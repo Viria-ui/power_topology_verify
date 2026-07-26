@@ -216,3 +216,29 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# 虚拟环境
+venv/
+*.cfg
+
+# Python缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 程序输出产物
+output/
+*.csv
+*.json
+*.log
+*.svg
+
+# 本地原始大数据集
+CP-*比赛资料/
+*.sql
+
+# IDE缓存
+.idea/
+.vscode/
+.DS_Store
