@@ -1,0 +1,4 @@
+pydantic>=2.7.0
+networkx>=3.3
+pandas>=2.2
+lxml>=5.0
