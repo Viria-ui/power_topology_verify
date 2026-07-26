@@ -1,0 +1,13 @@
+[
+  {
+    "trace_uuid": "2c3cd85d-eef6-42e8-b12c-9bd8a2135e42",
+    "equip_id": "DEV_TEST_001",
+    "point_id": "PT_001",
+    "line_id": "10kVLINE003",
+    "rule_code": "R001",
+    "rule_desc": "设备拓扑度数为0，判定悬空设备",
+    "check_result": "异常",
+    "review_status": "待复核",
+    "detail": "该设备无任何线路连接，判定悬空"
+  }
+]
