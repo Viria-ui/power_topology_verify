@@ -1,0 +1,37 @@
+{
+    "canvas": {
+        "background": "#FFFFFF",
+        "dpi": 96,
+        "grid_size_px": 10,
+        "padding_px": 24
+    },
+    "colors": {
+        "main_line": "#00A854",
+        "tie_line": "#FF6A00",
+        "inter_station_line": "#722ED1",
+        "spare_line": "#BFBFBF",
+        "container_border": "#595959",
+        "trace_path": "#1890FF",
+        "text": "#262626"
+    },
+    "stroke_width_px": {
+        "main_line": 3.0,
+        "branch_line": 1.5,
+        "tie_line": 4.5,
+        "spare_line": 1.0,
+        "container_border": 2.0
+    },
+    "font_size_px": {
+        "title": 21.3,
+        "main_device": 14.0,
+        "branch_device": 12.0,
+        "line_name": 12.0,
+        "device_id": 10.0
+    },
+    "layout_constraints": {
+        "min_device_spacing_x": 80,
+        "parallel_line_spacing_y": 100,
+        "container_inner_spacing": 40,
+        "text_padding": 4
+    }
+}

@@ -4,10 +4,12 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.append(PROJECT_ROOT)
 
+from config.settings import TEST_SVG_ROOT
 from core.graph_model import TopologyGraph
 from core.topology_builder import TopologyBuilder
 from data_io.data_reader import SqlTableLoader
 from data_io.data_writer import gen_sample_data
+from data_io.svg_reader import SvgParser
 
 if __name__ == "__main__":
     print("=== 配网拓扑构建任务启动 ===")
@@ -35,4 +37,24 @@ if __name__ == "__main__":
     # 4.生成标准JSON/CSV输出样例
     gen_sample_data()
     print("\nJSON/CSV标准样例已生成至docs目录")
-    print("=== 拓扑构建任务运行结束，满足验收条件 ===")
+
+    # 5.SVG解析：提取LINE215/LINE216图元清单与连接关系
+    print("\n===== SVG解析任务启动 =====")
+    svg_dir = TEST_SVG_ROOT
+    for fname in ['LINE215.svg', 'LINE216.svg']:
+        fpath = os.path.join(svg_dir, fname)
+        if os.path.exists(fpath):
+            print(f"\n--- 解析 {fname} ---")
+            doc = SvgParser.parse(fpath)
+            if doc:
+                doc.export_elements_json(f'{fname}_elements.json')
+                doc.export_elements_csv(f'{fname}_elements.csv')
+                doc.export_connections_json(f'{fname}_connections.json')
+                doc.export_connections_csv(f'{fname}_connections.csv')
+                print(f"  图元清单导出: output/csv/{fname}_elements.csv")
+                print(f"  连接关系导出: output/csv/{fname}_connections.csv")
+        else:
+            print(f" 文件不存在: {fname}")
+    print("\n=== SVG解析任务完成 ===")
+
+    print("\n=== 拓扑构建任务运行结束，满足验收条件 ===")

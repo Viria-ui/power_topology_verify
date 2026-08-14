@@ -3,8 +3,8 @@ import os
 # 项目根目录
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# 输入路径（对应你本地存放的SQL、SVG）
-INPUT_SQL_DIR = os.path.join(BASE_DIR, "input", "sql")
+# 输入路径（D盘项目内；GBK SQL 优先）
+INPUT_SQL_DIR = os.path.join(BASE_DIR, "input", "sql_gbk")
 INPUT_SVG_DIR = os.path.join(BASE_DIR, "input", "svg")
 RULE_JSON_PATH = os.path.join(BASE_DIR, "config", "rule_config.json")
 
@@ -27,8 +27,13 @@ PRIMARY_KEY = {
 }
 
 # ========== 新增：比赛测试SQL路径、电压等级、设备内部连通规则 ==========
-# 外部比赛测试数据集绝对路径
-TEST_SQL_ROOT = r"C:\Users\Xu's\Desktop\CP-202606-面向新型电力系统的配电网图模拓扑智能识别与修正研究比赛资料\sql形式数据集"
+# 外部比赛测试数据集（D盘）；优先使用项目内 GBK 副本
+_TEST_SQL_GBK = os.path.join(BASE_DIR, "input", "sql_gbk")
+_TEST_SQL_SRC = r"d:\挑战杯\挑战杯\CP-202606-面向新型电力系统的配电网图模拓扑智能识别与修正研究比赛资料\sql形式数据集"
+TEST_SQL_ROOT = _TEST_SQL_GBK if os.path.isdir(_TEST_SQL_GBK) else _TEST_SQL_SRC
+
+# SVG 配网单线图目录（D盘）
+TEST_SVG_ROOT = r"d:\挑战杯\挑战杯\CP-202606-面向新型电力系统的配电网图模拓扑智能识别与修正研究比赛资料\svg\配网 svg"
 
 # 电压等级常量（区分主网/配网）
 MAIN_VOLTAGE = "110"    # 主网电压标识

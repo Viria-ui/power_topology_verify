@@ -17,8 +17,18 @@ class SqlTableLoader:
 
     def parse_sql_insert_to_df(self, sql_file_path: str) -> pd.DataFrame:
         """适配PostgreSQL带双引号、schema前缀的INSERT语句解析"""
-        with open(sql_file_path, "r", encoding="utf-8", errors="ignore") as f:
-            sql_text = f.read()
+        # 优先 GBK（项目 input/sql_gbk），失败回退 UTF-8
+        sql_text = None
+        for enc in ("gbk", "gb18030", "utf-8-sig", "utf-8"):
+            try:
+                with open(sql_file_path, "r", encoding=enc) as f:
+                    sql_text = f.read()
+                break
+            except UnicodeDecodeError:
+                continue
+        if sql_text is None:
+            with open(sql_file_path, "r", encoding="utf-8", errors="ignore") as f:
+                sql_text = f.read()
         
         # 正则匹配：兼容 "SCHEMA"."TABLE"("COL1","COL2") VALUES (...) 双引号格式
         pattern = re.compile(r'INSERT INTO .*?\("(.*?)"\)\s*VALUES\s*\((.*?)\);', re.S)

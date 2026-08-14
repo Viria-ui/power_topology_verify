@@ -22,7 +22,7 @@ class ConnectPoint(BaseModel):
 class TopoEdge(BaseModel):
     line_id: str
     start_point: str
-    end_point: str
+    end_point: Optional[str] = None
     line_name: Optional[str] = None
 
 
@@ -80,7 +80,8 @@ class TopologyGraph:
 
     def add_edge(self, edge: TopoEdge):
         self.edge_map[edge.line_id] = edge
-        self.graph.add_edge(edge.start_point, edge.end_point, edge_info=edge.model_dump())
+        if edge.end_point:
+            self.graph.add_edge(edge.start_point, edge.end_point, edge_info=edge.model_dump())
 
     def link_device_point(self, equip_id: str, point_id: str):
         if equip_id in self.device_map and point_id in self.point_map:

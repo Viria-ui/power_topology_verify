@@ -79,22 +79,28 @@ class TopologyBuilder:
         """添加外部馈线线路（跨设备端点连接）"""
         # 主网线路
         for _, row in self.main_line.iterrows():
-            edge = TopoEdge(
-                line_id=row["LINE_ID"],
-                start_point=f"PT_{row['START_ST_ID']}",
-                end_point=f"PT_{row['END_ST_ID']}",
-                line_name=row["LINE_NAME"]
-            )
-            self.main_topo.add_edge(edge)
+            start_st = row.get("START_ST_ID")
+            end_st = row.get("END_ST_ID")
+            if start_st:
+                edge = TopoEdge(
+                    line_id=row["LINE_ID"],
+                    start_point=f"PT_{start_st}",
+                    end_point=f"PT_{end_st}" if end_st else None,
+                    line_name=row.get("LINE_NAME", "")
+                )
+                self.main_topo.add_edge(edge)
         # 配网线路
         for _, row in self.dist_line.iterrows():
-            edge = TopoEdge(
-                line_id=row["LINE_ID"],
-                start_point=f"PT_{row['START_ST_ID']}",
-                end_point=f"PT_{row['END_ST_ID']}",
-                line_name=row["LINE_NAME"]
-            )
-            self.dist_topo.add_edge(edge)
+            start_st = row.get("START_ST_ID")
+            end_st = row.get("END_ST_ID")
+            if start_st:
+                edge = TopoEdge(
+                    line_id=row["LINE_ID"],
+                    start_point=f"PT_{start_st}",
+                    end_point=f"PT_{end_st}" if end_st else None,
+                    line_name=row.get("LINE_NAME", "")
+                )
+                self.dist_topo.add_edge(edge)
 
     def fill_all_internal_connection(self):
         """批量补齐所有设备内部端点连通关系"""
