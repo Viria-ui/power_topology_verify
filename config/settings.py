@@ -28,7 +28,7 @@ PRIMARY_KEY = {
 
 # ========== 新增：比赛测试SQL路径、电压等级、设备内部连通规则 ==========
 # 外部比赛测试数据集绝对路径
-TEST_SQL_ROOT = r"C:\Users\Xu's\Desktop\CP-202606-面向新型电力系统的配电网图模拓扑智能识别与修正研究比赛资料\sql形式数据集"
+TEST_SQL_ROOT = os.path.join(BASE_DIR, "数据集更新版20260729", "sql形式数据集")
 
 # 电压等级常量（区分主网/配网）
 MAIN_VOLTAGE = "110"    # 主网电压标识
