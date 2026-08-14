@@ -9,6 +9,8 @@ if PROJECT_ROOT not in sys.path:
 
 from data_io.data_reader import SqlTableLoader
 from core.topology_builder import TopologyBuilder
+# 在顶部引入修复模块
+from core.repair_generator import TopologyRepairGenerator
 
 # ==========================================
 # 步骤 1：加载数据库拓扑模型
@@ -168,3 +170,66 @@ with open(output_json_path, "w", encoding="utf-8") as f:
     json.dump(defects_report, f, ensure_ascii=False, indent=4)
 
 print(f"\n🎉 已成功将格式化缺陷清单（含设备ID、说明、修正建议、SQL草案）导出至文件：\n👉 {output_json_path}")
+
+
+# ==========================================
+# 步骤 5：8/5-8/12 目标——生成修补候选、可回滚 SQL 与拓扑差异
+# ==========================================
+print("\n" + "=" * 60)
+print("🔧 开始生成最小修改候选方案与可回滚 SQL...")
+print("=" * 60)
+
+repair_gen = TopologyRepairGenerator(defects_report)
+repair_candidates = repair_gen.generate_repair_candidates()
+
+# 计算拓扑修补前后差异
+topo_delta = TopologyRepairGenerator.calculate_topology_delta(dist_topo, repair_candidates)
+
+# 打印四类问题的可审查 SQL 示例
+print("\n【每类缺陷可审查 SQL 与回滚 SQL 示例】:")
+printed_types = set()
+for candidate in repair_candidates:
+    t = candidate["defect_type"]
+    if t not in printed_types:
+        printed_types.add(t)
+        print(f"\n📌 问题类型：[{t}] | 动作：{candidate['action']}")
+        print(f"   正向 SQL: {candidate['sql_forward']}")
+        print(f"   回滚 SQL: {candidate['sql_rollback']}")
+
+# 打印修正前后拓扑差异
+print("\n" + "-" * 60)
+print("📊 修正前后拓扑差异 (Topology Delta):")
+print(f"  • 修正前节点数: {topo_delta['before_nodes']}")
+print(f"  • 修正后预计节点数: {topo_delta['after_nodes']} (净变动: {topo_delta['net_node_change']:+d})")
+print(f"  • 拟新增物理连接边数: {topo_delta['added_edges']}")
+print(f"  • 拟修正逻辑/属性设备数: {topo_delta['repaired_attributes']}")
+print("-" * 60)
+
+# 导出完整的修改候选与 SQL 脚本文件
+repair_output_path = f"output/{line_name}_最小修改候选与SQL草案.json"
+sql_script_path = f"output/{line_name}_正向修复与回滚脚本.sql"
+
+with open(repair_output_path, "w", encoding="utf-8") as f:
+    json.dump({
+        "topology_delta": topo_delta,
+        "candidates": repair_candidates
+    }, f, ensure_ascii=False, indent=4)
+
+# 将正向与回滚 SQL 导出为标准的 .sql 脚本文件
+with open(sql_script_path, "w", encoding="utf-8") as f:
+    f.write("-- ==========================================\n")
+    f.write(f"-- {line_name} 自动化拓扑修复 SQL 脚本\n")
+    f.write("-- ==========================================\n\n")
+    f.write("-- 1. 正向修复 SQL 脚本 (Forward Repair)\n")
+    for c in repair_candidates:
+        f.write(f"{c['sql_forward']} -- {c['impact_summary']}\n")
+    
+    f.write("\n\n-- ==========================================\n")
+    f.write("-- 2. 逆向回滚 SQL 脚本 (Rollback)\n")
+    f.write("-- ==========================================\n")
+    for c in reversed(repair_candidates):
+        f.write(f"{c['sql_rollback']}\n")
+
+print(f"\n🎉 修改候选与 SQL 脚本已成功生成导出：")
+print(f"👉 JSON 详细报告: {repair_output_path}")
+print(f"👉 可执行 SQL 文件: {sql_script_path}")
