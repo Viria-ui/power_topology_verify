@@ -1533,35 +1533,79 @@ if __name__ == "__main__":
                 conn.raw_metadata["Layer_Ref"] = dict(child.attrib)
 
     def compute_adaptive_viewbox(self, margin: float = 24.0):
-        """基于所有图元计算带边距的 viewBox。"""
+        """基于所有图元计算带边距的 viewBox。
+
+        关键修复：过滤异常点 (0,0) 和负坐标（避免被未初始化设备/异常连接线点污染）。
+        只基于设备+文字坐标算包围盒，连接线点单独检测：
+        - 若连接线点在设备包围盒附近（容差内），纳入计算；
+        - 若是孤立的 (0,0) 或远离设备群体的异常点，忽略。
+        """
         if not self.elements and not self.connections and not self.texts:
             return self.viewbox
 
-        xs, ys = [], []
+        # 第一步：基于设备+文字坐标算"主体包围盒"
+        # 仅纳入真正的"设备"图层（在 DEVICE_STANDARD_SIZES 中），跳过 ACLineSegment 等
+        from svg_io.svg_beautifier import DEVICE_STANDARD_SIZES
+        dev_xs, dev_ys = [], []
         for elem in self.elements:
-            xs.extend([elem.x, elem.x + elem.width])
-            ys.extend([elem.y, elem.y + elem.height])
-        for conn in self.connections:
-            for x, y in conn.points:
-                xs.append(x)
-                ys.append(y)
+            if (elem.layer_name in DEVICE_STANDARD_SIZES
+                    and elem.width and elem.height
+                    and elem.width > 0 and elem.height > 0):
+                # 跳过 (0,0) 附近的占位设备
+                if abs(elem.x) < 1.0 and abs(elem.y) < 1.0:
+                    continue
+                dev_xs.extend([elem.x, elem.x + elem.width])
+                dev_ys.extend([elem.y, elem.y + elem.height])
         for txt in self.texts:
-            xs.append(txt.x)
-            ys.append(txt.y)
+            if not getattr(txt, "hidden", False):
+                dev_xs.append(txt.x)
+                dev_ys.append(txt.y)
 
-        if not xs or not ys:
+        if not dev_xs or not dev_ys:
             return self.viewbox
 
-        min_x, max_x = min(xs), max(xs)
-        min_y, max_y = min(ys), max(ys)
-        w = max_x - min_x + 2 * margin
-        h = max_y - min_y + 2 * margin
-        self.viewbox = (min_x - margin, min_y - margin, w, h)
+        dev_min_x, dev_max_x = min(dev_xs), max(dev_xs)
+        dev_min_y, dev_max_y = min(dev_ys), max(dev_ys)
+
+        # 第二步：扩展包围盒以容纳有效连接线点
+        # 容差：主体对角线长度 × 0.3（防止异常远点拉大包围盒）
+        diag = ((dev_max_x - dev_min_x) ** 2 + (dev_max_y - dev_min_y) ** 2) ** 0.5
+        tol = max(diag * 0.3, 100.0)
+
+        for conn in self.connections:
+            if not conn.points:
+                continue
+            for x, y in conn.points:
+                # 过滤 (0,0) 异常点或远离主体的点
+                if x == 0.0 and y == 0.0:
+                    continue
+                if (dev_min_x - tol <= x <= dev_max_x + tol and
+                        dev_min_y - tol <= y <= dev_max_y + tol):
+                    dev_min_x = min(dev_min_x, x)
+                    dev_max_x = max(dev_max_x, x)
+                    dev_min_y = min(dev_min_y, y)
+                    dev_max_y = max(dev_max_y, y)
+
+        w = dev_max_x - dev_min_x + 2 * margin
+        h = dev_max_y - dev_min_y + 2 * margin
+        self.viewbox = (dev_min_x - margin, dev_min_y - margin, w, h)
         self.width = w
         self.height = h
         return self.viewbox
 
     def _resolve_connection_links(self):
+        """建立 conn → (start_device_id, end_device_id) 映射。
+
+        关键修复（旧 bug）：旧逻辑把同一 chain 中所有 conn 都赋为链首尾设备，
+        导致大量 conn 共享相同 start/end，输出重复路径。
+
+        新逻辑：
+        1. 把同 chain 的 conn 视为一条"逻辑连接线链"，按 polyline 几何邻接关系
+           排序连接：上一条 conn 的尾点 ≈ 下一条 conn 的首点。
+        2. 每段 conn 的 start/end_device_id 取其 polyline 端点附近的设备，
+           通过端点距离匹配（容差按设备最大边长 + 连接线段距离）。
+        3. 兜底：若无法按几何邻接，则按 chain 内 dev_list 全局排序赋首尾。
+        """
         device_by_id = {}
         for elem in self.elements:
             if elem.element_id:
@@ -1594,10 +1638,54 @@ if __name__ == "__main__":
                 if ref in conn_by_id and ref != conn.connection_id:
                     conn_chain[conn.connection_id].add(ref)
 
+        # 设备中心点查询（带兜底，避免 SvgElement 默认 0,0 误导距离匹配）
+        # 过滤无效设备（坐标 (0,0) 且宽高为 0 的解析失败元素）
+        def _dev_center(dev_id):
+            d = device_by_id.get(dev_id)
+            if d is None:
+                return None
+            w = d.width if d.width and d.width > 0 else 1.0
+            h = d.height if d.height and d.height > 0 else 1.0
+            # 跳过 (0,0) 且宽高为 0 的无效设备
+            if d.x == 0 and d.y == 0 and w == 1.0 and h == 1.0:
+                return None
+            return (d.x + w / 2.0, d.y + h / 2.0)
+
+        def _point_dist(p1, p2):
+            return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+
+        # 对一条 conn，按端点几何距离匹配最近的设备
+        def _match_device_by_endpoint(point, candidate_ids, max_dist):
+            if not point or not candidate_ids:
+                return ""
+            best_id = ""
+            best_d = max_dist
+            for dev_id in candidate_ids:
+                center = _dev_center(dev_id)
+                if center is None:
+                    continue
+                d = _point_dist(point, center)
+                if d < best_d:
+                    best_d = d
+                    best_id = dev_id
+            return best_id
+
+        # 容差：设备最大边长 + 一定冗余（避免太严格导致匹配失败）
+        def _match_tolerance():
+            max_size = 0.0
+            for d in device_by_id.values():
+                w = d.width if d.width and d.width > 0 else 0
+                h = d.height if d.height and d.height > 0 else 0
+                max_size = max(max_size, w, h)
+            return max_size * 2.0 + 50.0  # 容差放宽，便于原始坐标小尺寸时也能匹配
+
+        tol = _match_tolerance()
+
         visited = set()
         for conn_id in conn_by_id:
             if conn_id in visited:
                 continue
+            # 找到完整 chain
             chain_component = set()
             stack = [conn_id]
             while stack:
@@ -1610,31 +1698,15 @@ if __name__ == "__main__":
                     if next_cid not in visited:
                         stack.append(next_cid)
 
-            if len(chain_component) > 1:
-                all_devices = set()
-                for cid in chain_component:
-                    all_devices.update(direct_device_refs.get(cid, set()))
-                # 稳定排序：按设备坐标排序，避免 set→list 顺序不稳定
-                dev_list = sorted(all_devices, key=lambda d: (
-                    device_by_id.get(d, SvgElement()).x,
-                    device_by_id.get(d, SvgElement()).y
-                ))
-                for cid in chain_component:
-                    conn = conn_by_id[cid]
-                    if len(dev_list) >= 2:
-                        conn.start_device_id = dev_list[0]
-                        conn.end_device_id = dev_list[1]
-                    elif len(dev_list) == 1:
-                        conn.start_device_id = dev_list[0]
-
-        for conn in self.connections:
-            if not conn.start_device_id and not conn.end_device_id:
-                dev_refs = direct_device_refs.get(conn.connection_id, set())
-                ref_device_ids = set()
-                for ref in conn.glink_refs:
-                    if ref in glink_to_device_ids:
-                        ref_device_ids.update(glink_to_device_ids[ref])
-                dev_list = sorted(dev_refs | ref_device_ids, key=lambda d: (
+            if len(chain_component) <= 1:
+                # 单条 conn：直接按 direct refs + glink refs 综合匹配
+                conn = conn_by_id[next(iter(chain_component))]
+                if conn.start_device_id and conn.end_device_id:
+                    continue
+                dev_refs = direct_device_refs.get(conn.connection_id, set()) | \
+                           {ref for ref in conn.glink_refs if ref in glink_to_device_ids
+                            for _ in glink_to_device_ids[ref]}
+                dev_list = sorted(dev_refs, key=lambda d: (
                     device_by_id.get(d, SvgElement()).x,
                     device_by_id.get(d, SvgElement()).y
                 ))
@@ -1642,6 +1714,63 @@ if __name__ == "__main__":
                     conn.start_device_id = dev_list[0]
                     conn.end_device_id = dev_list[1]
                 elif len(dev_list) == 1:
+                    conn.start_device_id = dev_list[0]
+                continue
+
+            # 多条 conn 组成 chain：按几何邻接排序
+            chain_conns = [conn_by_id[cid] for cid in chain_component]
+            # 收集 chain 中所有设备候选
+            chain_dev_set = set()
+            for conn in chain_conns:
+                chain_dev_set.update(direct_device_refs.get(conn.connection_id, set()))
+                for ref in conn.glink_refs:
+                    if ref in glink_to_device_ids:
+                        chain_dev_set.update(glink_to_device_ids[ref])
+
+            if not chain_dev_set:
+                continue
+
+            # 对每条 conn，按其首尾点匹配最近设备
+            for conn in chain_conns:
+                if conn.start_device_id and conn.end_device_id:
+                    continue  # 已被显式赋值
+                if not conn.points or len(conn.points) < 2:
+                    continue
+                start_pt = conn.points[0]
+                end_pt = conn.points[-1]
+                # 起点和终点分别匹配 chain 中最近设备
+                start_dev = _match_device_by_endpoint(start_pt, chain_dev_set, tol)
+                end_dev = _match_device_by_endpoint(end_pt, chain_dev_set, tol)
+                # 避免起终设备相同
+                if start_dev and end_dev and start_dev == end_dev:
+                    # 找第二近的设备
+                    other_devs = chain_dev_set - {start_dev}
+                    end_dev = _match_device_by_endpoint(end_pt, other_devs, tol * 2.0)
+                if start_dev:
+                    conn.start_device_id = start_dev
+                if end_dev:
+                    conn.end_device_id = end_dev
+
+        # 兜底：仍未赋值的 conn，用 direct refs 排序赋值
+        for conn in self.connections:
+            if conn.start_device_id and conn.end_device_id:
+                continue
+            dev_refs = direct_device_refs.get(conn.connection_id, set())
+            ref_device_ids = set()
+            for ref in conn.glink_refs:
+                if ref in glink_to_device_ids:
+                    ref_device_ids.update(glink_to_device_ids[ref])
+            dev_list = sorted(dev_refs | ref_device_ids, key=lambda d: (
+                device_by_id.get(d, SvgElement()).x,
+                device_by_id.get(d, SvgElement()).y
+            ))
+            if len(dev_list) >= 2:
+                if not conn.start_device_id:
+                    conn.start_device_id = dev_list[0]
+                if not conn.end_device_id:
+                    conn.end_device_id = dev_list[1]
+            elif len(dev_list) == 1:
+                if not conn.start_device_id:
                     conn.start_device_id = dev_list[0]
 
     # ------------------------------------------------------------------

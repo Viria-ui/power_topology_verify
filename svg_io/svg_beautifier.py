@@ -138,6 +138,20 @@ class SvgBeautifier:
         self.device_to_station: dict[str, str] = {}
         self.text_device_map: dict[str, str] = {}  # text_id → device_id
 
+    def _move_device(self, elem, new_x: float, new_y: float):
+        """移动设备到新坐标：更新 x/y 属性 + transform 中的 translate 值。
+
+        保留原始 transform 的 translate(x,y) scale(s) translate(-x,-y) 结构，
+        仅替换 translate 和 rotate 中的坐标值。
+        """
+        old_x, old_y = elem.x, elem.y
+        elem.x = new_x
+        elem.y = new_y
+        # 使用 patch_transform_translate 更新 transform 中的位置
+        elem.patch_transform_translate(old_x, old_y, new_x, new_y)
+        # 同步连接线端点和文字
+        self._sync_device_move(elem.element_id, new_x - old_x, new_y - old_y)
+
     def beautify(self) -> str:
         print(f"\n{'='*60}")
         print(f"美化 {self.svg_filename}")
@@ -145,24 +159,39 @@ class SvgBeautifier:
 
         self.doc.parse()
 
-        # 第1步：建立站房映射 + 文字→设备关联
+        # 第1步：建立站房映射 + 文字→设备关联 + 备用间隔检测
         self._build_station_map()
         self._build_text_device_map()
         self._detect_spare_intervals()
 
-        # 第2步：连接线样式规范化（颜色、线宽、线型）
+        # 第2步：设备图标标准化（统一显示尺寸，重建 transform）
+        self._normalize_device_icons()
+
+        # 第3步：全局拓扑布局重构（BFS 分层 + 纵向排列，替代坐标缩放）
+        self._layout_by_topology()
+
+        # 第4步：设备重叠消解
+        self._resolve_device_overlaps()
+
+        # 第5步：连接线样式规范化（颜色、线宽、线型）
         self._normalize_connection_styles()
 
-        # 第3步：站房边框标准化
+        # 第6步：站房边框标准化
         self._normalize_station_styles()
 
-        # 第4步：文字样式/位置规范化（紧贴设备、统一字号字重）
+        # 第7步：连接线正交路由（端点贴设备边缘 + L 型路径）
+        self._route_connections_to_edges()
+
+        # 第8步：文字样式规范化（颜色、字号、字重、位置）
         self._normalize_text_styles()
 
-        # 第5步：自适应viewbox（保持原始坐标空间）
+        # 第9步：文字碰撞避让
+        self._resolve_text_collisions()
+
+        # 第10步：自适应 viewBox（最后处理，width/height 同步）
         self._adapt_viewbox()
 
-        # 写出 SVG（含白色背景）
+        # 写出 SVG
         write_svg(self.doc, self.output_path, update_style=True)
 
         # 自检并输出质量报告
@@ -170,6 +199,71 @@ class SvgBeautifier:
 
         print(f"\n美化完成: {self.output_path}")
         return self.output_path
+
+    # ------------------------------------------------------------------
+    # 坐标空间等比放大
+    # ------------------------------------------------------------------
+    def _scale_coordinate_space(self, factor: float = 8.0):
+        """等比放大整个坐标空间，让所有元素变得可见。
+
+        放大的维度：
+        - 设备 x, y, width, height
+        - 连接线所有点
+        - 文字 x, y, font_size
+        - viewBox
+
+        放大后相对位置不变，但绝对尺寸变大，文字/设备可见。
+        """
+        print(f"  坐标空间放大: factor={factor}")
+
+        # 放大设备
+        for elem in self.doc.elements:
+            elem.x *= factor
+            elem.y *= factor
+            elem.width *= factor
+            elem.height *= factor
+            # 更新 transform（平移分量也要放大）
+            if elem.transform:
+                elem._transform_tx *= factor
+                elem._transform_ty *= factor
+                elem.rebuild_transform()
+            # polygon 的 points 也要放大
+            if elem.shape_tag == "polygon":
+                pts_str = elem.shape_attrs.get("points", "")
+                if pts_str:
+                    new_pts = []
+                    for pt in pts_str.strip().split():
+                        coords = pt.split(",")
+                        if len(coords) == 2:
+                            new_pts.append(f"{float(coords[0])*factor:.6f},{float(coords[1])*factor:.6f}")
+                        else:
+                            new_pts.append(pt)
+                    elem.shape_attrs["points"] = " ".join(new_pts)
+
+        # 放大连接线
+        for conn in self.doc.connections:
+            if conn.points:
+                conn.points = [(p[0] * factor, p[1] * factor) for p in conn.points]
+
+        # 放大文字
+        for txt in self.doc.texts:
+            txt.x *= factor
+            txt.y *= factor
+            txt.font_size = (txt.font_size or 12.0) * factor
+            # dx/dy 也放大
+            if hasattr(txt, 'dx'):
+                txt.dx = (txt.dx or 0) * factor
+            if hasattr(txt, 'dy'):
+                txt.dy = (txt.dy or 0) * factor
+
+        # 放大 viewBox
+        vx, vy, vw, vh = self.doc.viewbox
+        self.doc.viewbox = (vx * factor, vy * factor, vw * factor, vh * factor)
+        self.doc.width = vw * factor
+        self.doc.height = vh * factor
+
+        print(f"  viewBox: ({vx:.1f},{vy:.1f} {vw:.1f}x{vh:.1f}) -> "
+              f"({vx*factor:.1f},{vy*factor:.1f} {vw*factor:.1f}x{vh*factor:.1f})")
 
     # ------------------------------------------------------------------
     # B.1 画布视区（最后处理，viewBox/width/height 同步）
@@ -214,9 +308,18 @@ class SvgBeautifier:
 
         # 设备
         dev_outside = 0
+        invalid_dev_count = 0
         for elem in self.doc.elements:
             ex, ey = elem.x, elem.y
             ew, eh = elem.width or 0, elem.height or 0
+            # 跳过无效设备（width/height 为 0 或坐标在原点附近），这些是解析失败的占位元素
+            if ew <= 0 or eh <= 0:
+                invalid_dev_count += 1
+                continue
+            # 跳过 (0,0) 原点附近设备（原始 SVG 中的占位符）
+            if abs(ex) < 1.0 and abs(ey) < 1.0:
+                invalid_dev_count += 1
+                continue
             if ex + ew < vb_x or ex > vb_x + vb_w or ey + eh < vb_y or ey > vb_y + vb_h:
                 dev_outside += 1
 
@@ -236,7 +339,8 @@ class SvgBeautifier:
               f"({len(hidden_texts)/total*100:.1f}%)")
         print(f"  文字重叠: {text_overlap} 对 ({text_overlap/len(visible_texts)*100:.1f}%)  "
               f"越界: {text_outside} 个")
-        print(f"  设备越界: {dev_outside} 个, 连接线端点越界: {conn_outside} 条")
+        print(f"  设备越界: {dev_outside} 个 (无效设备: {invalid_dev_count} 个), "
+              f"连接线端点越界: {conn_outside} 条")
 
     # ------------------------------------------------------------------
     # 站房映射（用于跨站联络识别）
@@ -410,11 +514,17 @@ class SvgBeautifier:
         for elem in self.doc.elements:
             if not elem.element_id:
                 continue
+            # 跳过非标准设备图层（如 ACLineSegment 是线路图层，不应作为设备处理）
+            if elem.layer_name not in DEVICE_STANDARD_SIZES:
+                continue
             # 跳过站房内设备（由拓扑布局确定坐标）
             if elem.element_id in self.device_to_station:
                 continue
             # 跳过站房本身
             if elem.layer_name == "Substation":
+                continue
+            # 跳过 (0,0) 附近的无效设备（解析失败的占位元素）
+            if abs(elem.x) < 1.0 and abs(elem.y) < 1.0:
                 continue
 
             old_x, old_y = elem.x, elem.y
@@ -445,10 +555,7 @@ class SvgBeautifier:
             }
 
             if elem.x != new_x or elem.y != new_y:
-                elem.x = new_x
-                elem.y = new_y
-                if elem.transform or getattr(elem, 'raw_transform', None):
-                    elem.patch_transform_translate(old_x, old_y, new_x, new_y)
+                self._move_device(elem, new_x, new_y)
                 snapped += 1
 
         # 连接线端点同步
@@ -489,40 +596,64 @@ class SvgBeautifier:
     # 设备重叠消解
     # ------------------------------------------------------------------
     def _resolve_device_overlaps(self):
-        """检测并消解设备 bounding box 重叠：将重叠设备向 y 方向偏移。"""
+        """检测并消解设备重叠：仅处理明显重叠，不破坏拓扑布局。
+
+        关键改进：
+        1. 按 X/Y 排序后分组检查，避免 O(N²) 全量比较
+        2. 只处理真正严重重叠（重叠面积 > 30%）
+        3. 站内设备不在此处理（由 _layout_station_internal 管理）
+        4. 只做 1 轮微调，避免层层推开导致整体Y发散
+        """
         device_elems = [e for e in self.doc.elements
                         if e.element_id and e.layer_name != "Substation"
-                        and e.width > 0 and e.height > 0]
+                        and e.width > 0 and e.height > 0
+                        and e.element_id not in self.device_to_station]  # 跳过站内设备
         if len(device_elems) < 2:
             return
 
-        max_iter = 3
         total_resolved = 0
-        for iteration in range(max_iter):
-            overlaps = 0
-            for i in range(len(device_elems)):
-                e1 = device_elems[i]
-                for j in range(i + 1, len(device_elems)):
-                    e2 = device_elems[j]
-                    # 检查 bounding box 重叠
-                    if not (e1.x + e1.width + 1 < e2.x or
-                            e2.x + e2.width + 1 < e1.x or
-                            e1.y + e1.height + 1 < e2.y or
-                            e2.y + e2.height + 1 < e1.y):
-                        overlaps += 1
-                        # 将 e2 向下偏移
-                        offset = e1.height + 4
-                        old_y = e2.y
-                        e2.y += offset
-                        if e2.transform or getattr(e2, 'raw_transform', None):
-                            e2.patch_transform_translate(e2.x, old_y, e2.x, e2.y)
-                        self._sync_device_move(e2.element_id, 0, offset)
-                        total_resolved += 1
-            if overlaps == 0:
-                break
+        OVERLAP_TOL_X = 4  # X方向容差：同列设备允许稍微重叠
+        OVERLAP_TOL_Y = 4  # Y方向容差
+
+        # 按Y排序，按X分桶检查（减少比较量）
+        device_elems.sort(key=lambda e: (round(e.x / 60), e.y))
+
+        for i in range(len(device_elems)):
+            e1 = device_elems[i]
+            for j in range(i + 1, min(i + 10, len(device_elems))):
+                e2 = device_elems[j]
+                # 快速过滤X不重叠
+                if (e1.x + e1.width + OVERLAP_TOL_X < e2.x or
+                    e2.x + e2.width + OVERLAP_TOL_X < e1.x):
+                    continue
+                if (e1.y + e1.height + OVERLAP_TOL_Y < e2.y or
+                    e2.y + e2.height + OVERLAP_TOL_Y < e1.y):
+                    continue
+
+                # 计算重叠面积
+                ov_x1 = max(e1.x, e2.x)
+                ov_y1 = max(e1.y, e2.y)
+                ov_x2 = min(e1.x + e1.width, e2.x + e2.width)
+                ov_y2 = min(e1.y + e1.height, e2.y + e2.height)
+                ov_area = max(0, ov_x2 - ov_x1) * max(0, ov_y2 - ov_y1)
+                min_area = min(e1.width * e1.height, e2.width * e2.height)
+                if min_area <= 0:
+                    continue
+
+                # 只有重叠>30%才处理
+                if ov_area / min_area < 0.3:
+                    continue
+
+                # 将 e2 向下偏移到 e1 下方
+                offset = (e1.y + e1.height) - e2.y + 6
+                if offset > 0:
+                    self._move_device(e2, e2.x, e2.y + offset)
+                    total_resolved += 1
 
         if total_resolved > 0:
             print(f"  设备重叠消解: {total_resolved} 个设备已偏移")
+        else:
+            print(f"  设备重叠消解: 0 个需要处理")
 
     # ------------------------------------------------------------------
     # 站房内设备布局重构
@@ -560,16 +691,9 @@ class SvgBeautifier:
                 for i, elem in enumerate(main_devs):
                     new_x = sx + sw / 2 - elem.width / 2
                     new_y = sy + top_margin + spacing * (i + 1) - elem.height / 2
-                    dx = new_x - elem.x
-                    dy = new_y - elem.y
-                    if dx != 0 or dy != 0:
-                        old_x, old_y = elem.x, elem.y
-                        elem.x = new_x
-                        elem.y = new_y
-                        if elem.transform or getattr(elem, 'raw_transform', None):
-                            elem.patch_transform_translate(old_x, old_y, new_x, new_y)
+                    if new_x != elem.x or new_y != elem.y:
+                        self._move_device(elem, new_x, new_y)
                         moved += 1
-                        self._sync_device_move(elem.element_id, dx, dy)
 
             if spare_devs:
                 usable_h = max(sh - top_margin - bottom_margin, 10.0)
@@ -577,16 +701,9 @@ class SvgBeautifier:
                 for i, elem in enumerate(spare_devs):
                     new_x = sx + sw - right_margin - elem.width
                     new_y = sy + top_margin + spacing * (i + 1) - elem.height / 2
-                    dx = new_x - elem.x
-                    dy = new_y - elem.y
-                    if dx != 0 or dy != 0:
-                        old_x, old_y = elem.x, elem.y
-                        elem.x = new_x
-                        elem.y = new_y
-                        if elem.transform or getattr(elem, 'raw_transform', None):
-                            elem.patch_transform_translate(old_x, old_y, new_x, new_y)
+                    if new_x != elem.x or new_y != elem.y:
+                        self._move_device(elem, new_x, new_y)
                         moved += 1
-                        self._sync_device_move(elem.element_id, dx, dy)
 
         print(f"  站房内设备已重构布局: {moved} 个设备已移动")
 
@@ -616,70 +733,362 @@ class SvgBeautifier:
     # 站房内拓扑布局（基于 self.doc.connections 构建无向图）
     # ------------------------------------------------------------------
     def _layout_by_topology(self):
-        """按电气拓扑关系重新排布站房内设备，消除成团现象。
+        """拓扑布局：大分量BFS分层 + 孤立设备2D网格。
 
-        算法流程：
-        1. 基于 connections 构建设备无向图
-        2. 按站房分组设备
-        3. 选择根节点（母线优先）
-        4. BFS 分层
-        5. 按拓扑层分配 x，按子树宽度分配 y
-        6. 备用设备放右侧
+        画布目标：1400 × 1000（黄金比例），避免极端拉伸。
         """
-        import networkx as nx
+        from collections import deque, defaultdict
 
-        # 1. 构建设备无向图
-        G = nx.Graph()
-        device_by_id = {}
+        device_by_id = {e.element_id: e for e in self.doc.elements if e.element_id}
+
+        # 1. 收集有效设备
+        valid_devices = []
         for elem in self.doc.elements:
-            if elem.element_id and elem.layer_name != "Substation":
-                G.add_node(elem.element_id, layer=elem.layer_name, element=elem)
-                device_by_id[elem.element_id] = elem
+            if not elem.element_id:
+                continue
+            if elem.layer_name not in DEVICE_STANDARD_SIZES:
+                continue
+            if elem.layer_name == "Substation":
+                continue
+            if elem.width <= 0 or elem.height <= 0:
+                continue
+            if abs(elem.x) < 0.1 and abs(elem.y) < 0.1:
+                continue
+            valid_devices.append(elem.element_id)
+        valid_set = set(valid_devices)
 
+        if not valid_devices:
+            print("  拓扑布局: 无有效设备，跳过")
+            return
+
+        # 2. 构建邻接图
+        adj = defaultdict(set)
         for conn in self.doc.connections:
             sid = conn.start_device_id
             eid = conn.end_device_id
-            if sid and eid and sid in device_by_id and eid in device_by_id:
-                G.add_edge(sid, eid)
+            if sid and eid and sid != eid:
+                adj[sid].add(eid)
+                adj[eid].add(sid)
 
-        # 2. 按站房分组设备
+        # 3. 找连通分量
+        visited_global = set()
+        components = []
+        for dev_id in valid_devices:
+            if dev_id not in visited_global:
+                comp = []
+                queue = deque([dev_id])
+                visited_global.add(dev_id)
+                while queue:
+                    cur = queue.popleft()
+                    comp.append(cur)
+                    for nb in adj.get(cur, []):
+                        if nb not in visited_global and nb in valid_set:
+                            visited_global.add(nb)
+                            queue.append(nb)
+                components.append(comp)
+
+        # 按大小降序：大分量先布局
+        components.sort(key=len, reverse=True)
+
+        # 4. 布局参数（紧凑画布）
+        CANVAS_W = 1400.0
+        CANVAS_H = 1000.0
+        MARGIN = 80.0
+        LAYER_SPACING = 90.0
+        ROW_SPACING = 38.0
+        MAX_ROWS_PER_COMP = 25  # 单个分量每列最大行数
+
+        # 5. 分离：大分量 vs 孤立设备
+        big_comps = [c for c in components if len(c) >= 2]
+        isolated = [c[0] for c in components if len(c) == 1]
+
+        # 统计孤立设备类型占比
+        iso_by_layer = defaultdict(list)
+        for dev_id in isolated:
+            elem = device_by_id.get(dev_id)
+            if elem:
+                iso_by_layer[elem.layer_name].append(dev_id)
+
+        moved = 0
+        # 6. 大分量：从上往下排列，每分量占一行区域，BFS左右分层
+        comp_y_start = MARGIN
+        comp_x_start = MARGIN
+
+        # 计算大分量总共占用多少行高，按均匀分布
+        total_devs_big = sum(len(c) for c in big_comps)
+        if total_devs_big > 0:
+            row_h = min(ROW_SPACING * MAX_ROWS_PER_COMP, (CANVAS_H - 2 * MARGIN) / max(len(big_comps), 1))
+        else:
+            row_h = CANVAS_H - 2 * MARGIN
+
+        for comp in big_comps:
+            # 选根
+            root = None
+            for dev_id in comp:
+                elem = device_by_id.get(dev_id)
+                if elem and elem.layer_name == "PowerTransformer":
+                    root = dev_id
+                    break
+            if not root:
+                for dev_id in comp:
+                    elem = device_by_id.get(dev_id)
+                    if elem and elem.layer_name == "Breaker":
+                        root = dev_id
+                        break
+            if not root:
+                for dev_id in comp:
+                    elem = device_by_id.get(dev_id)
+                    if elem and elem.layer_name == "LoadBreakSwitch":
+                        root = dev_id
+                        break
+            if not root:
+                deg = {d: len(adj.get(d, [])) for d in comp}
+                root = max(comp, key=lambda d: deg.get(d, 0))
+
+            # BFS 分层
+            comp_visited = set()
+            layers = []
+            q = deque([(root, 0)])
+            comp_visited.add(root)
+            while q:
+                dev_id, layer = q.popleft()
+                while len(layers) <= layer:
+                    layers.append([])
+                layers[layer].append(dev_id)
+                for nb in sorted(adj.get(dev_id, []), key=lambda d: len(adj.get(d, [])), reverse=True):
+                    if nb not in comp_visited and nb in valid_set:
+                        comp_visited.add(nb)
+                        q.append((nb, layer + 1))
+            for dev_id in comp:
+                if dev_id not in comp_visited:
+                    layers.append([dev_id])
+
+            # 给分量分配Y空间：从 comp_y_start 开始，按层内最多元素的数量决定列数
+            max_devs_in_layer = max(len(l) for l in layers) if layers else 1
+            # 计算层内需要多少子列：如果超过 MAX_ROWS_PER_COMP 则多行多列
+            layer_cols = 1
+            if max_devs_in_layer > MAX_ROWS_PER_COMP:
+                layer_cols = (max_devs_in_layer + MAX_ROWS_PER_COMP - 1) // MAX_ROWS_PER_COMP
+
+            comp_width = len(layers) * LAYER_SPACING + (layer_cols - 1) * LAYER_SPACING * 0.6
+            # 如果超出画布宽，缩放层间距
+            if comp_x_start + comp_width > CANVAS_W - MARGIN:
+                comp_x_start = MARGIN
+                comp_y_start += row_h + 20
+
+            # 分配坐标
+            local_x = comp_x_start
+            for layer_idx, devs_in_layer in enumerate(layers):
+                # 层内按 MAX_ROWS_PER_COMP 分组，每组占一列位置
+                col_y = comp_y_start
+                col_x = local_x
+                for i, dev_id in enumerate(devs_in_layer):
+                    elem = device_by_id.get(dev_id)
+                    if not elem:
+                        continue
+                    old_x, old_y = elem.x, elem.y
+                    self._move_device(elem, col_x, col_y)
+                    moved += 1
+                    col_y += ROW_SPACING
+                    # 换子列
+                    if (i + 1) % MAX_ROWS_PER_COMP == 0 and (i + 1) != len(devs_in_layer):
+                        col_y = comp_y_start
+                        col_x += LAYER_SPACING * 0.6
+
+                local_x += LAYER_SPACING
+
+            # 下一个分量：x继续右移，如果超宽则换行
+            comp_x_start = local_x + 30
+            if comp_x_start > CANVAS_W - MARGIN - LAYER_SPACING:
+                comp_x_start = MARGIN
+                comp_y_start += row_h + 20
+
+        # 7. 孤立设备：2D网格（按层排，重要类型在前）
+        # 优先类型顺序：变电站相关设备 → 变压器 → 开关 → 其他
+        iso_layer_priority = {
+            "PowerTransformer": 0, "Breaker": 1, "LoadBreakSwitch": 2,
+            "Fuse": 3, "Disconnector": 4, "CurrentTransformer": 5,
+            "EnergyConsumer": 6, "Junction": 7, "Other": 8,
+        }
+        iso_sorted_devs = []
+        for dev_id in isolated:
+            elem = device_by_id.get(dev_id)
+            pri = iso_layer_priority.get(elem.layer_name, 5) if elem else 5
+            iso_sorted_devs.append((pri, dev_id))
+        iso_sorted_devs.sort(key=lambda x: x[0])
+
+        # 紧凑网格：基于剩余空间
+        iso_start_y = comp_y_start + 10
+        iso_area_h = max(CANVAS_H - iso_start_y - MARGIN, 400)
+        ISO_ROWS = max(8, int(iso_area_h / ROW_SPACING))  # 多少行
+        iso_cur_x = MARGIN
+        iso_cur_y = iso_start_y
+        iso_x_step = LAYER_SPACING * 1.2
+        iso_row_count = 0
+
+        for _, dev_id in iso_sorted_devs:
+            elem = device_by_id.get(dev_id)
+            if not elem:
+                continue
+            old_x, old_y = elem.x, elem.y
+            self._move_device(elem, iso_cur_x, iso_cur_y)
+            moved += 1
+            iso_row_count += 1
+            if iso_row_count >= ISO_ROWS:
+                # 换列
+                iso_cur_x += iso_x_step
+                iso_cur_y = iso_start_y
+                iso_row_count = 0
+            else:
+                iso_cur_y += ROW_SPACING
+
+        # 8. 站房内设备纵向排列 + 站房位置跟随
+        station_moved = self._layout_station_internal(device_by_id, ROW_SPACING)
+
+        # 9. 站房位置：跟随其内部设备的中心
+        self._reposition_stations(device_by_id)
+
+        # 10. 文字位置同步到设备
+        unmatched = 0
+        for txt in self.doc.texts:
+            dev_id = self.text_device_map.get(txt.text_id, "")
+            elem = device_by_id.get(dev_id)
+            if elem and elem.width > 0 and elem.height > 0:
+                # 设备有效：文字跟随设备
+                txt.x = elem.x + elem.width / 2
+                txt.y = elem.y + elem.height / 2
+            elif not dev_id:
+                # 完全无设备关联：隐藏
+                txt.hidden = True
+                unmatched += 1
+            else:
+                # 设备无效（width=0）：尝试找最近的有效设备
+                # 如果找不到，保持原位但不隐藏（让 _normalize_text_styles 处理）
+                pass
+
+        if unmatched:
+            print(f"  文字位置同步: {unmatched} 个无关联文字已隐藏")
+
+        print(f"  拓扑布局: {len(components)} 分量(大{len(big_comps)}/孤{len(isolated)}), {moved} 设备重排, {station_moved} 站内设备")
+
+    def _layout_station_internal(self, device_by_id: dict, grid_y: float) -> int:
+        """站房内设备纵向排列，站房位置基于内部设备的BFS布局位置。
+
+        核心修复：
+        - 不使用站房的原始坐标（那是极小坐标系）
+        - 先计算内部设备的质心作为站房新位置
+        - 再在站房内纵向排列设备
+        """
         station_devices = {}
         for dev_id, station_id in self.device_to_station.items():
             if station_id not in station_devices:
                 station_devices[station_id] = []
             station_devices[station_id].append(dev_id)
 
-        # 3. 获取站房边界
         station_bounds = {}
         for elem in self.doc.elements:
             if elem.layer_name == "Substation" and elem.element_id:
-                station_bounds[elem.element_id] = (elem.x, elem.y, elem.width, elem.height)
+                station_bounds[elem.element_id] = elem
 
         moved = 0
-        stations_processed = 0
         for sid, dev_ids in station_devices.items():
-            if not dev_ids or sid not in station_bounds:
+            if sid not in station_bounds:
+                continue
+            station_elem = station_bounds[sid]
+
+            # 收集站内设备
+            internal_devs = []
+            for dev_id in dev_ids:
+                elem = device_by_id.get(dev_id)
+                if elem and elem.width > 0 and elem.height > 0:
+                    internal_devs.append(elem)
+
+            if not internal_devs:
                 continue
 
-            sx, sy, sw, sh = station_bounds[sid]
-            sub_G = G.subgraph(dev_ids).copy()
-            if not sub_G.nodes:
+            # 计算设备质心（基于BFS布局后的当前位置）
+            avg_x = sum(e.x + e.width / 2 for e in internal_devs) / len(internal_devs)
+            avg_y = sum(e.y + e.height / 2 for e in internal_devs) / len(internal_devs)
+
+            # 站房新位置：以质心为参考
+            station_w = max(max(e.width for e in internal_devs) + 24.0, 50.0)
+            station_h = sum(max(e.height + 6.0, 25.0) for e in internal_devs) + 24.0
+            station_x = avg_x - station_w / 2.0
+            station_y = avg_y - station_h / 2.0
+
+            # 按原始 x 坐标排序
+            internal_devs.sort(key=lambda e: e.x)
+
+            # 纵向排列（间距足够容纳文字标注）
+            y_offset = 12.0
+            max_x = 0
+            STATION_DEV_SPACING = 25.0  # 最小设备间距，确保文字不重叠
+            for elem in internal_devs:
+                old_x, old_y = elem.x, elem.y
+                new_x = station_x + 12.0
+                new_y = station_y + y_offset
+                self._move_device(elem, new_x, new_y)
+                y_offset += max(elem.height + 6.0, STATION_DEV_SPACING)
+                max_x = max(max_x, elem.x + elem.width)
+                moved += 1
+
+            # 更新站房边框
+            new_w = max(max_x - station_x + 12.0, 50.0)
+            new_h = y_offset + 12.0
+            station_elem.x = station_x
+            station_elem.y = station_y
+            station_elem.width = new_w
+            station_elem.height = new_h
+            if station_elem.shape_tag == "polygon":
+                pts = f"{station_x},{station_y} {station_x + new_w},{station_y} {station_x + new_w},{station_y + new_h} {station_x},{station_y + new_h}"
+                station_elem.shape_attrs["points"] = pts
+
+        return moved
+
+    def _reposition_stations(self, device_by_id: dict):
+        """站房位置跟随其内部设备的包围盒中心。"""
+        # 按站房分组设备
+        station_devices = {}
+        for dev_id, station_id in self.device_to_station.items():
+            if station_id not in station_devices:
+                station_devices[station_id] = []
+            station_devices[station_id].append(dev_id)
+
+        for sid, dev_ids in station_devices.items():
+            station_elem = None
+            for e in self.doc.elements:
+                if e.element_id == sid and e.layer_name == "Substation":
+                    station_elem = e
+                    break
+            if not station_elem:
                 continue
 
-            # 选择根节点
-            root = self._pick_root(sub_G)
-            if root is None:
+            # 计算内部设备包围盒
+            xs, ys = [], []
+            for dev_id in dev_ids:
+                elem = device_by_id.get(dev_id)
+                if elem and elem.width > 0 and elem.height > 0:
+                    xs.extend([elem.x, elem.x + elem.width])
+                    ys.extend([elem.y, elem.y + elem.height])
+            if not xs:
                 continue
 
-            # BFS 分层
-            layers = self._bfs_layers(sub_G, root)
+            min_x, max_x = min(xs), max(xs)
+            min_y, max_y = min(ys), max(ys)
+            padding = 12.0
 
-            # 分配坐标
-            moved += self._assign_coords_by_layers(
-                sid, layers, sub_G, sx, sy, sw, sh, device_by_id)
-            stations_processed += 1
+            old_x, old_y = station_elem.x, station_elem.y
+            station_elem.x = min_x - padding
+            station_elem.y = min_y - padding
+            station_elem.width = (max_x - min_x) + 2 * padding
+            station_elem.height = (max_y - min_y) + 2 * padding
 
-        print(f"  站房内拓扑布局: {moved} 个设备已重新排列, {stations_processed} 个站房")
+            # 更新 polygon points
+            if station_elem.shape_tag == "polygon":
+                sx, sy = station_elem.x, station_elem.y
+                sw, sh = station_elem.width, station_elem.height
+                pts = f"{sx},{sy} {sx+sw},{sy} {sx+sw},{sy+sh} {sx},{sy+sh}"
+                station_elem.shape_attrs["points"] = pts
 
     def _pick_root(self, sub_G):
         """选择根节点：母线优先，其次变压器，最后度数最大的。"""
@@ -818,15 +1227,8 @@ class SvgBeautifier:
 
                 new_x = x
                 new_y = y
-                dx = new_x - elem.x
-                dy = new_y - elem.y
-                if abs(dx) > 0.1 or abs(dy) > 0.1:
-                    old_x, old_y = elem.x, elem.y
-                    elem.x = new_x
-                    elem.y = new_y
-                    if elem.transform or getattr(elem, 'raw_transform', None):
-                        elem.patch_transform_translate(old_x, old_y, new_x, new_y)
-                    self._sync_device_move(elem.element_id, dx, dy)
+                if abs(new_x - elem.x) > 0.1 or abs(new_y - elem.y) > 0.1:
+                    self._move_device(elem, new_x, new_y)
                     moved += 1
 
         # 备用设备放站房右侧
@@ -843,15 +1245,8 @@ class SvgBeautifier:
                 spare_y = sy + 10 + spare_y_spacing * (i + 1) - std_h / 2
             else:
                 spare_y = sy + sh / 2 - std_h / 2
-            dx = spare_x - elem.x
-            dy = spare_y - elem.y
-            if abs(dx) > 0.1 or abs(dy) > 0.1:
-                old_x, old_y = elem.x, elem.y
-                elem.x = spare_x
-                elem.y = spare_y
-                if elem.transform or getattr(elem, 'raw_transform', None):
-                    elem.patch_transform_translate(old_x, old_y, spare_x, spare_y)
-                self._sync_device_move(elem.element_id, dx, dy)
+            if abs(spare_x - elem.x) > 0.1 or abs(spare_y - elem.y) > 0.1:
+                self._move_device(elem, spare_x, spare_y)
                 moved += 1
 
         return moved
@@ -933,13 +1328,13 @@ class SvgBeautifier:
             if elem.element_id:
                 device_by_id[elem.element_id] = elem
 
-        # 建立站房边界列表（用于判断设备是否在站房内，从而过滤站内设备名称）
+        # 建立站房边界列表
         station_bounds = []
         for elem in self.doc.elements:
             if elem.layer_name == "Substation" and elem.width and elem.height:
                 station_bounds.append((elem.x, elem.y, elem.width, elem.height))
 
-        # 建立 connection_id / glink_ref → connection 的映射（用于线路文字定位）
+        # 建立 connection_id / glink_ref → connection 的映射
         connection_by_id = {}
         for conn in self.doc.connections:
             if conn.connection_id:
@@ -948,7 +1343,47 @@ class SvgBeautifier:
                 if gid:
                     connection_by_id[gid] = conn
 
+        # 预处理：对每个设备只保留最高优先级的文字，其余标记隐藏
+        device_best_text = {}  # dev_id → (priority, text_id)
         for txt in self.doc.texts:
+            if getattr(txt, "hidden", False):
+                continue
+            dev_id = self.text_device_map.get(txt.text_id, "")
+            if not dev_id:
+                continue
+            content = (txt.content or "").strip()
+            has_chinese = bool(re.search(r'[\u4e00-\u9fff]', content))
+            if not has_chinese or len(content) < 2:
+                continue
+            # 优先级：站名 > 关键设备名 > 普通设备名 > 线路名 > ID
+            pri = 0
+            if re.search(r'(变电站|开关站|配电室|站房|开闭所)', content):
+                pri = 0
+            elif re.search(r'(环网箱|箱变|变压器|故障指示器|开关)', content):
+                pri = 1
+            else:
+                pri = 2
+            existing = device_best_text.get(dev_id)
+            if existing is None or pri < existing[0]:
+                device_best_text[dev_id] = (pri, txt.text_id)
+
+        for txt in self.doc.texts:
+            # 0. 清理文字内容：去除TMP前缀元数据，提取有意义的设备名
+            txt.content = self._clean_text_content(txt.content)
+
+            # 0.1 去重：同一设备只保留最高优先级的文字
+            dev_id = self.text_device_map.get(txt.text_id, "")
+            if dev_id and dev_id in device_best_text:
+                best_text_id = device_best_text[dev_id][1]
+                if txt.text_id != best_text_id:
+                    # 非最佳文字，检查是否是线路标签（保留线路标签）
+                    content = (txt.content or "").strip()
+                    is_line_name = bool(re.search(r'LINE\d+|_线|馈线', content))
+                    if not is_line_name:
+                        txt.hidden = True
+                        hidden_count += 1
+                        continue
+
             # 1. 颜色统一
             if txt.fill != STYLE["text"]:
                 txt.fill = STYLE["text"]
@@ -956,7 +1391,6 @@ class SvgBeautifier:
 
             # 2. 判定 text_role（保留已预设的特殊角色，如 spare）
             if not txt.text_role:
-                dev_id = self.text_device_map.get(txt.text_id, "")
                 elem = device_by_id.get(dev_id)
                 content = txt.content.strip()
                 has_chinese = bool(re.search(r'[\u4e00-\u9fff]', content))
@@ -976,13 +1410,13 @@ class SvgBeautifier:
                 else:
                     txt.text_role = "name"
 
-            # 2.1 文字过滤：隐藏 ID 和描述性线路标签
+            # 2.1 文字过滤
             if self._should_hide_text(txt):
                 txt.hidden = True
                 hidden_count += 1
                 continue
 
-            # 2.2 长标签截断
+            # 2.2 截断
             txt.content = self._truncate_text(txt.content)
 
             # 3. 字体
@@ -997,10 +1431,10 @@ class SvgBeautifier:
                 txt.font_weight = weight
                 font_updated += 1
 
-            # 3. 位置：保持原始文字位置，仅调整 dx/dy 偏移和对齐方式
+            # 5. 位置：文字坐标已在布局阶段同步到设备中心，这里仅设置 dx/dy 偏移
             dev_id = self.text_device_map.get(txt.text_id, "")
             elem = device_by_id.get(dev_id) if dev_id else None
-            if elem and not (elem.width <= 0 and elem.height <= 0 and elem.x == 0 and elem.y == 0):
+            if elem and elem.width > 0 and elem.height > 0:
                 pos_info = self._compute_text_position(txt, elem)
                 if pos_info:
                     old_dx, old_dy = txt.dx, txt.dy
@@ -1008,11 +1442,9 @@ class SvgBeautifier:
                     txt.dy = pos_info.get("dy", 0)
                     txt.text_anchor = pos_info.get("text_anchor", "middle")
                     txt.dominant_baseline = pos_info.get("dominant_baseline", "auto")
-                    # 不覆盖原始 x/y，保持原始布局
                     if txt.dx != old_dx or txt.dy != old_dy:
                         pos_updated += 1
             else:
-                # 无有效关联设备：保持原始位置，仅更新偏移
                 pos_info = self._compute_text_position_no_device(txt)
                 if pos_info:
                     old_dx, old_dy = txt.dx, txt.dy
@@ -1026,12 +1458,10 @@ class SvgBeautifier:
         print(f"  文字颜色: {color_updated} 个, 字号/字重: {font_updated} 个, 位置: {pos_updated} 个, 隐藏: {hidden_count} 个")
 
     def _resolve_text_collisions(self):
-        """全局文字碰撞避让：基于近似包围盒，按优先级贪心错开，必要时隐藏。
+        """全局文字碰撞避让：基于近似包围盒，按优先级贪心错开。
 
-        策略：按 title > 关键设备名 > 普通设备名 > spare > line 优先级排序，
-        对每个文字计算近似 BBox，若与已放置文字重叠，尝试在 ±30px 范围内小步
-        偏移（优先纵向，其次横向），仍无法错开时隐藏优先级较低的文字，避免
-        标签远离设备。
+        策略：优先小幅度偏移解决重叠，仅当无法错开时才隐藏低优先级文字。
+        大幅提高偏移尝试次数，尽量保留所有文字。
         """
         visible_texts = [t for t in self.doc.texts if not getattr(t, "hidden", False)]
         if not visible_texts:
@@ -1060,11 +1490,15 @@ class SvgBeautifier:
         adjusted = 0
         hidden = 0
 
-        # 候选偏移：优先小幅度纵向，再横向；限制在设备附近
-        candidate_offsets = [
-            (0, 12), (0, -12), (0, 24), (0, -24), (0, 30), (0, -30),
-            (12, 0), (-12, 0), (24, 0), (-24, 0),
-        ]
+        # 扩展候选偏移范围：更多纵向/横向选项
+        candidate_offsets = []
+        for i in range(1, 20):
+            candidate_offsets.extend([
+                (0, i * 6), (0, -i * 6),
+                (i * 6, 0), (-i * 6, 0),
+                (i * 6, i * 6), (i * 6, -i * 6),
+                (-i * 6, i * 6), (-i * 6, -i * 6),
+            ])
 
         for txt in visible_texts:
             bx, by, bw, bh = self._text_bbox(txt)
@@ -1086,14 +1520,19 @@ class SvgBeautifier:
                     break
 
             if found:
-                # 将偏移量累加到 dx/dy
                 txt.dx += best_x - bx
                 txt.dy += best_y - by
                 placed.append((best_x, best_y, bw, bh))
                 adjusted += 1
             else:
-                txt.hidden = True
-                hidden += 1
+                # 无法错开：保留文字（即使重叠），不隐藏
+                # 仅当文字内容为空或过短时才隐藏
+                content = (txt.content or "").strip()
+                if len(content) < 2:
+                    txt.hidden = True
+                    hidden += 1
+                else:
+                    placed.append((bx, by, bw, bh))
 
         print(f"  文字碰撞避让: 调整 {adjusted} 个, 隐藏 {hidden} 个")
 
@@ -1246,40 +1685,199 @@ class SvgBeautifier:
         # 默认按支线设备名称处理
         return {"dx": 14, "dy": 4, "text_anchor": "start", "dominant_baseline": "middle"}
 
+    def _clean_text_content(self, content: str) -> str:
+        """清理文字内容：去除元数据前缀，提取有意义的设备名。
+
+        原始SVG中的文字模式：
+        - "TMP00131368#~界著支1#" → "界著支1#"
+        - "00000#~LINE216_争15#" → "LINE216_争15#" → "争15#"
+        - "TMP00131373LINE215_线开关－LINE215_线LINE365_1#环网箱101" → "环网箱101"
+        - "00000白7#~界著支26白8#" → "界著支26白8#"
+        - "TMP00132954白1#SUB011_-LINE216_争140白3#" → "争140白3#"
+        - "TMP00131599LINE216_争24电缆次" → "争24电缆次"
+        - "SUB010_66kV变电站" → 保留
+        - "故障指示器006" → 保留
+        """
+        if not content:
+            return content
+        content = content.strip()
+
+        # 1. 去除 TMP + 数字 前缀
+        content = re.sub(r'^TMP\d+#?', '', content)
+
+        # 2. 去除 00000 占位前缀
+        content = re.sub(r'^0{3,}', '', content)
+
+        # 3. 按分隔符分割取最后一段（~ | #- | _-LINE | SUB\d+_）
+        # SUB011_-LINE... 和 SUB010_断路器 也是分隔符
+        # 先处理 SUB\d+_ 类型的分隔符（不包含变电站等有意义的）
+        def _split_sub(m):
+            full = m.group(0)
+            # 如果是变电站等有意义的 SUBxxx_名称，保留
+            suffix = content[m.end():m.end()+8] if m.end()+8 <= len(content) else content[m.end():]
+            if re.search(r'(变电站|开关站|配电室|站房|开闭所)', content[m.start():]):
+                return full  # 保留有意义的 SUB_
+            # 否则作为分隔符处理
+            return '|||'  # 临时分隔符
+
+        sub_split = re.sub(r'SUB\d+_', _split_sub, content)
+        # 统一使用 ||| 分割 + _-LINE 分割 + #- + ~
+        parts = re.split(r'\|\|\||_-LINE|#-|~', sub_split)
+        if len(parts) > 1:
+            # 取最后一段（含 LINE 前缀的优先移除前缀）
+            best_parts = []
+            for part in reversed(parts):
+                part = part.strip()
+                if part and len(part) >= 2:
+                    best_parts.append(part)
+            if best_parts:
+                content = best_parts[0]
+
+        # 4. 去除开头的 #、~、-、. 等残留分隔符
+        content = re.sub(r'^[#~\-.]+', '', content)
+
+        # 5. 如果含 －/— 分隔的连接描述，取最后一段
+        # 注意：短横杠 - 可能是设备名的一部分（如电缆终端头的名称），所以不按 - 分割
+        if re.search(r'[－—]', content):
+            parts = re.split(r'[－—]', content)
+            if len(parts) >= 2:
+                last_part = parts[-1].strip()
+                if last_part and len(last_part) >= 2:
+                    content = last_part
+
+        # 6. 去除 LINE\d+_ 前缀（如 LINE216_争 → 争）
+        m = re.match(r'^LINE\d+_(.+)$', content)
+        if m:
+            remaining = m.group(1)
+            if re.search(r'[\u4e00-\u9fff\d]', remaining):
+                content = remaining
+
+        # 7. 去除开头的 # 和 -
+        content = re.sub(r'^[#\-]+', '', content)
+
+        # 8. 去除末尾所有残留标点（.、#、-、~ 等重复出现的）
+        content = re.sub(r'[.#~\-]+$', '', content)
+
+        return content.strip()
+
     def _should_hide_text(self, txt: SvgText) -> bool:
         """过滤非关键文字，降低图纸信息密度。
 
         隐藏规则：
-        - 设备唯一 ID
-        - 线路描述性标签（含 TMP/线开关/环网箱/进线/出线/联络等内部关键词）
+        - 纯编码ID（无中文）且role=id → 隐藏
+        - 空内容 → 隐藏
+        - 内容过短（<2字符）且无意义 → 隐藏
+        - 仍在原始坐标区域(290-540, 410-580)的文字 → 隐藏（设备未被移动）
+        - 纯垃圾文字（无设备关键词、无编号、全是随机中文）→ 隐藏
         """
         role = txt.text_role
-        content = txt.content or ""
-        lower = content.lower()
+        content = (txt.content or "").strip()
 
-        # 1. 隐藏设备唯一 ID
-        if role == "id":
+        if not content:
             return True
 
-        # 2. 隐藏 ACLineSegment 内部描述性长标签
-        if role == "line":
-            # 包含内部编码或描述性关键词
-            if any(k in lower for k in ["tmp", "线开关", "环网箱", "进线", "出线", "联络", "馈线"]):
+        if len(content) < 2:
+            return True
+
+        # 纯 ID 类型（纯编码、无中文）→ 隐藏
+        if role == "id":
+            has_chinese = bool(re.search(r'[\u4e00-\u9fff]', content))
+            if not has_chinese:
                 return True
-            # 超长且带下划线的内部编号
-            if len(content) > 20 and "_" in content:
+
+        # 仍在原始坐标区域的文字：关联设备未被布局移动
+        if 290 <= txt.x <= 540 and 410 <= txt.y <= 580:
+            return True
+
+        # 垃圾文字检测：中文随机字符组合，伪装成设备标注
+        has_chinese = bool(re.search(r'[\u4e00-\u9fff]', content))
+        if not has_chinese:
+            return False  # 非中文交给其他规则
+
+        # (1) 合法设备关键词检查
+        LEGIT_KW = (
+            '变电站', '开关站', '配电室', '站房', '开闭所', '环网箱', '箱变', '变压器',
+            '故障指示器', '开关', '刀闸', '配变', '用户', '母线', '终端头', '电缆',
+            '主变', '联络', '馈线', '进线', '出线', '数线', '次母线', '站外', '站内',
+        )
+        has_device_keyword = any(kw in content for kw in LEGIT_KW)
+        # 合法后缀：结构字（支/分/争）+数字 或 （照/白/间/开关/刀闸/配变/用户等）+数字
+        legit_suffix_match = re.search(
+            r'(支\d|分\d|照\d|白\d|间\d|柜\d|线\d|盒\d|表\d|'
+            r'用户\d|开关\d|刀闸\d|配变\d|争\d|站\d|箱\d|缆\d|头\d|'
+            r'次母线|母线|数线)',
+            content
+        )
+        has_number = bool(re.search(r'\d', content))
+
+        # 提取所有中文段
+        cn_segments = re.findall(r'[\u4e00-\u9fff]+', content)
+        cn_only = ''.join(cn_segments)
+        # 合法地名+结构字模式（2字地名+1字结构字 或 3字地名+1字结构字）
+        # 如：界著支、饭想分、清叫支、五海分、从地支、多列分、士诉分、约命...（非）
+        # 结构字限定为：支、分、争
+        STRUCT_RE = re.compile(r'^[\u4e00-\u9fff]{1,3}[支分争]$')
+
+        # (2) 单段中文>=4字且不含关键词 → 乱码（"故障指示器"5字含关键词，通过；"助速常开发个行者劳"8字无关键词，被隐藏）
+        for seg in cn_segments:
+            seg_has_kw = any(kw in seg for kw in LEGIT_KW)
+            if len(seg) >= 4 and not seg_has_kw:
                 return True
+
+        # (3) 含设备关键词的场景：检查前缀是否为乱码段
+        # 例："了严2#母线" → cn_segments=["了严", "母线"], has_device_keyword=True
+        #   "了严" 不在关键词中 → 检查 "了严" 是否为合法2字地名/前缀
+        LEGIT_2CH_OR_SUFFIX = (
+            '数线', '进线', '出线', '馈线', '母线', '联络', '电缆', '终端', '站外',
+            '站内', '故障', '指示', '变压', '箱变', '开关', '刀闸', '配变', '用户',
+            '开闭', '配电', '变电', '环网', '次母',
+        )
+        LEGIT_SINGLE = ('白', '照', '间', '箱', '柜', '表', '盒', '线', '缆', '头',
+                        '开', '关', '配', '闸', '站', '主', '次', '争')
+        if has_device_keyword and len(cn_segments) >= 2:
+            for seg in cn_segments:
+                seg_has_kw = any(kw in seg for kw in LEGIT_KW)
+                if seg_has_kw or len(seg) < 2:
+                    continue
+                # 合法地名结构（2-3字+支/分/争结尾）
+                if STRUCT_RE.match(seg):
+                    continue
+                # 合法后缀词（数线等）
+                if seg in LEGIT_2CH_OR_SUFFIX:
+                    continue
+                # 3字或更长的非结构字结尾 → 乱码
+                if len(seg) >= 3:
+                    return True
+                # 2字段：是合法后缀词（如"照1"的"照"是长度1，不触发这里）→ 乱码（如"了严"）
+                if len(seg) == 2:
+                    return True
+
+        # (4) 总中文字符数过多且无关键词（不管后缀）→ 乱码
+        # 正常："清叫支20#数线" → cn=["清叫支","数线"] → cn_only=5字
+        #       "约命了严个行者劳2#" → 去掉数字，cn_only="约命了严个行者劳"=9字 无kw → 隐藏
+        if len(cn_only) >= 7 and not has_device_keyword:
+            return True
+
+        # (5) 没有关键词、没有合法后缀、总中文>=5 → 乱码
+        if not has_device_keyword and not legit_suffix_match and len(cn_only) >= 5:
+            return True
+
+        # (6) 兜底：纯中文（无数字无#）+ 无关键词 → 隐藏
+        if not has_device_keyword and not has_number and '#' not in content:
+            return True
 
         return False
 
-    def _truncate_text(self, content: str, max_chars: int = 12) -> str:
+    def _truncate_text(self, content: str, max_chars: int = 25) -> str:
         """长标签截断，超过 max_chars 时保留前段并加省略号。"""
         if not content:
             return content
         content = content.strip()
-        if len(content) <= max_chars:
+        has_chinese = bool(re.search(r'[\u4e00-\u9fff]', content))
+        limit = 30 if has_chinese else max_chars
+        if len(content) <= limit:
             return content
-        return content[:max_chars] + "…"
+        return content[:limit] + "…"
 
     def _classify_text(self, txt: SvgText, device_by_id: dict) -> tuple:
         """根据 text_role 和关联设备图层返回固定字号（px）和字重。"""
@@ -1321,47 +1919,43 @@ class SvgBeautifier:
     # ------------------------------------------------------------------
     def _normalize_device_icons(self):
         """标准化设备显示尺寸：按类型设定 width/height，去除 transform 中的极小 scale，
-        并按中心点不变修正 x/y，使设备与文字/线宽尺度协调。"""
+        并按中心点不变修正 x/y，使设备与文字/线宽尺度协调。
+
+        关键修复：
+        1. width/height 为 0 或极小时用 std 兜底，避免 _edge_point 误返回 (0,0)
+        2. transform 重建为 translate + rotate（清除极小 scale），use.width 直接决定显示尺寸
+        3. 同步连接线端点和文字位置
+        """
         updated = 0
+        skipped_zero = 0
         for elem in self.doc.elements:
             layer = elem.layer_name
             if layer not in DEVICE_STANDARD_SIZES:
                 continue
+            if not elem.element_id:
+                continue
 
             std_w, std_h = DEVICE_STANDARD_SIZES[layer]
-            old_w = elem.width or std_w
-            old_h = elem.height or std_h
-            cx = elem.x + old_w / 2.0
-            cy = elem.y + old_h / 2.0
+            old_w = elem.width if (elem.width and elem.width > 0.01) else std_w
+            old_h = elem.height if (elem.height and elem.height > 0.01) else std_h
 
-            new_x = cx - std_w / 2.0
-            new_y = cy - std_h / 2.0
-            dx = new_x - elem.x
-            dy = new_y - elem.y
+            if (elem.x == 0 and elem.y == 0 and
+                    elem.width <= 0.01 and elem.height <= 0.01):
+                skipped_zero += 1
+                continue
 
-            elem.x = new_x
-            elem.y = new_y
+            # 保留原始 transform 结构（translate(x,y) scale(s) translate(-x,-y)）
+            # 将 scale 设为 1.0，通过 width/height 控制显示尺寸
+            # 这样 transform 仅负责定位（translate + rotate），不参与缩放
+            elem.patch_transform_scale(1.0)
+
+            # 更新 width/height 为标准尺寸
             elem.width = std_w
             elem.height = std_h
 
-            # 重建 transform：保留旋转分量，scale 由 width/height 决定
-            # 旋转中心点使用新位置的中心，确保旋转围绕设备视觉中心
-            _, _, orig_scale, rotation, _ = SvgDocument._parse_transform(
-                elem.transform or elem.raw_transform or ''
-            )
-            new_cx = new_x + std_w / 2.0
-            new_cy = new_y + std_h / 2.0
-            if abs(rotation) > 0.001:
-                elem.transform = f"rotate({rotation:.6f},{new_cx:.6f},{new_cy:.6f})"
-            else:
-                elem.transform = ''
-
-            # 同步连接线端点和文字位置
-            self._sync_device_move(elem.element_id, dx, dy)
-
             updated += 1
 
-        print(f"  设备图标已标准化: {updated} 个")
+        print(f"  设备图标已标准化: {updated} 个 (跳过零坐标设备: {skipped_zero} 个)")
 
     def _compute_grid_size(self) -> float:
         """动态计算网格尺寸：基于最大标准设备宽度和最小间距。"""
@@ -1374,9 +1968,16 @@ class SvgBeautifier:
 
         核心逻辑：计算所有设备间的最小曼哈顿距离，如果小于目标间距
         （最大设备宽 + 最小间距），则按比例放大所有坐标。
+
+        关键修复：
+        1. factor 上限改为 10.0（避免极端放大导致设备飞散）
+        2. 当 min_dist 极小（<1.0）时直接使用保守 factor，避免单点误差放大
+        3. 放大时同步处理 polygon points（站房矩形等），不只是 x/y
         """
         device_elems = [e for e in self.doc.elements
-                        if e.element_id and e.layer_name != "Substation"]
+                        if e.element_id and e.layer_name != "Substation"
+                        and e.width and e.width > 0
+                        and e.height and e.height > 0]
         if len(device_elems) < 2:
             return
 
@@ -1384,38 +1985,64 @@ class SvgBeautifier:
         min_dist = float('inf')
         centers = []
         for e in device_elems:
-            cx = e.x + (e.width or 0) / 2
-            cy = e.y + (e.height or 0) / 2
+            cx = e.x + e.width / 2
+            cy = e.y + e.height / 2
             centers.append((cx, cy))
 
         for i in range(len(centers)):
             for j in range(i + 1, len(centers)):
                 dist = abs(centers[i][0] - centers[j][0]) + abs(centers[i][1] - centers[j][1])
-                if dist > 0.01:
+                if dist > 0.5:  # 过滤重合设备
                     min_dist = min(min_dist, dist)
 
-        if min_dist == float('inf') or min_dist < 0.01:
+        if min_dist == float('inf'):
             return
 
         # 目标最小间距：最大设备宽度 + 最小间距
         max_dev_w = max(w for w, h in DEVICE_STANDARD_SIZES.values())
-        target_min_dist = max_dev_w + 8.0
+        target_min_dist = max_dev_w + 8.0  # 40.0
 
         if min_dist >= target_min_dist:
             print(f"  坐标尺度已满足: 最小间距 {min_dist:.2f} >= 目标 {target_min_dist:.2f}")
             return
 
         factor = target_min_dist / min_dist
-        # 限制最大缩放因子
-        factor = min(factor, 50.0)
+        # 限制最大缩放因子（避免极小间距导致爆炸放大）
+        factor = min(factor, 10.0)
 
+        # 放大设备坐标
         for elem in self.doc.elements:
             elem.x *= factor
             elem.y *= factor
+            # Substation 是 polygon，width/height 不变但 points 要放大
+            if elem.shape_tag == "polygon":
+                pts_str = elem.shape_attrs.get("points", "")
+                if pts_str:
+                    new_pts = []
+                    for pt in pts_str.strip().split():
+                        coords = pt.split(",")
+                        if len(coords) == 2:
+                            try:
+                                new_pts.append(
+                                    f"{float(coords[0]) * factor:.6f},"
+                                    f"{float(coords[1]) * factor:.6f}"
+                                )
+                            except ValueError:
+                                new_pts.append(pt)
+                        else:
+                            new_pts.append(pt)
+                    elem.shape_attrs["points"] = " ".join(new_pts)
+            # 同步 transform 的 translate 分量
+            if elem.transform:
+                elem._transform_tx *= factor
+                elem._transform_ty *= factor
+                elem.rebuild_transform()
 
+        # 放大连接线坐标
         for conn in self.doc.connections:
             conn.points = [(x * factor, y * factor) for x, y in conn.points]
 
+        # 放大文字坐标（字号不放大，由 _normalize_text_styles 按规范统一设置）
         for txt in self.doc.texts:
             txt.x *= factor
             txt.y *= factor
@@ -1423,25 +2050,27 @@ class SvgBeautifier:
         print(f"  坐标尺度归一化: 最小间距 {min_dist:.2f} → {min_dist * factor:.2f} (×{factor:.2f})")
 
     def _route_connections_to_edges(self):
-        """连接线正交路由：端点贴设备边缘 + L 型中间路径。
+        """基于新设备位置重新生成正交连接线路径。
 
-        策略：
-        1. 起点和终点贴到设备边缘
-        2. 如果只有首尾两点，生成 L 型正交中间点
-        3. 如果有中间点，仅更新首尾端点
+        核心逻辑：
+        1. 获取连接线的起止设备
+        2. 计算设备边缘连接点
+        3. 生成正交路径（L型或Z型）
+        4. 无设备关联的连接线保持原样
         """
         device_by_id = {e.element_id: e for e in self.doc.elements if e.element_id}
         updated = 0
+        skipped = 0
 
         def _edge_point(dev, target_x, target_y):
+            """计算设备边缘上最接近目标方向的连接点。"""
+            if not dev or dev.width <= 0 or dev.height <= 0:
+                return None
             cx = dev.x + dev.width / 2.0
             cy = dev.y + dev.height / 2.0
             dx = target_x - cx
             dy = target_y - cy
             if abs(dx) < 1e-6 and abs(dy) < 1e-6:
-                return cx, cy
-            # 防止设备尺寸为0时除零
-            if dev.width <= 0 or dev.height <= 0:
                 return cx, cy
             if abs(dx) * dev.height > abs(dy) * dev.width:
                 ex = dev.x + (dev.width if dx > 0 else 0.0)
@@ -1453,50 +2082,73 @@ class SvgBeautifier:
                 ey = dev.y + (dev.height if dy > 0 else 0.0)
             return ex, ey
 
-        for conn in self.doc.connections:
-            if not conn.points or len(conn.points) < 2:
-                continue
+        def _make_orthogonal_path(x1, y1, x2, y2):
+            """生成正交折线路径：L型或Z型。"""
+            if abs(x1 - x2) < 1.0:
+                # 垂直直连
+                return [(x1, y1), (x2, y2)]
+            if abs(y1 - y2) < 1.0:
+                # 水平直连
+                return [(x1, y1), (x2, y2)]
 
-            new_points = list(conn.points)
+            # 判断用L型还是Z型
+            mid_x = (x1 + x2) / 2.0
+            if abs(y1 - y2) < abs(x1 - x2) * 0.3:
+                # Y差较小，用Z型走中线
+                return [(x1, y1), (mid_x, y1), (mid_x, y2), (x2, y2)]
+            else:
+                # Y差较大，用L型
+                if abs(y1 - y2) > abs(x1 - x2):
+                    # 先垂直再水平
+                    return [(x1, y1), (x1, y2), (x2, y2)]
+                else:
+                    # 先水平再垂直
+                    return [(x1, y1), (x2, y1), (x2, y2)]
+
+        for conn in self.doc.connections:
             start_dev = device_by_id.get(conn.start_device_id) if conn.start_device_id else None
             end_dev = device_by_id.get(conn.end_device_id) if conn.end_device_id else None
 
-            # 起点贴设备边缘
+            # 跳过 start==end
+            if start_dev and end_dev and start_dev.element_id == end_dev.element_id:
+                skipped += 1
+                continue
+
+            if not start_dev and not end_dev:
+                # 无设备关联，保持原样
+                continue
+
+            # 计算起止设备中心
             if start_dev:
-                target = new_points[1]
-                new_start = _edge_point(start_dev, target[0], target[1])
-                if new_start != new_points[0]:
-                    new_points[0] = new_start
-                    updated += 1
+                scx = start_dev.x + start_dev.width / 2
+                scy = start_dev.y + start_dev.height / 2
+            else:
+                if not conn.points:
+                    continue
+                scx, scy = conn.points[0]
 
-            # 终点贴设备边缘
             if end_dev:
-                target = new_points[-2]
-                new_end = _edge_point(end_dev, target[0], target[1])
-                if new_end != new_points[-1]:
-                    new_points[-1] = new_end
-                    updated += 1
+                ecx = end_dev.x + end_dev.width / 2
+                ecy = end_dev.y + end_dev.height / 2
+            else:
+                if not conn.points:
+                    continue
+                ecx, ecy = conn.points[-1]
 
-            # L 型正交路由：如果只有首尾两点且不在同一行/列，添加中间转折点
-            if len(new_points) == 2 and start_dev and end_dev:
-                sp = new_points[0]
-                ep = new_points[-1]
-                if abs(sp[0] - ep[0]) > 1.0 and abs(sp[1] - ep[1]) > 1.0:
-                    # L 型：先水平后垂直
-                    mid_pt = (ep[0], sp[1])
-                    new_points = [sp, mid_pt, ep]
-                    updated += 1
-            elif len(new_points) == 2 and (start_dev or end_dev):
-                sp = new_points[0]
-                ep = new_points[-1]
-                if abs(sp[0] - ep[0]) > 1.0 and abs(sp[1] - ep[1]) > 1.0:
-                    mid_pt = (ep[0], sp[1])
-                    new_points = [sp, mid_pt, ep]
-                    updated += 1
+            # 计算边缘连接点
+            sp = _edge_point(start_dev, ecx, ecy) if start_dev else (scx, scy)
+            ep = _edge_point(end_dev, scx, scy) if end_dev else (ecx, ecy)
 
+            if sp is None or ep is None:
+                skipped += 1
+                continue
+
+            # 生成正交路径
+            new_points = _make_orthogonal_path(sp[0], sp[1], ep[0], ep[1])
             conn.points = new_points
+            updated += 1
 
-        print(f"  连接线正交路由: {updated} 条已更新")
+        print(f"  连接线正交路由: {updated} 条已更新 (跳过: {skipped} 条)")
 
 
 def beautify_svg_file(svg_path: str, output_path: str = None) -> str:

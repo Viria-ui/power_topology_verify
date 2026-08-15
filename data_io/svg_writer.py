@@ -148,17 +148,18 @@ class SvgDocumentWriter:
             if shape_elem is not None:
                 tag = _local_tag(shape_elem.tag)
                 if tag == "use":
-                    # 对于use元素，只覆盖坐标和尺寸；transform 由 beautifier 在移动时
-                    # 通过 patch_transform_translate 维护，写回时直接使用 elem.transform
-                    # 以保留原始 scale/rotate 语义。
+                    # x/y 属性控制位置，transform 仅保留 rotate（由 beautifier 设置）
+                    # 始终使用 elem.transform，不回退到原始 transform（避免残留 scale/translate）
                     shape_elem.set("x", self._fmt(elem.x))
                     shape_elem.set("y", self._fmt(elem.y))
+                    if elem.transform:
+                        shape_elem.set("transform", elem.transform)
+                    elif 'transform' in shape_elem.attrib:
+                        del shape_elem.attrib['transform']
                     if elem.width:
                         shape_elem.set("width", self._fmt(elem.width))
                     if elem.height:
                         shape_elem.set("height", self._fmt(elem.height))
-                    if elem.transform:
-                        shape_elem.set("transform", elem.transform)
                     # 保留原始href和class，不覆盖
                 elif tag == "rect":
                     shape_elem.set("x", self._fmt(elem.x))
