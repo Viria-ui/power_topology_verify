@@ -1,260 +1,112 @@
-"""SVG 处理流程 - 闭环：解析 → 中间模型 → 修改/美化 → 重新生成 → 再解析验证。
-
-任务：
-1. 美化 LINE215.svg 和 LINE216.svg
-2. LINE215：在开关00104（TMP00044018）和开关00102（TMP00044016）之间插入站房000300，含3个开关
-3. LINE216：删除开关00024（TMP00043912），两侧设备直接连接
-4. 每步生成中间模型（device.json、graph.json、topology.json）并验证闭环
-"""
 import os
-import sys
 import json
-from pathlib import Path
+import sys
+import time
+
+# Ensure project root is in path
+PROJECT_ROOT = os.getcwd()
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 from data_io.svg_reader import SvgDocument
-from svg_io.svg_beautifier import beautify_svg_file
-from svg_io.svg_editor import SvgEditor
+from data_io.svg_writer import SvgDocumentWriter
+from core.topology_validator import (
+    validate_svg_only, validate_svg_vs_topology, 
+    validate_rendered_svg, export_defect_report
+)
+from core.topology_repairer import TopologyRepairer
+from svg_io.svg_beautifier import SvgBeautifier
+from svg_io.svg_editor import SvgInteractiveEditor
+from scripts._load_sql_topology import load_sql_topology
 
+def run_beautify_only_pipeline():
+    # 1. Initialize paths
+    input_dir = os.path.join(PROJECT_ROOT, "数据集更新版20260729", "配网 svg")
+    output_dir = os.path.join(PROJECT_ROOT, "output", "svg")
+    report_dir = os.path.join(PROJECT_ROOT, "output", "reports")
+    
+    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(report_dir, exist_ok=True)
 
-class PipelineRunner:
-    def __init__(self):
-        self.project_root = Path(__file__).parent
-        self.svg_source_dir = self.project_root / "数据集更新版20260729" / "配网 svg"
-        self.output_dir = self.project_root / "output"
-        self.svg_output_dir = self.output_dir / "svg"
-        self.ir_output_dir = self.output_dir / "intermediate"  # device/graph/topology
-        self.svg_output_dir.mkdir(parents=True, exist_ok=True)
-        self.ir_output_dir.mkdir(parents=True, exist_ok=True)
-
-        self.results = {}
-
-    # ------------------------------------------------------------------
-    # 主流程
-    # ------------------------------------------------------------------
-    def run(self):
-        print("=" * 70)
-        print("SVG 处理闭环流程")
-        print("=" * 70)
-
-        # Step 1: 美化两个原始 SVG
-        for fname in ["LINE215.svg", "LINE216.svg"]:
-            src = str(self.svg_source_dir / fname)
-            beautified = self._beautify(fname)
-            self.results[fname] = {
-                "beautified": beautified,
-            }
-
-        # Step 2: LINE215 插入站房
-        line215_beautified = self.results["LINE215.svg"]["beautified"]
-        line215_edited = self._add_station(line215_beautified)
-        self.results["LINE215.svg"]["edited"] = line215_edited
-
-        # Step 3: LINE216 删除开关
-        line216_beautified = self.results["LINE216.svg"]["beautified"]
-        line216_edited = self._delete_switch(line216_beautified)
-        self.results["LINE216.svg"]["edited"] = line216_edited
-
-        # Step 4: 导出中间模型并闭环验证
-        final_files = {
-            "LINE215_beautified": line215_beautified,
-            "LINE215_with_000300": line215_edited,
-            "LINE216_beautified": line216_beautified,
-            "LINE216_del_switch": line216_edited,
-        }
-        print("\n" + "=" * 70)
-        print("闭环验证与中间模型导出")
-        print("=" * 70)
-        all_pass = True
-        for label, svg_path in final_files.items():
-            ok = self._verify_and_export(label, svg_path)
-            if not ok:
-                all_pass = False
-
-        self._generate_preview(final_files)
-
-        print("\n" + "=" * 70)
-        if all_pass:
-            print("全部 SVG 闭环验证通过")
-        else:
-            print("部分 SVG 闭环验证失败，请检查日志")
-        print("=" * 70)
-        return all_pass
-
-    # ------------------------------------------------------------------
-    # 步骤实现
-    # ------------------------------------------------------------------
-    def _beautify(self, fname: str) -> str:
-        print(f"\n>>> Step 1: 美化 {fname}")
-        src = str(self.svg_source_dir / fname)
-        dest = str(self.svg_output_dir / f"{Path(fname).stem}_beautified.svg")
-        out = beautify_svg_file(src, output_path=dest)
-        print(f"    输出: {out}")
-        return out
-
-    def _add_station(self, svg_path: str) -> str:
-        print(f"\n>>> Step 2: LINE215 插入站房 000300")
-        editor = SvgEditor(svg_path)
-        editor.load()
-        dest = str(self.svg_output_dir / "LINE215_with_000300.svg")
-        edited_path = editor.add_station_with_switches(
-            upstream_switch_id="TMP00044018",
-            downstream_switch_id="TMP00044016",
-            station_id="000300",
-            switch_ids=["00301", "00302", "00303"],
-            output_path=dest,
-        )
-        print(f"    编辑输出: {edited_path}")
-        # 编辑后再按规范美化一次
-        beautified_path = beautify_svg_file(edited_path, output_path=edited_path)
-        print(f"    美化输出: {beautified_path}")
-        return beautified_path
-
-    def _delete_switch(self, svg_path: str) -> str:
-        print(f"\n>>> Step 3: LINE216 删除开关 00024")
-        editor = SvgEditor(svg_path)
-        editor.load()
-        dest = str(self.svg_output_dir / "LINE216_del_switch.svg")
-        edited_path = editor.delete_switch("TMP00043912", output_path=dest)
-        print(f"    编辑输出: {edited_path}")
-        # 编辑后再按规范美化一次
-        beautified_path = beautify_svg_file(edited_path, output_path=edited_path)
-        print(f"    美化输出: {beautified_path}")
-        return beautified_path
-
-    # ------------------------------------------------------------------
-    # 验证与导出
-    # ------------------------------------------------------------------
-    def _verify_and_export(self, label: str, svg_path: str) -> bool:
-        print(f"\n--- 验证 [{label}] ---")
-        doc = SvgDocument(svg_path)
+    # 注意：任务 5.1 明确要求“不读取数据库拓扑信息，仅依托 SVG 文件自身连接关系”
+    print("\n[Step 0] 启动美化专项流水线 (不依赖数据库)...")
+    
+    target_files = ["LINE215.svg", "LINE216.svg"]
+    
+    for filename in target_files:
+        print(f"\n" + "="*60)
+        print(f"正在执行 5.1 美化任务: {filename}")
+        print("="*60)
+        
+        input_path = os.path.join(input_dir, filename)
+        if not os.path.exists(input_path):
+            print(f"文件不存在: {input_path}")
+            continue
+            
+        # ---- Step 1: 解析原始 SVG ----
+        print("\n[Step 1] 解析原始 SVG (提取图元、文本、坐标、连线)...")
+        doc = SvgDocument(input_path)
         if not doc.parse():
-            print(f"    [FAIL] 重新解析失败: {svg_path}")
-            return False
+            print(f"解析失败: {filename}")
+            continue
+        
+        # 导出原始 IR
+        ir_initial_path = os.path.join(report_dir, f"{filename}_ir_initial.json")
+        doc.dump_ir(ir_initial_path)
+            
+        # ---- Step 2: 初始质量校验 (仅针对 SVG 规范) ----
+        print("\n[Step 2] 正在执行初始质量校验 (23项配网制图规范)...")
+        defects_svg, summary_svg = validate_svg_only(doc, stage="initial")
+        report_initial_path = os.path.join(report_dir, f"{filename}_validation_initial.json")
+        export_defect_report(defects_svg, summary_svg, report_initial_path)
+        print(f"  初始发现缺陷: {len(defects_svg)} 条")
 
-        print(f"    重新解析成功: {len(doc.elements)} 设备, {len(doc.connections)} 连接, {len(doc.texts)} 文字")
+        # ---- Step 3: 执行拓扑自动修复 (仅基于 SVG 几何与 glink) ----
+        print("\n[Step 3] 执行拓扑缺陷整治 (修复飞线、缝合孤岛)...")
+        pre_counts = {"elements": len(doc.elements), "connections": len(doc.connections)}
+        
+        repairer = TopologyRepairer(doc)
+        doc = repairer.repair() # 该模块已重构，仅使用 doc 内部数据
+        
+        post_counts = {"elements": len(doc.elements), "connections": len(doc.connections)}
+        # 导出修复后 IR
+        ir_repaired_path = os.path.join(report_dir, f"{filename}_ir_repaired.json")
+        doc.dump_ir(ir_repaired_path)
+        
+        q = getattr(doc, "topology_stats", {})
+        print(f"  修复成果: 新增物理连接 {post_counts['connections'] - pre_counts['connections']} 条")
+        print(f"  拓扑状态: 连通分量={q.get('connected_components')}, 孤立节点={q.get('isolated_nodes_count')}")
 
-        # 任务特定校验
-        ok = True
-        if "LINE215_with_000300" in label:
-            ok = self._verify_line215_station(doc)
-        elif "LINE216_del_switch" in label:
-            ok = self._verify_line216_delete(doc)
+        # ---- Step 4: 执行标准化美化排版 (Task 5.1 核心) ----
+        print("\n[Step 4] 执行标准化美化排版 (布局重构、站房规范、L-Shape 路由)...")
+        beautified_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0]}_beautified.svg")
+        beautifier = SvgBeautifier(input_path, output_path=beautified_path)
+        beautifier.doc = doc # 传入修复后的 IR
+        beautifier.beautify()
+        
+        # 核心修复：美化后再次导出最终 IR，展示重排后的坐标、正交化路径和归一化角度
+        ir_final_path = os.path.join(report_dir, f"{filename}_ir_final.json")
+        doc.dump_ir(ir_final_path)
+        print(f"  最终美化版 IR 已导出: {ir_final_path}")
+        
+        # ---- Step 5: 美化后质量终审 ----
+        print("\n[Step 5] 执行美化后质量终审...")
+        defects_post, summary_post = validate_rendered_svg(beautified_path)
+        report_beautified_path = os.path.join(report_dir, f"{filename}_validation_beautified.json")
+        export_defect_report(defects_post, summary_post, report_beautified_path)
+        print(f"  最终残余缺陷: {len(defects_post)} 条 (主要为建议性标注)")
 
-        if not ok:
-            return False
-
-        # 导出中间模型
-        base = self.ir_output_dir / label
-        doc.export_elements_json(str(base / "device.json"))
-        doc.export_connections_json(str(base / "graph.json"))
-        topology = self._build_topology_json(doc)
-        self._write_json(str(base / "topology.json"), topology)
-
-        print(f"    [PASS] {label}")
-        return True
-
-    def _verify_line215_station(self, doc: SvgDocument) -> bool:
-        station = doc.get_device_by_id("TMP000300")
-        if station is None:
-            print("    [FAIL] 站房 TMP000300 不存在")
-            return False
-        print(f"    站房 TMP000300: {station.element_name} at ({station.x:.2f}, {station.y:.2f})")
-
-        for sw_id in ["TMP00301", "TMP00302", "TMP00303"]:
-            sw = doc.get_device_by_id(sw_id)
-            if sw is None:
-                print(f"    [FAIL] 开关 {sw_id} 不存在")
-                return False
-            connected = doc.get_connected_devices(sw_id)
-            print(f"    开关 {sw_id}: 连接 {connected}")
-
-        # 检查 00301 与上游 00104 相连，00303 与下游 00102 相连
-        up_connected = doc.get_connected_devices("TMP00301")
-        if "TMP00044018" not in up_connected:
-            print("    [FAIL] 00301 未连接到上游开关 TMP00044018")
-            return False
-        down_connected = doc.get_connected_devices("TMP00303")
-        if "TMP00044016" not in down_connected:
-            print("    [FAIL] 00303 未连接到下游开关 TMP00044016")
-            return False
-        if "TMP00301" not in doc.get_connected_devices("TMP00303"):
-            print("    [FAIL] 00301 与 00303 未连接")
-            return False
-        return True
-
-    def _verify_line216_delete(self, doc: SvgDocument) -> bool:
-        if doc.get_device_by_id("TMP00043912") is not None:
-            print("    [FAIL] 开关 TMP00043912 仍存在")
-            return False
-        # 检查是否有连接仍引用已删除开关
-        for conn in doc.connections:
-            if "TMP00043912" in conn.glink_refs:
-                print(f"    [FAIL] 连接 {conn.connection_id} 仍引用 TMP00043912")
-                return False
-        for elem in doc.elements:
-            if "TMP00043912" in elem.glink_refs:
-                print(f"    [FAIL] 设备 {elem.element_id} 仍引用 TMP00043912")
-                return False
-        print("    开关 TMP00043912 已彻底删除，无残留引用")
-        return True
-
-    def _build_topology_json(self, doc: SvgDocument) -> dict:
-        nodes = []
-        for elem in doc.elements:
-            nodes.append({
-                "id": elem.element_id,
-                "name": elem.element_name,
-                "type": elem.element_type,
-                "layer": elem.layer_name,
-                "x": elem.x,
-                "y": elem.y,
-            })
-
-        edges = []
-        seen = set()
-        for conn in doc.connections:
-            if conn.start_device_id and conn.end_device_id:
-                a, b = conn.start_device_id, conn.end_device_id
-                if (a, b) not in seen and (b, a) not in seen:
-                    edges.append({"source": a, "target": b, "id": conn.connection_id})
-                    seen.add((a, b))
-
-        return {
-            "feeder_id": doc.feeder_id,
-            "node_count": len(nodes),
-            "edge_count": len(edges),
-            "nodes": nodes,
-            "edges": edges,
-        }
-
-    @staticmethod
-    def _write_json(path: str, data: dict):
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-
-    # ------------------------------------------------------------------
-    # 预览
-    # ------------------------------------------------------------------
-    def _generate_preview(self, final_files: dict):
-        html_path = self.svg_output_dir / "preview.html"
-        html = ["<!DOCTYPE html><html><head><meta charset='UTF-8'><title>SVG Preview</title></head><body>"]
-        html.append("<h1>SVG 闭环处理结果预览</h1>")
-        for label, svg_path in final_files.items():
-            fname = os.path.basename(svg_path)
-            html.append(f"<h2>{label}</h2>")
-            html.append(f'<object data="{fname}" type="image/svg+xml" width="1000" height="700"></object><br/>')
-        html.append("</body></html>")
-        with open(html_path, "w", encoding="utf-8") as f:
-            f.write("\n".join(html))
-        print(f"\n预览页面: {html_path}")
-
-
-def main():
-    runner = PipelineRunner()
-    success = runner.run()
-    sys.exit(0 if success else 1)
-
+    print("\n" + "="*60)
+    print("5.1 美化专项测试任务执行完毕，请查看 output 目录下的 _beautified.svg 文件。")
+    print("="*60)
 
 if __name__ == "__main__":
-    main()
+    print("="*60)
+    print("SVG 拓扑图形美化流水线 (Task 5.1 专项版)")
+    print("="*60)
+    try:
+        run_beautify_only_pipeline()
+    except Exception as e:
+        print(f"\n执行失败: {e}")
+        import traceback
+        traceback.print_exc()

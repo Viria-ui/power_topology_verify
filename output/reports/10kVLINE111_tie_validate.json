@@ -1,0 +1,23 @@
+[
+  {
+    "equip_id": "AUTO__77cb09ca",
+    "defect_type": "图上有模型无",
+    "description": "SVG图纸存在设备[](ID:AUTO__77cb09ca)，但数据库拓扑模型中缺失",
+    "suggestion": "建议在数据库设备表 EQUIP_JBS_PWEQUIPINFO 中补全设备 AUTO__77cb09ca 信息",
+    "sql_draft": "INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('AUTO__77cb09ca', '未知', '');"
+  },
+  {
+    "equip_id": "AUTO__aba3a4ca",
+    "defect_type": "图上有模型无",
+    "description": "SVG图纸存在设备[](ID:AUTO__aba3a4ca)，但数据库拓扑模型中缺失",
+    "suggestion": "建议在数据库设备表 EQUIP_JBS_PWEQUIPINFO 中补全设备 AUTO__aba3a4ca 信息",
+    "sql_draft": "INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('AUTO__aba3a4ca', '未知', '');"
+  },
+  {
+    "equip_id": "AUTO__4e2b194d",
+    "defect_type": "图上有模型无",
+    "description": "SVG图纸存在设备[](ID:AUTO__4e2b194d)，但数据库拓扑模型中缺失",
+    "suggestion": "建议在数据库设备表 EQUIP_JBS_PWEQUIPINFO 中补全设备 AUTO__4e2b194d 信息",
+    "sql_draft": "INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('AUTO__4e2b194d', '未知', '');"
+  }
+]

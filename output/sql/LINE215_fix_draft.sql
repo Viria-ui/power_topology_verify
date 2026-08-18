@@ -1,0 +1,8790 @@
+-- LINE215.svg 拓扑修正 SQL 草案
+-- 生成时间: 2026-08-17
+
+BEGIN TRANSACTION;
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[故障指示器006](ID:TMP00131796)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00131796', '故障指示器006', '故障指示器');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[故障指示器005](ID:TMP00131794)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00131794', '故障指示器005', '故障指示器');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[故障指示器004](ID:TMP00131784)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00131784', '故障指示器004', '故障指示器');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311352)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311352', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311534)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311534', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311358)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311358', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311364)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311364', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311355)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311355', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311367)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311367', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311611)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311611', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311376)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311376', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311370)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311370', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311379)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311379', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311397)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311397', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311382)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311382', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311400)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311400', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311385)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311385', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311636)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311636', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311640)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311640', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311643)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311643', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311528)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311528', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311406)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311406', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311516)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311516', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311403)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311403', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311658)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311658', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311664)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311664', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311670)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311670', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311409)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311409', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311683)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311683', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311692)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311692', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311424)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311424', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311412)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311412', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311427)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311427', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311722)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311722', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311729)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311729', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311736)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311736', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311436)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311436', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311747)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311747', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311433)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311433', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311442)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311442', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311525)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311525', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311762)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311762', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311766)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311766', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311770)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311770', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311773)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311773', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311531)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311531', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311778)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311778', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311782)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311782', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311361)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311361', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311786)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311786', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311373)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311373', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311794)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311794', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311388)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311388', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311391)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311391', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311809)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311809', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311394)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311394', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311430)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311430', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311825)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311825', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311439)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311439', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311832)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311832', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311448)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311448', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311843)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311843', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311460)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311460', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311854)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311854', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311463)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311463', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311867)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311867', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311466)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311466', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311878)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311878', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311469)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311469', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311887)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311887', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311472)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311472', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311900)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311900', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311478)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311478', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311911)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311911', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311481)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311481', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311920)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311920', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311484)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311484', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311937)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311937', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311487)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311487', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311946)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311946', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311492)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311492', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311495)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311495', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311959)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311959', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311965)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311965', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311498)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311498', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311501)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311501', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311979)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311979', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311504)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311504', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311987)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311987', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311507)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311507', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311998)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311998', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311513)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311513', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311418)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311418', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311415)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311415', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312012)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312012', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311421)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311421', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312025)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312025', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311445)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311445', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312034)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312034', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311451)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311451', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311454)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311454', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312050)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312050', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311457)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311457', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312063)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312063', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311475)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311475', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312076)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312076', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311510)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311510', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312087)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312087', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311519)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311519', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00311522)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311522', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312098)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312098', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312150)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312150', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312158)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312158', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312164)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312164', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312174)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312174', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312178)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312178', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312188)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312188', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312192)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312192', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312204)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312204', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312206)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312206', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312218)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312218', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312220)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312220', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312232)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312232', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312241)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312241', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312234)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312234', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312250)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312250', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312275)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312275', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312306)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312306', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312284)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312284', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312312)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312312', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312272)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312272', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312321)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312321', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312278)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312278', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312281)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312281', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312339)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312339', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312343)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312343', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312347)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312347', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312350)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312350', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312362)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312362', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312371)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312371', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312378)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312378', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312384)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312384', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312391)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312391', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312396)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312396', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312458)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312458', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312466)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312466', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312479)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312479', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312482)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312482', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312487)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312487', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312494)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312494', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312506)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312506', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312515)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312515', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312527)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312527', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312534)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312534', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312538)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312538', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312542)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312542', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[接头](ID:TMP00312553)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312553', '未知', '接头');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[开关02442](ID:TMP00048671)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00048671', '开关02442', '断路器');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312793)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312793', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311536)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311536', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311599)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311599', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311602)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311602', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311605)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311605', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311608)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311608', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311614)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311614', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311617)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311617', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311620)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311620', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311623)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311623', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311626)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311626', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311629)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311629', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311632)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311632', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311646)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311646', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311649)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311649', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311652)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311652', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311655)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311655', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311661)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311661', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311667)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311667', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311673)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311673', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311676)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311676', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311679)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311679', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311688)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311688', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311696)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311696', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311701)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311701', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311708)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311708', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311798)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311798', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311801)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311801', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311807)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311807', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311812)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311812', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311818)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311818', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311823)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311823', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311836)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311836', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311841)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311841', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311847)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311847', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311852)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311852', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311860)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311860', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311865)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311865', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311871)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311871', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311876)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311876', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311882)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311882', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311885)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311885', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311893)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311893', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311898)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311898', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311904)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311904', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311909)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311909', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311915)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311915', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311918)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311918', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311926)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311926', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311935)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311935', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311941)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311941', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311944)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311944', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311954)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311954', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311957)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311957', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311963)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311963', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311968)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311968', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311974)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311974', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311977)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311977', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311993)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311993', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00311996)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00311996', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312795)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312795', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312796)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312796', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312797)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312797', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312798)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312798', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312799)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312799', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312800)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312800', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312801)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312801', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312802)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312802', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312803)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312803', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312023)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312023', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312028)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312028', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312032)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312032', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312039)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312039', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312045)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312045', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312048)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312048', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312056)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312056', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312061)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312061', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312067)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312067', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312074)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312074', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312080)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312080', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312085)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312085', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312094)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312094', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312096)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312096', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312148)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312148', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312156)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312156', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312169)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312169', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312172)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312172', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312183)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312183', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312186)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312186', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312197)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312197', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312202)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312202', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312211)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312211', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312216)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312216', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312225)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312225', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312230)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312230', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312239)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312239', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312244)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312244', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312299)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312299', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312304)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312304', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312316)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312316', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312319)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312319', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312352)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312352', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312353)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312353', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312456)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312456', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312499)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312499', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312504)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312504', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312513)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312513', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312804)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312804', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312525)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312525', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312805)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312805', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[其他](ID:TMP00312562)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00312562', '未知', '其他');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[00000次母线](ID:TMP00131880)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00131880', '00000次母线', '母线');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000085](ID:TMP00000284)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000284', '站房000085', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000080](ID:TMP00000279)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000279', '站房000080', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000079](ID:TMP00000278)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000278', '站房000079', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000083](ID:TMP00000282)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000282', '站房000083', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000077](ID:TMP00000276)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000276', '站房000077', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000076](ID:TMP00000275)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000275', '站房000076', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000081](ID:TMP00000280)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000280', '站房000081', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000082](ID:TMP00000281)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000281', '站房000082', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000086](ID:TMP00000285)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000285', '站房000086', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000084](ID:TMP00000283)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000283', '站房000084', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000078](ID:TMP00000277)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000277', '站房000078', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000028](ID:TMP00000227)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000227', '站房000028', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000029](ID:TMP00000228)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000228', '站房000029', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000063](ID:TMP00000262)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000262', '站房000063', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000064](ID:TMP00000263)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000263', '站房000064', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000032](ID:TMP00000231)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000231', '站房000032', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000071](ID:TMP00000270)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000270', '站房000071', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000051](ID:TMP00000250)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000250', '站房000051', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000039](ID:TMP00000238)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000238', '站房000039', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000065](ID:TMP00000264)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000264', '站房000065', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000052](ID:TMP00000251)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000251', '站房000052', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000036](ID:TMP00000235)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000235', '站房000036', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000034](ID:TMP00000233)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000233', '站房000034', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000048](ID:TMP00000247)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000247', '站房000048', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000033](ID:TMP00000232)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000232', '站房000033', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000037](ID:TMP00000236)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000236', '站房000037', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000047](ID:TMP00000246)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000246', '站房000047', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000073](ID:TMP00000272)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000272', '站房000073', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000061](ID:TMP00000260)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000260', '站房000061', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000050](ID:TMP00000249)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000249', '站房000050', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000040](ID:TMP00000239)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000239', '站房000040', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000027](ID:TMP00000226)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000226', '站房000027', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000046](ID:TMP00000245)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000245', '站房000046', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000074](ID:TMP00000273)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000273', '站房000074', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000001](ID:TMP00000200)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000200', '站房000001', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000002](ID:TMP00000201)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000201', '站房000002', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000010](ID:TMP00000209)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000209', '站房000010', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000013](ID:TMP00000212)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000212', '站房000013', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000008](ID:TMP00000207)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000207', '站房000008', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000009](ID:TMP00000208)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000208', '站房000009', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000007](ID:TMP00000206)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000206', '站房000007', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000006](ID:TMP00000205)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000205', '站房000006', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000004](ID:TMP00000203)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000203', '站房000004', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000022](ID:TMP00000221)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000221', '站房000022', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000038](ID:TMP00000237)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000237', '站房000038', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000031](ID:TMP00000230)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000230', '站房000031', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000049](ID:TMP00000248)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000248', '站房000049', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000030](ID:TMP00000229)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000229', '站房000030', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000045](ID:TMP00000244)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000244', '站房000045', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000062](ID:TMP00000261)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000261', '站房000062', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000024](ID:TMP00000223)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000223', '站房000024', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000066](ID:TMP00000265)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000265', '站房000066', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000067](ID:TMP00000266)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000266', '站房000067', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000005](ID:TMP00000204)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000204', '站房000005', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000003](ID:TMP00000202)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000202', '站房000003', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000075](ID:TMP00000274)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000274', '站房000075', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000016](ID:TMP00000215)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000215', '站房000016', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000017](ID:TMP00000216)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000216', '站房000017', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000021](ID:TMP00000220)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000220', '站房000021', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000019](ID:TMP00000218)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000218', '站房000019', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000018](ID:TMP00000217)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000217', '站房000018', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000070](ID:TMP00000269)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000269', '站房000070', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000023](ID:TMP00000222)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000222', '站房000023', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000020](ID:TMP00000219)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000219', '站房000020', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房000014](ID:TMP00000213)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000213', '站房000014', '站房');
+
+-- 问题类型: 图上有模型无
+-- 问题描述: SVG图纸存在设备[站房](ID:TMP00000198)，但数据库拓扑模型中缺失
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('TMP00000198', '未知', '站房');
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0001](ID:TMP00043528)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1707_Layer 补画设备 TMP00043528
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0002](ID:TMP00043529)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1707_Layer 补画设备 TMP00043529
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0003](ID:TMP00043530)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1707_Layer 补画设备 TMP00043530
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0004](ID:TMP00043531)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1707_Layer 补画设备 TMP00043531
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043541)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043541
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043542)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043542
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043543)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043543
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043544)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043544
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043545)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043545
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043546)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043546
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043547)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043547
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043548)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043548
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043549)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043549
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043550)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043550
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043551)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043551
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043552)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043552
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043553)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043553
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043554)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043554
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043555)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043555
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043556)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043556
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043557)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043557
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043558)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043558
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043559)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043559
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043560)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043560
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043561)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043561
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043562)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043562
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043563)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043563
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043564)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043564
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043565)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043565
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043566)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043566
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043567)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043567
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043568)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043568
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043569)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043569
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043570)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043570
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043571)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043571
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043572)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043572
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043573)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043573
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043574)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043574
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043575)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043575
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043576)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043576
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043577)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043577
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043578)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043578
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043579)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043579
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043580)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043580
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043624)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043624
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043625)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043625
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043626)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043626
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043627)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043627
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043628)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043628
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043629)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043629
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043630)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043630
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043631)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043631
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043632)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043632
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043633)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043633
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043634)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043634
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043635)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043635
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043636)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043636
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043637)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043637
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043638)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043638
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043639)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043639
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043640)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043640
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043641)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043641
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043642)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043642
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043643)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043643
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043644)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043644
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043645)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043645
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043646)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043646
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043647)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043647
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043648)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043648
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043649)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043649
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043650)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043650
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043651)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043651
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043652)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043652
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043653)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043653
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043654)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043654
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043655)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043655
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043656)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043656
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043657)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043657
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043658)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043658
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043659)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043659
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043660)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043660
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043661)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043661
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043662)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043662
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043663)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043663
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043664)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043664
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043665)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043665
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043666)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043666
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043667)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043667
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043668)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043668
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043669)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043669
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043670)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043670
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043671)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043671
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043672)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043672
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043673)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043673
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043674)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043674
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043675)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043675
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043676)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043676
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043677)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043677
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043678)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043678
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043679)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043679
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043680)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043680
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043681)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043681
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043682)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043682
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043683)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043683
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043684)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043684
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043685)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043685
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043686)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043686
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043687)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043687
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043688)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043688
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043689)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043689
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043690)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043690
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043691)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043691
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043692)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043692
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043693)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043693
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043726)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043726
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043727)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043727
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043728)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043728
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043729)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043729
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043730)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043730
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043731)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043731
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043732)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043732
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043733)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043733
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043734)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043734
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043735)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043735
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043736)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043736
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043737)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043737
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043738)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043738
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043739)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043739
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043740)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043740
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043741)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043741
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043742)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043742
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043743)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043743
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043744)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043744
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043745)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043745
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043746)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043746
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043747)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043747
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043748)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043748
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043756)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043756
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043757)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043757
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043758)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043758
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043759)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043759
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043760)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043760
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043761)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043761
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043762)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043762
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043763)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043763
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043764)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043764
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043765)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043765
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043766)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043766
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043767)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043767
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043768)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043768
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043769)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043769
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043770)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043770
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043771)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043771
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043772)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043772
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043773)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043773
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043774)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043774
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043775)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043775
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043776)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043776
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043777)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043777
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043778)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043778
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043779)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043779
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043780)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043780
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043781)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043781
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043782)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043782
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043783)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043783
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043784)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043784
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043785)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043785
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043786)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043786
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043787)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043787
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043788)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043788
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043789)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043789
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043790)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043790
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043791)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043791
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043792)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043792
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043793)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043793
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043794)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043794
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043795)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043795
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043796)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043796
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043797)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043797
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043798)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043798
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043799)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043799
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043800)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043800
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043801)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043801
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043802)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043802
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043803)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043803
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043804)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043804
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043805)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043805
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043806)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043806
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043807)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043807
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043808)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043808
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00043809)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00043809
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043810)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043810
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043811)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043811
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043812)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043812
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043813)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043813
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043814)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043814
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043815)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043815
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043816)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043816
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043817)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043817
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043818)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043818
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043819)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043819
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043820)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043820
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043821)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043821
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043822)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043822
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043823)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043823
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043824)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043824
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043825)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043825
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043826)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043826
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043827)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043827
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043828)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043828
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043829)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043829
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043830)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043830
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043831)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043831
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043832)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043832
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043833)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043833
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043834)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043834
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043835)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043835
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043836)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043836
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043837)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043837
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043838)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043838
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043839)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043839
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043840)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043840
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043841)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043841
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043842)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043842
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043843)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043843
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043844)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043844
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043845)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043845
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043846)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043846
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[杆塔XX](ID:TMP00043847)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1714_Layer 补画设备 TMP00043847
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[配变2077](ID:TMP00043882)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1703_Layer 补画设备 TMP00043882
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[配变2078](ID:TMP00043883)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1703_Layer 补画设备 TMP00043883
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[配变2079](ID:TMP00043884)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1703_Layer 补画设备 TMP00043884
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00039](ID:TMP00043963)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00043963
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00040](ID:TMP00043964)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00043964
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00041](ID:TMP00043965)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00043965
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00042](ID:TMP00043966)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00043966
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00043](ID:TMP00043967)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00043967
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00051](ID:TMP00044236)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00044236
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00052](ID:TMP00044237)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00044237
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00053](ID:TMP00044238)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00044238
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00054](ID:TMP00044239)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00044239
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[开关00055](ID:TMP00044240)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1705_Layer 补画设备 TMP00044240
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0081](ID:TMP00044461)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044461
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0082](ID:TMP00044462)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044462
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0083](ID:TMP00044463)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044463
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0084](ID:TMP00044464)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044464
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0085](ID:TMP00044465)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044465
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0086](ID:TMP00044466)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044466
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0087](ID:TMP00044467)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044467
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0088](ID:TMP00044468)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044468
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0089](ID:TMP00044469)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044469
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[刀闸0090](ID:TMP00044470)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1708_Layer 补画设备 TMP00044470
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0011](ID:TMP00044483)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044483
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0012](ID:TMP00044484)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044484
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0013](ID:TMP00044485)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044485
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0014](ID:TMP00044486)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044486
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0015](ID:TMP00044487)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044487
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0016](ID:TMP00044488)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044488
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0017](ID:TMP00044489)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044489
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0018](ID:TMP00044490)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044490
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0019](ID:TMP00044491)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044491
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0020](ID:TMP00044492)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044492
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0021](ID:TMP00044493)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044493
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0022](ID:TMP00044494)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044494
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0023](ID:TMP00044495)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044495
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0024](ID:TMP00044496)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044496
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[地刀0025](ID:TMP00044497)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1709_Layer 补画设备 TMP00044497
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[母线XX](ID:TMP00044598)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1710_Layer 补画设备 TMP00044598
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[PT006](ID:TMP00044606)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1713_Layer 补画设备 TMP00044606
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045088)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045088
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045089)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045089
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045090)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045090
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045091)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045091
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045092)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045092
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045093)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045093
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045094)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045094
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045095)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045095
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045096)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045096
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045097)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045097
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045098)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045098
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045099)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045099
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045100)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045100
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045101)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045101
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045102)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045102
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045103)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045103
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045104)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045104
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045105)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045105
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045106)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045106
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045107)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045107
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045108)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045108
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045109)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045109
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045110)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045110
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045111)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045111
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045112)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045112
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045113)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045113
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045114)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045114
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045115)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045115
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045116)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045116
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045117)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045117
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045118)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045118
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[馈线段XX](ID:TMP00045119)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1702_Layer 补画设备 TMP00045119
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[CT016](ID:TMP00045920)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1313_Layer 补画设备 TMP00045920
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[CT017](ID:TMP00045921)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1313_Layer 补画设备 TMP00045921
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[CT018](ID:TMP00045922)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1313_Layer 补画设备 TMP00045922
+
+-- 问题类型: 模型有图无
+-- 问题描述: 数据库模型存在设备[CT019](ID:TMP00045923)，但 SVG 图纸中缺失
+-- SVG缺失图元: 请在图层 1313_Layer 补画设备 TMP00045923
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044055 与 TMP00044537 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044055_TMP00044537', 'TMP00044055', 'TMP00044537', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044624 与 TMP00044625 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044624_TMP00044625', 'TMP00044624', 'TMP00044625', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044017 与 TMP00044584 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044017_TMP00044584', 'TMP00044017', 'TMP00044584', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044611 与 TMP00044612 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044611_TMP00044612', 'TMP00044611', 'TMP00044612', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044439 与 TMP00045208 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044439_TMP00045208', 'TMP00044439', 'TMP00045208', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044147 与 TMP00046525 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044147_TMP00046525', 'TMP00044147', 'TMP00046525', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043974 与 TMP00044600 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043974_TMP00044600', 'TMP00043974', 'TMP00044600', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044382 与 TMP00046162 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044382_TMP00046162', 'TMP00044382', 'TMP00046162', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044003 与 TMP00311649 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044003_TMP00311649', 'TMP00044003', 'TMP00311649', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044245 与 TMP00044599 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044245_TMP00044599', 'TMP00044245', 'TMP00044599', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044190 与 TMP00312096 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044190_TMP00312096', 'TMP00044190', 'TMP00312096', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044414 与 TMP00046392 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044414_TMP00046392', 'TMP00044414', 'TMP00046392', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043934 与 TMP00046219 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043934_TMP00046219', 'TMP00043934', 'TMP00046219', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044738 与 TMP00046293 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044738_TMP00046293', 'TMP00044738', 'TMP00046293', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044685 与 TMP00045209 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044685_TMP00045209', 'TMP00044685', 'TMP00045209', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043955 与 TMP00044453 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043955_TMP00044453', 'TMP00043955', 'TMP00044453', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044052 与 TMP00046504 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044052_TMP00046504', 'TMP00044052', 'TMP00046504', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044228 与 TMP00046559 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044228_TMP00046559', 'TMP00044228', 'TMP00046559', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044214 与 TMP00044578 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044214_TMP00044578', 'TMP00044214', 'TMP00044578', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045195 与 TMP00046212 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045195_TMP00046212', 'TMP00045195', 'TMP00046212', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045217 与 TMP00311683 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045217_TMP00311683', 'TMP00045217', 'TMP00311683', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043957 与 TMP00044455 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043957_TMP00044455', 'TMP00043957', 'TMP00044455', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044482 与 TMP00044727 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044482_TMP00044727', 'TMP00044482', 'TMP00044727', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046260 与 TMP00311457 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046260_TMP00311457', 'TMP00046260', 'TMP00311457', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044242 与 TMP00044599 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044242_TMP00044599', 'TMP00044242', 'TMP00044599', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044044 与 TMP00046514 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044044_TMP00046514', 'TMP00044044', 'TMP00046514', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044399 与 TMP00045125 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044399_TMP00045125', 'TMP00044399', 'TMP00045125', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044188 与 TMP00046549 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044188_TMP00046549', 'TMP00044188', 'TMP00046549', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044215 与 TMP00044578 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044215_TMP00044578', 'TMP00044215', 'TMP00044578', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043983 与 TMP00044591 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043983_TMP00044591', 'TMP00043983', 'TMP00044591', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043980 与 TMP00044594 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043980_TMP00044594', 'TMP00043980', 'TMP00044594', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045918 与 TMP00312391 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045918_TMP00312391', 'TMP00045918', 'TMP00312391', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044053 与 TMP00046503 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044053_TMP00046503', 'TMP00044053', 'TMP00046503', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044135 与 TMP00044552 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044135_TMP00044552', 'TMP00044135', 'TMP00044552', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046169 与 TMP00312384 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046169_TMP00312384', 'TMP00046169', 'TMP00312384', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044215 与 TMP00046553 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044215_TMP00046553', 'TMP00044215', 'TMP00046553', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044010 与 TMP00311629 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044010_TMP00311629', 'TMP00044010', 'TMP00311629', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043927 与 TMP00044629 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043927_TMP00044629', 'TMP00043927', 'TMP00044629', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043969 与 TMP00046030 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043969_TMP00046030', 'TMP00043969', 'TMP00046030', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044390 与 TMP00046375 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044390_TMP00046375', 'TMP00044390', 'TMP00046375', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044440 与 TMP00046379 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044440_TMP00046379', 'TMP00044440', 'TMP00046379', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044195 与 TMP00044565 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044195_TMP00044565', 'TMP00044195', 'TMP00044565', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044398 与 TMP00046179 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044398_TMP00046179', 'TMP00044398', 'TMP00046179', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043982 与 TMP00045198 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043982_TMP00045198', 'TMP00043982', 'TMP00045198', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045217 与 TMP00046230 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045217_TMP00046230', 'TMP00045217', 'TMP00046230', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044124 与 TMP00312164 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044124_TMP00312164', 'TMP00044124', 'TMP00312164', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046281 与 TMP00046282 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046281_TMP00046282', 'TMP00046281', 'TMP00046282', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044724 与 TMP00311427 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044724_TMP00311427', 'TMP00044724', 'TMP00311427', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00048671 与 TMP00131880 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00048671_TMP00131880', 'TMP00048671', 'TMP00131880', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044126 与 TMP00046247 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044126_TMP00046247', 'TMP00044126', 'TMP00046247', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046228 与 TMP00311611 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046228_TMP00311611', 'TMP00046228', 'TMP00311611', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044740 与 TMP00311364 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044740_TMP00311364', 'TMP00044740', 'TMP00311364', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044034 与 TMP00044541 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044034_TMP00044541', 'TMP00044034', 'TMP00044541', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044397 与 TMP00044682 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044397_TMP00044682', 'TMP00044397', 'TMP00044682', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00312085 与 TMP00312087 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00312085_TMP00312087', 'TMP00312085', 'TMP00312087', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045204 与 TMP00046215 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045204_TMP00046215', 'TMP00045204', 'TMP00046215', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044438 与 TMP00044673 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044438_TMP00044673', 'TMP00044438', 'TMP00044673', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044043 与 TMP00044544 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044043_TMP00044544', 'TMP00044043', 'TMP00044544', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044164 与 TMP00046239 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044164_TMP00046239', 'TMP00044164', 'TMP00046239', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045150 与 TMP00045174 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045150_TMP00045174', 'TMP00045150', 'TMP00045174', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044040 与 TMP00312206 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044040_TMP00312206', 'TMP00044040', 'TMP00312206', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044197 与 TMP00046535 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044197_TMP00046535', 'TMP00044197', 'TMP00046535', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043925 与 TMP00044631 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043925_TMP00044631', 'TMP00043925', 'TMP00044631', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00312304 与 TMP00312306 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00312304_TMP00312306', 'TMP00312304', 'TMP00312306', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044427 与 TMP00044630 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044427_TMP00044630', 'TMP00044427', 'TMP00044630', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044411 与 TMP00044653 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044411_TMP00044653', 'TMP00044411', 'TMP00044653', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043996 与 TMP00044588 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043996_TMP00044588', 'TMP00043996', 'TMP00044588', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043974 与 TMP00044472 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043974_TMP00044472', 'TMP00043974', 'TMP00044472', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044018 与 TMP00044584 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044018_TMP00044584', 'TMP00044018', 'TMP00044584', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044101 与 TMP00044528 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044101_TMP00044528', 'TMP00044101', 'TMP00044528', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046238 与 TMP00311516 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046238_TMP00311516', 'TMP00046238', 'TMP00311516', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044182 与 TMP00044571 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044182_TMP00044571', 'TMP00044182', 'TMP00044571', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046187 与 TMP00311904 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046187_TMP00311904', 'TMP00046187', 'TMP00311904', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044219 与 TMP00044579 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044219_TMP00044579', 'TMP00044219', 'TMP00044579', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00311391 与 TMP00311801 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00311391_TMP00311801', 'TMP00311391', 'TMP00311801', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044409 与 TMP00044707 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044409_TMP00044707', 'TMP00044409', 'TMP00044707', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044714 与 TMP00046259 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044714_TMP00046259', 'TMP00044714', 'TMP00046259', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046170 与 TMP00312479 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046170_TMP00312479', 'TMP00046170', 'TMP00312479', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044716 与 TMP00046195 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044716_TMP00046195', 'TMP00044716', 'TMP00046195', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044645 与 TMP00044646 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044645_TMP00044646', 'TMP00044645', 'TMP00044646', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043988 与 TMP00044585 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043988_TMP00044585', 'TMP00043988', 'TMP00044585', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044036 与 TMP00044542 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044036_TMP00044542', 'TMP00044036', 'TMP00044542', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046171 与 TMP00312479 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046171_TMP00312479', 'TMP00046171', 'TMP00312479', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044175 与 TMP00046543 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044175_TMP00046543', 'TMP00044175', 'TMP00046543', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043972 与 TMP00312562 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043972_TMP00312562', 'TMP00043972', 'TMP00312562', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044641 与 TMP00044642 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044641_TMP00044642', 'TMP00044641', 'TMP00044642', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043976 与 TMP00044600 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043976_TMP00044600', 'TMP00043976', 'TMP00044600', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046091 与 TMP00046396 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046091_TMP00046396', 'TMP00046091', 'TMP00046396', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044151 与 TMP00044557 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044151_TMP00044557', 'TMP00044151', 'TMP00044557', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043973 与 TMP00044503 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043973_TMP00044503', 'TMP00043973', 'TMP00044503', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044693 与 TMP00046235 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044693_TMP00046235', 'TMP00044693', 'TMP00046235', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044116 与 TMP00044533 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044116_TMP00044533', 'TMP00044116', 'TMP00044533', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044049 与 TMP00044546 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044049_TMP00044546', 'TMP00044049', 'TMP00044546', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044403 与 TMP00044702 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044403_TMP00044702', 'TMP00044403', 'TMP00044702', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044037 与 TMP00312178 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044037_TMP00312178', 'TMP00044037', 'TMP00312178', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044161 与 TMP00046516 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044161_TMP00046516', 'TMP00044161', 'TMP00046516', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043943 与 TMP00044710 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043943_TMP00044710', 'TMP00043943', 'TMP00044710', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046233 与 TMP00046234 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046233_TMP00046234', 'TMP00046233', 'TMP00046234', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00311898 与 TMP00311900 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00311898_TMP00311900', 'TMP00311898', 'TMP00311900', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044017 与 TMP00311605 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044017_TMP00311605', 'TMP00044017', 'TMP00311605', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044218 与 TMP00044579 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044218_TMP00044579', 'TMP00044218', 'TMP00044579', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044217 与 TMP00044579 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044217_TMP00044579', 'TMP00044217', 'TMP00044579', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043991 与 TMP00044587 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043991_TMP00044587', 'TMP00043991', 'TMP00044587', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044213 与 TMP00311445 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044213_TMP00311445', 'TMP00044213', 'TMP00311445', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045129 与 TMP00046037 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045129_TMP00046037', 'TMP00045129', 'TMP00046037', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044203 与 TMP00044567 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044203_TMP00044567', 'TMP00044203', 'TMP00044567', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044148 与 TMP00044556 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044148_TMP00044556', 'TMP00044148', 'TMP00044556', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043984 与 TMP00045215 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043984_TMP00045215', 'TMP00043984', 'TMP00045215', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045213 与 TMP00046225 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045213_TMP00046225', 'TMP00045213', 'TMP00046225', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045217 与 TMP00311664 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045217_TMP00311664', 'TMP00045217', 'TMP00311664', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044204 与 TMP00044567 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044204_TMP00044567', 'TMP00044204', 'TMP00044567', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046268 与 TMP00311436 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046268_TMP00311436', 'TMP00046268', 'TMP00311436', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043991 与 TMP00044475 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043991_TMP00044475', 'TMP00043991', 'TMP00044475', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044733 与 TMP00311801 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044733_TMP00311801', 'TMP00044733', 'TMP00311801', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00312096 与 TMP00312098 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00312096_TMP00312098', 'TMP00312096', 'TMP00312098', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043969 与 TMP00044500 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043969_TMP00044500', 'TMP00043969', 'TMP00044500', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044019 与 TMP00044584 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044019_TMP00044584', 'TMP00044019', 'TMP00044584', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044728 与 TMP00046281 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044728_TMP00046281', 'TMP00044728', 'TMP00046281', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044092 与 TMP00046491 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044092_TMP00046491', 'TMP00044092', 'TMP00046491', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046294 与 TMP00046306 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046294_TMP00046306', 'TMP00046294', 'TMP00046306', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044218 与 TMP00311457 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044218_TMP00311457', 'TMP00044218', 'TMP00311457', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043972 与 TMP00044502 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043972_TMP00044502', 'TMP00043972', 'TMP00044502', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044002 与 TMP00044592 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044002_TMP00044592', 'TMP00044002', 'TMP00044592', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00311487 与 TMP00311941 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00311487_TMP00311941', 'TMP00311487', 'TMP00311941', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043997 与 TMP00311676 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043997_TMP00311676', 'TMP00043997', 'TMP00311676', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044118 与 TMP00046501 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044118_TMP00046501', 'TMP00044118', 'TMP00046501', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044619 与 TMP00044622 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044619_TMP00044622', 'TMP00044619', 'TMP00044622', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044090 与 TMP00312192 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044090_TMP00312192', 'TMP00044090', 'TMP00312192', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044136 与 TMP00044552 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044136_TMP00044552', 'TMP00044136', 'TMP00044552', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044043 与 TMP00044739 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044043_TMP00044739', 'TMP00044043', 'TMP00044739', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044170 与 TMP00044551 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044170_TMP00044551', 'TMP00044170', 'TMP00044551', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043996 与 TMP00044478 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043996_TMP00044478', 'TMP00043996', 'TMP00044478', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044387 与 TMP00045171 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044387_TMP00045171', 'TMP00044387', 'TMP00045171', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044098 与 TMP00311507 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044098_TMP00311507', 'TMP00044098', 'TMP00311507', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043968 与 TMP00044501 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043968_TMP00044501', 'TMP00043968', 'TMP00044501', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043937 与 TMP00046223 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043937_TMP00046223', 'TMP00043937', 'TMP00046223', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044179 与 TMP00044570 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044179_TMP00044570', 'TMP00044179', 'TMP00044570', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044445 与 TMP00044601 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044445_TMP00044601', 'TMP00044445', 'TMP00044601', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043958 与 TMP00044456 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043958_TMP00044456', 'TMP00043958', 'TMP00044456', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044028 与 TMP00044539 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044028_TMP00044539', 'TMP00044028', 'TMP00044539', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044095 与 TMP00044526 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044095_TMP00044526', 'TMP00044095', 'TMP00044526', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043960 与 TMP00044513 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043960_TMP00044513', 'TMP00043960', 'TMP00044513', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044413 与 TMP00044415 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044413_TMP00044415', 'TMP00044413', 'TMP00044415', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044185 与 TMP00044573 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044185_TMP00044573', 'TMP00044185', 'TMP00044573', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043957 与 TMP00044509 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043957_TMP00044509', 'TMP00043957', 'TMP00044509', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044202 与 TMP00044567 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044202_TMP00044567', 'TMP00044202', 'TMP00044567', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044708 与 TMP00046187 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044708_TMP00046187', 'TMP00044708', 'TMP00046187', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044089 与 TMP00044524 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044089_TMP00044524', 'TMP00044089', 'TMP00044524', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044123 与 TMP00044535 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044123_TMP00044535', 'TMP00044123', 'TMP00044535', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044036 与 TMP00312188 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044036_TMP00312188', 'TMP00044036', 'TMP00312188', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044727 与 TMP00046280 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044727_TMP00046280', 'TMP00044727', 'TMP00046280', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043977 与 TMP00311433 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043977_TMP00311433', 'TMP00043977', 'TMP00311433', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045194 与 TMP00046210 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045194_TMP00046210', 'TMP00045194', 'TMP00046210', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044694 与 TMP00046235 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044694_TMP00046235', 'TMP00044694', 'TMP00046235', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043971 与 TMP00044244 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043971_TMP00044244', 'TMP00043971', 'TMP00044244', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043991 与 TMP00311722 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043991_TMP00311722', 'TMP00043991', 'TMP00311722', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044093 与 TMP00311478 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044093_TMP00311478', 'TMP00044093', 'TMP00311478', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046180 与 TMP00311882 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046180_TMP00311882', 'TMP00046180', 'TMP00311882', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043961 与 TMP00044597 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043961_TMP00044597', 'TMP00043961', 'TMP00044597', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044425 与 TMP00046402 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044425_TMP00046402', 'TMP00044425', 'TMP00046402', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044471 与 TMP00046075 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044471_TMP00046075', 'TMP00044471', 'TMP00046075', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044413 与 TMP00044751 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044413_TMP00044751', 'TMP00044413', 'TMP00044751', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044234 与 TMP00046550 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044234_TMP00046550', 'TMP00044234', 'TMP00046550', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044054 与 TMP00044536 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044054_TMP00044536', 'TMP00044054', 'TMP00044536', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044122 与 TMP00046502 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044122_TMP00046502', 'TMP00044122', 'TMP00046502', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046282 与 TMP00311406 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046282_TMP00311406', 'TMP00046282', 'TMP00311406', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044008 与 TMP00044586 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044008_TMP00044586', 'TMP00044008', 'TMP00044586', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046053 与 TMP00312362 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046053_TMP00312362', 'TMP00046053', 'TMP00312362', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044230 与 TMP00046560 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044230_TMP00046560', 'TMP00044230', 'TMP00046560', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044134 与 TMP00312506 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044134_TMP00312506', 'TMP00044134', 'TMP00312506', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044609 与 TMP00131794 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044609_TMP00131794', 'TMP00044609', 'TMP00131794', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046301 与 TMP00048671 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046301_TMP00048671', 'TMP00046301', 'TMP00048671', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044405 与 TMP00044747 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044405_TMP00044747', 'TMP00044405', 'TMP00044747', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044214 与 TMP00312025 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044214_TMP00312025', 'TMP00044214', 'TMP00312025', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044623 与 TMP00044624 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044623_TMP00044624', 'TMP00044623', 'TMP00044624', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044200 与 TMP00044566 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044200_TMP00044566', 'TMP00044200', 'TMP00044566', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043970 与 TMP00044499 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043970_TMP00044499', 'TMP00043970', 'TMP00044499', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00311501 与 TMP00311974 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00311501_TMP00311974', 'TMP00311501', 'TMP00311974', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046189 与 TMP00046254 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046189_TMP00046254', 'TMP00046189', 'TMP00046254', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045213 与 TMP00311670 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045213_TMP00311670', 'TMP00045213', 'TMP00311670', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046222 与 TMP00311747 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046222_TMP00311747', 'TMP00046222', 'TMP00311747', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044019 与 TMP00311599 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044019_TMP00311599', 'TMP00044019', 'TMP00311599', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044718 与 TMP00046264 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044718_TMP00046264', 'TMP00044718', 'TMP00046264', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043995 与 TMP00044588 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043995_TMP00044588', 'TMP00043995', 'TMP00044588', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044403 与 TMP00045218 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044403_TMP00045218', 'TMP00044403', 'TMP00045218', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00312048 与 TMP00312050 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00312048_TMP00312050', 'TMP00312048', 'TMP00312050', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044014 与 TMP00044589 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044014_TMP00044589', 'TMP00044014', 'TMP00044589', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00311865 与 TMP00311867 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00311865_TMP00311867', 'TMP00311865', 'TMP00311867', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044199 与 TMP00044566 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044199_TMP00044566', 'TMP00044199', 'TMP00044566', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044101 与 TMP00046494 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044101_TMP00046494', 'TMP00044101', 'TMP00046494', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046221 与 TMP00311747 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046221_TMP00311747', 'TMP00046221', 'TMP00311747', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044232 与 TMP00044583 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044232_TMP00044583', 'TMP00044232', 'TMP00044583', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044699 与 TMP00046242 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044699_TMP00046242', 'TMP00044699', 'TMP00046242', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044161 与 TMP00044547 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044161_TMP00044547', 'TMP00044161', 'TMP00044547', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045206 与 TMP00046217 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045206_TMP00046217', 'TMP00045206', 'TMP00046217', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043949 与 TMP00044722 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043949_TMP00044722', 'TMP00043949', 'TMP00044722', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045147 与 TMP00045148 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045147_TMP00045148', 'TMP00045147', 'TMP00045148', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046182 与 TMP00311968 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046182_TMP00311968', 'TMP00046182', 'TMP00311968', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00312319 与 TMP00312321 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00312319_TMP00312321', 'TMP00312319', 'TMP00312321', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044189 与 TMP00044574 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044189_TMP00044574', 'TMP00044189', 'TMP00044574', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045123 与 TMP00312527 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045123_TMP00312527', 'TMP00045123', 'TMP00312527', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044675 与 TMP00044678 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044675_TMP00044678', 'TMP00044675', 'TMP00044678', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044032 与 TMP00311825 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044032_TMP00311825', 'TMP00044032', 'TMP00311825', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044691 与 TMP00044758 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044691_TMP00044758', 'TMP00044691', 'TMP00044758', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044041 与 TMP00311794 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044041_TMP00311794', 'TMP00044041', 'TMP00311794', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044187 与 TMP00044573 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044187_TMP00044573', 'TMP00044187', 'TMP00044573', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043950 与 TMP00044756 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043950_TMP00044756', 'TMP00043950', 'TMP00044756', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044028 与 TMP00046255 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044028_TMP00046255', 'TMP00044028', 'TMP00046255', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043957 与 TMP00044597 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043957_TMP00044597', 'TMP00043957', 'TMP00044597', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044695 与 TMP00311522 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044695_TMP00311522', 'TMP00044695', 'TMP00311522', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045905 与 TMP00311427 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045905_TMP00311427', 'TMP00045905', 'TMP00311427', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044206 与 TMP00044567 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044206_TMP00044567', 'TMP00044206', 'TMP00044567', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045198 与 TMP00045199 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045198_TMP00045199', 'TMP00045198', 'TMP00045199', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046056 与 TMP00046260 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046056_TMP00046260', 'TMP00046056', 'TMP00046260', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044087 与 TMP00044523 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044087_TMP00044523', 'TMP00044087', 'TMP00044523', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044742 与 TMP00046301 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044742_TMP00046301', 'TMP00044742', 'TMP00046301', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044723 与 TMP00046198 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044723_TMP00046198', 'TMP00044723', 'TMP00046198', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044181 与 TMP00044571 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044181_TMP00044571', 'TMP00044181', 'TMP00044571', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044182 与 TMP00046173 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044182_TMP00046173', 'TMP00044182', 'TMP00046173', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044407 与 TMP00046083 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044407_TMP00046083', 'TMP00044407', 'TMP00046083', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043990 与 TMP00044585 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043990_TMP00044585', 'TMP00043990', 'TMP00044585', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044701 与 TMP00046245 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044701_TMP00046245', 'TMP00044701', 'TMP00046245', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044387 与 TMP00045170 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044387_TMP00045170', 'TMP00044387', 'TMP00045170', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044440 与 TMP00046378 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044440_TMP00046378', 'TMP00044440', 'TMP00046378', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044392 与 TMP00046214 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044392_TMP00046214', 'TMP00044392', 'TMP00046214', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044053 与 TMP00044536 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044053_TMP00044536', 'TMP00044053', 'TMP00044536', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044031 与 TMP00311481 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044031_TMP00311481', 'TMP00044031', 'TMP00311481', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044743 与 TMP00044750 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044743_TMP00044750', 'TMP00044743', 'TMP00044750', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044157 与 TMP00044559 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044157_TMP00044559', 'TMP00044157', 'TMP00044559', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044099 与 TMP00046493 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044099_TMP00046493', 'TMP00044099', 'TMP00046493', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044636 与 TMP00044637 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044636_TMP00044637', 'TMP00044636', 'TMP00044637', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044155 与 TMP00044559 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044155_TMP00044559', 'TMP00044155', 'TMP00044559', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044411 与 TMP00044612 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044411_TMP00044612', 'TMP00044411', 'TMP00044612', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043938 与 TMP00044748 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043938_TMP00044748', 'TMP00043938', 'TMP00044748', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043977 与 TMP00044600 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043977_TMP00044600', 'TMP00043977', 'TMP00044600', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044033 与 TMP00044541 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044033_TMP00044541', 'TMP00044033', 'TMP00044541', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044057 与 TMP00044537 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044057_TMP00044537', 'TMP00044057', 'TMP00044537', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044057 与 TMP00311469 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044057_TMP00311469', 'TMP00044057', 'TMP00311469', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044389 与 TMP00046213 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044389_TMP00046213', 'TMP00044389', 'TMP00046213', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043962 与 TMP00044597 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043962_TMP00044597', 'TMP00043962', 'TMP00044597', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00312553 与 TMP00312562 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00312553_TMP00312562', 'TMP00312553', 'TMP00312562', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044400 与 TMP00045263 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044400_TMP00045263', 'TMP00044400', 'TMP00045263', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044714 与 TMP00046197 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044714_TMP00046197', 'TMP00044714', 'TMP00046197', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044094 与 TMP00044526 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044094_TMP00044526', 'TMP00044094', 'TMP00044526', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044225 与 TMP00046557 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044225_TMP00046557', 'TMP00044225', 'TMP00046557', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043953 与 TMP00044587 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043953_TMP00044587', 'TMP00043953', 'TMP00044587', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044447 与 TMP00044603 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044447_TMP00044603', 'TMP00044447', 'TMP00044603', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044050 与 TMP00044536 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044050_TMP00044536', 'TMP00044050', 'TMP00044536', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046084 与 TMP00046386 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046084_TMP00046386', 'TMP00046084', 'TMP00046386', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044391 与 TMP00046374 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044391_TMP00046374', 'TMP00044391', 'TMP00046374', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043995 与 TMP00044480 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043995_TMP00044480', 'TMP00043995', 'TMP00044480', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044736 与 TMP00046292 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044736_TMP00046292', 'TMP00044736', 'TMP00046292', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044228 与 TMP00044582 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044228_TMP00044582', 'TMP00044228', 'TMP00044582', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043973 与 TMP00044600 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043973_TMP00044600', 'TMP00043973', 'TMP00044600', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044153 与 TMP00311394 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044153_TMP00311394', 'TMP00044153', 'TMP00311394', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046250 与 TMP00311487 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046250_TMP00311487', 'TMP00046250', 'TMP00311487', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044085 与 TMP00046489 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044085_TMP00046489', 'TMP00044085', 'TMP00046489', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043992 与 TMP00044474 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043992_TMP00044474', 'TMP00043992', 'TMP00044474', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044399 与 TMP00046383 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044399_TMP00046383', 'TMP00044399', 'TMP00046383', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044401 与 TMP00046241 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044401_TMP00046241', 'TMP00044401', 'TMP00046241', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043975 与 TMP00044510 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043975_TMP00044510', 'TMP00043975', 'TMP00044510', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044120 与 TMP00046500 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044120_TMP00046500', 'TMP00044120', 'TMP00046500', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044127 与 TMP00044561 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044127_TMP00044561', 'TMP00044127', 'TMP00044561', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046211 与 TMP00312278 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046211_TMP00312278', 'TMP00046211', 'TMP00312278', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044195 与 TMP00045193 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044195_TMP00045193', 'TMP00044195', 'TMP00045193', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046186 与 TMP00311915 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046186_TMP00311915', 'TMP00046186', 'TMP00311915', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044425 与 TMP00044624 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044425_TMP00044624', 'TMP00044425', 'TMP00044624', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046192 与 TMP00311860 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046192_TMP00311860', 'TMP00046192', 'TMP00311860', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044404 与 TMP00045274 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044404_TMP00045274', 'TMP00044404', 'TMP00045274', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044158 与 TMP00044560 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044158_TMP00044560', 'TMP00044158', 'TMP00044560', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043938 与 TMP00045279 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043938_TMP00045279', 'TMP00043938', 'TMP00045279', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044197 与 TMP00044565 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044197_TMP00044565', 'TMP00044197', 'TMP00044565', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044083 与 TMP00046488 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044083_TMP00046488', 'TMP00044083', 'TMP00046488', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044193 与 TMP00044564 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044193_TMP00044564', 'TMP00044193', 'TMP00044564', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044620 与 TMP00046098 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044620_TMP00046098', 'TMP00044620', 'TMP00046098', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044145 与 TMP00044555 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044145_TMP00044555', 'TMP00044145', 'TMP00044555', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043982 与 TMP00044594 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043982_TMP00044594', 'TMP00043982', 'TMP00044594', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044480 与 TMP00044725 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044480_TMP00044725', 'TMP00044480', 'TMP00044725', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045215 与 TMP00311778 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045215_TMP00311778', 'TMP00045215', 'TMP00311778', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046038 与 TMP00311692 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046038_TMP00311692', 'TMP00046038', 'TMP00311692', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043927 与 TMP00045131 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043927_TMP00045131', 'TMP00043927', 'TMP00045131', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00311918 与 TMP00311920 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00311918_TMP00311920', 'TMP00311918', 'TMP00311920', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044034 与 TMP00311430 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044034_TMP00311430', 'TMP00044034', 'TMP00311430', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044232 与 TMP00312272 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044232_TMP00312272', 'TMP00044232', 'TMP00312272', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043976 与 TMP00311442 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043976_TMP00311442', 'TMP00043976', 'TMP00311442', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043991 与 TMP00046207 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043991_TMP00046207', 'TMP00043991', 'TMP00046207', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044117 与 TMP00044533 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044117_TMP00044533', 'TMP00044117', 'TMP00044533', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044383 与 TMP00044633 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044383_TMP00044633', 'TMP00044383', 'TMP00044633', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044201 与 TMP00044566 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044201_TMP00044566', 'TMP00044201', 'TMP00044566', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046194 与 TMP00312028 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046194_TMP00312028', 'TMP00046194', 'TMP00312028', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045124 与 TMP00045125 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045124_TMP00045125', 'TMP00045124', 'TMP00045125', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044084 与 TMP00044522 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044084_TMP00044522', 'TMP00044084', 'TMP00044522', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044008 与 TMP00046289 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044008_TMP00046289', 'TMP00044008', 'TMP00046289', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044149 与 TMP00044557 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044149_TMP00044557', 'TMP00044149', 'TMP00044557', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044394 与 TMP00046377 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044394_TMP00046377', 'TMP00044394', 'TMP00046377', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044180 与 TMP00044571 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044180_TMP00044571', 'TMP00044180', 'TMP00044571', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043962 与 TMP00044460 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043962_TMP00044460', 'TMP00043962', 'TMP00044460', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044442 与 TMP00044735 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044442_TMP00044735', 'TMP00044442', 'TMP00044735', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044383 与 TMP00046368 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044383_TMP00046368', 'TMP00044383', 'TMP00046368', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044688 与 TMP00044690 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044688_TMP00044690', 'TMP00044688', 'TMP00044690', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046163 与 TMP00312527 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046163_TMP00312527', 'TMP00046163', 'TMP00312527', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044020 与 TMP00044584 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044020_TMP00044584', 'TMP00044020', 'TMP00044584', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044118 与 TMP00044534 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044118_TMP00044534', 'TMP00044118', 'TMP00044534', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044741 与 TMP00046299 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044741_TMP00046299', 'TMP00044741', 'TMP00046299', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043968 与 TMP00045926 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043968_TMP00045926', 'TMP00043968', 'TMP00045926', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043987 与 TMP00311770 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043987_TMP00311770', 'TMP00043987', 'TMP00311770', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044441 与 TMP00044757 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044441_TMP00044757', 'TMP00044441', 'TMP00044757', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044460 与 TMP00312396 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044460_TMP00312396', 'TMP00044460', 'TMP00312396', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00311448 与 TMP00311836 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00311448_TMP00311836', 'TMP00311448', 'TMP00311836', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045216 与 TMP00046228 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045216_TMP00046228', 'TMP00045216', 'TMP00046228', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044233 与 TMP00044575 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044233_TMP00044575', 'TMP00044233', 'TMP00044575', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043968 与 TMP00044241 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043968_TMP00044241', 'TMP00043968', 'TMP00044241', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044000 与 TMP00044593 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044000_TMP00044593', 'TMP00044000', 'TMP00044593', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043998 与 TMP00044593 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043998_TMP00044593', 'TMP00043998', 'TMP00044593', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045264 与 TMP00045266 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045264_TMP00045266', 'TMP00045264', 'TMP00045266', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045170 与 TMP00046043 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045170_TMP00046043', 'TMP00045170', 'TMP00046043', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044412 与 TMP00046388 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044412_TMP00046388', 'TMP00044412', 'TMP00046388', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046285 与 TMP00311397 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046285_TMP00311397', 'TMP00046285', 'TMP00311397', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044213 与 TMP00044719 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044213_TMP00044719', 'TMP00044213', 'TMP00044719', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044647 与 TMP00044648 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044647_TMP00044648', 'TMP00044647', 'TMP00044648', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045214 与 TMP00046226 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045214_TMP00046226', 'TMP00045214', 'TMP00046226', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044156 与 TMP00044559 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044156_TMP00044559', 'TMP00044156', 'TMP00044559', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043978 与 TMP00044505 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043978_TMP00044505', 'TMP00043978', 'TMP00044505', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043928 与 TMP00045197 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043928_TMP00045197', 'TMP00043928', 'TMP00045197', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043988 与 TMP00045212 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043988_TMP00045212', 'TMP00043988', 'TMP00045212', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043981 与 TMP00312352 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043981_TMP00312352', 'TMP00043981', 'TMP00312352', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043994 与 TMP00044481 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043994_TMP00044481', 'TMP00043994', 'TMP00044481', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043942 与 TMP00046189 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043942_TMP00046189', 'TMP00043942', 'TMP00046189', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044219 与 TMP00046554 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044219_TMP00046554', 'TMP00044219', 'TMP00046554', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044704 与 TMP00046248 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044704_TMP00046248', 'TMP00044704', 'TMP00046248', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044386 与 TMP00046212 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044386_TMP00046212', 'TMP00044386', 'TMP00046212', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043978 与 TMP00044600 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043978_TMP00044600', 'TMP00043978', 'TMP00044600', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043959 与 TMP00044512 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043959_TMP00044512', 'TMP00043959', 'TMP00044512', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045907 与 TMP00046076 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045907_TMP00046076', 'TMP00045907', 'TMP00046076', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044703 与 TMP00046063 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044703_TMP00046063', 'TMP00044703', 'TMP00046063', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045928 与 TMP00046269 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045928_TMP00046269', 'TMP00045928', 'TMP00046269', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044031 与 TMP00044707 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044031_TMP00044707', 'TMP00044031', 'TMP00044707', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044038 与 TMP00044543 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044038_TMP00044543', 'TMP00044038', 'TMP00044543', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044082 与 TMP00044522 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044082_TMP00044522', 'TMP00044082', 'TMP00044522', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045132 与 TMP00045197 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045132_TMP00045197', 'TMP00045132', 'TMP00045197', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046090 与 TMP00046395 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046090_TMP00046395', 'TMP00046090', 'TMP00046395', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044181 与 TMP00046545 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044181_TMP00046545', 'TMP00044181', 'TMP00046545', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044227 与 TMP00044582 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044227_TMP00044582', 'TMP00044227', 'TMP00044582', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044188 与 TMP00044574 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044188_TMP00044574', 'TMP00044188', 'TMP00044574', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044144 与 TMP00046524 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044144_TMP00046524', 'TMP00044144', 'TMP00046524', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044086 与 TMP00044523 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044086_TMP00044523', 'TMP00044086', 'TMP00044523', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046241 与 TMP00311510 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046241_TMP00311510', 'TMP00046241', 'TMP00311510', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044125 与 TMP00311959 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044125_TMP00311959', 'TMP00044125', 'TMP00311959', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044200 与 TMP00046537 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044200_TMP00046537', 'TMP00044200', 'TMP00046537', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044049 与 TMP00046244 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044049_TMP00046244', 'TMP00044049', 'TMP00046244', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044029 与 TMP00044540 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044029_TMP00044540', 'TMP00044029', 'TMP00044540', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044126 与 TMP00044561 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044126_TMP00044561', 'TMP00044126', 'TMP00044561', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043988 与 TMP00046048 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043988_TMP00046048', 'TMP00043988', 'TMP00046048', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044092 与 TMP00044525 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044092_TMP00044525', 'TMP00044092', 'TMP00044525', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044115 与 TMP00046499 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044115_TMP00046499', 'TMP00044115', 'TMP00046499', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044091 与 TMP00311911 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044091_TMP00311911', 'TMP00044091', 'TMP00311911', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044223 与 TMP00044581 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044223_TMP00044581', 'TMP00044223', 'TMP00044581', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044177 与 TMP00312158 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044177_TMP00312158', 'TMP00044177', 'TMP00312158', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044724 与 TMP00046273 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044724_TMP00046273', 'TMP00044724', 'TMP00046273', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044121 与 TMP00311460 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044121_TMP00311460', 'TMP00044121', 'TMP00311460', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044048 与 TMP00044546 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044048_TMP00044546', 'TMP00044048', 'TMP00044546', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043953 与 TMP00044451 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043953_TMP00044451', 'TMP00043953', 'TMP00044451', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043931 与 TMP00045170 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043931_TMP00045170', 'TMP00043931', 'TMP00045170', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044152 与 TMP00046527 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044152_TMP00046527', 'TMP00044152', 'TMP00046527', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044439 与 TMP00046380 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044439_TMP00046380', 'TMP00044439', 'TMP00046380', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044204 与 TMP00046540 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044204_TMP00046540', 'TMP00044204', 'TMP00046540', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044136 与 TMP00312494 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044136_TMP00312494', 'TMP00044136', 'TMP00312494', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044012 与 TMP00044590 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044012_TMP00044590', 'TMP00044012', 'TMP00044590', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044220 与 TMP00044580 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044220_TMP00044580', 'TMP00044220', 'TMP00044580', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044007 与 TMP00044586 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044007_TMP00044586', 'TMP00044007', 'TMP00044586', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044166 与 TMP00044549 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044166_TMP00044549', 'TMP00044166', 'TMP00044549', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044011 与 TMP00044590 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044011_TMP00044590', 'TMP00044011', 'TMP00044590', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044203 与 TMP00046541 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044203_TMP00046541', 'TMP00044203', 'TMP00046541', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044037 与 TMP00046227 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044037_TMP00046227', 'TMP00044037', 'TMP00046227', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044013 与 TMP00044589 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044013_TMP00044589', 'TMP00044013', 'TMP00044589', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044038 与 TMP00312218 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044038_TMP00312218', 'TMP00044038', 'TMP00312218', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044171 与 TMP00046520 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044171_TMP00046520', 'TMP00044171', 'TMP00046520', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044400 与 TMP00046382 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044400_TMP00046382', 'TMP00044400', 'TMP00046382', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045134 与 TMP00312458 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045134_TMP00312458', 'TMP00045134', 'TMP00312458', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044039 与 TMP00044543 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044039_TMP00044543', 'TMP00044039', 'TMP00044543', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044436 与 TMP00044649 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044436_TMP00044649', 'TMP00044436', 'TMP00044649', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044004 与 TMP00311646 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044004_TMP00311646', 'TMP00044004', 'TMP00311646', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044409 与 TMP00046252 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044409_TMP00046252', 'TMP00044409', 'TMP00046252', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044097 与 TMP00044527 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044097_TMP00044527', 'TMP00044097', 'TMP00044527', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043954 与 TMP00044452 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043954_TMP00044452', 'TMP00043954', 'TMP00044452', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044625 与 TMP00045245 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044625_TMP00045245', 'TMP00044625', 'TMP00045245', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043961 与 TMP00044514 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043961_TMP00044514', 'TMP00043961', 'TMP00044514', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044174 与 TMP00044568 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044174_TMP00044568', 'TMP00044174', 'TMP00044568', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046294 与 TMP00311376 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046294_TMP00311376', 'TMP00046294', 'TMP00311376', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044394 与 TMP00046045 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044394_TMP00046045', 'TMP00044394', 'TMP00046045', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044176 与 TMP00046164 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044176_TMP00046164', 'TMP00044176', 'TMP00046164', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043999 与 TMP00044593 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043999_TMP00044593', 'TMP00043999', 'TMP00044593', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044221 与 TMP00311454 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044221_TMP00311454', 'TMP00044221', 'TMP00311454', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044186 与 TMP00044573 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044186_TMP00044573', 'TMP00044186', 'TMP00044573', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044035 与 TMP00044542 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044035_TMP00044542', 'TMP00044035', 'TMP00044542', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044155 与 TMP00046528 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044155_TMP00046528', 'TMP00044155', 'TMP00046528', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044428 与 TMP00046397 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044428_TMP00046397', 'TMP00044428', 'TMP00046397', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044438 与 TMP00046408 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044438_TMP00046408', 'TMP00044438', 'TMP00046408', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045261 与 TMP00045282 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045261_TMP00045282', 'TMP00045261', 'TMP00045282', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044388 与 TMP00046372 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044388_TMP00046372', 'TMP00044388', 'TMP00046372', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043998 与 TMP00311673 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043998_TMP00311673', 'TMP00043998', 'TMP00311673', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045135 与 TMP00045227 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045135_TMP00045227', 'TMP00045135', 'TMP00045227', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044162 与 TMP00044547 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044162_TMP00044547', 'TMP00044162', 'TMP00044547', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044385 与 TMP00046369 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044385_TMP00046369', 'TMP00044385', 'TMP00046369', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044408 与 TMP00044705 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044408_TMP00044705', 'TMP00044408', 'TMP00044705', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044088 与 TMP00044524 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044088_TMP00044524', 'TMP00044088', 'TMP00044524', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044027 与 TMP00046508 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044027_TMP00046508', 'TMP00044027', 'TMP00046508', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044080 与 TMP00044521 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044080_TMP00044521', 'TMP00044080', 'TMP00044521', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043978 与 TMP00044447 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043978_TMP00044447', 'TMP00043978', 'TMP00044447', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045126 与 TMP00046165 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045126_TMP00046165', 'TMP00045126', 'TMP00046165', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043984 与 TMP00046051 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043984_TMP00046051', 'TMP00043984', 'TMP00046051', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043970 与 TMP00044243 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043970_TMP00044243', 'TMP00043970', 'TMP00044243', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044034 与 TMP00044723 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044034_TMP00044723', 'TMP00044034', 'TMP00044723', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044100 与 TMP00044528 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044100_TMP00044528', 'TMP00044100', 'TMP00044528', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044176 与 TMP00044569 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044176_TMP00044569', 'TMP00044176', 'TMP00044569', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044031 与 TMP00044540 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044031_TMP00044540', 'TMP00044031', 'TMP00044540', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044175 与 TMP00044569 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044175_TMP00044569', 'TMP00044175', 'TMP00044569', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044173 与 TMP00046542 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044173_TMP00046542', 'TMP00044173', 'TMP00046542', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045171 与 TMP00045203 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045171_TMP00045203', 'TMP00045171', 'TMP00045203', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043997 与 TMP00044593 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043997_TMP00044593', 'TMP00043997', 'TMP00044593', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046183 与 TMP00046223 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046183_TMP00046223', 'TMP00046183', 'TMP00046223', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044164 与 TMP00046240 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044164_TMP00046240', 'TMP00044164', 'TMP00046240', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044712 与 TMP00046257 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044712_TMP00046257', 'TMP00044712', 'TMP00046257', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044033 与 TMP00046510 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044033_TMP00046510', 'TMP00044033', 'TMP00046510', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044422 与 TMP00046404 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044422_TMP00046404', 'TMP00044422', 'TMP00046404', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044005 与 TMP00044586 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044005_TMP00044586', 'TMP00044005', 'TMP00044586', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044621 与 TMP00044622 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044621_TMP00044622', 'TMP00044621', 'TMP00044622', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045170 与 TMP00045171 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045170_TMP00045171', 'TMP00045170', 'TMP00045171', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044196 与 TMP00044565 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044196_TMP00044565', 'TMP00044196', 'TMP00044565', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044157 与 TMP00044734 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044157_TMP00044734', 'TMP00044157', 'TMP00044734', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044127 与 TMP00046530 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044127_TMP00046530', 'TMP00044127', 'TMP00046530', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044404 与 TMP00045272 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044404_TMP00045272', 'TMP00044404', 'TMP00045272', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043960 与 TMP00044458 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043960_TMP00044458', 'TMP00043960', 'TMP00044458', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044143 与 TMP00044555 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044143_TMP00044555', 'TMP00044143', 'TMP00044555', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043984 与 TMP00044591 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043984_TMP00044591', 'TMP00043984', 'TMP00044591', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044056 与 TMP00311887 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044056_TMP00311887', 'TMP00044056', 'TMP00311887', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045213 与 TMP00312206 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045213_TMP00312206', 'TMP00045213', 'TMP00312206', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044102 与 TMP00044528 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044102_TMP00044528', 'TMP00044102', 'TMP00044528', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044159 与 TMP00312234 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044159_TMP00312234', 'TMP00044159', 'TMP00312234', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044082 与 TMP00311843 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044082_TMP00311843', 'TMP00044082', 'TMP00311843', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043993 与 TMP00044587 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043993_TMP00044587', 'TMP00043993', 'TMP00044587', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044737 与 TMP00046293 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044737_TMP00046293', 'TMP00044737', 'TMP00046293', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044720 与 TMP00311442 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044720_TMP00311442', 'TMP00044720', 'TMP00311442', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046050 与 TMP00311773 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046050_TMP00311773', 'TMP00046050', 'TMP00311773', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044194 与 TMP00046536 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044194_TMP00046536', 'TMP00044194', 'TMP00046536', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046278 与 TMP00311418 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046278_TMP00311418', 'TMP00046278', 'TMP00311418', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043940 与 TMP00046248 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043940_TMP00046248', 'TMP00043940', 'TMP00046248', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044410 与 TMP00046251 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044410_TMP00046251', 'TMP00044410', 'TMP00046251', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044415 与 TMP00046088 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044415_TMP00046088', 'TMP00044415', 'TMP00046088', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043934 与 TMP00045191 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043934_TMP00045191', 'TMP00043934', 'TMP00045191', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043980 与 TMP00312347 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043980_TMP00312347', 'TMP00043980', 'TMP00312347', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044044 与 TMP00044545 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044044_TMP00044545', 'TMP00044044', 'TMP00044545', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044154 与 TMP00311809 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044154_TMP00311809', 'TMP00044154', 'TMP00311809', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044405 与 TMP00044407 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044405_TMP00044407', 'TMP00044405', 'TMP00044407', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043993 与 TMP00044473 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043993_TMP00044473', 'TMP00043993', 'TMP00044473', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044173 与 TMP00044568 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044173_TMP00044568', 'TMP00044173', 'TMP00044568', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044046 与 TMP00044545 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044046_TMP00044545', 'TMP00044046', 'TMP00044545', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044160 与 TMP00312241 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044160_TMP00312241', 'TMP00044160', 'TMP00312241', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044235 与 TMP00312034 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044235_TMP00312034', 'TMP00044235', 'TMP00312034', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046204 与 TMP00311611 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046204_TMP00311611', 'TMP00046204', 'TMP00311611', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044193 与 TMP00046533 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044193_TMP00046533', 'TMP00044193', 'TMP00046533', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044006 与 TMP00044586 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044006_TMP00044586', 'TMP00044006', 'TMP00044586', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046196 与 TMP00311457 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046196_TMP00311457', 'TMP00046196', 'TMP00311457', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044416 与 TMP00046094 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044416_TMP00046094', 'TMP00044416', 'TMP00046094', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044229 与 TMP00044582 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044229_TMP00044582', 'TMP00044229', 'TMP00044582', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044123 与 TMP00312174 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044123_TMP00312174', 'TMP00044123', 'TMP00312174', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043995 与 TMP00045911 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043995_TMP00045911', 'TMP00043995', 'TMP00045911', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043939 与 TMP00044749 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043939_TMP00044749', 'TMP00043939', 'TMP00044749', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043983 与 TMP00311782 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043983_TMP00311782', 'TMP00043983', 'TMP00311782', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046052 与 TMP00311611 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046052_TMP00311611', 'TMP00046052', 'TMP00311611', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043996 与 TMP00045909 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043996_TMP00045909', 'TMP00043996', 'TMP00045909', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044150 与 TMP00046526 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044150_TMP00046526', 'TMP00044150', 'TMP00046526', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044454 与 TMP00045912 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044454_TMP00045912', 'TMP00044454', 'TMP00045912', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044094 与 TMP00046492 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044094_TMP00046492', 'TMP00044094', 'TMP00046492', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043955 与 TMP00044588 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043955_TMP00044588', 'TMP00043955', 'TMP00044588', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044398 与 TMP00046242 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044398_TMP00046242', 'TMP00044398', 'TMP00046242', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044411 与 TMP00046387 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044411_TMP00046387', 'TMP00044411', 'TMP00046387', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043987 与 TMP00044585 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043987_TMP00044585', 'TMP00043987', 'TMP00044585', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046049 与 TMP00311670 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046049_TMP00311670', 'TMP00046049', 'TMP00311670', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044414 与 TMP00044751 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044414_TMP00044751', 'TMP00044414', 'TMP00044751', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043956 与 TMP00044454 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043956_TMP00044454', 'TMP00043956', 'TMP00044454', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044216 与 TMP00044579 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044216_TMP00044579', 'TMP00044216', 'TMP00044579', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044079 与 TMP00311878 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044079_TMP00311878', 'TMP00044079', 'TMP00311878', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044454 与 TMP00044482 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044454_TMP00044482', 'TMP00044454', 'TMP00044482', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044035 与 TMP00046511 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044035_TMP00046511', 'TMP00044035', 'TMP00046511', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044147 与 TMP00044556 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044147_TMP00044556', 'TMP00044147', 'TMP00044556', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044015 与 TMP00311614 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044015_TMP00311614', 'TMP00044015', 'TMP00311614', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043932 与 TMP00045171 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043932_TMP00045171', 'TMP00043932', 'TMP00045171', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044626 与 TMP00044627 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044626_TMP00044627', 'TMP00044626', 'TMP00044627', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044086 与 TMP00311498 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044086_TMP00311498', 'TMP00044086', 'TMP00311498', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043928 与 TMP00045150 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043928_TMP00045150', 'TMP00043928', 'TMP00045150', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044026 与 TMP00044539 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044026_TMP00044539', 'TMP00044026', 'TMP00044539', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044018 与 TMP00311602 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044018_TMP00311602', 'TMP00044018', 'TMP00311602', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044159 与 TMP00044560 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044159_TMP00044560', 'TMP00044159', 'TMP00044560', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045907 与 TMP00311729 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045907_TMP00311729', 'TMP00045907', 'TMP00311729', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044015 与 TMP00044589 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044015_TMP00044589', 'TMP00044015', 'TMP00044589', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044393 与 TMP00045179 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044393_TMP00045179', 'TMP00044393', 'TMP00045179', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044431 与 TMP00046394 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044431_TMP00046394', 'TMP00044431', 'TMP00046394', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044002 与 TMP00311652 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044002_TMP00311652', 'TMP00044002', 'TMP00311652', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044096 与 TMP00044526 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044096_TMP00044526', 'TMP00044096', 'TMP00044526', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043958 与 TMP00044511 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043958_TMP00044511', 'TMP00043958', 'TMP00044511', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046180 与 TMP00046256 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046180_TMP00046256', 'TMP00046180', 'TMP00046256', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045284 与 TMP00045285 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045284_TMP00045285', 'TMP00045284', 'TMP00045285', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046278 与 TMP00311421 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046278_TMP00311421', 'TMP00046278', 'TMP00311421', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044121 与 TMP00044534 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044121_TMP00044534', 'TMP00044121', 'TMP00044534', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043973 与 TMP00044471 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043973_TMP00044471', 'TMP00043973', 'TMP00044471', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044458 与 TMP00312384 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044458_TMP00312384', 'TMP00044458', 'TMP00312384', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044085 与 TMP00044523 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044085_TMP00044523', 'TMP00044085', 'TMP00044523', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044452 与 TMP00044477 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044452_TMP00044477', 'TMP00044452', 'TMP00044477', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044032 与 TMP00044541 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044032_TMP00044541', 'TMP00044032', 'TMP00044541', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044079 与 TMP00044521 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044079_TMP00044521', 'TMP00044079', 'TMP00044521', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044241 与 TMP00044599 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044241_TMP00044599', 'TMP00044241', 'TMP00044599', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044633 与 TMP00044634 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044633_TMP00044634', 'TMP00044633', 'TMP00044634', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044089 与 TMP00046490 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044089_TMP00046490', 'TMP00044089', 'TMP00046490', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044709 与 TMP00046254 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044709_TMP00046254', 'TMP00044709', 'TMP00046254', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044616 与 TMP00045135 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044616_TMP00045135', 'TMP00044616', 'TMP00045135', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044386 与 TMP00046199 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044386_TMP00046199', 'TMP00044386', 'TMP00046199', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044733 与 TMP00046286 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044733_TMP00046286', 'TMP00044733', 'TMP00046286', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044436 与 TMP00046390 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044436_TMP00046390', 'TMP00044436', 'TMP00046390', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044004 与 TMP00046234 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044004_TMP00046234', 'TMP00044004', 'TMP00046234', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046263 与 TMP00312039 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046263_TMP00312039', 'TMP00046263', 'TMP00312039', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044020 与 TMP00311536 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044020_TMP00311536', 'TMP00044020', 'TMP00311536', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044384 与 TMP00044701 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044384_TMP00044701', 'TMP00044384', 'TMP00044701', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044222 与 TMP00044580 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044222_TMP00044580', 'TMP00044222', 'TMP00044580', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044673 与 TMP00046101 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044673_TMP00046101', 'TMP00044673', 'TMP00046101', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044146 与 TMP00044556 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044146_TMP00044556', 'TMP00044146', 'TMP00044556', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044182 与 TMP00046172 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044182_TMP00046172', 'TMP00044182', 'TMP00046172', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044226 与 TMP00311475 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044226_TMP00311475', 'TMP00044226', 'TMP00311475', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044651 与 TMP00045247 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044651_TMP00045247', 'TMP00044651', 'TMP00045247', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044438 与 TMP00044672 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044438_TMP00044672', 'TMP00044438', 'TMP00044672', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044098 与 TMP00044527 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044098_TMP00044527', 'TMP00044098', 'TMP00044527', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044632 与 TMP00044635 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044632_TMP00044635', 'TMP00044632', 'TMP00044635', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044648 与 TMP00045230 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044648_TMP00045230', 'TMP00044648', 'TMP00045230', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043959 与 TMP00044597 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043959_TMP00044597', 'TMP00043959', 'TMP00044597', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044689 与 TMP00044690 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044689_TMP00044690', 'TMP00044689', 'TMP00044690', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044640 与 TMP00044641 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044640_TMP00044641', 'TMP00044640', 'TMP00044641', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044158 与 TMP00046529 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044158_TMP00046529', 'TMP00044158', 'TMP00046529', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044087 与 TMP00311965 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044087_TMP00311965', 'TMP00044087', 'TMP00311965', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044189 与 TMP00046169 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044189_TMP00046169', 'TMP00044189', 'TMP00046169', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045278 与 TMP00131796 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045278_TMP00131796', 'TMP00045278', 'TMP00131796', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044001 与 TMP00311655 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044001_TMP00311655', 'TMP00044001', 'TMP00311655', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044418 与 TMP00046264 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044418_TMP00046264', 'TMP00044418', 'TMP00046264', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044416 与 TMP00046399 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044416_TMP00046399', 'TMP00044416', 'TMP00046399', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044739 与 TMP00046296 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044739_TMP00046296', 'TMP00044739', 'TMP00046296', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043985 与 TMP00044591 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043985_TMP00044591', 'TMP00043985', 'TMP00044591', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043977 与 TMP00044506 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043977_TMP00044506', 'TMP00043977', 'TMP00044506', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044201 与 TMP00312012 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044201_TMP00312012', 'TMP00044201', 'TMP00312012', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044428 与 TMP00044633 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044428_TMP00044633', 'TMP00044428', 'TMP00044633', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044049 与 TMP00044700 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044049_TMP00044700', 'TMP00044049', 'TMP00044700', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044057 与 TMP00044711 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044057_TMP00044711', 'TMP00044057', 'TMP00044711', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044646 与 TMP00044647 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044646_TMP00044647', 'TMP00044646', 'TMP00044647', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044006 与 TMP00311640 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044006_TMP00311640', 'TMP00044006', 'TMP00311640', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044732 与 TMP00046205 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044732_TMP00046205', 'TMP00044732', 'TMP00046205', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044003 与 TMP00044592 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044003_TMP00044592', 'TMP00044003', 'TMP00044592', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044671 与 TMP00045235 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044671_TMP00045235', 'TMP00044671', 'TMP00045235', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044413 与 TMP00046391 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044413_TMP00046391', 'TMP00044413', 'TMP00046391', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044009 与 TMP00044590 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044009_TMP00044590', 'TMP00044009', 'TMP00044590', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044721 与 TMP00046268 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044721_TMP00046268', 'TMP00044721', 'TMP00046268', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044164 与 TMP00044548 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044164_TMP00044548', 'TMP00044164', 'TMP00044548', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044719 与 TMP00312538 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044719_TMP00312538', 'TMP00044719', 'TMP00312538', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044154 与 TMP00044558 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044154_TMP00044558', 'TMP00044154', 'TMP00044558', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044047 与 TMP00311987 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044047_TMP00311987', 'TMP00044047', 'TMP00311987', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044233 与 TMP00311451 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044233_TMP00311451', 'TMP00044233', 'TMP00311451', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044433 与 TMP00044711 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044433_TMP00044711', 'TMP00044433', 'TMP00044711', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046203 与 TMP00046288 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046203_TMP00046288', 'TMP00046203', 'TMP00046288', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044452 与 TMP00311736 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044452_TMP00311736', 'TMP00044452', 'TMP00311736', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044119 与 TMP00044534 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044119_TMP00044534', 'TMP00044119', 'TMP00044534', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044051 与 TMP00044536 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044051_TMP00044536', 'TMP00044051', 'TMP00044536', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044205 与 TMP00044567 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044205_TMP00044567', 'TMP00044205', 'TMP00044567', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046210 与 TMP00312278 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046210_TMP00312278', 'TMP00046210', 'TMP00312278', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043946 与 TMP00044717 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043946_TMP00044717', 'TMP00043946', 'TMP00044717', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045268 与 TMP00045269 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045268_TMP00045269', 'TMP00045268', 'TMP00045269', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044012 与 TMP00311623 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044012_TMP00311623', 'TMP00044012', 'TMP00311623', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044444 与 TMP00044602 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044444_TMP00044602', 'TMP00044444', 'TMP00044602', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044165 与 TMP00044549 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044165_TMP00044549', 'TMP00044165', 'TMP00044549', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044230 与 TMP00044583 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044230_TMP00044583', 'TMP00044230', 'TMP00044583', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044222 与 TMP00046556 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044222_TMP00046556', 'TMP00044222', 'TMP00046556', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044628 与 TMP00044629 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044628_TMP00044629', 'TMP00044628', 'TMP00044629', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044125 与 TMP00044561 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044125_TMP00044561', 'TMP00044125', 'TMP00044561', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044401 与 TMP00044698 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044401_TMP00044698', 'TMP00044401', 'TMP00044698', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046203 与 TMP00311798 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046203_TMP00311798', 'TMP00046203', 'TMP00311798', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043959 与 TMP00044457 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043959_TMP00044457', 'TMP00043959', 'TMP00044457', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046266 与 TMP00311442 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046266_TMP00311442', 'TMP00046266', 'TMP00311442', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044048 与 TMP00046515 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044048_TMP00046515', 'TMP00044048', 'TMP00046515', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044443 与 TMP00046409 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044443_TMP00046409', 'TMP00044443', 'TMP00046409', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043954 与 TMP00044587 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043954_TMP00044587', 'TMP00043954', 'TMP00044587', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044730 与 TMP00046283 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044730_TMP00046283', 'TMP00044730', 'TMP00046283', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044178 与 TMP00046544 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044178_TMP00046544', 'TMP00044178', 'TMP00046544', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044419 与 TMP00046403 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044419_TMP00046403', 'TMP00044419', 'TMP00046403', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043993 与 TMP00044444 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043993_TMP00044444', 'TMP00043993', 'TMP00044444', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044136 与 TMP00045127 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044136_TMP00045127', 'TMP00044136', 'TMP00045127', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043970 与 TMP00045924 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043970_TMP00045924', 'TMP00043970', 'TMP00045924', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046165 与 TMP00312513 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046165_TMP00312513', 'TMP00046165', 'TMP00312513', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044213 与 TMP00044578 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044213_TMP00044578', 'TMP00044213', 'TMP00044578', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044047 与 TMP00044546 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044047_TMP00044546', 'TMP00044047', 'TMP00044546', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044726 与 TMP00311421 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044726_TMP00311421', 'TMP00044726', 'TMP00311421', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044224 与 TMP00046558 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044224_TMP00046558', 'TMP00044224', 'TMP00046558', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046190 与 TMP00311893 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046190_TMP00311893', 'TMP00046190', 'TMP00311893', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044725 与 TMP00046276 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044725_TMP00046276', 'TMP00044725', 'TMP00046276', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043999 与 TMP00311667 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043999_TMP00311667', 'TMP00043999', 'TMP00311667', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044124 与 TMP00044535 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044124_TMP00044535', 'TMP00044124', 'TMP00044535', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044453 与 TMP00045910 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044453_TMP00045910', 'TMP00044453', 'TMP00045910', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046176 与 TMP00046224 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046176_TMP00046224', 'TMP00046176', 'TMP00046224', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044030 与 TMP00044540 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044030_TMP00044540', 'TMP00044030', 'TMP00044540', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044029 与 TMP00046509 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044029_TMP00046509', 'TMP00044029', 'TMP00046509', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045916 与 TMP00312378 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045916_TMP00312378', 'TMP00045916', 'TMP00312378', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044725 与 TMP00046275 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044725_TMP00046275', 'TMP00044725', 'TMP00046275', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044205 与 TMP00046539 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044205_TMP00046539', 'TMP00044205', 'TMP00046539', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044225 与 TMP00044581 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044225_TMP00044581', 'TMP00044225', 'TMP00044581', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044027 与 TMP00044539 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044027_TMP00044539', 'TMP00044027', 'TMP00044539', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045238 与 TMP00045239 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045238_TMP00045239', 'TMP00045238', 'TMP00045239', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044427 与 TMP00046398 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044427_TMP00046398', 'TMP00044427', 'TMP00046398', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044162 与 TMP00312458 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044162_TMP00312458', 'TMP00044162', 'TMP00312458', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044244 与 TMP00044599 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044244_TMP00044599', 'TMP00044244', 'TMP00044599', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043974 与 TMP00044504 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043974_TMP00044504', 'TMP00043974', 'TMP00044504', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044697 与 TMP00046240 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044697_TMP00046240', 'TMP00044697', 'TMP00046240', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044001 与 TMP00044592 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044001_TMP00044592', 'TMP00044001', 'TMP00044592', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045196 与 TMP00312272 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045196_TMP00312272', 'TMP00045196', 'TMP00312272', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044424 与 TMP00046401 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044424_TMP00046401', 'TMP00044424', 'TMP00046401', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044615 与 TMP00044754 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044615_TMP00044754', 'TMP00044615', 'TMP00044754', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044042 与 TMP00044544 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044042_TMP00044544', 'TMP00044042', 'TMP00044544', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046198 与 TMP00311818 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046198_TMP00311818', 'TMP00046198', 'TMP00311818', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044170 与 TMP00311832 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044170_TMP00311832', 'TMP00044170', 'TMP00311832', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044184 与 TMP00044572 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044184_TMP00044572', 'TMP00044184', 'TMP00044572', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044016 与 TMP00311608 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044016_TMP00311608', 'TMP00044016', 'TMP00311608', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044419 与 TMP00044754 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044419_TMP00044754', 'TMP00044419', 'TMP00044754', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046208 与 TMP00312284 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046208_TMP00312284', 'TMP00046208', 'TMP00312284', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044116 与 TMP00311979 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044116_TMP00311979', 'TMP00044116', 'TMP00311979', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043971 与 TMP00044605 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043971_TMP00044605', 'TMP00043971', 'TMP00044605', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044005 与 TMP00311643 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044005_TMP00311643', 'TMP00044005', 'TMP00311643', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044080 与 TMP00046487 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044080_TMP00046487', 'TMP00044080', 'TMP00046487', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044393 与 TMP00046376 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044393_TMP00046376', 'TMP00044393', 'TMP00046376', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044741 与 TMP00311358 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044741_TMP00311358', 'TMP00044741', 'TMP00311358', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044420 与 TMP00046406 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044420_TMP00046406', 'TMP00044420', 'TMP00046406', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043982 与 TMP00046218 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043982_TMP00046218', 'TMP00043982', 'TMP00046218', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043940 与 TMP00046249 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043940_TMP00046249', 'TMP00043940', 'TMP00046249', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044144 与 TMP00044555 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044144_TMP00044555', 'TMP00044144', 'TMP00044555', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044187 与 TMP00046548 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044187_TMP00046548', 'TMP00044187', 'TMP00046548', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044419 与 TMP00044423 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044419_TMP00044423', 'TMP00044419', 'TMP00044423', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044426 与 TMP00046400 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044426_TMP00046400', 'TMP00044426', 'TMP00046400', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045219 与 TMP00312150 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045219_TMP00312150', 'TMP00045219', 'TMP00312150', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044083 与 TMP00044522 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044083_TMP00044522', 'TMP00044083', 'TMP00044522', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046198 与 TMP00046272 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046198_TMP00046272', 'TMP00046198', 'TMP00046272', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044148 与 TMP00312275 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044148_TMP00312275', 'TMP00044148', 'TMP00312275', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044050 与 TMP00311937 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044050_TMP00311937', 'TMP00044050', 'TMP00311937', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043979 与 TMP00044594 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043979_TMP00044594', 'TMP00043979', 'TMP00044594', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046039 与 TMP00046371 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046039_TMP00046371', 'TMP00046039', 'TMP00046371', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043961 与 TMP00044459 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043961_TMP00044459', 'TMP00043961', 'TMP00044459', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044715 与 TMP00046056 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044715_TMP00046056', 'TMP00044715', 'TMP00046056', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044244 与 TMP00044498 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044244_TMP00044498', 'TMP00044244', 'TMP00044498', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045221 与 TMP00045265 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045221_TMP00045265', 'TMP00045221', 'TMP00045265', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044134 与 TMP00044552 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044134_TMP00044552', 'TMP00044134', 'TMP00044552', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046224 与 TMP00311766 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046224_TMP00311766', 'TMP00046224', 'TMP00311766', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043975 与 TMP00044446 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043975_TMP00044446', 'TMP00043975', 'TMP00044446', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044382 与 TMP00046031 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044382_TMP00046031', 'TMP00044382', 'TMP00046031', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044434 与 TMP00046393 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044434_TMP00046393', 'TMP00044434', 'TMP00046393', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044217 与 TMP00046555 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044217_TMP00046555', 'TMP00044217', 'TMP00046555', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046237 与 TMP00311516 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046237_TMP00311516', 'TMP00046237', 'TMP00311516', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044234 与 TMP00044575 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044234_TMP00044575', 'TMP00044234', 'TMP00044575', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044184 与 TMP00312527 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044184_TMP00312527', 'TMP00044184', 'TMP00312527', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044086 与 TMP00046246 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044086_TMP00046246', 'TMP00044086', 'TMP00046246', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044042 与 TMP00046513 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044042_TMP00046513', 'TMP00044042', 'TMP00046513', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046032 与 TMP00311736 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046032_TMP00311736', 'TMP00046032', 'TMP00311736', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043930 与 TMP00045209 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043930_TMP00045209', 'TMP00043930', 'TMP00045209', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044421 与 TMP00046405 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044421_TMP00046405', 'TMP00044421', 'TMP00046405', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044153 与 TMP00044558 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044153_TMP00044558', 'TMP00044153', 'TMP00044558', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043972 与 TMP00045927 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043972_TMP00045927', 'TMP00043972', 'TMP00045927', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044652 与 TMP00045247 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044652_TMP00045247', 'TMP00044652', 'TMP00045247', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044722 与 TMP00046270 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044722_TMP00046270', 'TMP00044722', 'TMP00046270', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044152 与 TMP00044558 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044152_TMP00044558', 'TMP00044152', 'TMP00044558', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046274 与 TMP00311427 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046274_TMP00311427', 'TMP00046274', 'TMP00311427', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044616 与 TMP00044618 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044616_TMP00044618', 'TMP00044616', 'TMP00044618', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044178 与 TMP00044570 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044178_TMP00044570', 'TMP00044178', 'TMP00044570', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046232 与 TMP00312150 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046232_TMP00312150', 'TMP00046232', 'TMP00312150', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044099 与 TMP00044527 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044099_TMP00044527', 'TMP00044099', 'TMP00044527', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046178 与 TMP00311510 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046178_TMP00311510', 'TMP00046178', 'TMP00311510', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044393 与 TMP00044394 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044393_TMP00044394', 'TMP00044393', 'TMP00044394', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044418 与 TMP00046193 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044418_TMP00046193', 'TMP00044418', 'TMP00046193', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044198 与 TMP00044566 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044198_TMP00044566', 'TMP00044198', 'TMP00044566', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044165 与 TMP00046518 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044165_TMP00046518', 'TMP00044165', 'TMP00046518', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044183 与 TMP00044572 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044183_TMP00044572', 'TMP00044183', 'TMP00044572', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046226 与 TMP00311773 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046226_TMP00311773', 'TMP00046226', 'TMP00311773', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046188 与 TMP00311487 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046188_TMP00311487', 'TMP00046188', 'TMP00311487', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044119 与 TMP00311854 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044119_TMP00311854', 'TMP00044119', 'TMP00311854', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044157 与 TMP00311388 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044157_TMP00311388', 'TMP00044157', 'TMP00311388', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044052 与 TMP00044536 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044052_TMP00044536', 'TMP00044052', 'TMP00044536', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043933 与 TMP00045205 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043933_TMP00045205', 'TMP00043933', 'TMP00045205', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044013 与 TMP00311620 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044013_TMP00311620', 'TMP00044013', 'TMP00311620', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046302 与 TMP00048671 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046302_TMP00048671', 'TMP00046302', 'TMP00048671', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044040 与 TMP00044543 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044040_TMP00044543', 'TMP00044040', 'TMP00044543', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043976 与 TMP00044507 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043976_TMP00044507', 'TMP00043976', 'TMP00044507', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044740 与 TMP00046297 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044740_TMP00046297', 'TMP00044740', 'TMP00046297', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044150 与 TMP00044557 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044150_TMP00044557', 'TMP00044150', 'TMP00044557', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044395 与 TMP00044713 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044395_TMP00044713', 'TMP00044395', 'TMP00044713', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044190 与 TMP00044564 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044190_TMP00044564', 'TMP00044190', 'TMP00044564', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045210 与 TMP00312250 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045210_TMP00312250', 'TMP00045210', 'TMP00312250', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044004 与 TMP00044592 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044004_TMP00044592', 'TMP00044004', 'TMP00044592', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044564 与 TMP00046534 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044564_TMP00046534', 'TMP00044564', 'TMP00046534', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044045 与 TMP00044545 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044045_TMP00044545', 'TMP00044045', 'TMP00044545', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046184 与 TMP00311954 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046184_TMP00311954', 'TMP00046184', 'TMP00311954', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043975 与 TMP00044597 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043975_TMP00044597', 'TMP00043975', 'TMP00044597', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044389 与 TMP00046200 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044389_TMP00046200', 'TMP00044389', 'TMP00046200', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044384 与 TMP00046245 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044384_TMP00046245', 'TMP00044384', 'TMP00046245', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046187 与 TMP00046253 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046187_TMP00046253', 'TMP00046187', 'TMP00046253', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044405 与 TMP00046385 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044405_TMP00046385', 'TMP00044405', 'TMP00046385', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044095 与 TMP00311946 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044095_TMP00311946', 'TMP00044095', 'TMP00311946', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044409 与 TMP00045281 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044409_TMP00045281', 'TMP00044409', 'TMP00045281', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043949 与 TMP00045237 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043949_TMP00045237', 'TMP00043949', 'TMP00045237', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044081 与 TMP00311466 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044081_TMP00311466', 'TMP00044081', 'TMP00311466', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044014 与 TMP00311617 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044014_TMP00311617', 'TMP00044014', 'TMP00311617', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045154 与 TMP00045179 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045154_TMP00045179', 'TMP00045154', 'TMP00045179', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044051 与 TMP00046505 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044051_TMP00046505', 'TMP00044051', 'TMP00046505', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043972 与 TMP00044245 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043972_TMP00044245', 'TMP00043972', 'TMP00044245', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044696 与 TMP00311519 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044696_TMP00311519', 'TMP00044696', 'TMP00311519', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044233 与 TMP00046262 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044233_TMP00046262', 'TMP00044233', 'TMP00046262', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044683 与 TMP00045209 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044683_TMP00045209', 'TMP00044683', 'TMP00045209', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044456 与 TMP00312371 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044456_TMP00312371', 'TMP00044456', 'TMP00312371', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045120 与 TMP00045924 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045120_TMP00045924', 'TMP00045120', 'TMP00045924', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044179 与 TMP00312150 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044179_TMP00312150', 'TMP00044179', 'TMP00312150', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044000 与 TMP00311661 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044000_TMP00311661', 'TMP00044000', 'TMP00311661', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044163 与 TMP00044548 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044163_TMP00044548', 'TMP00044163', 'TMP00044548', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044437 与 TMP00046407 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044437_TMP00046407', 'TMP00044437', 'TMP00046407', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046284 与 TMP00311400 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046284_TMP00311400', 'TMP00046284', 'TMP00311400', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044729 与 TMP00046283 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044729_TMP00046283', 'TMP00044729', 'TMP00046283', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043958 与 TMP00044597 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043958_TMP00044597', 'TMP00043958', 'TMP00044597', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044183 与 TMP00046547 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044183_TMP00046547', 'TMP00044183', 'TMP00046547', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044455 与 TMP00312362 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044455_TMP00312362', 'TMP00044455', 'TMP00312362', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046265 与 TMP00312538 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046265_TMP00312538', 'TMP00046265', 'TMP00312538', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044122 与 TMP00044535 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044122_TMP00044535', 'TMP00044122', 'TMP00044535', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044097 与 TMP00311998 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044097_TMP00311998', 'TMP00044097', 'TMP00311998', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043937 与 TMP00045211 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043937_TMP00045211', 'TMP00043937', 'TMP00045211', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044734 与 TMP00046203 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044734_TMP00046203', 'TMP00044734', 'TMP00046203', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044706 与 TMP00046251 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044706_TMP00046251', 'TMP00044706', 'TMP00046251', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044716 与 TMP00046261 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044716_TMP00046261', 'TMP00044716', 'TMP00046261', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046046 与 TMP00311747 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046046_TMP00311747', 'TMP00046046', 'TMP00311747', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045120 与 TMP00046161 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045120_TMP00046161', 'TMP00045120', 'TMP00046161', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045274 与 TMP00045275 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045274_TMP00045275', 'TMP00045274', 'TMP00045275', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045128 与 TMP00046171 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045128_TMP00046171', 'TMP00045128', 'TMP00046171', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00311510 与 TMP00312080 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00311510_TMP00312080', 'TMP00311510', 'TMP00312080', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045272 与 TMP00045274 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045272_TMP00045274', 'TMP00045272', 'TMP00045274', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046202 与 TMP00311773 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046202_TMP00311773', 'TMP00046202', 'TMP00311773', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044093 与 TMP00046253 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044093_TMP00046253', 'TMP00044093', 'TMP00046253', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043960 与 TMP00044597 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043960_TMP00044597', 'TMP00043960', 'TMP00044597', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044185 与 TMP00312482 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044185_TMP00312482', 'TMP00044185', 'TMP00312482', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044176 与 TMP00312515 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044176_TMP00312515', 'TMP00044176', 'TMP00312515', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043989 与 TMP00044585 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043989_TMP00044585', 'TMP00043989', 'TMP00044585', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044404 与 TMP00046384 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044404_TMP00046384', 'TMP00044404', 'TMP00046384', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044478 与 TMP00045217 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044478_TMP00045217', 'TMP00044478', 'TMP00045217', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044037 与 TMP00044542 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044037_TMP00044542', 'TMP00044037', 'TMP00044542', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043962 与 TMP00044508 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043962_TMP00044508', 'TMP00043962', 'TMP00044508', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044471 与 TMP00311436 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044471_TMP00311436', 'TMP00044471', 'TMP00311436', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044091 与 TMP00044525 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044091_TMP00044525', 'TMP00044091', 'TMP00044525', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044388 与 TMP00045172 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044388_TMP00045172', 'TMP00044388', 'TMP00045172', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044410 与 TMP00046185 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044410_TMP00046185', 'TMP00044410', 'TMP00046185', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046209 与 TMP00312284 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046209_TMP00312284', 'TMP00046209', 'TMP00312284', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044100 与 TMP00312230 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044100_TMP00312230', 'TMP00044100', 'TMP00312230', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044180 与 TMP00046546 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044180_TMP00046546', 'TMP00044180', 'TMP00046546', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043994 与 TMP00044588 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043994_TMP00044588', 'TMP00043994', 'TMP00044588', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044443 与 TMP00045260 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044443_TMP00045260', 'TMP00044443', 'TMP00045260', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044402 与 TMP00046381 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044402_TMP00046381', 'TMP00044402', 'TMP00046381', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044420 与 TMP00044617 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044420_TMP00044617', 'TMP00044420', 'TMP00044617', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043936 与 TMP00044746 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043936_TMP00044746', 'TMP00043936', 'TMP00044746', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044408 与 TMP00045282 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044408_TMP00045282', 'TMP00044408', 'TMP00045282', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044163 与 TMP00046517 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044163_TMP00046517', 'TMP00044163', 'TMP00046517', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044090 与 TMP00044524 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044090_TMP00044524', 'TMP00044090', 'TMP00044524', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044194 与 TMP00044565 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044194_TMP00044565', 'TMP00044194', 'TMP00044565', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044088 与 TMP00312204 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044088_TMP00312204', 'TMP00044088', 'TMP00312204', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046166 与 TMP00312499 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046166_TMP00312499', 'TMP00046166', 'TMP00312499', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044243 与 TMP00044599 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044243_TMP00044599', 'TMP00044243', 'TMP00044599', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044435 与 TMP00044649 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044435_TMP00044649', 'TMP00044435', 'TMP00044649', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043956 与 TMP00044588 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043956_TMP00044588', 'TMP00043956', 'TMP00044588', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043950 与 TMP00044685 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043950_TMP00044685', 'TMP00043950', 'TMP00044685', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043992 与 TMP00044587 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043992_TMP00044587', 'TMP00043992', 'TMP00044587', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046175 与 TMP00312458 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046175_TMP00312458', 'TMP00046175', 'TMP00312458', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043947 与 TMP00046166 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043947_TMP00046166', 'TMP00043947', 'TMP00046166', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044093 与 TMP00044525 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044093_TMP00044525', 'TMP00044093', 'TMP00044525', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043969 与 TMP00044242 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043969_TMP00044242', 'TMP00043969', 'TMP00044242', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046201 与 TMP00312183 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046201_TMP00312183', 'TMP00046201', 'TMP00312183', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044016 与 TMP00044589 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044016_TMP00044589', 'TMP00044016', 'TMP00044589', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044041 与 TMP00044544 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044041_TMP00044544', 'TMP00044041', 'TMP00044544', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044102 与 TMP00312220 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044102_TMP00312220', 'TMP00044102', 'TMP00312220', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044700 与 TMP00046243 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044700_TMP00046243', 'TMP00044700', 'TMP00046243', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044231 与 TMP00044583 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044231_TMP00044583', 'TMP00044231', 'TMP00044583', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044235 与 TMP00044575 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044235_TMP00044575', 'TMP00044235', 'TMP00044575', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044172 与 TMP00044551 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044172_TMP00044551', 'TMP00044172', 'TMP00044551', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044226 与 TMP00044581 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044226_TMP00044581', 'TMP00044226', 'TMP00044581', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044009 与 TMP00311632 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044009_TMP00311632', 'TMP00044009', 'TMP00311632', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044631 与 TMP00044632 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044631_TMP00044632', 'TMP00044631', 'TMP00044632', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044387 与 TMP00046373 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044387_TMP00046373', 'TMP00044387', 'TMP00046373', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044446 与 TMP00044604 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044446_TMP00044604', 'TMP00044446', 'TMP00044604', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044192 与 TMP00044564 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044192_TMP00044564', 'TMP00044192', 'TMP00044564', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043989 与 TMP00046037 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043989_TMP00046037', 'TMP00043989', 'TMP00046037', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044642 与 TMP00044643 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044642_TMP00044643', 'TMP00044642', 'TMP00044643', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044045 与 TMP00311786 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044045_TMP00311786', 'TMP00044045', 'TMP00311786', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044223 与 TMP00312076 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044223_TMP00312076', 'TMP00044223', 'TMP00312076', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044189 与 TMP00044731 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044189_TMP00044731', 'TMP00044189', 'TMP00044731', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044151 与 TMP00046258 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044151_TMP00046258', 'TMP00044151', 'TMP00046258', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046035 与 TMP00312384 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046035_TMP00312384', 'TMP00046035', 'TMP00312384', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044712 与 TMP00046191 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044712_TMP00046191', 'TMP00044712', 'TMP00046191', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044435 与 TMP00046389 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044435_TMP00046389', 'TMP00044435', 'TMP00046389', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044177 与 TMP00044570 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044177_TMP00044570', 'TMP00044177', 'TMP00044570', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046205 与 TMP00046285 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046205_TMP00046285', 'TMP00046205', 'TMP00046285', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044198 与 TMP00046538 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044198_TMP00046538', 'TMP00044198', 'TMP00046538', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043981 与 TMP00044594 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043981_TMP00044594', 'TMP00043981', 'TMP00044594', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045211 与 TMP00046223 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045211_TMP00046223', 'TMP00045211', 'TMP00046223', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045906 与 TMP00046207 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045906_TMP00046207', 'TMP00045906', 'TMP00046207', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044039 与 TMP00046512 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044039_TMP00046512', 'TMP00044039', 'TMP00046512', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045929 与 TMP00311747 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045929_TMP00311747', 'TMP00045929', 'TMP00311747', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043986 与 TMP00044591 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043986_TMP00044591', 'TMP00043986', 'TMP00044591', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045212 与 TMP00046224 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045212_TMP00046224', 'TMP00045212', 'TMP00046224', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046284 与 TMP00046305 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046284_TMP00046305', 'TMP00046284', 'TMP00046305', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044224 与 TMP00044581 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044224_TMP00044581', 'TMP00044224', 'TMP00044581', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044007 与 TMP00046077 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044007_TMP00046077', 'TMP00044007', 'TMP00046077', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044171 与 TMP00044551 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044171_TMP00044551', 'TMP00044171', 'TMP00044551', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044028 与 TMP00311472 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044028_TMP00311472', 'TMP00044028', 'TMP00311472', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044010 与 TMP00044590 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044010_TMP00044590', 'TMP00044010', 'TMP00044590', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044056 与 TMP00044537 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044056_TMP00044537', 'TMP00044056', 'TMP00044537', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044160 与 TMP00044560 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044160_TMP00044560', 'TMP00044160', 'TMP00044560', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044479 与 TMP00311692 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044479_TMP00311692', 'TMP00044479', 'TMP00311692', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044135 与 TMP00046521 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044135_TMP00046521', 'TMP00044135', 'TMP00046521', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044151 与 TMP00311463 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044151_TMP00311463', 'TMP00044151', 'TMP00311463', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044191 与 TMP00044564 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044191_TMP00044564', 'TMP00044191', 'TMP00044564', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044607 与 TMP00045269 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044607_TMP00045269', 'TMP00044607', 'TMP00045269', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044216 与 TMP00312063 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044216_TMP00312063', 'TMP00044216', 'TMP00312063', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044081 与 TMP00044521 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044081_TMP00044521', 'TMP00044081', 'TMP00044521', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044054 与 TMP00311484 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044054_TMP00311484', 'TMP00044054', 'TMP00311484', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046277 与 TMP00046278 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046277_TMP00046278', 'TMP00046277', 'TMP00046278', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044221 与 TMP00044580 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044221_TMP00044580', 'TMP00044221', 'TMP00044580', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044120 与 TMP00044534 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044120_TMP00044534', 'TMP00044120', 'TMP00044534', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044115 与 TMP00044533 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044115_TMP00044533', 'TMP00044115', 'TMP00044533', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044126 与 TMP00311495 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044126_TMP00311495', 'TMP00044126', 'TMP00311495', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044143 与 TMP00312312 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044143_TMP00312312', 'TMP00044143', 'TMP00312312', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043969 与 TMP00045925 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043969_TMP00045925', 'TMP00043969', 'TMP00045925', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044451 与 TMP00044476 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044451_TMP00044476', 'TMP00044451', 'TMP00044476', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044618 与 TMP00045227 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044618_TMP00045227', 'TMP00044618', 'TMP00045227', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044727 与 TMP00311415 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044727_TMP00311415', 'TMP00044727', 'TMP00311415', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044011 与 TMP00311626 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044011_TMP00311626', 'TMP00044011', 'TMP00311626', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045924 与 TMP00046160 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045924_TMP00046160', 'TMP00045924', 'TMP00046160', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00312350 与 TMP00312353 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00312350_TMP00312353', 'TMP00312350', 'TMP00312353', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046174 与 TMP00311692 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046174_TMP00311692', 'TMP00046174', 'TMP00311692', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00045132 与 TMP00045174 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00045132_TMP00045174', 'TMP00045132', 'TMP00045174', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043926 与 TMP00045130 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043926_TMP00045130', 'TMP00043926', 'TMP00045130', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044692 与 TMP00046233 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044692_TMP00046233', 'TMP00044692', 'TMP00046233', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044055 与 TMP00046506 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044055_TMP00046506', 'TMP00044055', 'TMP00046506', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00043937 与 TMP00045218 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00043937_TMP00045218', 'TMP00043937', 'TMP00045218', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00046181 与 TMP00046245 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00046181_TMP00046245', 'TMP00046181', 'TMP00046245', 'TMP00000188');
+
+-- 问题类型: 物理连接不一致
+-- 问题描述: SVG图纸存在设备 TMP00044643 与 TMP00044644 的物理连接，但数据库拓扑中缺失该连线
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_TMP00044643_TMP00044644', 'TMP00044643', 'TMP00044644', 'TMP00000188');
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046241 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046241';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044404 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044404';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046031 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046031';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044003 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044003';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044458 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044458';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046375 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046375';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043932 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043932';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043982 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043982';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046085 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046085';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046547 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046547';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046183 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046183';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046058 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046058';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046407 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046407';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046051 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046051';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043983 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043983';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046182 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046182';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046540 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046540';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044086 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044086';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046083 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046083';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046374 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046374';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044398 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044398';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043984 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043984';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046508 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046508';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043941 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043941';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044422 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044422';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045930 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045930';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046370 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046370';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044206 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044206';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044158 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044158';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046225 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046225';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044125 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044125';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046385 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046385';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046286 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046286';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043926 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043926';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046178 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046178';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044171 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044171';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046170 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046170';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044479 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044479';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046236 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046236';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044508 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044508';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044014 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044014';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044184 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044184';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045918 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045918';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046263 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046263';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046493 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046493';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044018 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044018';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045917 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045917';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044090 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044090';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046048 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046048';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046246 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046246';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046256 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046256';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043944 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043944';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044437 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044437';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044216 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044216';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044017 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044017';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044387 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044387';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046397 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046397';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044446 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044446';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046401 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046401';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046509 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046509';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044181 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044181';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046550 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046550';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044220 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044220';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046176 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046176';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043951 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043951';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045911 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045911';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046537 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046537';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046078 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046078';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046560 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046560';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046056 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046056';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044188 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044188';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046063 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046063';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044223 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044223';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044229 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044229';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043985 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043985';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046216 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046216';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044500 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044500';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046488 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046488';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044233 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044233';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044443 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044443';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046278 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046278';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046218 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046218';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046287 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046287';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046075 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046075';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044434 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044434';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044085 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044085';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044030 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044030';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044038 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044038';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046036 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046036';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045913 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045913';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046097 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046097';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044416 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044416';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044403 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044403';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044007 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044007';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045906 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045906';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043973 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043973';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044136 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044136';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043943 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043943';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046261 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046261';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044047 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044047';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046380 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046380';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046535 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046535';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044099 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044099';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044053 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044053';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046189 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046189';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046517 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046517';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044382 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044382';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046504 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046504';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046257 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046257';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046546 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046546';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046069 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046069';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044162 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044162';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046527 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046527';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044176 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044176';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044191 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044191';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046060 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046060';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044154 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044154';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043956 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043956';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044042 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044042';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046072 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046072';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046264 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046264';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046035 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046035';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046103 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046103';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044120 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044120';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044088 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044088';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046269 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046269';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043955 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043955';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046243 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046243';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046226 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046226';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046408 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046408';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044179 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044179';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044172 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044172';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044440 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044440';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044473 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044473';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043954 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043954';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046378 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046378';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046529 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046529';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044505 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044505';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044015 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044015';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044230 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044230';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046231 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046231';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046180 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046180';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044504 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044504';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045919 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045919';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044147 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044147';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044083 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044083';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044036 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044036';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044428 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044428';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044033 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044033';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043933 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043933';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045929 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045929';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046094 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046094';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046274 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046274';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046213 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046213';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044602 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044602';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044157 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044157';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046533 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046533';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044101 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044101';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045905 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045905';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046249 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046249';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044187 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044187';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046297 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046297';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046229 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046229';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044148 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044148';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046194 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046194';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044079 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044079';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046167 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046167';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044028 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044028';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046491 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046491';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046232 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046232';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044402 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044402';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046282 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046282';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046518 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046518';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044436 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044436';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044199 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044199';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044383 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044383';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046071 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046071';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046368 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046368';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043993 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043993';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044177 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044177';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044134 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044134';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046052 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046052';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044424 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044424';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046296 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046296';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046247 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046247';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046228 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046228';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046489 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046489';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043998 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043998';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046032 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046032';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044513 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044513';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046294 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046294';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044245 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044245';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046388 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046388';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046074 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046074';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043971 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043971';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044198 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044198';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046254 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046254';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046239 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046239';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044194 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044194';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046173 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046173';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046298 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046298';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044004 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044004';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046102 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046102';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044509 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044509';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046525 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046525';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046096 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046096';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044143 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044143';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044189 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044189';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046222 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046222';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046520 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046520';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046384 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046384';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046275 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046275';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044008 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044008';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044012 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044012';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043992 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043992';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046197 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046197';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046204 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046204';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044159 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044159';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044217 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044217';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046398 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046398';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046040 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046040';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044460 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044460';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046281 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046281';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043996 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043996';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044444 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044444';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044010 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044010';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043991 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043991';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043939 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043939';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045910 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045910';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044150 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044150';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044429 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044429';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044423 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044423';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046046 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046046';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046168 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046168';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044392 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044392';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046259 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046259';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046300 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046300';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046191 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046191';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044391 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044391';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046064 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046064';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044476 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044476';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044097 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044097';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046186 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046186';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046166 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046166';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044121 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044121';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044087 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044087';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044511 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044511';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046255 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046255';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046087 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046087';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046039 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046039';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043959 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043959';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044056 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044056';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046101 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046101';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046288 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046288';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043957 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043957';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045925 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045925';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044096 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044096';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046396 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046396';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044175 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044175';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044417 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044417';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044474 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044474';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044057 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044057';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044457 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044457';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044389 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044389';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045916 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045916';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044453 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044453';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043936 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043936';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046169 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046169';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044115 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044115';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046557 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046557';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046490 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046490';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043981 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043981';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046272 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046272';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043935 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043935';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044471 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044471';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044502 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044502';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044080 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044080';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046174 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046174';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046044 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046044';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046251 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046251';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044499 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044499';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046503 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046503';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046161 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046161';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044005 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044005';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046212 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046212';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044193 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044193';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043948 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043948';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044506 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044506';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046265 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046265';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045907 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045907';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046245 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046245';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045926 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045926';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044385 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044385';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046250 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046250';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043947 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043947';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044445 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044445';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045909 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045909';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046267 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046267';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044601 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044601';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044035 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044035';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046372 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046372';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046556 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046556';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044180 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044180';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046539 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046539';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044435 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044435';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046050 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046050';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044165 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044165';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043953 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043953';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044222 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044222';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046215 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046215';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046057 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046057';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046100 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046100';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046284 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046284';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046195 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046195';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044442 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044442';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046053 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046053';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046406 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046406';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044454 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044454';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044241 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044241';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046037 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046037';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044178 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044178';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046555 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046555';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046292 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046292';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044482 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044482';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046305 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046305';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046511 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046511';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044396 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044396';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046199 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046199';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046179 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046179';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045928 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045928';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043950 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043950';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046515 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046515';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046513 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046513';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044082 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044082';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046271 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046271';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046512 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046512';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046172 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046172';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044156 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044156';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046521 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046521';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046304 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046304';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046233 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046233';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046200 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046200';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044427 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044427';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046033 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046033';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044153 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044153';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044225 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044225';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046061 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046061';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046553 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046553';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046175 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046175';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043974 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043974';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046542 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046542';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044019 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044019';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046268 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046268';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044164 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044164';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044200 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044200';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046220 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046220';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046224 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046224';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046030 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046030';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044102 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044102';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046502 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046502';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046295 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046295';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044439 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044439';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043978 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043978';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044214 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044214';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046392 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046392';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044224 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044224';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044093 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044093';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044149 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044149';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044174 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044174';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044196 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044196';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044498 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044498';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046193 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046193';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046059 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046059';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046500 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046500';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043934 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043934';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044459 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044459';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044405 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044405';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044218 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044218';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046081 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046081';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046248 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046248';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046062 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046062';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046079 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046079';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044016 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044016';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046289 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046289';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046068 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046068';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044122 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044122';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046077 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046077';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044231 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044231';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046516 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046516';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044510 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044510';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046376 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046376';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043995 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043995';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046090 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046090';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046373 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046373';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046283 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046283';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044041 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044041';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043990 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043990';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044452 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044452';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046492 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046492';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044126 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044126';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046558 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046558';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044100 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044100';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046549 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046549';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044420 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044420';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044135 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044135';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044091 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044091';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043945 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043945';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044054 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044054';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046548 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046548';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045914 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045914';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046538 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046538';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044414 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044414';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046217 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046217';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044501 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044501';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046098 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046098';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044221 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044221';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044512 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044512';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046201 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046201';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044144 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044144';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043999 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043999';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046285 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046285';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046230 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046230';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044203 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044203';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046047 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046047';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044123 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044123';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044475 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044475';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046505 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046505';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046303 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046303';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046528 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046528';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046299 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046299';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046306 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046306';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046190 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046190';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044013 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044013';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046526 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046526';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046219 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046219';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044430 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044430';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044480 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044480';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046089 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046089';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044186 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044186';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046237 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046237';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046070 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046070';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044032 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044032';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043997 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043997';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043994 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043994';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046273 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046273';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046262 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046262';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043975 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043975';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046196 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046196';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044232 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044232';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044447 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044447';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044046 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044046';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044029 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044029';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046390 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046390';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044395 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044395';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044205 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044205';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044426 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044426';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046185 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046185';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044243 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044243';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044094 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044094';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044055 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044055';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046202 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046202';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046210 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046210';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046088 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046088';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046162 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046162';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044095 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044095';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046091 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046091';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043940 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043940';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043980 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043980';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044197 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044197';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044388 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044388';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046171 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046171';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044415 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044415';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044117 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044117';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046402 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046402';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046302 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046302';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044204 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044204';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046084 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046084';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044026 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044026';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044409 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044409';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046554 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046554';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046177 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046177';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043928 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043928';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044399 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044399';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044441 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044441';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044048 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044048';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044011 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044011';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046253 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046253';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046382 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046382';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046494 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046494';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044160 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044160';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046242 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046242';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044043 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044043';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046499 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046499';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046238 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046238';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044433 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044433';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045912 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045912';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046369 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046369';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043986 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043986';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044051 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044051';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046290 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046290';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046211 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046211';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044394 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044394';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044183 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044183';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046501 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046501';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046389 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046389';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044020 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044020';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044432 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044432';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043962 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043962';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046252 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046252';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044412 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044412';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046244 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046244';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046383 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046383';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044037 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044037';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044040 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044040';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046541 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046541';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046391 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046391';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046045 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046045';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046054 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046054';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046506 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046506';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046082 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046082';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044451 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044451';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044234 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044234';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046559 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046559';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045915 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045915';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046223 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046223';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043968 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043968';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046301 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046301';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046409 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046409';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044219 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044219';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044145 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044145';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044514 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044514';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044127 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044127';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046240 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046240';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044009 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044009';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044050 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044050';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044400 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044400';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044477 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044477';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043937 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043937';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046181 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046181';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044408 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044408';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044605 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044605';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044195 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044195';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046258 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046258';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044006 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044006';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046293 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046293';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045908 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045908';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044401 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044401';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044039 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044039';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043988 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043988';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044119 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044119';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044418 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044418';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044163 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044163';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046395 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046395';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046291 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046291';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044235 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044235';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044478 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044478';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046043 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046043';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044213 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044213';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044481 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044481';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044201 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044201';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046165 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046165';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046377 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046377';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046095 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046095';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044089 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044089';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046379 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046379';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046387 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046387';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046510 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046510';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045924 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045924';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044146 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044146';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046055 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046055';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046227 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046227';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044407 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044407';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044410 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044410';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043960 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043960';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044027 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044027';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046042 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046042';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046164 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046164';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044215 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044215';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046214 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046214';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046399 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046399';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043929 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043929';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046404 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046404';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046099 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046099';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046198 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046198';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044472 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044472';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044411 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044411';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046205 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046205';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044098 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044098';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044228 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044228';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043927 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043927';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044384 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044384';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044421 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044421';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046221 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046221';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044031 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044031';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046049 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046049';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044192 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044192';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046184 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046184';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046405 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046405';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046536 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046536';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046514 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046514';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044431 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044431';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044173 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044173';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044002 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044002';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044000 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044000';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044227 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044227';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046524 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046524';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046187 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046187';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046093 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046093';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043952 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043952';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043961 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043961';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044044 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044044';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044151 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044151';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046080 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046080';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046386 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046386';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046530 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046530';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044118 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044118';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046270 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046270';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046208 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046208';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046260 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046260';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046076 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046076';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046487 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046487';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046092 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046092';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046534 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046534';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046086 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046086';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044413 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044413';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043946 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043946';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043970 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043970';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046065 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046065';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044049 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044049';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046543 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046543';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044455 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044455';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046393 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046393';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046066 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046066';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044170 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044170';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046073 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046073';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044034 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044034';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044503 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044503';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046067 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046067';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046544 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046544';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044507 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044507';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046163 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046163';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044045 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044045';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044155 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044155';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046400 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046400';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043969 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043969';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046038 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046038';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044052 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044052';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044244 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044244';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043931 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043931';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046041 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046041';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046203 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046203';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046277 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046277';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043976 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043976';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044084 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044084';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044603 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044603';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043930 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043930';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043925 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043925';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044161 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044161';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044393 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044393';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043979 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043979';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043989 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043989';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044604 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044604';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046276 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046276';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046206 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046206';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044390 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044390';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044081 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044081';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043938 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043938';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046280 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046280';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044226 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044226';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046188 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046188';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044152 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044152';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043972 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043972';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043977 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043977';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046234 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046234';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044386 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044386';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044124 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044124';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046403 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046403';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046207 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046207';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046394 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046394';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044001 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044001';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046160 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046160';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044116 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044116';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044190 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044190';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044438 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044438';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044242 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044242';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043987 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043987';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044185 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044185';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044092 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044092';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044397 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044397';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044425 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044425';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043949 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043949';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046209 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046209';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046192 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046192';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046381 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046381';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00045927 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00045927';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046545 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046545';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043942 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043942';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044406 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044406';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044166 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044166';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046235 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046235';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046266 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046266';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044456 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044456';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046034 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046034';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00046279 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00046279';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00043958 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00043958';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044182 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044182';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044419 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044419';
+
+-- 问题类型: 逻辑连接不一致
+-- 问题描述: 设备 TMP00044202 电压等级不一致：SVG为[10kV]，数据库为[1010]
+UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='10kV' WHERE EQUIP_ID='TMP00044202';
+
+COMMIT;

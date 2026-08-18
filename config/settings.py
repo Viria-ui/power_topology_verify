@@ -27,18 +27,17 @@ PRIMARY_KEY = {
 }
 
 # ========== 新增：比赛测试SQL路径、电压等级、设备内部连通规则 ==========
-<<<<<<< HEAD
-# 外部比赛测试数据集（D盘）；优先使用项目内 GBK 副本
+# 项目内部 SQL 副本（GBK 编码优先）
 _TEST_SQL_GBK = os.path.join(BASE_DIR, "input", "sql_gbk")
-_TEST_SQL_SRC = r"d:\挑战杯\挑战杯\CP-202606-面向新型电力系统的配电网图模拓扑智能识别与修正研究比赛资料\sql形式数据集"
-TEST_SQL_ROOT = _TEST_SQL_GBK if os.path.isdir(_TEST_SQL_GBK) else _TEST_SQL_SRC
+# 数据集目录中的 SQL（备份路径）
+_TEST_SQL_DATASET = os.path.join(BASE_DIR, "数据集更新版20260729", "sql形式数据集")
+TEST_SQL_ROOT = _TEST_SQL_GBK if os.path.isdir(_TEST_SQL_GBK) else _TEST_SQL_DATASET
 
-# SVG 配网单线图目录（D盘）
-TEST_SVG_ROOT = r"d:\挑战杯\挑战杯\CP-202606-面向新型电力系统的配电网图模拓扑智能识别与修正研究比赛资料\svg\配网 svg"
-=======
-# 外部比赛测试数据集绝对路径
-TEST_SQL_ROOT = os.path.join(BASE_DIR, "数据集更新版20260729", "sql形式数据集")
->>>>>>> 28dd083296963d2896e56ae8eca2483f9a9e66f7
+# SVG 配网单线图目录（项目内数据集目录，与 run_beautify.py 保持一致）
+TEST_SVG_ROOT = os.path.join(BASE_DIR, "数据集更新版20260729", "配网 svg")
+# 验证：若不存在则使用旧的 input/svg
+if not os.path.isdir(TEST_SVG_ROOT):
+    TEST_SVG_ROOT = os.path.join(BASE_DIR, "input", "svg")
 
 # 电压等级常量（区分主网/配网）
 MAIN_VOLTAGE = "110"    # 主网电压标识
