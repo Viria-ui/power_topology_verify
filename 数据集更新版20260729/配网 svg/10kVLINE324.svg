@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" xmlns:ns2="http://iec.ch/TC57/2005/SVG-schema#" coordinateExtent="0.000 0.000 2104.586 1495.450" height="795.000000" preserveAspectRatio="xMidYMid" viewBox="0 0 1124 795" width="1124.000000">
+  <ns0:defs>
+    <ns0:style type="text/css">symbol{overflow:visible}
+				.lkv1000 {fill:none;stroke:rgb(0,0,255)}
+				.kv1000 {fill:rgb(0,0,255);stroke:rgb(0,0,255);stroke-width:1}
+				.lkv750 {fill:none;stroke:rgb(250,128,10)}
+				.kv750 {fill:rgb(250,128,10);stroke:rgb(250,128,10);stroke-width:1}
+				.lkv500 {fill:none;stroke:rgb(255,0,0)}
+				.kv500 {fill:rgb(255,0,0);stroke:rgb(255,0,0);stroke-width:1}
+				.lkv330 {fill:none;stroke:rgb(30,144,255)}
+				.kv330 {fill:rgb(30,144,255);stroke:rgb(30,144,255);stroke-width:1}
+				.lkv220 {fill:none;stroke:rgb(128,0,128)}
+				.kv220 {fill:rgb(128,0,128);stroke:rgb(128,0,128);stroke-width:1}
+				.lkv110 {fill:none;stroke:rgb(240,65,85)}
+				.kv110 {fill:rgb(240,65,85);stroke:rgb(240,65,85);stroke-width:1}
+				.lkv66 {fill:none;stroke:rgb(255,204,0)}
+				.kv66 {fill:rgb(255,204,0);stroke:rgb(255,204,0);stroke-width:1}
+				.lkv35 {fill:none;stroke:rgb(255,255,0)}
+				.kv35 {fill:rgb(255,255,0);stroke:rgb(255,255,0);stroke-width:1}
+				.lkv20 {fill:none;stroke:rgb(226,172,6)}
+				.kv20 {fill:rgb(226,172,6);stroke:rgb(226,172,6);stroke-width:1}
+				.lkv15.75 {fill:none;stroke:rgb(0,128,0)}
+				.kv15.75 {fill:rgb(0,128,0);stroke:rgb(0,128,0);stroke-width:1}
+				.lkv13.8 {fill:none;stroke:rgb(0,210,0)}
+				.kv13.8 {fill:rgb(0,210,0);stroke:rgb(0,210,0);stroke-width:1}
+				.lkv10 {fill:none;stroke:rgb(185,72,66)}
+				.kv10 {fill:rgb(185,72,66);stroke:rgb(185,72,66);stroke-width:1}
+				.lkv6 {fill:none;stroke:rgb(0,0,139)}
+				.kv6 {fill:rgb(0,0,139);stroke:rgb(0,0,139);stroke-width:1}
+				.lkv3 {fill:none;stroke:rgb(0,100,0)}
+				.kv3 {fill:rgb(0,100,0);stroke:rgb(0,100,0);stroke-width:1}
+				.lv380 {fill:none;stroke:rgb(0,204,255)}
+				.v380 {fill:rgb(0,204,255);stroke:rgb(0,204,255);stroke-width:1}
+				.lv220 {fill:none;stroke:rgb(176,164,227)}
+				.v220 {fill:rgb(176,164,227);stroke:rgb(176,164,227);stroke-width:1}
+				.lv110 {fill:none;stroke:rgb(192,192,192)}
+				.v110 {fill:rgb(192,192,192);stroke:rgb(192,192,192);stroke-width:1}
+				.lvdc {fill:none;stroke:rgb(98,49,49)}
+				.vdc {fill:rgb(98,49,49);stroke:rgb(98,49,49);stroke-width:1}
+</ns0:style>
+    <ns0:symbol id="terminal">
+      <ns0:circle cx="0.000000" cy="0.000000" fill="none" r="0.200000" stroke="rgb(0,200,255)" stroke-width="0.100000"/>
+    </ns0:symbol>
+    <ns0:symbol height="1.100000" id="Breaker_TMP_13258a4b-762d-49de-bb3d-22f4ab58667b" viewBox="0 0 7.108000 1.100000" width="7.108000">
+      <ns0:rect fill="rgb(255,0,0)" height="0.938000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="3.000000" x="-1.500000" y="-0.437000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="1.500000" x2="3.500000" y1="0.000000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-1.500000" x2="-3.437000" y1="0.000000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.500000" x2="-3.000000" y1="0.034000" y2="-0.466000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.500000" x2="-3.125000" y1="-0.034000" y2="0.466000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.000000" x2="-2.500000" y1="0.027000" y2="-0.411000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.000000" x2="-2.500000" y1="-0.027000" y2="0.473000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.508000" x2="3.092000" y1="0.025000" y2="-0.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.508000" x2="3.092000" y1="-0.033000" y2="0.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.967000" x2="2.552000" y1="0.025000" y2="-0.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.967000" x2="2.552000" y1="-0.033000" y2="0.500000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="3.378000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-3.419000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="1.072000" id="Breaker_TMP_d73d98b8-fe15-4169-966a-1bf4b1b2468d" viewBox="0 0 7.139000 1.072000" width="7.139000">
+      <ns0:rect fill="none" height="0.938000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="3.000000" x="-1.562000" y="-0.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.528000" x2="-3.028000" y1="0.024000" y2="-0.476000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.517000" x2="-3.142000" y1="-0.028000" y2="0.472000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.511000" x2="3.073000" y1="0.018000" y2="-0.482000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.511000" x2="3.136000" y1="-0.031000" y2="0.469000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.500000" x2="-2.500000" y1="-0.437000" y2="0.250000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.473000" x2="-2.973000" y1="0.313000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.524000" x2="-2.024000" y1="0.313000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.438000" x2="2.438000" y1="-0.437000" y2="0.250000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.465000" x2="1.965000" y1="0.310000" y2="-0.003000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.410000" x2="2.910000" y1="0.310000" y2="-0.003000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="3.378000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-3.419000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="1.100000" id="Breaker_TMP_5097273f-6e29-4866-979b-804689390df7" viewBox="0 0 7.817000 1.100000" width="7.817000">
+      <ns0:rect fill="none" height="0.938000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="3.000000" x="-1.559000" y="-0.437000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="1.441000" x2="3.316000" y1="0.000000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-1.559000" x2="-3.497000" y1="0.000000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.843000" x2="3.343000" y1="0.000000" y2="-0.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.843000" x2="3.218000" y1="0.000000" y2="0.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.318000" x2="3.818000" y1="0.000000" y2="-0.437000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.318000" x2="3.818000" y1="0.000000" y2="0.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.024000" x2="-3.462000" y1="0.000000" y2="-0.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.024000" x2="-3.399000" y1="0.000000" y2="0.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.462000" x2="-3.899000" y1="0.013000" y2="-0.487000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.512000" x2="-3.887000" y1="0.013000" y2="0.450000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="3.378000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-3.419000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="1.069000" id="Breaker_TMP_3c9478b5-be4d-40de-a880-14c2cbaebc3f" viewBox="0 0 7.042000 1.069000" width="7.042000">
+      <ns0:rect fill="none" height="0.938000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="3.000000" x="-1.476000" y="-0.437000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="1.524000" x2="3.399000" y1="0.000000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-1.476000" x2="-3.414000" y1="0.000000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.480000" x2="-2.980000" y1="0.031000" y2="-0.469000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.476000" x2="-3.101000" y1="-0.033000" y2="0.467000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.976000" x2="-2.476000" y1="0.000000" y2="-0.437000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.978000" x2="-2.478000" y1="-0.008000" y2="0.492000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.461000" x2="3.024000" y1="0.038000" y2="-0.462000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.461000" x2="3.086000" y1="-0.026000" y2="0.474000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.992000" x2="2.554000" y1="0.038000" y2="-0.462000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.961000" x2="2.586000" y1="0.000000" y2="0.438000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="3.378000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-3.419000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="1.067000" id="Breaker_TMP_850abc78-3f19-482c-a640-4187631684a0" viewBox="0 0 7.044000 1.067000" width="7.044000">
+      <ns0:rect fill="rgb(255,0,0)" height="0.938000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="3.000000" x="-1.500000" y="-0.437000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.506000" x2="-3.006000" y1="0.033000" y2="-0.467000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.500000" x2="-3.125000" y1="-0.031000" y2="0.469000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.438000" x2="3.000000" y1="0.035000" y2="-0.465000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.438000" x2="3.063000" y1="-0.027000" y2="0.473000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.437000" x2="-2.437000" y1="-0.375000" y2="0.313000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.413000" x2="-2.913000" y1="0.375000" y2="0.063000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.466000" x2="-1.966000" y1="0.375000" y2="0.063000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.500000" x2="2.500000" y1="-0.375000" y2="0.313000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.529000" x2="2.029000" y1="0.375000" y2="0.063000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.473000" x2="2.973000" y1="0.375000" y2="0.063000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="3.378000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-3.419000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="1.100000" id="Breaker_TMP_dc88a842-5afc-490b-9648-759e0e848fa3" viewBox="0 0 7.822000 1.100000" width="7.822000">
+      <ns0:rect fill="rgb(255,0,0)" height="0.938000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="3.000000" x="-1.477000" y="-0.444000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="1.523000" x2="3.398000" y1="-0.007000" y2="-0.007000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-1.477000" x2="-3.414000" y1="-0.007000" y2="-0.007000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.926000" x2="3.426000" y1="-0.007000" y2="-0.507000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.926000" x2="3.301000" y1="-0.007000" y2="0.493000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.406000" x2="3.906000" y1="0.000000" y2="-0.438000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="3.395000" x2="3.895000" y1="-0.021000" y2="0.479000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.942000" x2="-3.379000" y1="-0.007000" y2="-0.507000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-2.942000" x2="-3.317000" y1="-0.007000" y2="0.493000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.379000" x2="-3.817000" y1="-0.007000" y2="-0.507000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.442000" x2="-3.817000" y1="-0.007000" y2="0.431000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="3.378000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-3.419000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="0.913000" id="Junction_TMP_fc60e698-15b4-4518-b7d9-965e4635d915" viewBox="0 0 4.078000 0.913000" width="4.078000">
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-1.978000" x2="0.460000" y1="0.000000" y2="0.000000"/>
+      <ns0:polygon fill="none" points="0.460000,-0.375000 0.460000,0.438000 2.000000,0.000000" stroke="rgb(255,0,0)" stroke-width="0.100000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="0.000000" y="0.000000"/>
+    </ns0:symbol>
+  </ns0:defs>
+  <ns0:g id="BackGround_Layer">
+    <ns0:rect fill="rgb(255,255,255)" height="793.701216" width="1122.5202912" x="0" y="0"/>
+  </ns0:g>
+  <ns0:g id="Substation_Layer">
+    <ns0:g id="TMP_2941f622-ac25-4697-a974-8544200a6488">
+      <ns0:polygon class="lkv110" fill="none" points="207.34546013292,288.685567783902 238.182590581562,288.685567783902 238.182590581562,319.522698232543 207.34546013292,319.522698232543 207.34546013292,288.685567783902" stroke="rgb(255,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00000195" ObjectName="SUB007_变" PSRType="zf01"/>
+        <ns2:Layer_Ref ObjectName="Substation_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="ConnLine_Layer">
+    <ns0:g id="TMP_5f9556e5-3b96-47d2-8756-f24b17c1523a">
+      <ns0:polyline class="lkv10" fill="none" points="259.101973824407,304.104359766597 267.637758316172,304.104359766597" stroke="rgb(128,128,128)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00277315" ObjectName="" PSRType="360000"/>
+        <ns2:GLink_Ref ObjectID="TMP00277316"/>
+        <ns2:GLink_Ref ObjectID="TMP00277317"/>
+        <ns2:Layer_Ref ObjectName="ConnLine_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_6660414e-bd57-480b-b94d-829a15b21096">
+      <ns0:polyline class="lkv10" fill="none" points="222.762502836729,304.104359766597 248.93782125108,304.104359766597" stroke="rgb(128,128,128)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00277318" ObjectName="" PSRType="360000"/>
+        <ns2:GLink_Ref ObjectID="TMP00266514"/>
+        <ns2:GLink_Ref ObjectID="TMP00277316"/>
+        <ns2:Layer_Ref ObjectName="ConnLine_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="Breaker_Layer">
+    </ns0:g>
+  <ns0:g id="Junction_Layer">
+    </ns0:g>
+  <ns0:g id="Text_Layer">
+    <ns0:g id="TXT-TMP_2941f622-ac25-4697-a974-8544200a6488">
+      <ns0:text fill="rgb(0,0,0)" font-family="败转" font-size="10.2790289730441" stroke="none" style="text-anchor:middle" x="229.382179067202" y="286.380489748031">SUB007_变</ns0:text>
+      <ns0:metadata>
+        <ns2:PSR_Ref ObjectID="TXT_TMP00000195"/>
+        <ns2:Layer_Ref ObjectName="Text_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+  </ns0:g>
+</ns0:svg>

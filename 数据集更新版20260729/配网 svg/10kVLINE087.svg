@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?><ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" xmlns:ns2="http://iec.ch/TC57/2005/SVG-schema#" coordinateExtent="0.000 0.000 1123.000 794.000" height="795.000000" preserveAspectRatio="xMidYMid" viewBox="0 0 1124 795" width="1124.000000">
+  <ns0:defs>
+    <ns0:style type="text/css">symbol{overflow:visible}
+				.lkv1000 {fill:none;stroke:rgb(0,0,255)}
+				.kv1000 {fill:rgb(0,0,255);stroke:rgb(0,0,255);stroke-width:1}
+				.lkv750 {fill:none;stroke:rgb(250,128,10)}
+				.kv750 {fill:rgb(250,128,10);stroke:rgb(250,128,10);stroke-width:1}
+				.lkv500 {fill:none;stroke:rgb(255,0,0)}
+				.kv500 {fill:rgb(255,0,0);stroke:rgb(255,0,0);stroke-width:1}
+				.lkv330 {fill:none;stroke:rgb(30,144,255)}
+				.kv330 {fill:rgb(30,144,255);stroke:rgb(30,144,255);stroke-width:1}
+				.lkv220 {fill:none;stroke:rgb(128,0,128)}
+				.kv220 {fill:rgb(128,0,128);stroke:rgb(128,0,128);stroke-width:1}
+				.lkv110 {fill:none;stroke:rgb(240,65,85)}
+				.kv110 {fill:rgb(240,65,85);stroke:rgb(240,65,85);stroke-width:1}
+				.lkv66 {fill:none;stroke:rgb(255,204,0)}
+				.kv66 {fill:rgb(255,204,0);stroke:rgb(255,204,0);stroke-width:1}
+				.lkv35 {fill:none;stroke:rgb(255,255,0)}
+				.kv35 {fill:rgb(255,255,0);stroke:rgb(255,255,0);stroke-width:1}
+				.lkv20 {fill:none;stroke:rgb(226,172,6)}
+				.kv20 {fill:rgb(226,172,6);stroke:rgb(226,172,6);stroke-width:1}
+				.lkv15.75 {fill:none;stroke:rgb(0,128,0)}
+				.kv15.75 {fill:rgb(0,128,0);stroke:rgb(0,128,0);stroke-width:1}
+				.lkv13.8 {fill:none;stroke:rgb(0,210,0)}
+				.kv13.8 {fill:rgb(0,210,0);stroke:rgb(0,210,0);stroke-width:1}
+				.lkv10 {fill:none;stroke:rgb(185,72,66)}
+				.kv10 {fill:rgb(185,72,66);stroke:rgb(185,72,66);stroke-width:1}
+				.lkv6 {fill:none;stroke:rgb(0,0,139)}
+				.kv6 {fill:rgb(0,0,139);stroke:rgb(0,0,139);stroke-width:1}
+				.lkv3 {fill:none;stroke:rgb(0,100,0)}
+				.kv3 {fill:rgb(0,100,0);stroke:rgb(0,100,0);stroke-width:1}
+				.lv380 {fill:none;stroke:rgb(0,204,255)}
+				.v380 {fill:rgb(0,204,255);stroke:rgb(0,204,255);stroke-width:1}
+				.lv220 {fill:none;stroke:rgb(176,164,227)}
+				.v220 {fill:rgb(176,164,227);stroke:rgb(176,164,227);stroke-width:1}
+				.lv110 {fill:none;stroke:rgb(192,192,192)}
+				.v110 {fill:rgb(192,192,192);stroke:rgb(192,192,192);stroke-width:1}
+				.lvdc {fill:none;stroke:rgb(98,49,49)}
+				.vdc {fill:rgb(98,49,49);stroke:rgb(98,49,49);stroke-width:1}
+</ns0:style>
+    <ns0:symbol id="terminal">
+      <ns0:circle cx="0.000000" cy="0.000000" fill="none" r="0.200000" stroke="rgb(0,200,255)" stroke-width="0.100000"/>
+    </ns0:symbol>
+    <ns0:symbol height="2.100000" id="Junction_TMP_6055ad39-9484-428f-a5ae-e7c2a71bc8cf" viewBox="0 0 1.600000 2.100000" width="1.600000">
+      <ns0:polygon fill="rgb(255,0,0)" points="0.875000,0.000000 -0.625000,-1.000000 -0.625000,1.000000" stroke="rgb(255,0,0)" stroke-width="0.100000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="0.000000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="3.350000" id="Breaker_TMP_0db04972-9d69-49c8-8c28-4eb994e03c8d" viewBox="0 0 13.100000 3.350000" width="13.100000">
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-6.500000" x2="-4.000000" y1="0.000000" y2="0.000000"/>
+      <ns0:rect fill="rgb(255,102,0)" height="3.250000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="8.000000" x="-4.000000" y="-1.625000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="4.000000" x2="6.500000" y1="0.000000" y2="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="6.500000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-6.500000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="3.350000" id="Breaker_TMP_9bcd7ddc-4797-45e2-8610-ba3c669087bf" viewBox="0 0 13.100000 3.350000" width="13.100000">
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-6.500000" x2="-4.125000" y1="0.000000" y2="0.000000"/>
+      <ns0:rect fill="none" height="3.250000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="8.000000" x="-4.000000" y="-1.625000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="4.125000" x2="6.500000" y1="0.000000" y2="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="6.500000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-6.500000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="2.475000" id="Disconnector_TMP_75710934-a150-4a77-bf2e-69db60c392a1" viewBox="0 0 9.100000 2.475000" width="9.100000">
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-4.500000" x2="-1.046000" y1="0.000000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-1.074000" x2="1.926000" y1="0.000000" y2="-1.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="1.703000" x2="1.704000" y1="-0.953000" y2="0.750000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="1.704000" x2="4.500000" y1="0.000000" y2="0.000000"/>
+      <ns0:polygon fill="none" points="-0.421000,-0.687000 -0.046000,0.000000 1.704000,-0.937000 1.329000,-1.625000" stroke="rgb(255,0,0)" stroke-width="0.100000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="4.500000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-4.500000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="3.350000" id="Disconnector_TMP_74efc9e2-ff27-499e-9f92-89a518daae5d" viewBox="0 0 9.100000 3.350000" width="9.100000">
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-4.500000" x2="-1.046000" y1="0.000000" y2="0.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-1.046000" x2="1.454000" y1="0.000000" y2="-2.500000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="1.704000" x2="1.704000" y1="-0.687000" y2="0.750000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="1.704000" x2="4.500000" y1="0.000000" y2="0.000000"/>
+      <ns0:polygon fill="none" points="-0.483000,-1.125000 0.017000,-0.562000 1.392000,-1.875000 0.892000,-2.437000" stroke="rgb(255,0,0)" stroke-width="0.100000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="4.500000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-4.500000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="3.000000" id="PoleCode_TMP_cdeee723-31ad-4248-a2fc-8f3985a255fb" viewBox="0 0 3.000000 3.000000" width="3.000000">
+      <ns0:circle cx="-0.004000" cy="0.000000" fill="rgb(255,255,255)" r="1.500000" stroke="rgb(0,0,0)" stroke-width="0.050000"/>
+      <ns0:line fill="none" stroke="rgb(0,0,0)" stroke-width="0.100000" x1="-1.348000" x2="0.152000" y1="0.641000" y2="-1.484000"/>
+      <ns0:line fill="none" stroke="rgb(0,0,0)" stroke-width="0.100000" x1="0.840000" x2="-0.816000" y1="-1.219000" y2="1.250000"/>
+      <ns0:line fill="none" stroke="rgb(0,0,0)" stroke-width="0.100000" x1="-0.098000" x2="1.340000" y1="1.484000" y2="-0.641000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="0.000000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="3.069000" id="PoleCode_TMP_3bdaa98e-6041-46ee-8fb4-37bef147432b" viewBox="0 0 3.069000 3.069000" width="3.069000">
+      <ns0:circle cx="-0.016000" cy="0.016000" fill="rgb(192,192,192)" r="1.484000" stroke="rgb(0,0,0)" stroke-width="0.100000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="0.000000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="0.913000" id="Junction_TMP_de3c8103-99dd-4261-9e9e-93aebc2378d9" viewBox="0 0 4.078000 0.913000" width="4.078000">
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-1.978000" x2="0.460000" y1="0.000000" y2="0.000000"/>
+      <ns0:polygon fill="none" points="0.460000,-0.375000 0.460000,0.438000 2.000000,0.000000" stroke="rgb(255,0,0)" stroke-width="0.100000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="0.000000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="2.100000" id="Breaker_TMP_aeeabaed-398a-4ad1-9586-4849cd74bb11" viewBox="0 0 7.538000 2.100000" width="7.538000">
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.500000" x2="3.750000" y1="0.000000" y2="0.000000"/>
+      <ns0:rect fill="rgb(255,0,0)" height="2.000000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="4.875000" x="-2.438000" y="-1.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.688000" x2="-2.500000" y1="0.000000" y2="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="3.717000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-3.644000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="2.100000" id="Breaker_TMP_965eb7cf-ed10-4fa7-a619-b141da22fc65" viewBox="0 0 7.538000 2.100000" width="7.538000">
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="2.500000" x2="3.750000" y1="0.000000" y2="0.000000"/>
+      <ns0:rect fill="none" height="2.000000" stroke="rgb(255,0,0)" stroke-width="0.100000" width="4.875000" x="-2.438000" y="-1.000000"/>
+      <ns0:line fill="none" stroke="rgb(255,0,0)" stroke-width="0.100000" x1="-3.688000" x2="-2.500000" y1="0.000000" y2="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="3.717000" y="0.000000"/>
+      <ns0:use ns1:href="#terminal" terminal-index="2" type="0" x="-3.644000" y="0.000000"/>
+    </ns0:symbol>
+    <ns0:symbol height="6.975000" id="EnergyConsumer_TMP_f454aeab-de51-4611-84f0-85752b832035" viewBox="0 0 6.975000 6.975000" width="6.975000">
+      <ns0:circle cx="0.000000" cy="0.000000" fill="none" r="3.438000" stroke="rgb(255,0,0)" stroke-width="0.100000"/>
+      <ns0:text dy=".3em" fill="rgb(0,0,0)" font-family="败转" font-size="6.486000" stroke="none" style="text-anchor:middle" x="-0.191000" y="0.101000">J</ns0:text>
+      <ns0:use ns1:href="#terminal" terminal-index="1" type="0" x="0.000000" y="0.000000"/>
+    </ns0:symbol>
+  </ns0:defs>
+  <ns0:g id="BackGround_Layer">
+    <ns0:rect fill="rgb(255,255,255)" height="793.701216" width="1122.5202912" x="0" y="0"/>
+  </ns0:g>
+  <ns0:g id="Substation_Layer">
+    <ns0:g id="TMP_67f5cddf-75bf-425e-b376-2071673e3fb4">
+      <ns0:polygon class="lkv110" fill="none" points="207.515810351505,303.812426568394 251.0185207473,303.812426568394 251.0185207473,347.315136964189 207.515810351505,347.315136964189 207.515810351505,303.812426568394" stroke="rgb(255,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00000192" ObjectName="SUB006_变" PSRType="zf01"/>
+        <ns2:Layer_Ref ObjectName="Substation_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_9f6b66df-364e-45cd-9b9f-107fb522aea9">
+      <ns0:polygon class="lkv10" fill="none" points="382.807049581249,324.105664657943 452.094456224794,324.105664657943 452.094456224794,365.884349852637 382.807049581249,365.884349852637 382.807049581249,324.105664657943" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00199263" ObjectName="站房004775" PSRType="zf07"/>
+        <ns2:Layer_Ref ObjectName="Substation_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="ConnLine_Layer">
+    <ns0:g id="TMP_4884f0e4-8f9a-46ae-8499-2d7a9b7dbaec">
+      <ns0:polyline class="lkv10" fill="none" points="747.925369374789,332.813765762613 739.971798116876,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00259976" ObjectName="" PSRType="130000"/>
+        <ns2:GLink_Ref ObjectID="TMP00261134"/>
+        <ns2:GLink_Ref ObjectID="TMP00261135"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ConnLine_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_8aceddd8-9883-4484-a5a0-7bee7c409b44">
+      <ns0:polyline class="lkv10" fill="none" points="851.945918657296,325.563873279917 868.987403072517,325.563873279917" stroke="rgb(128,128,128)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261136" ObjectName="" PSRType="130000"/>
+        <ns2:GLink_Ref ObjectID="TMP00016156"/>
+        <ns2:GLink_Ref ObjectID="TMP00261138"/>
+        <ns2:GLink_Ref ObjectID="TMP00157277"/>
+        <ns2:GLink_Ref ObjectID="TMP00032243"/>
+        <ns2:Layer_Ref ObjectName="ConnLine_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_fd834995-4c16-4e24-a443-893519b9195d">
+      <ns0:polyline class="lkv10" fill="none" points="824.619583865158,325.563873279917 834.544358628123,325.563873279917" stroke="rgb(128,128,128)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261140" ObjectName="" PSRType="130000"/>
+        <ns2:GLink_Ref ObjectID="TMP00026834"/>
+        <ns2:GLink_Ref ObjectID="TMP00016156"/>
+        <ns2:GLink_Ref ObjectID="TMP00261143"/>
+        <ns2:Layer_Ref ObjectName="ConnLine_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_af0b70a8-4c7a-4023-a0da-039f2fec1a92">
+      <ns0:polyline class="lkv10" fill="none" points="519.185108779623,325.563873279917 527.860539519794,325.563873279917" stroke="rgb(128,128,128)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261144" ObjectName="" PSRType="130000"/>
+        <ns2:GLink_Ref ObjectID="TMP00016157"/>
+        <ns2:GLink_Ref ObjectID="TMP00261145"/>
+        <ns2:GLink_Ref ObjectID="TMP00261146"/>
+        <ns2:Layer_Ref ObjectName="ConnLine_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_ab72d103-c1a4-418e-a1e5-e0e606f86e79">
+      <ns0:polyline class="lkv10" fill="none" points="543.745230692697,325.563873279917 555.325730987188,325.65425823791" stroke="rgb(128,128,128)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261153" ObjectName="" PSRType="130000"/>
+        <ns2:GLink_Ref ObjectID="TMP00261146"/>
+        <ns2:GLink_Ref ObjectID="TMP00261154"/>
+        <ns2:Layer_Ref ObjectName="ConnLine_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_4d35e7b3-fc70-4687-8a4b-3ab216fb2dde">
+      <ns0:polyline class="lkv10" fill="none" points="571.611190833092,325.65425823791 596.355133116352,325.563873279917" stroke="rgb(128,128,128)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261155" ObjectName="" PSRType="130000"/>
+        <ns2:GLink_Ref ObjectID="TMP00261154"/>
+        <ns2:GLink_Ref ObjectID="TMP00026825"/>
+        <ns2:Layer_Ref ObjectName="ConnLine_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="ACLineSegment_Layer">
+    <ns0:g id="TMP_8c9cd0ac-6f74-4691-a2f1-c70626fe70d5">
+      <ns0:polyline class="lkv10" fill="none" points="834.544358628123,325.563873279917 851.945918657296,325.563873279917" stroke="rgb(0,0,0)" stroke-dasharray="2 1" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00016156" ObjectName="馈线段 XX" PSRType="0201"/>
+        <ns2:GLink_Ref ObjectID="TMP00261140"/>
+        <ns2:GLink_Ref ObjectID="TMP00261143"/>
+        <ns2:GLink_Ref ObjectID="TMP00261136"/>
+        <ns2:GLink_Ref ObjectID="TMP00261138"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_8ec8f52c-9c08-447c-a101-16a2700b4236">
+      <ns0:polyline class="lkv10" fill="none" points="695.600745428064,325.563873279917 705.5244830366,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026842" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026841"/>
+        <ns2:GLink_Ref ObjectID="TMP00016155"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_07176c11-d7f2-4870-b4d3-4803769eecbf">
+      <ns0:polyline class="lkv10" fill="none" points="685.675970665098,325.563873279917 695.600745428064,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026841" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026839"/>
+        <ns2:GLink_Ref ObjectID="TMP00026842"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_d418be1d-34c3-4fb8-a462-b5163f770a88">
+      <ns0:polyline class="lkv10" fill="none" points="675.751195902133,325.563873279917 685.675970665098,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026839" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026830"/>
+        <ns2:GLink_Ref ObjectID="TMP00026841"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_1c76414d-7a22-4ad6-b038-60ee5816ea46">
+      <ns0:polyline class="lkv10" fill="none" points="665.827458293596,325.563873279917 675.751195902133,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026830" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026829"/>
+        <ns2:GLink_Ref ObjectID="TMP00026839"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_dc9b6630-6474-4c15-961c-73f5cef7730e">
+      <ns0:polyline class="lkv10" fill="none" points="655.902683530631,325.563873279917 665.827458293596,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026829" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00016154"/>
+        <ns2:GLink_Ref ObjectID="TMP00026830"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_7cc77d33-a9e1-4efd-b18a-90fcbaf25adc">
+      <ns0:polyline class="lkv10" fill="none" points="645.97796977675,325.563873279917 655.902683530631,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00016154" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026840"/>
+        <ns2:GLink_Ref ObjectID="TMP00026829"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_b85f23bc-5b77-4a6b-86e7-e0bc36a88ab0">
+      <ns0:polyline class="lkv10" fill="none" points="636.053195013785,325.563873279917 645.97796977675,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026840" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00016153"/>
+        <ns2:GLink_Ref ObjectID="TMP00016154"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_66f3d2fc-02d5-488c-bdd0-139e9e761a12">
+      <ns0:polyline class="lkv10" fill="none" points="626.128420250819,325.563873279917 636.053195013785,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00016153" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026843"/>
+        <ns2:GLink_Ref ObjectID="TMP00026840"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_82fdda50-d362-43a9-95de-dcf59e36126f">
+      <ns0:polyline class="lkv10" fill="none" points="616.204682642283,325.563873279917 626.128420250819,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026843" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00016152"/>
+        <ns2:GLink_Ref ObjectID="TMP00016153"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_fafa2b2e-389d-4ca5-879a-6ec176f2ce1c">
+      <ns0:polyline class="lkv10" fill="none" points="606.279968888402,325.563873279917 616.204682642283,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00016152" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026825"/>
+        <ns2:GLink_Ref ObjectID="TMP00026843"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_a474acd1-b0de-4e72-b472-55aee5d3e79a">
+      <ns0:polyline class="lkv10" fill="none" points="596.355133116352,325.563873279917 606.279968888402,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026825" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261155"/>
+        <ns2:GLink_Ref ObjectID="TMP00016152"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_dc71269b-9f81-417f-b221-fb6bbaa106e3">
+      <ns0:polyline class="lkv10" fill="none" points="692.251163687491,332.813765762613 684.297592429578,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261167" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261168"/>
+        <ns2:GLink_Ref ObjectID="TMP00018307"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_38679efd-97ed-414d-a991-a9cae284cc80">
+      <ns0:polyline class="lkv10" fill="none" points="684.297592429578,332.813765762613 676.342984017237,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00018307" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261167"/>
+        <ns2:GLink_Ref ObjectID="TMP00018306"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_c010a7eb-9e82-43b5-8754-5294512e31be">
+      <ns0:polyline class="lkv10" fill="none" points="700.20375880006,332.813765762613 692.251163687491,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261168" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00018308"/>
+        <ns2:GLink_Ref ObjectID="TMP00261167"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_e61d7bf5-26d8-432a-acdb-b041179729b7">
+      <ns0:polyline class="lkv10" fill="none" points="708.157391067056,332.813765762613 700.20375880006,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00018308" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261169"/>
+        <ns2:GLink_Ref ObjectID="TMP00261168"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_5b1b4dc8-6a3d-47e9-94b4-61b9da121ccb">
+      <ns0:polyline class="lkv10" fill="none" points="716.110962324969,332.813765762613 708.157391067056,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261169" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261170"/>
+        <ns2:GLink_Ref ObjectID="TMP00018308"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_a4aefcce-3b24-4b62-916b-0186095582bd">
+      <ns0:polyline class="lkv10" fill="none" points="724.064594591966,332.813765762613 716.110962324969,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261170" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261171"/>
+        <ns2:GLink_Ref ObjectID="TMP00261169"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_89fa6eb2-2187-4861-a459-4797258cc69a">
+      <ns0:polyline class="lkv10" fill="none" points="732.018165849879,332.813765762613 724.064594591966,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261171" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261135"/>
+        <ns2:GLink_Ref ObjectID="TMP00261170"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_8ffefebe-88ee-4890-96c3-3ea82afef1e6">
+      <ns0:polyline class="lkv10" fill="none" points="739.971798116876,332.813765762613 732.018165849879,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261135" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00259976"/>
+        <ns2:GLink_Ref ObjectID="TMP00261171"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_5f644a4d-d75b-4cd2-b3c5-9e6f1befb488">
+      <ns0:polyline class="lkv10" fill="none" points="787.693408691605,332.813765762613 814.371766002247,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261172" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00018301"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_a7b6fc2e-0151-4e12-a61c-ee65d1f8cf93">
+      <ns0:polyline class="lkv10" fill="none" points="779.738800279264,332.813765762613 787.693408691605,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00018301" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261173"/>
+        <ns2:GLink_Ref ObjectID="TMP00261172"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_c04ae03e-d927-4bf0-bb60-f649219d669e">
+      <ns0:polyline class="lkv10" fill="none" points="771.785168012267,332.813765762613 779.738800279264,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261173" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261174"/>
+        <ns2:GLink_Ref ObjectID="TMP00018301"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_b7c83b54-a706-421d-9f1b-dd118fffc8e1">
+      <ns0:polyline class="lkv10" fill="none" points="763.832572899699,332.813765762613 771.785168012267,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261174" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261175"/>
+        <ns2:GLink_Ref ObjectID="TMP00261173"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_9f605325-9871-42c2-a457-8d2aba9949cc">
+      <ns0:polyline class="lkv10" fill="none" points="755.879001641786,332.813765762613 747.925369374789,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261134" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261175"/>
+        <ns2:GLink_Ref ObjectID="TMP00259976"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_022df647-3afb-4052-a295-698ad7ffbf39">
+      <ns0:polyline class="lkv10" fill="none" points="755.879001641786,332.813765762613 763.832572899699,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261175" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261134"/>
+        <ns2:GLink_Ref ObjectID="TMP00261174"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_ecd4296a-4101-4c12-a850-b1a4cb12fed0">
+      <ns0:polyline class="lkv10" fill="none" points="814.694870111277,325.563873279917 824.619583865158,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026834" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026835"/>
+        <ns2:GLink_Ref ObjectID="TMP00261140"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_11baa383-b064-4f77-9e03-b431b8ec268a">
+      <ns0:polyline class="lkv10" fill="none" points="804.771071493656,325.563873279917 814.694870111277,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026835" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026831"/>
+        <ns2:GLink_Ref ObjectID="TMP00026834"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_8692c7b9-9329-4e8c-831e-93b96090f6a2">
+      <ns0:polyline class="lkv10" fill="none" points="794.846296730691,325.563873279917 804.771071493656,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026831" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026827"/>
+        <ns2:GLink_Ref ObjectID="TMP00026835"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_97ab888f-946b-4d10-b8cc-18d365264361">
+      <ns0:polyline class="lkv10" fill="none" points="784.92158297681,325.563873279917 794.846296730691,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026827" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026826"/>
+        <ns2:GLink_Ref ObjectID="TMP00026831"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_cf0f845e-22c7-4ffb-a031-e64f06b9e2da">
+      <ns0:polyline class="lkv10" fill="none" points="774.997784359189,325.563873279917 784.92158297681,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026826" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026828"/>
+        <ns2:GLink_Ref ObjectID="TMP00026827"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_17596895-885e-4a56-a363-7302aabf8946">
+      <ns0:polyline class="lkv10" fill="none" points="765.072033450879,325.563873279917 774.997784359189,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026828" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026832"/>
+        <ns2:GLink_Ref ObjectID="TMP00026826"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_b241489a-fb72-4be7-883f-e27dfda3670d">
+      <ns0:polyline class="lkv10" fill="none" points="755.147258687914,325.563873279917 765.072033450879,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026832" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026833"/>
+        <ns2:GLink_Ref ObjectID="TMP00026828"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_bec1220d-b78e-4322-a81c-904bc5751874">
+      <ns0:polyline class="lkv10" fill="none" points="644.529553112762,332.813765762613 636.575981854849,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00018303" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00261183"/>
+        <ns2:GLink_Ref ObjectID="TMP00018302"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_87dd72df-7e4a-49be-b7b4-a68ed4d0f965">
+      <ns0:polyline class="lkv10" fill="none" points="652.483185379759,332.813765762613 644.529553112762,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261183" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00018304"/>
+        <ns2:GLink_Ref ObjectID="TMP00018303"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_1e25bd23-15a6-4205-9538-8492a8d37297">
+      <ns0:polyline class="lkv10" fill="none" points="660.436756637672,332.813765762613 652.483185379759,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00018304" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00018305"/>
+        <ns2:GLink_Ref ObjectID="TMP00261183"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_f4b806ca-424e-4a42-96d6-fe8cb842ac12">
+      <ns0:polyline class="lkv10" fill="none" points="668.390388904669,332.813765762613 660.436756637672,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00018305" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00018306"/>
+        <ns2:GLink_Ref ObjectID="TMP00018304"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_d8ca6a24-3072-458d-bede-8005c64d14bd">
+      <ns0:polyline class="lkv10" fill="none" points="676.342984017237,332.813765762613 668.390388904669,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00018306" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00018307"/>
+        <ns2:GLink_Ref ObjectID="TMP00018305"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_4ca20b04-1942-4f51-bb4d-a70ee6baae23">
+      <ns0:polyline class="lkv10" fill="none" points="636.575981854849,332.813765762613 605.835578720317,332.813765762613" stroke="rgb(0,128,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00018302" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00018303"/>
+        <ns2:IFTG Value="1"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_0e2eabcc-998d-4d25-8875-5bde8ec5c305">
+      <ns0:polyline class="lkv10" fill="none" points="735.298746316412,325.563873279917 745.223521079377,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026837" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026836"/>
+        <ns2:GLink_Ref ObjectID="TMP00026833"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_14b9e9e6-8808-4c3d-a526-1d9cac67c145">
+      <ns0:polyline class="lkv10" fill="none" points="745.223521079377,325.563873279917 755.147258687914,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026833" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026837"/>
+        <ns2:GLink_Ref ObjectID="TMP00026832"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_8f4419d6-fa9c-46c2-9f2c-f636bc25171d">
+      <ns0:polyline class="lkv10" fill="none" points="725.375008707875,325.563873279917 735.298746316412,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026836" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026838"/>
+        <ns2:GLink_Ref ObjectID="TMP00026837"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_51c2dd75-96ea-4a01-a35a-d0a60aedeb9a">
+      <ns0:polyline class="lkv10" fill="none" points="715.45023394491,325.563873279917 725.375008707875,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00026838" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00016155"/>
+        <ns2:GLink_Ref ObjectID="TMP00026836"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_bfd789c7-268d-4580-8fb2-040e59a05263">
+      <ns0:polyline class="lkv10" fill="none" points="705.5244830366,325.563873279917 715.45023394491,325.563873279917" stroke="rgb(0,0,0)" stroke-width="0.1"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00016155" ObjectName="馈线段 XX" PSRType="dxd"/>
+        <ns2:GLink_Ref ObjectID="TMP00026842"/>
+        <ns2:GLink_Ref ObjectID="TMP00026838"/>
+        <ns2:Layer_Ref ObjectName="ACLineSegment_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="BusbarSection_Layer">
+    </ns0:g>
+  <ns0:g id="Junction_Layer">
+    <ns0:g id="TMP_cc8a5283-7292-4438-8050-5888b2f2e32c">
+      <ns0:use class="lkv10" height="2.09999990463257" ns1:href="#Junction_TMP_6055ad39-9484-428f-a5ae-e7c2a71bc8cf" transform="rotate(-180,851.945918657296,325.563873279917) translate(851.945918657296,325.563873279917) scale(1.01124916117607,1.01124916117607) translate(-851.945918655434,-325.563873279917)" width="1.60000002384186" x="851.945918657296" y="325.563873279917"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261138" ObjectName="GLT（A由B）1GL115192-6502" PSRType="0202"/>
+        <ns2:GLink_Ref ObjectID="TMP00261136"/>
+        <ns2:GLink_Ref ObjectID="TMP00016156"/>
+        <ns2:Layer_Ref ObjectName="Junction_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_6741116a-f46c-438f-b25d-076e28262d71">
+      <ns0:use class="lkv10" height="2.09999990463257" ns1:href="#Junction_TMP_6055ad39-9484-428f-a5ae-e7c2a71bc8cf" transform="translate(834.544358628123,325.563873279917) scale(1.01124916117607,1.01124916117607) translate(-834.544358626261,-325.563873279917)" width="1.60000002384186" x="834.544358628123" y="325.563873279917"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261143" ObjectName="GLT（A由B）1GL115192-6501" PSRType="0202"/>
+        <ns2:GLink_Ref ObjectID="TMP00261140"/>
+        <ns2:GLink_Ref ObjectID="TMP00016156"/>
+        <ns2:Layer_Ref ObjectName="Junction_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TMP_9b063500-13d2-4396-9ec0-fae7d9860d63">
+      <ns0:use class="lkv10" height="2.09999990463257" ns1:href="#Junction_TMP_6055ad39-9484-428f-a5ae-e7c2a71bc8cf" transform="rotate(-180,519.185108779623,325.563873279917) translate(519.185108779623,325.563873279917) scale(1.01124916117607,1.01124916117607) translate(-519.18510877776,-325.563873279917)" width="1.60000002384186" x="519.185108779623" y="325.563873279917"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261145" ObjectName="GLT（A由B）1GL201124-LINE082_支线-102" PSRType="0202"/>
+        <ns2:GLink_Ref ObjectID="TMP00261144"/>
+        <ns2:GLink_Ref ObjectID="TMP00016157"/>
+        <ns2:Layer_Ref ObjectName="Junction_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    </ns0:g>
+  <ns0:g id="Breaker_Layer">
+    <ns0:g id="TMP_d8de3077-0ac1-4967-a926-3fa91f98aab9">
+      <ns0:use class="lkv10" height="2.09999990463257" ns1:href="#Breaker_TMP_aeeabaed-398a-4ad1-9586-4849cd74bb11" transform="rotate(180,563.549694505528,325.65425823791) translate(563.549694505528,325.65425823791) scale(2.21240148886985,2.21240148886985) translate(-563.54969441901,-325.65425823791)" width="7.53750038146973" x="563.549694505528" y="325.65425823791"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261154" ObjectName="开关01501" PSRType="0111"/>
+        <ns2:GLink_Ref ObjectID="TMP00261153"/>
+        <ns2:GLink_Ref ObjectID="TMP00261155"/>
+        <ns2:Layer_Ref ObjectName="Breaker_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="Disconnector_Layer">
+    <ns0:g id="TMP_7c329f4a-24a9-4ed7-ad5f-c84ec30e180e">
+      <ns0:use class="lkv10" height="2.47499990463257" ns1:href="#Disconnector_TMP_75710934-a150-4a77-bf2e-69db60c392a1" transform="rotate(-180,535.802885106245,325.563873279917) translate(535.802885106245,325.563873279917) scale(1.76497218662894,1.76497218662894) translate(-535.802885106245,-325.563873323553)" width="9.10000038146973" x="535.802885106245" y="325.563873279917"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00261146" ObjectName="刀闸0308" PSRType="0113"/>
+        <ns2:GLink_Ref ObjectID="TMP00261144"/>
+        <ns2:GLink_Ref ObjectID="TMP00261153"/>
+        <ns2:Layer_Ref ObjectName="Disconnector_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="EnergyConsumer_Layer">
+    <ns0:g id="TMP_df27c60d-b5e7-4d6b-a47e-c0df3551b4fe">
+      <ns0:use class="lkv10" height="6.97499990463257" ns1:href="#EnergyConsumer_TMP_f454aeab-de51-4611-84f0-85752b832035" transform="translate(868.987403072517,325.563873279917) scale(1.52231105722003,1.52231105722003) translate(-868.987403072517,-325.563873279917)" width="6.97499990463257" x="868.987403072517" y="325.563873279917"/>
+      <ns0:metadata>
+        <ns2:PSR_Ref LineType="Trunk" ObjectID="TMP00032243" ObjectName="用户0030" PSRType="370000"/>
+        <ns2:GLink_Ref ObjectID="TMP00261136"/>
+        <ns2:GLink_Ref ObjectID="TMP00157277"/>
+        <ns2:Layer_Ref ObjectName="EnergyConsumer_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="Text_Layer">
+    <ns0:g id="TXT-TMP_df27c60d-b5e7-4d6b-a47e-c0df3551b4fe">
+      <ns0:text fill="rgb(0,0,0)" font-family="败转" font-size="5.07532091562624" stroke="none" style="text-anchor:middle" x="894.784362146158" y="322.042714167097">用户0030</ns0:text>
+      
+      
+      <ns0:metadata>
+        <ns2:PSR_Ref ObjectID="TXT_TMP00032243"/>
+        <ns2:Layer_Ref ObjectName="Text_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TXT-TMP_9f6b66df-364e-45cd-9b9f-107fb522aea9">
+      <ns0:text fill="rgb(255,0,0)" font-family="败转" font-size="7.46796850029851" stroke="none" style="text-anchor:middle" x="417.942333597604" y="311.31873946866">站房004775</ns0:text>
+      
+      <ns0:metadata>
+        <ns2:PSR_Ref ObjectID="TXT_TMP00199263"/>
+        <ns2:Layer_Ref ObjectName="Text_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TXT-TMP_67f5cddf-75bf-425e-b376-2071673e3fb4">
+      <ns0:text fill="rgb(0,0,0)" font-family="败转" font-size="14.5009031475092" stroke="none" style="text-anchor:middle" x="229.267020652828" y="302.310391117638">SUB006_变</ns0:text>
+      <ns0:metadata>
+        <ns2:PSR_Ref ObjectID="TXT_TMP00000192"/>
+        <ns2:Layer_Ref ObjectName="Text_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    
+    <ns0:g id="TXT-TMP_d8de3077-0ac1-4967-a926-3fa91f98aab9">
+      <ns0:text fill="rgb(0,0,0)" font-family="败转" font-size="3.70491675804261" stroke="none" style="text-anchor:middle" x="563.48057121332" y="322.529863504991">开关01501</ns0:text>
+      <ns0:metadata>
+        <ns2:PSR_Ref ObjectID="TXT_TMP00261154"/>
+        <ns2:Layer_Ref ObjectName="Text_Layer"/>
+      </ns0:metadata>
+    </ns0:g>
+    <ns0:g id="TXT-TMP_67696792-5fcc-416d-a9b8-854e83b0dad6">
+        <ns0:text fill="rgb(0,0,0)" font-family="败转" font-size="5.07532091562624" stroke="none" style="text-anchor:middle" x="379.09492135882" y="439.19382154208">LINE228</ns0:text>
+      </ns0:g>
+  </ns0:g>
+</ns0:svg>

@@ -38,27 +38,11 @@ class TopologyBuilder:
 
     def add_all_devices(self):
         """批量添加设备、绑定模拟端点（后续对接端子表替换真实端点）"""
-        # 主网设备
-        for _, row in self.main_equip.iterrows():
-            dev = Device(
-                equip_id=row["EQUIP_ID"],
-                equip_name=row["EQUIP_NAME"],
-                equip_type=row["EQUIP_TYPE"],
-                voltage_type=row["VOLTAGE_TYPE"],
-                feeder_id=str(row["FEEDER_ID"]) if row["FEEDER_ID"] is not None else "",
-                dsubstation_id=str(row["DSUBSTATION_ID"]) if row["DSUBSTATION_ID"] is not None else ""
-            )
-            self.main_topo.add_device(dev)
-            # 模拟端点：PT_设备ID
-            pt = ConnectPoint(
-                point_id=f"PT_{row['EQUIP_ID']}",
-                belong_equip_id=row["EQUIP_ID"],
-                feeder_id=str(row["FEEDER_ID"]) if row["FEEDER_ID"] is not None else ""
-            )
-            self.main_topo.add_point(pt)
-
+        print(f"  [Builder] 正在添加 {len(self.dist_equip)} 个配网设备...")
         # 配网设备
-        for _, row in self.dist_equip.iterrows():
+        for i, (_, row) in enumerate(self.dist_equip.iterrows()):
+            if i % 10000 == 0 and i > 0:
+                print(f"    - 已处理 {i} 个设备")
             dev = Device(
                 equip_id=row["EQUIP_ID"],
                 equip_name=row["EQUIP_NAME"],

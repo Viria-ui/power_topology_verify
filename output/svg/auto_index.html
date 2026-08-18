@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>5.3 自动生成 SVG 图集（成员3交付）</title>
+<style>
+  body { margin:0; padding:0; font-family: "Microsoft YaHei","SimHei",Arial,sans-serif; background:#f5f7fa; }
+  header { background:linear-gradient(135deg,#1890FF,#00A854); color:white; padding:18px 28px; }
+  header h1 { margin:0; font-size:22px; }
+  header p  { margin:6px 0 0; font-size:13px; opacity:0.9; }
+  .tabs { background:#fff; border-bottom:1px solid #e8e8e8; padding:0 28px; display:flex; flex-wrap:wrap; gap:4px; }
+  .tab-btn { border:none; background:#fafafa; padding:10px 18px; cursor:pointer; font-size:14px;
+              border-radius:4px 4px 0 0; margin-top:6px; color:#595959; }
+  .tab-btn.active { background:#1890FF; color:white; font-weight:bold; }
+  .tab-panel { padding:18px 28px; }
+  .tab-panel h2 { margin:0 0 6px; color:#262626; font-size:18px; }
+  .desc { color:#595959; font-size:13px; margin:0 0 12px; }
+  .info-box { margin-top:12px; background:white; border:1px solid #e8e8e8; border-radius:8px; padding:14px 18px; line-height:1.9; font-size:13px; }
+  .info-box > div { margin:2px 0; }
+</style>
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).style.display = 'block';
+  btn.classList.add('active');
+}
+</script>
+</head>
+<body>
+<header>
+  <h1>5.3 自动生成 SVG 图集（成员3交付）</h1>
+  <p>本页包含 4 类共 5 张自动生成 SVG：单馈线单线图×2、馈线联络关系图×1、全站馈线联络总图×1、电源追溯路径图×1</p>
+</header>
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('tab0', this)">LINE215 单线图</button>
+        <button class="tab-btn " onclick="showTab('tab1', this)">LINE216 单线图</button>
+        <button class="tab-btn " onclick="showTab('tab2', this)">10kVLINE111 联络图</button>
+        <button class="tab-btn " onclick="showTab('tab3', this)">SUB004 全站联络总图</button>
+        <button class="tab-btn " onclick="showTab('tab4', this)">TMP00034205 电源追溯</button>
+        </div>
+<div>
+        <div id="tab0" class="tab-panel" style="display:block">
+          <h2>5.3.1 单馈线单线图 - LINE215</h2>
+          <p class="desc">基于 SQL 馈 LINE215 的所有设备，BFS Sugiyama 分层布局，主干绿色 #00A854。</p>
+          <object data="LINE215_single_line.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div class="info-box">
+            <div><b>图名：</b>LINE215 单线图</div>
+            <div><b>生成逻辑：</b>_feeder_subgraph('LINE215') 过滤 → _project_to_device_graph → _sugiyama_layout 分层渲染</div>
+            <div><b>节点/边数统计：</b>SVG设备=1401 / SVG连接=0 ｜ SQL期望设备=1401 / SQL期望边=1400</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/2802) ｜ <a href="../reports/LINE215_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+          </div>
+        </div>
+        <div id="tab1" class="tab-panel" style="display:none">
+          <h2>5.3.1 单馈线单线图 - LINE216</h2>
+          <p class="desc">基于 SQL 馈 LINE216 的所有设备，BFS Sugiyama 分层布局，主干绿色 #00A854。</p>
+          <object data="LINE216_single_line.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div class="info-box">
+            <div><b>图名：</b>LINE216 单线图</div>
+            <div><b>生成逻辑：</b>_feeder_subgraph('LINE216') 过滤 → _project_to_device_graph → _sugiyama_layout 分层渲染</div>
+            <div><b>节点/边数统计：</b>SVG设备=1679 / SVG连接=0 ｜ SQL期望设备=1679 / SQL期望边=1678</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/3358) ｜ <a href="../reports/LINE216_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+          </div>
+        </div>
+        <div id="tab2" class="tab-panel" style="display:none">
+          <h2>5.3.2 馈线联络关系图 - 10kVLINE111</h2>
+          <p class="desc">在馈线子集 + 邻接馈线中查找联络开关（跨 feeder 的 Breaker/LoadBreakSwitch），联络线高亮橙色。</p>
+          <object data="10kVLINE111_tie.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div class="info-box">
+            <div><b>图名：</b>10kVLINE111 联络图</div>
+            <div><b>生成逻辑：</b>_find_tie_neighbors('10kVLINE111') 抽取联络关系 → 中心放射布局，联络开关在中点标注</div>
+            <div><b>节点/边数统计：</b>SVG设备=3 / SVG连接=0 ｜ SQL期望设备=180 / SQL期望边=179</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/3) ｜ <a href="../reports/10kVLINE111_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+          </div>
+        </div>
+        <div id="tab3" class="tab-panel" style="display:none">
+          <h2>5.3.3 全站馈线联络总图 - SUB004</h2>
+          <p class="desc">SUB004 站房下所有馈线横向排列，馈线间的联络开关以橙色虚线跨列连接。</p>
+          <object data="SUB004_station_tie.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div class="info-box">
+            <div><b>图名：</b>SUB004 全站联络总图</div>
+            <div><b>生成逻辑：</b>_station_feeders_and_ties('SUB004') 收集馈线+联络 → 5列栅格布局绘制馈线框 + 跨列联络线</div>
+            <div><b>节点/边数统计：</b>SVG设备=180 / SVG连接=0 ｜ SQL期望设备=47642 / SQL期望边=47462</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/180) ｜ <a href="../reports/SUB004_station_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+          </div>
+        </div>
+        <div id="tab4" class="tab-panel" style="display:none">
+          <h2>5.3.4 电源追溯路径图 - 目标 TMP00034205</h2>
+          <p class="desc">从目标配变 TMP00034205 反向 BFS 追溯到电源；主供路径实线蓝，备供路径虚线橙加粗。</p>
+          <object data="TMP00034205_power_trace.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div class="info-box">
+            <div><b>图名：</b>TMP00034205 电源追溯</div>
+            <div><b>生成逻辑：</b>_power_trace_paths('TMP00034205') 主/备供路径 → Sugiyama布局，主供路径粗蓝+箭头、备供橙虚线+箭头、目标设备高亮红底</div>
+            <div><b>节点/边数统计：</b>SVG设备=86 / SVG连接=0 ｜ SQL期望设备=34 / SQL期望边=33</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/86) ｜ <a href="../reports/TMP00034205_power_trace_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+          </div>
+        </div>
+</div>
+</body>
+</html>

@@ -49,10 +49,10 @@ class SqlTableLoader:
         return pd.DataFrame(rows, columns=cols)
 
     def load_all_topo_tables(self):
-        """批量加载拓扑所需两张核心表"""
         table_map = {
             "equip": "EQUIP_JBS_PWEQUIPINFO.sql",
-            "line": "EQUIP_JBS_PWFEEDERLINE.sql"
+            "line": "EQUIP_JBS_PWFEEDERLINE.sql",
+            "terminal": "EQUIP_JBS_PWTERMINAL.sql",
         }
         table_data = {}
         for key, fname in table_map.items():

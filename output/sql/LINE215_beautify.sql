@@ -1,0 +1,2 @@
+-- LINE215_beautify.sql: 美化步骤为纯 SVG 几何/样式重构，不涉及业务数据库 DDL/DML 变更。
+-- 若需要同步拓扑模型，请基于美化后 SVG 重新调用 topology_builder.build_full_topology() 自动建表。
