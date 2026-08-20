@@ -714,9 +714,11 @@ class SvgBeautifier:
             if defs is not None:
                 svg.append(copy.deepcopy(defs))
 
+        cg = ET.SubElement(svg, f'{{{SVG_NS}}}g', {'id': 'ConnLine_Layer'})
+        self._draw_wires(cg)
+
         g = ET.SubElement(svg, f'{{{SVG_NS}}}g', {'id': 'MainLayer'})
         self._draw_containers(g)
-        self._draw_wires(g)
         self._draw_devices(g)
         self._draw_labels(g)
 
@@ -766,6 +768,7 @@ class SvgBeautifier:
             t.text = name if len(name) <= 16 else name[:14] + '..'
 
     def _draw_wires(self, g):
+        conn_idx = 0
         for child, par in self.tree_parent.items():
             if par is None or child not in self.pos or par not in self.pos:
                 continue
@@ -776,11 +779,15 @@ class SvgBeautifier:
                             or self.devices[child]['type'] in BUSBAR_TYPES) else W_BRANCH
             _, r1, _, _ = self._dev_sym_edges(par)
             l2, _, _, _ = self._dev_sym_edges(child)
+            conn_idx += 1
+            conn_id = f'WIRE_{conn_idx:06d}'
             if is_trunk:
-                self._line(g, x1 + r1, y1, x2 + l2, y2, C_10KV, w)
+                # 端点放设备中心（距离<5.0匹配），设备白色背景覆盖内部线段
+                points = [(x1, y1), (x1 + r1, y1), (x2 + l2, y2), (x2, y2)]
+                self._polyline(g, points, C_10KV, w, conn_id=conn_id, from_id=par, to_id=child)
             else:
-                self._line(g, x1, y1, x1, y2, C_10KV, w)
-                self._line(g, x1, y2, x2 + l2, y2, C_10KV, w)
+                points = [(x1, y1), (x1, y2), (x2 + l2, y2), (x2, y2)]
+                self._polyline(g, points, C_10KV, w, conn_id=conn_id, from_id=par, to_id=child)
 
         # 母线：加粗横线
         drawn = set()
@@ -797,9 +804,24 @@ class SvgBeautifier:
             if key in drawn:
                 continue
             drawn.add(key)
-            self._line(g, x1, y, x2, y, C_BUSBAR, W_BUSBAR)
+            conn_idx += 1
+            self._polyline(g, [(x1, y), (x2, y)], C_BUSBAR, W_BUSBAR, conn_id=f'BUS_{conn_idx:06d}', from_id=pid)
 
     def _draw_devices(self, g):
+        # 先画白色背景（无metadata，避免被解析器当作设备图元）
+        for pid, (x, y) in self.pos.items():
+            d = self.devices.get(pid)
+            if not d or d['type'] in BUSBAR_TYPES:
+                continue
+            left, right, top, bottom = self._dev_sym_edges(pid)
+            pad = 1.5
+            ET.SubElement(g, f'{{{SVG_NS}}}rect', {
+                'x': f'{x + left - pad:.1f}', 'y': f'{y + top - pad:.1f}',
+                'width': f'{right - left + 2 * pad:.1f}',
+                'height': f'{bottom - top + 2 * pad:.1f}',
+                'fill': '#ffffff', 'stroke': 'none',
+            })
+        # 再画设备符号（有metadata）
         for pid, (x, y) in self.pos.items():
             d = self.devices.get(pid)
             if not d or d['type'] in BUSBAR_TYPES:
@@ -807,14 +829,7 @@ class SvgBeautifier:
             dg = ET.SubElement(g, f'{{{SVG_NS}}}g', {
                 'transform': f'translate({x},{y})',
             })
-            left, right, top, bottom = self._dev_sym_edges(pid)
-            pad = 1.5
-            ET.SubElement(dg, f'{{{SVG_NS}}}rect', {
-                'x': f'{left - pad:.1f}', 'y': f'{top - pad:.1f}',
-                'width': f'{right - left + 2 * pad:.1f}',
-                'height': f'{bottom - top + 2 * pad:.1f}',
-                'fill': '#ffffff', 'stroke': 'none',
-            })
+            self._add_device_metadata(dg, pid)
             if d.get('symbol'):
                 sym = d['symbol'].lstrip('#')
                 info = self.sym_box.get(sym)
@@ -872,12 +887,15 @@ class SvgBeautifier:
             ly = y - DEV_HH - 6
             disp = name if len(name) <= 14 else name[:12] + '..'
             tw = max(len(disp) * font_size * 0.95, 20)
-            ET.SubElement(g, f'{{{SVG_NS}}}rect', {
+            lg = ET.SubElement(g, f'{{{SVG_NS}}}g')
+            md = ET.SubElement(lg, f'{{{SVG_NS}}}metadata')
+            ET.SubElement(md, f'{{{IEC_NS}}}PSR_Ref', {'ObjectID': f'TXT_{pid}'})
+            ET.SubElement(lg, f'{{{SVG_NS}}}rect', {
                 'x': f'{x - tw / 2:.1f}', 'y': f'{ly - font_size + 2:.1f}',
                 'width': f'{tw:.1f}', 'height': f'{font_size + 2:.1f}',
                 'fill': '#ffffff', 'stroke': 'none',
             })
-            t = ET.SubElement(g, f'{{{SVG_NS}}}text', {
+            t = ET.SubElement(lg, f'{{{SVG_NS}}}text', {
                 'x': str(x), 'y': str(ly), 'text-anchor': 'middle',
                 'font-size': str(font_size), 'fill': C_TEXT, 'font-weight': weight,
             })
@@ -918,7 +936,112 @@ class SvgBeautifier:
             'stroke-linecap': 'round',
         })
 
+    @staticmethod
+    def _polyline(g, points, color, width, conn_id=None, from_id=None, to_id=None):
+        """用<g>包裹polyline渲染连接线，并添加metadata语义信息。
+        端点必须靠近设备中心（距离<5.0），SvgParser才能匹配连接关系。
+        """
+        if len(points) < 2:
+            return
+        cg = ET.SubElement(g, f'{{{SVG_NS}}}g', {'id': conn_id or f'WIRE_{id(points):06d}'})
+        pts_str = ' '.join(f'{x:.0f},{y:.0f}' for x, y in points)
+        pl = ET.SubElement(cg, f'{{{SVG_NS}}}polyline', {
+            'points': pts_str,
+            'fill': 'none', 'stroke': color, 'stroke-width': str(width),
+            'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+        })
+        if from_id or to_id:
+            md = ET.SubElement(cg, f'{{{SVG_NS}}}metadata')
+            if from_id:
+                ET.SubElement(md, f'{{{IEC_NS}}}Terminal', {'ObjectID': from_id, 'side': 'from'})
+            if to_id:
+                ET.SubElement(md, f'{{{IEC_NS}}}Terminal', {'ObjectID': to_id, 'side': 'to'})
 
-def beautify_svg_file(svg_path: str, output_path: str = None) -> str:
+    def _add_device_metadata(self, g, pid):
+        """为设备图元添加metadata语义标签（ObjectID + GLink_Ref）。"""
+        d = self.devices.get(pid, {})
+        md = ET.SubElement(g, f'{{{SVG_NS}}}metadata')
+        ET.SubElement(md, f'{{{IEC_NS}}}PSR_Ref', {
+            'ObjectID': pid,
+            'Name': d.get('name', ''),
+            'Type': d.get('type', ''),
+        })
+        for gl in d.get('glinks', []):
+            ET.SubElement(md, f'{{{IEC_NS}}}GLink_Ref', {'ObjectID': gl})
+
+
+def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bool = True) -> str:
+    """美化SVG文件，可选生成美化前后质量对比报告。
+
+    Args:
+        svg_path: 原始SVG路径
+        output_path: 输出SVG路径，默认在同目录下生成 *_beautified.svg
+        quality_report: 是否生成质量评分对比报告（任务一算法）
+    """
+    from data_io.svg_reader import SvgParser
+    from svg_io.quality_scorer import evaluate_svg_quality, export_quality_report
+    from types import SimpleNamespace
+
+    if output_path is None:
+        base, ext = os.path.splitext(svg_path)
+        output_path = f"{base}_beautified{ext}"
+
+    before_defects = before_summary = None
+    if quality_report:
+        try:
+            doc_before = SvgParser.parse(svg_path)
+            before_defects, before_summary = evaluate_svg_quality(doc_before, stage="美化前")
+        except Exception as ex:
+            print(f"  [质量] 美化前评估跳过: {ex}")
+
     beautifier = SvgBeautifier(svg_path, output_path=output_path)
-    return beautifier.beautify()
+    result = beautifier.beautify()
+
+    if quality_report and before_summary is not None:
+        try:
+            # 先收集所有连接，为设备补充拓扑GLink互引（美化后连接都是真实拓扑连接）
+            conns = []
+            seen = set()
+            topo_glinks = defaultdict(set)
+            for u, neighbors in beautifier.adj.items():
+                for v in neighbors:
+                    key = tuple(sorted([u, v]))
+                    if key in seen or u == v:
+                        continue
+                    seen.add(key)
+                    topo_glinks[u].add(v)
+                    topo_glinks[v].add(u)
+                    pu = beautifier.pos.get(u, (0, 0))
+                    pv = beautifier.pos.get(v, (0, 0))
+                    conns.append(SimpleNamespace(
+                        from_element_id=u, to_element_id=v,
+                        line_id=f"edge_{u}_{v}",
+                        points=[(pu[0], pu[1]), (pv[0], pv[1])],
+                    ))
+            elems = []
+            for did, dev in beautifier.devices.items():
+                if not beautifier.is_real_device(dev.get('type', '')):
+                    continue
+                pos = beautifier.pos.get(did, beautifier.orig_pos.get(did, (0, 0)))
+                sym = beautifier.sym_box.get(did, {})
+                glinks = set(dev.get('glinks', []))
+                glinks.update(topo_glinks.get(did, set()))
+                elems.append(SimpleNamespace(
+                    element_id=did,
+                    object_name=dev.get('name', ''),
+                    element_type=dev.get('type', ''),
+                    layer=dev.get('layer', ''),
+                    x=pos[0], y=pos[1],
+                    width=sym.get('w', 20), height=sym.get('h', 20),
+                    glink_refs=list(glinks),
+                ))
+            doc_after = SimpleNamespace(elements=elems, connections=conns, texts={})
+            after_defects, after_summary = evaluate_svg_quality(doc_after, stage="美化后")
+            line_name = os.path.splitext(os.path.basename(svg_path))[0]
+            report_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "output", "reports")
+            report_path = os.path.join(report_dir, f"{line_name}_美化质量对比报告.json")
+            export_quality_report(before_summary, after_summary, before_defects, after_defects, report_path)
+        except Exception as ex:
+            print(f"  [质量] 美化后评估跳过: {ex}")
+
+    return result

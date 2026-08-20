@@ -2,12 +2,12 @@
   "stage": "feeder_tie",
   "feeder_id": "10kVLINE111",
   "topo_device_count": 0,
-  "svg_device_count": 3,
+  "svg_device_count": 47,
   "defects_by_type": {
-    "图上有模型无": 3,
+    "图上有模型无": 47,
     "模型有图无": 0,
     "物理连接不一致": 0,
     "逻辑连接不一致": 0
   },
-  "total_defects": 3
+  "total_defects": 47
 }
