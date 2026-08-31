@@ -9,7 +9,7 @@ if PROJECT_ROOT not in sys.path:
 import networkx as nx
 from config.settings import MAIN_VOLTAGE, DIST_VOLTAGE
 from core.graph_model import TopologyGraph, Device, ConnectPoint, TopoEdge, build_device_internal_edges
-from core.topo_checker import TopoChecker
+from core.topology_validator import TopoDbValidator
 
 class TopologyBuilder:
     def __init__(self, table_data: dict):
@@ -172,12 +172,12 @@ class TopologyBuilder:
             build_device_internal_edges(self.dist_topo, row, term_ids)
 
     def check_topo_abnormal(self, topo: TopologyGraph, trace_id="TOPO001"):
-    """执行数据库拓扑全套检测：悬空、孤岛、馈线断点、联络开关、疑似联络、非计划合环"""
-    from core.topology_validator import run_database_topo_check
-    abnormal_list, breakpoint_list, tie_loop_list = run_database_topo_check(topo, trace_id)
-    # 将联络合环结果回写到topo对象，方便后续xlsx导出读取
-    topo.tie_loop_list = tie_loop_list
-    return abnormal_list, breakpoint_list
+        """拓扑异常检测：悬空、孤岛、断点"""
+        from core.topology_validator import run_database_topo_check
+        abnormal_list, breakpoint_list, tie_loop_list = run_database_topo_check(topo, trace_id)
+        # 将联络合环结果回写到topo对象，方便后续xlsx导出读取
+        topo.tie_loop_list = tie_loop_list
+        return abnormal_list, breakpoint_list
 
     def build_full_topology(self):
         """完整构建流程：拆分→加设备→生成真实端子→端子互连→设备内部通路→拓扑校验"""
