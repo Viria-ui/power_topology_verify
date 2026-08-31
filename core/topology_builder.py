@@ -9,6 +9,7 @@ if PROJECT_ROOT not in sys.path:
 import networkx as nx
 from config.settings import MAIN_VOLTAGE, DIST_VOLTAGE
 from core.graph_model import TopologyGraph, Device, ConnectPoint, TopoEdge, build_device_internal_edges
+from core.topo_checker import TopoChecker
 
 class TopologyBuilder:
     def __init__(self, table_data: dict):
@@ -17,7 +18,6 @@ class TopologyBuilder:
         # =========新增端子表DataFrame=========
         self.pw_terminal_df = table_data.get("pw_terminal", None)
         self.zw_terminal_df = table_data.get("zw_terminal", None)
-
         # 初始化两套独立拓扑
         self.main_topo = TopologyGraph()    # 110kV主网
         self.dist_topo = TopologyGraph()    # 10kV配网
@@ -27,6 +27,10 @@ class TopologyBuilder:
         # 清理列名防止后续读取报错
         self.equip_df.columns = [col.strip() for col in self.equip_df.columns]
         self.line_df.columns = [col.strip() for col in self.line_df.columns]
+        if self.pw_terminal_df is not None:
+            self.pw_terminal_df.columns = [col.strip() for col in self.pw_terminal_df.columns]
+        if self.zw_terminal_df is not None:
+            self.zw_terminal_df.columns = [col.strip() for col in self.zw_terminal_df.columns]
     
         # 主网空，所有设备进配网
         self.main_equip = self.equip_df.iloc[0:0]
@@ -42,7 +46,7 @@ class TopologyBuilder:
         print(f"配网线路数量：{len(self.dist_line)}")
 
     def add_all_devices(self):
-        """批量添加设备、绑定模拟端点（后续对接端子表替换真实端点）"""
+        """批量添加设备"""
         print(f"  [Builder] 正在添加 {len(self.dist_equip)} 个配网设备...")
         source_type_list = ["变电站", "1701"]
         # 配网设备
@@ -59,73 +63,126 @@ class TopologyBuilder:
                 equip_type=row["EQUIP_TYPE"],
                 voltage_type=row["VOLTAGE_TYPE"],
                 feeder_id=str(row["FEEDER_ID"]) if row["FEEDER_ID"] is not None else "",
-                dsubstation_id=str(row["DSUBSTATION_ID"]) if row["DSUBSTATION_ID"] is not None else ""
+                dsubstation_id=str(row["DSUBSTATION_ID"]) if row["DSUBSTATION_ID"] is not None else "",
+                is_source=is_source
             )
             self.dist_topo.add_device(dev)
+            
+    def build_real_terminal_points(self):
+        """从端子表生成真实端子ConnectPoint，point_id=TERMINAL_ID"""
+        # 配网端子
+        for _, row in self.pw_terminal_df.iterrows():
+            term_id = str(row["TERMINAL_ID"])
+            dev_id = str(row["DEVICE_ID"])
+            if dev_id not in self.dist_topo.device_map:
+                continue
+            dev = self.dist_topo.device_map[dev_id]
             pt = ConnectPoint(
-                point_id=f"PT_{row['EQUIP_ID']}",
-                belong_equip_id=row["EQUIP_ID"],
-                feeder_id=str(row["FEEDER_ID"]) if row["FEEDER_ID"] is not None else ""
+                point_id=term_id,
+                belong_equip_id=dev_id,
+                feeder_id=dev.feeder_id
             )
             self.dist_topo.add_point(pt)
+            # 设备节点与端子节点建立连接
+            self.dist_topo.link_device_point(dev_id, term_id)
+        # 主网端子
+        for _, row in self.zw_terminal_df.iterrows():
+            term_id = str(row["TERMINAL_ID"])
+            dev_id = str(row["DEVICE_ID"])
+            if dev_id not in self.main_topo.device_map:
+                continue
+            dev = self.main_topo.device_map[dev_id]
+            pt = ConnectPoint(
+                point_id=term_id,
+                belong_equip_id=dev_id,
+                feeder_id=dev.feeder_id
+            )
+            self.main_topo.add_point(pt)
+            self.main_topo.link_device_point(dev_id, term_id)
+
+        print(f"[Builder] 配网真实端子数量:{len(self.dist_topo.point_map)}")
+        print(f"[Builder] 主网真实端子数量:{len(self.main_topo.point_map)}")
+
 
     def build_graph_from_terminal(self):
-        """【核心】端子表构建真实电气连通边"""
+        """同CONNECT_NODE_ID下真实端子之间互连，节点为TERMINAL_ID"""
         if self.pw_terminal_df is None:
-            print("[警告] 未加载配网端子表，无法构建配网电气边！")
+            print("[警告] 未加载配网端子表，无法构建配网电气边")
             return
         if self.zw_terminal_df is None:
-            print("[警告] 未加载主网端子表，无法构建主网电气边！")
+            print("[警告] 未加载主网端子表，无法构建主网电气边")
             return
 
         # -----配网端子建边-----
-        node_to_devs = defaultdict(list)
+        cn_to_terms = defaultdict(list)
         for _, row in self.pw_terminal_df.iterrows():
-            dev_id = str(row["DEVICE_ID"])
             cn_id = str(row["CONNECT_NODE_ID"])
-            node_to_devs[cn_id].append(dev_id)
+            term_id = str(row["TERMINAL_ID"])
+            cn_to_terms[cn_id].append(term_id)
 
-        for cn, dev_list in node_to_devs.items():
-            if len(dev_list) < 2:
+        for cn, term_list in cn_to_terms.items():
+            if len(term_list) < 2:
                 continue
-            for i in range(len(dev_list)-1):
-                pt_a = f"PT_{dev_list[i]}"
-                pt_b = f"PT_{dev_list[i+1]}"
-                self.dist_topo.graph.add_edge(pt_a, pt_b)
+            for i in range(len(term_list)-1):
+                t1 = term_list[i]
+                t2 = term_list[i+1]
+                e = TopoEdge(
+                    line_id=f"CN_{cn}_{t1}_{t2}",
+                    start_point=t1,
+                    end_point=t2,
+                    line_name=f"连接节点{cn}端子互连"
+                )
+                self.dist_topo.add_edge(e)
 
         # -----主网端子建边-----
-        node_to_devs_zw = defaultdict(list)
+        cn_to_terms_zw = defaultdict(list)
         for _, row in self.zw_terminal_df.iterrows():
-            dev_id = str(row["DEVICE_ID"])
             cn_id = str(row["CONNECT_NODE_ID"])
-            node_to_devs_zw[cn_id].append(dev_id)
+            term_id = str(row["TERMINAL_ID"])
+            cn_to_terms_zw[cn_id].append(term_id)
 
-        for cn, dev_list in node_to_devs_zw.items():
-            if len(dev_list) < 2:
+        for cn, term_list in cn_to_terms_zw.items():
+            if len(term_list) < 2:
                 continue
-            for i in range(len(dev_list)-1):
-                pt_a = f"PT_{dev_list[i]}"
-                pt_b = f"PT_{dev_list[i+1]}"
-                self.main_topo.graph.add_edge(pt_a, pt_b)
+            for i in range(len(term_list)-1):
+                t1 = term_list[i]
+                t2 = term_list[i+1]
+                e = TopoEdge(
+                    line_id=f"CN_{cn}_{t1}_{t2}",
+                    start_point=t1,
+                    end_point=t2,
+                    line_name=f"主网连接节点{cn}端子互连"
+                )
+                self.main_topo.add_edge(e)
 
         print(f"[端子建边完成] 配网拓扑边数量：{self.dist_topo.graph.number_of_edges()}")
         print(f"[端子建边完成] 主网拓扑边数量：{self.main_topo.graph.number_of_edges()}")
 
     def fill_all_internal_connection(self):
-        """批量补齐所有设备内部端点连通关系"""
-        # 主网设备补内部边
+        """批量补齐设备内部端子通路，传入真实端子ID列表"""
+        # 主网设备
         for _, row in self.main_equip.iterrows():
-            dev_pts = [f"PT_{row['EQUIP_ID']}"]
-            build_device_internal_edges(self.main_topo, row, dev_pts)
-        # 配网设备补内部边
+            equip_id = row["EQUIP_ID"]
+            term_ids = self.main_topo.get_device_all_points(equip_id)
+            build_device_internal_edges(self.main_topo, row, term_ids)
+        # 配网设备
         for _, row in self.dist_equip.iterrows():
-            dev_pts = [f"PT_{row['EQUIP_ID']}"]
-            build_device_internal_edges(self.dist_topo, row, dev_pts)
+            equip_id = row["EQUIP_ID"]
+            term_ids = self.dist_topo.get_device_all_points(equip_id)
+            build_device_internal_edges(self.dist_topo, row, term_ids)
+
+    def check_topo_abnormal(self, topo: TopologyGraph, trace_id="TOPO001"):
+        """执行悬空、孤岛、断点检测"""
+        checker = TopoChecker(topo)
+        abnormal_list, breakpoint_list = checker.run_full_check(trace_uuid=trace_id)
+        return abnormal_list, breakpoint_list
 
     def build_full_topology(self):
-        """完整构建流程：拆分→加设备→加外部线路→补内部连通"""
+        """完整构建流程：拆分→加设备→生成真实端子→端子互连→设备内部通路→拓扑校验"""
         self.split_voltage_data()
         self.add_all_devices()
+        self.build_real_terminal_points()
+        self.build_graph_from_terminal()
         self.fill_all_internal_connection()
         print("开始执行拓扑异常检测：悬空、孤岛、断点")
         main_abnormal, main_break = self.check_topo_abnormal(self.main_topo, trace_id="MAIN_001")
