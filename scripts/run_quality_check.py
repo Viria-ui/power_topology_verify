@@ -16,6 +16,8 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from core.defect_excel_exporter import export_defects_xlsx
+from config.settings import DATASET_STANDARD_OUTPUT_XLSX, TEST_SVG_ROOT
 from data_io.data_reader import SqlTableLoader
 from core.topology_builder import TopologyBuilder
 from data_io.svg_reader import SvgParser
@@ -24,7 +26,7 @@ FEEDER_MAP = {
     "LINE215": "TMP00000188",
     "LINE216": "TMP00000189",
 }
-SVG_DIR = os.path.join(PROJECT_ROOT, "数据集更新版20260729", "配网 svg")
+SVG_DIR = TEST_SVG_ROOT
 JSON_DIR = os.path.join(PROJECT_ROOT, "output", "json")
 REPORT_DIR = os.path.join(PROJECT_ROOT, "output", "reports")
 
@@ -148,6 +150,16 @@ def run_check(line_name: str, dist_topo):
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(defects, f, ensure_ascii=False, indent=2)
     print(f"  报告已导出: {out_path}")
+
+    xlsx_path = os.path.join(REPORT_DIR, f"{line_name}_拓扑校验缺陷报告.xlsx")
+    export_defects_xlsx(
+        defects,
+        xlsx_path,
+        line_name,
+        template_path=DATASET_STANDARD_OUTPUT_XLSX,
+        default_station="",
+    )
+    print(f"  Excel 报告已导出: {xlsx_path}")
     return defects
 
 

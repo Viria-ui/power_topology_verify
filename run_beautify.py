@@ -6,9 +6,10 @@ import traceback
 sys.path.append(os.getcwd())
 
 from svg_io.svg_beautifier import beautify_svg_file
+from config.settings import TEST_SVG_ROOT
 
 project_root = os.getcwd()
-svg_dir = os.path.join(project_root, "数据集更新版20260729", "配网 svg")
+svg_dir = TEST_SVG_ROOT
 output_dir = os.path.join(project_root, "output", "svg")
 os.makedirs(output_dir, exist_ok=True)
 

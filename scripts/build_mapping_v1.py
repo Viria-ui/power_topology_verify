@@ -10,14 +10,8 @@ from pathlib import Path
 import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-SQL_SRC = Path(
-    r"d:\挑战杯\挑战杯\CP-202606-面向新型电力系统的配电网图模拓扑智能识别与修正研究比赛资料"
-    r"\sql形式数据集"
-)
-SVG_SRC = Path(
-    r"d:\挑战杯\挑战杯\CP-202606-面向新型电力系统的配电网图模拓扑智能识别与修正研究比赛资料"
-    r"\svg\配网 svg\LINE215.svg"
-)
+SQL_SRC = PROJECT_ROOT / "数据集更新版20260729" / "sql形式数据集"
+SVG_SRC = PROJECT_ROOT / "数据集更新版20260729" / "配网 svg" / "LINE215.svg"
 SQL_GBK_DIR = PROJECT_ROOT / "input" / "sql_gbk"
 DOCS_DIR = PROJECT_ROOT / "docs"
 OUT_CSV = PROJECT_ROOT / "output" / "csv"

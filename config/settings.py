@@ -26,18 +26,22 @@ PRIMARY_KEY = {
     "feeder_id": "FEEDER_ID"      # 馈线编号，匹配svg文件名10kVLINExxx
 }
 
-# ========== 新增：比赛测试SQL路径、电压等级、设备内部连通规则 ==========
-# 项目内部 SQL 副本（GBK 编码优先）
+# ========== 比赛数据集路径（7/29 基础 + 8/21 增量补丁）==========
+DATASET_DIR_729 = os.path.join(BASE_DIR, "数据集更新版20260729")
+DATASET_DIR_821 = os.path.join(BASE_DIR, "数据集更新版20260821")
+DATASET_SQL_729 = os.path.join(DATASET_DIR_729, "sql形式数据集")
+DATASET_SVG_729 = os.path.join(DATASET_DIR_729, "配网 svg")
+DATASET_PATCH_821 = os.path.join(DATASET_DIR_821, "数据库更新脚本20260821.txt")
+DATASET_STANDARD_OUTPUT_XLSX = os.path.join(DATASET_DIR_821, "拓扑校验问题标准输出.xlsx")
+DATASET_UPDATE_NOTE_729 = os.path.join(DATASET_DIR_729, "数据集更新说明：.txt")
+
+# 运行时 SQL：input/sql_gbk（由 scripts/sync_dataset.py 从 729 同步并叠加 821 补丁）
 _TEST_SQL_GBK = os.path.join(BASE_DIR, "input", "sql_gbk")
-# 数据集目录中的 SQL（备份路径）
-_TEST_SQL_DATASET = os.path.join(BASE_DIR, "数据集更新版20260729", "sql形式数据集")
+_TEST_SQL_DATASET = DATASET_SQL_729
 TEST_SQL_ROOT = _TEST_SQL_GBK if os.path.isdir(_TEST_SQL_GBK) else _TEST_SQL_DATASET
 
-# SVG 配网单线图目录（项目内数据集目录，与 run_beautify.py 保持一致）
-TEST_SVG_ROOT = os.path.join(BASE_DIR, "数据集更新版20260729", "配网 svg")
-# 验证：若不存在则使用旧的 input/svg
-if not os.path.isdir(TEST_SVG_ROOT):
-    TEST_SVG_ROOT = os.path.join(BASE_DIR, "input", "svg")
+# SVG 配网单线图：7/29 更新版（含 objectid / GLink_Ref 修复与文件名对齐）
+TEST_SVG_ROOT = DATASET_SVG_729 if os.path.isdir(DATASET_SVG_729) else os.path.join(BASE_DIR, "input", "svg")
 
 # 电压等级常量（区分主网/配网）
 MAIN_VOLTAGE = "110"    # 主网电压标识

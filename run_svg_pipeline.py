@@ -18,10 +18,11 @@ from core.topology_repairer import TopologyRepairer
 from svg_io.svg_beautifier import SvgBeautifier
 from svg_io.svg_editor import SvgInteractiveEditor
 from scripts._load_sql_topology import load_sql_topology
+from config.settings import TEST_SVG_ROOT
 
 def run_beautify_only_pipeline():
     # 1. Initialize paths
-    input_dir = os.path.join(PROJECT_ROOT, "数据集更新版20260729", "配网 svg")
+    input_dir = TEST_SVG_ROOT
     output_dir = os.path.join(PROJECT_ROOT, "output", "svg")
     report_dir = os.path.join(PROJECT_ROOT, "output", "reports")
     

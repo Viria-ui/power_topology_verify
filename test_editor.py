@@ -17,7 +17,8 @@ def test_editor():
     print("任务 5.2: 交互式增删设备 (v2 引擎集成版)")
     print("="*60)
     
-    input_dir = os.path.join(PROJECT_ROOT, "数据集更新版20260729", "配网 svg")
+    from config.settings import TEST_SVG_ROOT
+    input_dir = TEST_SVG_ROOT
     output_dir = os.path.join(PROJECT_ROOT, "output", "svg")
     os.makedirs(output_dir, exist_ok=True)
     

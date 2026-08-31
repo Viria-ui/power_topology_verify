@@ -82,11 +82,11 @@ class TopologyRepairGenerator:
         return candidates
 
     @staticmethod
-    def calculate_topology_delta(before_topo, repair_candidates):
-        """计算修正前后的拓扑差异"""
-        before_node_count = len(before_topo.device_map) if hasattr(before_topo, 'device_map') else 0
+    def calculate_topology_delta(line_db_devices, repair_candidates):
+        """计算修正前后的拓扑差异 (精准基于当前馈线)"""
+        # 精准获取当前馈线的节点数
+        before_node_count = len(line_db_devices) if isinstance(line_db_devices, (dict, set, list)) else 0
         
-        # 统计修补意图带来的增量
         added_nodes = sum(1 for c in repair_candidates if c["action"] == "ADD_DEVICE")
         deleted_nodes = sum(1 for c in repair_candidates if c["action"] == "DELETE_DEVICE")
         added_edges = sum(1 for c in repair_candidates if c["action"] == "ADD_CONNECTION")

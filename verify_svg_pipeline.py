@@ -7,6 +7,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from data_io.svg_reader import SvgDocument
+from config.settings import TEST_SVG_ROOT
 
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output", "svg")
 INTERMEDIATE_DIR = os.path.join(PROJECT_ROOT, "output", "intermediate")
@@ -124,7 +125,7 @@ def verify_beautification_coords():
     print("【问题3】美化坐标变化验证")
     print("=" * 70)
 
-    orig_path = os.path.join(PROJECT_ROOT, "数据集更新版20260729", "配网 svg", "LINE215.svg")
+    orig_path = os.path.join(TEST_SVG_ROOT, "LINE215.svg")
     beaut_path = os.path.join(OUTPUT_DIR, "LINE215_beautified.svg")
 
     if not os.path.exists(orig_path):
