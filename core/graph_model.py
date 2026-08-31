@@ -11,6 +11,7 @@ class Device(BaseModel):
     voltage_type: Optional[str] = None
     feeder_id: Optional[str] = None
     dsubstation_id: Optional[str] = None
+    is_source: bool = False
 
 
 class ConnectPoint(BaseModel):
@@ -86,6 +87,21 @@ class TopologyGraph:
     def link_device_point(self, equip_id: str, point_id: str):
         if equip_id in self.device_map and point_id in self.point_map:
             self.graph.add_edge(equip_id, point_id, edge_type="terminal")
+            
+    def get_device_all_points(self, equip_id: str) -> list[str]:
+        """获取某设备下属全部端子point_id"""
+        res = []
+        for pid, pt in self.point_map.items():
+            if pt.belong_equip_id == equip_id:
+                res.append(pid)
+        return res
+
+    def get_all_source_equip(self) -> list[str]:
+        src_list = []
+        for eid, dev in self.device_map.items():
+            if dev.is_source:
+                src_list.append(eid)
+        return src_list
 
 
 # 新增：设备内部端点连通生成函数（解决导入报错）
