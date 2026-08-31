@@ -18,7 +18,15 @@ from collections import defaultdict
 import networkx as nx
 
 from data_io.svg_reader import SvgDocument, SvgElement, SvgConnection, SvgText
-from core.graph_model import TopologyGraph
+from core.graph_model import TopologyGraph, AbnormalItem, BreakpointItem, TieLoopItem
+from core.constants import (
+    TERMINAL_EXEMPT_TYPES, NON_TERMINAL_SWITCH_TYPES,
+    TIE_EXCLUDE_NAME_KEYS, TEST_LINE_KEYS,
+    ERR, SUSPECT, EXEMPT, REVIEW,
+    R_TIE_EXCLUDE_001, R_TIE_001, R_TIE_002, R_LOOP_001,
+    R001, R002, R003,
+    SWITCH_STATUS_MAP
+)
 
 
 _SQL_TODO = "--建议人工核对后补 INSERT/UPDATE"
@@ -742,3 +750,320 @@ def export_defect_report(defects: list, summary: dict, out_path: str):
         json.dump(summary, f, ensure_ascii=False, indent=2)
     print(f"  缺陷报告已导出: {out_path} ({len(defects)} 条)")
     print(f"  汇总报告已导出: {sum_path}")
+
+class TopoDbValidator:
+    def __init__(self, topo: TopologyGraph):
+        self.topo = topo
+        self.G = topo.graph
+        self.source_equip_ids = set(topo.get_all_source_equip())
+        self.source_point_ids = set()
+        # 收集电源设备下属全部端子
+        for src_eid in self.source_equip_ids:
+            pts = self.topo.get_device_all_points(src_eid)
+            self.source_point_ids.update(pts)
+
+    def find_all_connected_components(self) -> list[set]:
+        """获取全部连通分量，只保留端子节点TERMINAL_ID"""
+        comps = []
+        for comp in nx.connected_components(self.G):
+            term_comp = {n for n in comp if n in self.topo.point_map}
+            if len(term_comp) > 0:
+                comps.append(term_comp)
+        return comps
+
+    def _get_feeder_of_terminal(self, term_id: str) -> Optional[str]:
+        """获取端子所属馈线"""
+        pt = self.topo.point_map.get(term_id)
+        if pt:
+            return pt.feeder_id
+        return None
+
+    def _get_component_equip_and_feeder(self, comp: set):
+        """返回该分量：设备集合、馈线集合"""
+        equip_set = set()
+        feed_set = set()
+        for pid in comp:
+            pt = self.topo.point_map[pid]
+            eid = pt.belong_equip_id
+            equip_set.add(eid)
+            if pt.feeder_id:
+                feed_set.add(pt.feeder_id)
+        return equip_set, feed_set
+
+    def detect_hanging_terminal(self, trace_uuid: str):
+        """R001 端子悬空：非末端开关设备端子数量不符合要求；末端设备豁免"""
+        deg_map = dict(self.G.degree())
+        equip_term_cnt = defaultdict(int)
+        for pid, pt in self.topo.point_map.items():
+            equip_term_cnt[pt.belong_equip_id] += 1
+
+        for equip_id, dev in self.topo.device_map.items():
+            if equip_id in self.source_equip_ids:
+                continue
+            n_terms = equip_term_cnt.get(equip_id, 0)
+            dev_type = dev.equip_type or ""
+            dev_name = dev.equip_name or ""
+
+            # R_TIE_EXCLUDE_001：末端设备豁免（配变、用户，允许单端子）
+            if dev_type in TERMINAL_EXEMPT_TYPES:
+                continue
+            # 测试设备标记待复核
+            if any(k in dev_name for k in TEST_LINE_KEYS):
+                    item = AbnormalItem(
+                        trace_uuid=trace_uuid,
+                        equip_id=equip_id,
+                        point_id="",
+                        line_id=None,
+                        rule_code=R001,
+                        rule_desc="测试/虚拟设备，待人工复核",
+                        check_result=REVIEW,
+                        review_status="待复核",
+                        detail=f"设备{equip_id}[{dev_name}]命中测试关键字，跳过自动判定，需人工复核",
+                        dimension="拓扑完整性",
+                        risk_level="低"
+                    )
+                    self.topo.abnormal_list.append(item)
+                    continue
+
+            # 开关类设备要求2个端子
+            if dev_type in NON_TERMINAL_SWITCH_TYPES:
+                if n_terms == 1:
+                    item = AbnormalItem(
+                        trace_uuid=trace_uuid,
+                        equip_id=equip_id,
+                        point_id="",
+                        line_id=None,
+                        rule_code=R001,
+                        rule_desc="开关设备单端悬空，端子数量不足",
+                        check_result=ERR,
+                        review_status="待复核",
+                        detail=f"开关设备{equip_id}[{dev_name}]仅有{n_terms}个端子，需要2个有效端子",
+                        dimension="拓扑完整性",
+                        risk_level="中"
+                    )
+                    self.topo.abnormal_list.append(item)
+                elif n_terms == 0:
+                    item = AbnormalItem(
+                        trace_uuid=trace_uuid,
+                        equip_id=equip_id,
+                        point_id="",
+                        line_id=None,
+                        rule_code=R001,
+                        rule_desc="开关设备无任何端子，完全悬空",
+                        check_result=ERR,
+                        review_status="待复核",
+                        detail=f"开关设备{equip_id}[{dev_name}]未关联任何端子",
+                        dimension="拓扑完整性",
+                        risk_level="高"
+                    )
+                    self.topo.abnormal_list.append(item)
+
+    def detect_island_no_source(self, trace_uuid: str):
+        """R002 孤岛：连通分量不含任何电源端子"""
+        comps = self.find_all_connected_components()
+        for comp in comps:
+            if comp & self.source_point_ids:
+                continue
+            equip_set, _ = self._get_component_equip_and_feeder(comp)
+            comp_size = len(comp)
+            first_equip = next(iter(equip_set))
+            first_pt = next(iter(comp))
+            item = BreakpointItem(
+                trace_uuid=trace_uuid,
+                equip_id=first_equip,
+                point_id=first_pt,
+                line_id=None,
+                component_size=comp_size,
+                rule_code=R002,
+                rule_desc="拓扑孤岛，该连通分量无供电电源",
+                detail=f"本连通分量包含{comp_size}个端子，共{len(equip_set)}台设备，未连通到任何电源设备",
+                check_result=ERR,
+                dimension="拓扑完整性"
+            )
+            self.topo.breakpoint_list.append(item)
+
+    def detect_feed_breakpoint(self, trace_uuid: str):
+        """R003 馈线断点：同一馈线端子分布在多个连通分量"""
+        feed_2_points = defaultdict(set)
+        for pid, pt in self.topo.point_map.items():
+            fid = pt.feeder_id
+            if not fid:
+                continue
+            feed_2_points[fid].add(pid)
+
+        all_comps = self.find_all_connected_components()
+        for feed_id, point_set in feed_2_points.items():
+            comp_tag_set = set()
+            for comp in all_comps:
+                inter = point_set & comp
+                if len(inter) > 0:
+                    comp_tag_set.add(id(comp))
+            if len(comp_tag_set) >= 2:
+                item = BreakpointItem(
+                    trace_uuid=trace_uuid,
+                    equip_id="",
+                    point_id="",
+                    line_id=None,
+                    component_size=len(point_set),
+                    rule_code=R003,
+                    rule_desc=f"馈线{feed_id}存在断点，拓扑分割为{len(comp_tag_set)}个独立区域",
+                    detail=f"馈线{feed_id}内设备端子分散在{len(comp_tag_set)}个互不连通分量，存在断线或开关分断",
+                    check_result=ERR,
+                    dimension="拓扑完整性"
+                )
+                self.topo.breakpoint_list.append(item)
+
+    def detect_tie_and_suspect_tie(self, trace_uuid: str):
+        """R_TIE_EXCLUDE_001 / R_TIE_001 / R_TIE_002：联络开关、疑似联络识别"""
+        comp_map = {}
+        for comp in self.find_all_connected_components():
+            for pid in comp:
+                comp_map[pid] = comp
+
+        for equip_id, dev in self.topo.device_map.items():
+            dev_name = dev.equip_name or ""
+            dev_type = dev.equip_type or ""
+            term_ids = self.topo.get_device_all_points(equip_id)
+
+            # R_TIE_EXCLUDE_001：末端对象直接排除联络识别
+            if any(k in dev_name for k in TIE_EXCLUDE_NAME_KEYS):
+                continue
+            # 只处理开关类设备，端子数量必须等于2
+            if dev_type not in NON_TERMINAL_SWITCH_TYPES or len(term_ids) != 2:
+                continue
+
+            t1, t2 = term_ids[0], term_ids[1]
+            f1 = self._get_feeder_of_terminal(t1)
+            f2 = self._get_feeder_of_terminal(t2)
+
+            # 两侧馈线至少有一个为空 → 信息缺失，标记疑似联络待复核
+            if not f1 or not f2:
+                item = TieLoopItem(
+                    trace_uuid=trace_uuid,
+                    equip_id=equip_id,
+                    point_id=",".join(term_ids),
+                    line_id=None,
+                    result_type="疑似联络",
+                    rule_code=R_TIE_002,
+                    rule_desc="疑似联络开关，馈线信息缺失，需人工复核",
+                    detail=f"设备{equip_id}[{dev_name}]为开关，端子馈线信息不全：馈线A={f1},馈线B={f2}",
+                    switch_status=dev.switch_status,
+                    risk_level="中",
+                    review_required=True,
+                    left_feeder=f1,
+                    right_feeder=f2,
+                    is_planned_loop=False
+                )
+                self.topo.tie_loop_list.append(item)
+                continue
+
+            # 两侧馈线相同：不属于联络
+            if f1 == f2:
+                continue
+
+            # 两侧馈线不同，联络候选
+            sw_status = dev.switch_status
+            if sw_status == "合位":
+                # 合位 → 进一步进入合环风险检查
+                self._check_loop_for_switch(equip_id, term_ids, trace_uuid)
+                tie_result = "联络"
+                rule = R_TIE_001
+                desc = "合规联络开关，跨两条馈线，开关处于合位"
+            elif sw_status == "分位":
+                tie_result = "联络"
+                rule = R_TIE_001
+                desc = "合规联络开关，跨两条馈线，开关处于分位"
+            else:
+                # 状态未知、无效 → 疑似联络待复核
+                item = TieLoopItem(
+                    trace_uuid=trace_uuid,
+                    equip_id=equip_id,
+                    point_id=",".join(term_ids),
+                    line_id=None,
+                    result_type="疑似联络",
+                    rule_code=R_TIE_002,
+                    rule_desc="疑似联络开关，开关遥信状态未知，待人工复核",
+                    detail=f"设备{equip_id}[{dev_name}]跨馈线 {f1} / {f2}，开关状态[{sw_status}]无效",
+                    switch_status=sw_status,
+                    risk_level="中",
+                    review_required=True,
+                    left_feeder=f1,
+                    right_feeder=f2,
+                    is_planned_loop=False
+                )
+                self.topo.tie_loop_list.append(item)
+                continue
+
+            item = TieLoopItem(
+                trace_uuid=trace_uuid,
+                equip_id=equip_id,
+                point_id=",".join(term_ids),
+                line_id=None,
+                result_type=tie_result,
+                rule_code=rule,
+                rule_desc=desc,
+                detail=f"设备{equip_id}[{dev_name}]，跨馈线 {f1} / {f2}，开关状态：{sw_status}",
+                switch_status=sw_status,
+                risk_level="中",
+                review_required=False,
+                left_feeder=f1,
+                right_feeder=f2,
+                is_planned_loop=False
+            )
+            self.topo.tie_loop_list.append(item)
+
+    def _check_loop_for_switch(self, equip_id: str, term_ids: list, trace_uuid: str):
+        """R_LOOP_001：开关合位，检测是否产生多电源非计划合环"""
+        visited_comp = set()
+        for tid in term_ids:
+            comp = None
+            for c in self.find_all_connected_components():
+                if tid in c:
+                    comp = c
+                    break
+            if comp is None:
+                continue
+            comp_key = id(comp)
+            if comp_key in visited_comp:
+                continue
+            visited_comp.add(comp_key)
+            equip_set, _ = self._get_component_equip_and_feeder(comp)
+            src_in_comp = equip_set & self.source_equip_ids
+            src_cnt = len(src_in_comp)
+            if src_cnt >= 2:
+                src_list = ",".join(sorted(list(src_in_comp)))
+                dev = self.topo.device_map[equip_id]
+                item = TieLoopItem(
+                    trace_uuid=trace_uuid,
+                    equip_id=equip_id,
+                    point_id=",".join(term_ids),
+                    line_id=None,
+                    result_type="非计划合环",
+                    rule_code=R_LOOP_001,
+                    rule_desc="检测到非计划合环，连通域包含多个电源设备",
+                    detail=f"开关{equip_id}[{dev.equip_name or ''}]合位，环路包含电源：{src_list}，无计划转供标记，非计划合环风险",
+                    switch_status=dev.switch_status,
+                    risk_level="高",
+                    review_required=True,
+                    source_count=src_cnt,
+                    is_planned_loop=False
+                )
+                self.topo.tie_loop_list.append(item)
+
+    def run_all_db_check(self, trace_uuid: str = "DB_TOPO_001"):
+        """全套数据库拓扑检测入口"""
+        self.topo.abnormal_list.clear()
+        self.topo.breakpoint_list.clear()
+        self.topo.tie_loop_list.clear()
+
+        self.detect_hanging_terminal(trace_uuid)
+        self.detect_island_no_source(trace_uuid)
+        self.detect_feed_breakpoint(trace_uuid)
+        self.detect_tie_and_suspect_tie(trace_uuid)
+        return self.topo.abnormal_list, self.topo.breakpoint_list, self.topo.tie_loop_list
+
+def run_database_topo_check(topo: TopologyGraph, trace_id="DB_TOPO_001"):
+    """对外调用入口，供topology_builder.py调用"""
+    validator = TopoDbValidator(topo)
+    abn, brk, tie = validator.run_all_db_check(trace_uuid=trace_id)
+    return abn, brk, tie
