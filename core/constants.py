@@ -114,3 +114,55 @@ KEY_DEVICE_LAYERS = {"PowerTransformer", "Breaker", "BusbarSection"}
 
 # B.1 网格吸附
 GRID_SIZE = 10.0
+
+# 拓扑/联络合环/豁免/评分业务常量
+# 设备类型编码/文本：配变、用户、负荷点、表箱、末端站房类
+TERMINAL_EXEMPT_TYPES = {"电力用户", "配变", "电缆终端头", "封头", "备用出线间隔", "用户", "负荷点", "表箱"}
+# 开关类，要求必须2个有效端子，否则判单端悬空
+NON_TERMINAL_SWITCH_TYPES = {"断路器", "负荷开关", "隔离开关", "刀闸", "Breaker", "LoadBreakSwitch", "Disconnector"}
+
+# 名称关键字命中则排除联络识别 R_TIE_EXCLUDE_001
+TIE_EXCLUDE_NAME_KEYS = {"站房", "配电室", "箱变", "台区", "配变", "用户", "负荷", "表箱"}
+
+# 白名单豁免类型
+EXEMPT_REVERSE_POWER_TYPES = {"光伏", "储能", "分布式电源"}   # 新能源，允许反向潮流
+EXEMPT_CAP_TRANSITION_TYPES = {"电容器", "SVG", "无功补偿"}     # 无功补偿，30s过渡屏蔽
+TEST_LINE_KEYS = {"测试", "TMP", "虚拟"}                        # 测试/临时线路，标记待复核
+
+# -------- 异常标签定义 --------
+ERR = "ERR"          # 严重错误，阻断，扣分
+SUSPECT = "SUSPECT"  # 可疑隐患，观察期，扣分
+EXEMPT = "EXEMPT"    # 豁免放行，不扣分
+REVIEW = "REVIEW"    # 待人工复核，归档不扣分
+
+# -------- 规则编码 --------
+R_TIE_EXCLUDE_001 = "R_TIE_EXCLUDE_001"
+R_TIE_001 = "R_TIE_001"
+R_TIE_002 = "R_TIE_002"
+R_LOOP_001 = "R_LOOP_001"
+R001 = "R001"
+R002 = "R002"
+R003 = "R003"
+
+# -------- 模型质量评分权重与单项扣分上限 --------
+SCORE_WEIGHTS = {
+    "拓扑完整性": 5,
+    "图模一致性": 3,
+    "电气逻辑": 2,
+    "接口规范性": 4,
+}
+SCORE_CAPS = {
+    "拓扑完整性": 30,
+    "图模一致性": 25,
+    "电气逻辑": 20,
+    "接口规范性": 25,
+}
+
+# -------- 遥信状态文本映射，POINT字段码值 --------
+SWITCH_STATUS_MAP = {
+    "0": "分位",
+    "1": "合位",
+    "2": "中间态_冲突",
+    "3": "品质无效",
+    "99": "通信中断失效"
+}
