@@ -52,6 +52,7 @@ class SqlTableLoader:
         table_map = {
             "equip": "EQUIP_JBS_PWEQUIPINFO.sql",
             "line": "EQUIP_JBS_PWFEEDERLINE.sql",
+            "pw_terminal": "EQUIP_JBS_PWTERMINAL.sql",
             "terminal": "EQUIP_JBS_PWTERMINAL.sql",
         }
         table_data = {}

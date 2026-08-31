@@ -11,6 +11,8 @@ class Device(BaseModel):
     voltage_type: Optional[str] = None
     feeder_id: Optional[str] = None
     dsubstation_id: Optional[str] = None
+    is_source: bool = False
+    switch_status: Optional[str] = None
 
 
 class ConnectPoint(BaseModel):
@@ -36,6 +38,8 @@ class AbnormalItem(BaseModel):
     check_result: str
     review_status: str = "待复核"
     detail: str
+    dimension: str = "拓扑完整性"   # 缺陷维度：拓扑完整性/图模一致性/电气逻辑/接口规范性
+    risk_level: str = "中"          # 低/中/高
 
 
 class BreakpointItem(BaseModel):
@@ -47,6 +51,8 @@ class BreakpointItem(BaseModel):
     rule_code: str
     rule_desc: str
     detail: str
+    check_result: str = "ERR"
+    dimension: str = "拓扑完整性"
 
 
 class TieLoopItem(BaseModel):
@@ -58,6 +64,15 @@ class TieLoopItem(BaseModel):
     rule_code: str
     rule_desc: str
     detail: str
+    switch_status: Optional[str] = None      # 分位/合位
+    risk_level: str = "中"                   # 低/中/高
+    review_required: bool = False            # 是否待人工复核
+    left_feeder: Optional[str] = None        # 左侧馈线
+    right_feeder: Optional[str] = None       # 右侧馈线
+    left_station: Optional[str] = None       # 左侧厂站
+    right_station: Optional[str] = None      # 右侧厂站
+    source_count: int = 0                     # 连通区内电源点数量（合环判定用）
+    is_planned_loop: bool = False             # 是否计划合环
 
 
 class TopologyGraph:
@@ -86,6 +101,21 @@ class TopologyGraph:
     def link_device_point(self, equip_id: str, point_id: str):
         if equip_id in self.device_map and point_id in self.point_map:
             self.graph.add_edge(equip_id, point_id, edge_type="terminal")
+            
+    def get_device_all_points(self, equip_id: str) -> list[str]:
+        """获取某设备下属全部端子point_id"""
+        res = []
+        for pid, pt in self.point_map.items():
+            if pt.belong_equip_id == equip_id:
+                res.append(pid)
+        return res
+
+    def get_all_source_equip(self) -> list[str]:
+        src_list = []
+        for eid, dev in self.device_map.items():
+            if dev.is_source:
+                src_list.append(eid)
+        return src_list
 
 
 # 新增：设备内部端点连通生成函数（解决导入报错）
