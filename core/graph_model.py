@@ -2,6 +2,7 @@
 from pydantic import BaseModel
 import networkx as nx
 from typing import Optional
+from collections import defaultdict
 
 
 class Device(BaseModel):
@@ -80,6 +81,8 @@ class TopologyGraph:
         self.graph = nx.Graph()
         self.device_map: dict[str, Device] = {}
         self.point_map: dict[str, ConnectPoint] = {}
+        # 端子按所属设备建立索引，供大规模拓扑校验快速查询。
+        self._points_by_equip: dict[str, list[str]] = defaultdict(list)
         self.edge_map: dict[str, TopoEdge] = {}
         self.abnormal_list: list[AbnormalItem] = []
         self.breakpoint_list: list[BreakpointItem] = []
@@ -90,7 +93,12 @@ class TopologyGraph:
         self.graph.add_node(dev.equip_id, node_type="device", dev_info=dev.model_dump())
 
     def add_point(self, pt: ConnectPoint):
+        old_point = self.point_map.get(pt.point_id)
+        if old_point is not None and old_point.belong_equip_id != pt.belong_equip_id:
+            self._points_by_equip[old_point.belong_equip_id].remove(pt.point_id)
         self.point_map[pt.point_id] = pt
+        if pt.point_id not in self._points_by_equip[pt.belong_equip_id]:
+            self._points_by_equip[pt.belong_equip_id].append(pt.point_id)
         self.graph.add_node(pt.point_id, node_type="point", pt_info=pt.model_dump())
 
     def add_edge(self, edge: TopoEdge):
@@ -104,11 +112,7 @@ class TopologyGraph:
             
     def get_device_all_points(self, equip_id: str) -> list[str]:
         """获取某设备下属全部端子point_id"""
-        res = []
-        for pid, pt in self.point_map.items():
-            if pt.belong_equip_id == equip_id:
-                res.append(pid)
-        return res
+        return list(self._points_by_equip.get(equip_id, []))
 
     def get_all_source_equip(self) -> list[str]:
         src_list = []

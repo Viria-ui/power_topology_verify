@@ -54,11 +54,19 @@ class SqlTableLoader:
             "line": "EQUIP_JBS_PWFEEDERLINE.sql",
             "pw_terminal": "EQUIP_JBS_PWTERMINAL.sql",
             "terminal": "EQUIP_JBS_PWTERMINAL.sql",
+            # 主网端子表是可选数据：纯配网数据集可能不提供该文件。
+            "zw_terminal": "EQUIP_JBS_ZWTERMINAL.sql",
         }
         table_data = {}
         for key, fname in table_map.items():
             fpath = os.path.join(self.sql_dir, fname)
-            table_data[key] = self.parse_sql_insert_to_df(fpath)
+            if not os.path.isfile(fpath):
+                # 不要用 None 表示缺表。下游可统一按 DataFrame 处理，纯配网
+                # 模式也不会因主网增量文件缺失而中断。
+                print(f"[警告] 未找到 SQL 表文件：{fname}，按空表处理")
+                table_data[key] = pd.DataFrame()
+            else:
+                table_data[key] = self.parse_sql_insert_to_df(fpath)
             # 统一字段类型（全部字符串）
             table_data[key] = table_data[key].astype(str)
             table_data[key] = table_data[key].apply(lambda col: col.str.strip())
