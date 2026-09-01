@@ -180,6 +180,43 @@ def _build_defect_rows(defects: list[dict], line_name: str, default_station: str
     ]
 
 
+def _flatten_tie_rows(tie_data) -> list[dict]:
+    """接收单线路或批量分析结果，并去重汇总联络关系。"""
+    if isinstance(tie_data, dict):
+        rows = []
+        for value in tie_data.values():
+            rows.extend(_flatten_tie_rows(value))
+        return rows
+    if not isinstance(tie_data, list):
+        return []
+    return [row for row in tie_data if isinstance(row, dict)]
+
+
+def _merge_tie_rows(tie_data) -> list[dict]:
+    """汇总所有线路关系；同一线路存在“是”时移除占位的“否”。"""
+    rows = _flatten_tie_rows(tie_data)
+    lines_with_tie = {
+        str(row.get("线路id") or "") for row in rows
+        if row.get("是否有联络") == "是"
+    }
+    merged: list[dict] = []
+    seen: set[tuple] = set()
+    for row in rows:
+        line_id = str(row.get("线路id") or "")
+        if row.get("是否有联络") == "否" and line_id in lines_with_tie:
+            continue
+        key = (
+            line_id,
+            str(row.get("联络开关id") or ""),
+            str(row.get("联络线路id") or ""),
+            str(row.get("是否有联络") or ""),
+        )
+        if key not in seen:
+            seen.add(key)
+            merged.append(row)
+    return merged
+
+
 def export_defects_xlsx(
     defects: list[dict],
     output_path: str | Path,
@@ -198,7 +235,11 @@ def export_defects_xlsx(
     analysis = analysis or {}
     defect_rows = _build_defect_rows(defects, line_name, default_station)
     breakpoint_rows = analysis.get("breakpoints", [])
-    tie_rows = analysis.get("tie_switches", [])
+    # batch_tie_switches / all_tie_switches 可由批量调用方传入；单线路
+    # 调用仍使用 tie_switches。合并后确保不会被邻线缺失时的“否”覆盖。
+    tie_rows = _merge_tie_rows(
+        analysis.get("batch_tie_switches", analysis.get("all_tie_switches", analysis.get("tie_switches", [])))
+    )
     loop_rows = analysis.get("loops", [])
     score_rows = analysis.get("scores", [])
 

@@ -256,7 +256,12 @@ def analyze_tie_switches(
     device_graph: nx.Graph,
     line_df,
 ) -> list[dict]:
-    """联络开关自动识别与梳理。"""
+    """联络开关自动识别与梳理。
+
+    在完整设备图上检索，不把图裁剪为当前馈线子图。开关自身所属馈线
+    也作为一个端点参与判定，因而可识别“本馈线开关 -> 邻馈线设备”及
+    “本馈线开关 -> 主网/变电站接口”两类跨线联络。
+    """
     fid2name: dict[str, str] = {}
     fid2station: dict[str, str] = {}
     if line_df is not None:
@@ -274,38 +279,62 @@ def analyze_tie_switches(
             return str(device_graph.nodes[devid].get("feeder_id") or "")
         return ""
 
+    def _station_of(devid: str) -> str:
+        if device_graph.has_node(devid):
+            return str(device_graph.nodes[devid].get("dsubstation_id") or "")
+        return ""
+
+    def _append_tie(*, switch_id: str, other_id: str, other_name: str, other_station: str) -> None:
+        key = (target, other_id, switch_id)
+        if key in tie_set:
+            return
+        tie_set.add(key)
+        tie_rows.append({
+            "线路id": target,
+            "线路名称": line_name or fid2name.get(target, target),
+            "上级变电站名称": start_st_id or fid2station.get(target, ""),
+            "联络开关id": switch_id,
+            "联络开关名称": _device_name(device_graph, switch_id),
+            "是否有联络": "是",
+            "联络线路id": other_id,
+            "联络线路名称": other_name or fid2name.get(other_id, other_id),
+            "联络线变电站名称": other_station or fid2station.get(other_id, ""),
+        })
+
     for node in device_graph.nodes():
-        neighbors = list(device_graph.neighbors(node))
-        fids = {_fid_of(nb) for nb in neighbors if _fid_of(nb)}
-        if len(fids) < 2:
-            continue
-        my_fids, other_fids = [], []
-        for f in fids:
-            if f == target:
-                my_fids.append(f)
-            else:
-                other_fids.append(f)
-        if not my_fids or not other_fids:
-            continue
         if not _is_switch_node(device_graph, node):
             continue
-        sw_name = _device_name(device_graph, node)
-        for other in other_fids:
-            key = (target, other, node)
-            if key in tie_set:
-                continue
-            tie_set.add(key)
-            tie_rows.append({
-                "线路id": target,
-                "线路名称": line_name or fid2name.get(target, target),
-                "上级变电站名称": start_st_id or fid2station.get(target, ""),
-                "联络开关id": node,
-                "联络开关名称": sw_name,
-                "是否有联络": "是",
-                "联络线路id": other,
-                "联络线路名称": fid2name.get(other, other),
-                "联络线变电站名称": fid2station.get(other, ""),
-            })
+        neighbors = list(device_graph.neighbors(node))
+        node_fid = _fid_of(node)
+        neighbor_fids = {_fid_of(nb) for nb in neighbors if _fid_of(nb)}
+        # 旧实现仅观察相邻设备的馈线，漏掉了开关自身位于目标馈线、
+        # 另一端直接接入邻馈线的常见结构。
+        endpoint_fids = set(neighbor_fids)
+        if node_fid:
+            endpoint_fids.add(node_fid)
+        if target not in endpoint_fids:
+            continue
+
+        for other in endpoint_fids - {target}:
+            _append_tie(
+                switch_id=node,
+                other_id=other,
+                other_name=fid2name.get(other, other),
+                other_station=fid2station.get(other, ""),
+            )
+
+        # 未挂 FEEDER_ID 的另一端按主网/变电站接口记录，不能因邻侧
+        # 数据未挂载而误输出“否”。前缀令该对象与普通馈线 ID 明确区分。
+        if endpoint_fids == {target}:
+            station_ids = {_station_of(nb) for nb in neighbors if not _fid_of(nb) and _station_of(nb)}
+            station_ids.discard(start_st_id)
+            for station_id in station_ids:
+                _append_tie(
+                    switch_id=node,
+                    other_id=f"MAIN_STATION:{station_id}",
+                    other_name="主网/变电站接口",
+                    other_station=station_id,
+                )
 
     if not tie_rows:
         tie_rows.append({
