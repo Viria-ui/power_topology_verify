@@ -1,0 +1,10 @@
+{
+  "components_count": 84,
+  "max_component_size": 9,
+  "dangling_count": 0,
+  "overlap_count": 2287,
+  "fake_connect_count": 0,
+  "text_missing_count": 62,
+  "total_defects": 2374,
+  "stage": "initial"
+}
