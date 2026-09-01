@@ -1,67 +1,41 @@
-from typing import Any, overload, TypeVar
+from typing import overload
+from typing_extensions import deprecated
 
 import numpy as np
-from numpy import floating, object_
 from numpy._typing import (
     NDArray,
-    _FloatLike_co,
     _ArrayLikeFloat_co,
     _ArrayLikeObject_co,
+    _FloatLike_co,
 )
 
-_ArrayType = TypeVar("_ArrayType", bound=NDArray[Any])
-
-__all__: list[str]
+__all__ = ["fix", "isneginf", "isposinf"]
 
 @overload
-def fix(  # type: ignore[misc]
-    x: _FloatLike_co,
-    out: None = ...,
-) -> floating[Any]: ...
+@deprecated("numpy.fix is deprecated. Use numpy.trunc instead.")
+def fix(x: _FloatLike_co, out: None = None) -> np.floating: ...
 @overload
-def fix(
-    x: _ArrayLikeFloat_co,
-    out: None = ...,
-) -> NDArray[floating[Any]]: ...
+@deprecated("numpy.fix is deprecated. Use numpy.trunc instead.")
+def fix(x: _ArrayLikeFloat_co, out: None = None) -> NDArray[np.floating]: ...
 @overload
-def fix(
-    x: _ArrayLikeObject_co,
-    out: None = ...,
-) -> NDArray[object_]: ...
+@deprecated("numpy.fix is deprecated. Use numpy.trunc instead.")
+def fix(x: _ArrayLikeObject_co, out: None = None) -> NDArray[np.object_]: ...
 @overload
-def fix(
-    x: _ArrayLikeFloat_co | _ArrayLikeObject_co,
-    out: _ArrayType,
-) -> _ArrayType: ...
+@deprecated("numpy.fix is deprecated. Use numpy.trunc instead.")
+def fix[ArrayT: np.ndarray](x: _ArrayLikeFloat_co | _ArrayLikeObject_co, out: ArrayT) -> ArrayT: ...
 
+#
 @overload
-def isposinf(  # type: ignore[misc]
-    x: _FloatLike_co,
-    out: None = ...,
-) -> np.bool: ...
+def isposinf(x: _FloatLike_co, out: None = None) -> np.bool: ...
 @overload
-def isposinf(
-    x: _ArrayLikeFloat_co,
-    out: None = ...,
-) -> NDArray[np.bool]: ...
+def isposinf(x: _ArrayLikeFloat_co, out: None = None) -> NDArray[np.bool]: ...
 @overload
-def isposinf(
-    x: _ArrayLikeFloat_co,
-    out: _ArrayType,
-) -> _ArrayType: ...
+def isposinf[ArrayT: np.ndarray](x: _ArrayLikeFloat_co, out: ArrayT) -> ArrayT: ...
 
+#
 @overload
-def isneginf(  # type: ignore[misc]
-    x: _FloatLike_co,
-    out: None = ...,
-) -> np.bool: ...
+def isneginf(x: _FloatLike_co, out: None = None) -> np.bool: ...
 @overload
-def isneginf(
-    x: _ArrayLikeFloat_co,
-    out: None = ...,
-) -> NDArray[np.bool]: ...
+def isneginf(x: _ArrayLikeFloat_co, out: None = None) -> NDArray[np.bool]: ...
 @overload
-def isneginf(
-    x: _ArrayLikeFloat_co,
-    out: _ArrayType,
-) -> _ArrayType: ...
+def isneginf[ArrayT: np.ndarray](x: _ArrayLikeFloat_co, out: ArrayT) -> ArrayT: ...

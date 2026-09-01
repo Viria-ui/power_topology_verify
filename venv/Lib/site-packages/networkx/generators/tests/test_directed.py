@@ -1,11 +1,14 @@
 """Generators - Directed Graphs
 ----------------------------
 """
+
 import pytest
 
 import networkx as nx
 from networkx.classes import Graph, MultiDiGraph
 from networkx.generators.directed import (
+    _random_k_out_graph_numpy,
+    _random_k_out_graph_python,
     gn_graph,
     gnc_graph,
     gnr_graph,
@@ -13,6 +16,13 @@ from networkx.generators.directed import (
     random_uniform_k_out_graph,
     scale_free_graph,
 )
+
+try:
+    import numpy as np
+
+    has_numpy = True
+except ImportError:
+    has_numpy = False
 
 
 class TestGeneratorsDirected:
@@ -95,23 +105,40 @@ class TestRandomKOutGraph:
 
     """
 
-    def test_regularity(self):
-        """Tests that the generated graph is `k`-out-regular."""
-        n = 10
-        k = 3
-        alpha = 1
-        G = random_k_out_graph(n, k, alpha)
-        assert all(d == k for v, d in G.out_degree())
-        G = random_k_out_graph(n, k, alpha, seed=42)
-        assert all(d == k for v, d in G.out_degree())
+    @pytest.fixture(
+        params=[
+            pytest.param(
+                _random_k_out_graph_numpy,
+                marks=pytest.mark.skipif(not has_numpy, reason="numpy not installed"),
+            ),
+            _random_k_out_graph_python,
+        ]
+    )
+    def f(self, request):
+        yield request.param
 
-    def test_no_self_loops(self):
-        """Tests for forbidding self-loops."""
-        n = 10
-        k = 3
-        alpha = 1
-        G = random_k_out_graph(n, k, alpha, self_loops=False)
+    @pytest.fixture(params=[(10, 3, 1), (20, 2, 4), (5, 1, 10)])
+    def nkalpha(self, request):
+        yield request.param
+
+    def test_regularity(self, f, nkalpha):
+        """Test that the generated graph is `k`-out-regular."""
+        n, k, alpha = nkalpha
+        G = f(n, k, alpha, seed=42)
+        assert all(d == k for _, d in G.out_degree)
+
+    def test_no_self_loops(self, f, nkalpha):
+        """Test for forbidding self-loops."""
+        n, k, alpha = nkalpha
+        G = f(n, k, alpha, self_loops=False, seed=42)
         assert nx.number_of_selfloops(G) == 0
+
+    def test_random_k_out_graph(self, nkalpha):
+        """Test that the interface function `random_k_out_graph` works correctly."""
+        n, k, alpha = nkalpha
+        G = random_k_out_graph(n, k, alpha, seed=42)
+        assert len(G) == n
+        assert all(d == k for _, d in G.out_degree)
 
     def test_negative_alpha(self):
         with pytest.raises(ValueError, match="alpha must be positive"):

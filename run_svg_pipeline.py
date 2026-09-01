@@ -16,7 +16,7 @@ from core.topology_validator import (
 )
 from core.topology_repairer import TopologyRepairer
 from svg_io.svg_beautifier import SvgBeautifier
-from svg_io.svg_editor import SvgInteractiveEditor
+from svg_io.svg_editor import SvgInteractiveEditorV2
 from scripts._load_sql_topology import load_sql_topology
 from config.settings import TEST_SVG_ROOT
 

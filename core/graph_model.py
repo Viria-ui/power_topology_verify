@@ -1,7 +1,7 @@
 """设备/端点/边 拓扑图数据结构定义。"""
 from pydantic import BaseModel
 import networkx as nx
-from typing import Optional
+from typing import Optional, Dict
 from collections import defaultdict
 
 
@@ -87,6 +87,9 @@ class TopologyGraph:
         self.abnormal_list: list[AbnormalItem] = []
         self.breakpoint_list: list[BreakpointItem] = []
         self.tie_loop_list: list[TieLoopItem] = []
+
+        self.switch_state_map: Dict[str, str] = {}
+        self.switch_state_source: Dict[str, str] = {}
 
     def add_device(self, dev: Device):
         self.device_map[dev.equip_id] = dev

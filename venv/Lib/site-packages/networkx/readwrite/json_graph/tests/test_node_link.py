@@ -7,44 +7,9 @@ from networkx.readwrite.json_graph import node_link_data, node_link_graph
 
 
 class TestNodeLink:
-    # TODO: To be removed when signature change complete
-    def test_custom_attrs_dep(self):
-        G = nx.path_graph(4)
-        G.add_node(1, color="red")
-        G.add_edge(1, 2, width=7)
-        G.graph[1] = "one"
-        G.graph["foo"] = "bar"
-
-        attrs = {
-            "source": "c_source",
-            "target": "c_target",
-            "name": "c_id",
-            "key": "c_key",
-            "link": "c_links",
-        }
-
-        H = node_link_graph(node_link_data(G, **attrs), multigraph=False, **attrs)
-        assert nx.is_isomorphic(G, H)
-        assert H.graph["foo"] == "bar"
-        assert H.nodes[1]["color"] == "red"
-        assert H[1][2]["width"] == 7
-
-        # provide only a partial dictionary of keywords.
-        # This is similar to an example in the doc string
-        attrs = {
-            "link": "c_links",
-            "source": "c_source",
-            "target": "c_target",
-        }
-        H = node_link_graph(node_link_data(G, **attrs), multigraph=False, **attrs)
-        assert nx.is_isomorphic(G, H)
-        assert H.graph["foo"] == "bar"
-        assert H.nodes[1]["color"] == "red"
-        assert H[1][2]["width"] == 7
-
     def test_exception_dep(self):
+        G = nx.MultiDiGraph()
         with pytest.raises(nx.NetworkXError):
-            G = nx.MultiDiGraph()
             node_link_data(G, name="node", source="node", target="node", key="node")
 
     def test_graph(self):
@@ -105,9 +70,9 @@ class TestNodeLink:
         assert H.nodes[1][q] == q
 
     def test_exception(self):
+        G = nx.MultiDiGraph()
+        attrs = {"name": "node", "source": "node", "target": "node", "key": "node"}
         with pytest.raises(nx.NetworkXError):
-            G = nx.MultiDiGraph()
-            attrs = {"name": "node", "source": "node", "target": "node", "key": "node"}
             node_link_data(G, **attrs)
 
     def test_string_ids(self):
@@ -117,8 +82,8 @@ class TestNodeLink:
         G.add_node(q)
         G.add_edge("A", q)
         data = node_link_data(G)
-        assert data["links"][0]["source"] == "A"
-        assert data["links"][0]["target"] == q
+        assert data["edges"][0]["source"] == "A"
+        assert data["edges"][0]["target"] == q
         H = node_link_graph(data)
         assert nx.is_isomorphic(G, H)
 
@@ -134,7 +99,7 @@ class TestNodeLink:
             "target": "c_target",
             "name": "c_id",
             "key": "c_key",
-            "link": "c_links",
+            "edges": "c_links",
         }
 
         H = node_link_graph(node_link_data(G, **attrs), multigraph=False, **attrs)

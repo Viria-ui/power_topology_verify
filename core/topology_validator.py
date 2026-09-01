@@ -14,6 +14,7 @@ import re
 import json
 from typing import Tuple, Optional
 from collections import defaultdict
+from typing import Optional, Union
 
 import networkx as nx
 
@@ -762,6 +763,98 @@ class TopoDbValidator:
             pts = self.topo.get_device_all_points(src_eid)
             self.source_point_ids.update(pts)
 
+    def _is_tie_switch_candidate(self, dev, feeder_set: set):
+        """判断设备是否是联络开关候选，读取constants豁免规则"""
+        equip_type = dev.equip_type or ""
+        equip_name = dev.equip_name or ""
+        # 类型豁免
+        if equip_type in TERMINAL_EXEMPT_TYPES:
+            return False
+        # 名称关键字豁免
+        for ban_key in TIE_EXCLUDE_NAME_KEYS:
+            if ban_key in equip_name:
+                return False
+        # 跨至少2个馈线
+        if len(feeder_set) < 2:
+            return False
+        # 开关类型
+        if equip_type in NON_TERMINAL_SWITCH_TYPES:
+            return True
+        return False
+
+    def detect_cycle_based_loop(self, trace_uuid: str):
+        """基于nx.cycle_basis完整环路检测：区分计划联络环 / 非计划合环"""
+        graph = self.G
+        for comp_nodes in nx.connected_components(graph):
+            subg = graph.subgraph(comp_nodes).copy()
+            cycle_list = nx.cycle_basis(subg)
+            for one_cycle in cycle_list:
+                # one_cycle: list[point_id] 端子ID
+                dev_id_set = set()
+                feeder_set = set()
+                dev_info_map = {}
+                for point_id in one_cycle:
+                    cp = self.topo.point_map.get(point_id)
+                    if cp is None:
+                        continue
+                    dev_id = cp.belong_equip_id
+                    dev_id_set.add(dev_id)
+                    if cp.feeder_id:
+                        feeder_set.add(cp.feeder_id)
+                    dev_info_map[dev_id] = self.topo.device_map.get(dev_id)
+                if not dev_id_set:
+                    continue
+
+                # 遍历环内所有设备，找联络开关候选
+                has_tie_candidate = False
+                tie_equip_id = None
+                for eid in dev_id_set:
+                    d = dev_info_map.get(eid)
+                    if d is None:
+                        continue
+                    if self._is_tie_switch_candidate(d, feeder_set):
+                        has_tie_candidate = True
+                        tie_equip_id = eid
+                        break
+
+                if has_tie_candidate:
+                    # 计划联络环：存在联络开关候选 → 标记为待复核
+                    dev = dev_info_map[tie_equip_id]
+                    item = TieLoopItem(
+                        trace_uuid=trace_uuid,
+                        equip_id=tie_equip_id,
+                        point_id=",".join(one_cycle[:5]),
+                        line_id=None,
+                        result_type="疑似联络环(需复核)",
+                        rule_code=R_TIE_001,
+                        rule_desc="检测到计划联络环，需要复核开关实际遥信状态",
+                        detail=f"环路跨馈线:{list(feeder_set)}，环内存在联络开关候选：{tie_equip_id}[{dev.equip_name or ''}]",
+                        switch_status=None,
+                        risk_level="中",
+                        review_required=True,
+                        left_feeder=next(iter(feeder_set)) if len(feeder_set)>=1 else None,
+                        right_feeder=list(feeder_set)[1] if len(feeder_set)>=2 else None,
+                        is_planned_loop=True
+                    )
+                    self.topo.tie_loop_list.append(item)
+                else:
+                    # 无联络开关：非计划合环故障
+                    item = TieLoopItem(
+                        trace_uuid=trace_uuid,
+                        equip_id=",".join(list(dev_id_set)[:3]),
+                        point_id=",".join(one_cycle[:5]),
+                        line_id=None,
+                        result_type="非计划合环",
+                        rule_code=R_LOOP_001,
+                        rule_desc="非计划合环，环路内无合法联络开关",
+                        detail=f"环路跨馈线:{list(feeder_set)}，环内设备:{list(dev_id_set)[:4]}",
+                        switch_status=None,
+                        risk_level="高",
+                        review_required=True,
+                        is_planned_loop=False
+                    )
+                    self.topo.tie_loop_list.append(item)    
+
     def find_all_connected_components(self) -> list[set]:
         """获取全部连通分量，只保留端子节点TERMINAL_ID"""
         comps = []
@@ -936,6 +1029,15 @@ class TopoDbValidator:
             f1 = self._get_feeder_of_terminal(t1)
             f2 = self._get_feeder_of_terminal(t2)
 
+            feeder_set = set()
+            if f1:
+                feeder_set.add(f1)
+            if f2:
+                feeder_set.add(f2)
+            # 命中豁免/不满足联络候选条件，直接跳过，不生成告警
+            if not self._is_tie_switch_candidate(dev, feeder_set):
+                continue
+
             # 两侧馈线至少有一个为空 → 信息缺失，标记疑似联络待复核
             if not f1 or not f2:
                 item = TieLoopItem(
@@ -947,7 +1049,7 @@ class TopoDbValidator:
                     rule_code=R_TIE_002,
                     rule_desc="疑似联络开关，馈线信息缺失，需人工复核",
                     detail=f"设备{equip_id}[{dev_name}]为开关，端子馈线信息不全：馈线A={f1},馈线B={f2}",
-                    switch_status=dev.switch_status,
+                    switch_status=None,
                     risk_level="中",
                     review_required=True,
                     left_feeder=f1,
@@ -962,17 +1064,19 @@ class TopoDbValidator:
                 continue
 
             # 两侧馈线不同，联络候选
-            sw_status = dev.switch_status
+            sw_status = self.topo.switch_state_map.get(equip_id, "close")
+            st_source = self.topo.switch_state_source.get(equip_id, "default_rule")
+
             if sw_status == "合位":
-                # 合位 → 进一步进入合环风险检查
+                 # 合位 → 进一步进入合环风险检查
                 self._check_loop_for_switch(equip_id, term_ids, trace_uuid)
                 tie_result = "联络"
                 rule = R_TIE_001
-                desc = "合规联络开关，跨两条馈线，开关处于合位"
+                desc = f"合规联络开关，跨两条馈线，开关处于{sw_status}，状态来源:{st_source}"
             elif sw_status == "分位":
                 tie_result = "联络"
                 rule = R_TIE_001
-                desc = "合规联络开关，跨两条馈线，开关处于分位"
+                desc = f"合规联络开关，跨两条馈线，开关处于{sw_status}，状态来源:{st_source}"
             else:
                 # 状态未知、无效 → 疑似联络待复核
                 item = TieLoopItem(
@@ -983,10 +1087,14 @@ class TopoDbValidator:
                     result_type="疑似联络",
                     rule_code=R_TIE_002,
                     rule_desc="疑似联络开关，开关遥信状态未知，待人工复核",
-                    detail=f"设备{equip_id}[{dev_name}]跨馈线 {f1} / {f2}，开关状态[{sw_status}]无效",
+                    detail=(
+                        f"设备{equip_id}[{dev_name}]跨馈线 {f1} / {f2}，"
+                        f"开关状态[{sw_status}]，状态来源:{st_source}。"
+                        f"{'【提示】本结果由赛题默认规则推演，建议人工复核' if st_source == 'default_rule' else ''}"
+                    ),
                     switch_status=sw_status,
                     risk_level="中",
-                    review_required=True,
+                    review_required=(st_source == "default_rule"), # 默认推演标记待复核
                     left_feeder=f1,
                     right_feeder=f2,
                     is_planned_loop=False
@@ -1002,10 +1110,14 @@ class TopoDbValidator:
                 result_type=tie_result,
                 rule_code=rule,
                 rule_desc=desc,
-                detail=f"设备{equip_id}[{dev_name}]，跨馈线 {f1} / {f2}，开关状态：{sw_status}",
+                detail=(
+                    f"设备{equip_id}[{dev_name}]，跨馈线 {f1} / {f2}，"
+                    f"开关状态：{sw_status}，状态来源:{st_source}。"
+                    f"{'【提示】本结果由赛题默认规则推演，建议人工复核' if st_source == 'default_rule' else ''}"
+                ),
                 switch_status=sw_status,
                 risk_level="中",
-                review_required=False,
+                review_required=(st_source == "default_rule"),
                 left_feeder=f1,
                 right_feeder=f2,
                 is_planned_loop=False
@@ -1015,6 +1127,8 @@ class TopoDbValidator:
     def _check_loop_for_switch(self, equip_id: str, term_ids: list, trace_uuid: str):
         """R_LOOP_001：开关合位，检测是否产生多电源非计划合环"""
         visited_comp = set()
+        sw_status = self.topo.switch_state_map.get(equip_id, "close")
+        st_source = self.topo.switch_state_source.get(equip_id, "default_rule")
         for tid in term_ids:
             comp = None
             for c in self.find_all_connected_components():
@@ -1041,14 +1155,30 @@ class TopoDbValidator:
                     result_type="非计划合环",
                     rule_code=R_LOOP_001,
                     rule_desc="检测到非计划合环，连通域包含多个电源设备",
-                    detail=f"开关{equip_id}[{dev.equip_name or ''}]合位，环路包含电源：{src_list}，无计划转供标记，非计划合环风险",
-                    switch_status=dev.switch_status,
+                    detail=(
+                        f"开关{equip_id}[{dev.equip_name or ''}]合位，环路包含电源：{src_list}，"
+                        f"开关状态:{sw_status}，状态来源:{st_source}。"
+                        f"{'【提示】本结果由赛题默认规则推演，建议人工复核' if st_source == 'default_rule' else ''}"
+                    ),
+                    switch_status=sw_status,   # ✅现在使用预处理得来的sw_status
                     risk_level="高",
-                    review_required=True,
+                    review_required=(st_source == "default_rule"),
                     source_count=src_cnt,
                     is_planned_loop=False
                 )
                 self.topo.tie_loop_list.append(item)
+
+    def _post_filter_tie_loop_items(self):
+        """成员函数：全局去重，消除两套算法重复输出同一设备"""
+        seen = set()
+        final_list = []
+        for item in self.topo.tie_loop_list:
+            key = f"{item.equip_id}__{item.result_type}"
+            if key in seen:
+                continue
+            seen.add(key)
+            final_list.append(item)
+        self.topo.tie_loop_list = final_list
 
     def run_all_db_check(self, trace_uuid: str = "DB_TOPO_001"):
         """全套数据库拓扑检测入口"""
@@ -1060,7 +1190,10 @@ class TopoDbValidator:
         self.detect_island_no_source(trace_uuid)
         self.detect_feed_breakpoint(trace_uuid)
         self.detect_tie_and_suspect_tie(trace_uuid)
+        self.detect_cycle_based_loop(trace_uuid)
+        self._post_filter_tie_loop_items()
         return self.topo.abnormal_list, self.topo.breakpoint_list, self.topo.tie_loop_list
+
 
 def run_database_topo_check(topo: TopologyGraph, trace_id="DB_TOPO_001"):
     """对外调用入口，供topology_builder.py调用"""

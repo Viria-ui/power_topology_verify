@@ -56,6 +56,7 @@ class SqlTableLoader:
             "terminal": "EQUIP_JBS_PWTERMINAL.sql",
             # 主网端子表是可选数据：纯配网数据集可能不提供该文件。
             "zw_terminal": "EQUIP_JBS_ZWTERMINAL.sql",
+            "yx_real": "EQUIP_JBS_PWREAL.sql",
         }
         table_data = {}
         for key, fname in table_map.items():
