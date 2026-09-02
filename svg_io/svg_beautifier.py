@@ -8,6 +8,7 @@ SVG美化模块 v2 - 权重树算法集成版（完整功能对齐参考文件 s
 """
 
 import os
+import logging
 import re
 import copy
 import math
@@ -17,6 +18,9 @@ from typing import List, Tuple, Dict, Optional, Set
 
 from data_io.svg_reader import SvgDocument, SvgElement, SvgConnection, SvgText, SVG_NS, XLINK_NS, IEC_NS
 from data_io.svg_writer import write_svg
+
+logger = logging.getLogger(__name__)
+
 
 # ═══════════════════════════════════════════════════════════
 #  规范常量（与参考文件 v2 对齐，自包含不依赖 core.constants）
@@ -238,8 +242,8 @@ class SvgBeautifier:
                             fv = float(v)
                             if abs(fv) <= MAX_ORIG:
                                 xs.append(fv)
-                        except ValueError:
-                            pass
+                        except ValueError as _e:
+                            logger.debug("ignored ValueError: %s", _e)
                 for attr in ('y', 'y1', 'y2', 'cy'):
                     v = child.get(attr)
                     if v:
@@ -247,8 +251,8 @@ class SvgBeautifier:
                             fv = float(v)
                             if abs(fv) <= MAX_ORIG:
                                 ys.append(fv)
-                        except ValueError:
-                            pass
+                        except ValueError as _e:
+                            logger.debug("ignored ValueError: %s", _e)
                 if tag == 'circle':
                     try:
                         cx = float(child.get('cx', 0))
@@ -257,8 +261,8 @@ class SvgBeautifier:
                         if abs(cx) <= MAX_ORIG and r > 0:
                             xs += [cx - r, cx + r]
                             ys += [cy - r, cy + r]
-                    except ValueError:
-                        pass
+                    except ValueError as _e:
+                        logger.debug("ignored ValueError: %s", _e)
                 elif tag == 'ellipse':
                     try:
                         cx = float(child.get('cx', 0))
@@ -268,8 +272,8 @@ class SvgBeautifier:
                         if abs(cx) <= MAX_ORIG and rx > 0:
                             xs += [cx - rx, cx + rx]
                             ys += [cy - ry, cy + ry]
-                    except ValueError:
-                        pass
+                    except ValueError as _e:
+                        logger.debug("ignored ValueError: %s", _e)
                 elif tag == 'rect':
                     try:
                         rx = float(child.get('x', 0))
@@ -279,8 +283,8 @@ class SvgBeautifier:
                         if abs(rx) <= MAX_ORIG and rw > 0:
                             xs += [rx, rx + rw]
                             ys += [ry, ry + rh]
-                    except ValueError:
-                        pass
+                    except ValueError as _e:
+                        logger.debug("ignored ValueError: %s", _e)
                 pts = child.get('points')
                 if pts:
                     for pair in pts.split():
@@ -291,8 +295,8 @@ class SvgBeautifier:
                                 xs.append(fx)
                             if abs(fy) <= MAX_ORIG:
                                 ys.append(fy)
-                        except ValueError:
-                            pass
+                        except ValueError as _e:
+                            logger.debug("ignored ValueError: %s", _e)
             if xs and ys:
                 min_x, max_x = min(xs), max(xs)
                 min_y, max_y = min(ys), max(ys)

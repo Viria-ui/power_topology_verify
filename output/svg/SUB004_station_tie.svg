@@ -25,7 +25,7 @@
   <line x1="780.00" y1="1585.00" x2="460.00" y2="3675.00" stroke="#FF6A00" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="620.00" y="2630.00" text-anchor="middle" font-size="7" fill="#FF6A00">×2</text>
   <line x1="780.00" y1="2905.00" x2="140.00" y2="3675.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
-  <text x="460.00" y="3290.00" text-anchor="middle" font-size="7" fill="#FF6A00">×34</text>
+  <text x="460.00" y="3290.00" text-anchor="middle" font-size="7" fill="#FF6A00">×28</text>
   <line x1="300.00" y1="815.00" x2="140.00" y2="1145.00" stroke="#FF6A00" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="220.00" y="980.00" text-anchor="middle" font-size="7" fill="#FF6A00">×2</text>
   <line x1="460.00" y1="815.00" x2="620.00" y2="815.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
@@ -33,7 +33,7 @@
   <line x1="460.00" y1="815.00" x2="620.00" y2="925.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="540.00" y="870.00" text-anchor="middle" font-size="7" fill="#FF6A00">×20</text>
   <line x1="620.00" y1="925.00" x2="300.00" y2="1585.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
-  <text x="460.00" y="1255.00" text-anchor="middle" font-size="7" fill="#FF6A00">×74</text>
+  <text x="460.00" y="1255.00" text-anchor="middle" font-size="7" fill="#FF6A00">×56</text>
   <line x1="620.00" y1="705.00" x2="460.00" y2="2245.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="540.00" y="1475.00" text-anchor="middle" font-size="7" fill="#FF6A00">×24</text>
   <line x1="620.00" y1="705.00" x2="620.00" y2="1585.00" stroke="#FF6A00" stroke-width="4.8" stroke-dasharray="6 4" opacity="0.7"/>
@@ -51,7 +51,7 @@
   <line x1="300.00" y1="705.00" x2="140.00" y2="1475.00" stroke="#FF6A00" stroke-width="2.4" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="220.00" y="1090.00" text-anchor="middle" font-size="7" fill="#FF6A00">×4</text>
   <line x1="620.00" y1="2905.00" x2="300.00" y2="3565.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
-  <text x="460.00" y="3235.00" text-anchor="middle" font-size="7" fill="#FF6A00">×116</text>
+  <text x="460.00" y="3235.00" text-anchor="middle" font-size="7" fill="#FF6A00">×56</text>
   <line x1="460.00" y1="1805.00" x2="620.00" y2="3565.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="540.00" y="2685.00" text-anchor="middle" font-size="7" fill="#FF6A00">×14</text>
   <line x1="140.00" y1="155.00" x2="460.00" y2="705.00" stroke="#FF6A00" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
@@ -79,7 +79,7 @@
   <line x1="460.00" y1="925.00" x2="300.00" y2="3565.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="380.00" y="2245.00" text-anchor="middle" font-size="7" fill="#FF6A00">×22</text>
   <line x1="460.00" y1="925.00" x2="620.00" y2="3125.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
-  <text x="540.00" y="2025.00" text-anchor="middle" font-size="7" fill="#FF6A00">×54</text>
+  <text x="540.00" y="2025.00" text-anchor="middle" font-size="7" fill="#FF6A00">×14</text>
   <line x1="140.00" y1="265.00" x2="140.00" y2="1915.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="140.00" y="1090.00" text-anchor="middle" font-size="7" fill="#FF6A00">×24</text>
   <line x1="620.00" y1="1695.00" x2="780.00" y2="2685.00" stroke="#FF6A00" stroke-width="4.8" stroke-dasharray="6 4" opacity="0.7"/>
@@ -115,7 +115,7 @@
   <line x1="780.00" y1="1585.00" x2="780.00" y2="2795.00" stroke="#FF6A00" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="780.00" y="2190.00" text-anchor="middle" font-size="7" fill="#FF6A00">×2</text>
   <line x1="460.00" y1="1695.00" x2="620.00" y2="2685.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
-  <text x="540.00" y="2190.00" text-anchor="middle" font-size="7" fill="#FF6A00">×28</text>
+  <text x="540.00" y="2190.00" text-anchor="middle" font-size="7" fill="#FF6A00">×16</text>
   <line x1="620.00" y1="2685.00" x2="780.00" y2="2795.00" stroke="#FF6A00" stroke-width="4.8" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="700.00" y="2740.00" text-anchor="middle" font-size="7" fill="#FF6A00">×12</text>
   <line x1="620.00" y1="2685.00" x2="300.00" y2="2905.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
@@ -129,7 +129,7 @@
   <line x1="780.00" y1="2795.00" x2="140.00" y2="2905.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="460.00" y="2850.00" text-anchor="middle" font-size="7" fill="#FF6A00">×34</text>
   <line x1="300.00" y1="2905.00" x2="300.00" y2="3015.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
-  <text x="300.00" y="2960.00" text-anchor="middle" font-size="7" fill="#FF6A00">×42</text>
+  <text x="300.00" y="2960.00" text-anchor="middle" font-size="7" fill="#FF6A00">×32</text>
   <line x1="140.00" y1="1365.00" x2="460.00" y2="2795.00" stroke="#FF6A00" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="300.00" y="2080.00" text-anchor="middle" font-size="7" fill="#FF6A00">×2</text>
   <line x1="460.00" y1="375.00" x2="140.00" y2="3675.00" stroke="#FF6A00" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
@@ -206,8 +206,8 @@
   <text x="620.00" y="1365.00" text-anchor="middle" font-size="7" fill="#FF6A00">×6</text>
   <line x1="300.00" y1="3125.00" x2="300.00" y2="3565.00" stroke="#FF6A00" stroke-width="5.0" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="300.00" y="3345.00" text-anchor="middle" font-size="7" fill="#FF6A00">×16</text>
-  <line x1="460.00" y1="2355.00" x2="460.00" y2="3345.00" stroke="#FF6A00" stroke-width="3.6" stroke-dasharray="6 4" opacity="0.7"/>
-  <text x="460.00" y="2850.00" text-anchor="middle" font-size="7" fill="#FF6A00">×8</text>
+  <line x1="460.00" y1="2355.00" x2="460.00" y2="3345.00" stroke="#FF6A00" stroke-width="3.0" stroke-dasharray="6 4" opacity="0.7"/>
+  <text x="460.00" y="2850.00" text-anchor="middle" font-size="7" fill="#FF6A00">×6</text>
   <line x1="300.00" y1="1805.00" x2="780.00" y2="2245.00" stroke="#FF6A00" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
   <text x="540.00" y="2025.00" text-anchor="middle" font-size="7" fill="#FF6A00">×2</text>
   <line x1="140.00" y1="1805.00" x2="620.00" y2="2575.00" stroke="#FF6A00" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
@@ -353,7 +353,7 @@
   <g><rect x="240.00" y="1115.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="300.00" y="1137.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE038</text><text x="300.00" y="1155.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="400.00" y="1115.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="460.00" y="1137.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE119</text><text x="460.00" y="1155.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="560.00" y="1115.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="620.00" y="1137.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">20kVLINE120</text><text x="620.00" y="1155.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
-  <g><rect x="720.00" y="1115.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="780.00" y="1137.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE121</text><text x="780.00" y="1155.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
+  <g><rect x="720.00" y="1115.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="780.00" y="1137.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE121_195</text><text x="780.00" y="1155.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="80.00" y="1225.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="140.00" y="1247.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE076</text><text x="140.00" y="1265.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="240.00" y="1225.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="300.00" y="1247.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE093</text><text x="300.00" y="1265.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="400.00" y="1225.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="460.00" y="1247.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">20kVLINE122</text><text x="460.00" y="1265.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
@@ -425,7 +425,7 @@
   <g><rect x="560.00" y="2655.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="620.00" y="2677.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE059</text><text x="620.00" y="2695.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="720.00" y="2655.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="780.00" y="2677.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE157</text><text x="780.00" y="2695.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="80.00" y="2765.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="140.00" y="2787.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE088</text><text x="140.00" y="2805.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
-  <g><rect x="240.00" y="2765.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="300.00" y="2787.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE121</text><text x="300.00" y="2805.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
+  <g><rect x="240.00" y="2765.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="300.00" y="2787.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE121_185</text><text x="300.00" y="2805.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="400.00" y="2765.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="460.00" y="2787.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE081</text><text x="460.00" y="2805.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="560.00" y="2765.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="620.00" y="2787.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE158</text><text x="620.00" y="2805.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="720.00" y="2765.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="780.00" y="2787.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE159</text><text x="780.00" y="2805.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
@@ -484,5 +484,5 @@
   <g><rect x="400.00" y="3975.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="460.00" y="3997.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE210</text><text x="460.00" y="4015.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="560.00" y="3975.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="620.00" y="3997.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE212</text><text x="620.00" y="4015.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
   <g><rect x="720.00" y="3975.00" width="120.0" height="60.0" rx="6" fill="white" stroke="#00A854" stroke-width="2"/><text x="780.00" y="3997.00" text-anchor="middle" font-size="9" font-weight="bold" fill="#262626">10kVLINE213</text><text x="780.00" y="4015.00" text-anchor="middle" font-size="8" fill="#595959">馈线</text></g>
-  <text x="460.00" y="26" text-anchor="middle" font-weight="bold" font-size="14" fill="#262626">【全站馈线联络总图】 SUB004  (馈线 180 / 联络 1728)</text>
+  <text x="460.00" y="26" text-anchor="middle" font-weight="bold" font-size="14" fill="#262626">【全站馈线联络总图】 SUB004  (馈线 180 / 联络 1580)</text>
 </svg>

@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import math
 import os
+import logging
 import sys
 from typing import Optional
 
@@ -39,6 +40,9 @@ from data_io.data_reader import SqlTableLoader
 from core.topology_builder import TopologyBuilder
 from core.graph_model import TopologyGraph, Device
 import networkx as nx
+
+logger = logging.getLogger(__name__)
+
 
 
 # ----------------------------------------------------------------
@@ -133,9 +137,8 @@ class SvgAutoGenerator:
                             a, b = devs[i], devs[j]
                             if a != b and not G.has_edge(a, b):
                                 G.add_edge(a, b, lines=[("CN_" + cid, "connectivity_node")])
-            except Exception:
-                pass
-
+            except Exception as _e:
+                logger.debug("ignored exception: %s", _e)
         if G.number_of_edges() == 0 and table_data_line is not None:
             try:
                 line_df = table_data_line
@@ -145,9 +148,8 @@ class SvgAutoGenerator:
                     if ss in device_ids and ee in device_ids and ss != ee:
                         if not G.has_edge(ss, ee):
                             G.add_edge(ss, ee, lines=[(str(row.get("LINE_ID") or ""), str(row.get("LINE_NAME") or ""))])
-            except Exception:
-                pass
-
+            except Exception as _e:
+                logger.debug("ignored exception: %s", _e)
         if G.number_of_edges() == 0:
             feeder_groups: dict[str, list] = {}
             for n, d in G.nodes(data=True):
@@ -196,8 +198,8 @@ class SvgAutoGenerator:
                 mask = equip_df["FEEDER_ID"].astype(str).str.lower().str.contains(kw.lower(), regex=False, na=False)
                 if mask.any():
                     return str(equip_df[mask].iloc[0]["FEEDER_ID"])
-        except Exception:
-            pass
+        except Exception as _e:
+            logger.debug("ignored exception: %s", _e)
         return kw
 
     def _resolve_substation_id(self, kw: str) -> str:
@@ -222,8 +224,8 @@ class SvgAutoGenerator:
                             if kw_low in sid.lower():
                                 return sid
                         return str(valid[0][0])
-        except Exception:
-            pass
+        except Exception as _e:
+            logger.debug("ignored exception: %s", _e)
         return kw
 
     def _feeder_subgraph(self, feeder_keyword: str) -> nx.Graph:
@@ -1102,8 +1104,8 @@ def extract_symbol_defs(beautified_svg_path: str) -> str:
         ET.register_namespace("", SVG_NS)
         try:
             ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
-        except ValueError:
-            pass
+        except ValueError as _e:
+            logger.debug("ignored ValueError: %s", _e)
         parts = []
         for child in defs_elem:
             parts.append(ET.tostring(child, encoding="unicode"))
@@ -1286,9 +1288,8 @@ def _make_minimal_doc(vb_w: float, vb_h: float, defs_xml: str = ""):
             wrap = ET.fromstring(f"<svg xmlns='{SVG_NS}' xmlns:xlink='{XLINK_NS}'>{defs_xml}</svg>")
             for child in list(wrap):
                 defs.append(_copy.deepcopy(child))
-        except Exception:
-            pass
-
+        except Exception as _e:
+            logger.debug("ignored exception: %s", _e)
     for lid in ["BackGround_Layer", "Substation_Layer", "BusbarSection_Layer",
                 "PowerTransformer_Layer", "Breaker_Layer", "LoadBreakSwitch_Layer",
                 "Disconnector_Layer", "GroundDisconnector_Layer", "Fuse_Layer",
@@ -1306,8 +1307,8 @@ def _make_minimal_doc(vb_w: float, vb_h: float, defs_xml: str = ""):
     tmp_doc.root = tmp_root
     try:
         tmp_doc.tree = ET.ElementTree(tmp_root)
-    except Exception:
-        pass
+    except Exception as _e:
+        logger.debug("ignored exception: %s", _e)
     return tmp_doc
 
 
