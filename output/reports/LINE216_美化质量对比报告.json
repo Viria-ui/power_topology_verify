@@ -11,9 +11,9 @@
     "components_before": 214,
     "components_after": 1,
     "type_changes": {
-      "孤岛设备": 148,
       "标注错位": 30,
-      "设备重叠": 272
+      "设备重叠": 272,
+      "孤岛设备": 148
     }
   },
   "before": {
