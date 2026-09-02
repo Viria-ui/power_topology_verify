@@ -255,7 +255,8 @@ class SvgAutoGenerator:
                          roots: Optional[list] = None,
                          base_x=PAD, base_y=PAD,
                          col_gap=NODE_H_GAP * 1.2,
-                         row_gap=NODE_V_GAP * 1.1) -> tuple[dict[str, tuple[float, float]], int, int]:
+                         row_gap=NODE_V_GAP * 1.1,
+                         auto_transpose=True) -> tuple[dict[str, tuple[float, float]], int, int]:
         """BFS 分层 (列)，同层纵向均匀排布。返回 {node_id: (x,y)} 与 (cols, rows)。"""
         pos: dict[str, tuple[float, float]] = {}
         if not sub.number_of_nodes():
@@ -305,7 +306,7 @@ class SvgAutoGenerator:
                 pos[n] = (x, y)
 
         # 若布局为纵向(rows>cols)，转置为横向布局，避免第一列过长
-        if rows > cols:
+        if rows > cols and auto_transpose:
             transposed = {}
             for n, (x, y) in pos.items():
                 transposed[n] = (base_x + (y - base_y), base_y + (x - base_x))
@@ -664,9 +665,9 @@ class SvgAutoGenerator:
         edges_total = sub.number_of_edges()
 
         # 布局
-        pos, cols, rows = self._sugiyama_layout(sub)
-        # 若为横向布局（列数>行数），交换x/y坐标转为纵向（层从上到下）
-        if pos and cols > rows:
+        pos, cols, rows = self._sugiyama_layout(sub, auto_transpose=False)
+        # 统一交换x/y转为纵向布局（层从上到下），确保两张单线图排列方向一致
+        if pos:
             pos = {n: (p[1], p[0]) for n, p in pos.items()}
             cols, rows = rows, cols
             # 交换后若太窄（宽高比<0.3），缩放x坐标让宽度合理（设备在y方向排列，x缩放不会重叠）
