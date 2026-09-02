@@ -552,9 +552,9 @@ class SvgBeautifier:
             rep = min(ms, key=lambda m: level.get(m, 99999))
             cont_rep[cid] = rep
 
-        DEV_SPAN = 110
+        DEV_SPAN = 140
         TRUNK_Y0 = MARGIN + 30
-        LAYER_H = 120
+        LAYER_H = 150
         GROUP_GAP = 60
 
         weight = {}
@@ -645,8 +645,8 @@ class SvgBeautifier:
         return None
 
     def _layout_containers(self, cont_rep):
-        CONT_ROW_H = 68
-        CONT_TOP = 55
+        CONT_ROW_H = 130
+        CONT_TOP = 75
         CONT_W = 110
         for cid, c in self.containers.items():
             ms = [m for m in c['members'] if m in self.pos]
@@ -673,6 +673,99 @@ class SvgBeautifier:
             y1 = min(ys) - CONT_TOP
             y2 = max(ys) + CONT_PAD + UNIT_V // 2
             self.cont_box[cid] = (self.snap(x1), self.snap(y1), self.snap(x2), self.snap(y2))
+
+        # ---- 容器碰撞避让：按x从左到右，右侧容器若与左侧容器y重叠且x重叠，则整体右移 ----
+        sorted_cids = sorted(self.cont_box.keys(), key=lambda c: self.cont_box[c][0])
+        GAP = 80  # 容器间最小水平间隙
+        for idx, cid in enumerate(sorted_cids):
+            if idx == 0:
+                continue
+            cx1, cy1, cx2, cy2 = self.cont_box[cid]
+            # 找左边所有与当前容器y范围重叠的容器，取最大右边界
+            need_x = cx1
+            for left_cid in sorted_cids[:idx]:
+                lx1, ly1, lx2, ly2 = self.cont_box[left_cid]
+                # y范围不重叠则跳过
+                if cy2 < ly1 or ly2 < cy1:
+                    continue
+                if lx2 + GAP > need_x:
+                    need_x = lx2 + GAP
+            if need_x > cx1:
+                dx = need_x - cx1
+                # 整体右移容器内所有设备
+                ms = [m for m in self.containers[cid]['members'] if m in self.pos]
+                for m in ms:
+                    px, py = self.pos[m]
+                    self.pos[m] = (self.snap(px + dx), py)
+                # 重新计算容器框
+                xs = [self.pos[m][0] for m in ms]
+                ys = [self.pos[m][1] for m in ms]
+                cxc = sum(xs) / len(xs)
+                self.cont_box[cid] = (self.snap(cxc - CONT_W // 2), self.snap(min(ys) - CONT_TOP),
+                                       self.snap(cxc + CONT_W // 2), self.snap(max(ys) + CONT_PAD + UNIT_V // 2))
+
+        # ---- 容器顶部避让：检测容器顶部是否伸入上方设备层，有则整体下移 ----
+        TOP_GAP = 35  # 容器顶部与上方设备层的最小间距
+        # 收集所有设备的y坐标（按层去重，主干线横跨全图，包括其他容器成员）
+        all_dev_ys = set()
+        for pid, (px, py) in self.pos.items():
+            d = self.devices.get(pid)
+            if not d or d['type'] in BUSBAR_TYPES:
+                continue
+            all_dev_ys.add(py)
+
+        for cid in sorted(self.cont_box.keys(), key=lambda c: self.cont_box[c][1]):
+            cx1, cy1, cx2, cy2 = self.cont_box[cid]
+            ms = [m for m in self.containers[cid]['members'] if m in self.pos]
+            if not ms:
+                continue
+            min_dev_y = min(self.pos[m][1] for m in ms)
+            # 当前容器成员的y层（排除这些，因为它们在容器内部）
+            self_ys = set(self.pos[m][1] for m in ms)
+            # 找上方最近的设备层（最大y且 < min_dev_y，排除当前容器成员层）
+            max_above_y = max((y for y in all_dev_ys if y < min_dev_y and y not in self_ys), default=-999999)
+            if max_above_y == -999999:
+                continue
+            # 容器顶部 = min_dev_y - CONT_TOP，需与上方设备层间距 >= TOP_GAP
+            needed_top = max_above_y + TOP_GAP
+            current_top = min_dev_y - CONT_TOP
+            if current_top < needed_top:
+                dy = needed_top - current_top
+                for m in ms:
+                    px, py = self.pos[m]
+                    self.pos[m] = (px, self.snap(py + dy))
+                xs = [self.pos[m][0] for m in ms]
+                ys = [self.pos[m][1] for m in ms]
+                cxc = sum(xs) / len(xs)
+                self.cont_box[cid] = (self.snap(cxc - CONT_W // 2), self.snap(min(ys) - CONT_TOP),
+                                       self.snap(cxc + CONT_W // 2), self.snap(max(ys) + CONT_PAD + UNIT_V // 2))
+
+        # ---- 非柜箱设备避让：不属于任何柜箱的设备若落在柜箱框内，则水平移出 ----
+        cont_member_set = set()
+        for cid, cdata in self.containers.items():
+            for m in cdata.get('members', []):
+                cont_member_set.add(m)
+        DEV_HW_LOCAL = 15
+        SIDE_GAP = 50  # 移出柜箱后与柜箱边框的最小间距
+        for pid, (px, py) in list(self.pos.items()):
+            if pid in cont_member_set:
+                continue
+            d = self.devices.get(pid)
+            if not d or d['type'] in BUSBAR_TYPES:
+                continue
+            # 检查是否落在某个柜箱框内（含标题栏，留5px余量）
+            for cid, (cx1, cy1, cx2, cy2) in self.cont_box.items():
+                if (px + DEV_HW_LOCAL > cx1 + 5 and px - DEV_HW_LOCAL < cx2 - 5 and
+                        py + DEV_HH > cy1 + 5 and py - DEV_HH < cy2 - 5):
+                    # 落在柜箱内，移到较近的一侧
+                    dist_left = px - cx1
+                    dist_right = cx2 - px
+                    if dist_left <= dist_right:
+                        new_x = cx1 - DEV_HW_LOCAL - SIDE_GAP
+                    else:
+                        new_x = cx2 + DEV_HW_LOCAL + SIDE_GAP
+                    self.pos[pid] = (self.snap(new_x), py)
+                    break
 
     def _normalize(self):
         if not self.pos:
@@ -718,8 +811,8 @@ class SvgBeautifier:
         self._draw_wires(cg)
 
         g = ET.SubElement(svg, f'{{{SVG_NS}}}g', {'id': 'MainLayer'})
-        self._draw_containers(g)
         self._draw_devices(g)
+        self._draw_containers(g)
         self._draw_labels(g)
 
         ET.ElementTree(svg).write(out_path, encoding='utf-8', xml_declaration=True)
@@ -753,7 +846,7 @@ class SvgBeautifier:
             ET.SubElement(g, f'{{{SVG_NS}}}rect', {
                 'x': str(x1), 'y': str(y1),
                 'width': str(x2 - x1), 'height': str(y2 - y1),
-                'fill': '#ffffff', 'stroke': C_CONTAINER,
+                'fill': 'none', 'stroke': C_CONTAINER,
                 'stroke-width': str(W_CONTAINER), 'rx': '3',
             })
             ET.SubElement(g, f'{{{SVG_NS}}}rect', {
@@ -849,7 +942,25 @@ class SvgBeautifier:
 
     def _draw_labels(self, g):
         seen_names = set()
-        # 母线标注
+        # 收集所有设备符号包围盒，用于标注碰撞检测
+        dev_bboxes = []
+        for pid, (x, y) in self.pos.items():
+            d = self.devices.get(pid)
+            if not d:
+                continue
+            left, right, top, bottom = self._dev_sym_edges(pid)
+            dev_bboxes.append((x + left, y + top, x + right, y + bottom))
+        # 加入柜箱标题栏作为障碍物，避免标注压标题栏
+        for (cx1, cy1, cx2, cy2) in self.cont_box.values():
+            dev_bboxes.append((cx1, cy1, cx2, cy1 + 20))
+
+        def _bbox_overlap(a, b, pad=2):
+            return not (a[2] + pad < b[0] or b[2] + pad < a[0] or
+                        a[3] + pad < b[1] or b[3] + pad < a[1])
+
+        placed_labels = []
+
+        # 母线标注（母线在顶部，冲突少，直接放上方）
         for pid, d in self.devices.items():
             if d['type'] not in BUSBAR_TYPES or pid not in self.pos:
                 continue
@@ -860,19 +971,16 @@ class SvgBeautifier:
             x, y = self.pos[pid]
             ly = y - DEV_HH - 6
             disp = name if len(name) <= 28 else name[:26] + '..'
-            tw = max(len(disp) * F_BRANCH * 0.95, 20)
-            ET.SubElement(g, f'{{{SVG_NS}}}rect', {
-                'x': f'{x - tw / 2:.1f}', 'y': f'{ly - F_BRANCH + 2:.1f}',
-                'width': f'{tw:.1f}', 'height': f'{F_BRANCH + 2:.1f}',
-                'fill': '#ffffff', 'stroke': 'none',
-            })
+            tw = max(len(disp) * F_BRANCH * 1.1, 20)
+            placed_labels.append((x - tw / 2, ly - F_BRANCH + 2, x + tw / 2, ly + 2))
             t = ET.SubElement(g, f'{{{SVG_NS}}}text', {
                 'x': str(x), 'y': str(ly),
                 'text-anchor': 'middle', 'font-size': str(F_BRANCH), 'fill': C_TEXT,
+                'stroke': '#ffffff', 'stroke-width': '3.5', 'paint-order': 'stroke',
             })
             t.text = disp
 
-        # 设备标注
+        # 设备标注（带碰撞避让：上方 -> 下方 -> 左侧 -> 右侧）
         for pid, (x, y) in self.pos.items():
             d = self.devices.get(pid)
             if not d or d['type'] in BUSBAR_TYPES:
@@ -884,20 +992,68 @@ class SvgBeautifier:
             is_key = d['type'] in KEY_DEV_TYPES
             font_size = F_KEY if is_key else F_BRANCH
             weight = 'bold' if is_key else 'normal'
-            ly = y - DEV_HH - 6
             disp = name if len(name) <= 14 else name[:12] + '..'
-            tw = max(len(disp) * font_size * 0.95, 20)
+            tw = max(len(disp) * font_size * 1.1, 20)
+            lh = font_size + 2
+
+            def _mk_bbox(cx, cy):
+                return (cx - tw / 2, cy - font_size + 2, cx + tw / 2, cy + 2)
+
+            def _conflict(bbox):
+                for db in dev_bboxes:
+                    if _bbox_overlap(bbox, db, pad=2):
+                        return True
+                for lb in placed_labels:
+                    if _bbox_overlap(bbox, lb, pad=2):
+                        return True
+                return False
+
+            # 候选位置：上方、下方、左侧、右侧、左上、右上、左下、右下
+            candidates = [
+                (x, y - DEV_HH - 6),
+                (x, y + DEV_HH + 6 + font_size),
+                (x - tw / 2 - 30, y),
+                (x + tw / 2 + 30, y),
+                (x - tw / 2 - 20, y - DEV_HH - 6),
+                (x + tw / 2 + 20, y - DEV_HH - 6),
+                (x - tw / 2 - 20, y + DEV_HH + 6 + font_size),
+                (x + tw / 2 + 20, y + DEV_HH + 6 + font_size),
+            ]
+            lx, ly = candidates[0]
+            best_overlap = float('inf')
+            found = False
+            for cx, cy in candidates:
+                bb = _mk_bbox(cx, cy)
+                if not _conflict(bb):
+                    lx, ly = cx, cy
+                    found = True
+                    break
+                # 计算重叠面积，记录最小的
+                ov = 0
+                for db in dev_bboxes:
+                    ox = min(bb[2], db[2]) - max(bb[0], db[0])
+                    oy = min(bb[3], db[3]) - max(bb[1], db[1])
+                    if ox > 0 and oy > 0:
+                        ov += ox * oy
+                for lb in placed_labels:
+                    ox = min(bb[2], lb[2]) - max(bb[0], lb[0])
+                    oy = min(bb[3], lb[3]) - max(bb[1], lb[1])
+                    if ox > 0 and oy > 0:
+                        ov += ox * oy
+                if ov < best_overlap:
+                    best_overlap = ov
+                    lx, ly = cx, cy
+            # 如果所有候选都冲突，用重叠最小的（上面已记录）
+
+            placed_labels.append(_mk_bbox(lx, ly))
+
             lg = ET.SubElement(g, f'{{{SVG_NS}}}g')
             md = ET.SubElement(lg, f'{{{SVG_NS}}}metadata')
             ET.SubElement(md, f'{{{IEC_NS}}}PSR_Ref', {'ObjectID': f'TXT_{pid}'})
-            ET.SubElement(lg, f'{{{SVG_NS}}}rect', {
-                'x': f'{x - tw / 2:.1f}', 'y': f'{ly - font_size + 2:.1f}',
-                'width': f'{tw:.1f}', 'height': f'{font_size + 2:.1f}',
-                'fill': '#ffffff', 'stroke': 'none',
-            })
             t = ET.SubElement(lg, f'{{{SVG_NS}}}text', {
-                'x': str(x), 'y': str(ly), 'text-anchor': 'middle',
+                'x': str(lx), 'y': str(ly), 'text-anchor': 'middle',
                 'font-size': str(font_size), 'fill': C_TEXT, 'font-weight': weight,
+                'stroke': '#ffffff', 'stroke-width': '3.5', 'paint-order': 'stroke',
             })
             t.text = disp
 
@@ -907,7 +1063,7 @@ class SvgBeautifier:
         info = self.sym_box.get(sym)
         if info:
             return info['left'], info['right'], info['top'], info['bottom']
-        return -15.0, 15.0, -10.0, 10.0
+        return -22.0, 22.0, -22.0, 22.0
 
     @staticmethod
     def _display_name(d):

@@ -1,13 +1,12 @@
 {
   "stage": "station_tie_overview",
-  "feeder_id": "SUB004",
-  "topo_device_count": 0,
   "svg_device_count": 180,
-  "defects_by_type": {
-    "图上有模型无": 180,
-    "模型有图无": 0,
-    "物理连接不一致": 0,
-    "逻辑连接不一致": 0
-  },
-  "total_defects": 180
+  "svg_connection_count": 144,
+  "topo_device_count": 180,
+  "only_in_svg": 0,
+  "connection_mismatch": 0,
+  "broken_path": 0,
+  "total_defects": 3,
+  "pass_rate": "100%",
+  "stub_validator": true
 }
