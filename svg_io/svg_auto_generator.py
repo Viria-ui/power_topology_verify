@@ -533,12 +533,14 @@ class SvgAutoGenerator:
 
     # 设备类型代码 -> 标准符号类型映射
     _TYPE_CODE_MAP = {
-        "1702": "line", "1703": "transformer", "1705": "breaker",
-        "1706": "load_switch", "1707": "fuse", "1708": "disconnector",
-        "1709": "ground_switch", "1710": "busbar", "1713": "pt",
-        "1714": "pole", "1719": "consumer", "1720": "composite_switch",
-        "1301": "busbar", "1311": "transformer", "1321": "breaker",
-        "1322": "disconnector", "1323": "ground_switch", "1313": "ct",
+        "1702": "line", "1703": "transformer", "1704": "reactor",
+        "1705": "breaker", "1706": "load_switch", "1707": "fuse",
+        "1708": "disconnector", "1709": "ground_switch", "1710": "busbar",
+        "1713": "pt", "1714": "pole", "1719": "consumer", "1720": "composite_switch",
+        "1301": "busbar", "1311": "transformer", "1313": "ct", "1314": "pt",
+        "1317": "station_transformer", "1318": "transformer", "1321": "breaker",
+        "1322": "disconnector", "1323": "ground_switch", "1325": "reactor",
+        "1328": "arrester",
         "0307": "breaker", "0201": "load_switch", "0202": "disconnector",
         "0203": "ground_switch", "0302": "fuse", "0305": "pt",
         "0306": "ct", "0110": "transformer", "0111": "distribution_transformer",
@@ -578,7 +580,7 @@ class SvgAutoGenerator:
                     f'rx="2" fill="{PAL["main"]}" stroke="none"/>')
 
         # 变压器/配变：双圆圈
-        if sym_type in ("transformer", "distribution_transformer"):
+        if sym_type in ("transformer", "distribution_transformer", "station_transformer"):
             r = min(w, h) * 0.28
             return (f'<circle cx="{cx-r*0.6:.1f}" cy="{cy:.1f}" r="{r:.1f}" '
                     f'fill="none" stroke="{color}" stroke-width="2"/>'
@@ -645,6 +647,15 @@ class SvgAutoGenerator:
         if sym_type == "arrester":
             return (f'<rect x="{cx-6:.1f}" y="{cy-8:.1f}" width="12" height="16" '
                     f'rx="1" fill="white" stroke="{color}" stroke-width="1.5"/>')
+
+        # 电抗器/消弧线圈：矩形+内部斜线
+        if sym_type == "reactor":
+            return (f'<rect x="{cx-10:.1f}" y="{cy-8:.1f}" width="20" height="16" '
+                    f'rx="2" fill="white" stroke="{color}" stroke-width="1.8"/>'
+                    f'<line x1="{cx-6:.1f}" y1="{cy-4:.1f}" x2="{cx+6:.1f}" y2="{cy+4:.1f}" '
+                    f'stroke="{color}" stroke-width="1.2"/>'
+                    f'<line x1="{cx-6:.1f}" y1="{cy+4:.1f}" x2="{cx+6:.1f}" y2="{cy-4:.1f}" '
+                    f'stroke="{color}" stroke-width="1.2"/>')
 
         # 站房/容器：大矩形（虚线边框）
         if sym_type == "station":
