@@ -669,6 +669,16 @@ class SvgAutoGenerator:
         if pos and cols > rows:
             pos = {n: (p[1], p[0]) for n, p in pos.items()}
             cols, rows = rows, cols
+            # 交换后若太窄（宽高比<0.3），缩放x坐标让宽度合理（设备在y方向排列，x缩放不会重叠）
+            xs_t = [p[0] for p in pos.values()]
+            ys_t = [p[1] for p in pos.values()]
+            w_t = max(xs_t) - min(xs_t) + NODE_W
+            h_t = max(ys_t) - min(ys_t) + NODE_H
+            if h_t > 0 and w_t / h_t < 0.3:
+                min_x = min(xs_t)
+                target_w = 0.35 * h_t
+                scale = target_w / w_t if w_t > 0 else 1.0
+                pos = {n: (min_x + (p[0] - min_x) * scale, p[1]) for n, p in pos.items()}
         if not pos:
             self._write_svg(out_path, 400, 200,
                 f'<text x="200" y="100" text-anchor="middle" fill="{PAL["ink"]}" font-size="14">'
