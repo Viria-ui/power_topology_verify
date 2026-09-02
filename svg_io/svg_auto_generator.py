@@ -531,6 +531,21 @@ class SvgAutoGenerator:
         if "负荷" in tp or "用电" in tp or "配变" in tp: return PAL["load"]
         return PAL["ink"]
 
+    # 设备类型代码 -> 标准符号类型映射
+    _TYPE_CODE_MAP = {
+        "1702": "line", "1703": "transformer", "1705": "breaker",
+        "1706": "load_switch", "1707": "fuse", "1708": "disconnector",
+        "1709": "ground_switch", "1710": "busbar", "1713": "pt",
+        "1714": "pole", "1719": "consumer", "1720": "composite_switch",
+        "1301": "busbar", "1311": "transformer", "1321": "breaker",
+        "1322": "disconnector", "1323": "ground_switch", "1313": "ct",
+        "0307": "breaker", "0201": "load_switch", "0202": "disconnector",
+        "0203": "ground_switch", "0302": "fuse", "0305": "pt",
+        "0306": "ct", "0110": "transformer", "0111": "distribution_transformer",
+        "0115": "pole", "0313": "line_end", "0314": "line_end",
+        "370000": "consumer", "0309": "arrester",
+    }
+
     @staticmethod
     def _device_symbol(nd: dict, x: float, y: float, w: float, h: float) -> str:
         """根据设备类型渲染标准电气符号，返回SVG片段。"""
@@ -539,13 +554,31 @@ class SvgAutoGenerator:
         cx, cy = x + w / 2, y + h / 2
         color = SvgAutoGenerator._node_color(nd)
 
+        # 归一化设备类型：数字代码 -> 标准符号类型
+        sym_type = SvgAutoGenerator._TYPE_CODE_MAP.get(tp.strip(), "")
+        if not sym_type:
+            # 后备：用中文名称/英文名称判断
+            tl = tp.lower()
+            if "母线" in tp or "busbar" in tl: sym_type = "busbar"
+            elif "变压" in tp or "配变" in tp or "transformer" in tl: sym_type = "transformer"
+            elif "断路" in tp or "breaker" in tl: sym_type = "breaker"
+            elif "负荷" in tp or "load" in tl: sym_type = "load_switch"
+            elif "隔离" in tp or "disconnector" in tl: sym_type = "disconnector"
+            elif "接地" in tp: sym_type = "ground_switch"
+            elif "熔断" in tp or "保险" in tp or "fuse" in tl: sym_type = "fuse"
+            elif "互感" in tp or "pt" in tl: sym_type = "pt"
+            elif "杆塔" in tp or "pole" in tl: sym_type = "pole"
+            elif "用户" in tp or "用电" in tp or "负荷" in tp or "consumer" in tl: sym_type = "consumer"
+            elif "站" in tp or "室" in tp or "container" in tl: sym_type = "station"
+            elif "线路" in tp or "线段" in tp or "line" in tl: sym_type = "line"
+
         # 母线：粗绿色矩形
-        if "母线" in tp or "busbar" in tp.lower():
+        if sym_type == "busbar":
             return (f'<rect x="{x:.1f}" y="{cy-4:.1f}" width="{w:.1f}" height="8" '
                     f'rx="2" fill="{PAL["main"]}" stroke="none"/>')
 
         # 变压器/配变：双圆圈
-        if "变压" in tp or "配变" in tp or "transformer" in tp.lower():
+        if sym_type in ("transformer", "distribution_transformer"):
             r = min(w, h) * 0.28
             return (f'<circle cx="{cx-r*0.6:.1f}" cy="{cy:.1f}" r="{r:.1f}" '
                     f'fill="none" stroke="{color}" stroke-width="2"/>'
@@ -553,7 +586,7 @@ class SvgAutoGenerator:
                     f'fill="none" stroke="{color}" stroke-width="2"/>')
 
         # 断路器：矩形+X
-        if "断路" in tp or "breaker" in tp.lower():
+        if sym_type == "breaker":
             return (f'<rect x="{cx-12:.1f}" y="{cy-10:.1f}" width="24" height="20" '
                     f'rx="2" fill="white" stroke="{color}" stroke-width="2"/>'
                     f'<line x1="{cx-8:.1f}" y1="{cy-6:.1f}" x2="{cx+8:.1f}" y2="{cy+6:.1f}" '
@@ -561,39 +594,66 @@ class SvgAutoGenerator:
                     f'<line x1="{cx+8:.1f}" y1="{cy-6:.1f}" x2="{cx-8:.1f}" y2="{cy+6:.1f}" '
                     f'stroke="{color}" stroke-width="1.5"/>')
 
-        # 开关/负荷开关/隔离开关：圆圈+斜线（刀闸符号）
-        if "开关" in tp or "隔离" in tp or "负荷" in tp or "disconnector" in tp.lower() or "switch" in tp.lower():
+        # 负荷开关/组合开关：圆圈+斜线（加粗）
+        if sym_type in ("load_switch", "composite_switch"):
+            return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="8" fill="white" '
+                    f'stroke="{color}" stroke-width="2.2"/>'
+                    f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{cx+11:.1f}" y2="{cy-9:.1f}" '
+                    f'stroke="{color}" stroke-width="2.2"/>')
+
+        # 隔离开关：圆圈+斜线
+        if sym_type == "disconnector":
             return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="7" fill="white" '
                     f'stroke="{color}" stroke-width="1.8"/>'
                     f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{cx+10:.1f}" y2="{cy-8:.1f}" '
                     f'stroke="{color}" stroke-width="1.8"/>')
 
+        # 接地刀闸：圆圈+向下斜线+接地符号
+        if sym_type == "ground_switch":
+            return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="7" fill="white" '
+                    f'stroke="{color}" stroke-width="1.8"/>'
+                    f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{cx:.1f}" y2="{cy+10:.1f}" '
+                    f'stroke="{color}" stroke-width="1.8"/>'
+                    f'<line x1="{cx-5:.1f}" y1="{cy+10:.1f}" x2="{cx+5:.1f}" y2="{cy+10:.1f}" '
+                    f'stroke="{color}" stroke-width="1.5"/>')
+
         # 熔断器：矩形
-        if "保险" in tp or "熔断" in tp or "fuse" in tp.lower():
+        if sym_type == "fuse":
             return (f'<rect x="{cx-10:.1f}" y="{cy-6:.1f}" width="20" height="12" '
                     f'rx="1" fill="white" stroke="{color}" stroke-width="1.8"/>')
 
-        # 电压互感器/电流互感器：小圆圈
-        if "互感" in tp or "PT" in tp or "CT" in tp or "transform" in tp.lower():
-            return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="8" fill="white" '
-                    f'stroke="{color}" stroke-width="1.8"/>')
+        # 电压互感器/电流互感器：双小圆圈
+        if sym_type in ("pt", "ct"):
+            return (f'<circle cx="{cx-4:.1f}" cy="{cy:.1f}" r="6" fill="white" '
+                    f'stroke="{color}" stroke-width="1.5"/>'
+                    f'<circle cx="{cx+4:.1f}" cy="{cy:.1f}" r="6" fill="white" '
+                    f'stroke="{color}" stroke-width="1.5"/>')
 
-        # 用户/负荷：方块
-        if "用户" in tp or "用电" in tp or "负荷" in tp or "consumer" in tp.lower() or "load" in tp.lower():
+        # 用户/负荷：方块+J
+        if sym_type == "consumer":
             return (f'<rect x="{cx-9:.1f}" y="{cy-9:.1f}" width="18" height="18" '
                     f'rx="1" fill="white" stroke="{color}" stroke-width="1.8"/>'
                     f'<text x="{cx:.1f}" y="{cy+4:.1f}" text-anchor="middle" '
                     f'font-size="10" fill="{color}" font-weight="bold">J</text>')
 
         # 杆塔：三角形
-        if "杆塔" in tp or "pole" in tp.lower():
+        if sym_type == "pole":
             return (f'<polygon points="{cx},{cy-10} {cx-9},{cy+8} {cx+9},{cy+8}" '
                     f'fill="white" stroke="{color}" stroke-width="1.5"/>')
 
-        # 站房/容器：大矩形
-        if "站" in tp or "室" in tp or "container" in tp.lower():
+        # 避雷器：小矩形
+        if sym_type == "arrester":
+            return (f'<rect x="{cx-6:.1f}" y="{cy-8:.1f}" width="12" height="16" '
+                    f'rx="1" fill="white" stroke="{color}" stroke-width="1.5"/>')
+
+        # 站房/容器：大矩形（虚线边框）
+        if sym_type == "station":
             return (f'<rect x="{x+5:.1f}" y="{y+5:.1f}" width="{w-10:.1f}" height="{h-10:.1f}" '
                     f'rx="4" fill="#fafafa" stroke="{PAL["station"]}" stroke-width="1.5" stroke-dasharray="4 2"/>')
+
+        # 线路段/线路端点：小圆点
+        if sym_type in ("line", "line_end"):
+            return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="3" fill="{color}" stroke="none"/>')
 
         # 默认：圆角矩形
         return (f'<rect x="{x+2:.1f}" y="{y+2:.1f}" width="{w-4:.1f}" height="{h-4:.1f}" '
