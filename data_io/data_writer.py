@@ -41,9 +41,17 @@ def gen_sample_data():
         review_status="待复核",
         detail="该设备无任何线路连接，判定悬空"
     )
-    # 统一落在配置的输出目录，避免随运行目录漂移到项目外。
-    export_abnormal_csv([sample], "sample_abnormal.csv")
-    export_abnormal_json([sample], "sample_abnormal.json")
+    # 样例文件输出到项目根目录docs，不要复用export_abnormal_csv（它会强制拼接OUTPUT_CSV）
+    docs_dir = os.path.join(PROJECT_ROOT, "docs")
+    os.makedirs(docs_dir, exist_ok=True)
+
+    csv_path = os.path.join(docs_dir, "sample_abnormal.csv")
+    df = pd.DataFrame([sample.model_dump()])
+    df.to_csv(csv_path, index=False, encoding="utf-8-sig")
+
+    json_path = os.path.join(docs_dir, "sample_abnormal.json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump([sample.model_dump()], f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":
     gen_sample_data()

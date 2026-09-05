@@ -321,10 +321,10 @@ class TopologyBuilder:
             term_ids = dist_terms_by_equip[equip_id]
             build_device_internal_edges(self.dist_topo, row, term_ids)
 
-    def check_topo_abnormal(self, topo: TopologyGraph, trace_id="TOPO001"):
+    def check_topo_abnormal(self, topo: TopologyGraph, trace_id="TOPO001", measure_proc=None):
         """拓扑异常检测：悬空、孤岛、断点"""
         from core.topology_validator import run_database_topo_check
-        abnormal_list, breakpoint_list, tie_loop_list = run_database_topo_check(topo, trace_id)
+        abnormal_list, breakpoint_list, tie_loop_list = run_database_topo_check(topo, trace_id, measure_proc=measure_proc)
         # 将联络合环结果回写到topo对象，方便后续xlsx导出读取
         topo.tie_loop_list = tie_loop_list
         return abnormal_list, breakpoint_list
@@ -389,22 +389,7 @@ class TopologyBuilder:
 
     def build_full_topology(self):
         """完整构建流程：拆分→加设备→生成真实端子→端子互连→设备内部通路→拓扑校验"""
-        from core.constants import SWITCH_TYPES as _SW
-
-        switch_type_list = _SW
-        all_switch_ids = set()
-        if not self.dist_equip.empty and "EQUIP_ID" in self.dist_equip.columns and "EQUIP_TYPE" in self.dist_equip.columns:
-            mask_sw = self.dist_equip["EQUIP_TYPE"].astype(str).isin(switch_type_list)
-            sw_rows = self.dist_equip.loc[mask_sw]
-            all_switch_ids = set(str(x) for x in sw_rows["EQUIP_ID"].tolist())
-        logger.info("开关ID集合初始化：候选开关类型=%d 识别开关数=%d",
-                    len(switch_type_list), len(all_switch_ids))
-
-        yx_df = self.yx_real_df
-
-        from core.measure_preprocess import MeasurePreprocessor
-        meas = MeasurePreprocessor(yx_df, all_switch_ids, time_window_sec=10)
-        switch_state_map, state_source_map = meas.run()
+        table_data = self.table_data
 
         self.split_voltage_data()
         self.add_all_devices()
@@ -412,40 +397,80 @@ class TopologyBuilder:
         self.build_graph_from_terminal()
         self.fill_all_internal_connection()
 
-        # ----------------拓扑对象创建完成，挂载开关状态----------------
-        self.dist_topo.switch_state_map = switch_state_map
-        self.dist_topo.switch_state_source = state_source_map
-        self.main_topo.switch_state_map = {}  # 主网默认空
-        self.main_topo.switch_state_source = {}
+        # ============【全新遥信预处理调用】============
+        from core.measure_preprocess import MeasurePreprocessor
+        # ①新构造函数：只传完整table_data
+        meas = MeasurePreprocessor(table_data, time_window_sec=5)
+
+        # ②收集全部开关ID集合，从已经建好的topo设备map拿（优先，不要从原始equip_df）
+        switch_type_set = {"断路器", "隔离开关", "负荷开关", "接地隔离开关"}
+        all_switch_ids = set()
+        # 配网开关
+        for eid, dev in self.dist_topo.device_map.items():
+            if dev.equip_type in switch_type_set:
+                all_switch_ids.add(eid)
+        # 主网开关
+        if len(self.main_topo.device_map) > 0:
+            for eid, dev in self.main_topo.device_map.items():
+                if dev.equip_type in switch_type_set:
+                    all_switch_ids.add(eid)
+
+        # ③执行run，把开关ID集合传给run方法
+        final_state_map, source_map = meas.run(all_switch_ids)
+
+        # ④回填每个Device的switch_status字段，并同步到图节点
         mounted = 0
-        for equip_id, state in switch_state_map.items():
-            if equip_id in self.dist_topo.device_map:
-                dev = self.dist_topo.device_map[equip_id]
+        for eid, dev in self.dist_topo.device_map.items():
+            if dev.equip_type in switch_type_set:
+                state = final_state_map.get(eid, "CLOSE")
                 dev.switch_status = state
-                if equip_id in self.dist_topo.graph.nodes:
-                    data = self.dist_topo.graph.nodes[equip_id]
+                if eid in self.dist_topo.graph.nodes:
+                    data = self.dist_topo.graph.nodes[eid]
                     info = data.get("dev_info", {})
                     info["switch_status"] = state
                     data["dev_info"] = info
                 mounted += 1
-        print(f"[遥信预处理统计] 总开关状态映射条目:{len(switch_state_map)} 实际挂载到设备:{mounted}")
-        rtu_cnt = sum(1 for v in state_source_map.values() if v == "rtu")
-        default_cnt = sum(1 for v in state_source_map.values() if v == "default_rule")
+        if len(self.main_topo.device_map) > 0:
+            for eid, dev in self.main_topo.device_map.items():
+                if dev.equip_type in switch_type_set:
+                    state = final_state_map.get(eid, "CLOSE")
+                    dev.switch_status = state
+                    if eid in self.main_topo.graph.nodes:
+                        data = self.main_topo.graph.nodes[eid]
+                        info = data.get("dev_info", {})
+                        info["switch_status"] = state
+                        data["dev_info"] = info
+
+        # 兼容旧字段保留（不使用，仅防止其他代码报key不存在）
+        self.dist_topo.switch_state_map = final_state_map
+        self.dist_topo.switch_state_source = source_map
+        self.main_topo.switch_state_map = {}  # 主网默认空
+        self.main_topo.switch_state_source = {}
+
+        # 把预处理实例存到builder自身属性，后面传给校验器
+        self.measure_proc = meas
+
+        print(f"[遥信预处理统计] 总开关状态映射条目:{len(final_state_map)} 实际挂载到设备:{mounted}")
+        rtu_cnt = sum(1 for v in source_map.values() if v == "rtu")
+        default_cnt = sum(1 for v in source_map.values() if v == "default_rule")
         print(f"  -->遥信实测开关:{rtu_cnt}，赛题默认合位推演开关:{default_cnt}")
         electrical_defects = self.check_electrical_logic()
         print(f"[电气逻辑校验] RULE-E01~E07 命中:{len(electrical_defects)}")
+        # ==============================================
 
         print("开始执行拓扑异常检测：悬空、孤岛、断点")
         main_ready = len(self.main_equip) > 0 and len(self.main_topo.point_map) > 0
         if main_ready:
-            main_abnormal, main_break = self.check_topo_abnormal(self.main_topo, trace_id="MAIN_001")
+            main_abnormal, main_break = self.check_topo_abnormal(self.main_topo, trace_id="MAIN_001", measure_proc=self.measure_proc)
         else:
             print(
                 "[警告] 主网设备数或真实端子数为 0，已跳过主网拓扑构建与校验："
                 f"设备数={len(self.main_equip)}，端子数={len(self.main_topo.point_map)}"
             )
             main_abnormal, main_break = [], []
-        dist_abnormal, dist_break = self.check_topo_abnormal(self.dist_topo, trace_id="DIST_001")
+
+        dist_abnormal, dist_break = self.check_topo_abnormal(self.dist_topo, trace_id="DIST_001", measure_proc=self.measure_proc)
+
         print(f"主网异常数量：{len(main_abnormal)}，断点数量：{len(main_break)}")
         print(f"配网异常数量：{len(dist_abnormal)}，断点数量：{len(dist_break)}")
         return self.main_topo, self.dist_topo
