@@ -824,8 +824,8 @@ class SvgBeautifier:
         self._draw_wires(cg)
 
         g = ET.SubElement(svg, f'{{{SVG_NS}}}g', {'id': 'MainLayer'})
-        self._draw_containers(g)
         self._draw_devices(g)
+        self._draw_containers(g)
         self._draw_labels(g)
 
         ET.ElementTree(svg).write(out_path, encoding='utf-8', xml_declaration=True)
@@ -859,7 +859,7 @@ class SvgBeautifier:
             ET.SubElement(g, f'{{{SVG_NS}}}rect', {
                 'x': str(x1), 'y': str(y1),
                 'width': str(x2 - x1), 'height': str(y2 - y1),
-                'fill': '#ffffff', 'stroke': C_CONTAINER,
+                'fill': 'none', 'stroke': C_CONTAINER,
                 'stroke-width': str(W_CONTAINER), 'rx': '3',
             })
             ET.SubElement(g, f'{{{SVG_NS}}}rect', {
@@ -1055,14 +1055,10 @@ class SvgBeautifier:
             disp = name if len(name) <= 28 else name[:26] + '..'
             tw = max(len(disp) * F_BRANCH * 1.1, 20)
             placed_labels.append((x - tw / 2, ly - F_BRANCH + 2, x + tw / 2, ly + 2))
-            ET.SubElement(g, f'{{{SVG_NS}}}rect', {
-                'x': f'{x - tw / 2:.1f}', 'y': f'{ly - F_BRANCH + 2:.1f}',
-                'width': f'{tw:.1f}', 'height': f'{F_BRANCH + 2:.1f}',
-                'fill': '#ffffff', 'stroke': 'none',
-            })
             t = ET.SubElement(g, f'{{{SVG_NS}}}text', {
                 'x': str(x), 'y': str(ly),
                 'text-anchor': 'middle', 'font-size': str(F_BRANCH), 'fill': C_TEXT,
+                'stroke': '#ffffff', 'stroke-width': '3.5', 'paint-order': 'stroke',
             })
             t.text = disp
 
@@ -1133,14 +1129,10 @@ class SvgBeautifier:
             lg = ET.SubElement(g, f'{{{SVG_NS}}}g')
             md = ET.SubElement(lg, f'{{{SVG_NS}}}metadata')
             ET.SubElement(md, f'{{{IEC_NS}}}PSR_Ref', {'ObjectID': f'TXT_{pid}'})
-            ET.SubElement(lg, f'{{{SVG_NS}}}rect', {
-                'x': f'{lx - tw / 2:.1f}', 'y': f'{ly - font_size + 2:.1f}',
-                'width': f'{tw:.1f}', 'height': f'{font_size + 2:.1f}',
-                'fill': '#ffffff', 'stroke': 'none',
-            })
             t = ET.SubElement(lg, f'{{{SVG_NS}}}text', {
                 'x': str(lx), 'y': str(ly), 'text-anchor': 'middle',
                 'font-size': str(font_size), 'fill': C_TEXT, 'font-weight': weight,
+                'stroke': '#ffffff', 'stroke-width': '3.5', 'paint-order': 'stroke',
             })
             t.text = disp
 

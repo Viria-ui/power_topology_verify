@@ -1,247 +1,47 @@
 [
   {
-    "equip_id": "TMP00043850",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043850 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043850 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043850 并添加iec:PSR_Ref元数据"
+    "trace_uuid": "",
+    "equip_id": "",
+    "point_id": "",
+    "line_id": "",
+    "defect_type": "P2-stub",
+    "severity": "medium",
+    "rule_code": "P2-DEV-COUNT",
+    "description": "SVG设备数 vs 期望设备数",
+    "suggestion": "",
+    "sql_draft": "",
+    "detail": "SVG设备=2034, 期望=1679",
+    "stage": "feeder_single_line",
+    "check_result": "WARN"
   },
   {
-    "equip_id": "TMP00043851",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043851 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043851 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043851 并添加iec:PSR_Ref元数据"
+    "trace_uuid": "",
+    "equip_id": "",
+    "point_id": "",
+    "line_id": "",
+    "defect_type": "INFO",
+    "severity": "info",
+    "rule_code": "P2-EDGE-COUNT",
+    "description": "SVG连接数 vs 期望边数",
+    "suggestion": "",
+    "sql_draft": "",
+    "detail": "SVG连接=1646, 期望=1646",
+    "stage": "feeder_single_line",
+    "check_result": "PASS"
   },
   {
-    "equip_id": "TMP00043852",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043852 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043852 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043852 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043853",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043853 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043853 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043853 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043854",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043854 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043854 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043854 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043855",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043855 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043855 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043855 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043856",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043856 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043856 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043856 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043857",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043857 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043857 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043857 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043858",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043858 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043858 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043858 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043859",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043859 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043859 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043859 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043860",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043860 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043860 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043860 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043861",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043861 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043861 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043861 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043862",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043862 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043862 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043862 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043863",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043863 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043863 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043863 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043864",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043864 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043864 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043864 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043865",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043865 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043865 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043865 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043866",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043866 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043866 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043866 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043867",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043867 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043867 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043867 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043868",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043868 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043868 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043868 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043869",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043869 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043869 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043869 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043870",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043870 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043870 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043870 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043871",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043871 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043871 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043871 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043872",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043872 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043872 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043872 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043873",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043873 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043873 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043873 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043874",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043874 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043874 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043874 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043875",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043875 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043875 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043875 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043876",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043876 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043876 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043876 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043877",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043877 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043877 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043877 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043878",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043878 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043878 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043878 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043879",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043879 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043879 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043879 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043880",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043880 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043880 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043880 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043881",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[杆塔XX](ID:TMP00043881 TYPE=1714)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1714_Layer 补画设备图元 TMP00043881 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1714_Layer 补画ID=TMP00043881 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043889",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[避雷器001](ID:TMP00043889 TYPE=1328)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1328_Layer 补画设备图元 TMP00043889 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1328_Layer 补画ID=TMP00043889 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043890",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[避雷器002](ID:TMP00043890 TYPE=1328)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1328_Layer 补画设备图元 TMP00043890 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1328_Layer 补画ID=TMP00043890 并添加iec:PSR_Ref元数据"
-  },
-  {
-    "equip_id": "TMP00043891",
-    "defect_type": "模型有图无",
-    "description": "数据库模型存在设备[避雷器003](ID:TMP00043891 TYPE=1328)，但SVG图纸中缺失图元",
-    "suggestion": "请在SVG图层 1328_Layer 补画设备图元 TMP00043891 及PSR_Ref元数据标注",
-    "sql_draft": "-- SVG图缺失: 请在SVG图层=1328_Layer 补画ID=TMP00043891 并添加iec:PSR_Ref元数据"
+    "trace_uuid": "",
+    "equip_id": "",
+    "point_id": "",
+    "line_id": "",
+    "defect_type": "INFO",
+    "severity": "info",
+    "rule_code": "P2-DEV-COVERAGE",
+    "description": "期望设备ID覆盖率",
+    "suggestion": "",
+    "sql_draft": "",
+    "detail": "覆盖率=97.92% 缺失=35",
+    "stage": "feeder_single_line",
+    "check_result": "PASS"
   }
 ]

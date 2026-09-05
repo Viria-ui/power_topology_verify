@@ -1,16 +1,47 @@
 [
   {
-    "equip_id": "AUTO__cac9aedf",
-    "defect_type": "图上有模型无",
-    "description": "SVG图纸存在设备[](ID:AUTO__cac9aedf 图层=)，但数据库拓扑模型中缺失",
-    "suggestion": "建议核查是否为非设备图元。若非豁免接头/杆塔，在 EQUIP_JBS_PWEQUIPINFO 中补全设备 AUTO__cac9aedf",
-    "sql_draft": "INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID,EQUIP_NAME,EQUIP_TYPE,FEEDER_ID,VOLTAGE_TYPE,DSUBSTATION_ID) VALUES ('AUTO__cac9aedf','SVG补录','','TMP00034205','1010','');"
+    "trace_uuid": "",
+    "equip_id": "",
+    "point_id": "",
+    "line_id": "",
+    "defect_type": "P2-stub",
+    "severity": "medium",
+    "rule_code": "P2-DEV-COUNT",
+    "description": "SVG设备数 vs 期望设备数",
+    "suggestion": "",
+    "sql_draft": "",
+    "detail": "SVG设备=2, 期望=700",
+    "stage": "power_trace",
+    "check_result": "WARN"
   },
   {
-    "equip_id": "AUTO__cd66603f",
-    "defect_type": "图上有模型无",
-    "description": "SVG图纸存在设备[](ID:AUTO__cd66603f 图层=)，但数据库拓扑模型中缺失",
-    "suggestion": "建议核查是否为非设备图元。若非豁免接头/杆塔，在 EQUIP_JBS_PWEQUIPINFO 中补全设备 AUTO__cd66603f",
-    "sql_draft": "INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID,EQUIP_NAME,EQUIP_TYPE,FEEDER_ID,VOLTAGE_TYPE,DSUBSTATION_ID) VALUES ('AUTO__cd66603f','SVG补录','','TMP00034205','1010','');"
+    "trace_uuid": "",
+    "equip_id": "",
+    "point_id": "",
+    "line_id": "",
+    "defect_type": "P2-stub",
+    "severity": "medium",
+    "rule_code": "P2-EDGE-COUNT",
+    "description": "SVG连接数 vs 期望边数",
+    "suggestion": "",
+    "sql_draft": "",
+    "detail": "SVG连接=0, 期望=699",
+    "stage": "power_trace",
+    "check_result": "WARN"
+  },
+  {
+    "trace_uuid": "",
+    "equip_id": "",
+    "point_id": "",
+    "line_id": "",
+    "defect_type": "P2-stub",
+    "severity": "medium",
+    "rule_code": "P2-DEV-COVERAGE",
+    "description": "期望设备ID覆盖率",
+    "suggestion": "",
+    "sql_draft": "",
+    "detail": "覆盖率=0.00% 缺失=700",
+    "stage": "power_trace",
+    "check_result": "WARN"
   }
 ]
