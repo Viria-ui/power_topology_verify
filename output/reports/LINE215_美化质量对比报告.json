@@ -6,51 +6,51 @@
     "defects_before": 944,
     "defects_after": 0,
     "defects_reduced": 944,
-    "devices_before": 1430,
-    "devices_after": 855,
+    "devices_before": 1432,
+    "devices_after": 856,
     "components_before": 84,
     "components_after": 6,
     "type_changes": {
-      "孤岛设备": 25,
-      "标注错位": 62,
-      "设备重叠": 857
+      "标注错位": 61,
+      "设备重叠": 858,
+      "孤岛设备": 25
     }
   },
   "before": {
     "stage": "美化前",
-    "total_devices": 1430,
+    "total_devices": 1432,
     "total_connections": 962,
     "total_defects": 944,
-    "defect_rate_percent": 66.0,
+    "defect_rate_percent": 65.9,
     "quality_score": 0.0,
     "defects_by_type": {
       "孤岛设备": 25,
-      "设备重叠": 857,
-      "标注错位": 62
+      "设备重叠": 858,
+      "标注错位": 61
     },
     "defects_by_severity": {
       "high": 25,
-      "medium": 857,
-      "low": 62
+      "medium": 858,
+      "low": 61
     },
     "connected_components": 84,
     "max_component_size": 9,
     "dangling_count": 0,
     "fake_connect_count": 0,
-    "overlap_count": 857,
-    "text_missing_count": 62
+    "overlap_count": 858,
+    "text_missing_count": 61
   },
   "after": {
     "stage": "美化后",
-    "total_devices": 855,
-    "total_connections": 1382,
+    "total_devices": 856,
+    "total_connections": 1384,
     "total_defects": 0,
     "defect_rate_percent": 0.0,
     "quality_score": 100,
     "defects_by_type": {},
     "defects_by_severity": {},
     "connected_components": 6,
-    "max_component_size": 768,
+    "max_component_size": 770,
     "dangling_count": 0,
     "fake_connect_count": 0,
     "overlap_count": 0,

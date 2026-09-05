@@ -84,7 +84,7 @@ LAYOUT = {
 # 业务分类标记
 WIRE_MARKERS = ('TMP', 'dxd')
 # 母线：数值码1710 + 字符串0311 + CIM类名
-BUSBAR_TYPES = {'0311', '1710', 'BusbarSection', '母线'}
+BUSBAR_TYPES = {'0311', '1710', 'BusbarSection', '母线', '1301'}
 # 容器/站房类
 CONTAINER_TYPES = {'zf01', 'zf06', 'zf07', 'zf08', 'Substation', '站房', '配电室', '箱变', '环网柜', '开关站'}
 # 开关类：数值码(JBS设备字典表) + CIM类名 + 中文名
@@ -93,19 +93,20 @@ CONTAINER_TYPES = {'zf01', 'zf06', 'zf07', 'zf08', 'Substation', '站房', '配�
 SWITCH_TYPES = {
     '0307', '0201', '0202', '0203', '0302', '0305', '0306', '0309',
     '1705', '1706', '1707', '1708', '1709',
+    '1321', '1322', '1323',
     'Breaker', 'LoadBreakSwitch', 'Disconnector', 'GroundDisconnector', 'Fuse', 'CompositeSwitch',
     '断路器', '负荷开关', '隔离开关', '刀闸', '接地刀闸', '熔断器', '组合开关',
 }
 # 变压器/配变：1703=配变 0110/0111=主变
-TRANSFORMER_TYPES = {'0110', '0111', '1703', 'PowerTransformer', '变压器', '配变'}
+TRANSFORMER_TYPES = {'0110', '0111', '1703', 'PowerTransformer', '变压器', '配变', '1311'}
 # 电容器/无功补偿/新能源（用于白名单豁免）
-CAPACITOR_TYPES = {'1711', '1712', 'Capacitor', 'Reactor', '电容器', 'SVG', '无功补偿', '电抗器', 'Filter', 'CAP'}
-NEW_ENERGY_TYPES = {'1720', '1721', '1722', '光伏', '储能', '分布式电源', '新能源', '风电', 'PV', 'ESS', 'DG'}
+CAPACITOR_TYPES = {'1711', '1712', 'Capacitor', 'Reactor', '电容器', 'SVG', '无功补偿', '电抗器', 'Filter', 'CAP', '1402', '1704'}
+NEW_ENERGY_TYPES = {'1721', '1722', '光伏', '储能', '分布式电源', '新能源', '风电', 'PV', 'ESS', 'DG'}
 # 负荷/用户/末端
-LOAD_TYPES = {'1730', '1731', 'EnergyConsumer', '电力用户', '配变', '用户', '负荷点', '表箱'}
+LOAD_TYPES = {'1730', '1731', 'EnergyConsumer', '电力用户', '配变', '用户', '负荷点', '表箱', '1719'}
 KEY_DEV_TYPES = SWITCH_TYPES | TRANSFORMER_TYPES | BUSBAR_TYPES
 # 电源设备识别（用于孤岛判定的电源点）
-SOURCE_TYPES = {'1701', '1702', '变电站', '主变', 'Substation', 'PowerTransformer'} | TRANSFORMER_TYPES | {'0110', '0111'}
+SOURCE_TYPES = {'变电站', '主变', 'Substation', 'PowerTransformer', '1301', '1311', '0110', '0111'}
 
 # 乱码检测：含大量生僻字/无意义组合的标注
 GARBAGE_PATTERNS = [
@@ -138,9 +139,12 @@ GRID_SIZE = 10.0
 TERMINAL_EXEMPT_TYPES = {
     "电力用户", "配变", "电缆终端头", "封头", "备用出线间隔", "用户", "负荷点", "表箱",
     "1730", "1731", "EnergyConsumer", "Junction", "接头", "PoleCode", "杆塔",
+    "1719", "1714", "1713",
 } | LOAD_TYPES
 # 开关类，要求必须2个有效端子，否则判单端悬空（完整的数值码+CIM+中文名集合）
-NON_TERMINAL_SWITCH_TYPES = SWITCH_TYPES | TRANSFORMER_TYPES - LOAD_TYPES
+# 规则（基线规范书 v1.0 表格6）：仅开关类设备要求 2 端子（断路器/负荷开关/隔离开关/刀闸）。
+# 母线(1301/1710/0311)与变压器不做 2 端子要求，不得混入开关类。
+NON_TERMINAL_SWITCH_TYPES = SWITCH_TYPES - LOAD_TYPES
 
 # 名称关键字命中则排除联络识别 R_TIE_EXCLUDE_001
 TIE_EXCLUDE_NAME_KEYS = {"站房", "配电室", "箱变", "台区", "配变", "用户", "负荷", "表箱"}

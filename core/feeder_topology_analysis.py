@@ -135,6 +135,159 @@ def _device_name(device_graph: nx.Graph, dev_id: str, fallback: str = "") -> str
     return fallback or dev_id
 
 
+def _has_db_path(device_graph: nx.Graph, a: str, b: str) -> bool:
+    if not device_graph.has_node(a) or not device_graph.has_node(b):
+        return False
+    if device_graph.has_edge(a, b):
+        return True
+    try:
+        return nx.has_path(device_graph, a, b)
+    except Exception:
+        return False
+
+
+def find_breakpoint_between(device_graph: nx.Graph, start_id: str, end_id: str) -> dict:
+    """标准 Sheet2 API：给定两设备，返回路径及首个分位开关/不可达断点。
+    兼容 TopologyGraph（含 .graph 属性）与纯 nx.Graph 两种传参。"""
+    if hasattr(device_graph, "graph") and isinstance(device_graph.graph, nx.Graph):
+        device_graph = device_graph.graph
+    if not device_graph.has_node(start_id) or not device_graph.has_node(end_id):
+        return {"found": False, "reason": "起点或终点不在拓扑中", "path": []}
+    try:
+        path = nx.shortest_path(device_graph, start_id, end_id)
+    except nx.NetworkXNoPath:
+        return {"found": True, "reason": "两点不可达", "path": []}
+    for node in path:
+        if _is_switch_node(device_graph, node) and str(device_graph.nodes[node].get("switch_status") or "") in {"open", "分位", "0"}:
+            return {"found": True, "reason": "分位开关断点", "breakpoint_id": node, "path": path}
+    return {"found": False, "reason": "两点连通", "path": path}
+
+
+def analyze_breakpoints(
+    *,
+    feeder_id: str,
+    svg_connections: list,
+    element_to_object_map: dict,
+    line_db_devices: dict,
+    device_graph: nx.Graph,
+    defects_report: list[dict],
+) -> list[dict]:
+    """拓扑连通性异常诊断与断点定位。"""
+    feeder_ids = set(line_db_devices.keys())
+    db_sub = _feeder_subgraph(device_graph, feeder_id)
+    svg_g = _build_svg_graph(svg_connections, element_to_object_map, feeder_ids)
+    rows: list[dict] = []
+    seen: set[tuple] = set()
+
+    def _append(row: dict) -> None:
+        key = (
+            row.get("起点设备id"),
+            row.get("终点设备id"),
+            row.get("本侧疑似断点设备id"),
+            row.get("断点类型"),
+        )
+        if key in seen:
+            return
+        seen.add(key)
+        rows.append(row)
+
+    for defect in defects_report:
+        if defect.get("defect_type") != "物理连接不一致":
+            continue
+        equip_key = str(defect.get("equip_id") or "")
+        if "<->" not in equip_key:
+            continue
+        parts = [p.strip() for p in equip_key.split("<->")]
+        if len(parts) != 2:
+            continue
+        a, b = parts
+        _append({
+            "起点设备id": a,
+            "终点设备id": b,
+            "断点类型": "图形物理连通、拓扑逻辑断开",
+            "本侧疑似断点设备id": a,
+            "本侧疑似断点设备名称": defect.get("equip_name") or _device_name(device_graph, a),
+            "对侧疑似断点设备id": b,
+            "对侧疑似断点设备名称": _device_name(device_graph, b),
+            "修正方案": defect.get("suggestion", ""),
+            "修正sql": defect.get("sql_draft", ""),
+        })
+
+    for a, b in svg_g.edges():
+        if a not in feeder_ids and b not in feeder_ids:
+            continue
+        if not _has_db_path(db_sub, a, b):
+            near_id, far_id = a, b
+            if _is_switch_node(device_graph, b) and not _is_switch_node(device_graph, a):
+                near_id, far_id = b, a
+            _append({
+                "起点设备id": a,
+                "终点设备id": b,
+                "断点类型": "SVG连通但模型不连通",
+                "本侧疑似断点设备id": near_id,
+                "本侧疑似断点设备名称": _device_name(device_graph, near_id),
+                "对侧疑似断点设备id": far_id,
+                "对侧疑似断点设备名称": _device_name(device_graph, far_id),
+                "修正方案": f"建议在模型中补全 {a} 与 {b} 之间的拓扑连接",
+                "修正sql": (
+                    f"INSERT INTO EQUIP_JBS_PWFEEDERLINE (START_ST_ID, END_ST_ID, FEEDER_ID) "
+                    f"VALUES ('{a}', '{b}', '{feeder_id}');"
+                ),
+            })
+
+    for node in svg_g.nodes():
+        if svg_g.degree(node) == 0:
+            _append({
+                "起点设备id": node,
+                "终点设备id": node,
+                "断点类型": "孤立节点",
+                "本侧疑似断点设备id": node,
+                "本侧疑似断点设备名称": _device_name(device_graph, node),
+                "对侧疑似断点设备id": "",
+                "对侧疑似断点设备名称": "",
+                "修正方案": "SVG图元未与任何设备建立有效连接，建议补画连接关系",
+                "修正sql": "-- SVG层面补全连接，无需直接修改数据库",
+            })
+
+    components = list(nx.connected_components(svg_g)) if svg_g.number_of_nodes() else []
+    if len(components) > 1:
+        sorted_comps = sorted(components, key=len, reverse=True)
+        main_comp = sorted_comps[0]
+        for comp in sorted_comps[1:]:
+            a = next(iter(main_comp))
+            b = next(iter(comp))
+            _append({
+                "起点设备id": a,
+                "终点设备id": b,
+                "断点类型": "连通分量断裂",
+                "本侧疑似断点设备id": a,
+                "本侧疑似断点设备名称": _device_name(device_graph, a),
+                "对侧疑似断点设备id": b,
+                "对侧疑似断点设备名称": _device_name(device_graph, b),
+                "修正方案": "SVG存在多个电气孤岛，需定位中间断点设备并补全连接",
+                "修正sql": "-- 请结合图纸定位断点并补全拓扑",
+            })
+
+    for defect in defects_report:
+        if defect.get("defect_type") == "模型有图上无":
+            dev_id = str(defect.get("equip_id") or "")
+            _append({
+                "起点设备id": dev_id,
+                "终点设备id": dev_id,
+                "断点类型": "模型有图无",
+                "本侧疑似断点设备id": dev_id,
+                "本侧疑似断点设备名称": defect.get("equip_name") or _device_name(device_graph, dev_id),
+                "对侧疑似断点设备id": "",
+                "对侧疑似断点设备名称": "",
+                "修正方案": defect.get("suggestion", ""),
+                "修正sql": defect.get("sql_draft", ""),
+            })
+
+    for idx, row in enumerate(rows, start=1):
+        row["序号"] = idx
+    return rows
+
+
 # ------------------------------------------------------------------
 #  Sheet 3：联络开关自动识别（核心修复）
 # ------------------------------------------------------------------

@@ -180,6 +180,31 @@ class TopologyBuilder:
                 src_cnt_main += 1
             logger.info(f"通过ZWSUBSTATION补充注入电源: {src_cnt_main} 台")
             
+    def _inject_main_substation_sources(self):
+        """主配电源注入：配网设备若与主网端子共享 CONNECTIVITYNODE_ID（Q41 主配拼接口径），
+        视为电源点（is_source=True），供孤岛检测判定该配网分量已连通主网电源。"""
+        if self.zw_terminal_df is None or self.zw_terminal_df.empty:
+            return
+        try:
+            zw_cn = set(self.zw_terminal_df['CONNECTIVITYNODE_ID'].dropna().astype(str))
+        except KeyError:
+            return
+        if not zw_cn:
+            return
+        if self.pw_terminal_df is None or self.pw_terminal_df.empty:
+            return
+        injected = 0
+        for _, row in self.pw_terminal_df.iterrows():
+            cn = str(row.get('CONNECTIVITYNODE_ID') or '')
+            if not cn or cn not in zw_cn:
+                continue
+            eid = str(row.get('EQUIP_ID') or '')
+            dev = self.dist_topo.device_map.get(eid)
+            if dev is not None and not dev.is_source:
+                dev.is_source = True
+                injected += 1
+        logger.info("主配电源注入：%d 台配网设备经共享连接点接入主网电源", injected)
+
     def build_real_terminal_points(self):
         """从端子表生成真实端子ConnectPoint，point_id=TERMINAL_ID"""
         # 配网端子
@@ -253,11 +278,14 @@ class TopologyBuilder:
         else:
             # -----配网端子建边-----
             cn_to_terms = defaultdict(list)
+            term_to_equip = {}
             for _, row in self.pw_terminal_df.iterrows():
                 cn_id = str(row.get("CONNECT_NODE_ID") or row.get("CONNECTIVITYNODE_ID") or "")
                 term_id = str(row.get("TERMINAL_ID") or row.get("ID") or "")
                 if cn_id and term_id:
                     cn_to_terms[cn_id].append(term_id)
+                if term_id:
+                    term_to_equip[term_id] = str(row.get("EQUIP_ID") or "")
 
             for cn, term_list in cn_to_terms.items():
                 if len(term_list) < 2:
@@ -265,6 +293,10 @@ class TopologyBuilder:
                 for i in range(len(term_list)-1):
                     t1 = term_list[i]
                     t2 = term_list[i+1]
+                    # 同一设备两端子共享连接点时，设备内部通路由 fill_all_internal_connection
+                    # 负责（INT_ 边），此处跳过以避免平行边造成单设备自环误判
+                    if term_to_equip.get(t1) and term_to_equip.get(t2) and term_to_equip[t1] == term_to_equip[t2]:
+                        continue
                     e = TopoEdge(
                         line_id=f"CN_{cn}_{t1}_{t2}",
                         start_point=t1,
@@ -287,11 +319,14 @@ class TopologyBuilder:
             return
 
         cn_to_terms_zw = defaultdict(list)
+        term_to_equip_zw = {}
         for _, row in self.zw_terminal_df.iterrows():
             cn_id = str(row.get("CONNECT_NODE_ID") or row.get("CONNECTIVITYNODE_ID") or "")
             term_id = str(row.get("TERMINAL_ID") or row.get("ID") or "")
             if cn_id and term_id:
                 cn_to_terms_zw[cn_id].append(term_id)
+            if term_id:
+                term_to_equip_zw[term_id] = str(row.get("EQUIP_ID") or "")
 
         for cn, term_list in cn_to_terms_zw.items():
             if len(term_list) < 2:
@@ -299,6 +334,9 @@ class TopologyBuilder:
             for i in range(len(term_list)-1):
                 t1 = term_list[i]
                 t2 = term_list[i+1]
+                # 与配网一致：同设备端子对由内部边负责，连接点边跳过
+                if term_to_equip_zw.get(t1) and term_to_equip_zw.get(t2) and term_to_equip_zw[t1] == term_to_equip_zw[t2]:
+                    continue
                 e = TopoEdge(
                     line_id=f"CN_{cn}_{t1}_{t2}",
                     start_point=t1,
@@ -356,27 +394,50 @@ class TopologyBuilder:
             results.extend(evaluator.evaluate_electrical_logic(equip_id, dev.equip_type or ""))
         self.dist_topo.electrical_defects = results
 
-        # --- 主配接口校验（Q41 拓扑节点对齐 + Q42 漏拼/错拼） ---
+        # --- 主配接口校验（规则 v1 口径） ---
+        # 4.1 漏拼：主网站无出线 / CONNECTIVITYNODE_ID 未对齐 / 物理断开
+        # 4.2 错拼：馈线起始主网站(START_ST_ID)不存在 / 绑定错接 / 电压变比不兼容
+        # 关联字段：PWFEEDERLINE.START_ST_ID ↔ ZWSUBSTATION.ST_ID（而非 equip.DSUBSTATION_ID）
         from core.graph_model import AbnormalItem
         import uuid as _uuid
         trace_uuid = "MAIN_SUB_IFACE_" + _uuid.uuid4().hex[:8]
-        feeder_to_stations: dict[str, set[str]] = defaultdict(set)
-        for equip_id, dev in self.dist_topo.device_map.items():
-            fid = dev.feeder_id or ""
-            sid = dev.dsubstation_id or ""
-            if fid and sid:
-                feeder_to_stations[fid].add(sid)
+        zw_st_ids = set(self.zw_substation_df['ST_ID'].astype(str)) if len(self.zw_substation_df) else set()
+        zw_cn: set[str] = set()
+        if self.zw_terminal_df is not None and not self.zw_terminal_df.empty:
+            zw_cn = set(self.zw_terminal_df['CONNECTIVITYNODE_ID'].dropna().astype(str))
+        # 配网端子 → 所属设备 → 馈线 → 连接点集合
+        pw_feeder_cn: dict[str, set[str]] = defaultdict(set)
+        if self.pw_terminal_df is not None and not self.pw_terminal_df.empty:
+            for _, _row in self.pw_terminal_df.iterrows():
+                _cn = str(_row.get('CONNECTIVITYNODE_ID') or '')
+                _eid = str(_row.get('EQUIP_ID') or '')
+                _dev = self.dist_topo.device_map.get(_eid)
+                if _dev is None or not _cn:
+                    continue
+                _fid = _dev.feeder_id or ''
+                if _fid:
+                    pw_feeder_cn[_fid].add(_cn)
         iface_cnt_ok = 0
         iface_cnt_bad = 0
-        for fid, station_set in feeder_to_stations.items():
-            if not station_set:
-                continue
-            for station_id in sorted(station_set):
-                passed, conf, detail = evaluator.verify_main_substation_interface(
-                    fid, station_id,
-                    feeder_line_ids=None,
-                    zw_lineend_df=self.zw_line_end_df,
-                )
+        if self.line_df is not None and not self.line_df.empty:
+            for _, lrow in self.line_df.iterrows():
+                fid = str(lrow.get('LINE_ID') or '')
+                start_st = str(lrow.get('START_ST_ID') or '').strip()
+                passed = True
+                code = ''
+                detail = ''
+                if not start_st or start_st.lower() in ("null", "nan", "none"):
+                    passed, code, detail = False, "R_MAIN_IFACE_41", f"4.1漏拼：配网馈线{fid}缺失起始主网站(START_ST_ID为空)"
+                elif start_st not in zw_st_ids:
+                    passed, code, detail = False, "R_MAIN_IFACE_42", f"4.2错拼：配网馈线{fid}起始站ID={start_st} 不存在于主网变电站表(共{len(zw_st_ids)}个)"
+                else:
+                    lineends = self.zw_line_end_df[self.zw_line_end_df['ST_ID'].astype(str) == start_st] if len(self.zw_line_end_df) else None
+                    if lineends is None or lineends.empty:
+                        passed, code, detail = False, "R_MAIN_IFACE_41", f"4.1漏拼：主网站{start_st}无任何出线(ZWLINEEND)记录"
+                    else:
+                        shared = pw_feeder_cn.get(fid, set()) & zw_cn
+                        if not shared:
+                            passed, code, detail = False, "R_MAIN_IFACE_41", f"4.1漏拼：馈线{fid}端子与主网无共享连接点(CONNECTIVITYNODE_ID未对齐)"
                 if passed:
                     iface_cnt_ok += 1
                     continue
@@ -385,8 +446,8 @@ class TopologyBuilder:
                     trace_uuid=trace_uuid,
                     equip_id=fid or "UNKNOWN_FEEDER",
                     point_id="",
-                    rule_code="R_MAIN_IFACE_41" if "漏拼" in detail else "R_MAIN_IFACE_42",
-                    rule_desc="主配网接口校验(4.1漏拼/4.2错拼)" if not "漏拼" in detail else detail.split("：")[0],
+                    rule_code=code,
+                    rule_desc="主配网接口校验(4.1漏拼/4.2错拼)",
                     check_result="ERR",
                     review_status="待复核",
                     detail=detail,
@@ -404,6 +465,7 @@ class TopologyBuilder:
 
         self.split_voltage_data()
         self.add_all_devices()
+        self._inject_main_substation_sources()
         self.build_real_terminal_points()
         self.build_graph_from_terminal()
         self.fill_all_internal_connection()

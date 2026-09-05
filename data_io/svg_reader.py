@@ -499,6 +499,25 @@ class SvgDocument:
                 txt = self._parse_text_element_direct(child, combined_matrix, current_metadata)
                 if txt: self.texts.append(txt)
 
+        # S10c：无形状子元素但含 PSR_Ref metadata 的 g（beautifier 母线/线段节点）→ 建占位元素
+        if current_metadata is not None and not any(
+            _local_tag(c.tag) in ("use", "rect", "polygon", "polyline", "path", "circle", "line")
+            for c in g_elem
+        ):
+            psr = current_metadata.find(f"{{{IEC_NS}}}PSR_Ref")
+            if psr is not None and psr.get("ObjectID"):
+                elem = SvgElement()
+                elem.layer_name = layer_name
+                elem.element_type = DEVICE_TYPE_MAP.get(layer_name, layer_name)
+                elem.shape_tag = "g"
+                elem.shape_attrs = dict(g_elem.attrib)
+                elem.element_id = psr.get("ObjectID")
+                tx, ty = combined_matrix.apply(0.0, 0.0)
+                elem.x, elem.y, elem.width, elem.height = tx, ty, 1.0, 1.0
+                self._parse_metadata(current_metadata, elem)
+                elem.raw_element = copy.deepcopy(g_elem)
+                self.elements.append(elem)
+
     def _parse_text_element_direct(self, text_elem: ET.Element, parent_matrix: Matrix, metadata_elem: Optional[ET.Element] = None) -> Optional[SvgText]:
         """直接解析 text 标签，而不假设它被包裹在 g 中。"""
         local_matrix = _parse_transform_to_matrix(text_elem.get("transform", ""))
@@ -647,6 +666,15 @@ class SvgDocument:
             elif tag == "GLink_Ref":
                 gid = child.get("ObjectID", "")
                 if gid: conn.glink_refs.append(gid)
+            elif tag == "Terminal":
+                # SvgBeautifier 渲染的连接以 Terminal@side=from/to 引用两端设备
+                tid = child.get("ObjectID") or child.get("ObjectId") or child.get("ID") or ""
+                side = (child.get("side") or "").strip().lower()
+                if tid:
+                    if side == "from":
+                        conn.start_device_id = tid
+                    elif side == "to":
+                        conn.end_device_id = tid
 
     def _parse_text_metadata(self, metadata_elem: ET.Element, txt: SvgText):
         for child in metadata_elem:

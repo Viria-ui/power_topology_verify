@@ -311,7 +311,8 @@ def validate_svg_only(doc: SvgDocument, stage: str = "pre") -> Tuple[list, dict]
 # 2) SVG vs 逻辑拓扑一致性校验
 # ----------------------------------------------------------------------
 def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
-                              stage: str = "post_edit") -> Tuple[list, dict]:
+                              stage: str = "post_edit",
+                              trace_uuid: str = "") -> Tuple[list, dict]:
     """校验 SVG 与 TopologyGraph 逻辑拓扑一致性。
     
     实现成员2要求的四类校验：
@@ -352,7 +353,7 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
                 defect_type="图上有模型无",
                 description=f"SVG图纸存在设备[{ename or e.element_type}](ID:{oid} 图层={layer})，但数据库拓扑模型中缺失",
                 suggestion=f"建议核查是否为非设备图元。若非豁免接头/杆塔，在 EQUIP_JBS_PWEQUIPINFO 中补全设备 {oid}",
-                sql_draft=f"INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID,EQUIP_NAME,EQUIP_TYPE,FEEDER_ID,VOLTAGE_TYPE,DSUBSTATION_ID,STATUS) VALUES ('{oid}','{ename or 'SVG补录'}','{ptype or layer}','{feeder_id}','1010','','1');",
+                sql_draft=f"INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID,EQUIP_NAME,EQUIP_TYPE,FEEDER_ID,VOLTAGE_TYPE,DSUBSTATION_ID) VALUES ('{oid}','{ename or 'SVG补录'}','{ptype or layer}','{feeder_id}','1010','');",
             ))
 
     # ---- 2. 模型有图无 ----
@@ -417,7 +418,7 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
                 defect_type="物理连接不一致",
                 description=f"SVG存在物理连接{s}-{e}，但模型端子图不连通(候选端子对={len(cand_pairs) if pts_s else '无端子'})",
                 suggestion="建议在PWFEEDERLINE补线段记录，或PWTERMINAL补端子并对齐CONNECT_NODE_ID",
-                sql_draft=f"INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID,START_ST_ID,END_ST_ID,FEEDER_ID,VOLTAGE_TYPE,STATUS) VALUES ('LN_{s}_{e}','{s}','{e}','{feeder_id}','1010','1');",
+                sql_draft=f"INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID,LINE_NAME,START_ST_ID,VOLTAGE_TYPE) VALUES ('LN_{s}_{e}','SVG物理连通补录','{s}','1010');",
             ))
 
     # ---- 4. 逻辑连接/属性不一致 ----
@@ -767,6 +768,10 @@ def validate_rendered_svg(svg_path: str) -> Tuple[list, dict]:
                     suggestion="请优化 viewBox 计算逻辑或布局范围"
                 ))
 
+    if trace_uuid:
+        for _d in defects:
+            _d.setdefault("trace_uuid", trace_uuid)
+
     summary = {
         "total_rendered_defects": len(defects),
         "layers_checked": list(layer_bounds.keys()),
@@ -842,6 +847,10 @@ class TopoDbValidator:
                         feeder_set.add(cp.feeder_id)
                     dev_info_map[dev_id] = self.topo.device_map.get(dev_id)
                 if not dev_id_set:
+                    continue
+                # 单设备自环：设备节点经 link_device_point 连入端子图，
+                # 构成 A-t1-t2-A 伪环（35368 个），属设备内部结构而非合环，跳过
+                if len(dev_id_set) <= 1:
                     continue
 
                 # 遍历环内所有设备，找联络开关候选

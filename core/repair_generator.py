@@ -46,15 +46,14 @@ class TopologyRepairGenerator:
                 candidate["action"] = "ADD_DEVICE"
                 candidate["sql_forward"] = (
                     "INSERT INTO EQUIP_JBS_PWEQUIPINFO "
-                    "(EQUIP_ID,EQUIP_NAME,EQUIP_TYPE,FEEDER_ID,VOLTAGE_TYPE,DSUBSTATION_ID,STATUS,REMARK) "
+                    "(EQUIP_ID,EQUIP_NAME,EQUIP_TYPE,FEEDER_ID,VOLTAGE_TYPE,DSUBSTATION_ID) "
                     f"VALUES ({self._esc(equip_id)},{self._esc(ename)},{self._esc(etype)},"
-                    f"{self._esc(fid)},{self._esc(vid)},'','1','SVG补录设备');"
+                    f"{self._esc(fid)},{self._esc(vid)},'');"
                 )
                 candidate["sql_rollback"] = (
-                    "UPDATE EQUIP_JBS_PWEQUIPINFO SET STATUS='0',REMARK='逻辑删除-回滚SVG补录' "
-                    f"WHERE EQUIP_ID={self._esc(equip_id)};"
+                    "-- 回滚：Q49禁止DELETE且PWEQUIPINFO无状态列，需人工核对后删除该INSERT行。"
                 )
-                candidate["impact_summary"] = f"数据库逻辑新增设备 [{equip_id}]（软写入，STATUS=1）"
+                candidate["impact_summary"] = f"数据库新增设备 [{equip_id}]（INSERT，列已对齐真实表结构）"
 
             elif d_type == "模型有图上无":
                 candidate["action"] = "ADD_SVG_ELEMENT"
@@ -77,19 +76,19 @@ class TopologyRepairGenerator:
                 if from_dev and to_dev:
                     candidate["sql_forward"] = (
                         "INSERT INTO EQUIP_JBS_PWFEEDERLINE "
-                        "(LINE_ID,LINE_NAME,START_ST_ID,END_ST_ID,FEEDER_ID,VOLTAGE_TYPE,STATUS) "
+                        "(LINE_ID,LINE_NAME,START_ST_ID,VOLTAGE_TYPE) "
                         f"VALUES ({self._esc(line_id)},'SVG物理连通补录',"
-                        f"{self._esc(from_dev)},{self._esc(to_dev)},{self._esc(fid)},'1010','1');"
+                        f"{self._esc(from_dev)},'1010');"
                     )
                     candidate["sql_rollback"] = (
-                        f"UPDATE EQUIP_JBS_PWFEEDERLINE SET STATUS='0' WHERE LINE_ID={self._esc(line_id)};"
+                        "-- 回滚：Q49禁止DELETE且PWFEEDERLINE无状态列，需人工核对后删除该INSERT行。"
                     )
                 else:
                     candidate["sql_forward"] = (
                         "-- 解析不到SVG边的两端设备，需要人工补录PWFEEDERLINE。"
                     )
                     candidate["sql_rollback"] = "-- 无"
-                candidate["impact_summary"] = f"模型新增物理边 [{from_dev} -> {to_dev}]（软写入STATUS=1）"
+                candidate["impact_summary"] = f"模型新增物理边 [{from_dev} -> {to_dev}]（INSERT，列已对齐真实表结构）"
 
             elif d_type == "逻辑连接不一致":
                 vid_new = defect.get("svg_voltage") or defect.get("voltage_level") or "1010"

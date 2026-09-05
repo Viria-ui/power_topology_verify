@@ -1,0 +1,100 @@
+{
+  "SVG_FILE": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\LINE216_del_switch_00024.svg",
+  "PASS": false,
+  "PASS_THRESHOLDS": {
+    "device_overlap_pairs": 5,
+    "text_overlap_pct": 5.0,
+    "device_outside_pct": 1.0,
+    "island_components_pct": 85.0,
+    "isolated_nodes_pct": 60.0,
+    "dangling_connections_pct": 10.0,
+    "fontscale_abnormal_pct": 5.0
+  },
+  "CHECKS": {
+    "device_overlap_pairs": {
+      "value": 0,
+      "ok": true,
+      "threshold": 5
+    },
+    "text_overlap_pct": {
+      "value": 0.0,
+      "ok": true,
+      "threshold": 5.0
+    },
+    "device_outside_pct": {
+      "value": 0.0,
+      "ok": true,
+      "threshold": 1.0
+    },
+    "island_components_pct": {
+      "value": 99.73,
+      "ok": false,
+      "threshold": 85.0
+    },
+    "isolated_nodes_pct": {
+      "value": 55.17,
+      "ok": true,
+      "threshold": 60.0
+    },
+    "dangling_connections_pct": {
+      "value": 6.84,
+      "ok": true,
+      "threshold": 10.0
+    },
+    "fontscale_abnormal_pct": {
+      "value": 0.0,
+      "ok": true,
+      "threshold": 5.0
+    },
+    "aspect_match": {
+      "value": true,
+      "ok": true,
+      "threshold": "bool"
+    }
+  },
+  "METRICS": {
+    "viewBox": {
+      "x": 0.0,
+      "y": 0.0,
+      "w": 17310.0,
+      "h": 1880.0
+    },
+    "canvas": {
+      "width": 17310.0,
+      "height": 1880.0,
+      "aspect_match": true,
+      "vb_ratio": 9.2074,
+      "wh_ratio": 9.2074
+    },
+    "devices": {
+      "total": 1343,
+      "stations": 0,
+      "outside": 0,
+      "outside_pct": 0.0,
+      "overlap_pairs": 0,
+      "avg_height_unit": 32.511
+    },
+    "texts": {
+      "total": 650,
+      "visible": 650,
+      "hidden": 0,
+      "hidden_pct": 0.0,
+      "overlap_victims": 0,
+      "overlap_pct": 0.0,
+      "outside": 0,
+      "fontscale_abnormal": 0,
+      "fontscale_abnormal_pct": 0.0,
+      "avg_dev_h_for_ref": 32.511
+    },
+    "topology": {
+      "total_device_nodes": 1343,
+      "connections_total": 1695,
+      "connected_components": 746,
+      "largest_component_size": 560,
+      "largest_component_pct": 41.7,
+      "island_components_pct": 99.73,
+      "isolated_nodes_pct": 55.17,
+      "dangling_connections_pct": 6.84
+    }
+  }
+}

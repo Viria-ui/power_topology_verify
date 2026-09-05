@@ -1,56 +1,56 @@
 {
   "comparison": {
-    "score_before": 72.6,
+    "score_before": 72.5,
     "score_after": 100,
-    "score_change": 27.4,
-    "defects_before": 450,
+    "score_change": 27.5,
+    "defects_before": 453,
     "defects_after": 0,
-    "defects_reduced": 450,
-    "devices_before": 1644,
-    "devices_after": 632,
+    "defects_reduced": 453,
+    "devices_before": 1648,
+    "devices_after": 635,
     "components_before": 214,
     "components_after": 1,
     "type_changes": {
-      "孤岛设备": 148,
-      "标注错位": 30,
-      "设备重叠": 272
+      "标注错位": 27,
+      "设备重叠": 278,
+      "孤岛设备": 148
     }
   },
   "before": {
     "stage": "美化前",
-    "total_devices": 1644,
+    "total_devices": 1648,
     "total_connections": 660,
-    "total_defects": 450,
-    "defect_rate_percent": 27.4,
-    "quality_score": 72.6,
+    "total_defects": 453,
+    "defect_rate_percent": 27.5,
+    "quality_score": 72.5,
     "defects_by_type": {
       "孤岛设备": 148,
-      "设备重叠": 272,
-      "标注错位": 30
+      "设备重叠": 278,
+      "标注错位": 27
     },
     "defects_by_severity": {
       "high": 148,
-      "medium": 272,
-      "low": 30
+      "medium": 278,
+      "low": 27
     },
     "connected_components": 214,
     "max_component_size": 5,
     "dangling_count": 0,
     "fake_connect_count": 0,
-    "overlap_count": 272,
-    "text_missing_count": 30
+    "overlap_count": 278,
+    "text_missing_count": 27
   },
   "after": {
     "stage": "美化后",
-    "total_devices": 632,
-    "total_connections": 1682,
+    "total_devices": 635,
+    "total_connections": 1686,
     "total_defects": 0,
     "defect_rate_percent": 0.0,
     "quality_score": 100,
     "defects_by_type": {},
     "defects_by_severity": {},
     "connected_components": 1,
-    "max_component_size": 678,
+    "max_component_size": 682,
     "dangling_count": 0,
     "fake_connect_count": 0,
     "overlap_count": 0,

@@ -270,8 +270,10 @@ def check_svg_quality(svg_path: str, report_out: Optional[str] = None) -> tuple[
     comps.sort(key=lambda g: -len(g))
     if graph:
         total_nodes = len(graph)
-        comp_ge5 = sum(1 for c in comps if len(c) >= 5)
-        island_comps_pct = (len(comps) - comp_ge5) / len(comps) * 100 if comps else 0.0
+        # 孤岛判定修正：径向单线图天然存在大量 <5 节点末端分量（配变-用户-表箱），
+        # 不能把“小分量”当孤岛。真正的孤岛 = 未接入最大连通分量的节点占比。
+        largest_size = len(comps[0]) if comps else 0
+        island_comps_pct = (total_nodes - largest_size) / total_nodes * 100 if total_nodes else 0.0
         isolated_nodes = sum(1 for n, neighbors in graph.items() if len(neighbors) == 0)
         isolated_nodes_pct = isolated_nodes / total_nodes * 100 if total_nodes else 0.0
         largest_comp_ratio = (len(comps[0]) / total_nodes) if comps else 0.0
