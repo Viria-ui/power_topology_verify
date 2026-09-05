@@ -11,10 +11,10 @@
     "components_before": 214,
     "components_after": 2,
     "type_changes": {
-      "标注错位": 1361,
-      "设备重叠": 12,
       "孤岛设备": 148,
-      "飞线-悬空端点": 1
+      "设备重叠": 12,
+      "飞线-悬空端点": 1,
+      "标注错位": 1361
     }
   },
   "before": {
@@ -45,14 +45,14 @@
   "after": {
     "stage": "美化后",
     "total_devices": 7,
-    "total_connections": 1678,
+    "total_connections": 1679,
     "total_defects": 0,
     "defect_rate_percent": 0.0,
     "quality_score": 100,
     "defects_by_type": {},
     "defects_by_severity": {},
     "connected_components": 2,
-    "max_component_size": 675,
+    "max_component_size": 676,
     "dangling_count": 0,
     "fake_connect_count": 0,
     "overlap_count": 0,

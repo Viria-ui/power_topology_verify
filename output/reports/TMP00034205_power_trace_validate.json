@@ -10,7 +10,7 @@
     "description": "SVG设备数 vs 期望设备数",
     "suggestion": "",
     "sql_draft": "",
-    "detail": "SVG设备=2, 期望=700",
+    "detail": "SVG设备=34, 期望=1309",
     "stage": "power_trace",
     "check_result": "WARN"
   },
@@ -25,7 +25,7 @@
     "description": "SVG连接数 vs 期望边数",
     "suggestion": "",
     "sql_draft": "",
-    "detail": "SVG连接=0, 期望=699",
+    "detail": "SVG连接=0, 期望=1308",
     "stage": "power_trace",
     "check_result": "WARN"
   },
@@ -40,7 +40,7 @@
     "description": "期望设备ID覆盖率",
     "suggestion": "",
     "sql_draft": "",
-    "detail": "覆盖率=0.00% 缺失=700",
+    "detail": "覆盖率=0.00% 缺失=1309",
     "stage": "power_trace",
     "check_result": "WARN"
   }

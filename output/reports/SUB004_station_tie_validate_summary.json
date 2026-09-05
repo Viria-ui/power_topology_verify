@@ -1,7 +1,7 @@
 {
   "stage": "station_tie_overview",
   "topo_device_count": 444,
-  "svg_device_count": 0,
+  "svg_device_count": 5,
   "only_in_svg": 0,
   "only_in_topo": 0,
   "connection_mismatch": 0,

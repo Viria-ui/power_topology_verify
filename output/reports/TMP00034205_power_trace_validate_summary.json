@@ -1,7 +1,7 @@
 {
   "stage": "power_trace",
-  "topo_device_count": 700,
-  "svg_device_count": 2,
+  "topo_device_count": 1309,
+  "svg_device_count": 34,
   "only_in_svg": 0,
   "only_in_topo": 0,
   "connection_mismatch": 0,

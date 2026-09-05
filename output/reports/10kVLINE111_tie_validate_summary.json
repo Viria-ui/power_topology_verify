@@ -1,7 +1,7 @@
 {
   "stage": "feeder_tie",
   "topo_device_count": 180,
-  "svg_device_count": 0,
+  "svg_device_count": 47,
   "only_in_svg": 0,
   "only_in_topo": 0,
   "connection_mismatch": 0,

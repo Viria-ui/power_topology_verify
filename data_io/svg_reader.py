@@ -467,9 +467,7 @@ class SvgDocument:
         if elem.shape_tag == "rect" and not metadata:
             if fill in {"ffffff", "white", "fff", ""} and stroke in {"none", "ffffff", "white", "fff", ""}:
                 return None
-        # 额外过滤：无 metadata 且无 element_name 的 rect 在设备 <g> 内为背景装饰
-        if elem.shape_tag == "rect" and not metadata and not elem.element_name:
-            return None
+        # 注意：不能因无metadata/无element_name就过滤rect——自动生成图(联络/全站/追溯)的设备rect均无metadata
         if elem.layer_name in {"Junction", "RemoteUnit", "Other"} and not metadata and not elem.element_name:
             pass
         return elem

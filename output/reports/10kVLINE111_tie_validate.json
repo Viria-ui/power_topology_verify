@@ -10,7 +10,7 @@
     "description": "SVG设备数 vs 期望设备数",
     "suggestion": "",
     "sql_draft": "",
-    "detail": "SVG设备=0, 期望=180",
+    "detail": "SVG设备=47, 期望=180",
     "stage": "feeder_tie",
     "check_result": "WARN"
   },
