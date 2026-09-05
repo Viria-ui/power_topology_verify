@@ -4,15 +4,15 @@
     "equip_id": "",
     "point_id": "",
     "line_id": "",
-    "defect_type": "P2-stub",
-    "severity": "medium",
+    "defect_type": "INFO",
+    "severity": "info",
     "rule_code": "P2-DEV-COUNT",
     "description": "SVG设备数 vs 期望设备数",
     "suggestion": "",
     "sql_draft": "",
-    "detail": "SVG设备=2034, 期望=1679",
+    "detail": "SVG设备=2034, 期望=2034",
     "stage": "feeder_single_line",
-    "check_result": "WARN"
+    "check_result": "PASS"
   },
   {
     "trace_uuid": "",

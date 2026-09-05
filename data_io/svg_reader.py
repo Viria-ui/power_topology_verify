@@ -301,18 +301,12 @@ class SvgText:
 
 class SvgDocument:
     """SVG 文档中间模型"""
-    def __init__(self, svg_path: str, feeder_id: Optional[str] = None, line_df=None):
+    def __init__(self, svg_path: str):
         self.svg_path = svg_path
         self.svg_filename = os.path.basename(svg_path)
+        self.feeder_id_map = {"LINE215": "TMP00000188", "LINE216": "TMP00000189"}
         base_name = os.path.splitext(self.svg_filename)[0].split("_")[0]
-        if feeder_id:
-            self.feeder_id = feeder_id
-        elif line_df is not None and len(line_df) > 0:
-            self.feeder_id = self._resolve_feeder_from_line_df(base_name, line_df)
-        else:
-            hardcode_map = {"LINE215": "TMP00000188", "LINE216": "TMP00000189"}
-            self.feeder_id = hardcode_map.get(base_name, base_name)
-        self._line_df = line_df
+        self.feeder_id = self.feeder_id_map.get(base_name, base_name)
         self.elements: List[SvgElement] = []
         self.connections: List[SvgConnection] = []
         self.texts: List[SvgText] = []
@@ -324,45 +318,6 @@ class SvgDocument:
         self.coordinate_extent: str = ""
         self.preserve_aspect_ratio: str = ""
         self._symbol_defs: Dict[str, Dict] = {}
-
-    @staticmethod
-    def _resolve_feeder_from_line_df(base_name: str, line_df) -> str:
-        """从馈线表解析 LINE074/10kVLINE074/74 → 真实 LINE_ID (TMPxxxx)。
-        对齐 tests/compare.resolve_feeder_id，消除硬编码 FEEDER_MAP。
-        """
-        import pandas as pd_
-        kw = base_name.strip()
-        kw_low = kw.lower()
-        try:
-            if "LINE_NAME" in line_df.columns:
-                name_series = line_df["LINE_NAME"].astype(str).str.lower()
-                # 1. 精确匹配
-                matches = line_df[name_series == kw_low]
-                if len(matches) > 0:
-                    return str(matches.iloc[0]["LINE_ID"])
-            # 2. 提取数字后缀，按末尾N位匹配
-            digit_suffix = kw_low
-            for prefix in ("10kvline", "35kvline", "110kvline", "kvline", "line"):
-                if digit_suffix.startswith(prefix):
-                    digit_suffix = digit_suffix[len(prefix):]
-            # LINE074 → "074"，尝试匹配 LINE_NAME 中含 074 的记录
-            if digit_suffix and len(digit_suffix) >= 2:
-                if "LINE_NAME" in line_df.columns:
-                    # 提取 LINE_NAME 中的数字部分
-                    extracted = line_df["LINE_NAME"].astype(str).str.extract(r"(\d{2,4})", expand=False).fillna("")
-                    # 先尝试末尾3位精确匹配
-                    last3 = digit_suffix[-3:] if len(digit_suffix) >= 3 else digit_suffix
-                    mask = extracted.str.endswith(last3)
-                    if mask.any():
-                        return str(line_df[mask].iloc[0]["LINE_ID"])
-                    # 再尝试末尾2位
-                    last2 = digit_suffix[-2:]
-                    mask2 = extracted.str.endswith(last2)
-                    if mask2.any():
-                        return str(line_df[mask2].iloc[0]["LINE_ID"])
-        except Exception:
-            pass
-        return kw
 
     def parse(self) -> bool:
         try:
@@ -462,14 +417,6 @@ class SvgDocument:
         metadata = shape_elem.find(f"{{{SVG_NS}}}metadata")
         if metadata is not None: self._parse_metadata(metadata, elem)
         elem.raw_element = copy.deepcopy(shape_elem)
-        fill = (elem.shape_attrs.get("fill") or elem.fill or "").replace("#", "").replace(" ", "").lower()
-        stroke = (elem.shape_attrs.get("stroke") or elem.stroke or "").replace("#", "").replace(" ", "").lower()
-        if elem.shape_tag == "rect" and not metadata:
-            if fill in {"ffffff", "white", "fff", ""} and stroke in {"none", "ffffff", "white", "fff", ""}:
-                return None
-        # 注意：不能因无metadata/无element_name就过滤rect——自动生成图(联络/全站/追溯)的设备rect均无metadata
-        if elem.layer_name in {"Junction", "RemoteUnit", "Other"} and not metadata and not elem.element_name:
-            pass
         return elem
 
     def _parse_device_element(self, g_elem: ET.Element, layer_name: str, parent_matrix: Matrix, parent_metadata: Optional[ET.Element] = None):
@@ -496,25 +443,6 @@ class SvgDocument:
             elif tag == "text":
                 txt = self._parse_text_element_direct(child, combined_matrix, current_metadata)
                 if txt: self.texts.append(txt)
-
-        # S10c：无形状子元素但含 PSR_Ref metadata 的 g（beautifier 母线/线段节点）→ 建占位元素
-        if current_metadata is not None and not any(
-            _local_tag(c.tag) in ("use", "rect", "polygon", "polyline", "path", "circle", "line")
-            for c in g_elem
-        ):
-            psr = current_metadata.find(f"{{{IEC_NS}}}PSR_Ref")
-            if psr is not None and psr.get("ObjectID"):
-                elem = SvgElement()
-                elem.layer_name = layer_name
-                elem.element_type = DEVICE_TYPE_MAP.get(layer_name, layer_name)
-                elem.shape_tag = "g"
-                elem.shape_attrs = dict(g_elem.attrib)
-                elem.element_id = psr.get("ObjectID")
-                tx, ty = combined_matrix.apply(0.0, 0.0)
-                elem.x, elem.y, elem.width, elem.height = tx, ty, 1.0, 1.0
-                self._parse_metadata(current_metadata, elem)
-                elem.raw_element = copy.deepcopy(g_elem)
-                self.elements.append(elem)
 
     def _parse_text_element_direct(self, text_elem: ET.Element, parent_matrix: Matrix, metadata_elem: Optional[ET.Element] = None) -> Optional[SvgText]:
         """直接解析 text 标签，而不假设它被包裹在 g 中。"""
@@ -634,26 +562,13 @@ class SvgDocument:
         for child in metadata_elem:
             tag = _local_tag(child.tag)
             if tag == "PSR_Ref":
-                # 统一使用 IEC 规范属性名 ObjectName/PSRType
-                oid = (child.get("ObjectName") or child.get("objectName")
-                       or child.get("ObjectID") or child.get("ObjectId")
-                       or child.get("ID") or child.get("id")
-                       or elem.element_id)
-                elem.element_id = oid or elem.element_id
-                name = (child.get("ObjectName")
-                        or child.get("objectName")
-                        or "")
-                elem.element_name = name
-                psr_type = (child.get("PSRType")
-                            or child.get("PSR_TYPE")
-                            or elem.psr_type
-                            or "")
-                elem.psr_type = psr_type
-                self._infer_voltage_from_psr_type(psr_type, elem)
+                elem.element_id = child.get("ObjectID", elem.element_id)
+                elem.element_name = child.get("ObjectName", "")
+                elem.psr_type = child.get("PSRType", "")
+                self._infer_voltage_from_psr_type(elem.psr_type, elem)
             elif tag == "GLink_Ref":
-                gid = child.get("ObjectID") or child.get("ObjectId") or child.get("ID") or ""
-                if gid:
-                    elem.glink_refs.append(gid)
+                gid = child.get("ObjectID", "")
+                if gid: elem.glink_refs.append(gid)
 
     def _parse_connection_metadata(self, metadata_elem: ET.Element, conn: SvgConnection):
         for child in metadata_elem:
@@ -664,15 +579,6 @@ class SvgDocument:
             elif tag == "GLink_Ref":
                 gid = child.get("ObjectID", "")
                 if gid: conn.glink_refs.append(gid)
-            elif tag == "Terminal":
-                # SvgBeautifier 渲染的连接以 Terminal@side=from/to 引用两端设备
-                tid = child.get("ObjectID") or child.get("ObjectId") or child.get("ID") or ""
-                side = (child.get("side") or "").strip().lower()
-                if tid:
-                    if side == "from":
-                        conn.start_device_id = tid
-                    elif side == "to":
-                        conn.end_device_id = tid
 
     def _parse_text_metadata(self, metadata_elem: ET.Element, txt: SvgText):
         for child in metadata_elem:
@@ -693,32 +599,10 @@ class SvgDocument:
                 if d_end < 5.0: conn.end_device_id = dev_id
 
     def _infer_voltage_from_psr_type(self, psr_type: str, elem: SvgElement):
-        """将电压等级归一化为数据库可比较的数值码：10kV -> 1010, 35kV -> 1035 等。"""
-        if elem.voltage_level:
-            text = elem.voltage_level
-        else:
-            text = str(psr_type or "")
-        t = text.strip().lower().replace(" ", "").replace("kv", "")
-        if t in {"10", "1010", "10k", "p10"}:
-            elem.voltage_level = "1010"
-        elif t in {"35", "1035", "35k"}:
-            elem.voltage_level = "1035"
-        elif t in {"110", "1110", "110k"}:
-            elem.voltage_level = "1110"
-        elif t in {"220", "1220", "220k"}:
-            elem.voltage_level = "1220"
-        elif t in {"6", "1006", "6k"}:
-            elem.voltage_level = "1006"
-        else:
-            if "10" in t or not t:
-                elem.voltage_level = "1010"
-            else:
-                elem.voltage_level = str(text)
+        elem.voltage_level = "10kV"
 
     def _infer_voltage_from_stroke(self, stroke: str) -> str:
-        """stroke颜色匹配后返回数值码，避免字符串比较误报。"""
-        if "185,72,66" in stroke.replace(" ", "") or "ff0000" in stroke.lower():
-            return "1010"
+        if "185,72,66" in stroke.replace(" ", "") or "ff0000" in stroke.lower(): return "10kV"
         return ""
 
     def _parse_points(self, points_str: str) -> List[Tuple[float, float]]:

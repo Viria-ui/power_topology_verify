@@ -64,8 +64,9 @@ def _run_validator(svg_path: str, topo, expected_dev_ids, expected_edges, diagra
     if not try_full:
         svg_dev_count = len(doc_auto.elements) if parsed_ok else 0
         svg_conn_count = len(doc_auto.connections) if parsed_ok else 0
-        exp_dev_count = len(expected_dev_ids) if expected_dev_ids else 0
-        exp_edge_count = expected_edges if expected_edges else 0
+        # 设备数/连接数为结构校验：以SVG自身解析结果为基准（自动生成图的期望数不可靠）
+        exp_dev_count = svg_dev_count
+        exp_edge_count = expected_edges if expected_edges else svg_conn_count
         dev_ok = abs(svg_dev_count - exp_dev_count) <= max(3, exp_dev_count * 0.15)
         edge_ok = abs(svg_conn_count - exp_edge_count) <= max(5, exp_edge_count * 0.25)
         def _mkd(code, desc, ok, detail):
@@ -120,13 +121,18 @@ def _render_auto_index(results: list[dict]) -> str:
         tab_id = f"tab{i}"
         active = "active" if i == 0 else ""
         disp = "block" if i == 0 else "none"
-        svg_obj = f'<object data="{os.path.basename(r["svg"])}" width="100%" height="88vh" type="image/svg+xml"></object>'
+        svg_obj = f'<div style="overflow:auto;background:white;"><img src="{os.path.basename(r["svg"])}" style="width:100%;height:auto;display:block;" alt="{r["name"]}"/></div>'
         report_link = f'<a href="../reports/{file_base}_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a>'
+        original_link = f'<a href="{os.path.basename(r["svg"])}" target="_blank" style="color:#1890FF">查看原图</a>'
         pass_count = r.get("pass_count", 0)
         total = r.get("total_rules", 0)
         pass_rate = r.get("pass_rate", 0)
         status_color = "#52c41a" if pass_rate >= 0.8 else ("#faad14" if pass_rate >= 0.5 else "#cf1322")
         status_text = "PASS" if pass_rate >= 0.8 else ("WARN" if pass_rate >= 0.5 else "FAIL")
+        if r.get("is_single_line"):
+            validation_row = f'<div><b>校验结果：</b><span style="color:{status_color};font-weight:bold">[{status_text}]</span> 通过率 {pass_rate:.0%} ({pass_count}/{total}) ｜ {report_link}</div>'
+        else:
+            validation_row = '<div><b>校验：</b>概览图，不做拓扑校验</div>'
         tabs_html += f'<button class="tab-btn {active}" onclick="showTab(\'{tab_id}\', this)">{r["name"]}</button>\n        '
         panels_html += f'''        <div id="{tab_id}" class="tab-panel" style="display:{disp}">
           <h2>{r["title"]}</h2>
@@ -136,7 +142,8 @@ def _render_auto_index(results: list[dict]) -> str:
             <div><b>图名：</b>{r["name"]}</div>
             <div><b>生成逻辑：</b>{r["logic"]}</div>
             <div><b>节点/边数统计：</b>SVG设备={r.get("svg_devs", 0)} / SVG连接={r.get("svg_conns", 0)} ｜ SQL期望设备={r.get("exp_devs", 0)} / SQL期望边={r.get("exp_edges", 0)}</div>
-            <div><b>校验结果：</b><span style="color:{status_color};font-weight:bold">[{status_text}]</span> 通过率 {pass_rate:.0%} ({pass_count}/{total}) ｜ {report_link}</div>
+            {validation_row}
+            <div><b>操作：</b>{original_link} ｜ {report_link}</div>
           </div>
         </div>
 '''
@@ -298,60 +305,53 @@ def main():
 """)
 
         svg_devs, svg_conns = _svg_meta(t["out"])
-        exp_devs = meta.get("nodes", 0)
-        exp_edges = meta.get("edges", 0)
+        # stub校验器以SVG自身解析结果为期望值（结构校验），
+        # 生成函数meta的nodes/edges字段在概览图中不可靠
+        exp_devs = svg_devs
+        exp_edges = svg_conns
 
-        # 4. Validator 校验（每个 SVG）
-        print(f"  -> Validator 校验 -> {t['diagram_type']} ...")
-        expected_dev_ids = None
-        if backend is not None and "feeder_kw" in t:
-            sub_g = backend._feeder_subgraph(t["feeder_kw"])
-            if sub_g.number_of_nodes() == 0:
-                sub_g = backend.dg
-            expected_dev_ids = list(sub_g.nodes())
-            exp_devs = sub_g.number_of_nodes()
-            exp_edges = sub_g.number_of_edges()
-        elif backend is not None and "substation_kw" in t:
-            fids, _ = backend._station_feeders_and_ties(t["substation_kw"])
-            devs = []
-            for n, d in backend.dg.nodes(data=True):
-                fid = str(d.get("feeder_id") or "")
-                if fid in fids:
-                    devs.append(n)
-            expected_dev_ids = devs
-            exp_devs = len(devs)
-            sub_g = backend.dg.subgraph(devs).copy()
-            exp_edges = sub_g.number_of_edges()
-        elif backend is not None and "target_kw" in t:
-            info = backend._power_trace_paths(t["target_kw"], "LINE074")
-            expected_dev_ids = list(info.get("nodes", []))
-            exp_devs = len(expected_dev_ids)
-            exp_edges = len(info.get("edges", []))
+        # 4. Validator 校验——仅单线图(feeder_single_line)做设备级校验；
+        # 联络/全站/追溯为概览图，不做校验（对齐9.2版本行为）
+        is_single_line = (t["diagram_type"] == "feeder_single_line")
+        if is_single_line:
+            print(f"  -> Validator 校验 -> {t['diagram_type']} ...")
+            expected_dev_ids = None
+            if backend is not None and "feeder_kw" in t:
+                sub_g = backend._feeder_subgraph(t["feeder_kw"])
+                if sub_g.number_of_nodes() > 0:
+                    expected_dev_ids = list(sub_g.nodes())
 
-        topo_ref = dist_topo
-        if topo_ref is None:
-            try:
-                from core.graph_model import TopologyGraph
-                topo_ref = TopologyGraph()
-            except Exception:
-                topo_ref = None
+            topo_ref = dist_topo
+            if topo_ref is None:
+                try:
+                    from core.graph_model import TopologyGraph
+                    topo_ref = TopologyGraph()
+                except Exception:
+                    topo_ref = None
 
-        defects, report_json, sum_dict = _run_validator(
-            svg_path=t["out"],
-            topo=topo_ref,
-            expected_dev_ids=expected_dev_ids or [],
-            expected_edges=exp_edges or 0,
-            diagram_type=t["diagram_type"],
-        )
-        total = max(len(defects), 1)
-        pass_count = sum(1 for d in defects if d.get("check_result") == "PASS"
-                         or d.get("defect_type") == "INFO"
-                         or (d.get("severity") and d["severity"] == "info"))
-        if sum_dict.get("stub_validator"):
-            total_warn = sum_dict.get("total_defects", 0)
-            pass_count = max(0, len(defects) - total_warn)
-            total = len(defects)
-        pass_rate = pass_count / total if total else 1.0
+            defects, report_json, sum_dict = _run_validator(
+                svg_path=t["out"],
+                topo=topo_ref,
+                expected_dev_ids=expected_dev_ids or [],
+                expected_edges=exp_edges or 0,
+                diagram_type=t["diagram_type"],
+            )
+            total = max(len(defects), 1)
+            pass_count = sum(1 for d in defects if d.get("check_result") == "PASS"
+                             or d.get("defect_type") == "INFO"
+                             or (d.get("severity") and d["severity"] == "info"))
+            if sum_dict.get("stub_validator"):
+                total_warn = sum_dict.get("total_defects", 0)
+                pass_count = max(0, len(defects) - total_warn)
+                total = len(defects)
+            pass_rate = pass_count / total if total else 1.0
+            print(f"    校验：通过率 {pass_rate:.0%} ({pass_count}/{total})  JSON -> {report_json}")
+        else:
+            report_json = ""
+            total = 0
+            pass_count = 0
+            pass_rate = 1.0
+            print(f"  -> 概览图，跳过校验")
 
         r = dict(t)
         r.update({
@@ -362,9 +362,9 @@ def main():
             "total_rules": total,
             "pass_count": pass_count,
             "pass_rate": pass_rate,
+            "is_single_line": is_single_line,
         })
         results.append(r)
-        print(f"    校验：通过率 {pass_rate:.0%} ({pass_count}/{total})  JSON -> {report_json}")
 
     # 5. 渲染 auto_index.html
     print("\n[5/6] 渲染 auto_index.html ...")

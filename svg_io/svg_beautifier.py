@@ -317,13 +317,15 @@ class SvgBeautifier:
             }
 
     def _assign_fallback_symbols(self):
+        # 设备类型 -> 符号关键词映射（用于符号归一化，确保同类型设备用同一符号）
         type_map = {
-            '0201': 'Disconnector', '0202': 'Disconnector',
+            '0201': 'LoadBreakSwitch', '0202': 'Disconnector',
             '0203': 'GroundDisconnector', '0302': 'Fuse',
             '0305': 'PotentialTransformer', '0306': 'CurrentTransformer',
             '0110': 'PowerTransformer', '0111': 'PowerTransformer',
             '0115': 'PoleCode', '0313': 'Junction', '0314': 'Junction',
-            '0307': 'Breaker', '370000': 'EnergyConsumer',
+            '0307': 'Breaker', '0309': 'CompositeSwitch',
+            '370000': 'EnergyConsumer',
         }
         sym_by_kw = {}
         if self.doc and self.doc.root is not None:
@@ -334,9 +336,9 @@ class SvgBeautifier:
                     for kw in set(type_map.values()):
                         if kw in sid and kw not in sym_by_kw:
                             sym_by_kw[kw] = sid
+        # 符号归一化：同类型设备统一使用第一个匹配的符号，
+        # 避免原始SVG中同类型多个UUID符号导致视觉不一致
         for pid, d in self.devices.items():
-            if d.get('symbol'):
-                continue
             kw = type_map.get(d['type'])
             if kw and kw in sym_by_kw:
                 d['symbol'] = '#' + sym_by_kw[kw]

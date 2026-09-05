@@ -1,58 +1,56 @@
 {
   "comparison": {
-    "score_before": 0.0,
+    "score_before": 72.6,
     "score_after": 100,
-    "score_change": 100.0,
-    "defects_before": 1522,
+    "score_change": 27.4,
+    "defects_before": 450,
     "defects_after": 0,
-    "defects_reduced": 1522,
-    "devices_before": 409,
-    "devices_after": 7,
+    "defects_reduced": 450,
+    "devices_before": 1644,
+    "devices_after": 632,
     "components_before": 214,
-    "components_after": 2,
+    "components_after": 1,
     "type_changes": {
+      "设备重叠": 272,
       "孤岛设备": 148,
-      "设备重叠": 12,
-      "飞线-悬空端点": 1,
-      "标注错位": 1361
+      "标注错位": 30
     }
   },
   "before": {
     "stage": "美化前",
-    "total_devices": 409,
+    "total_devices": 1644,
     "total_connections": 660,
-    "total_defects": 1522,
-    "defect_rate_percent": 372.1,
-    "quality_score": 0.0,
+    "total_defects": 450,
+    "defect_rate_percent": 27.4,
+    "quality_score": 72.6,
     "defects_by_type": {
       "孤岛设备": 148,
-      "飞线-悬空端点": 1,
-      "设备重叠": 12,
-      "标注错位": 1361
+      "设备重叠": 272,
+      "标注错位": 30
     },
     "defects_by_severity": {
       "high": 148,
-      "medium": 13,
-      "low": 1361
+      "medium": 272,
+      "low": 30
     },
     "connected_components": 214,
     "max_component_size": 5,
-    "dangling_count": 1,
+    "dangling_count": 0,
     "fake_connect_count": 0,
-    "overlap_count": 12,
-    "text_missing_count": 1361
+    "overlap_count": 272,
+    "text_missing_count": 30
   },
   "after": {
     "stage": "美化后",
-    "total_devices": 7,
-    "total_connections": 1679,
+    "total_devices": 632,
+    "total_connections": 1682,
     "total_defects": 0,
     "defect_rate_percent": 0.0,
     "quality_score": 100,
     "defects_by_type": {},
     "defects_by_severity": {},
-    "connected_components": 2,
-    "max_component_size": 676,
+    "connected_components": 1,
+    "max_component_size": 678,
     "dangling_count": 0,
     "fake_connect_count": 0,
     "overlap_count": 0,
@@ -60,143 +58,143 @@
   },
   "before_defects_sample": [
     {
-      "equip_id": "配变2144",
+      "equip_id": "TMP00046367",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[配变2144](ID:配变2144)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[配变2144](ID:TMP00046367)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "用户1639",
+      "equip_id": "TMP00046025",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1639](ID:用户1639)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[用户1639](ID:TMP00046025)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "刀闸0142",
+      "equip_id": "TMP00044378",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[刀闸0142](ID:刀闸0142)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[刀闸0142](ID:TMP00044378)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "配变2143",
+      "equip_id": "TMP00046366",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[配变2143](ID:配变2143)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[配变2143](ID:TMP00046366)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "刀闸0141",
+      "equip_id": "TMP00044377",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[刀闸0141](ID:刀闸0141)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[刀闸0141](ID:TMP00044377)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "刀闸0140",
+      "equip_id": "TMP00044376",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[刀闸0140](ID:刀闸0140)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[刀闸0140](ID:TMP00044376)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "00000#-LINE216_争36#数线",
+      "equip_id": "TMP00046147",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[00000#-LINE216_争36#数线](ID:00000#-LINE216_争36#数线)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000站外-电缆终端头](ID:TMP00046147)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "开关00031",
+      "equip_id": "TMP00043919",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00031](ID:开关00031)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[开关00031](ID:TMP00043919)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "开关00030",
+      "equip_id": "TMP00043918",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00030](ID:开关00030)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[开关00030](ID:TMP00043918)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "用户1645",
+      "equip_id": "TMP00046019",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1645](ID:用户1645)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[用户1645](ID:TMP00046019)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "用户1713",
+      "equip_id": "TMP00045951",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1713](ID:用户1713)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[用户1713](ID:TMP00045951)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "开关00029",
+      "equip_id": "TMP00043917",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00029](ID:开关00029)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[开关00029](ID:TMP00043917)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "00000终端头510736",
+      "equip_id": "TMP00046144",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[00000终端头510736](ID:00000终端头510736)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000终端头510736](ID:TMP00046144)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "开关00027",
+      "equip_id": "TMP00043915",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00027](ID:开关00027)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[开关00027](ID:TMP00043915)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "用户1654",
+      "equip_id": "TMP00046010",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1654](ID:用户1654)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[用户1654](ID:TMP00046010)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "开关00025",
+      "equip_id": "TMP00043913",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00025](ID:开关00025)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[开关00025](ID:TMP00043913)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "开关00024",
+      "equip_id": "TMP00043912",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00024](ID:开关00024)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[开关00024](ID:TMP00043912)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "开关00023",
+      "equip_id": "TMP00043911",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00023](ID:开关00023)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[开关00023](ID:TMP00043911)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "用户1657",
+      "equip_id": "TMP00046007",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1657](ID:用户1657)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[用户1657](ID:TMP00046007)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "开关00021",
+      "equip_id": "TMP00043909",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00021](ID:开关00021)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[开关00021](ID:TMP00043909)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     }
   ],

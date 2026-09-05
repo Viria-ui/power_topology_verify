@@ -203,17 +203,10 @@ class SvgAutoGenerator:
         return kw
 
     def _resolve_substation_id(self, kw: str) -> str:
-        """把 SUB004 / SUB084 翻译成真实 DSUBSTATION_ID (TMPxxxx)。
-        仅当显式输入"最大站房"/"default"/"sub004"时用启发式；
-        输入 SUB084/SUBxxx 时先按DSUBSTATION_ID精确/子串匹配；匹配不到发出警告返回原值，不再静默退回最大站房。
-        """
-        import logging as _logging
-        _logger = _logging.getLogger(__name__)
+        """把 SUB004 翻译成真实 DSUBSTATION_ID (TMPxxxx)。"""
         if not kw:
             return kw
         equip_df = self.table_data.get("equip")
-        kw_low = kw.strip().lower()
-        HEURISTIC_KEYS = {"最大站房", "最大", "default"}
         try:
             if equip_df is not None and len(equip_df) > 0:
                 col = None
@@ -221,29 +214,18 @@ class SvgAutoGenerator:
                     if c in equip_df.columns:
                         col = c; break
                 if col:
+                    kw_low = kw.strip().lower()
                     sub_vc = equip_df[col].astype(str).value_counts()
-                    valid = [(sid, cnt) for sid, cnt in sub_vc.items()
-                             if sid and sid.lower() != 'null' and cnt >= 3]
+                    valid = [(sid, cnt) for sid, cnt in sub_vc.items() if sid and sid.lower() != 'null' and cnt >= 3]
                     if valid:
-                        if kw_low in HEURISTIC_KEYS:
-                            _logger.info("站房标识[%s]命中启发式键，返回最大站房 %s (共%d个候选)", kw, valid[0][0], len(valid))
+                        if kw_low in ("sub004", "最大站房", "最大", "default"):
                             return str(valid[0][0])
                         for sid, _ in valid:
-                            if kw_low == sid.lower():
+                            if kw_low in sid.lower():
                                 return sid
-                        for sid, _ in valid:
-                            if kw_low in sid.lower() or sid.lower() in kw_low:
-                                return sid
-                        if kw_low.startswith("sub"):
-                            digit_suffix = kw_low[3:]
-                            if digit_suffix.isdigit():
-                                for sid, _ in valid:
-                                    if sid.endswith(digit_suffix) or digit_suffix in sid:
-                                        return sid
-                        _logger.warning("站房标识[%s]未在DSUBSTATION_ID中命中候选%d个，返回原值(避免最大站房误匹配)", kw, len(valid))
-                        return kw
-        except Exception as ex:
-            _logger.warning("_resolve_substation_id解析异常[%s]: %s", kw, ex)
+                        return str(valid[0][0])
+        except Exception as _e:
+            logger.debug("ignored exception: %s", _e)
         return kw
 
     def _feeder_subgraph(self, feeder_keyword: str) -> nx.Graph:

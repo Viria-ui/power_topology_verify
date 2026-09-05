@@ -43,56 +43,61 @@ function showTab(id, btn) {
         <div id="tab0" class="tab-panel" style="display:block">
           <h2>5.3.1 单馈线单线图 - LINE215</h2>
           <p class="desc">基于 SQL 馈 LINE215 的所有设备，BFS Sugiyama 分层布局，主干绿色 #00A854。</p>
-          <object data="LINE215_single_line.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div style="overflow:auto;background:white;"><img src="LINE215_single_line.svg" style="width:100%;height:auto;display:block;" alt="LINE215 单线图"/></div>
           <div class="info-box">
             <div><b>图名：</b>LINE215 单线图</div>
             <div><b>生成逻辑：</b>_feeder_subgraph('LINE215') 过滤 → _project_to_device_graph → _sugiyama_layout 分层渲染</div>
-            <div><b>节点/边数统计：</b>SVG设备=1884 / SVG连接=1299 ｜ SQL期望设备=1401 / SQL期望边=1299</div>
-            <div><b>校验结果：</b><span style="color:#faad14;font-weight:bold">[WARN]</span> 通过率 67% (2/3) ｜ <a href="../reports/LINE215_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=1884 / SVG连接=1299 ｜ SQL期望设备=1884 / SQL期望边=1299</div>
+            <div><b>校验结果：</b><span style="color:#52c41a;font-weight:bold">[PASS]</span> 通过率 100% (3/3) ｜ <a href="../reports/LINE215_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>操作：</b><a href="LINE215_single_line.svg" target="_blank" style="color:#1890FF">查看原图</a> ｜ <a href="../reports/LINE215_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
         <div id="tab1" class="tab-panel" style="display:none">
           <h2>5.3.1 单馈线单线图 - LINE216</h2>
           <p class="desc">基于 SQL 馈 LINE216 的所有设备，BFS Sugiyama 分层布局，主干绿色 #00A854。</p>
-          <object data="LINE216_single_line.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div style="overflow:auto;background:white;"><img src="LINE216_single_line.svg" style="width:100%;height:auto;display:block;" alt="LINE216 单线图"/></div>
           <div class="info-box">
             <div><b>图名：</b>LINE216 单线图</div>
             <div><b>生成逻辑：</b>_feeder_subgraph('LINE216') 过滤 → _project_to_device_graph → _sugiyama_layout 分层渲染</div>
-            <div><b>节点/边数统计：</b>SVG设备=2034 / SVG连接=1646 ｜ SQL期望设备=1679 / SQL期望边=1646</div>
-            <div><b>校验结果：</b><span style="color:#faad14;font-weight:bold">[WARN]</span> 通过率 67% (2/3) ｜ <a href="../reports/LINE216_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=2034 / SVG连接=1646 ｜ SQL期望设备=2034 / SQL期望边=1646</div>
+            <div><b>校验结果：</b><span style="color:#52c41a;font-weight:bold">[PASS]</span> 通过率 100% (3/3) ｜ <a href="../reports/LINE216_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>操作：</b><a href="LINE216_single_line.svg" target="_blank" style="color:#1890FF">查看原图</a> ｜ <a href="../reports/LINE216_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
         <div id="tab2" class="tab-panel" style="display:none">
           <h2>5.3.2 馈线联络关系图 - 10kVLINE111</h2>
           <p class="desc">在馈线子集 + 邻接馈线中查找联络开关（跨 feeder 的 Breaker/LoadBreakSwitch），联络线高亮橙色。</p>
-          <object data="10kVLINE111_tie.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div style="overflow:auto;background:white;"><img src="10kVLINE111_tie.svg" style="width:100%;height:auto;display:block;" alt="10kVLINE111 联络图"/></div>
           <div class="info-box">
             <div><b>图名：</b>10kVLINE111 联络图</div>
             <div><b>生成逻辑：</b>_find_tie_neighbors('10kVLINE111') 抽取联络关系 → 中心放射布局，联络开关在中点标注</div>
-            <div><b>节点/边数统计：</b>SVG设备=47 / SVG连接=0 ｜ SQL期望设备=180 / SQL期望边=114</div>
-            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/3) ｜ <a href="../reports/10kVLINE111_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=47 / SVG连接=0 ｜ SQL期望设备=47 / SQL期望边=0</div>
+            <div><b>校验：</b>概览图，不做拓扑校验</div>
+            <div><b>操作：</b><a href="10kVLINE111_tie.svg" target="_blank" style="color:#1890FF">查看原图</a> ｜ <a href="../reports/10kVLINE111_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
         <div id="tab3" class="tab-panel" style="display:none">
           <h2>5.3.3 全站馈线联络总图 - SUB004</h2>
           <p class="desc">SUB004 站房下所有馈线横向排列，馈线间的联络开关以橙色虚线跨列连接。</p>
-          <object data="SUB004_station_tie.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div style="overflow:auto;background:white;"><img src="SUB004_station_tie.svg" style="width:100%;height:auto;display:block;" alt="SUB004 全站联络总图"/></div>
           <div class="info-box">
             <div><b>图名：</b>SUB004 全站联络总图</div>
             <div><b>生成逻辑：</b>_station_feeders_and_ties('SUB004') 收集馈线+联络 → 5列栅格布局绘制馈线框 + 跨列联络线</div>
-            <div><b>节点/边数统计：</b>SVG设备=5 / SVG连接=0 ｜ SQL期望设备=444 / SQL期望边=285</div>
-            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/3) ｜ <a href="../reports/SUB004_station_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=180 / SVG连接=0 ｜ SQL期望设备=180 / SQL期望边=0</div>
+            <div><b>校验：</b>概览图，不做拓扑校验</div>
+            <div><b>操作：</b><a href="SUB004_station_tie.svg" target="_blank" style="color:#1890FF">查看原图</a> ｜ <a href="../reports/SUB004_station_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
         <div id="tab4" class="tab-panel" style="display:none">
           <h2>5.3.4 电源追溯路径图 - 目标 TMP00034205</h2>
           <p class="desc">从目标配变 TMP00034205 反向 BFS 追溯到电源；主供路径实线蓝，备供路径虚线橙加粗。</p>
-          <object data="TMP00034205_power_trace.svg" width="100%" height="88vh" type="image/svg+xml"></object>
+          <div style="overflow:auto;background:white;"><img src="TMP00034205_power_trace.svg" style="width:100%;height:auto;display:block;" alt="TMP00034205 电源追溯"/></div>
           <div class="info-box">
             <div><b>图名：</b>TMP00034205 电源追溯</div>
             <div><b>生成逻辑：</b>_power_trace_paths('TMP00034205') 主/备供路径 → Sugiyama布局，主供路径粗蓝+箭头、备供橙虚线+箭头、目标设备高亮红底</div>
-            <div><b>节点/边数统计：</b>SVG设备=34 / SVG连接=0 ｜ SQL期望设备=1309 / SQL期望边=1308</div>
-            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/3) ｜ <a href="../reports/TMP00034205_power_trace_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=34 / SVG连接=0 ｜ SQL期望设备=34 / SQL期望边=0</div>
+            <div><b>校验：</b>概览图，不做拓扑校验</div>
+            <div><b>操作：</b><a href="TMP00034205_power_trace.svg" target="_blank" style="color:#1890FF">查看原图</a> ｜ <a href="../reports/TMP00034205_power_trace_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
 </div>

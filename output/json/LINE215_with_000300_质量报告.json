@@ -17,7 +17,7 @@
       "threshold": 5
     },
     "text_overlap_pct": {
-      "value": 0.51,
+      "value": 0.0,
       "ok": true,
       "threshold": 5.0
     },
@@ -27,17 +27,17 @@
       "threshold": 1.0
     },
     "island_components_pct": {
-      "value": 97.43,
+      "value": 99.89,
       "ok": false,
       "threshold": 85.0
     },
     "isolated_nodes_pct": {
-      "value": 59.34,
-      "ok": true,
+      "value": 100.0,
+      "ok": false,
       "threshold": 60.0
     },
     "dangling_connections_pct": {
-      "value": 22.96,
+      "value": 100.0,
       "ok": false,
       "threshold": 10.0
     },
@@ -56,45 +56,45 @@
     "viewBox": {
       "x": 0.0,
       "y": 0.0,
-      "w": 29650.0,
-      "h": 2890.0
+      "w": 36360.0,
+      "h": 3600.0
     },
     "canvas": {
-      "width": 29650.0,
-      "height": 2890.0,
+      "width": 36360.0,
+      "height": 3600.0,
       "aspect_match": true,
-      "vb_ratio": 10.2595,
-      "wh_ratio": 10.2595
+      "vb_ratio": 10.1,
+      "wh_ratio": 10.1
     },
     "devices": {
-      "total": 1739,
+      "total": 1744,
       "stations": 0,
       "outside": 0,
       "outside_pct": 0.0,
       "overlap_pairs": 2,
-      "avg_height_unit": 43.357
+      "avg_height_unit": 46.051
     },
     "texts": {
       "total": 788,
       "visible": 788,
       "hidden": 0,
       "hidden_pct": 0.0,
-      "overlap_victims": 4,
-      "overlap_pct": 0.51,
+      "overlap_victims": 0,
+      "overlap_pct": 0.0,
       "outside": 0,
       "fontscale_abnormal": 0,
       "fontscale_abnormal_pct": 0.0,
-      "avg_dev_h_for_ref": 43.357
+      "avg_dev_h_for_ref": 46.051
     },
     "topology": {
-      "total_device_nodes": 1739,
+      "total_device_nodes": 951,
       "connections_total": 1446,
-      "connected_components": 1127,
-      "largest_component_size": 288,
-      "largest_component_pct": 16.56,
-      "island_components_pct": 97.43,
-      "isolated_nodes_pct": 59.34,
-      "dangling_connections_pct": 22.96
+      "connected_components": 951,
+      "largest_component_size": 1,
+      "largest_component_pct": 0.11,
+      "island_components_pct": 99.89,
+      "isolated_nodes_pct": 100.0,
+      "dangling_connections_pct": 100.0
     }
   }
 }

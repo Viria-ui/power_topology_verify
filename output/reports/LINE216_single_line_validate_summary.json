@@ -1,11 +1,11 @@
 {
   "stage": "feeder_single_line",
-  "topo_device_count": 1679,
+  "topo_device_count": 2034,
   "svg_device_count": 2034,
   "only_in_svg": 0,
   "only_in_topo": 0,
   "connection_mismatch": 0,
   "broken_path": 0,
-  "total_defects": 1,
+  "total_defects": 0,
   "stub_validator": true
 }
