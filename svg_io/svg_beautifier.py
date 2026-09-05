@@ -913,8 +913,9 @@ class SvgBeautifier:
             conn_idx += 1
             self._polyline(g, [(x1, y), (x2, y)], C_BUSBAR, W_BUSBAR, conn_id=f'BUS_{conn_idx:06d}', from_id=pid)
 
-        # ★ 联络/环路：非树边（补回生成树算法丢弃的连接）
-        # 用橙色粗线 C_TIE / W_TIE 标识联络边，确保不丢失任何 adj 边
+        # ★ 环路补边：非树边（补回生成树算法丢弃的连接）
+        # 颜色语义：仅“跨站房/跨馈线”才用联络橙 C_TIE；同容器/无容器/母线参与均属
+        # 馈线内部连接，按主干/分支绿色绘制，避免单线图内部连线被误标为联络。
         drawn_pairs = set()
         for child, par in self.tree_parent.items():
             if par is not None:
@@ -929,7 +930,20 @@ class SvgBeautifier:
             x1, y1 = self.pos[u]
             x2, y2 = self.pos[v]
             conn_idx += 1
-            conn_id = f'TIE_{conn_idx:06d}'
+            u_c = self.devices.get(u, {}).get('ssjg') or ''
+            v_c = self.devices.get(v, {}).get('ssjg') or ''
+            u_t = self.devices.get(u, {}).get('type', '')
+            v_t = self.devices.get(v, {}).get('type', '')
+            is_bus_edge = u_t in BUSBAR_TYPES or v_t in BUSBAR_TYPES
+            is_internal = is_bus_edge or (not (u_c and v_c)) or (u_c == v_c)
+            if is_internal:
+                conn_id = f'WIRE_{conn_idx:06d}'
+                edge_color = C_10KV
+                edge_w = W_TRUNK if (abs(y1 - y2) < GRID or is_bus_edge) else W_BRANCH
+            else:
+                conn_id = f'TIE_{conn_idx:06d}'
+                edge_color = C_TIE
+                edge_w = W_TIE
             _, r1, _, _ = self._dev_sym_edges(u)
             l2, _, _, _ = self._dev_sym_edges(v)
             if abs(y1 - y2) < GRID * 2:
@@ -939,7 +953,7 @@ class SvgBeautifier:
             else:
                 mid_y = (y1 + y2) / 2
                 points = [(x1, y1), (x1 + r1, y1), (x1 + r1, mid_y), (x2 + l2, mid_y), (x2 + l2, y2), (x2, y2)]
-            self._polyline(g, points, C_TIE, W_TIE, conn_id=conn_id, from_id=u, to_id=v)
+            self._polyline(g, points, edge_color, edge_w, conn_id=conn_id, from_id=u, to_id=v)
 
         # ★ 补充：原始 SVG 连接中未被 adj 图捕获的边（防止连线数量下降）
         for elem in self.doc.connections:
