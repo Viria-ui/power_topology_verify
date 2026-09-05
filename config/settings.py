@@ -47,6 +47,13 @@ TEST_SVG_ROOT = DATASET_SVG_729 if os.path.isdir(DATASET_SVG_729) else os.path.j
 MAIN_VOLTAGE = "110"    # 主网电压标识
 DIST_VOLTAGE = "10"     # 配网电压标识
 
+# 硬编码馈线映射（LINE名称 → 数据库 LINE_ID）。
+# 优先通过 SQL 表的 LINE_NAME 解析；此字典仅作为 fallback。
+FEEDER_MAP: dict[str, str] = {
+    "LINE215": "TMP00000188",
+    "LINE216": "TMP00000189",
+}
+
 # 设备内部连通规则配置
 DEVICE_INTERNAL_RULE = {
     "变压器": "高低压两端连通",

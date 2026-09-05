@@ -1,32 +1,27 @@
-"""验证 LINE_ID == FEEDER_ID 映射关系，输出到项目 output 目录。"""
+"""验证 LINE_ID == FEEDER_ID 映射关系，日志写入 OUTPUT_LOG 目录。"""
 import sys
 import os
-import logging
 
 CURRENT_FILE = os.path.abspath(__file__)
 PROJECT_ROOT = os.path.dirname(CURRENT_FILE)
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from config.settings import OUTPUT_JSON
+from config.settings import OUTPUT_LOG
 from data_io.data_reader import SqlTableLoader
+from core.log_config import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 def main():
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-    )
     loader = SqlTableLoader()
     td = loader.load_all_topo_tables()
     equip_df = td['equip']
     line_df = td['line']
 
-    log_path = os.path.join(OUTPUT_JSON, "verify_mapping.log")
-    os.makedirs(os.path.dirname(log_path), exist_ok=True)
-
+    os.makedirs(OUTPUT_LOG, exist_ok=True)
+    log_path = os.path.join(OUTPUT_LOG, "verify_mapping.log")
     with open(log_path, 'w', encoding='utf-8') as f:
         f.write("=== 验证 LINE_ID == FEEDER_ID 假设 ===\n\n")
         for kw in ['LINE215', 'LINE216', '10kVLINE111', '10kVLINE074', '10kVLINE098']:
