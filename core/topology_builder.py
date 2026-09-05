@@ -1,7 +1,9 @@
 # SQL数据构建拓扑图基类
 import sys
 import os
+import pandas as pd
 from collections import defaultdict
+
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.append(PROJECT_ROOT)
@@ -10,12 +12,15 @@ import networkx as nx
 from config.settings import MAIN_VOLTAGE, DIST_VOLTAGE
 from core.graph_model import TopologyGraph, Device, ConnectPoint, TopoEdge, build_device_internal_edges
 from core.topology_validator import TopoDbValidator
+from core.measure_preprocess import MeasurePreprocessor
+
 
 class TopologyBuilder:
     def __init__(self, table_data: dict):
+        self.table_data = table_data
         self.equip_df = table_data["equip"]
         self.line_df = table_data["line"]
-        # =========新增端子表DataFrame=========
+
         self.pw_terminal_df = table_data.get("pw_terminal")
         self.zw_terminal_df = table_data.get("zw_terminal")
         # 初始化两套独立拓扑
@@ -230,11 +235,44 @@ class TopologyBuilder:
 
     def build_full_topology(self):
         """完整构建流程：拆分→加设备→生成真实端子→端子互连→设备内部通路→拓扑校验"""
+        table_data = self.table_data   # 构造函数传入的原始table_data
+
+        # ①提取全部开关设备ID集合
+        equip_df = table_data.get("equip", pd.DataFrame())
+        switch_type_list = {"断路器", "负荷开关", "隔离开关", "接地隔离开关"}
+        all_switch_ids = set()
+        if not equip_df.empty:
+            mask_sw = equip_df["EQUIP_TYPE"].isin(switch_type_list)
+            sw_rows = equip_df.loc[mask_sw]
+            all_switch_ids = set(str(x) for x in sw_rows["EQUIP_ID"].tolist())
+
+        # ②拿到遥信表，永远传DataFrame，不传None
+        yx_df = table_data.get("yx_real", pd.DataFrame())
+
+        # ③执行遥信预处理
+        from core.measure_preprocess import MeasurePreprocessor
+        meas = MeasurePreprocessor(yx_df, all_switch_ids, time_window_sec=5)
+        #switch_state_map, state_source_map = meas.run()
+        switch_state_map = dict()
+        state_source_map = dict()
+
+        # ④挂载到配网拓扑对象 dist_topo（此时dist_topo还没实例化，先不赋值，等new出来再赋值）
+        # =====================================================================
+
         self.split_voltage_data()
         self.add_all_devices()
         self.build_real_terminal_points()
         self.build_graph_from_terminal()
         self.fill_all_internal_connection()
+
+        # ----------------拓扑对象已经创建完成，给dist_topo挂载开关状态字典----------------
+        self.dist_topo.switch_state_map = switch_state_map
+        self.dist_topo.switch_state_source = state_source_map
+        print(f"[遥信预处理统计] 总开关数量:{len(switch_state_map)}")
+        rtu_cnt = sum(1 for v in state_source_map.values() if v == "rtu")
+        default_cnt = sum(1 for v in state_source_map.values() if v == "default_rule")
+        print(f"  -->遥信实测开关:{rtu_cnt}，赛题默认合位推演开关:{default_cnt}")
+
         print("开始执行拓扑异常检测：悬空、孤岛、断点")
         main_ready = len(self.main_equip) > 0 and len(self.main_topo.point_map) > 0
         if main_ready:
@@ -249,7 +287,7 @@ class TopologyBuilder:
         print(f"主网异常数量：{len(main_abnormal)}，断点数量：{len(main_break)}")
         print(f"配网异常数量：{len(dist_abnormal)}，断点数量：{len(dist_break)}")
         return self.main_topo, self.dist_topo
-
+    
     def get_topo_statistics(self, topo: TopologyGraph, name: str):
         """输出拓扑统计信息（验收指标：节点、边、连通分量、设备清单）"""
         node_count = len(topo.graph.nodes)

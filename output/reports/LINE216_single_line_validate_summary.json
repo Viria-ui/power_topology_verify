@@ -1,12 +1,13 @@
 {
   "stage": "feeder_single_line",
-  "svg_device_count": 1644,
-  "svg_connection_count": 1646,
+  "feeder_id": "TMP00000189",
   "topo_device_count": 1679,
-  "only_in_svg": 0,
-  "connection_mismatch": 0,
-  "broken_path": 0,
-  "total_defects": 3,
-  "pass_rate": "100%",
-  "stub_validator": true
+  "svg_device_count": 1644,
+  "defects_by_type": {
+    "图上有模型无": 1644,
+    "模型有图无": 1679,
+    "物理连接不一致": 0,
+    "逻辑连接不一致": 0
+  },
+  "total_defects": 3323
 }

@@ -267,10 +267,9 @@ class SvgInteractiveEditorV2:
             else:
                 self.b.pos[new_id] = (ux, uy + 80)
 
-    def save(self, output_path=None, relayout=False):
+    def save(self, output_path=None):
         out = output_path or self.b.output_path
-        if relayout:
-            self.b.layout()
+        self.b.layout()
         self.reposition_inserted()
         self.b.render(out)
         print(f"[Editor] 已保存: {out}")

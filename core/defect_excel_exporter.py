@@ -180,71 +180,6 @@ def _build_defect_rows(defects: list[dict], line_name: str, default_station: str
     ]
 
 
-def _flatten_tie_rows(tie_data) -> list[dict]:
-    """接收单线路/批量分析结果，兼容 list、dict 与 DataFrame。"""
-    if hasattr(tie_data, "to_dict") and hasattr(tie_data, "columns"):
-        # pandas.DataFrame：此前在这里被当成未知类型而丢弃。
-        return [row for row in tie_data.to_dict("records") if isinstance(row, dict)]
-    if isinstance(tie_data, dict):
-        if any(key in tie_data for key in ("联络开关id", "联络线路id", "是否有联络")):
-            return [tie_data]
-        rows = []
-        for value in tie_data.values():
-            rows.extend(_flatten_tie_rows(value))
-        return rows
-    if not isinstance(tie_data, list):
-        return []
-    return [row for row in tie_data if isinstance(row, dict)]
-
-
-_TIE_HEADER_ALIASES = {
-    # 标准模板当前使用“名称”后缀；同时兼容任务说明及历史版本的短字段名。
-    "上级变电站名": "上级变电站名称",
-    "上级变电站名称": "上级变电站名称",
-    "联络线变电站": "联络线变电站名称",
-    "联络线变电站名称": "联络线变电站名称",
-}
-
-
-def _normalise_tie_row(row: dict) -> dict:
-    """将上游不同字段拼写统一为当前标准模板的列名。"""
-    normalised = dict(row)
-    for source, target in _TIE_HEADER_ALIASES.items():
-        if source in row and row.get(source) not in (None, ""):
-            normalised[target] = row[source]
-    # 同时保留无后缀别名，保证换用历史模板时也能按其真实列名写入。
-    if normalised.get("上级变电站名称") not in (None, ""):
-        normalised["上级变电站名"] = normalised["上级变电站名称"]
-    if normalised.get("联络线变电站名称") not in (None, ""):
-        normalised["联络线变电站"] = normalised["联络线变电站名称"]
-    return normalised
-
-
-def _merge_tie_rows(tie_data) -> list[dict]:
-    """汇总所有线路关系；同一线路存在“是”时移除占位的“否”。"""
-    rows = [_normalise_tie_row(row) for row in _flatten_tie_rows(tie_data)]
-    lines_with_tie = {
-        str(row.get("线路id") or "") for row in rows
-        if row.get("是否有联络") == "是"
-    }
-    merged: list[dict] = []
-    seen: set[tuple] = set()
-    for row in rows:
-        line_id = str(row.get("线路id") or "")
-        if row.get("是否有联络") == "否" and line_id in lines_with_tie:
-            continue
-        key = (
-            line_id,
-            str(row.get("联络开关id") or ""),
-            str(row.get("联络线路id") or ""),
-            str(row.get("是否有联络") or ""),
-        )
-        if key not in seen:
-            seen.add(key)
-            merged.append(row)
-    return merged
-
-
 def export_defects_xlsx(
     defects: list[dict],
     output_path: str | Path,
@@ -263,18 +198,7 @@ def export_defects_xlsx(
     analysis = analysis or {}
     defect_rows = _build_defect_rows(defects, line_name, default_station)
     breakpoint_rows = analysis.get("breakpoints", [])
-    # batch_tie_switches / all_tie_switches 可由批量调用方传入；单线路
-    # 调用仍使用 tie_switches。合并后确保不会被邻线缺失时的“否”覆盖。
-    tie_source = analysis.get(
-        "batch_tie_switches",
-        analysis.get("all_tie_switches", analysis.get("tie_switches", [])),
-    )
-    tie_source_rows = _flatten_tie_rows(tie_source)
-    tie_rows = _merge_tie_rows(tie_source)
-    print(
-        f"[Excel] Sheet 3 联络源数据 {len(tie_source_rows)} 行，"
-        f"汇总后 {len(tie_rows)} 行：{tie_rows}"
-    )
+    tie_rows = analysis.get("tie_switches", [])
     loop_rows = analysis.get("loops", [])
     score_rows = analysis.get("scores", [])
 
@@ -301,14 +225,4 @@ def export_defects_xlsx(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     wb.save(output_path)
     wb.close()
-
-    # 明确回读 Sheet 3，便于批量运行日志直接确认联络数据已落盘。
-    check_wb = openpyxl.load_workbook(output_path, read_only=True, data_only=True)
-    try:
-        if SHEET_TIE in check_wb.sheetnames:
-            check_ws = check_wb[SHEET_TIE]
-            written_rows = list(check_ws.iter_rows(min_row=2, values_only=True))
-            print(f"[Excel] Sheet 3 联络开关实际写入 {len(written_rows)} 行：{written_rows}")
-    finally:
-        check_wb.close()
     return output_path

@@ -26,7 +26,6 @@ from __future__ import annotations
 
 import math
 import os
-import logging
 import sys
 from typing import Optional
 
@@ -40,9 +39,6 @@ from data_io.data_reader import SqlTableLoader
 from core.topology_builder import TopologyBuilder
 from core.graph_model import TopologyGraph, Device
 import networkx as nx
-
-logger = logging.getLogger(__name__)
-
 
 
 # ----------------------------------------------------------------
@@ -66,10 +62,10 @@ PAL = {
     "load":          "#531DAB",
 }
 
-NODE_W, NODE_H = 100.0, 40.0
-NODE_H_GAP = 130.0
-NODE_V_GAP = 50.0
-PAD = 60.0
+NODE_W, NODE_H = 90.0, 30.0
+NODE_H_GAP = 110.0
+NODE_V_GAP = 38.0
+PAD = 50.0
 
 
 # ----------------------------------------------------------------
@@ -137,8 +133,9 @@ class SvgAutoGenerator:
                             a, b = devs[i], devs[j]
                             if a != b and not G.has_edge(a, b):
                                 G.add_edge(a, b, lines=[("CN_" + cid, "connectivity_node")])
-            except Exception as _e:
-                logger.debug("ignored exception: %s", _e)
+            except Exception:
+                pass
+
         if G.number_of_edges() == 0 and table_data_line is not None:
             try:
                 line_df = table_data_line
@@ -148,8 +145,9 @@ class SvgAutoGenerator:
                     if ss in device_ids and ee in device_ids and ss != ee:
                         if not G.has_edge(ss, ee):
                             G.add_edge(ss, ee, lines=[(str(row.get("LINE_ID") or ""), str(row.get("LINE_NAME") or ""))])
-            except Exception as _e:
-                logger.debug("ignored exception: %s", _e)
+            except Exception:
+                pass
+
         if G.number_of_edges() == 0:
             feeder_groups: dict[str, list] = {}
             for n, d in G.nodes(data=True):
@@ -198,8 +196,8 @@ class SvgAutoGenerator:
                 mask = equip_df["FEEDER_ID"].astype(str).str.lower().str.contains(kw.lower(), regex=False, na=False)
                 if mask.any():
                     return str(equip_df[mask].iloc[0]["FEEDER_ID"])
-        except Exception as _e:
-            logger.debug("ignored exception: %s", _e)
+        except Exception:
+            pass
         return kw
 
     def _resolve_substation_id(self, kw: str) -> str:
@@ -224,8 +222,8 @@ class SvgAutoGenerator:
                             if kw_low in sid.lower():
                                 return sid
                         return str(valid[0][0])
-        except Exception as _e:
-            logger.debug("ignored exception: %s", _e)
+        except Exception:
+            pass
         return kw
 
     def _feeder_subgraph(self, feeder_keyword: str) -> nx.Graph:
@@ -257,8 +255,7 @@ class SvgAutoGenerator:
                          roots: Optional[list] = None,
                          base_x=PAD, base_y=PAD,
                          col_gap=NODE_H_GAP * 1.2,
-                         row_gap=NODE_V_GAP * 1.1,
-                         auto_transpose=True) -> tuple[dict[str, tuple[float, float]], int, int]:
+                         row_gap=NODE_V_GAP * 1.1) -> tuple[dict[str, tuple[float, float]], int, int]:
         """BFS 分层 (列)，同层纵向均匀排布。返回 {node_id: (x,y)} 与 (cols, rows)。"""
         pos: dict[str, tuple[float, float]] = {}
         if not sub.number_of_nodes():
@@ -306,15 +303,6 @@ class SvgAutoGenerator:
             for j, n in enumerate(layer):
                 y = start_y + j * row_gap
                 pos[n] = (x, y)
-
-        # 若布局为纵向(rows>cols)，转置为横向布局，避免第一列过长
-        if rows > cols and auto_transpose:
-            transposed = {}
-            for n, (x, y) in pos.items():
-                transposed[n] = (base_x + (y - base_y), base_y + (x - base_x))
-            pos = transposed
-            cols, rows = rows, cols
-
         return pos, cols, rows
 
     # ------------------------------------------------------------------
@@ -531,168 +519,6 @@ class SvgAutoGenerator:
         if "负荷" in tp or "用电" in tp or "配变" in tp: return PAL["load"]
         return PAL["ink"]
 
-    # 设备类型代码 -> 标准符号类型映射
-    _TYPE_CODE_MAP = {
-        "1702": "line", "1703": "transformer", "1704": "reactor",
-        "1705": "breaker", "1706": "load_switch", "1707": "fuse",
-        "1708": "disconnector", "1709": "ground_switch", "1710": "busbar",
-        "1713": "pt", "1714": "pole", "1719": "consumer", "1720": "composite_switch",
-        "1301": "busbar", "1311": "transformer", "1313": "ct", "1314": "pt",
-        "1317": "station_transformer", "1318": "transformer", "1321": "breaker",
-        "1322": "disconnector", "1323": "ground_switch", "1325": "reactor",
-        "1328": "arrester",
-        "0307": "breaker", "0201": "load_switch", "0202": "disconnector",
-        "0203": "ground_switch", "0302": "fuse", "0305": "pt",
-        "0306": "ct", "0110": "transformer", "0111": "distribution_transformer",
-        "0115": "pole", "0313": "line_end", "0314": "line_end",
-        "370000": "consumer", "0309": "arrester",
-    }
-
-    @staticmethod
-    def _device_symbol(nd: dict, x: float, y: float, w: float, h: float) -> str:
-        """根据设备类型渲染标准电气符号，返回SVG片段。"""
-        tp = str(nd.get("equip_type") or "")
-        name = str(nd.get("equip_name") or "")
-        cx, cy = x + w / 2, y + h / 2
-        color = SvgAutoGenerator._node_color(nd)
-
-        # 归一化设备类型：数字代码 -> 标准符号类型
-        sym_type = SvgAutoGenerator._TYPE_CODE_MAP.get(tp.strip(), "")
-        if not sym_type:
-            # 后备：用中文名称/英文名称判断
-            tl = tp.lower()
-            if "母线" in tp or "busbar" in tl: sym_type = "busbar"
-            elif "变压" in tp or "配变" in tp or "transformer" in tl: sym_type = "transformer"
-            elif "断路" in tp or "breaker" in tl: sym_type = "breaker"
-            elif "负荷" in tp or "load" in tl: sym_type = "load_switch"
-            elif "隔离" in tp or "disconnector" in tl: sym_type = "disconnector"
-            elif "接地" in tp: sym_type = "ground_switch"
-            elif "熔断" in tp or "保险" in tp or "fuse" in tl: sym_type = "fuse"
-            elif "互感" in tp or "pt" in tl: sym_type = "pt"
-            elif "杆塔" in tp or "pole" in tl: sym_type = "pole"
-            elif "用户" in tp or "用电" in tp or "负荷" in tp or "consumer" in tl: sym_type = "consumer"
-            elif "站" in tp or "室" in tp or "container" in tl: sym_type = "station"
-            elif "线路" in tp or "线段" in tp or "line" in tl: sym_type = "line"
-
-        # 母线：粗绿色矩形
-        if sym_type == "busbar":
-            return (f'<rect x="{x:.1f}" y="{cy-4:.1f}" width="{w:.1f}" height="8" '
-                    f'rx="2" fill="{PAL["main"]}" stroke="none"/>')
-
-        # 变压器/配变：双圆圈
-        if sym_type in ("transformer", "distribution_transformer", "station_transformer"):
-            r = min(w, h) * 0.28
-            return (f'<circle cx="{cx-r*0.6:.1f}" cy="{cy:.1f}" r="{r:.1f}" '
-                    f'fill="none" stroke="{color}" stroke-width="2"/>'
-                    f'<circle cx="{cx+r*0.6:.1f}" cy="{cy:.1f}" r="{r:.1f}" '
-                    f'fill="none" stroke="{color}" stroke-width="2"/>')
-
-        # 断路器：矩形+X
-        if sym_type == "breaker":
-            return (f'<rect x="{cx-12:.1f}" y="{cy-10:.1f}" width="24" height="20" '
-                    f'rx="2" fill="white" stroke="{color}" stroke-width="2"/>'
-                    f'<line x1="{cx-8:.1f}" y1="{cy-6:.1f}" x2="{cx+8:.1f}" y2="{cy+6:.1f}" '
-                    f'stroke="{color}" stroke-width="1.5"/>'
-                    f'<line x1="{cx+8:.1f}" y1="{cy-6:.1f}" x2="{cx-8:.1f}" y2="{cy+6:.1f}" '
-                    f'stroke="{color}" stroke-width="1.5"/>')
-
-        # 负荷开关/组合开关：圆圈+斜线（加粗）
-        if sym_type in ("load_switch", "composite_switch"):
-            return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="8" fill="white" '
-                    f'stroke="{color}" stroke-width="2.2"/>'
-                    f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{cx+11:.1f}" y2="{cy-9:.1f}" '
-                    f'stroke="{color}" stroke-width="2.2"/>')
-
-        # 隔离开关：圆圈+斜线
-        if sym_type == "disconnector":
-            return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="7" fill="white" '
-                    f'stroke="{color}" stroke-width="1.8"/>'
-                    f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{cx+10:.1f}" y2="{cy-8:.1f}" '
-                    f'stroke="{color}" stroke-width="1.8"/>')
-
-        # 接地刀闸：圆圈+向下斜线+接地符号
-        if sym_type == "ground_switch":
-            return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="7" fill="white" '
-                    f'stroke="{color}" stroke-width="1.8"/>'
-                    f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{cx:.1f}" y2="{cy+10:.1f}" '
-                    f'stroke="{color}" stroke-width="1.8"/>'
-                    f'<line x1="{cx-5:.1f}" y1="{cy+10:.1f}" x2="{cx+5:.1f}" y2="{cy+10:.1f}" '
-                    f'stroke="{color}" stroke-width="1.5"/>')
-
-        # 熔断器：矩形
-        if sym_type == "fuse":
-            return (f'<rect x="{cx-10:.1f}" y="{cy-6:.1f}" width="20" height="12" '
-                    f'rx="1" fill="white" stroke="{color}" stroke-width="1.8"/>')
-
-        # 电压互感器/电流互感器：双小圆圈
-        if sym_type in ("pt", "ct"):
-            return (f'<circle cx="{cx-4:.1f}" cy="{cy:.1f}" r="6" fill="white" '
-                    f'stroke="{color}" stroke-width="1.5"/>'
-                    f'<circle cx="{cx+4:.1f}" cy="{cy:.1f}" r="6" fill="white" '
-                    f'stroke="{color}" stroke-width="1.5"/>')
-
-        # 用户/负荷：方块+J
-        if sym_type == "consumer":
-            return (f'<rect x="{cx-9:.1f}" y="{cy-9:.1f}" width="18" height="18" '
-                    f'rx="1" fill="white" stroke="{color}" stroke-width="1.8"/>'
-                    f'<text x="{cx:.1f}" y="{cy+4:.1f}" text-anchor="middle" '
-                    f'font-size="10" fill="{color}" font-weight="bold">J</text>')
-
-        # 杆塔：三角形
-        if sym_type == "pole":
-            return (f'<polygon points="{cx},{cy-10} {cx-9},{cy+8} {cx+9},{cy+8}" '
-                    f'fill="white" stroke="{color}" stroke-width="1.5"/>')
-
-        # 避雷器：小矩形
-        if sym_type == "arrester":
-            return (f'<rect x="{cx-6:.1f}" y="{cy-8:.1f}" width="12" height="16" '
-                    f'rx="1" fill="white" stroke="{color}" stroke-width="1.5"/>')
-
-        # 电抗器/消弧线圈：矩形+内部斜线
-        if sym_type == "reactor":
-            return (f'<rect x="{cx-10:.1f}" y="{cy-8:.1f}" width="20" height="16" '
-                    f'rx="2" fill="white" stroke="{color}" stroke-width="1.8"/>'
-                    f'<line x1="{cx-6:.1f}" y1="{cy-4:.1f}" x2="{cx+6:.1f}" y2="{cy+4:.1f}" '
-                    f'stroke="{color}" stroke-width="1.2"/>'
-                    f'<line x1="{cx-6:.1f}" y1="{cy+4:.1f}" x2="{cx+6:.1f}" y2="{cy-4:.1f}" '
-                    f'stroke="{color}" stroke-width="1.2"/>')
-
-        # 站房/容器：大矩形（虚线边框）
-        if sym_type == "station":
-            return (f'<rect x="{x+5:.1f}" y="{y+5:.1f}" width="{w-10:.1f}" height="{h-10:.1f}" '
-                    f'rx="4" fill="#fafafa" stroke="{PAL["station"]}" stroke-width="1.5" stroke-dasharray="4 2"/>')
-
-        # 线路段/线路端点：小圆点
-        if sym_type in ("line", "line_end"):
-            return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="3" fill="{color}" stroke="none"/>')
-
-        # 默认：圆角矩形
-        return (f'<rect x="{x+2:.1f}" y="{y+2:.1f}" width="{w-4:.1f}" height="{h-4:.1f}" '
-                f'rx="3" fill="white" stroke="{color}" stroke-width="1.5"/>')
-
-    @staticmethod
-    def _edge_points(pa, pb, w, h):
-        """计算从设备A边缘到设备B边缘的连接点（避免线穿过设备）。"""
-        ax, ay = pa[0] + w / 2, pa[1] + h / 2
-        bx, by = pb[0] + w / 2, pb[1] + h / 2
-        dx, dy = bx - ax, by - ay
-        if abs(dx) < 0.01 and abs(dy) < 0.01:
-            return ax, ay, bx, by
-        # 设备半宽/半高
-        hw, hh = w / 2, h / 2
-        # 计算射线与设备矩形的交点
-        def rect_intersect(cx, cy, dx, dy, hw, hh):
-            if abs(dx) < 0.01:
-                t = hh / abs(dy)
-            elif abs(dy) < 0.01:
-                t = hw / abs(dx)
-            else:
-                t = min(hw / abs(dx), hh / abs(dy))
-            return cx + dx * t, cy + dy * t
-        x1, y1 = rect_intersect(ax, ay, dx, dy, hw, hh)
-        x2, y2 = rect_intersect(bx, by, -dx, -dy, hw, hh)
-        return x1, y1, x2, y2
-
     def _write_svg(self, out_path: str, vb_w: float, vb_h: float, body_xml: str,
                    defs_xml: str = "") -> None:
         """写一个可浏览器直接打开的 SVG。"""
@@ -738,21 +564,7 @@ class SvgAutoGenerator:
         edges_total = sub.number_of_edges()
 
         # 布局
-        pos, cols, rows = self._sugiyama_layout(sub, auto_transpose=False)
-        # 统一交换x/y转为纵向布局（层从上到下），确保两张单线图排列方向一致
-        if pos:
-            pos = {n: (p[1], p[0]) for n, p in pos.items()}
-            cols, rows = rows, cols
-            # 交换后若太窄（宽高比<0.3），缩放x坐标让宽度合理（设备在y方向排列，x缩放不会重叠）
-            xs_t = [p[0] for p in pos.values()]
-            ys_t = [p[1] for p in pos.values()]
-            w_t = max(xs_t) - min(xs_t) + NODE_W
-            h_t = max(ys_t) - min(ys_t) + NODE_H
-            if h_t > 0 and w_t / h_t < 0.3:
-                min_x = min(xs_t)
-                target_w = 0.35 * h_t
-                scale = target_w / w_t if w_t > 0 else 1.0
-                pos = {n: (min_x + (p[0] - min_x) * scale, p[1]) for n, p in pos.items()}
+        pos, cols, rows = self._sugiyama_layout(sub)
         if not pos:
             self._write_svg(out_path, 400, 200,
                 f'<text x="200" y="100" text-anchor="middle" fill="{PAL["ink"]}" font-size="14">'
@@ -767,9 +579,8 @@ class SvgAutoGenerator:
 
         body_parts = []
 
-        # 连接线（先画，中心到中心，设备符号白色填充盖住内部线段）
-        conn_parts = []
-        for ci, (a, b) in enumerate(sub.edges()):
+        # 连接线（先画）
+        for a, b in sub.edges():
             pa = pos.get(a); pb = pos.get(b)
             if not pa or not pb: continue
             ax, ay = pa[0] + NODE_W / 2, pa[1] + NODE_H / 2
@@ -780,36 +591,25 @@ class SvgAutoGenerator:
             fb = str(sub.nodes[b].get("feeder_id") or "")
             if fa and fb and fa != fb:
                 color = PAL["tie"]
-            conn_id = f"CONN_{ci:05d}"
-            conn_parts.append(
-                f'<g id="{conn_id}">'
-                f'<polyline points="{ax:.1f},{ay:.1f} {bx:.1f},{by:.1f}" '
-                f'fill="none" stroke="{color}" stroke-width="2.0" stroke-linecap="round"/>'
-                f'</g>')
-        body_parts.append(f'<g id="ConnLine_Layer">{"".join(conn_parts)}</g>')
+            body_parts.append(
+                f'<line x1="{ax:.2f}" y1="{ay:.2f}" x2="{bx:.2f}" y2="{by:.2f}" '
+                f'stroke="{color}" stroke-width="2.2" stroke-linecap="round"/>')
 
-        # 设备节点（标准电气符号 + 标注，带id供校验器识别）
-        dev_parts = []
-        text_parts = []
+        # 设备节点（圆角矩形）
         for n, (x, y) in pos.items():
             nd = sub.nodes[n]
-            name = str(nd.get("equip_name") or "")
-            if not name or name == "nan" or name == "None":
-                name = str(nd.get("equip_type") or n)
+            name = str(nd.get("equip_name") or n)
             tp = str(nd.get("equip_type") or "")
-            sym = self._device_symbol(nd, x, y, NODE_W, NODE_H)
-            # 标注在设备下方
-            short = name if len(name) <= 12 else name[:11] + "…"
-            dev_parts.append(
-                f'<g id="{n}" data-type="{tp}">{sym}</g>')
-            text_parts.append(
-                f'<g id="TXT_{n}">'
-                f'<text x="{x + NODE_W / 2:.1f}" y="{y + NODE_H + 12:.1f}" '
-                f'text-anchor="middle" fill="{PAL["ink"]}" font-size="9" '
-                f'stroke="#ffffff" stroke-width="2.5" paint-order="stroke">{short}</text>'
+            color = self._node_color(nd)
+            # 截断过长名
+            short = name if len(name) <= 10 else name[:9] + "…"
+            body_parts.append(
+                f'<g data-id="{n}" data-type="{tp}">'
+                f'<rect x="{x:.2f}" y="{y:.2f}" width="{NODE_W:.1f}" height="{NODE_H:.1f}" '
+                f'rx="2.5" ry="2.5" fill="white" stroke="{color}" stroke-width="1.6"/>'
+                f'<text x="{x + NODE_W / 2:.2f}" y="{y + NODE_H / 2 + 3.2:.2f}" '
+                f'text-anchor="middle" fill="{PAL["ink"]}" font-size="5.2">{short}</text>'
                 f'</g>')
-        body_parts.append(f'<g id="Other_Layer">{"".join(dev_parts)}</g>')
-        body_parts.append(f'<g id="Text_Layer">{"".join(text_parts)}</g>')
 
         # 标题
         body_parts.append(
@@ -1175,8 +975,8 @@ def extract_symbol_defs(beautified_svg_path: str) -> str:
         ET.register_namespace("", SVG_NS)
         try:
             ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
-        except ValueError as _e:
-            logger.debug("ignored ValueError: %s", _e)
+        except ValueError:
+            pass
         parts = []
         for child in defs_elem:
             parts.append(ET.tostring(child, encoding="unicode"))
@@ -1359,8 +1159,9 @@ def _make_minimal_doc(vb_w: float, vb_h: float, defs_xml: str = ""):
             wrap = ET.fromstring(f"<svg xmlns='{SVG_NS}' xmlns:xlink='{XLINK_NS}'>{defs_xml}</svg>")
             for child in list(wrap):
                 defs.append(_copy.deepcopy(child))
-        except Exception as _e:
-            logger.debug("ignored exception: %s", _e)
+        except Exception:
+            pass
+
     for lid in ["BackGround_Layer", "Substation_Layer", "BusbarSection_Layer",
                 "PowerTransformer_Layer", "Breaker_Layer", "LoadBreakSwitch_Layer",
                 "Disconnector_Layer", "GroundDisconnector_Layer", "Fuse_Layer",
@@ -1378,8 +1179,8 @@ def _make_minimal_doc(vb_w: float, vb_h: float, defs_xml: str = ""):
     tmp_doc.root = tmp_root
     try:
         tmp_doc.tree = ET.ElementTree(tmp_root)
-    except Exception as _e:
-        logger.debug("ignored exception: %s", _e)
+    except Exception:
+        pass
     return tmp_doc
 
 

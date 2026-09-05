@@ -38,8 +38,7 @@ if PROJECT_ROOT not in sys.path:
 
 from config.settings import OUTPUT_SVG, OUTPUT_JSON, OUTPUT_SQL, TEST_SVG_ROOT
 
-from svg_io.svg_beautifier import SvgBeautifier
-from svg_io.svg_editor import SvgInteractiveEditorV2
+from svg_io.svg_editor import SvgEditor
 from svg_io.quality_checker import check_svg_quality
 from data_io.svg_reader import SvgDocument
 
@@ -62,31 +61,36 @@ def run_task_a() -> dict:
     reports = {}
 
     # ---- A1. LINE215 插入站房 000300 ----
-    line215_src = os.path.join(TEST_SVG_ROOT, "LINE215.svg")
-    line215_out = os.path.join(OUTPUT_SVG, "LINE215_add_station_000300.svg")
+    line215_src = os.path.join(OUTPUT_SVG, "LINE215_beautified.svg")
+    if not os.path.isfile(line215_src):
+        line215_src = os.path.join(TEST_SVG_ROOT, "LINE215.svg")
+    line215_out = os.path.join(OUTPUT_SVG, "LINE215_beautified_with_000300.svg")
 
-    b1 = SvgBeautifier(line215_src, output_path=line215_out)
-    b1._prepare_internal_data()
-    b1.repair()
-    b1.layout()
+    # 先统计编辑前
+    pre_doc = SvgDocument(line215_src); pre_doc.parse()
+    pre_stat = {
+        "devices": len([e for e in pre_doc.elements if e.layer_name != "Substation"
+                        and e.width and e.height and e.width > 0]),
+        "stations": len([e for e in pre_doc.elements if e.layer_name == "Substation"]),
+        "connections": len(pre_doc.connections),
+    }
 
-    # 用 beautifier 内部数据统计编辑前（避免重新解析美化后SVG导致计数异常）
-    def _count_internal(b):
-        real_devs = [p for p, d in b.devices.items() if b.is_real_device(d['type'])]
-        conns = sum(len(v) for v in b.adj.values()) // 2
-        return {"devices": len(real_devs), "stations": len(b.containers), "connections": conns}
-
-    pre_stat = _count_internal(b1)
-    editor = SvgInteractiveEditorV2(b1)
-    editor.add_station(
+    editor = SvgEditor(line215_src).load()
+    editor.add_station_with_switches(
+        upstream_switch_id="TMP00044018",       # 开关 00104 对应 SVG 内 id
+        downstream_switch_id="TMP00044016",     # 开关 00102 对应 SVG 内 id
         station_id="000300",
-        station_name="站房000300",
-        upstream_query="TMP00044018",       # 开关 00104 对应 SVG 内 id
-        downstream_query="TMP00044016",     # 开关 00102 对应 SVG 内 id
-        internal_switch_ids=["00301", "00302", "00303"],
+        switch_ids=["00301", "00302", "00303"],
+        output_path=line215_out,
     )
-    editor.save(line215_out)
-    post_stat = _count_internal(b1)
+
+    post_doc = SvgDocument(line215_out); post_doc.parse()
+    post_stat = {
+        "devices": len([e for e in post_doc.elements if e.layer_name != "Substation"
+                        and e.width and e.height and e.width > 0]),
+        "stations": len([e for e in post_doc.elements if e.layer_name == "Substation"]),
+        "connections": len(post_doc.connections),
+    }
 
     # 质量验证
     ok_a1, rep_a1 = check_svg_quality(
@@ -146,24 +150,27 @@ COMMIT;
     reports["A1_LINE215_add_station_000300"] = diff_a1
 
     # ---- A2. LINE216 删除开关 00024 ----
-    line216_src = os.path.join(TEST_SVG_ROOT, "LINE216.svg")
-    line216_out = os.path.join(OUTPUT_SVG, "LINE216_del_switch_00024.svg")
+    line216_src = os.path.join(OUTPUT_SVG, "LINE216_beautified.svg")
+    if not os.path.isfile(line216_src):
+        line216_src = os.path.join(TEST_SVG_ROOT, "LINE216.svg")
+    line216_out = os.path.join(OUTPUT_SVG, "LINE216_beautified_del_00024.svg")
 
-    b2 = SvgBeautifier(line216_src, output_path=line216_out)
-    b2._prepare_internal_data()
-    b2.repair()
-    b2.layout()
+    pre_doc2 = SvgDocument(line216_src); pre_doc2.parse()
+    pre_stat2 = {
+        "devices": len([e for e in pre_doc2.elements if e.layer_name != "Substation"
+                        and e.width and e.height and e.width > 0 and e.element_id != "TMP00043912"]),
+        "connections": len(pre_doc2.connections),
+    }
 
-    def _count_internal2(b):
-        real_devs = [p for p, d in b.devices.items() if b.is_real_device(d['type'])]
-        conns = sum(len(v) for v in b.adj.values()) // 2
-        return {"devices": len(real_devs), "connections": conns}
+    editor2 = SvgEditor(line216_src).load()
+    editor2.delete_switch("TMP00043912", output_path=line216_out)
 
-    pre_stat2 = _count_internal2(b2)
-    editor2 = SvgInteractiveEditorV2(b2)
-    editor2.delete_device("TMP00043912")  # 开关 00024
-    editor2.save(line216_out)
-    post_stat2 = _count_internal2(b2)
+    post_doc2 = SvgDocument(line216_out); post_doc2.parse()
+    post_stat2 = {
+        "devices": len([e for e in post_doc2.elements if e.layer_name != "Substation"
+                        and e.width and e.height and e.width > 0]),
+        "connections": len(post_doc2.connections),
+    }
 
     ok_a2, rep_a2 = check_svg_quality(
         line216_out, os.path.join(OUTPUT_JSON, "LINE216_del_00024_质量报告.json"))
@@ -253,29 +260,29 @@ def run_task_b() -> dict:
 
     # B1. LINE215 单线图
     p = g.generate_feeder_single_line_diagram(feeder_name="LINE215",
-        out_path=os.path.join(OUTPUT_SVG, "LINE215_single_line.svg"))
+        out_path=os.path.join(OUTPUT_SVG, "AUTO_LINE215_单线图.svg"))
     results["B1_LINE215_单线图"] = p
 
     # B2. LINE216 单线图
     p = g.generate_feeder_single_line_diagram(feeder_name="LINE216",
-        out_path=os.path.join(OUTPUT_SVG, "LINE216_single_line.svg"))
+        out_path=os.path.join(OUTPUT_SVG, "AUTO_LINE216_单线图.svg"))
     results["B2_LINE216_单线图"] = p
 
     # B3. 10kVLINE111 联络关系图
     p = g.generate_feeder_tie_diagram(feeder_name="10kVLINE111",
-        out_path=os.path.join(OUTPUT_SVG, "10kVLINE111_tie.svg"))
+        out_path=os.path.join(OUTPUT_SVG, "AUTO_10kVLINE111_联络图.svg"))
     results["B3_10kVLINE111_联络关系图"] = p
 
     # B4. SUB004 全站馈线联络总图
     p = g.generate_station_tie_diagram(substation_id="SUB004",
-        out_path=os.path.join(OUTPUT_SVG, "SUB004_station_tie.svg"))
+        out_path=os.path.join(OUTPUT_SVG, "AUTO_SUB004_全站联络总图.svg"))
     results["B4_SUB004_全站联络总图"] = p
 
     # B5. LINE074 配变 TMP00034205 电源追溯路径图（含备供）
     p = g.generate_power_trace_diagram(
         target_equip_id="TMP00034205",
         feeder_name="LINE074",
-        out_path=os.path.join(OUTPUT_SVG, "TMP00034205_power_trace.svg"))
+        out_path=os.path.join(OUTPUT_SVG, "AUTO_LINE074_TMP00034205_电源追溯.svg"))
     results["B5_LINE074_TMP00034205_电源追溯"] = p
 
     # 输出汇总 JSON
