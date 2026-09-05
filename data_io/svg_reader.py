@@ -336,20 +336,30 @@ class SvgDocument:
         try:
             if "LINE_NAME" in line_df.columns:
                 name_series = line_df["LINE_NAME"].astype(str).str.lower()
+                # 1. 精确匹配
                 matches = line_df[name_series == kw_low]
                 if len(matches) > 0:
                     return str(matches.iloc[0]["LINE_ID"])
+            # 2. 提取数字后缀，按末尾N位匹配
             digit_suffix = kw_low
             for prefix in ("10kvline", "35kvline", "110kvline", "kvline", "line"):
                 if digit_suffix.startswith(prefix):
                     digit_suffix = digit_suffix[len(prefix):]
-            if digit_suffix.isdigit() and len(digit_suffix) >= 2:
+            # LINE074 → "074"，尝试匹配 LINE_NAME 中含 074 的记录
+            if digit_suffix and len(digit_suffix) >= 2:
                 if "LINE_NAME" in line_df.columns:
+                    # 提取 LINE_NAME 中的数字部分
                     extracted = line_df["LINE_NAME"].astype(str).str.extract(r"(\d{2,4})", expand=False).fillna("")
-                    last3 = digit_suffix[-3:]
+                    # 先尝试末尾3位精确匹配
+                    last3 = digit_suffix[-3:] if len(digit_suffix) >= 3 else digit_suffix
                     mask = extracted.str.endswith(last3)
                     if mask.any():
                         return str(line_df[mask].iloc[0]["LINE_ID"])
+                    # 再尝试末尾2位
+                    last2 = digit_suffix[-2:]
+                    mask2 = extracted.str.endswith(last2)
+                    if mask2.any():
+                        return str(line_df[mask2].iloc[0]["LINE_ID"])
         except Exception:
             pass
         return kw
@@ -457,6 +467,9 @@ class SvgDocument:
         if elem.shape_tag == "rect" and not metadata:
             if fill in {"ffffff", "white", "fff", ""} and stroke in {"none", "ffffff", "white", "fff", ""}:
                 return None
+        # 额外过滤：无 metadata 且无 element_name 的 rect 在设备 <g> 内为背景装饰
+        if elem.shape_tag == "rect" and not metadata and not elem.element_name:
+            return None
         if elem.layer_name in {"Junction", "RemoteUnit", "Other"} and not metadata and not elem.element_name:
             pass
         return elem
@@ -604,22 +617,18 @@ class SvgDocument:
         for child in metadata_elem:
             tag = _local_tag(child.tag)
             if tag == "PSR_Ref":
-                oid = (child.get("ObjectID")
-                       or child.get("ObjectId")
-                       or child.get("ID")
-                       or child.get("id")
+                # 统一使用 IEC 规范属性名 ObjectName/PSRType
+                oid = (child.get("ObjectName") or child.get("objectName")
+                       or child.get("ObjectID") or child.get("ObjectId")
+                       or child.get("ID") or child.get("id")
                        or elem.element_id)
                 elem.element_id = oid or elem.element_id
                 name = (child.get("ObjectName")
-                        or child.get("Name")
                         or child.get("objectName")
-                        or child.get("name")
                         or "")
                 elem.element_name = name
                 psr_type = (child.get("PSRType")
                             or child.get("PSR_TYPE")
-                            or child.get("Type")
-                            or child.get("type")
                             or elem.psr_type
                             or "")
                 elem.psr_type = psr_type

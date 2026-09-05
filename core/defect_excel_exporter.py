@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import logging
 from copy import copy
 from pathlib import Path
 
@@ -308,12 +309,10 @@ def export_report_all_in_one(
     if run_beautify:
         try:
             from svg_io.svg_beautifier import beautify_svg_file
-            beautified = svg_path.with_name(svg_path.stem + "_beautified.xlsx_suffix.svg").as_posix().replace(
-                ".xlsx_suffix.svg", "_beautified.svg"
-            )
+            beautified = svg_path.with_name(svg_path.stem + "_beautified.svg")
             svg_for_parse = beautify_svg_file(
                 svg_path.as_posix(),
-                output_path=beautified,
+                output_path=str(beautified),
                 quality_report=False,
             )
         except Exception:
@@ -396,3 +395,20 @@ def export_report_all_in_one(
         default_station=start_st_id,
         analysis=analysis_payload,
     )
+
+
+# ------------------------------------------------------------------
+# CLI: python -m core.defect_excel_exporter LINE074 [svg_path] [out_path]
+# ------------------------------------------------------------------
+if __name__ == "__main__":
+    import sys
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+    args = sys.argv[1:]
+    feeder = args[0] if args else None
+    svg = args[1] if len(args) > 1 else None
+    out = args[2] if len(args) > 2 else None
+    if not feeder:
+        print("Usage: python -m core.defect_excel_exporter <feeder_id> [svg_path] [output_path]")
+        sys.exit(1)
+    result = export_report_all_in_one(feeder_id=feeder, svg_path=svg, output_path=out)
+    print(f"Report exported to: {result}")

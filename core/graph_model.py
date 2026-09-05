@@ -166,7 +166,8 @@ class TopologyGraph:
                 path_devs.append(node)
                 seen.add(node)
 
-        # P1: 路径上的分位开关
+        # P1: 路径上的分位开关（最高优先级，发现即终止后续检测）
+        p1_found = False
         for eid in path_devs:
             dev = self.device_map.get(eid)
             if dev is None:
@@ -177,7 +178,8 @@ class TopologyGraph:
                 status = (self.switch_state_map.get(eid)
                           or dev.switch_status
                           or "close")
-                if status in {"open", "分位", "0"}:
+                # 统一状态映射：CLOSE/合位/1 → 合位，OPEN/分位/0 → 分位
+                if str(status).upper() in {"OPEN", "分位", "0"}:
                     results.append({
                         "priority": "P1", "equip_id": eid,
                         "point_id": ",".join(self._points_by_equip.get(eid, [])[:5]),
@@ -187,6 +189,15 @@ class TopologyGraph:
                         "switch_status_tag": "分位",
                         "yx_yz_conflict_tag": "",
                     })
+                    p1_found = True
+        # P1 命中时跳过 P2-P7（断点已定位，无需重复报告）
+        if p1_found:
+            _PRI_ORDER = {"P1": 0, "P2": 1, "P3": 2, "P4": 3, "P5": 4, "P6": 5, "P7": 6}
+            for r in results:
+                if not r["breakpoint_type"].startswith("[P"):
+                    r["breakpoint_type"] = f"[{r.get('priority','P?')}]{r['breakpoint_type']}"
+            results.sort(key=lambda x: _PRI_ORDER.get(x.get("priority", "P?"), 99))
+            return results
         # P3: 遥信-遥测矛盾（开关合位标记 + 但一侧无电流/电压矛盾）
         try:
             if self.electrical_defects:

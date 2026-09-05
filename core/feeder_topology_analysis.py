@@ -119,20 +119,6 @@ def _is_switch_node(device_graph: nx.Graph, node_id: str) -> bool:
 def _has_db_path(device_graph: nx.Graph, a: str, b: str) -> bool:
     if not device_graph.has_node(a) or not device_graph.has_node(b):
         return False
-
-
-def find_breakpoint_between(device_graph: nx.Graph, start_id: str, end_id: str) -> dict:
-    """标准 Sheet2 API：给定两设备，返回路径及首个分位开关/不可达断点。"""
-    if not device_graph.has_node(start_id) or not device_graph.has_node(end_id):
-        return {"found": False, "reason": "起点或终点不在拓扑中", "path": []}
-    try:
-        path = nx.shortest_path(device_graph, start_id, end_id)
-    except nx.NetworkXNoPath:
-        return {"found": True, "reason": "两点不可达", "path": []}
-    for node in path:
-        if _is_switch_node(device_graph, node) and str(device_graph.nodes[node].get("switch_status") or "") in {"open", "分位", "0"}:
-            return {"found": True, "reason": "分位开关断点", "breakpoint_id": node, "path": path}
-    return {"found": False, "reason": "两点连通", "path": path}
     if device_graph.has_edge(a, b):
         return True
     try:

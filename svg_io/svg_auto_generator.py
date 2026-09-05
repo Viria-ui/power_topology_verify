@@ -205,12 +205,13 @@ class SvgAutoGenerator:
         仅当显式输入"最大站房"/"default"/"sub004"时用启发式；
         输入 SUB084/SUBxxx 时先按DSUBSTATION_ID精确/子串匹配；匹配不到发出警告返回原值，不再静默退回最大站房。
         """
-        import sys as _sys
+        import logging as _logging
+        _logger = _logging.getLogger(__name__)
         if not kw:
             return kw
         equip_df = self.table_data.get("equip")
         kw_low = kw.strip().lower()
-        HEURISTIC_KEYS = {"最大站房", "最大", "default", "sub004"}
+        HEURISTIC_KEYS = {"最大站房", "最大", "default"}
         try:
             if equip_df is not None and len(equip_df) > 0:
                 col = None
@@ -223,6 +224,7 @@ class SvgAutoGenerator:
                              if sid and sid.lower() != 'null' and cnt >= 3]
                     if valid:
                         if kw_low in HEURISTIC_KEYS:
+                            _logger.info("站房标识[%s]命中启发式键，返回最大站房 %s (共%d个候选)", kw, valid[0][0], len(valid))
                             return str(valid[0][0])
                         for sid, _ in valid:
                             if kw_low == sid.lower():
@@ -236,10 +238,10 @@ class SvgAutoGenerator:
                                 for sid, _ in valid:
                                     if sid.endswith(digit_suffix) or digit_suffix in sid:
                                         return sid
-                        print(f"[WARN] 站房标识[{kw}]未在DSUBSTATION_ID中命中候选{len(valid)}个，返回原值(避免最大站房误匹配)", file=_sys.stderr)
+                        _logger.warning("站房标识[%s]未在DSUBSTATION_ID中命中候选%d个，返回原值(避免最大站房误匹配)", kw, len(valid))
                         return kw
         except Exception as ex:
-            print(f"[WARN] _resolve_substation_id解析异常[{kw}]: {ex}", file=_sys.stderr)
+            _logger.warning("_resolve_substation_id解析异常[%s]: %s", kw, ex)
         return kw
 
     def _feeder_subgraph(self, feeder_keyword: str) -> nx.Graph:

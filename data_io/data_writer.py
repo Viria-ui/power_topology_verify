@@ -1,6 +1,7 @@
 # JSON/CSV统一输出工具
 import sys
 import os
+import logging
 # 把项目根目录加入Python检索路径，解决模块找不到问题
 CURRENT_FILE = os.path.abspath(__file__)
 PROJECT_ROOT = os.path.dirname(os.path.dirname(CURRENT_FILE))
@@ -14,11 +15,14 @@ import uuid
 from config.settings import OUTPUT_CSV, OUTPUT_JSON
 from core.graph_model import AbnormalItem
 
+logger = logging.getLogger(__name__)
+
 def export_abnormal_csv(data_list: list[AbnormalItem], file_name="problem_list.csv"):
     """导出问题清单CSV,字段固定可追溯"""
     df = pd.DataFrame([item.model_dump() for item in data_list])
     save_path = os.path.join(OUTPUT_CSV, file_name)
     df.to_csv(save_path, index=False, encoding="utf-8-sig")
+    logger.info("Exported CSV -> %s (%d rows)", save_path, len(df))
     return save_path
 
 def export_abnormal_json(data_list: list[AbnormalItem], file_name="problem_list.json"):
@@ -26,6 +30,7 @@ def export_abnormal_json(data_list: list[AbnormalItem], file_name="problem_list.
     save_path = os.path.join(OUTPUT_JSON, file_name)
     with open(save_path, "w", encoding="utf-8") as f:
         json.dump([item.model_dump() for item in data_list], f, ensure_ascii=False, indent=2)
+    logger.info("Exported JSON -> %s (%d rows)", save_path, len(data_list))
     return save_path
 
 # 生成空白样例数据（用于交付样例文件）
@@ -41,17 +46,10 @@ def gen_sample_data():
         review_status="待复核",
         detail="该设备无任何线路连接，判定悬空"
     )
-    # 样例文件输出到项目根目录docs，不要复用export_abnormal_csv（它会强制拼接OUTPUT_CSV）
-    docs_dir = os.path.join(PROJECT_ROOT, "docs")
-    os.makedirs(docs_dir, exist_ok=True)
-
-    csv_path = os.path.join(docs_dir, "sample_abnormal.csv")
-    df = pd.DataFrame([sample.model_dump()])
-    df.to_csv(csv_path, index=False, encoding="utf-8-sig")
-
-    json_path = os.path.join(docs_dir, "sample_abnormal.json")
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump([sample.model_dump()], f, ensure_ascii=False, indent=2)
+    csv_path = export_abnormal_csv([sample], "sample_abnormal.csv")
+    json_path = export_abnormal_json([sample], "sample_abnormal.json")
+    return csv_path, json_path
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
     gen_sample_data()

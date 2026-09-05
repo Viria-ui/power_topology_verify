@@ -20,7 +20,7 @@ from config.settings import DATASET_STANDARD_OUTPUT_XLSX
 
 
 def resolve_feeder_id(line_name: str, line_df) -> str:
-    """将 LINE215 / 10kVLINE215 等名称解析为数据库 FEEDER_ID (LINE_ID)。"""
+    """将 LINE215 / 10kVLINE215 / LINE074 等名称解析为数据库 FEEDER_ID (LINE_ID)。"""
     if line_df is None or len(line_df) == 0:
         return line_name
     kw = line_name.strip()
@@ -29,16 +29,16 @@ def resolve_feeder_id(line_name: str, line_df) -> str:
     if len(matches) > 0:
         return str(matches.iloc[0]["LINE_ID"])
     digit_suffix = kw_low
-    for prefix in ("10kvline", "kvline", "line"):
+    for prefix in ("10kvline", "35kvline", "110kvline", "kvline", "line"):
         if digit_suffix.startswith(prefix):
             digit_suffix = digit_suffix[len(prefix):]
-    if digit_suffix.isdigit() and len(digit_suffix) >= 2:
+    if digit_suffix and len(digit_suffix) >= 2:
         mask = (
             line_df["LINE_NAME"]
             .astype(str)
             .str.extract(r"(\d{2,4})", expand=False)
             .fillna("")
-            .str.endswith(digit_suffix[-3:])
+            .str.endswith(digit_suffix[-3:] if len(digit_suffix) >= 3 else digit_suffix[-2:])
         )
         if mask.any():
             return str(line_df[mask].iloc[0]["LINE_ID"])
@@ -191,19 +191,44 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
             to_obj_id = element_to_object_map.get(to_elem_id)
 
             if from_obj_id and to_obj_id and (from_obj_id != to_obj_id):
-                has_edge = False
+                has_logic_conn = False
                 if hasattr(dist_topo, "graph"):
-                    has_edge = (
-                        dist_topo.graph.has_edge(from_obj_id, to_obj_id)
-                        or dist_topo.graph.has_edge(to_obj_id, from_obj_id)
-                    )
-                if not has_edge:
+                    import networkx as nx_
+                    G = dist_topo.graph
+                    # 拓扑图是 设备-端子/端子-端子 混合图，不能直接 has_edge(device, device)。
+                    # 正确方式：取两端设备各自的端子，检查是否存在连通路径。
+                    pts_from = dist_topo.get_device_all_points(from_obj_id)
+                    pts_to = dist_topo.get_device_all_points(to_obj_id)
+                    if pts_from and pts_to:
+                        for pa in pts_from:
+                            if not G.has_node(pa):
+                                continue
+                            for pb in pts_to:
+                                if not G.has_node(pb):
+                                    continue
+                                try:
+                                    if nx_.has_path(G, pa, pb):
+                                        plen = len(nx_.shortest_path(G, pa, pb))
+                                        if plen <= 10:
+                                            has_logic_conn = True
+                                            break
+                                except (nx_.NetworkXNoPath, nx_.NodeNotFound):
+                                    continue
+                            if has_logic_conn:
+                                break
+                    # 退化：无端子时直接检查节点是否存在路径
+                    if not has_logic_conn and G.has_node(from_obj_id) and G.has_node(to_obj_id):
+                        try:
+                            has_logic_conn = nx_.has_path(G, from_obj_id, to_obj_id)
+                        except (nx_.NetworkXNoPath, nx_.NodeNotFound):
+                            pass
+                if not has_logic_conn:
                     defects_report.append(_make_defect(
                         equip_id=f"{from_obj_id} <-> {to_obj_id}",
                         defect_type="物理连接不一致",
                         description=(
                             f"SVG图纸存在设备 {from_obj_id} 与 {to_obj_id} 的物理连接，"
-                            f"但数据库拓扑网中缺失该连线"
+                            f"但数据库拓扑网中缺失该连线(端子图不连通)"
                         ),
                         suggestion="建议在数据库线路表 EQUIP_JBS_PWFEEDERLINE 中增补对应物理连接记录",
                         sql_draft=(

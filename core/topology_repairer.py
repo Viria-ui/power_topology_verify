@@ -8,9 +8,12 @@
 """
 import math
 import uuid
+import logging
 import networkx as nx
 from collections import defaultdict
 from typing import List, Tuple, Optional, Dict
+
+logger = logging.getLogger(__name__)
 from data_io.svg_reader import SvgDocument, SvgElement, SvgConnection
 
 class TopologyRepairer:
@@ -104,7 +107,7 @@ class TopologyRepairer:
                     elem.container_id = st.element_id
                     count += 1
                     break
-        print(f"    - 已建立 {count} 个设备的站房归属关系")
+        logger.info(f"已建立 {count} 个设备的站房归属关系")
 
     def _identify_topology_hierarchy(self):
         """识别电源点、主干线与支线，为布局提供层级参考。"""

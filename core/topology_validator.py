@@ -12,11 +12,14 @@
 import os
 import re
 import json
+import logging
 from typing import Tuple, Optional
 from collections import defaultdict
 from typing import Optional, Union
 
 import networkx as nx
+
+logger = logging.getLogger(__name__)
 
 from data_io.svg_reader import SvgDocument, SvgElement, SvgConnection, SvgText
 from core.graph_model import TopologyGraph, AbnormalItem, BreakpointItem, TieLoopItem
@@ -329,7 +332,10 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
     topo_device_ids = set(topo.device_map.keys())
     svg_device_ids = set(svg_device_map.keys())
 
-    SVG_EXEMPT_TYPES = {"Junction", "接头", "PoleCode", "杆塔", "Other"}
+    SVG_EXEMPT_TYPES = {"Junction", "接头", "PoleCode", "杆塔", "Other",
+                        "其他", "RemoteUnit", "故障指示器",
+                        "CurrentTransformer", "电流互感器",
+                        "PotentialTransformer", "电压互感器"}
     feeder_id = doc.feeder_id
 
     # ---- 1. 图上有模型无 ----
@@ -338,7 +344,8 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
             layer = (e.layer_name or "").strip()
             ptype = (e.psr_type or "").strip()
             ename = (e.element_name or "").strip()
-            if layer in SVG_EXEMPT_TYPES and not ename:
+            # 豁免：Junction/接头/PoleCode/Other/互感器 等非设备图元
+            if layer in SVG_EXEMPT_TYPES or ptype in SVG_EXEMPT_TYPES:
                 continue
             defects.append(_make_defect(
                 equip_id=oid,
@@ -780,8 +787,8 @@ def export_defect_report(defects: list, summary: dict, out_path: str):
     sum_path = f"{base}_summary{ext}"
     with open(sum_path, "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
-    print(f"  缺陷报告已导出: {out_path} ({len(defects)} 条)")
-    print(f"  汇总报告已导出: {sum_path}")
+    logger.info(f"缺陷报告已导出: {out_path} ({len(defects)} 条)")
+    logger.info(f"汇总报告已导出: {sum_path}")
 
 class TopoDbValidator:
     def __init__(self, topo: TopologyGraph, measure_proc=None):
@@ -1039,7 +1046,11 @@ class TopoDbValidator:
                 self.topo.breakpoint_list.append(item)
 
     def detect_tie_and_suspect_tie(self, trace_uuid: str):
-        """R_TIE_EXCLUDE_001 / R_TIE_001 / R_TIE_002：联络开关、疑似联络识别"""
+        """R_TIE_EXCLUDE_001 / R_TIE_001 / R_TIE_002：联络开关、疑似联络识别
+
+        9.2 规则：联络开关需能连通到变电站母线（MAIN_STATION 分支）。
+        本方法对齐 analyze_tie_switches 批量路径的判定逻辑。
+        """
         comp_map = {}
         for comp in self.find_all_connected_components():
             for pid in comp:
@@ -1070,6 +1081,20 @@ class TopoDbValidator:
             if not self._is_tie_switch_candidate(dev, feeder_set):
                 continue
 
+            # 9.2 规则：检查开关两侧是否连通到变电站母线（MAIN STATION 分支）
+            comp1 = comp_map.get(t1)
+            comp2 = comp_map.get(t2)
+            src_in_comp1 = set()
+            src_in_comp2 = set()
+            if comp1:
+                equip_set_1, _ = self._get_component_equip_and_feeder(comp1)
+                src_in_comp1 = equip_set_1 & self.source_equip_ids
+            if comp2 and comp2 is not comp1:
+                equip_set_2, _ = self._get_component_equip_and_feeder(comp2)
+                src_in_comp2 = equip_set_2 & self.source_equip_ids
+            # 联络开关两侧均需有电源（变电站母线）连通
+            has_main_station = len(src_in_comp1) > 0 or len(src_in_comp2) > 0
+
             # 两侧馈线至少有一个为空 → 信息缺失，标记疑似联络待复核
             if not f1 or not f2:
                 item = TieLoopItem(
@@ -1093,6 +1118,27 @@ class TopoDbValidator:
 
             # 两侧馈线相同：不属于联络
             if f1 == f2:
+                continue
+
+            # 9.2 规则验证通过：联络开关需连通到变电站母线
+            if not has_main_station:
+                item = TieLoopItem(
+                    trace_uuid=trace_uuid,
+                    equip_id=equip_id,
+                    point_id=",".join(term_ids),
+                    line_id=None,
+                    result_type="疑似联络(无主网接口)",
+                    rule_code=R_TIE_002,
+                    rule_desc="疑似联络开关，未连通到变电站母线(9.2 MAIN STATION)，需人工复核",
+                    detail=f"设备{equip_id}[{dev_name}]跨馈线 {f1}/{f2}，但两侧均未连通到电源/变电站母线",
+                    switch_status=None,
+                    risk_level="中",
+                    review_required=True,
+                    left_feeder=f1,
+                    right_feeder=f2,
+                    is_planned_loop=False
+                )
+                self.topo.tie_loop_list.append(item)
                 continue
 
             # 两侧馈线不同，联络候选

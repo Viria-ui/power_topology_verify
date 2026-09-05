@@ -7,7 +7,10 @@
 注意：data_reader读出全部字段为字符串
 数据集说明：本数据集无QUALITY_CODE质量字段；E07时序去抖受数据源限制仅保留框架
 """
+import logging
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 from typing import Dict, Set, Tuple, Optional
 
 
@@ -108,8 +111,8 @@ class MeasurePreprocessor:
                 self.final_switch_state[sw_id] = "CLOSE"
                 self.state_source[sw_id] = "default_rule"
 
-        print(f"[MeasurePreprocess] 遥信实测开关数量：{len([k for k,v in self.state_source.items() if v=='rtu'])}")
-        print(f"[MeasurePreprocess] 默认合位开关数量：{len([k for k,v in self.state_source.items() if v=='default_rule'])}")
+        logger.info(f"[MeasurePreprocess] 遥信实测开关数量：{len([k for k,v in self.state_source.items() if v=='rtu'])}")
+        logger.info(f"[MeasurePreprocess] 默认合位开关数量：{len([k for k,v in self.state_source.items() if v=='default_rule'])}")
         return self.final_switch_state, self.state_source
 
     def get_switch_final_status(self, equip_id: str) -> str:

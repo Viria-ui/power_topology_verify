@@ -73,31 +73,42 @@ class TopologyBuilder:
             len(self.zw_substation_df), len(self.yx_real_df),
             len(self.zw_mea_df), len(self.zw_signal_df),
         )
-        print(f"主网设备数量：{len(self.main_equip)}")
-        print(f"配网设备数量：{len(self.dist_equip)}")
-        print(f"主网线路(ZLINEEND)数量：{len(self.main_line)}")
-        print(f"配网线路(PWFEEDERLINE)数量：{len(self.dist_line)}")
-        print(f"主网站点(ZWSUBSTATION)数量：{len(self.zw_substation_df)}")
-        print(f"遥信遥测(PWREAL)记录数：{len(self.yx_real_df)}")
-        print(f"主网遥测(ZWMEA)：{len(self.zw_mea_df)} 主网遥信(ZWSIGNAL)：{len(self.zw_signal_df)}")
+        logger.info(f"主网设备数量：{len(self.main_equip)}")
+        logger.info(f"配网设备数量：{len(self.dist_equip)}")
+        logger.info(f"主网线路(ZLINEEND)数量：{len(self.main_line)}")
+        logger.info(f"配网线路(PWFEEDERLINE)数量：{len(self.dist_line)}")
+        logger.info(f"主网站点(ZWSUBSTATION)数量：{len(self.zw_substation_df)}")
+        logger.info(f"遥信遥测(PWREAL)记录数：{len(self.yx_real_df)}")
+        logger.info(f"主网遥测(ZWMEA)：{len(self.zw_mea_df)} 主网遥信(ZWSIGNAL)：{len(self.zw_signal_df)}")
 
     def _is_source_type(self, equip_type_val: str, equip_name: str = "") -> bool:
-        """电源识别：数值码/中文名/CIM + 设备名称关键字三栖判定，避免0台电源。"""
+        """电源识别：数值码/中文名/CIM + 设备名称关键字三栖判定，避免0台电源。
+
+        识别逻辑（满足任一即为电源）：
+        1. 设备类型码在 SOURCE_TYPES 集合中
+        2. 设备名称含变电站/主变/STATION等关键词（不要求类型码同时命中）
+        3. 主网侧(ZWEQUIPINFO)设备默认为电源（主网即电源网络）
+        """
         if not equip_type_val:
             return False
         t = str(equip_type_val).strip()
+        # 1. 类型码精确匹配
         if t in SOURCE_TYPES:
             return True
         name = str(equip_name or "")
-        keywords = ("变电站", "站房", "主变", "变", "SUB", "STATION", "Trafo", "TRANSFORMER")
-        if any(k in name for k in keywords) and t in SOURCE_TYPES:
+        # 2. 名称关键字匹配（不要求类型码同时命中，修复原代码重言式bug）
+        keywords = ("变电站", "主变", "SUB", "STATION", "Trafo", "TRANSFORMER",
+                    "PowerTransformer", "变电")
+        if any(k in name.upper() for k in keywords):
             return True
-        # 主网设备默认识别：110kV侧的任何变压器/变电站默认电源
+        # 3. 主网站房类型码（1701/1702）也判电源
+        if t in ("1701", "1702"):
+            return True
         return False
 
     def add_all_devices(self):
         """批量添加设备"""
-        print(f"  [Builder] 正在添加 {len(self.main_equip)} 个主网设备和 {len(self.dist_equip)} 个配网设备...")
+        logger.info(f"[Builder] 正在添加 {len(self.main_equip)} 个主网设备和 {len(self.dist_equip)} 个配网设备...")
         src_cnt_main = 0
         for _, row in self.main_equip.iterrows():
             equip_id = str(row.get("EQUIP_ID", ""))
@@ -121,12 +132,12 @@ class TopologyBuilder:
                 is_source=is_src,
             ))
         logger.info("主网电源设备数=%d", src_cnt_main)
-        print(f"    - 主网电源设备识别: {src_cnt_main} 台")
+        logger.info(f"主网电源设备识别: {src_cnt_main} 台")
 
         src_cnt_dist = 0
         for i, (_, row) in enumerate(self.dist_equip.iterrows()):
             if i % 10000 == 0 and i > 0:
-                print(f"    - 已处理 {i} 个配网设备")
+                logger.debug(f"已处理 {i} 个配网设备")
 
             equip_type_val = str(row.get("EQUIP_TYPE", ""))
             equip_name_val = str(row.get("EQUIP_NAME", ""))
@@ -147,7 +158,7 @@ class TopologyBuilder:
             )
             self.dist_topo.add_device(dev)
         logger.info("配网电源设备数=%d", src_cnt_dist)
-        print(f"    - 配网电源设备识别: {src_cnt_dist} 台")
+        logger.info(f"配网电源设备识别: {src_cnt_dist} 台")
         if src_cnt_main == 0 and src_cnt_dist == 0 and len(self.zw_substation_df) > 0:
             logger.warning("未从设备表识别出任何电源，尝试使用ZWSUBSTATION注入电源点")
             for _, row in self.zw_substation_df.iterrows():
@@ -167,13 +178,13 @@ class TopologyBuilder:
                         is_source=True,
                     ))
                 src_cnt_main += 1
-            print(f"    - 通过ZWSUBSTATION补充注入电源: {src_cnt_main} 台")
+            logger.info(f"通过ZWSUBSTATION补充注入电源: {src_cnt_main} 台")
             
     def build_real_terminal_points(self):
         """从端子表生成真实端子ConnectPoint，point_id=TERMINAL_ID"""
         # 配网端子
         if self.pw_terminal_df is None or self.pw_terminal_df.empty:
-            print("[警告] 未加载配网端子表，跳过配网真实端子生成")
+            logger.warning("未加载配网端子表，跳过配网真实端子生成")
         else:
             for _, row in self.pw_terminal_df.iterrows():
                 # ✅ 修改后：自动兼容各种可能的字段列名
@@ -231,14 +242,14 @@ class TopologyBuilder:
                 self.main_topo.add_point(pt)
                 self.main_topo.link_device_point(dev_id, term_id)
 
-        print(f"[Builder] 配网真实端子数量:{len(self.dist_topo.point_map)}")
-        print(f"[Builder] 主网真实端子数量:{len(self.main_topo.point_map)}")
+        logger.info(f"[Builder] 配网真实端子数量:{len(self.dist_topo.point_map)}")
+        logger.info(f"[Builder] 主网真实端子数量:{len(self.main_topo.point_map)}")
 
 
     def build_graph_from_terminal(self):
         """同CONNECT_NODE_ID下真实端子之间互连，节点为TERMINAL_ID"""
         if self.pw_terminal_df is None or self.pw_terminal_df.empty:
-            print("[警告] 未加载配网端子表，无法构建配网电气边")
+            logger.warning("未加载配网端子表，无法构建配网电气边")
         else:
             # -----配网端子建边-----
             cn_to_terms = defaultdict(list)
@@ -264,15 +275,15 @@ class TopologyBuilder:
 
         # -----主网端子建边-----
         if len(self.main_equip) == 0 or len(self.main_topo.point_map) == 0:
-            print(
-                "[警告] 主网设备数或真实端子数为 0，跳过主网拓扑构建："
+            logger.warning(
+                "主网设备数或真实端子数为 0，跳过主网拓扑构建："
                 f"设备数={len(self.main_equip)}，端子数={len(self.main_topo.point_map)}"
             )
-            print(f"[端子建边完成] 配网拓扑边数量：{self.dist_topo.graph.number_of_edges()}")
+            logger.info(f"[端子建边完成] 配网拓扑边数量：{self.dist_topo.graph.number_of_edges()}")
             return
         if self.zw_terminal_df is None or self.zw_terminal_df.empty:
-            print("[警告] 未加载主网端子表，跳过主网电气边构建")
-            print(f"[端子建边完成] 配网拓扑边数量：{self.dist_topo.graph.number_of_edges()}")
+            logger.warning("未加载主网端子表，跳过主网电气边构建")
+            logger.info(f"[端子建边完成] 配网拓扑边数量：{self.dist_topo.graph.number_of_edges()}")
             return
 
         cn_to_terms_zw = defaultdict(list)
@@ -296,8 +307,8 @@ class TopologyBuilder:
                 )
                 self.main_topo.add_edge(e)
 
-        print(f"[端子建边完成] 配网拓扑边数量：{self.dist_topo.graph.number_of_edges()}")
-        print(f"[端子建边完成] 主网拓扑边数量：{self.main_topo.graph.number_of_edges()}")
+        logger.info(f"[端子建边完成] 配网拓扑边数量：{self.dist_topo.graph.number_of_edges()}")
+        logger.info(f"[端子建边完成] 主网拓扑边数量：{self.main_topo.graph.number_of_edges()}")
 
     def fill_all_internal_connection(self):
         """批量补齐设备内部端子通路，传入真实端子ID列表"""
@@ -384,7 +395,7 @@ class TopologyBuilder:
                 )
                 self.dist_topo.abnormal_list.append(item)
         logger.info("主配接口校验：通过=%d 失败=%d", iface_cnt_ok, iface_cnt_bad)
-        print(f"[主配接口校验] 4.1/4.2 命中缺陷: {iface_cnt_bad}")
+        logger.info(f"[主配接口校验] 4.1/4.2 命中缺陷: {iface_cnt_bad}")
         return results
 
     def build_full_topology(self):
@@ -450,29 +461,29 @@ class TopologyBuilder:
         # 把预处理实例存到builder自身属性，后面传给校验器
         self.measure_proc = meas
 
-        print(f"[遥信预处理统计] 总开关状态映射条目:{len(final_state_map)} 实际挂载到设备:{mounted}")
+        logger.info(f"[遥信预处理统计] 总开关状态映射条目:{len(final_state_map)} 实际挂载到设备:{mounted}")
         rtu_cnt = sum(1 for v in source_map.values() if v == "rtu")
         default_cnt = sum(1 for v in source_map.values() if v == "default_rule")
-        print(f"  -->遥信实测开关:{rtu_cnt}，赛题默认合位推演开关:{default_cnt}")
+        logger.info(f"遥信实测开关:{rtu_cnt}，赛题默认合位推演开关:{default_cnt}")
         electrical_defects = self.check_electrical_logic()
-        print(f"[电气逻辑校验] RULE-E01~E07 命中:{len(electrical_defects)}")
+        logger.info(f"[电气逻辑校验] RULE-E01~E07 命中:{len(electrical_defects)}")
         # ==============================================
 
-        print("开始执行拓扑异常检测：悬空、孤岛、断点")
+        logger.info("开始执行拓扑异常检测：悬空、孤岛、断点")
         main_ready = len(self.main_equip) > 0 and len(self.main_topo.point_map) > 0
         if main_ready:
             main_abnormal, main_break = self.check_topo_abnormal(self.main_topo, trace_id="MAIN_001", measure_proc=self.measure_proc)
         else:
-            print(
-                "[警告] 主网设备数或真实端子数为 0，已跳过主网拓扑构建与校验："
+            logger.warning(
+                "主网设备数或真实端子数为 0，已跳过主网拓扑构建与校验："
                 f"设备数={len(self.main_equip)}，端子数={len(self.main_topo.point_map)}"
             )
             main_abnormal, main_break = [], []
 
         dist_abnormal, dist_break = self.check_topo_abnormal(self.dist_topo, trace_id="DIST_001", measure_proc=self.measure_proc)
 
-        print(f"主网异常数量：{len(main_abnormal)}，断点数量：{len(main_break)}")
-        print(f"配网异常数量：{len(dist_abnormal)}，断点数量：{len(dist_break)}")
+        logger.info(f"主网异常数量：{len(main_abnormal)}，断点数量：{len(main_break)}")
+        logger.info(f"配网异常数量：{len(dist_abnormal)}，断点数量：{len(dist_break)}")
         return self.main_topo, self.dist_topo
     
     def get_topo_statistics(self, topo: TopologyGraph, name: str):

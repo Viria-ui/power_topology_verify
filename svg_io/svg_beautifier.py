@@ -780,6 +780,7 @@ class SvgBeautifier:
 
     def _draw_wires(self, g):
         conn_idx = 0
+        # 生成树边（主干+分支）
         for child, par in self.tree_parent.items():
             if par is None or child not in self.pos or par not in self.pos:
                 continue
@@ -793,7 +794,6 @@ class SvgBeautifier:
             conn_idx += 1
             conn_id = f'WIRE_{conn_idx:06d}'
             if is_trunk:
-                # 端点放设备中心（距离<5.0匹配），设备白色背景覆盖内部线段
                 points = [(x1, y1), (x1 + r1, y1), (x2 + l2, y2), (x2, y2)]
                 self._polyline(g, points, C_10KV, w, conn_id=conn_id, from_id=par, to_id=child)
             else:
@@ -818,18 +818,25 @@ class SvgBeautifier:
             conn_idx += 1
             self._polyline(g, [(x1, y), (x2, y)], C_BUSBAR, W_BUSBAR, conn_id=f'BUS_{conn_idx:06d}', from_id=pid)
 
-        # ★ 联络/环路：非树边（补回生成树算法丢弃的 962→831 丢失连接）
-        # 用橙色粗线 C_TIE / W_TIE 标识联络边
+        # ★ 联络/环路：非树边（补回生成树算法丢弃的连接）
+        # 用橙色粗线 C_TIE / W_TIE 标识联络边，确保不丢失任何 adj 边
+        drawn_pairs = set()
+        for child, par in self.tree_parent.items():
+            if par is not None:
+                drawn_pairs.add(tuple(sorted([child, par])))
         for (u, v) in self.non_tree_edges:
             if u not in self.pos or v not in self.pos:
                 continue
+            key = tuple(sorted([u, v]))
+            if key in drawn_pairs:
+                continue
+            drawn_pairs.add(key)
             x1, y1 = self.pos[u]
             x2, y2 = self.pos[v]
             conn_idx += 1
             conn_id = f'TIE_{conn_idx:06d}'
             _, r1, _, _ = self._dev_sym_edges(u)
             l2, _, _, _ = self._dev_sym_edges(v)
-            # 简单直角正交：横向优先
             if abs(y1 - y2) < GRID * 2:
                 points = [(x1, y1), (x1 + r1, y1), (x2 + l2, y2), (x2, y2)]
             elif abs(x1 - x2) < GRID * 2:
@@ -839,28 +846,52 @@ class SvgBeautifier:
                 points = [(x1, y1), (x1 + r1, y1), (x1 + r1, mid_y), (x2 + l2, mid_y), (x2 + l2, y2), (x2, y2)]
             self._polyline(g, points, C_TIE, W_TIE, conn_id=conn_id, from_id=u, to_id=v)
 
+        # ★ 补充：原始 SVG 连接中未被 adj 图捕获的边（防止连线数量下降）
+        for elem in self.doc.connections:
+            s_id = elem.start_device_id
+            e_id = elem.end_device_id
+            if not s_id or not e_id or s_id == e_id:
+                continue
+            if s_id not in self.pos or e_id not in self.pos:
+                continue
+            key = tuple(sorted([s_id, e_id]))
+            if key in drawn_pairs:
+                continue
+            drawn_pairs.add(key)
+            x1, y1 = self.pos[s_id]
+            x2, y2 = self.pos[e_id]
+            conn_idx += 1
+            conn_id = f'CONN_{conn_idx:06d}'
+            _, r1, _, _ = self._dev_sym_edges(s_id)
+            l2, _, _, _ = self._dev_sym_edges(e_id)
+            if abs(y1 - y2) < GRID * 2:
+                points = [(x1, y1), (x1 + r1, y1), (x2 + l2, y2), (x2, y2)]
+            elif abs(x1 - x2) < GRID * 2:
+                points = [(x1, y1), (x1, y2), (x2 + l2, y2), (x2, y2)]
+            else:
+                mid_y = (y1 + y2) / 2
+                points = [(x1, y1), (x1 + r1, y1), (x1 + r1, mid_y), (x2 + l2, mid_y), (x2 + l2, y2), (x2, y2)]
+            self._polyline(g, points, C_10KV, W_BRANCH, conn_id=conn_id, from_id=s_id, to_id=e_id)
+
     def _draw_devices(self, g):
-        # 先画白色背景（无metadata，避免被解析器当作设备图元）
+        # 设备符号：白色背景与符号放在同一个 <g> 内，避免被解析器当作独立设备图元
         for pid, (x, y) in self.pos.items():
             d = self.devices.get(pid)
             if not d or d['type'] in BUSBAR_TYPES:
                 continue
             left, right, top, bottom = self._dev_sym_edges(pid)
             pad = 1.5
-            ET.SubElement(g, f'{{{SVG_NS}}}rect', {
-                'x': f'{x + left - pad:.1f}', 'y': f'{y + top - pad:.1f}',
+            dg = ET.SubElement(g, f'{{{SVG_NS}}}g', {
+                'transform': f'translate({x},{y})',
+            })
+            # 白色背景放在设备 g 内部（无 metadata，不单独解析为设备）
+            ET.SubElement(dg, f'{{{SVG_NS}}}rect', {
+                'x': f'{left - pad:.1f}', 'y': f'{top - pad:.1f}',
                 'width': f'{right - left + 2 * pad:.1f}',
                 'height': f'{bottom - top + 2 * pad:.1f}',
                 'fill': '#ffffff', 'stroke': 'none',
             })
-        # 再画设备符号（有metadata）
-        for pid, (x, y) in self.pos.items():
-            d = self.devices.get(pid)
-            if not d or d['type'] in BUSBAR_TYPES:
-                continue
-            dg = ET.SubElement(g, f'{{{SVG_NS}}}g', {
-                'transform': f'translate({x},{y})',
-            })
+            # 设备 metadata（ObjectName/PSRType 属性名对齐 IEC 规范）
             self._add_device_metadata(dg, pid)
             if d.get('symbol'):
                 sym = d['symbol'].lstrip('#')
