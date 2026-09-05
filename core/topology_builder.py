@@ -475,17 +475,17 @@ class TopologyBuilder:
         # ①新构造函数：只传完整table_data
         meas = MeasurePreprocessor(table_data, time_window_sec=5)
 
-        # ②收集全部开关ID集合，从已经建好的topo设备map拿（优先，不要从原始equip_df）
-        switch_type_set = {"断路器", "隔离开关", "负荷开关", "接地隔离开关"}
+        # ②收集全部开关ID集合，从已经建好的topo设备map拿
+        # 使用 constants.SWITCH_TYPES（包含数值码 1705/1706/1707/1708/1709 等）
         all_switch_ids = set()
         # 配网开关
         for eid, dev in self.dist_topo.device_map.items():
-            if dev.equip_type in switch_type_set:
+            if dev.equip_type in SWITCH_TYPES:
                 all_switch_ids.add(eid)
         # 主网开关
         if len(self.main_topo.device_map) > 0:
             for eid, dev in self.main_topo.device_map.items():
-                if dev.equip_type in switch_type_set:
+                if dev.equip_type in SWITCH_TYPES:
                     all_switch_ids.add(eid)
 
         # ③执行run，把开关ID集合传给run方法
@@ -494,7 +494,7 @@ class TopologyBuilder:
         # ④回填每个Device的switch_status字段，并同步到图节点
         mounted = 0
         for eid, dev in self.dist_topo.device_map.items():
-            if dev.equip_type in switch_type_set:
+            if dev.equip_type in SWITCH_TYPES:
                 state = final_state_map.get(eid, "CLOSE")
                 dev.switch_status = state
                 if eid in self.dist_topo.graph.nodes:
@@ -505,7 +505,7 @@ class TopologyBuilder:
                 mounted += 1
         if len(self.main_topo.device_map) > 0:
             for eid, dev in self.main_topo.device_map.items():
-                if dev.equip_type in switch_type_set:
+                if dev.equip_type in SWITCH_TYPES:
                     state = final_state_map.get(eid, "CLOSE")
                     dev.switch_status = state
                     if eid in self.main_topo.graph.nodes:
