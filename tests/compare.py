@@ -323,10 +323,19 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
     )
     print(f"🔌 主配网接口校验结果: [{interface_msg}] (置信度: {interface_conf})")
 
-    score_summary = score_engine.evaluate_quality_score(defects_report, len(dist_topo.device_map))
+    # 计算已修复的缺陷ID（所有 repair_candidates 对应的缺陷索引）
+    # 注意：processed_defects 中的 _idx 是整数索引 (0, 1, 2, ...)
+    repaired_defect_ids = list(range(len(defects_report)))
+
+    # 评估修复前后的评分
+    score_summary = score_engine.evaluate_quality_score(
+        defects_report, len(dist_topo.device_map),
+        repaired_defect_ids=repaired_defect_ids
+    )
     print(f"  • 修正前图模质量评分: {score_summary['score_before']} 分")
     print(f"  • 预计修正后质量评分: {score_summary['score_after']} 分")
     print(f"  • 缺陷总数: {score_summary['defect_count']} 处")
+    print(f"  • 将修复缺陷数: {len(repaired_defect_ids)} 处")
 
     score_output_path = os.path.join(output_dir, f"{line_name}_质量评分与可解释置信度报告.json")
     with open(score_output_path, "w", encoding="utf-8") as f:
