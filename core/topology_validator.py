@@ -753,9 +753,10 @@ def export_defect_report(defects: list, summary: dict, out_path: str):
     print(f"  汇总报告已导出: {sum_path}")
 
 class TopoDbValidator:
-    def __init__(self, topo: TopologyGraph):
+    def __init__(self, topo: TopologyGraph, measure_proc=None):
         self.topo = topo
         self.G = topo.graph
+        self.measure_proc = measure_proc   # 新增：保存遥信预处理实例
         self.source_equip_ids = set(topo.get_all_source_equip())
         self.source_point_ids = set()
         # 收集电源设备下属全部端子
@@ -1195,8 +1196,7 @@ class TopoDbValidator:
         return self.topo.abnormal_list, self.topo.breakpoint_list, self.topo.tie_loop_list
 
 
-def run_database_topo_check(topo: TopologyGraph, trace_id="DB_TOPO_001"):
-    """对外调用入口，供topology_builder.py调用"""
-    validator = TopoDbValidator(topo)
+def run_database_topo_check(topo: TopologyGraph, trace_id="DB_TOPO_001", measure_proc=None):
+    validator = TopoDbValidator(topo, measure_proc=measure_proc)
     abn, brk, tie = validator.run_all_db_check(trace_uuid=trace_id)
     return abn, brk, tie
