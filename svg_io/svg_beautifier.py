@@ -543,6 +543,17 @@ class SvgBeautifier:
                     q.append(v)
 
         self.non_tree_edges = []
+        tree_edge_set = set()
+        for child, par in self.tree_parent.items():
+            if par is not None:
+                tree_edge_set.add(tuple(sorted([child, par])))
+        for u, neigh in self.adj.items():
+            for v in neigh:
+                if u >= v:
+                    continue
+                key = tuple(sorted([u, v]))
+                if key not in tree_edge_set:
+                    self.non_tree_edges.append((u, v))
 
         cont_rep = {}
         for cid, c in self.containers.items():
@@ -807,6 +818,27 @@ class SvgBeautifier:
             conn_idx += 1
             self._polyline(g, [(x1, y), (x2, y)], C_BUSBAR, W_BUSBAR, conn_id=f'BUS_{conn_idx:06d}', from_id=pid)
 
+        # ★ 联络/环路：非树边（补回生成树算法丢弃的 962→831 丢失连接）
+        # 用橙色粗线 C_TIE / W_TIE 标识联络边
+        for (u, v) in self.non_tree_edges:
+            if u not in self.pos or v not in self.pos:
+                continue
+            x1, y1 = self.pos[u]
+            x2, y2 = self.pos[v]
+            conn_idx += 1
+            conn_id = f'TIE_{conn_idx:06d}'
+            _, r1, _, _ = self._dev_sym_edges(u)
+            l2, _, _, _ = self._dev_sym_edges(v)
+            # 简单直角正交：横向优先
+            if abs(y1 - y2) < GRID * 2:
+                points = [(x1, y1), (x1 + r1, y1), (x2 + l2, y2), (x2, y2)]
+            elif abs(x1 - x2) < GRID * 2:
+                points = [(x1, y1), (x1, y2), (x2 + l2, y2), (x2, y2)]
+            else:
+                mid_y = (y1 + y2) / 2
+                points = [(x1, y1), (x1 + r1, y1), (x1 + r1, mid_y), (x2 + l2, mid_y), (x2 + l2, y2), (x2, y2)]
+            self._polyline(g, points, C_TIE, W_TIE, conn_id=conn_id, from_id=u, to_id=v)
+
     def _draw_devices(self, g):
         # 先画白色背景（无metadata，避免被解析器当作设备图元）
         for pid, (x, y) in self.pos.items():
@@ -958,13 +990,15 @@ class SvgBeautifier:
                 ET.SubElement(md, f'{{{IEC_NS}}}Terminal', {'ObjectID': to_id, 'side': 'to'})
 
     def _add_device_metadata(self, g, pid):
-        """为设备图元添加metadata语义标签（ObjectID + GLink_Ref）。"""
+        """为设备图元添加metadata语义标签（ObjectID + ObjectName + PSRType + GLink_Ref）。
+        对齐SVG制图规范：iec:PSR_Ref 属性名使用 ObjectName / PSRType 而非 Name / Type
+        """
         d = self.devices.get(pid, {})
         md = ET.SubElement(g, f'{{{SVG_NS}}}metadata')
         ET.SubElement(md, f'{{{IEC_NS}}}PSR_Ref', {
             'ObjectID': pid,
-            'Name': d.get('name', ''),
-            'Type': d.get('type', ''),
+            'ObjectName': d.get('name', ''),
+            'PSRType': d.get('type', ''),
         })
         for gl in d.get('glinks', []):
             ET.SubElement(md, f'{{{IEC_NS}}}GLink_Ref', {'ObjectID': gl})

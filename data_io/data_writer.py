@@ -41,8 +41,9 @@ def gen_sample_data():
         review_status="待复核",
         detail="该设备无任何线路连接，判定悬空"
     )
-    export_abnormal_csv([sample], "../../docs/sample_abnormal.csv")
-    export_abnormal_json([sample], "../../docs/sample_abnormal.json")
+    # 统一落在配置的输出目录，避免随运行目录漂移到项目外。
+    export_abnormal_csv([sample], "sample_abnormal.csv")
+    export_abnormal_json([sample], "sample_abnormal.json")
 
 if __name__ == "__main__":
     gen_sample_data()

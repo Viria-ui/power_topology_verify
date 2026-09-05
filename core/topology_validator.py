@@ -329,62 +329,88 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
     topo_device_ids = set(topo.device_map.keys())
     svg_device_ids = set(svg_device_map.keys())
 
+    SVG_EXEMPT_TYPES = {"Junction", "接头", "PoleCode", "杆塔", "Other"}
+    feeder_id = doc.feeder_id
+
     # ---- 1. 图上有模型无 ----
     for oid, e in svg_device_map.items():
         if oid not in topo_device_ids:
+            layer = (e.layer_name or "").strip()
+            ptype = (e.psr_type or "").strip()
+            ename = (e.element_name or "").strip()
+            if layer in SVG_EXEMPT_TYPES and not ename:
+                continue
             defects.append(_make_defect(
                 equip_id=oid,
                 defect_type="图上有模型无",
-                description=f"SVG图纸存在设备[{e.element_name or e.element_type}](ID:{oid})，但数据库拓扑模型中缺失",
-                suggestion=f"建议在数据库设备表 EQUIP_JBS_PWEQUIPINFO 中补全设备 {oid} 信息",
-                sql_draft=f"INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE) VALUES ('{oid}', '{e.element_name or '未知'}', '{e.element_type}');",
+                description=f"SVG图纸存在设备[{ename or e.element_type}](ID:{oid} 图层={layer})，但数据库拓扑模型中缺失",
+                suggestion=f"建议核查是否为非设备图元。若非豁免接头/杆塔，在 EQUIP_JBS_PWEQUIPINFO 中补全设备 {oid}",
+                sql_draft=f"INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID,EQUIP_NAME,EQUIP_TYPE,FEEDER_ID,VOLTAGE_TYPE,DSUBSTATION_ID,STATUS) VALUES ('{oid}','{ename or 'SVG补录'}','{ptype or layer}','{feeder_id}','1010','','1');",
             ))
 
     # ---- 2. 模型有图无 ----
-    # 筛选当前馈线的模型设备
-    feeder_id = doc.feeder_id
-    topo_feeder_devices = {tid: dev for tid, dev in topo.device_map.items() if dev.feeder_id == feeder_id}
-    
+    topo_feeder_devices = {tid: dev for tid, dev in topo.device_map.items()
+                           if (dev.feeder_id == feeder_id or not feeder_id)}
+    MODEL_EXEMPT = SVG_EXEMPT_TYPES | {"Junction", "1700"}
     for tid, dev in topo_feeder_devices.items():
-        if tid not in svg_device_ids:
-            defects.append(_make_defect(
-                equip_id=tid,
-                defect_type="模型有图无",
-                description=f"数据库模型存在设备[{dev.equip_name}](ID:{tid})，但 SVG 图纸中缺失",
-                suggestion=f"建议在 SVG 图纸中补画设备 {tid} 的图元与标注",
-                sql_draft=f"-- SVG缺失图元: 请在图层 {dev.equip_type}_Layer 补画设备 {tid}",
-            ))
+        if tid in svg_device_ids:
+            continue
+        dtype = (dev.equip_type or "").strip()
+        dname = (dev.equip_name or "").strip()
+        if dtype in MODEL_EXEMPT:
+            continue
+        defects.append(_make_defect(
+            equip_id=tid,
+            defect_type="模型有图无",
+            description=f"数据库模型存在设备[{dname or tid}](ID:{tid} TYPE={dtype})，但SVG图纸中缺失图元",
+            suggestion=f"请在SVG图层 {dtype}_Layer 补画设备图元 {tid} 及PSR_Ref元数据标注",
+            sql_draft=f"-- SVG图缺失: 请在SVG图层={dtype}_Layer 补画ID={tid} 并添加iec:PSR_Ref元数据",
+        ))
 
     # ---- 3. 物理连接不一致 ----
-    # SVG 物理连接对
-    svg_pairs = set()
+    # 正确比较：TopologyGraph.graph 是设备节点 + 真实端子(TERMINAL_ID)混合图，
+    # 边只存在 TERMINAL-TERMINAL(CONNECT_NODE连接) 和 DEVICE-TERMINAL(挂点)。
+    svg_pairs: set[tuple[str, str]] = set()
     for conn in doc.connections:
         s, e = conn.start_device_id, conn.end_device_id
-        if s and e:
+        if s and e and s != e:
             svg_pairs.add(tuple(sorted([s, e])))
-            
-    # 模型物理连接对 (基于 EQUIP_JBS_PWFEEDERLINE)
-    # 注意：TopologyGraph.graph 已经包含了由 PWFEEDERLINE 构建的边
+
+    G = topo.graph
     for s, e in svg_pairs:
-        # 在模型图中检查连通性 (跳过端点，直接查设备间路径)
+        if s not in G.nodes or e not in G.nodes:
+            defects.append(_make_defect(
+                equip_id=f"{s} <-> {e}",
+                defect_type="物理连接不一致",
+                description=f"SVG存在 {s}-{e} 连线，但一方设备未出现在模型端子图中(缺设备或缺端子)",
+                suggestion="核查PWTERMINAL/PWEQUIPINFO是否漏录SVG连接双方设备及端子",
+                sql_draft=f"-- 先补EQUIP_JBS_PWTERMINAL的{s}/{e}端子及CONNECT_NODE_ID,再补PWFEEDERLINE边",
+            ))
+            continue
+        pts_s = list(topo._points_by_equip.get(s, [])) if hasattr(topo, "_points_by_equip") else []
+        pts_e = list(topo._points_by_equip.get(e, [])) if hasattr(topo, "_points_by_equip") else []
         has_logic_conn = False
         try:
-            if topo.graph.has_node(s) and topo.graph.has_node(e):
-                # 检查是否有直接或通过端点相连
-                if nx.has_path(topo.graph, s, e):
-                    path = nx.shortest_path(topo.graph, s, e)
-                    if len(path) <= 3: # 设备-端点-设备 或 设备-设备
+            cand_pairs = []
+            if pts_s and pts_e:
+                cand_pairs = [(a, b) for a in pts_s if G.has_node(a) for b in pts_e if G.has_node(b)]
+            else:
+                cand_pairs = [(s, e)]
+            for a, b in cand_pairs:
+                if nx.has_path(G, a, b):
+                    plen = len(nx.shortest_path(G, a, b))
+                    if plen <= 10:  # 允许若干跳：设备A-端子A-端子N-...-端子N-设备B
                         has_logic_conn = True
-        except:
-            pass
-            
+                        break
+        except Exception:
+            has_logic_conn = False
         if not has_logic_conn:
             defects.append(_make_defect(
                 equip_id=f"{s} <-> {e}",
                 defect_type="物理连接不一致",
-                description=f"SVG图纸存在设备 {s} 与 {e} 的物理连接，但数据库拓扑中缺失该连线",
-                suggestion="建议在数据库线路表 EQUIP_JBS_PWFEEDERLINE 中增补对应物理连接记录",
-                sql_draft=f"INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, START_ST_ID, END_ST_ID, FEEDER_ID) VALUES ('LN_{s}_{e}', '{s}', '{e}', '{feeder_id}');"
+                description=f"SVG存在物理连接{s}-{e}，但模型端子图不连通(候选端子对={len(cand_pairs) if pts_s else '无端子'})",
+                suggestion="建议在PWFEEDERLINE补线段记录，或PWTERMINAL补端子并对齐CONNECT_NODE_ID",
+                sql_draft=f"INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID,START_ST_ID,END_ST_ID,FEEDER_ID,VOLTAGE_TYPE,STATUS) VALUES ('LN_{s}_{e}','{s}','{e}','{feeder_id}','1010','1');",
             ))
 
     # ---- 4. 逻辑连接/属性不一致 ----
@@ -396,7 +422,12 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
         svg_vol = svg_elem.voltage_level
         db_vol = db_dev.voltage_type
         
-        if svg_vol and db_vol and str(svg_vol) != str(db_vol):
+        # SVG 使用展示值 10kV，而数据库使用电压类型码 1010，必须归一化后比较。
+        def _norm_voltage(value):
+            text = str(value).strip().lower().replace(" ", "")
+            if text in {"10kv", "10k", "1010"}: return "1010"
+            return text.replace("kv", "")
+        if svg_vol and db_vol and _norm_voltage(svg_vol) != _norm_voltage(db_vol):
             defects.append(_make_defect(
                 equip_id=oid,
                 defect_type="逻辑连接不一致",
@@ -1067,13 +1098,13 @@ class TopoDbValidator:
             sw_status = self.topo.switch_state_map.get(equip_id, "close")
             st_source = self.topo.switch_state_source.get(equip_id, "default_rule")
 
-            if sw_status == "合位":
+            if sw_status in {"合位", "close"}:
                  # 合位 → 进一步进入合环风险检查
                 self._check_loop_for_switch(equip_id, term_ids, trace_uuid)
                 tie_result = "联络"
                 rule = R_TIE_001
                 desc = f"合规联络开关，跨两条馈线，开关处于{sw_status}，状态来源:{st_source}"
-            elif sw_status == "分位":
+            elif sw_status in {"分位", "open"}:
                 tie_result = "联络"
                 rule = R_TIE_001
                 desc = f"合规联络开关，跨两条馈线，开关处于{sw_status}，状态来源:{st_source}"

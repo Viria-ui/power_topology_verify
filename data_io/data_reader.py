@@ -57,6 +57,11 @@ class SqlTableLoader:
             # 主网端子表是可选数据：纯配网数据集可能不提供该文件。
             "zw_terminal": "EQUIP_JBS_ZWTERMINAL.sql",
             "yx_real": "EQUIP_JBS_PWREAL.sql",
+            "zw_equip": "EQUIP_JBS_ZWEQUIPINFO.sql",
+            "zw_line_end": "EQUIP_JBS_ZWLINEEND.sql",
+            "zw_substation": "EQUIP_JBS_ZWSUBSTATION.sql",
+            "zw_mea": "EQUIP_JBS_ZWMEA.sql",
+            "zw_signal": "EQUIP_JBS_ZWSIGNAL.sql",
         }
         table_data = {}
         for key, fname in table_map.items():

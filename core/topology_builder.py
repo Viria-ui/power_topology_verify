@@ -1,6 +1,8 @@
 # SQL数据构建拓扑图基类
+from __future__ import annotations
 import sys
 import os
+import logging
 import pandas as pd
 from collections import defaultdict
 
@@ -13,65 +15,159 @@ from config.settings import MAIN_VOLTAGE, DIST_VOLTAGE
 from core.graph_model import TopologyGraph, Device, ConnectPoint, TopoEdge, build_device_internal_edges
 from core.topology_validator import TopoDbValidator
 from core.measure_preprocess import MeasurePreprocessor
+from core.constants import SOURCE_TYPES, SWITCH_TYPES
+
+logger = logging.getLogger(__name__)
 
 
 class TopologyBuilder:
     def __init__(self, table_data: dict):
         self.table_data = table_data
-        self.equip_df = table_data["equip"]
-        self.line_df = table_data["line"]
+        self.equip_df = table_data.get("equip", pd.DataFrame()).copy()
+        self.zw_equip_df = table_data.get("zw_equip", pd.DataFrame()).copy()
+        self.line_df = table_data.get("line", pd.DataFrame()).copy()
 
         self.pw_terminal_df = table_data.get("pw_terminal")
         self.zw_terminal_df = table_data.get("zw_terminal")
-        # 初始化两套独立拓扑
-        self.main_topo = TopologyGraph()    # 110kV主网
-        self.dist_topo = TopologyGraph()    # 10kV配网
+        self.zw_substation_df = table_data.get("zw_substation", pd.DataFrame()).copy()
+        self.zw_line_end_df = table_data.get("zw_line_end", pd.DataFrame()).copy()
+        self.zw_mea_df = table_data.get("zw_mea", pd.DataFrame()).copy()
+        self.zw_signal_df = table_data.get("zw_signal", pd.DataFrame()).copy()
+        self.yx_real_df = table_data.get("yx_real", pd.DataFrame()).copy()
+
+        if hasattr(self.zw_substation_df, "columns"):
+            self.zw_substation_df.columns = [c.strip() for c in self.zw_substation_df.columns]
+        if hasattr(self.zw_line_end_df, "columns"):
+            self.zw_line_end_df.columns = [c.strip() for c in self.zw_line_end_df.columns]
+        if hasattr(self.zw_mea_df, "columns"):
+            self.zw_mea_df.columns = [c.strip() for c in self.zw_mea_df.columns]
+        if hasattr(self.zw_signal_df, "columns"):
+            self.zw_signal_df.columns = [c.strip() for c in self.zw_signal_df.columns]
+        if hasattr(self.yx_real_df, "columns"):
+            self.yx_real_df.columns = [c.strip() for c in self.yx_real_df.columns]
+
+        self.main_topo = TopologyGraph()
+        self.dist_topo = TopologyGraph()
 
     def split_voltage_data(self):
-        """直接全部数据归入配网，跳过电压匹配逻辑"""
-        # 清理列名防止后续读取报错
+        """按数据表来源拆分主配网，避免 1010 电压码导致主网被丢弃。"""
         self.equip_df.columns = [col.strip() for col in self.equip_df.columns]
         self.line_df.columns = [col.strip() for col in self.line_df.columns]
-        if self.pw_terminal_df is not None:
+        if self.pw_terminal_df is not None and hasattr(self.pw_terminal_df, "columns"):
             self.pw_terminal_df.columns = [col.strip() for col in self.pw_terminal_df.columns]
-        if self.zw_terminal_df is not None:
+        if self.zw_terminal_df is not None and hasattr(self.zw_terminal_df, "columns"):
             self.zw_terminal_df.columns = [col.strip() for col in self.zw_terminal_df.columns]
-    
-        # 主网空，所有设备进配网
-        self.main_equip = self.equip_df.iloc[0:0]
+        if hasattr(self.zw_equip_df, "columns"):
+            self.zw_equip_df.columns = [col.strip() for col in self.zw_equip_df.columns]
+        self.main_equip = self.zw_equip_df.copy()
         self.dist_equip = self.equip_df.copy()
-    
-        # 线路同理
-        self.main_line = self.line_df.iloc[0:0]
+
+        self.main_line = self.zw_line_end_df.copy()
         self.dist_line = self.line_df.copy()
-        
+
+        logger.info(
+            "主配数据拆分完成：主网设备=%d 配网设备=%d 主网线段=%d 配网线段=%d "
+            "主网站=%d 遥信遥测=%d ZWMEA=%d ZWSIGNAL=%d",
+            len(self.main_equip), len(self.dist_equip),
+            len(self.main_line), len(self.dist_line),
+            len(self.zw_substation_df), len(self.yx_real_df),
+            len(self.zw_mea_df), len(self.zw_signal_df),
+        )
         print(f"主网设备数量：{len(self.main_equip)}")
         print(f"配网设备数量：{len(self.dist_equip)}")
-        print(f"主网线路数量：{len(self.main_line)}")
-        print(f"配网线路数量：{len(self.dist_line)}")
+        print(f"主网线路(ZLINEEND)数量：{len(self.main_line)}")
+        print(f"配网线路(PWFEEDERLINE)数量：{len(self.dist_line)}")
+        print(f"主网站点(ZWSUBSTATION)数量：{len(self.zw_substation_df)}")
+        print(f"遥信遥测(PWREAL)记录数：{len(self.yx_real_df)}")
+        print(f"主网遥测(ZWMEA)：{len(self.zw_mea_df)} 主网遥信(ZWSIGNAL)：{len(self.zw_signal_df)}")
+
+    def _is_source_type(self, equip_type_val: str, equip_name: str = "") -> bool:
+        """电源识别：数值码/中文名/CIM + 设备名称关键字三栖判定，避免0台电源。"""
+        if not equip_type_val:
+            return False
+        t = str(equip_type_val).strip()
+        if t in SOURCE_TYPES:
+            return True
+        name = str(equip_name or "")
+        keywords = ("变电站", "站房", "主变", "变", "SUB", "STATION", "Trafo", "TRANSFORMER")
+        if any(k in name for k in keywords) and t in SOURCE_TYPES:
+            return True
+        # 主网设备默认识别：110kV侧的任何变压器/变电站默认电源
+        return False
 
     def add_all_devices(self):
         """批量添加设备"""
-        print(f"  [Builder] 正在添加 {len(self.dist_equip)} 个配网设备...")
-        source_type_list = ["变电站", "1701"]
-        # 配网设备
+        print(f"  [Builder] 正在添加 {len(self.main_equip)} 个主网设备和 {len(self.dist_equip)} 个配网设备...")
+        src_cnt_main = 0
+        for _, row in self.main_equip.iterrows():
+            equip_id = str(row.get("EQUIP_ID", ""))
+            if not equip_id:
+                continue
+            eq_type = str(row.get("EQUIP_TYPE", ""))
+            eq_name = str(row.get("EQUIP_NAME", ""))
+            is_src = self._is_source_type(eq_type, eq_name)
+            src_cnt_main += int(is_src)
+            dsub_id = (
+                str(row.get("ST_ID", ""))
+                or str(row.get("SUBSTATION_ID", ""))
+                or str(row.get("SUB_ID", ""))
+                or ""
+            )
+            self.main_topo.add_device(Device(
+                equip_id=equip_id, equip_name=eq_name,
+                equip_type=eq_type,
+                voltage_type=str(row.get("VOLTAGE_TYPE", "")),
+                dsubstation_id=dsub_id,
+                is_source=is_src,
+            ))
+        logger.info("主网电源设备数=%d", src_cnt_main)
+        print(f"    - 主网电源设备识别: {src_cnt_main} 台")
+
+        src_cnt_dist = 0
         for i, (_, row) in enumerate(self.dist_equip.iterrows()):
             if i % 10000 == 0 and i > 0:
-                print(f"    - 已处理 {i} 个设备")
-                
+                print(f"    - 已处理 {i} 个配网设备")
+
             equip_type_val = str(row.get("EQUIP_TYPE", ""))
-            is_source = equip_type_val in source_type_list
-            
+            equip_name_val = str(row.get("EQUIP_NAME", ""))
+            is_source = self._is_source_type(equip_type_val, equip_name_val)
+            src_cnt_dist += int(is_source)
+
+            feeder_raw = row.get("FEEDER_ID", "") if "FEEDER_ID" in row.index else None
+            dsub_raw = row.get("DSUBSTATION_ID", "") if "DSUBSTATION_ID" in row.index else None
+
             dev = Device(
-                equip_id=row["EQUIP_ID"],
-                equip_name=row["EQUIP_NAME"],
-                equip_type=row["EQUIP_TYPE"],
-                voltage_type=row["VOLTAGE_TYPE"],
-                feeder_id=str(row["FEEDER_ID"]) if row["FEEDER_ID"] is not None else "",
-                dsubstation_id=str(row["DSUBSTATION_ID"]) if row["DSUBSTATION_ID"] is not None else "",
-                is_source=is_source
+                equip_id=str(row.get("EQUIP_ID", "")),
+                equip_name=equip_name_val,
+                equip_type=equip_type_val,
+                voltage_type=str(row.get("VOLTAGE_TYPE", "")),
+                feeder_id=str(feeder_raw) if feeder_raw not in (None, "None") else "",
+                dsubstation_id=str(dsub_raw) if dsub_raw not in (None, "None") else "",
+                is_source=is_source,
             )
             self.dist_topo.add_device(dev)
+        logger.info("配网电源设备数=%d", src_cnt_dist)
+        print(f"    - 配网电源设备识别: {src_cnt_dist} 台")
+        if src_cnt_main == 0 and src_cnt_dist == 0 and len(self.zw_substation_df) > 0:
+            logger.warning("未从设备表识别出任何电源，尝试使用ZWSUBSTATION注入电源点")
+            for _, row in self.zw_substation_df.iterrows():
+                st_id = str(row.get("ST_ID", "") or row.get("SUBSTATION_ID", "") or row.get("ID", ""))
+                if not st_id:
+                    continue
+                if st_id in self.main_topo.device_map:
+                    self.main_topo.device_map[st_id].is_source = True
+                    self.main_topo.graph.nodes[st_id]["dev_info"]["is_source"] = True
+                else:
+                    self.main_topo.add_device(Device(
+                        equip_id=st_id,
+                        equip_name=str(row.get("ST_NAME", "") or row.get("SUBSTATION_NAME", "") or st_id),
+                        equip_type="1701",
+                        voltage_type=str(row.get("VOLTAGE_TYPE", MAIN_VOLTAGE)),
+                        dsubstation_id=st_id,
+                        is_source=True,
+                    ))
+                src_cnt_main += 1
+            print(f"    - 通过ZWSUBSTATION补充注入电源: {src_cnt_main} 台")
             
     def build_real_terminal_points(self):
         """从端子表生成真实端子ConnectPoint，point_id=TERMINAL_ID"""
@@ -233,31 +329,82 @@ class TopologyBuilder:
         topo.tie_loop_list = tie_loop_list
         return abnormal_list, breakpoint_list
 
+    def check_electrical_logic(self):
+        """对有 PWREAL 的配网设备执行 RULE-E01--E07，并保留结构化结果供评分/Sheet3 导出。
+        同时执行 4.1/4.2 主配接口校验并挂载到 abnormal_list。
+        """
+        from core.telemetry_evaluator import TelemetryEvaluator
+        evaluator = TelemetryEvaluator.from_pwreal(
+            self.yx_real_df,
+            main_substation_data=None,
+            zw_substation_df=self.zw_substation_df,
+        )
+        self.telemetry_evaluator = evaluator
+        results = []
+        for equip_id, dev in self.dist_topo.device_map.items():
+            results.extend(evaluator.evaluate_electrical_logic(equip_id, dev.equip_type or ""))
+        self.dist_topo.electrical_defects = results
+
+        # --- 主配接口校验（Q41 拓扑节点对齐 + Q42 漏拼/错拼） ---
+        from core.graph_model import AbnormalItem
+        import uuid as _uuid
+        trace_uuid = "MAIN_SUB_IFACE_" + _uuid.uuid4().hex[:8]
+        feeder_to_stations: dict[str, set[str]] = defaultdict(set)
+        for equip_id, dev in self.dist_topo.device_map.items():
+            fid = dev.feeder_id or ""
+            sid = dev.dsubstation_id or ""
+            if fid and sid:
+                feeder_to_stations[fid].add(sid)
+        iface_cnt_ok = 0
+        iface_cnt_bad = 0
+        for fid, station_set in feeder_to_stations.items():
+            if not station_set:
+                continue
+            for station_id in sorted(station_set):
+                passed, conf, detail = evaluator.verify_main_substation_interface(
+                    fid, station_id,
+                    feeder_line_ids=None,
+                    zw_lineend_df=self.zw_line_end_df,
+                )
+                if passed:
+                    iface_cnt_ok += 1
+                    continue
+                iface_cnt_bad += 1
+                item = AbnormalItem(
+                    trace_uuid=trace_uuid,
+                    equip_id=fid or "UNKNOWN_FEEDER",
+                    point_id="",
+                    rule_code="R_MAIN_IFACE_41" if "漏拼" in detail else "R_MAIN_IFACE_42",
+                    rule_desc="主配网接口校验(4.1漏拼/4.2错拼)" if not "漏拼" in detail else detail.split("：")[0],
+                    check_result="ERR",
+                    review_status="待复核",
+                    detail=detail,
+                    dimension="接口规范性",
+                    risk_level="高",
+                )
+                self.dist_topo.abnormal_list.append(item)
+        logger.info("主配接口校验：通过=%d 失败=%d", iface_cnt_ok, iface_cnt_bad)
+        print(f"[主配接口校验] 4.1/4.2 命中缺陷: {iface_cnt_bad}")
+        return results
+
     def build_full_topology(self):
         """完整构建流程：拆分→加设备→生成真实端子→端子互连→设备内部通路→拓扑校验"""
-        table_data = self.table_data   # 构造函数传入的原始table_data
+        from core.constants import SWITCH_TYPES as _SW
 
-        # ①提取全部开关设备ID集合
-        equip_df = table_data.get("equip", pd.DataFrame())
-        switch_type_list = {"断路器", "负荷开关", "隔离开关", "接地隔离开关"}
+        switch_type_list = _SW
         all_switch_ids = set()
-        if not equip_df.empty:
-            mask_sw = equip_df["EQUIP_TYPE"].isin(switch_type_list)
-            sw_rows = equip_df.loc[mask_sw]
+        if not self.dist_equip.empty and "EQUIP_ID" in self.dist_equip.columns and "EQUIP_TYPE" in self.dist_equip.columns:
+            mask_sw = self.dist_equip["EQUIP_TYPE"].astype(str).isin(switch_type_list)
+            sw_rows = self.dist_equip.loc[mask_sw]
             all_switch_ids = set(str(x) for x in sw_rows["EQUIP_ID"].tolist())
+        logger.info("开关ID集合初始化：候选开关类型=%d 识别开关数=%d",
+                    len(switch_type_list), len(all_switch_ids))
 
-        # ②拿到遥信表，永远传DataFrame，不传None
-        yx_df = table_data.get("yx_real", pd.DataFrame())
+        yx_df = self.yx_real_df
 
-        # ③执行遥信预处理
         from core.measure_preprocess import MeasurePreprocessor
-        meas = MeasurePreprocessor(yx_df, all_switch_ids, time_window_sec=5)
-        #switch_state_map, state_source_map = meas.run()
-        switch_state_map = dict()
-        state_source_map = dict()
-
-        # ④挂载到配网拓扑对象 dist_topo（此时dist_topo还没实例化，先不赋值，等new出来再赋值）
-        # =====================================================================
+        meas = MeasurePreprocessor(yx_df, all_switch_ids, time_window_sec=10)
+        switch_state_map, state_source_map = meas.run()
 
         self.split_voltage_data()
         self.add_all_devices()
@@ -265,13 +412,28 @@ class TopologyBuilder:
         self.build_graph_from_terminal()
         self.fill_all_internal_connection()
 
-        # ----------------拓扑对象已经创建完成，给dist_topo挂载开关状态字典----------------
+        # ----------------拓扑对象创建完成，挂载开关状态----------------
         self.dist_topo.switch_state_map = switch_state_map
         self.dist_topo.switch_state_source = state_source_map
-        print(f"[遥信预处理统计] 总开关数量:{len(switch_state_map)}")
+        self.main_topo.switch_state_map = {}  # 主网默认空
+        self.main_topo.switch_state_source = {}
+        mounted = 0
+        for equip_id, state in switch_state_map.items():
+            if equip_id in self.dist_topo.device_map:
+                dev = self.dist_topo.device_map[equip_id]
+                dev.switch_status = state
+                if equip_id in self.dist_topo.graph.nodes:
+                    data = self.dist_topo.graph.nodes[equip_id]
+                    info = data.get("dev_info", {})
+                    info["switch_status"] = state
+                    data["dev_info"] = info
+                mounted += 1
+        print(f"[遥信预处理统计] 总开关状态映射条目:{len(switch_state_map)} 实际挂载到设备:{mounted}")
         rtu_cnt = sum(1 for v in state_source_map.values() if v == "rtu")
         default_cnt = sum(1 for v in state_source_map.values() if v == "default_rule")
         print(f"  -->遥信实测开关:{rtu_cnt}，赛题默认合位推演开关:{default_cnt}")
+        electrical_defects = self.check_electrical_logic()
+        print(f"[电气逻辑校验] RULE-E01~E07 命中:{len(electrical_defects)}")
 
         print("开始执行拓扑异常检测：悬空、孤岛、断点")
         main_ready = len(self.main_equip) > 0 and len(self.main_topo.point_map) > 0

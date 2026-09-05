@@ -83,11 +83,29 @@ LAYOUT = {
 
 # 业务分类标记
 WIRE_MARKERS = ('TMP', 'dxd')
-BUSBAR_TYPES = {'0311', 'BusbarSection'}
-CONTAINER_TYPES = {'zf01', 'zf06', 'zf07', 'zf08', 'Substation'}
-SWITCH_TYPES = {'0307', '0201', '0202', '0203', '0302', '0305', '0306', '0309', 'Breaker', 'LoadBreakSwitch', 'Disconnector', 'GroundDisconnector'}
-TRANSFORMER_TYPES = {'0110', '0111', 'PowerTransformer'}
+# 母线：数值码1710 + 字符串0311 + CIM类名
+BUSBAR_TYPES = {'0311', '1710', 'BusbarSection', '母线'}
+# 容器/站房类
+CONTAINER_TYPES = {'zf01', 'zf06', 'zf07', 'zf08', 'Substation', '站房', '配电室', '箱变', '环网柜', '开关站'}
+# 开关类：数值码(JBS设备字典表) + CIM类名 + 中文名
+# 1705=断路器 1706=负荷开关 1707=隔离开关 1708=熔断器(含在SWITCH_TYPES用于2端子判定)
+# 1709=接地刀闸 0307/0201/0202/0203/0302/0305/0306/0309=旧版编号
+SWITCH_TYPES = {
+    '0307', '0201', '0202', '0203', '0302', '0305', '0306', '0309',
+    '1705', '1706', '1707', '1708', '1709',
+    'Breaker', 'LoadBreakSwitch', 'Disconnector', 'GroundDisconnector', 'Fuse', 'CompositeSwitch',
+    '断路器', '负荷开关', '隔离开关', '刀闸', '接地刀闸', '熔断器', '组合开关',
+}
+# 变压器/配变：1703=配变 0110/0111=主变
+TRANSFORMER_TYPES = {'0110', '0111', '1703', 'PowerTransformer', '变压器', '配变'}
+# 电容器/无功补偿/新能源（用于白名单豁免）
+CAPACITOR_TYPES = {'1711', '1712', 'Capacitor', 'Reactor', '电容器', 'SVG', '无功补偿', '电抗器', 'Filter', 'CAP'}
+NEW_ENERGY_TYPES = {'1720', '1721', '1722', '光伏', '储能', '分布式电源', '新能源', '风电', 'PV', 'ESS', 'DG'}
+# 负荷/用户/末端
+LOAD_TYPES = {'1730', '1731', 'EnergyConsumer', '电力用户', '配变', '用户', '负荷点', '表箱'}
 KEY_DEV_TYPES = SWITCH_TYPES | TRANSFORMER_TYPES | BUSBAR_TYPES
+# 电源设备识别（用于孤岛判定的电源点）
+SOURCE_TYPES = {'1701', '1702', '变电站', '主变', 'Substation', 'PowerTransformer'} | TRANSFORMER_TYPES | {'0110', '0111'}
 
 # 乱码检测：含大量生僻字/无意义组合的标注
 GARBAGE_PATTERNS = [
@@ -116,18 +134,21 @@ KEY_DEVICE_LAYERS = {"PowerTransformer", "Breaker", "BusbarSection"}
 GRID_SIZE = 10.0
 
 # 拓扑/联络合环/豁免/评分业务常量
-# 设备类型编码/文本：配变、用户、负荷点、表箱、末端站房类
-TERMINAL_EXEMPT_TYPES = {"电力用户", "配变", "电缆终端头", "封头", "备用出线间隔", "用户", "负荷点", "表箱"}
-# 开关类，要求必须2个有效端子，否则判单端悬空
-NON_TERMINAL_SWITCH_TYPES = {"断路器", "负荷开关", "隔离开关", "刀闸", "Breaker", "LoadBreakSwitch", "Disconnector"}
+# 设备类型编码/文本：配变、用户、负荷点、表箱、末端站房类（含数值码1730/1731）
+TERMINAL_EXEMPT_TYPES = {
+    "电力用户", "配变", "电缆终端头", "封头", "备用出线间隔", "用户", "负荷点", "表箱",
+    "1730", "1731", "EnergyConsumer", "Junction", "接头", "PoleCode", "杆塔",
+} | LOAD_TYPES
+# 开关类，要求必须2个有效端子，否则判单端悬空（完整的数值码+CIM+中文名集合）
+NON_TERMINAL_SWITCH_TYPES = SWITCH_TYPES | TRANSFORMER_TYPES - LOAD_TYPES
 
 # 名称关键字命中则排除联络识别 R_TIE_EXCLUDE_001
 TIE_EXCLUDE_NAME_KEYS = {"站房", "配电室", "箱变", "台区", "配变", "用户", "负荷", "表箱"}
 
 # 白名单豁免类型
-EXEMPT_REVERSE_POWER_TYPES = {"光伏", "储能", "分布式电源"}   # 新能源，允许反向潮流
-EXEMPT_CAP_TRANSITION_TYPES = {"电容器", "SVG", "无功补偿"}     # 无功补偿，30s过渡屏蔽
-TEST_LINE_KEYS = {"测试", "TMP", "虚拟"}                        # 测试/临时线路，标记待复核
+EXEMPT_REVERSE_POWER_TYPES = NEW_ENERGY_TYPES   # 新能源，允许反向潮流
+EXEMPT_CAP_TRANSITION_TYPES = CAPACITOR_TYPES    # 无功补偿，30s过渡屏蔽
+TEST_LINE_KEYS = {"测试", "TMP", "虚拟", "临时"}  # 测试/临时线路，标记待复核
 
 # -------- 异常标签定义 --------
 ERR = "ERR"          # 严重错误，阻断，扣分

@@ -22,20 +22,22 @@ class MeasurePreprocessor:
 
     def deduplicate(self) -> pd.DataFrame:
         """赛题Q8：TRAN_ID + DATA_DATE 联合去重，保留最后一条"""
-        if self.yx_df.empty:
+        if self.yx_df.empty or not {"TRAN_ID", "DATA_DATE"}.issubset(self.yx_df.columns):
             return pd.DataFrame()
         df = self.yx_df.copy()
         df = df.drop_duplicates(subset=["TRAN_ID", "DATA_DATE"], keep="last")
         return df
 
     def filter_bad_quality(self, df: pd.DataFrame) -> pd.DataFrame:
-        """坏数据过滤：QUALITY_CODE=0正常；VAL只能0或1"""
+        """兼容标准遥信表及赛题 PWREAL（POINT 是分/合位）。"""
         if df.empty:
             return df
-        # 全部是字符串，先转int
-        df["QUALITY_CODE_INT"] = df["QUALITY_CODE"].astype(int)
-        df["VAL_INT"] = df["VAL"].astype(int)
-        mask = (df["QUALITY_CODE_INT"] == 0) & (df["VAL_INT"].isin([0, 1]))
+        value_col = "VAL" if "VAL" in df.columns else "POINT"
+        df["VAL_INT"] = pd.to_numeric(df[value_col], errors="coerce")
+        mask = df["VAL_INT"].isin([0, 1])
+        if "QUALITY_CODE" in df.columns:
+            df["QUALITY_CODE_INT"] = pd.to_numeric(df["QUALITY_CODE"], errors="coerce")
+            mask &= df["QUALITY_CODE_INT"].fillna(0).eq(0)
         good_df = df.loc[mask].copy()
         return good_df
 
