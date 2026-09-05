@@ -786,7 +786,8 @@ class SvgBeautifier:
         for (a, b, c, d) in self.cont_box.values():
             xs += [a, c]
             ys += [b, d]
-        ox, oy = -min(xs) + MARGIN, -min(ys) + MARGIN
+        LABEL_PAD_X = 120  # 标注可能放在设备左右侧，预留水平空间防止越界
+        ox, oy = -min(xs) + MARGIN + LABEL_PAD_X, -min(ys) + MARGIN
         self.pos = {p: (self.snap(x + ox), self.snap(y + oy)) for p, (x, y) in self.pos.items()}
         self.cont_box = {c: (self.snap(a + ox), self.snap(b + oy),
                             self.snap(c2 + ox), self.snap(d + oy))
@@ -805,7 +806,8 @@ class SvgBeautifier:
         for (a, b, c, d) in self.cont_box.values():
             xs += [a, c]
             ys += [b, d]
-        W = self.snap(max(xs) + MARGIN)
+        LABEL_PAD_X = 120  # 与 _normalize 对齐：右侧标注预留空间
+        W = self.snap(max(xs) + MARGIN + LABEL_PAD_X)
         H = self.snap(max(ys) + MARGIN)
 
         svg = ET.Element(f'{{{SVG_NS}}}svg', {

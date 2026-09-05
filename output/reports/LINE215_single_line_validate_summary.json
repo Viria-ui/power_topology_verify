@@ -4,10 +4,10 @@
   "topo_device_count": 1401,
   "svg_device_count": 1313,
   "defects_by_type": {
-    "图上有模型无": 1313,
-    "模型有图无": 1401,
+    "图上有模型无": 0,
+    "模型有图无": 88,
     "物理连接不一致": 0,
     "逻辑连接不一致": 0
   },
-  "total_defects": 2714
+  "total_defects": 88
 }

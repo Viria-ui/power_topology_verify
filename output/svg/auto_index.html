@@ -47,8 +47,8 @@ function showTab(id, btn) {
           <div class="info-box">
             <div><b>图名：</b>LINE215 单线图</div>
             <div><b>生成逻辑：</b>_feeder_subgraph('LINE215') 过滤 → _project_to_device_graph → _sugiyama_layout 分层渲染</div>
-            <div><b>节点/边数统计：</b>SVG设备=1313 / SVG连接=0 ｜ SQL期望设备=1401 / SQL期望边=2240</div>
-            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/2714) ｜ <a href="../reports/LINE215_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=1884 / SVG连接=1299 ｜ SQL期望设备=1401 / SQL期望边=1299</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/88) ｜ <a href="../reports/LINE215_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
         <div id="tab1" class="tab-panel" style="display:none">
@@ -58,8 +58,8 @@ function showTab(id, btn) {
           <div class="info-box">
             <div><b>图名：</b>LINE216 单线图</div>
             <div><b>生成逻辑：</b>_feeder_subgraph('LINE216') 过滤 → _project_to_device_graph → _sugiyama_layout 分层渲染</div>
-            <div><b>节点/边数统计：</b>SVG设备=1644 / SVG连接=0 ｜ SQL期望设备=1679 / SQL期望边=2274</div>
-            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/3323) ｜ <a href="../reports/LINE216_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=2034 / SVG连接=1646 ｜ SQL期望设备=1679 / SQL期望边=1646</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/35) ｜ <a href="../reports/LINE216_single_line_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
         <div id="tab2" class="tab-panel" style="display:none">
@@ -69,8 +69,8 @@ function showTab(id, btn) {
           <div class="info-box">
             <div><b>图名：</b>10kVLINE111 联络图</div>
             <div><b>生成逻辑：</b>_find_tie_neighbors('10kVLINE111') 抽取联络关系 → 中心放射布局，联络开关在中点标注</div>
-            <div><b>节点/边数统计：</b>SVG设备=47 / SVG连接=0 ｜ SQL期望设备=180 / SQL期望边=263</div>
-            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/47) ｜ <a href="../reports/10kVLINE111_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=0 / SVG连接=0 ｜ SQL期望设备=180 / SQL期望边=114</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/1) ｜ <a href="../reports/10kVLINE111_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
         <div id="tab3" class="tab-panel" style="display:none">
@@ -80,8 +80,8 @@ function showTab(id, btn) {
           <div class="info-box">
             <div><b>图名：</b>SUB004 全站联络总图</div>
             <div><b>生成逻辑：</b>_station_feeders_and_ties('SUB004') 收集馈线+联络 → 5列栅格布局绘制馈线框 + 跨列联络线</div>
-            <div><b>节点/边数统计：</b>SVG设备=180 / SVG连接=0 ｜ SQL期望设备=47642 / SQL期望边=69953</div>
-            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/180) ｜ <a href="../reports/SUB004_station_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=0 / SVG连接=0 ｜ SQL期望设备=444 / SQL期望边=285</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/1) ｜ <a href="../reports/SUB004_station_tie_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
         <div id="tab4" class="tab-panel" style="display:none">
@@ -91,8 +91,8 @@ function showTab(id, btn) {
           <div class="info-box">
             <div><b>图名：</b>TMP00034205 电源追溯</div>
             <div><b>生成逻辑：</b>_power_trace_paths('TMP00034205') 主/备供路径 → Sugiyama布局，主供路径粗蓝+箭头、备供橙虚线+箭头、目标设备高亮红底</div>
-            <div><b>节点/边数统计：</b>SVG设备=27 / SVG连接=0 ｜ SQL期望设备=869 / SQL期望边=868</div>
-            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/27) ｜ <a href="../reports/TMP00034205_power_trace_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
+            <div><b>节点/边数统计：</b>SVG设备=2 / SVG连接=0 ｜ SQL期望设备=552 / SQL期望边=551</div>
+            <div><b>校验结果：</b><span style="color:#cf1322;font-weight:bold">[FAIL]</span> 通过率 0% (0/2) ｜ <a href="../reports/TMP00034205_power_trace_validate.json" target="_blank" style="color:#1890FF">查看校验报告JSON</a></div>
           </div>
         </div>
 </div>

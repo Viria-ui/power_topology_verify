@@ -710,7 +710,7 @@ def validate_edit_action(doc_before: SvgDocument, doc_after: SvgDocument,
     return all_defects, summary
 
 
-def validate_rendered_svg(svg_path: str) -> Tuple[list, dict]:
+def validate_rendered_svg(svg_path: str, trace_uuid: str = "") -> Tuple[list, dict]:
     """针对 Task 阶段3 增加：校验渲染后的 SVG 文件质量。
     
     检查项：
