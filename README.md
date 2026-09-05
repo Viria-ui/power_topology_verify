@@ -9,6 +9,19 @@ python -m pip install -r requirements.txt
 python tests/compare.py --line LINE215 LINE216
 ```
 
+启动交互式查看窗口：
+
+```bash
+streamlit run visual_app.py
+```
+
+窗口功能：
+
+- 在 `output/svg` 中选择已生成或已美化的 SVG 拓扑图。
+- 直接预览 `LINE215_beautified.svg`、`LINE216_beautified.svg` 等结果。
+- 上传本地 PNG/JPG/SVG 临时预览。
+- 查看 `output/reports` 下的 JSON 校验报告。
+
 常用输出目录：
 
 - `output/*_缺陷清单报告.json`：机器可读的缺陷明细。
