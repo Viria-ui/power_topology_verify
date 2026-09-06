@@ -998,14 +998,15 @@ class SvgBeautifier:
             if d['type'] in BUSBAR_TYPES:
                 # 母线视觉由 BUS_ 母线连线承担，仅输出 metadata 节点（图模一致）
                 continue
-            # 非母线设备：白色背景 + 符号
+            # 非母线设备：透明背景，符号独立渲染
+            # 保留原始SVG背景色，禁止强制覆盖为纯白
             left, right, top, bottom = self._dev_sym_edges(pid)
             pad = 1.5
             ET.SubElement(dg, f'{{{SVG_NS}}}rect', {
                 'x': f'{left - pad:.1f}', 'y': f'{top - pad:.1f}',
                 'width': f'{right - left + 2 * pad:.1f}',
                 'height': f'{bottom - top + 2 * pad:.1f}',
-                'fill': '#ffffff', 'stroke': 'none',
+                'fill': 'none', 'stroke': 'none',  # 不强制白底，尊重原始SVG
             })
             if d.get('symbol'):
                 sym = d['symbol'].lstrip('#')

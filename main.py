@@ -186,15 +186,22 @@ def run_topo_validation(table_datas: dict) -> tuple:
     interface_defects = [a for a in dist_topo.abnormal_list if '接口' in getattr(a, 'dimension', '')]
     print(f"  主配接口异常数量: {len(interface_defects)}")
 
-    # 1.2 拓扑统计
+    # 1.2 拓扑统计（不输出设备ID完整列表，避免刷屏）
     main_stat = builder.get_topo_statistics(main_topo, "110kV主网拓扑")
     dist_stat = builder.get_topo_statistics(dist_topo, "10kV配网拓扑")
     print("\n--- 主网拓扑统计 ---")
     for k, v in main_stat.items():
-        print(f"  {k}: {v}")
+        # 跳过设备ID清单，只打印统计指标
+        if k in ("设备ID清单", "设备ID列表", "设备ID"):
+            print(f"  {k}: {len(v)} 个设备")
+        else:
+            print(f"  {k}: {v}")
     print("\n--- 配网拓扑统计 ---")
     for k, v in dist_stat.items():
-        print(f"  {k}: {v}")
+        if k in ("设备ID清单", "设备ID列表", "设备ID"):
+            print(f"  {k}: {len(v)} 个设备")
+        else:
+            print(f"  {k}: {v}")
 
     # 1.3 拓扑异常检测
     print("\n--- 拓扑异常检测 ---")
