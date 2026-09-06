@@ -181,29 +181,87 @@ class TopologyBuilder:
             logger.info(f"通过ZWSUBSTATION补充注入电源: {src_cnt_main} 台")
             
     def _inject_main_substation_sources(self):
-        """主配电源注入：配网设备若与主网端子共享 CONNECTIVITYNODE_ID（Q41 主配拼接口径），
-        视为电源点（is_source=True），供孤岛检测判定该配网分量已连通主网电源。"""
-        if self.zw_terminal_df is None or self.zw_terminal_df.empty:
+        """主配电源注入 v2（修复 CN 空间不重叠导致 inject=0 的问题）。
+
+        根因：原 v1 代码通过主/配网端子共享 CONNECTIVITYNODE_ID 建立关联，但实际数据中
+        ZWTERMINAL 的 CN（格式 1090...）与 PWTERMINAL 的 CN（负数格式）完全不重叠。
+
+        修复方案：改用 ZWLINEEND.LINEEND_NAME（如 "10kV.LINE003_181线"）中嵌入的
+        线路编号与 PWFEEDERLINE.LINE_NAME 建立映射，从而建立馈线→主网站关联，
+        再将主网站下的设备标记为电源（is_source=True）。
+        """
+        if len(self.zw_line_end_df) == 0:
+            logger.warning("_inject_main_substation_sources: ZWLINEEND 为空，跳过")
             return
-        try:
-            zw_cn = set(self.zw_terminal_df['CONNECTIVITYNODE_ID'].dropna().astype(str))
-        except KeyError:
+        if len(self.main_equip) == 0:
+            logger.warning("_inject_main_substation_sources: 主网设备表为空，跳过")
             return
-        if not zw_cn:
-            return
-        if self.pw_terminal_df is None or self.pw_terminal_df.empty:
-            return
-        injected = 0
-        for _, row in self.pw_terminal_df.iterrows():
-            cn = str(row.get('CONNECTIVITYNODE_ID') or '')
-            if not cn or cn not in zw_cn:
+
+        import re
+        # Step 1: 解析 ZWLINEEND.LINEEND_NAME → 主网站 ST_ID
+        # 存储 原始名 和 标准化名（去 "10kV.", "_线" 等）
+        le_name_to_st_id: dict[str, str] = {}
+        for _, lrow in self.zw_line_end_df.iterrows():
+            st_id = str(lrow.get("ST_ID") or "").strip()
+            le_name = str(lrow.get("LINEEND_NAME") or "").strip()
+            if not st_id or not le_name:
                 continue
-            eid = str(row.get('EQUIP_ID') or '')
+            le_name_to_st_id[le_name] = st_id
+            std = le_name.replace("_线", "").replace("10kV.", "").replace("20kV.", "").replace("接地变", "")
+            le_name_to_st_id[std] = st_id
+
+        # Step 2: 建立配网 LINE_ID ↔ LINE_NAME 映射
+        pw_line_id_to_name: dict[str, str] = {}
+        pw_line_name_to_id: dict[str, str] = {}
+        if self.line_df is not None and not self.line_df.empty:
+            for _, lfrow in self.line_df.iterrows():
+                lid = str(lfrow.get("LINE_ID") or "").strip()
+                lname = str(lfrow.get("LINE_NAME") or "").strip()
+                if lid:
+                    pw_line_id_to_name[lid] = lname
+                    pw_line_name_to_id[lname] = lid
+                    std = lname.replace("_线", "").replace("10kV.", "").replace("20kV.", "")
+                    pw_line_name_to_id[std] = lid
+
+        # Step 3: 通过 LINE_NAME 匹配，建立 馈线LINE_ID → 主网站ST_ID 映射
+        pw_line_to_zw_st: dict[str, str] = {}
+        for le_name, st_id in le_name_to_st_id.items():
+            if le_name in pw_line_name_to_id:
+                lid = pw_line_name_to_id[le_name]
+                pw_line_to_zw_st[lid] = st_id
+
+        # Step 4: 遍历配网设备，根据 FEEDER_ID 找对应主网站，标记电源
+        injected = 0
+        # 缓存主网站 → 主网设备列表
+        main_equip_ids_by_st: dict[str, set[str]] = {}
+        for _, row in self.main_equip.iterrows():
+            eid = str(row.get("EQUIP_ID") or "").strip()
+            st_id = str(row.get("ST_ID") or row.get("SUBSTATION_ID") or "").strip()
+            if eid and st_id:
+                main_equip_ids_by_st.setdefault(st_id, set()).add(eid)
+
+        for _, row in self.dist_equip.iterrows():
+            fid = str(row.get("FEEDER_ID") or "").strip()
+            eid = str(row.get("EQUIP_ID") or "").strip()
+            if not fid or not eid:
+                continue
+            st_id = pw_line_to_zw_st.get(fid)
+            if not st_id:
+                continue
             dev = self.dist_topo.device_map.get(eid)
             if dev is not None and not dev.is_source:
                 dev.is_source = True
                 injected += 1
-        logger.info("主配电源注入：%d 台配网设备经共享连接点接入主网电源", injected)
+
+        # 主网设备本身标记为电源
+        for st_id, equip_ids in main_equip_ids_by_st.items():
+            for eid in equip_ids:
+                dev = self.main_topo.device_map.get(eid)
+                if dev is not None:
+                    dev.is_source = True
+
+        logger.info("主配电源注入（v2-ZWLINEEND映射）: %d 台配网设备接入主网电源", injected)
+        logger.info("  ZWLINEEND 解析出馈线→主网站映射数: %d", len(pw_line_to_zw_st))
 
     def build_real_terminal_points(self):
         """从端子表生成真实端子ConnectPoint，point_id=TERMINAL_ID"""
@@ -394,50 +452,83 @@ class TopologyBuilder:
             results.extend(evaluator.evaluate_electrical_logic(equip_id, dev.equip_type or ""))
         self.dist_topo.electrical_defects = results
 
-        # --- 主配接口校验（规则 v1 口径） ---
-        # 4.1 漏拼：主网站无出线 / CONNECTIVITYNODE_ID 未对齐 / 物理断开
-        # 4.2 错拼：馈线起始主网站(START_ST_ID)不存在 / 绑定错接 / 电压变比不兼容
-        # 关联字段：PWFEEDERLINE.START_ST_ID ↔ ZWSUBSTATION.ST_ID（而非 equip.DSUBSTATION_ID）
+        # --- 主配接口校验（v2 修复：CN 空间改为 LINE_NAME 匹配）---
+        # 4.1 漏拼：主网站无出线 / 馈线 LINE_NAME 与 ZWLINEEND 不匹配
+        # 4.2 错拼：馈线起始主网站(START_ST_ID)不存在 / 绑定错接
+        #
+        # 根因：原 v1 用 pw_feeder_cn[fid] & zw_cn 比对 CN，但 ZWTERMINAL（正数 CN）
+        # 与 PWTERMINAL（负数 CN）完全不重叠，导致 shared 恒空，42 条漏拼全为误报。
+        #
+        # 修复：改用 ZWLINEEND.LINEEND_NAME ↔ PWFEEDERLINE.LINE_NAME 建立主配对应关系。
         from core.graph_model import AbnormalItem
         import uuid as _uuid
         trace_uuid = "MAIN_SUB_IFACE_" + _uuid.uuid4().hex[:8]
         zw_st_ids = set(self.zw_substation_df["ST_ID"].astype(str)) if len(self.zw_substation_df) else set()
-        zw_cn: set[str] = set()
-        if self.zw_terminal_df is not None and not self.zw_terminal_df.empty:
-            zw_cn = set(self.zw_terminal_df["CONNECTIVITYNODE_ID"].dropna().astype(str))
-        # 配网端子 → 所属设备 → 馈线 → 连接点集合
-        pw_feeder_cn: dict[str, set[str]] = defaultdict(set)
-        if self.pw_terminal_df is not None and not self.pw_terminal_df.empty:
-            for _, _row in self.pw_terminal_df.iterrows():
-                _cn = str(_row.get('CONNECTIVITYNODE_ID') or '')
-                _eid = str(_row.get('EQUIP_ID') or '')
-                _dev = self.dist_topo.device_map.get(_eid)
-                if _dev is None or not _cn:
-                    continue
-                _fid = _dev.feeder_id or ''
-                if _fid:
-                    pw_feeder_cn[_fid].add(_cn)
+
+        # 建立 ZWLINEEND LINEEND_NAME → ST_ID 映射
+        le_name_to_st: dict[str, str] = {}
+        for _, lrow in self.zw_line_end_df.iterrows():
+            st_id = str(lrow.get("ST_ID") or "").strip()
+            le_name = str(lrow.get("LINEEND_NAME") or "").strip()
+            if not st_id or not le_name:
+                continue
+            le_name_to_st[le_name] = st_id
+            std = le_name.replace("_线", "").replace("10kV.", "").replace("20kV.", "").replace("接地变", "")
+            le_name_to_st[std] = st_id
+
+        # 建立配网 LINE_ID ↔ LINE_NAME 映射
+        pw_line_name_to_id: dict[str, str] = {}
+        if self.line_df is not None and not self.line_df.empty:
+            for _, lfrow in self.line_df.iterrows():
+                lid = str(lfrow.get("LINE_ID") or "").strip()
+                lname = str(lfrow.get("LINE_NAME") or "").strip()
+                if lid:
+                    pw_line_name_to_id[lname] = lid
+                    std = lname.replace("_线", "").replace("10kV.", "").replace("20kV.", "")
+                    pw_line_name_to_id[std] = lid
+
+        # 建立 配网LINE_ID → 主网站ST_ID 映射（核心修复）
+        pw_line_to_zw_st: dict[str, str] = {}
+        for le_name, st_id in le_name_to_st.items():
+            if le_name in pw_line_name_to_id:
+                pw_line_to_zw_st[pw_line_name_to_id[le_name]] = st_id
+
         iface_cnt_ok = 0
         iface_cnt_bad = 0
         if self.line_df is not None and not self.line_df.empty:
             for _, lrow in self.line_df.iterrows():
-                fid = str(lrow.get('LINE_ID') or '')
-                start_st = str(lrow.get('START_ST_ID') or '').strip()
+                fid = str(lrow.get("LINE_ID") or "").strip()
+                start_st = str(lrow.get("START_ST_ID") or "").strip()
+                lname = str(lrow.get("LINE_NAME") or "").strip()
                 passed = True
-                code = ''
-                detail = ''
+                code = ""
+                detail = ""
+
                 if not start_st or start_st.lower() in ("null", "nan", "none"):
-                    passed, code, detail = False, "R_MAIN_IFACE_41", f"4.1漏拼：配网馈线{fid}缺失起始主网站(START_ST_ID为空)"
+                    passed, code, detail = False, "R_MAIN_IFACE_41", \
+                        f"4.1漏拼：配网馈线{fid}({lname})缺失起始主网站(START_ST_ID为空)"
                 elif start_st not in zw_st_ids:
-                    passed, code, detail = False, "R_MAIN_IFACE_42", f"4.2错拼：配网馈线{fid}起始站ID={start_st} 不存在于主网变电站表(共{len(zw_st_ids)}个)"
+                    passed, code, detail = False, "R_MAIN_IFACE_42", \
+                        f"4.2错拼：配网馈线{fid}起始站ID={start_st} 不存在于主网变电站表(共{len(zw_st_ids)}个)"
                 else:
-                    lineends = self.zw_line_end_df[self.zw_line_end_df["ST_ID"].astype(str) == start_st] if len(self.zw_line_end_df) else None
-                    if lineends is None or lineends.empty:
-                        passed, code, detail = False, "R_MAIN_IFACE_41", f"4.1漏拼：主网站{start_st}无任何出线(ZWLINEEND)记录"
+                    # 用 ZWLINEEND 解析出的映射校验 START_ST_ID 是否与 LINE_NAME 对应主网站一致
+                    expected_st = pw_line_to_zw_st.get(fid)
+                    if expected_st and expected_st != start_st:
+                        passed, code, detail = False, "R_MAIN_IFACE_42", (
+                            f"4.2错拼：配网馈线{fid}({lname})通过LINE_NAME解析得主网站={expected_st}，"
+                            f"但START_ST_ID={start_st}，两者不一致（疑似错拼）"
+                        )
                     else:
-                        shared = pw_feeder_cn.get(fid, set()) & zw_cn
-                        if not shared:
-                            passed, code, detail = False, "R_MAIN_IFACE_41", f"4.1漏拼：馈线{fid}端子与主网无共享连接点(CONNECTIVITYNODE_ID未对齐)"
+                        lineends = self.zw_line_end_df[
+                            self.zw_line_end_df["ST_ID"].astype(str) == start_st
+                        ] if len(self.zw_line_end_df) else None
+                        if lineends is None or lineends.empty:
+                            passed, code, detail = False, "R_MAIN_IFACE_41", \
+                                f"4.1漏拼：主网站{start_st}无任何出线(ZWLINEEND)记录"
+                        elif not expected_st:
+                            # 降级：无法建立 LINE_NAME ↔ ZWLINEEND 映射 → 信息缺失，不判为错
+                            logger.debug("主配接口降级（非错）: 无法从LINE_NAME=%s解析出主网站映射", lname)
+
                 if passed:
                     iface_cnt_ok += 1
                     continue
