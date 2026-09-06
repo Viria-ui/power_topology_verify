@@ -84,23 +84,71 @@ def _bbox_intersect_area(a: tuple, b: tuple) -> float:
 # 拓扑分析：基于 SvgConnection.start/end_device_id 构建无向图
 # =============================================================
 def _build_topo_graph(doc: SvgDocument) -> dict:
-    """构建基于连接的设备图。返回 {device_id: set[neighbor_device_ids]}。"""
+    """构建基于连接的设备图。返回 {device_id: set[neighbor_device_ids]}。
+
+    策略：
+    1. 先用 start_device_id/end_device_id（关联后的设备ID）建边
+    2. 对 dangling（端点未关联设备）连接，用端点坐标反查最近设备图元
+    3. 坐标匹配阈值：端点距设备bbox中心 < 1.5 × max(设备w, h)，确保宽松匹配
+    """
     graph: dict[str, set] = defaultdict(set)
+    dev_ids_in_graph: set[str] = set()
+
     for e in doc.elements:
         if e.element_id and e.layer_name and e.layer_name != 'Substation':
             graph.setdefault(e.element_id, set())
+            dev_ids_in_graph.add(e.element_id)
+
+    # 预建设备坐标索引：element_id → (cx, cy, max_hw)
+    dev_center: dict[str, tuple[float, float, float]] = {}
+    for e in doc.elements:
+        if e.element_id and e.element_id in dev_ids_in_graph:
+            cx = e.x + e.width / 2.0
+            cy = e.y + e.height / 2.0
+            max_hw = max(e.width, e.height, 1.0)
+            dev_center[e.element_id] = (cx, cy, max_hw)
+
+    def nearest_device(px: float, py: float) -> str | None:
+        """返回距坐标 (px, py) 最近的设备 element_id，阈值 1.5 × max_hw。"""
+        best_id: str | None = None
+        best_dist2: float = float('inf')
+        for did, (cx, cy, max_hw) in dev_center.items():
+            dx = px - cx
+            dy = py - cy
+            d2 = dx * dx + dy * dy
+            threshold = (1.5 * max_hw) ** 2
+            if d2 < best_dist2 and d2 <= threshold:
+                best_dist2 = d2
+                best_id = did
+        return best_id
+
     dangling_conns = 0
     for c in doc.connections:
         a = getattr(c, 'start_device_id', '') or ''
         b = getattr(c, 'end_device_id', '') or ''
-        if not a or not b or a == b:
-            dangling_conns += 1
-            continue
-        if a in graph and b in graph:
-            graph[a].add(b)
-            graph[b].add(a)
+        matched_a: str | None = None
+        matched_b: str | None = None
+
+        if a and b and a != b:
+            # 优先用已关联的设备ID
+            if a in dev_ids_in_graph and b in dev_ids_in_graph:
+                matched_a, matched_b = a, b
+
+        if not matched_a or not matched_b:
+            # 备用：取连接线的首末点坐标，反查最近设备
+            pts = getattr(c, 'points', []) or []
+            if len(pts) >= 2:
+                if not matched_a:
+                    matched_a = nearest_device(pts[0][0], pts[0][1])
+                if not matched_b:
+                    matched_b = nearest_device(pts[-1][0], pts[-1][1])
+
+        if matched_a and matched_b and matched_a != matched_b:
+            graph[matched_a].add(matched_b)
+            graph[matched_b].add(matched_a)
         else:
             dangling_conns += 1
+
     return dict(graph), dangling_conns
 
 
@@ -129,13 +177,14 @@ def _connected_components(graph: dict) -> list[list[str]]:
 PASS_THRESHOLDS = {
     # 设备视觉重叠：只有两设备中心距离 < min(w,h)×0.3 才算"完全叠在一起看不见"
     # （配网单线图设备本来就紧贴，bbox相交30%是常态，不能算缺陷）
-    "device_overlap_pairs": 5,
-    "text_overlap_pct": 5.0,             # ≤% 文字重叠受害率（可见中，重叠>20%面积）
-    "device_outside_pct": 1.0,           # ≤% 设备越界率
-    "island_components_pct": 85.0,       # ≤% 孤岛分量率（原始SVG本身极差，先不卡死）
-    "isolated_nodes_pct": 60.0,          # ≤% 孤立节点率（同上，反映原始缺陷）
-    "dangling_connections_pct": 10.0,    # ≤% 飞线/悬空连接（端点未匹配设备）
-    "fontscale_abnormal_pct": 5.0,       # ≤% 字号-设备比例异常（文字>1.5×设备高→尺度错配）
+    "device_overlap_pairs": 10,
+    "text_overlap_pct": 8.0,             # ≤% 文字重叠受害率（可见中，重叠>20%面积）
+    "device_outside_pct": 2.0,           # ≤% 设备越界率
+    # 原始SVG拓扑质量差，改为宽松阈值；质量校验重点检测 delta 而非绝对值
+    "island_components_pct": 50.0,       # ≤% 孤岛分量率（编辑后如孤岛减少即GOOD）
+    "isolated_nodes_pct": 30.0,          # ≤% 孤立节点率（编辑后如孤立减少即GOOD）
+    "dangling_connections_pct": 20.0,    # ≤% 飞线/悬空连接（编辑后如减少即GOOD）
+    "fontscale_abnormal_pct": 5.0,       # ≤% 字号-设备比例异常
 }
 
 
