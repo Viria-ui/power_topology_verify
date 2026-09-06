@@ -1,27 +1,38 @@
 {
   "comparison": {
     "score_before": 0.0,
-    "score_after": 100,
-    "score_change": 100.0,
+    "score_after": 0.0,
+    "score_change": 0.0,
     "defects_before": 944,
-    "defects_after": 0,
-    "defects_reduced": 944,
-    "devices_before": 1430,
-    "devices_after": 855,
+    "defects_after": 3158,
+    "defects_reduced": -2214,
+    "elements_before": 1431,
+    "elements_after": 1431,
+    "elements_lost": 0,
+    "real_devices_before": 1430,
+    "real_devices_after": 1430,
+    "real_devices_lost": 0,
+    "defect_rate_before": 65.97,
+    "defect_rate_after": 220.68,
+    "defect_rate_penalty_before": 40.0,
+    "defect_rate_penalty_after": 40.0,
     "components_before": 84,
     "components_after": 6,
     "type_changes": {
-      "设备重叠": 857,
-      "孤岛设备": 25,
-      "标注错位": 62
+      "设备重叠": -2301,
+      "标注错位": 62,
+      "孤岛设备": 25
     }
   },
   "before": {
     "stage": "美化前",
-    "total_devices": 1430,
+    "total_elements": 1431,
+    "real_device_count": 1430,
+    "fake_device_count": 1,
     "total_connections": 962,
     "total_defects": 944,
-    "defect_rate_percent": 66.0,
+    "defect_rate_percent": 65.97,
+    "defect_rate_penalty": 40.0,
     "quality_score": 0.0,
     "defects_by_type": {
       "孤岛设备": 25,
@@ -42,18 +53,25 @@
   },
   "after": {
     "stage": "美化后",
-    "total_devices": 855,
+    "total_elements": 1431,
+    "real_device_count": 1430,
+    "fake_device_count": 1,
     "total_connections": 1382,
-    "total_defects": 0,
-    "defect_rate_percent": 0.0,
-    "quality_score": 100,
-    "defects_by_type": {},
-    "defects_by_severity": {},
+    "total_defects": 3158,
+    "defect_rate_percent": 220.68,
+    "defect_rate_penalty": 40.0,
+    "quality_score": 0.0,
+    "defects_by_type": {
+      "设备重叠": 3158
+    },
+    "defects_by_severity": {
+      "medium": 3158
+    },
     "connected_components": 6,
     "max_component_size": 768,
     "dangling_count": 0,
     "fake_connect_count": 0,
-    "overlap_count": 0,
+    "overlap_count": 3158,
     "text_missing_count": 0
   },
   "before_defects_sample": [
@@ -198,6 +216,147 @@
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     }
   ],
-  "after_defects_sample": [],
+  "after_defects_sample": [
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3照1#~LINE215_线如切败支3照2#] bbox重叠率=74.38% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支1#-LINE215_线如切败支2#] bbox重叠率=96.06% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3#-LINE215_线如切败支4#] bbox重叠率=81.30% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3#-LINE215_线如切败支3照1#数线] bbox重叠率=88.42% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000切败支5#] bbox重叠率=77.50% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000切败支11#] bbox重叠率=59.66% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3照3#-LINE215_线如切败支3照5#] bbox重叠率=50.25% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支12#~LINE215_线如切败支13#] bbox重叠率=57.09% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支5#-LINE215_线如切败支6#] bbox重叠率=74.52% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支6#-LINE215_线如切败支7#] bbox重叠率=71.55% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支7#-LINE215_线如切败支8#] bbox重叠率=68.58% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支8#-LINE215_线如切败支9#] bbox重叠率=65.61% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支9#-LINE215_线如切败支10#] bbox重叠率=62.64% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支11#-LINE215_线如切败支12#] bbox重叠率=57.09% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3照2#~LINE215_线如切败支3照3#] bbox重叠率=59.26% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [0] bbox重叠率=53.71% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [32TMP00132954] bbox重叠率=51.91% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044758",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [站房000079] bbox重叠率=59.85% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044757",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支3照1#~LINE215_线如切败支3照2#] 与 [00000败支1#-LINE215_线如切败支2#] bbox重叠率=71.06% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    },
+    {
+      "equip_id": "TMP00044757",
+      "defect_type": "设备重叠",
+      "severity": "medium",
+      "description": "设备[00000败支3照1#~LINE215_线如切败支3照2#] 与 [00000败支3#-LINE215_线如切败支4#] bbox重叠率=78.13% > 50%",
+      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+    }
+  ],
   "algorithm_note": "缺陷分类与评分算法与任务一 core.topology_validator.validate_svg_only 完全一致"
 }

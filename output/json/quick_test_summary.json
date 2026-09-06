@@ -1,0 +1,25 @@
+{
+  "tie_switches": 206,
+  "loops": 19,
+  "abnormal_list": 726,
+  "electrical_defects": 4458,
+  "breakpoint_list": 418,
+  "rule_stats": {
+    "RULE-E01": 119,
+    "RULE-E04": 604,
+    "RULE-E03": 2971,
+    "RULE-E07": 100,
+    "RULE-E06": 30,
+    "RULE-E02": 450,
+    "RULE-E05": 184
+  },
+  "abnormal_stats": {
+    "悬空": 726,
+    "孤岛": 0,
+    "断点": 0,
+    "其他": 0
+  },
+  "score_before": 69.1,
+  "score_after": 69.1,
+  "defect_count": 726
+}
