@@ -1,0 +1,3 @@
+@echo off
+cd /d "C:\Users\Xu's\Desktop\CP-202606-面向新型电力系统的配电网图模拓扑智能识别与修正研究比赛资料"
+python -c "import zipfile,re;z=zipfile.ZipFile(r'附件：参考内容.docx','r');x=z.read('word/document.xml').decode('utf-8');t=re.sub(r'<[^>]+>','\n',x);print(re.sub(r'\n+','\n',t).strip())"
