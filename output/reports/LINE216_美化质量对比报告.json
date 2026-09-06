@@ -1,27 +1,27 @@
 {
   "comparison": {
-    "score_before": 72.6,
-    "score_after": 0.0,
-    "score_change": -72.6,
+    "score_before": 44.8,
+    "score_after": 30.0,
+    "score_change": -14.8,
     "defects_before": 450,
-    "defects_after": 6106,
-    "defects_reduced": -5656,
-    "elements_before": 1645,
-    "elements_after": 1645,
-    "elements_lost": 0,
+    "defects_after": 7742,
+    "defects_reduced": -7292,
     "real_devices_before": 1644,
     "real_devices_after": 1644,
-    "real_devices_lost": 0,
-    "defect_rate_before": 27.36,
-    "defect_rate_after": 371.19,
-    "defect_rate_penalty_before": 40.0,
-    "defect_rate_penalty_after": 40.0,
+    "real_devices_change": 0,
+    "defect_rate_before": 27.37,
+    "defect_rate_after": 100.0,
+    "defect_rate_change": 72.63,
+    "defect_rate_penalty_before": 5.21,
+    "defect_rate_penalty_after": 20.0,
     "components_before": 214,
     "components_after": 1,
+    "components_change": -213,
     "type_changes": {
-      "设备重叠": -5834,
+      "孤岛设备": 148,
+      "虚假连通": -1626,
       "标注错位": 30,
-      "孤岛设备": 148
+      "设备重叠": -5844
     }
   },
   "before": {
@@ -31,9 +31,9 @@
     "fake_device_count": 1,
     "total_connections": 660,
     "total_defects": 450,
-    "defect_rate_percent": 27.36,
-    "defect_rate_penalty": 40.0,
-    "quality_score": 72.6,
+    "defect_rate_percent": 27.37,
+    "defect_rate_penalty": 5.21,
+    "quality_score": 44.8,
     "defects_by_type": {
       "孤岛设备": 148,
       "设备重叠": 272,
@@ -53,25 +53,27 @@
   },
   "after": {
     "stage": "美化后",
-    "total_elements": 1645,
+    "total_elements": 1644,
     "real_device_count": 1644,
-    "fake_device_count": 1,
+    "fake_device_count": 0,
     "total_connections": 1682,
-    "total_defects": 6106,
-    "defect_rate_percent": 371.19,
-    "defect_rate_penalty": 40.0,
-    "quality_score": 0.0,
+    "total_defects": 7742,
+    "defect_rate_percent": 100.0,
+    "defect_rate_penalty": 20.0,
+    "quality_score": 30.0,
     "defects_by_type": {
-      "设备重叠": 6106
+      "虚假连通": 1626,
+      "设备重叠": 6116
     },
     "defects_by_severity": {
-      "medium": 6106
+      "high": 1626,
+      "medium": 6116
     },
     "connected_components": 1,
     "max_component_size": 678,
     "dangling_count": 0,
-    "fake_connect_count": 0,
-    "overlap_count": 6106,
+    "fake_connect_count": 1626,
+    "overlap_count": 6116,
     "text_missing_count": 0
   },
   "before_defects_sample": [
@@ -218,144 +220,144 @@
   ],
   "after_defects_sample": [
     {
-      "equip_id": "TMP00045086",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[TMP00131370~LINE216_争2#1] 与 [TMP00131370~LINE216_争3#] bbox重叠率=54.68% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00046158_TMP00313565",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046158_TMP00313565] 两端设备[00000]-[故障指示器007] 无互引GLink，几何距离=150.00 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045086",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[TMP00131370~LINE216_争2#1] 与 [32TMP00132954] bbox重叠率=50.12% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00046158_TMP00046604",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046158_TMP00046604] 两端设备[00000]-[避雷器045] 无互引GLink，几何距离=205.18 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045084",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [00000#] bbox重叠率=90.15% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00046158_TMP00046159",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046158_TMP00046159] 两端设备[00000]-[TMP00131370] 无互引GLink，几何距离=317.65 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045084",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [00000~LINE216_争4#] bbox重叠率=90.06% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00313565_TMP00043924",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00313565_TMP00043924] 两端设备[故障指示器007]-[开关00036] 无互引GLink，几何距离=1408.01 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045084",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [TMP00131599LINE216_争8#] bbox重叠率=95.33% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00313539_TMP00048670",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00313539_TMP00048670] 两端设备[TMP00318364次母线]-[开关03300] 无互引GLink，几何距离=150.00 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045084",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [TMP00131599LINE216_争9#] bbox重叠率=91.22% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00048670_TMP00313541",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00048670_TMP00313541] 两端设备[开关03300]-[32TMP00132954] 无互引GLink，几何距离=205.18 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045084",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [TMP00131599LINE216_争6#] bbox重叠率=94.77% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00048670_TMP00045087",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00048670_TMP00045087] 两端设备[开关03300]-[TMP00314522LINE216_争1#] 无互引GLink，几何距离=579.74 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045084",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [00000~LINE216_争9-1#] bbox重叠率=62.95% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00048670_TMP00046159",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00048670_TMP00046159] 两端设备[开关03300]-[TMP00131370] 无互引GLink，几何距离=140.00 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045084",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [TMP00131370#~LINE216_争10#] bbox重叠率=56.25% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00044381_TMP00043924",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00044381_TMP00043924] 两端设备[刀闸0145]-[开关00036] 无互引GLink，几何距离=7621.48 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045083",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [00000~LINE216_争4#] bbox重叠率=99.72% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00044381_TMP00046157",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00044381_TMP00046157] 两端设备[刀闸0145]-[00000终端头510346] 无互引GLink，几何距离=7901.42 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045083",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [TMP00131599LINE216_争8#] bbox重叠率=85.48% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00044381_TMP00043895",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00044381_TMP00043895] 两端设备[刀闸0145]-[开关00007] 无互引GLink，几何距离=2364.76 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045083",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [TMP00131599LINE216_争9#] bbox重叠率=81.38% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00044381_TMP00045085",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00044381_TMP00045085] 两端设备[刀闸0145]-[00000终端头510346-站外-电缆终端头510347] 无互引GLink，几何距离=7761.45 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045083",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [TMP00131599LINE216_争6#] bbox重叠率=95.38% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00044381_TMP00046603",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00044381_TMP00046603] 两端设备[刀闸0145]-[避雷器044] 无互引GLink，几何距离=140.00 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045083",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000#] 与 [00000~LINE216_争9-1#] bbox重叠率=53.19% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00046157_TMP00046156",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046157_TMP00046156] 两端设备[00000终端头510346]-[00000终端头510347] 无互引GLink，几何距离=1467.69 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045082",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000~LINE216_争4#] 与 [TMP00131599LINE216_争8#] bbox重叠率=85.39% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00313553_TMP00046027",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00313553_TMP00046027] 两端设备[0]-[用户1637] 无互引GLink，几何距离=205.18 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045082",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000~LINE216_争4#] 与 [TMP00131599LINE216_争9#] bbox重叠率=81.39% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00046027_TMP00313561",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046027_TMP00313561] 两端设备[用户1637]-[0] 无互引GLink，几何距离=317.65 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045082",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000~LINE216_争4#] 与 [TMP00131599LINE216_争6#] bbox重叠率=95.11% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00046027_TMP00046497",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046027_TMP00046497] 两端设备[用户1637]-[配变2274] 无互引GLink，几何距离=370.00 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045082",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000~LINE216_争4#] 与 [00000~LINE216_争9-1#] bbox重叠率=53.03% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00046027_TMP00045085",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046027_TMP00045085] 两端设备[用户1637]-[00000终端头510346-站外-电缆终端头510347] 无互引GLink，几何距离=1467.69 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045081",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[TMP00131599LINE216_争8#] 与 [TMP00131599LINE216_争9#] bbox重叠率=95.89% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00046027_TMP00046156",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046027_TMP00046156] 两端设备[用户1637]-[00000终端头510347] 无互引GLink，几何距离=140.00 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
-      "equip_id": "TMP00045081",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[TMP00131599LINE216_争8#] 与 [TMP00131599LINE216_争6#] bbox重叠率=90.10% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "equip_id": "edge_TMP00044450_TMP00046602",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00044450_TMP00046602] 两端设备[刀闸0148]-[避雷器043] 无互引GLink，几何距离=2544.43 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     }
   ],
   "algorithm_note": "缺陷分类与评分算法与任务一 core.topology_validator.validate_svg_only 完全一致"

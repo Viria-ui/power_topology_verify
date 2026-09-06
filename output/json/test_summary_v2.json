@@ -6,10 +6,10 @@
     "breakpoint_count": 418
   },
   "模块1.3_联络开关": {
-    "count": 214
+    "count": 203
   },
   "模块1.4_疑似联络": {
-    "count": 0
+    "count": 203
   },
   "模块1.5_合环检测": {
     "count": 19
@@ -21,20 +21,21 @@
     "count": 306
   },
   "模块2.3_物通逻断": {
-    "physical_connections": 0
+    "physical_connections": 252,
+    "missing_in_topo": 197
   },
   "模块2.4_逻通物断": {
-    "count": 0
+    "count": 1753
   },
   "模块3_电气逻辑": {
     "total": 4458
   },
   "模块4_主配接口": {
-    "missing": 0,
-    "wrong": 0
+    "missing": 218,
+    "wrong": 508
   },
   "模块5_质量评分": {
-    "score_before": 23.9,
-    "score_after": 23.9
+    "score_before": 10.0,
+    "score_after": 10.0
   }
 }

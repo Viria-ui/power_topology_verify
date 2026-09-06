@@ -1462,3 +1462,253 @@
 2026-09-06 15:56:26 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
 2026-09-06 15:56:33 [INFO] core.topology_builder: 主网异常数量：338，断点数量：4
 2026-09-06 15:56:33 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
+2026-09-07 02:09:51 [INFO] core.topology_builder: 主配数据拆分完成：主网设备=1167 配网设备=50744 主网线段=223 配网线段=189 主网站=10 遥信遥测=5829 ZWMEA=442 ZWSIGNAL=1567
+2026-09-07 02:09:51 [INFO] core.topology_builder: 主网设备数量：1167
+2026-09-07 02:09:51 [INFO] core.topology_builder: 配网设备数量：50744
+2026-09-07 02:09:51 [INFO] core.topology_builder: 主网线路(ZLINEEND)数量：223
+2026-09-07 02:09:51 [INFO] core.topology_builder: 配网线路(PWFEEDERLINE)数量：189
+2026-09-07 02:09:51 [INFO] core.topology_builder: 主网站点(ZWSUBSTATION)数量：10
+2026-09-07 02:09:51 [INFO] core.topology_builder: 遥信遥测(PWREAL)记录数：5829
+2026-09-07 02:09:51 [INFO] core.topology_builder: 主网遥测(ZWMEA)：442 主网遥信(ZWSIGNAL)：1567
+2026-09-07 02:09:51 [INFO] core.topology_builder: [Builder] 正在添加 1167 个主网设备和 50744 个配网设备...
+2026-09-07 02:09:51 [INFO] core.topology_builder: 主网电源设备数=47
+2026-09-07 02:09:51 [INFO] core.topology_builder: 主网电源设备识别: 47 台
+2026-09-07 02:09:52 [DEBUG] core.topology_builder: 已处理 10000 个配网设备
+2026-09-07 02:09:53 [DEBUG] core.topology_builder: 已处理 20000 个配网设备
+2026-09-07 02:09:54 [DEBUG] core.topology_builder: 已处理 30000 个配网设备
+2026-09-07 02:09:55 [DEBUG] core.topology_builder: 已处理 40000 个配网设备
+2026-09-07 02:09:56 [DEBUG] core.topology_builder: 已处理 50000 个配网设备
+2026-09-07 02:09:56 [INFO] core.topology_builder: 配网电源设备数=17643
+2026-09-07 02:09:56 [INFO] core.topology_builder: 配网电源设备识别: 17643 台
+2026-09-07 02:09:59 [INFO] core.topology_builder: 主配电源注入（v2-ZWLINEEND映射）: 0 台配网设备接入主网电源
+2026-09-07 02:09:59 [INFO] core.topology_builder:   ZWLINEEND 解析出馈线→主网站映射数: 0
+2026-09-07 02:10:10 [INFO] core.topology_builder: [Builder] 配网真实端子数量:76354
+2026-09-07 02:10:10 [INFO] core.topology_builder: [Builder] 主网真实端子数量:1562
+2026-09-07 02:10:18 [INFO] core.topology_builder: [端子建边完成] 配网拓扑边数量：117276
+2026-09-07 02:10:18 [INFO] core.topology_builder: [端子建边完成] 主网拓扑边数量：2632
+2026-09-07 02:10:27 [INFO] core.measure_preprocess: [MeasurePreprocess] 遥信实测开关数量：6666
+2026-09-07 02:10:27 [INFO] core.measure_preprocess: [MeasurePreprocess] 默认合位开关数量：10942
+2026-09-07 02:10:27 [INFO] core.topology_builder: [遥信预处理统计] 总开关状态映射条目:17608 实际挂载到设备:16592
+2026-09-07 02:10:27 [INFO] core.topology_builder: 遥信实测开关:6666，赛题默认合位推演开关:10942
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE098解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE060解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE004解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE082解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE018解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE074解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE099解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE041解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE086解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE073解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE033解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE091解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE100解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE013解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE101解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE035解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE102解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE103解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE055解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE024解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE084解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE087解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE104解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE012解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE105解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE106解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE094解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE107解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE053解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE108解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE109解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE110解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE111解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE112解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE113解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE026解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE048解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE003解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE057解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE077解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE114解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE027解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE115解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE116解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE117解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE118解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE038解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE119解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE120解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE121_195解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE076解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE093解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE122解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE123解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE039解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE124解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE125解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE126解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE127解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE089解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE090解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE128解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE037解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE071解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE129解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE009解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE022解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE028解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE019解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE015解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE130解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE131解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE132解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE061解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE133解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE075解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE016解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE134解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE043解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE050解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE054解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE040解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE021解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE023解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE020解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE135解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE136解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE097解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE096解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE137解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE138解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE139解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE140解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE141解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE049解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE142解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE042解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE056解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE143解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE144解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE070解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE069解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE145解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE146解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE147解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE148解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE025解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE149解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE083解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE150解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE151解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE152解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE046解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE045解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE153解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE154解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE155解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE156解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE058解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE059解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE157解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE088解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE121_185解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE081解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE158解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE159解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE160解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE161解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE162解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE163解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE164解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE165解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE166解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE167解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE168解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE014解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE169解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE170解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE171解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE172解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE173解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE174解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE175解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE176解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE177解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE044解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE178解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE179解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE180解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=20kVLINE181解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE182解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE183解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE184解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE186解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE187解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE188解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE189解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE190解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE191解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE192解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE193解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE194解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE195解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE196解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE197解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE198解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE199解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE063解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE200解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE201解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE202解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE203解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE204解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE205解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE051解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE187解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE207解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE208解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE209解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE210解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE212解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=10kVLINE213解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=LINE215解析出主网站映射
+2026-09-07 02:10:40 [DEBUG] core.topology_builder: 主配接口降级（非错）: 无法从LINE_NAME=LINE216解析出主网站映射
+2026-09-07 02:10:40 [INFO] core.topology_builder: 主配接口校验：通过=184 失败=5
+2026-09-07 02:10:40 [INFO] core.topology_builder: [主配接口校验] 4.1/4.2 命中缺陷: 5
+2026-09-07 02:10:40 [INFO] core.topology_builder: [电气逻辑校验] RULE-E01~E07 命中:4458
+2026-09-07 02:10:40 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
+2026-09-07 02:10:45 [INFO] core.topology_builder: 主网异常数量：0，断点数量：0
+2026-09-07 02:10:45 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
+2026-09-07 02:10:56 [INFO] core.score_engine: 评分结果: 设备=50744 缺陷=1756 扣分=25.00 缺陷率=3.46% 缺陷率扣分=4.92 score_before=70.1 score_after=100.0
+2026-09-07 02:10:56 [INFO] core.enhanced_report_generator: [增强报告] 开始为 LINE215 生成增强报告
+2026-09-07 02:10:56 [INFO] core.enhanced_report_generator: [增强报告] 评估数据源质量...
+2026-09-07 02:10:56 [INFO] core.physical_constraint_checker: [物理约束] 数据源可信度: 遥测=0.11, SVG=0.77, 数据库=0.90
+2026-09-07 02:10:56 [INFO] core.enhanced_report_generator: [增强报告] 执行物理约束校验...
+2026-09-07 02:10:56 [INFO] core.physical_constraint_checker: [物理约束] 数据源可信度: 遥测=0.11, SVG=0.77, 数据库=0.90
+2026-09-07 02:10:56 [INFO] core.physical_constraint_checker: [物理约束] 开始KCL校验, 共100个节点
+2026-09-07 02:10:56 [INFO] core.physical_constraint_checker: [物理约束] 开始支路约束校验, 共50个开关
+2026-09-07 02:10:56 [INFO] core.enhanced_report_generator: [增强报告] 处理 1756 个缺陷...
+2026-09-07 02:10:56 [INFO] core.enhanced_report_generator: [增强报告] 排序修复方案...
+2026-09-07 02:10:56 [INFO] core.repair_ranking_engine: [修复排序] 处理1756个修复候选, 最高优先级=0.500(TMP00044547 <-> TMP00046078)
+2026-09-07 02:10:56 [INFO] core.enhanced_report_generator: [增强报告] 生成完成: 缺陷1756个, 高风险0个, 确认1756个
+2026-09-07 02:10:58 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=TMP00000188 识别到 1 个联络开关
+2026-09-07 02:10:58 [DEBUG] core.feeder_topology_analysis: P1-P7 引擎产生 15 条断点候选
+2026-09-07 02:10:58 [INFO] core.feeder_topology_analysis: Sheet2 断点定位: feeder=TMP00000188 共 378 条 (P1-P7 优先级排序)
+2026-09-07 02:10:58 [INFO] core.feeder_topology_analysis: Sheet4 合环识别: feeder=TMP00000188 共 2 条
+2026-09-07 02:11:22 [INFO] core.score_engine: 评分结果: 设备=50744 缺陷=1837 扣分=25.00 缺陷率=3.62% 缺陷率扣分=5.24 score_before=69.8 score_after=100.0
+2026-09-07 02:11:22 [INFO] core.enhanced_report_generator: [增强报告] 开始为 LINE216 生成增强报告
+2026-09-07 02:11:22 [INFO] core.enhanced_report_generator: [增强报告] 评估数据源质量...
+2026-09-07 02:11:22 [INFO] core.physical_constraint_checker: [物理约束] 数据源可信度: 遥测=0.11, SVG=0.77, 数据库=0.90
+2026-09-07 02:11:22 [INFO] core.enhanced_report_generator: [增强报告] 执行物理约束校验...
+2026-09-07 02:11:22 [INFO] core.physical_constraint_checker: [物理约束] 数据源可信度: 遥测=0.11, SVG=0.77, 数据库=0.90
+2026-09-07 02:11:22 [INFO] core.physical_constraint_checker: [物理约束] 开始KCL校验, 共100个节点
+2026-09-07 02:11:22 [INFO] core.physical_constraint_checker: [物理约束] 开始支路约束校验, 共50个开关
+2026-09-07 02:11:22 [INFO] core.enhanced_report_generator: [增强报告] 处理 1837 个缺陷...
+2026-09-07 02:11:22 [INFO] core.enhanced_report_generator: [增强报告] 排序修复方案...
+2026-09-07 02:11:23 [INFO] core.repair_ranking_engine: [修复排序] 处理1837个修复候选, 最高优先级=0.500(TMP00313565 <-> TMP00046158)
+2026-09-07 02:11:23 [INFO] core.enhanced_report_generator: [增强报告] 生成完成: 缺陷1837个, 高风险0个, 确认1837个
+2026-09-07 02:11:24 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=TMP00000189 识别到 1 个联络开关
+2026-09-07 02:11:24 [DEBUG] core.feeder_topology_analysis: P1-P7 引擎产生 54 条断点候选
+2026-09-07 02:11:24 [INFO] core.feeder_topology_analysis: Sheet2 断点定位: feeder=TMP00000189 共 256 条 (P1-P7 优先级排序)
+2026-09-07 02:11:24 [INFO] core.feeder_topology_analysis: Sheet4 合环识别: feeder=TMP00000189 共 9 条

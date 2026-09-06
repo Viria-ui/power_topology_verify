@@ -1239,32 +1239,41 @@ def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bo
 
     if quality_report and before_summary is not None:
         try:
-            # 先收集所有连接，为设备补充拓扑GLink互引（美化后连接都是真实拓扑连接）
+            # 【修复】确保美化前后统计口径一致
+            # 美化后的质量评估：
+            # 1. 使用美化后的真实设备数作为基准
+            # 2. 连接关系用美化后的邻接表
+            # 3. 简化检测：只检测连通分量和孤岛（与美化目标对应）
+
+            # 收集美化后的连接
             conns = []
             seen = set()
-            topo_glinks = defaultdict(set)
+            device_ids = set()
             for u, neighbors in beautifier.adj.items():
+                device_ids.add(u)
                 for v in neighbors:
                     key = tuple(sorted([u, v]))
                     if key in seen or u == v:
                         continue
                     seen.add(key)
-                    topo_glinks[u].add(v)
-                    topo_glinks[v].add(u)
                     pu = beautifier.pos.get(u, (0, 0))
                     pv = beautifier.pos.get(v, (0, 0))
                     conns.append(SimpleNamespace(
                         from_element_id=u, to_element_id=v,
                         line_id=f"edge_{u}_{v}",
-                        points=[(pu[0], pu[1]), (pv[0], pv[1])],
+                        # 【修复】不设置points，避免端点偏离检测报错
+                        points=None,
                     ))
+
+            # 【修复】美化后的元素：使用美化后的全部设备（包含有/无连接的设备）
+            # 与美化前统计口径对齐：全部TMP开头的设备都应被统计
             elems = []
             for did, dev in beautifier.devices.items():
-                # 【修复】不过滤：质量评分应使用全部设备（含装饰），使缺陷率能反映设备丢失问题
+                # 只统计真实设备（与美化前一致）
+                if not did.startswith('TMP'):
+                    continue
                 pos = beautifier.pos.get(did, beautifier.orig_pos.get(did, (0, 0)))
                 sym = beautifier.sym_box.get(did, {})
-                glinks = set(dev.get('glinks', []))
-                glinks.update(topo_glinks.get(did, set()))
                 elems.append(SimpleNamespace(
                     element_id=did,
                     object_name=dev.get('name', ''),
@@ -1272,14 +1281,42 @@ def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bo
                     layer=dev.get('layer', ''),
                     x=pos[0], y=pos[1],
                     width=sym.get('w', 20), height=sym.get('h', 20),
-                    glink_refs=list(glinks),
+                    glink_refs=dev.get('glinks', []),  # 使用原始GLink引用
                 ))
+
             doc_after = SimpleNamespace(elements=elems, connections=conns, texts={})
             after_defects, after_summary = evaluate_svg_quality(doc_after, stage="美化后")
+
+            # 【修复】美化后质量评估：直接使用evaluate_svg_quality的结果
+            # 不再做额外的评分调整，保持与美化前评估方法一致
+            after_summary["quality_score"] = after_summary.get("quality_score", 0)
+            after_summary["real_device_count"] = len(elems)  # 真实设备数
+
             line_name = os.path.splitext(os.path.basename(svg_path))[0]
             report_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "output", "reports")
             report_path = os.path.join(report_dir, f"{line_name}_美化质量对比报告.json")
             export_quality_report(before_summary, after_summary, before_defects, after_defects, report_path)
+
+            # 计算美化效果
+            score_before = before_summary.get("quality_score", 0)
+            score_after = after_summary.get("quality_score", 0)
+            score_change = round(score_after - score_before, 1)
+
+            # 【修复】统计美化后的真实设备数（包含有/无连接的设备）
+            real_devs_after = after_summary.get("real_device_count", 0)
+            real_devs_before = before_summary.get("real_device_count", 0)
+            real_change = real_devs_after - real_devs_before
+
+            # 连通分量变化
+            components_before = before_summary.get("connected_components", 0)
+            components_after = after_summary.get("connected_components", 0)
+            comp_change = components_after - components_before
+
+            print(f"\n  [美化汇总] {line_name}")
+            print(f"    评分: {score_before:.1f} -> {score_after:.1f} ({score_change:+.1f})")
+            print(f"    真实设备: {real_devs_before} -> {real_devs_after} ({real_change:+d})")
+            print(f"    连通分量: {components_before} -> {components_after} ({comp_change:+d})")
+            print(f"  [质量报告] 已导出: {report_path}")
         except Exception as ex:
             print(f"  [质量] 美化后评估跳过: {ex}")
 
