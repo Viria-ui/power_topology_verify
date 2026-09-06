@@ -1259,8 +1259,7 @@ def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bo
                     ))
             elems = []
             for did, dev in beautifier.devices.items():
-                if not beautifier.is_real_device(dev.get('type', '')):
-                    continue
+                # 【修复】不过滤：质量评分应使用全部设备（含装饰），使缺陷率能反映设备丢失问题
                 pos = beautifier.pos.get(did, beautifier.orig_pos.get(did, (0, 0)))
                 sym = beautifier.sym_box.get(did, {})
                 glinks = set(dev.get('glinks', []))

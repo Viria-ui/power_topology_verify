@@ -17,8 +17,11 @@
 import os
 import json
 import math
+import logging
 from collections import defaultdict
 from typing import Dict, List, Tuple
+
+logger = logging.getLogger(__name__)
 
 import networkx as nx
 
@@ -85,6 +88,8 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
     """
     defects: List[dict] = []
     elems = _elem_list(doc)
+    # 【修复】real_elems 用于重叠检测等需要真实设备图元的场景
+    # 不再用它来计算设备总数（避免美化后过滤导致统计口径不一致）
     real_elems = [e for e in elems if getattr(e, 'element_id', '').startswith('TMP')]
 
     max_size = 0.0
@@ -249,28 +254,57 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
             })
 
     # ---- 质量评分（参考任务一模块五：拓扑完整性/连接质量/布局质量/标注规范）----
+    # 【修复】评分公式修正：使用与 score_engine 一致的逻辑
+    # - 基准：100分
+    # - 扣分 = 缺陷严重度加权之和（已封顶）
+    # - 缺陷率惩罚：缺陷数/设备总数 超过1%开始扣，超过5%严重扣
+    # - 设备数量改为全部元素（含装饰图元），使缺陷率能反映真实的缺失设备问题
     severity_weights = {"high": 5, "medium": 3, "low": 1}
     type_counts = defaultdict(int)
     severity_counts = defaultdict(int)
-    total_penalty = 0
+    total_penalty = 0.0
     for d in defects:
         type_counts[d["defect_type"]] += 1
         sev = d.get("severity", "medium")
         severity_counts[sev] += 1
         total_penalty += severity_weights.get(sev, 3)
 
-    total_devices = len(real_elems)
-    defect_rate = round(len(defects) / max(total_devices, 1) * 100, 1)
-    score = max(0.0, round(100 - total_penalty, 1))
+    # 缺陷率 = 缺陷数 / 全部元素数（含装饰图元，反映真实缺失设备）
+    # 使用全部元素数使缺陷率能体现"设备丢失导致美化后设备数大幅减少"的问题
+    total_elements = len(elems)  # 全部元素（含装饰）
+    defect_count = len(defects)
+    defect_rate = round(defect_count / max(total_elements, 1) * 100, 2)
+    real_device_count = len(real_elems)  # 真实设备数（不含装饰）
+    fake_device_count = total_elements - real_device_count  # 装饰/非真实设备数
+
+    # 缺陷率惩罚（与 score_engine 一致）
+    defect_rate_penalty = 0.0
+    if defect_rate > 5.0:
+        defect_rate_penalty = min((defect_rate - 5.0) * 2, 40.0)  # 最多扣40分
+    elif defect_rate > 1.0:
+        defect_rate_penalty = (defect_rate - 1.0) * 10
+
+    # 评分 = 100 - 缺陷扣分 - 缺陷率惩罚（不能因0缺陷直接给100，需检查设备数是否正常）
+    # 如果设备数异常少（相比预期基线），即使0缺陷也给出警告
+    score = round(max(100.0 - total_penalty - defect_rate_penalty, 0.0), 1)
+
+    # 设备数异常警告：如果装饰设备占比过高（>30%），说明大量设备被过滤，分数应打折
+    if total_elements > 0 and fake_device_count / total_elements > 0.3:
+        score = round(score * 0.8, 1)  # 打8折
+        logger.warning(f"[质量评分] 装饰设备占比{fake_device_count/total_elements:.1%}，分数打8折")
+
     if score == 0 and defect_rate < 50:
         score = round(100 - defect_rate, 1)
 
     summary = {
         "stage": stage,
-        "total_devices": total_devices,
+        "total_elements": total_elements,  # 全部元素（含装饰）
+        "real_device_count": real_device_count,  # 真实设备数
+        "fake_device_count": fake_device_count,  # 装饰设备数（被过滤的）
         "total_connections": len(doc.connections),
-        "total_defects": len(defects),
+        "total_defects": defect_count,
         "defect_rate_percent": defect_rate,
+        "defect_rate_penalty": round(defect_rate_penalty, 2),
         "quality_score": score,
         "defects_by_type": dict(type_counts),
         "defects_by_severity": dict(severity_counts),
@@ -293,8 +327,17 @@ def compare_quality(before: dict, after: dict) -> dict:
         "defects_before": before.get("total_defects", 0),
         "defects_after": after.get("total_defects", 0),
         "defects_reduced": before.get("total_defects", 0) - after.get("total_defects", 0),
-        "devices_before": before.get("total_devices", 0),
-        "devices_after": after.get("total_devices", 0),
+        # 统计口径统一：使用 total_elements（含装饰）做对比
+        "elements_before": before.get("total_elements", 0),
+        "elements_after": after.get("total_elements", 0),
+        "elements_lost": before.get("total_elements", 0) - after.get("total_elements", 0),
+        "real_devices_before": before.get("real_device_count", 0),
+        "real_devices_after": after.get("real_device_count", 0),
+        "real_devices_lost": before.get("real_device_count", 0) - after.get("real_device_count", 0),
+        "defect_rate_before": before.get("defect_rate_percent", 0),
+        "defect_rate_after": after.get("defect_rate_percent", 0),
+        "defect_rate_penalty_before": before.get("defect_rate_penalty", 0),
+        "defect_rate_penalty_after": after.get("defect_rate_penalty", 0),
         "components_before": before.get("connected_components", 0),
         "components_after": after.get("connected_components", 0),
         "type_changes": {
@@ -323,4 +366,11 @@ def export_quality_report(before_summary: dict, after_summary: dict,
     print(f"  [质量报告] 已导出: {out_path}")
     print(f"    评分: {comparison['score_before']} -> {comparison['score_after']} ({comparison['score_change']:+.1f})")
     print(f"    缺陷: {comparison['defects_before']} -> {comparison['defects_after']} (减少{comparison['defects_reduced']})")
+    print(f"    缺陷率: {comparison['defect_rate_before']}% -> {comparison['defect_rate_after']}%")
+    print(f"    缺陷率惩罚: {comparison['defect_rate_penalty_before']} -> {comparison['defect_rate_penalty_after']}")
+    # 【修复】统计口径对比：输出设备丢失情况
+    if comparison['elements_lost'] != 0 or comparison['real_devices_lost'] != 0:
+        print(f"  [警告] 美化后设备丢失: 全部元素减少{comparison['elements_lost']}个, 真实设备减少{comparison['real_devices_lost']}个")
+        print(f"    元素: {comparison['elements_before']} -> {comparison['elements_after']}")
+        print(f"    真实设备: {comparison['real_devices_before']} -> {comparison['real_devices_after']}")
     print(f"    连通分量: {comparison['components_before']} -> {comparison['components_after']}")
