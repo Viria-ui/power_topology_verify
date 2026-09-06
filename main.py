@@ -47,9 +47,17 @@ from data_io.data_reader import SqlTableLoader
 from data_io.data_writer import gen_sample_data
 from data_io.svg_reader import SvgParser
 
+# 【auto_index修复】导入原本的自动出图+auto_index生成脚本（代码不改，仅调用）
+try:
+    from scripts.run_auto_generation import main as run_auto_generation_main
+    AUTO_GENERATION_OK = True
+except ImportError as e:
+    AUTO_GENERATION_OK = False
+    print(f"[警告] 自动出图模块导入失败: {e}")
+
 # SVG 编辑与出图模块（可选导入，失败不中断）
 try:
-    from svg_io.svg_beautifier import SvgBeautifier
+    from svg_io.svg_beautifier import SvgBeautifier, beautify_svg_file
     from svg_io.svg_editor import SvgInteractiveEditorV2
     from svg_io.svg_auto_generator import SvgAutoGenerator
     from svg_io.quality_checker import check_svg_quality
@@ -212,6 +220,9 @@ def run_topo_validation(table_datas: dict) -> tuple:
     print(f"  断点: {len(breakpoint_list)} 条")
     print(f"  联络合环: {len(tie_loop_list)} 条")
 
+    # 【S2修复】将拓扑异常/断点挂载到dist_topo，供图模比对使用
+    dist_topo.topo_abnormal_list = abnormal_list
+    dist_topo.topo_breakpoint_list = breakpoint_list
     return builder, main_topo, dist_topo, elec_results
 
 
@@ -274,6 +285,7 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         defects_report.append({
             "equip_id": dev_id,
             "defect_type": "图上有模型无",
+            "rule_code": "R002",
             "description": f"SVG图纸存在设备[{dev_name}](ID:{dev_id})，但数据库拓扑模型中缺失",
             "suggestion": f"建议在数据库设备表中补全设备 {dev_id} 信息",
             "sql_draft": f"INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME) VALUES ('{dev_id}', '{dev_name}');",
@@ -289,6 +301,7 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         defects_report.append({
             "equip_id": dev_id,
             "defect_type": "模型有图上无",
+            "rule_code": "R003",
             "description": f"数据库拓扑模型存在设备[{dev_name}](ID:{dev_id})，但SVG图纸未绘制该图元",
             "suggestion": f"建议重新补全SVG图纸绘图，增加设备 {dev_id} 图元",
             "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
@@ -330,12 +343,26 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
                     defects_report.append({
                         "equip_id": f"{from_obj_id} <-> {to_obj_id}",
                         "defect_type": "物理连接不一致",
+                        "rule_code": "R004",
                         "description": f"SVG图纸存在设备 {from_obj_id} 与 {to_obj_id} 的物理连接，但数据库拓扑网中缺失该连线",
                         "suggestion": "建议在数据库线路表中增补对应物理连接记录",
                         "sql_draft": f"INSERT INTO EQUIP_JBS_PWFEEDERLINE (START_EQUIP, END_EQUIP) VALUES ('{from_obj_id}', '{to_obj_id}');",
                         "equip_name": "物理连接",
                         "station_id": start_st_id,
                     })
+
+    # 【S1修复】电压等级字典码→名称映射（PMS系统1010=10kV等）
+    VOLTAGE_CODE_TO_NAME = {
+        "1010": "10kV", "1020": "20kV", "1035": "35kV",
+        "1066": "66kV", "1110": "110kV", "1220": "220kV",
+        "10": "10kV", "20": "20kV", "35": "35kV",
+        "66": "66kV", "110": "110kV", "220": "220kV",
+    }
+    def _norm_voltage(v):
+        if v is None:
+            return ""
+        s = str(v).strip()
+        return VOLTAGE_CODE_TO_NAME.get(s, s)
 
     # 校验4：逻辑属性不一致
     for dev_id in svg_dev_ids & db_dev_ids:
@@ -345,10 +372,11 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         db_voltage = getattr(db_dev, "voltage_type", None)
         dev_name = svg_elem.get("object_name") or getattr(db_dev, "equip_name", "") or "未知设备"
         station = getattr(db_dev, "dsubstation_id", "") or start_st_id
-        if svg_voltage and db_voltage and (str(svg_voltage) not in str(db_voltage)):
+        if svg_voltage and db_voltage and (_norm_voltage(svg_voltage) != _norm_voltage(db_voltage)):
             defects_report.append({
                 "equip_id": dev_id,
                 "defect_type": "逻辑连接不一致",
+                "rule_code": "R005",
                 "description": f"设备 {dev_id} 属性不一致：SVG电压=[{svg_voltage}]，数据库=[{db_voltage}]",
                 "suggestion": f"校对设备逻辑属性，统一将数据库更新为SVG图纸属性 [{svg_voltage}]",
                 "sql_draft": f"UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='{svg_voltage}' WHERE EQUIP_ID='{dev_id}';",
@@ -377,6 +405,48 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
                 "equip_name": dev_name,
                 "station_id": start_st_id,
             })
+
+    # ----------【S2修复】拓扑异常(悬空/孤岛)和断点进入缺陷清单 ----------
+    _topo_abnormal = getattr(dist_topo, 'topo_abnormal_list', [])
+    _topo_breakpoint = getattr(dist_topo, 'topo_breakpoint_list', [])
+    _topo_added = 0
+
+    for ab in _topo_abnormal:
+        _equip = getattr(ab, 'equip_id', '')
+        if not _equip or _equip not in line_db_devices:
+            continue  # 只加入当前馈线的异常
+        _dev_name = getattr(line_db_devices[_equip], 'equip_name', "") or ""
+        defects_report.append({
+            "equip_id": _equip,
+            "defect_type": getattr(ab, 'rule_desc', '拓扑异常'),
+            "rule_code": getattr(ab, 'rule_code', ''),
+            "description": getattr(ab, 'detail', '') or getattr(ab, 'rule_desc', ''),
+            "suggestion": f"建议核查设备 {_equip} 的拓扑连接关系",
+            "sql_draft": f"-- 拓扑异常 {getattr(ab, 'rule_code', '')}，建议核查 {_equip}",
+            "equip_name": _dev_name,
+            "station_id": start_st_id,
+        })
+        _topo_added += 1
+
+    for bp in _topo_breakpoint:
+        _equip = getattr(bp, 'equip_id', '')
+        if not _equip or _equip not in line_db_devices:
+            continue
+        _dev_name = getattr(line_db_devices[_equip], 'equip_name', "") or ""
+        defects_report.append({
+            "equip_id": _equip,
+            "defect_type": "拓扑断点",
+            "rule_code": getattr(bp, 'rule_code', 'R_BREAKPOINT'),
+            "description": getattr(bp, 'detail', '') or f"设备 {_equip} 所在连通分量大小={getattr(bp, 'component_size', 0)}",
+            "suggestion": f"建议核查设备 {_equip} 与主网的连接断点",
+            "sql_draft": f"-- 拓扑断点，建议核查 {_equip} 的连接关系",
+            "equip_name": _dev_name,
+            "station_id": start_st_id,
+        })
+        _topo_added += 1
+
+    if _topo_added > 0:
+        print(f"  • 【拓扑异常/断点补录】: {_topo_added} 条")
     # -----------------------------------------------------------------
 
     # 输出统计
@@ -670,6 +740,12 @@ def main():
 
     # 功能3: 图模比对
     if run_all or args.compare is not None:
+        # 【M8修复】--compare模式下若未跑拓扑校验，dist_topo未定义，自动先跑
+        try:
+            dist_topo
+        except NameError:
+            print("\n⚠️ --compare模式需先运行拓扑校验，自动执行功能1...")
+            builder, main_topo, dist_topo, elec_results = run_topo_validation(table_datas)
         if args.compare:
             line_names = args.compare
         else:
@@ -703,6 +779,36 @@ def main():
     if (run_all or args.svg) and not args.no_svg:
         svg_results = run_svg_edit_and_generate()
         results["svg"] = svg_results
+
+    # 【S7修复】功能5: SVG美化（--all模式自动执行，--no-beautify可跳过）
+    if run_all and not args.no_svg and SVG_MODULES_OK:
+        print("\n🎨 执行SVG美化...")
+        import os as _os
+        beautify_dir = _os.path.join(PROJECT_ROOT, "output", "svg")
+        _os.makedirs(beautify_dir, exist_ok=True)
+        for _fname in ["LINE215.svg", "LINE216.svg"]:
+            _fpath = _os.path.join(TEST_SVG_ROOT, _fname)
+            if _os.path.exists(_fpath):
+                try:
+                    _out = _os.path.join(beautify_dir, f"{_os.path.splitext(_fname)[0]}_beautified.svg")
+                    beautify_svg_file(_fpath, _out)
+                    print(f"  ✅ 美化完成: {_fname}")
+                except Exception as _e:
+                    print(f"  ⚠️ 美化失败 {_fname}: {_e}")
+            else:
+                print(f"  ⚠️ 文件不存在: {_fpath}")
+        results["beautify"] = "completed"
+
+    # 【auto_index修复】调用原本的自动出图+auto_index生成脚本（代码不改，仅调用）
+    if run_all and not args.no_svg and AUTO_GENERATION_OK:
+        print("\n📑 生成自动出图图集 + auto_index.html...")
+        try:
+            auto_results = run_auto_generation_main()
+            results["auto_index"] = "completed"
+            print("  ✅ auto_index.html 生成完成")
+        except Exception as _e:
+            print(f"  ⚠️ auto_index生成失败: {_e}")
+            results["auto_index"] = "failed"
 
     # 生成标准样例
     if run_all:

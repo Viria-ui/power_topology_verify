@@ -1239,42 +1239,8 @@ def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bo
 
     if quality_report and before_summary is not None:
         try:
-            # 先收集所有连接，为设备补充拓扑GLink互引（美化后连接都是真实拓扑连接）
-            conns = []
-            seen = set()
-            topo_glinks = defaultdict(set)
-            for u, neighbors in beautifier.adj.items():
-                for v in neighbors:
-                    key = tuple(sorted([u, v]))
-                    if key in seen or u == v:
-                        continue
-                    seen.add(key)
-                    topo_glinks[u].add(v)
-                    topo_glinks[v].add(u)
-                    pu = beautifier.pos.get(u, (0, 0))
-                    pv = beautifier.pos.get(v, (0, 0))
-                    conns.append(SimpleNamespace(
-                        from_element_id=u, to_element_id=v,
-                        line_id=f"edge_{u}_{v}",
-                        points=[(pu[0], pu[1]), (pv[0], pv[1])],
-                    ))
-            elems = []
-            for did, dev in beautifier.devices.items():
-                # 【修复】不过滤：质量评分应使用全部设备（含装饰），使缺陷率能反映设备丢失问题
-                pos = beautifier.pos.get(did, beautifier.orig_pos.get(did, (0, 0)))
-                sym = beautifier.sym_box.get(did, {})
-                glinks = set(dev.get('glinks', []))
-                glinks.update(topo_glinks.get(did, set()))
-                elems.append(SimpleNamespace(
-                    element_id=did,
-                    object_name=dev.get('name', ''),
-                    element_type=dev.get('type', ''),
-                    layer=dev.get('layer', ''),
-                    x=pos[0], y=pos[1],
-                    width=sym.get('w', 20), height=sym.get('h', 20),
-                    glink_refs=list(glinks),
-                ))
-            doc_after = SimpleNamespace(elements=elems, connections=conns, texts={})
+            # 【质检bug修复】解析实际生成的美化后SVG文件，而非使用美化器内部设备数据
+            doc_after = SvgParser.parse(output_path)
             after_defects, after_summary = evaluate_svg_quality(doc_after, stage="美化后")
             line_name = os.path.splitext(os.path.basename(svg_path))[0]
             report_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "output", "reports")

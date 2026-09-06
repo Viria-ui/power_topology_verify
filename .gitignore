@@ -7,3 +7,14 @@ env/
 __pycache__/
 *.pyc
 *.pyo
+
+# 备份文件
+*.bak_*
+*.bak
+
+# 临时脚本
+_fix_*.py
+
+# 输出文件（运行时生成，不提交）
+output/
+!output/.gitkeep

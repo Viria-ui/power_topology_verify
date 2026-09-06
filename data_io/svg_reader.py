@@ -424,12 +424,25 @@ class SvgDocument:
         combined_matrix = parent_matrix.multiply(_parse_transform_to_matrix(g_transform))
         local_metadata = g_elem.find(f"{{{SVG_NS}}}metadata")
         current_metadata = local_metadata if local_metadata is not None else parent_metadata
-        
+
+        # 【M3修复】如果<g>有metadata（设备容器），只解析一个形状元素（优先use），避免rect+use重复ID
+        shape_children = [c for c in g_elem if _local_tag(c.tag) in ("use", "rect", "polygon", "polyline", "path", "circle", "line")]
+        if local_metadata is not None and len(shape_children) > 1:
+            # 优先选择use元素，否则选第一个
+            use_children = [c for c in shape_children if _local_tag(c.tag) == "use"]
+            if use_children:
+                shape_children = use_children[:1]  # 只保留第一个use
+            else:
+                shape_children = shape_children[:1]  # 只保留第一个形状元素
+
         for child in g_elem:
             tag = _local_tag(child.tag)
             if tag == "g":
                 self._parse_device_element(child, layer_name, combined_matrix, current_metadata)
             elif tag in ("use", "rect", "polygon", "polyline", "path", "circle", "line"):
+                # M3修复：跳过不在shape_children中的元素（即跳过背景rect）
+                if local_metadata is not None and len(shape_children) == 1 and child is not shape_children[0]:
+                    continue
                 elem = SvgElement()
                 elem.layer_name = layer_name
                 elem.element_type = DEVICE_TYPE_MAP.get(layer_name, layer_name)
@@ -579,6 +592,18 @@ class SvgDocument:
             elif tag == "GLink_Ref":
                 gid = child.get("ObjectID", "")
                 if gid: conn.glink_refs.append(gid)
+            elif tag == "Terminal":
+                tid = child.get("ObjectID", "")
+                side = child.get("side", "")
+                if tid and side == "from":
+                    conn.start_device_id = tid
+                elif tid and side == "to":
+                    conn.end_device_id = tid
+                elif tid:
+                    if not conn.start_device_id:
+                        conn.start_device_id = tid
+                    elif not conn.end_device_id:
+                        conn.end_device_id = tid
 
     def _parse_text_metadata(self, metadata_elem: ET.Element, txt: SvgText):
         for child in metadata_elem:

@@ -51,6 +51,17 @@ DEFECT_CATEGORY_MAP = {
     "物理连接不一致": ("2 图模一致性校验", "2.3 图形物理连通、拓扑逻辑断开校验任务"),
     "逻辑连接不一致": ("3 电气逻辑校验", "3.1 开关 - 电压基础状态匹配校验任务"),
 }
+# 【分类修复】关键词匹配分类（用于defect_type为长文本或RULE-E0x的情况）
+DEFECT_CATEGORY_KEYWORDS = [
+    # 电气逻辑校验（RULE-E01~E07）
+    (lambda dt: dt.startswith("RULE-E"), ("3 电气逻辑校验", "3.1 开关 - 电压基础状态匹配校验任务")),
+    # 拓扑结构完整性检测 - 悬空
+    (lambda dt: "悬空" in dt, ("1 拓扑结构完整性检测", "1.1 设备拓扑悬空检测任务")),
+    # 拓扑结构完整性检测 - 断点
+    (lambda dt: "断点" in dt, ("1 拓扑结构完整性检测", "1.2 拓扑连通性异常诊断与断点定位任务")),
+    # 主配网接口拓扑完整性校验
+    (lambda dt: "接口" in dt or "漏拼" in dt or "错拼" in dt, ("4 主配网接口拓扑完整性校验", "4.1 主配接口漏拼接校验任务")),
+]
 DEFAULT_CATEGORY = ("2 图模一致性校验", "2.1 图上有、模型无校验任务")
 _NAME_IN_DESC_RE = re.compile(r"设备\[([^\]]+)\]")
 
@@ -99,7 +110,16 @@ def defect_to_standard_row(
     line_name: str,
     default_station: str = "",
 ) -> dict[str, object]:
-    cat1, cat2 = DEFECT_CATEGORY_MAP.get(defect.get("defect_type", ""), DEFAULT_CATEGORY)
+    # 【分类修复】先精确匹配，再关键词匹配
+    _dt = defect.get("defect_type", "")
+    if _dt in DEFECT_CATEGORY_MAP:
+        cat1, cat2 = DEFECT_CATEGORY_MAP[_dt]
+    else:
+        cat1, cat2 = DEFAULT_CATEGORY
+        for _matcher, _cat in DEFECT_CATEGORY_KEYWORDS:
+            if _matcher(_dt):
+                cat1, cat2 = _cat
+                break
     return {
         "序号": seq,
         "一级分类": cat1,
