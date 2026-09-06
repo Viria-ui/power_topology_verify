@@ -1229,3 +1229,236 @@
 2026-09-06 15:12:16 [DEBUG] core.feeder_topology_analysis: P1-P7 引擎产生 54 条断点候选
 2026-09-06 15:12:16 [INFO] core.feeder_topology_analysis: Sheet2 断点定位: feeder=TMP00000189 共 256 条 (P1-P7 优先级排序)
 2026-09-06 15:12:16 [INFO] core.feeder_topology_analysis: Sheet4 合环识别: feeder=TMP00000189 共 9 条
+2026-09-06 15:40:01 [INFO] core.topology_builder: 主配数据拆分完成：主网设备=1167 配网设备=50744 主网线段=223 配网线段=189 主网站=10 遥信遥测=5829 ZWMEA=442 ZWSIGNAL=1567
+2026-09-06 15:40:01 [INFO] core.topology_builder: 主网设备数量：1167
+2026-09-06 15:40:01 [INFO] core.topology_builder: 配网设备数量：50744
+2026-09-06 15:40:01 [INFO] core.topology_builder: 主网线路(ZLINEEND)数量：223
+2026-09-06 15:40:01 [INFO] core.topology_builder: 配网线路(PWFEEDERLINE)数量：189
+2026-09-06 15:40:01 [INFO] core.topology_builder: 主网站点(ZWSUBSTATION)数量：10
+2026-09-06 15:40:01 [INFO] core.topology_builder: 遥信遥测(PWREAL)记录数：5829
+2026-09-06 15:40:01 [INFO] core.topology_builder: 主网遥测(ZWMEA)：442 主网遥信(ZWSIGNAL)：1567
+2026-09-06 15:40:01 [INFO] core.topology_builder: [Builder] 正在添加 1167 个主网设备和 50744 个配网设备...
+2026-09-06 15:40:01 [INFO] core.topology_builder: 主网电源设备数=47
+2026-09-06 15:40:01 [INFO] core.topology_builder: 主网电源设备识别: 47 台
+2026-09-06 15:40:02 [DEBUG] core.topology_builder: 已处理 10000 个配网设备
+2026-09-06 15:40:03 [DEBUG] core.topology_builder: 已处理 20000 个配网设备
+2026-09-06 15:40:04 [DEBUG] core.topology_builder: 已处理 30000 个配网设备
+2026-09-06 15:40:05 [DEBUG] core.topology_builder: 已处理 40000 个配网设备
+2026-09-06 15:40:06 [DEBUG] core.topology_builder: 已处理 50000 个配网设备
+2026-09-06 15:40:06 [INFO] core.topology_builder: 配网电源设备数=17643
+2026-09-06 15:40:06 [INFO] core.topology_builder: 配网电源设备识别: 17643 台
+2026-09-06 15:40:10 [INFO] core.topology_builder: 主配电源注入：0 台配网设备经共享连接点接入主网电源
+2026-09-06 15:40:20 [INFO] core.topology_builder: [Builder] 配网真实端子数量:76354
+2026-09-06 15:40:20 [INFO] core.topology_builder: [Builder] 主网真实端子数量:1562
+2026-09-06 15:40:26 [INFO] core.topology_builder: [端子建边完成] 配网拓扑边数量：117276
+2026-09-06 15:40:26 [INFO] core.topology_builder: [端子建边完成] 主网拓扑边数量：2632
+2026-09-06 15:40:34 [INFO] core.measure_preprocess: [MeasurePreprocess] 遥信实测开关数量：6666
+2026-09-06 15:40:34 [INFO] core.measure_preprocess: [MeasurePreprocess] 默认合位开关数量：10942
+2026-09-06 15:40:34 [INFO] core.topology_builder: [遥信预处理统计] 总开关状态映射条目:17608 实际挂载到设备:16592
+2026-09-06 15:40:34 [INFO] core.topology_builder: 遥信实测开关:6666，赛题默认合位推演开关:10942
+2026-09-06 15:40:49 [INFO] core.topology_builder: 主配接口校验：通过=147 失败=42
+2026-09-06 15:40:49 [INFO] core.topology_builder: [主配接口校验] 4.1/4.2 命中缺陷: 42
+2026-09-06 15:40:49 [INFO] core.topology_builder: [电气逻辑校验] RULE-E01~E07 命中:4458
+2026-09-06 15:40:49 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
+2026-09-06 15:40:53 [INFO] core.topology_builder: 主网异常数量：338，断点数量：4
+2026-09-06 15:40:53 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
+2026-09-06 15:41:44 [INFO] core.topology_builder: 主配数据拆分完成：主网设备=1167 配网设备=50744 主网线段=223 配网线段=189 主网站=10 遥信遥测=5829 ZWMEA=442 ZWSIGNAL=1567
+2026-09-06 15:41:44 [INFO] core.topology_builder: 主网设备数量：1167
+2026-09-06 15:41:44 [INFO] core.topology_builder: 配网设备数量：50744
+2026-09-06 15:41:44 [INFO] core.topology_builder: 主网线路(ZLINEEND)数量：223
+2026-09-06 15:41:44 [INFO] core.topology_builder: 配网线路(PWFEEDERLINE)数量：189
+2026-09-06 15:41:44 [INFO] core.topology_builder: 主网站点(ZWSUBSTATION)数量：10
+2026-09-06 15:41:44 [INFO] core.topology_builder: 遥信遥测(PWREAL)记录数：5829
+2026-09-06 15:41:44 [INFO] core.topology_builder: 主网遥测(ZWMEA)：442 主网遥信(ZWSIGNAL)：1567
+2026-09-06 15:41:44 [INFO] core.topology_builder: [Builder] 正在添加 1167 个主网设备和 50744 个配网设备...
+2026-09-06 15:41:44 [INFO] core.topology_builder: 主网电源设备数=47
+2026-09-06 15:41:44 [INFO] core.topology_builder: 主网电源设备识别: 47 台
+2026-09-06 15:41:45 [DEBUG] core.topology_builder: 已处理 10000 个配网设备
+2026-09-06 15:41:46 [DEBUG] core.topology_builder: 已处理 20000 个配网设备
+2026-09-06 15:41:48 [DEBUG] core.topology_builder: 已处理 30000 个配网设备
+2026-09-06 15:41:49 [DEBUG] core.topology_builder: 已处理 40000 个配网设备
+2026-09-06 15:41:50 [DEBUG] core.topology_builder: 已处理 50000 个配网设备
+2026-09-06 15:41:50 [INFO] core.topology_builder: 配网电源设备数=17643
+2026-09-06 15:41:50 [INFO] core.topology_builder: 配网电源设备识别: 17643 台
+2026-09-06 15:41:53 [INFO] core.topology_builder: 主配电源注入：0 台配网设备经共享连接点接入主网电源
+2026-09-06 15:42:02 [INFO] core.topology_builder: [Builder] 配网真实端子数量:76354
+2026-09-06 15:42:02 [INFO] core.topology_builder: [Builder] 主网真实端子数量:1562
+2026-09-06 15:42:08 [INFO] core.topology_builder: [端子建边完成] 配网拓扑边数量：117276
+2026-09-06 15:42:08 [INFO] core.topology_builder: [端子建边完成] 主网拓扑边数量：2632
+2026-09-06 15:42:15 [INFO] core.measure_preprocess: [MeasurePreprocess] 遥信实测开关数量：6666
+2026-09-06 15:42:15 [INFO] core.measure_preprocess: [MeasurePreprocess] 默认合位开关数量：10942
+2026-09-06 15:42:15 [INFO] core.topology_builder: [遥信预处理统计] 总开关状态映射条目:17608 实际挂载到设备:16592
+2026-09-06 15:42:15 [INFO] core.topology_builder: 遥信实测开关:6666，赛题默认合位推演开关:10942
+2026-09-06 15:42:28 [INFO] core.topology_builder: 主配接口校验：通过=147 失败=42
+2026-09-06 15:42:28 [INFO] core.topology_builder: [主配接口校验] 4.1/4.2 命中缺陷: 42
+2026-09-06 15:42:28 [INFO] core.topology_builder: [电气逻辑校验] RULE-E01~E07 命中:4458
+2026-09-06 15:42:28 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
+2026-09-06 15:42:32 [INFO] core.topology_builder: 主网异常数量：338，断点数量：4
+2026-09-06 15:42:32 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
+2026-09-06 15:44:14 [INFO] core.topology_builder: 主配数据拆分完成：主网设备=1167 配网设备=50744 主网线段=223 配网线段=189 主网站=10 遥信遥测=5829 ZWMEA=442 ZWSIGNAL=1567
+2026-09-06 15:44:14 [INFO] core.topology_builder: 主网设备数量：1167
+2026-09-06 15:44:14 [INFO] core.topology_builder: 配网设备数量：50744
+2026-09-06 15:44:14 [INFO] core.topology_builder: 主网线路(ZLINEEND)数量：223
+2026-09-06 15:44:14 [INFO] core.topology_builder: 配网线路(PWFEEDERLINE)数量：189
+2026-09-06 15:44:14 [INFO] core.topology_builder: 主网站点(ZWSUBSTATION)数量：10
+2026-09-06 15:44:14 [INFO] core.topology_builder: 遥信遥测(PWREAL)记录数：5829
+2026-09-06 15:44:14 [INFO] core.topology_builder: 主网遥测(ZWMEA)：442 主网遥信(ZWSIGNAL)：1567
+2026-09-06 15:44:14 [INFO] core.topology_builder: [Builder] 正在添加 1167 个主网设备和 50744 个配网设备...
+2026-09-06 15:44:14 [INFO] core.topology_builder: 主网电源设备数=47
+2026-09-06 15:44:14 [INFO] core.topology_builder: 主网电源设备识别: 47 台
+2026-09-06 15:44:15 [DEBUG] core.topology_builder: 已处理 10000 个配网设备
+2026-09-06 15:44:15 [DEBUG] core.topology_builder: 已处理 20000 个配网设备
+2026-09-06 15:44:16 [DEBUG] core.topology_builder: 已处理 30000 个配网设备
+2026-09-06 15:44:17 [DEBUG] core.topology_builder: 已处理 40000 个配网设备
+2026-09-06 15:44:18 [DEBUG] core.topology_builder: 已处理 50000 个配网设备
+2026-09-06 15:44:18 [INFO] core.topology_builder: 配网电源设备数=17643
+2026-09-06 15:44:18 [INFO] core.topology_builder: 配网电源设备识别: 17643 台
+2026-09-06 15:44:22 [INFO] core.topology_builder: 主配电源注入：0 台配网设备经共享连接点接入主网电源
+2026-09-06 15:44:30 [INFO] core.topology_builder: [Builder] 配网真实端子数量:76354
+2026-09-06 15:44:30 [INFO] core.topology_builder: [Builder] 主网真实端子数量:1562
+2026-09-06 15:44:36 [INFO] core.topology_builder: [端子建边完成] 配网拓扑边数量：117276
+2026-09-06 15:44:36 [INFO] core.topology_builder: [端子建边完成] 主网拓扑边数量：2632
+2026-09-06 15:44:42 [INFO] core.measure_preprocess: [MeasurePreprocess] 遥信实测开关数量：6666
+2026-09-06 15:44:43 [INFO] core.measure_preprocess: [MeasurePreprocess] 默认合位开关数量：10942
+2026-09-06 15:44:43 [INFO] core.topology_builder: [遥信预处理统计] 总开关状态映射条目:17608 实际挂载到设备:16592
+2026-09-06 15:44:43 [INFO] core.topology_builder: 遥信实测开关:6666，赛题默认合位推演开关:10942
+2026-09-06 15:44:56 [INFO] core.topology_builder: 主配接口校验：通过=147 失败=42
+2026-09-06 15:44:56 [INFO] core.topology_builder: [主配接口校验] 4.1/4.2 命中缺陷: 42
+2026-09-06 15:44:56 [INFO] core.topology_builder: [电气逻辑校验] RULE-E01~E07 命中:4458
+2026-09-06 15:44:56 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
+2026-09-06 15:45:00 [INFO] core.topology_builder: 主网异常数量：338，断点数量：4
+2026-09-06 15:45:00 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
+2026-09-06 15:46:56 [INFO] core.topology_builder: 主配数据拆分完成：主网设备=1167 配网设备=50744 主网线段=223 配网线段=189 主网站=10 遥信遥测=5829 ZWMEA=442 ZWSIGNAL=1567
+2026-09-06 15:46:56 [INFO] core.topology_builder: 主网设备数量：1167
+2026-09-06 15:46:56 [INFO] core.topology_builder: 配网设备数量：50744
+2026-09-06 15:46:56 [INFO] core.topology_builder: 主网线路(ZLINEEND)数量：223
+2026-09-06 15:46:56 [INFO] core.topology_builder: 配网线路(PWFEEDERLINE)数量：189
+2026-09-06 15:46:56 [INFO] core.topology_builder: 主网站点(ZWSUBSTATION)数量：10
+2026-09-06 15:46:56 [INFO] core.topology_builder: 遥信遥测(PWREAL)记录数：5829
+2026-09-06 15:46:56 [INFO] core.topology_builder: 主网遥测(ZWMEA)：442 主网遥信(ZWSIGNAL)：1567
+2026-09-06 15:46:56 [INFO] core.topology_builder: [Builder] 正在添加 1167 个主网设备和 50744 个配网设备...
+2026-09-06 15:46:56 [INFO] core.topology_builder: 主网电源设备数=47
+2026-09-06 15:46:56 [INFO] core.topology_builder: 主网电源设备识别: 47 台
+2026-09-06 15:46:59 [DEBUG] core.topology_builder: 已处理 10000 个配网设备
+2026-09-06 15:47:02 [DEBUG] core.topology_builder: 已处理 20000 个配网设备
+2026-09-06 15:47:05 [DEBUG] core.topology_builder: 已处理 30000 个配网设备
+2026-09-06 15:47:08 [DEBUG] core.topology_builder: 已处理 40000 个配网设备
+2026-09-06 15:47:11 [DEBUG] core.topology_builder: 已处理 50000 个配网设备
+2026-09-06 15:47:11 [INFO] core.topology_builder: 配网电源设备数=17643
+2026-09-06 15:47:11 [INFO] core.topology_builder: 配网电源设备识别: 17643 台
+2026-09-06 15:47:22 [INFO] core.topology_builder: 主配电源注入：0 台配网设备经共享连接点接入主网电源
+2026-09-06 15:47:47 [INFO] core.topology_builder: [Builder] 配网真实端子数量:76354
+2026-09-06 15:47:47 [INFO] core.topology_builder: [Builder] 主网真实端子数量:1562
+2026-09-06 15:48:01 [INFO] core.topology_builder: [端子建边完成] 配网拓扑边数量：117276
+2026-09-06 15:48:01 [INFO] core.topology_builder: [端子建边完成] 主网拓扑边数量：2632
+2026-09-06 15:48:16 [INFO] core.measure_preprocess: [MeasurePreprocess] 遥信实测开关数量：6666
+2026-09-06 15:48:16 [INFO] core.measure_preprocess: [MeasurePreprocess] 默认合位开关数量：10942
+2026-09-06 15:48:16 [INFO] core.topology_builder: [遥信预处理统计] 总开关状态映射条目:17608 实际挂载到设备:16592
+2026-09-06 15:48:16 [INFO] core.topology_builder: 遥信实测开关:6666，赛题默认合位推演开关:10942
+2026-09-06 15:48:51 [INFO] core.topology_builder: 主配接口校验：通过=147 失败=42
+2026-09-06 15:48:51 [INFO] core.topology_builder: [主配接口校验] 4.1/4.2 命中缺陷: 42
+2026-09-06 15:48:51 [INFO] core.topology_builder: [电气逻辑校验] RULE-E01~E07 命中:4458
+2026-09-06 15:48:51 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
+2026-09-06 15:48:59 [INFO] core.topology_builder: 主网异常数量：338，断点数量：4
+2026-09-06 15:48:59 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
+2026-09-06 15:49:59 [INFO] core.topology_builder: 主配数据拆分完成：主网设备=1167 配网设备=50744 主网线段=223 配网线段=189 主网站=10 遥信遥测=5829 ZWMEA=442 ZWSIGNAL=1567
+2026-09-06 15:49:59 [INFO] core.topology_builder: 主网设备数量：1167
+2026-09-06 15:49:59 [INFO] core.topology_builder: 配网设备数量：50744
+2026-09-06 15:49:59 [INFO] core.topology_builder: 主网线路(ZLINEEND)数量：223
+2026-09-06 15:49:59 [INFO] core.topology_builder: 配网线路(PWFEEDERLINE)数量：189
+2026-09-06 15:49:59 [INFO] core.topology_builder: 主网站点(ZWSUBSTATION)数量：10
+2026-09-06 15:49:59 [INFO] core.topology_builder: 遥信遥测(PWREAL)记录数：5829
+2026-09-06 15:49:59 [INFO] core.topology_builder: 主网遥测(ZWMEA)：442 主网遥信(ZWSIGNAL)：1567
+2026-09-06 15:49:59 [INFO] core.topology_builder: [Builder] 正在添加 1167 个主网设备和 50744 个配网设备...
+2026-09-06 15:49:59 [INFO] core.topology_builder: 主网电源设备数=47
+2026-09-06 15:49:59 [INFO] core.topology_builder: 主网电源设备识别: 47 台
+2026-09-06 15:50:01 [DEBUG] core.topology_builder: 已处理 10000 个配网设备
+2026-09-06 15:50:03 [DEBUG] core.topology_builder: 已处理 20000 个配网设备
+2026-09-06 15:50:06 [DEBUG] core.topology_builder: 已处理 30000 个配网设备
+2026-09-06 15:50:07 [DEBUG] core.topology_builder: 已处理 40000 个配网设备
+2026-09-06 15:50:10 [DEBUG] core.topology_builder: 已处理 50000 个配网设备
+2026-09-06 15:50:10 [INFO] core.topology_builder: 配网电源设备数=17643
+2026-09-06 15:50:10 [INFO] core.topology_builder: 配网电源设备识别: 17643 台
+2026-09-06 15:50:18 [INFO] core.topology_builder: 主配电源注入：0 台配网设备经共享连接点接入主网电源
+2026-09-06 15:50:36 [INFO] core.topology_builder: [Builder] 配网真实端子数量:76354
+2026-09-06 15:50:36 [INFO] core.topology_builder: [Builder] 主网真实端子数量:1562
+2026-09-06 15:50:49 [INFO] core.topology_builder: [端子建边完成] 配网拓扑边数量：117276
+2026-09-06 15:50:49 [INFO] core.topology_builder: [端子建边完成] 主网拓扑边数量：2632
+2026-09-06 15:51:04 [INFO] core.measure_preprocess: [MeasurePreprocess] 遥信实测开关数量：6666
+2026-09-06 15:51:04 [INFO] core.measure_preprocess: [MeasurePreprocess] 默认合位开关数量：10942
+2026-09-06 15:51:05 [INFO] core.topology_builder: [遥信预处理统计] 总开关状态映射条目:17608 实际挂载到设备:16592
+2026-09-06 15:51:05 [INFO] core.topology_builder: 遥信实测开关:6666，赛题默认合位推演开关:10942
+2026-09-06 15:51:35 [INFO] core.topology_builder: 主配接口校验：通过=147 失败=42
+2026-09-06 15:51:35 [INFO] core.topology_builder: [主配接口校验] 4.1/4.2 命中缺陷: 42
+2026-09-06 15:51:35 [INFO] core.topology_builder: [电气逻辑校验] RULE-E01~E07 命中:4458
+2026-09-06 15:51:35 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
+2026-09-06 15:51:42 [INFO] core.topology_builder: 主网异常数量：338，断点数量：4
+2026-09-06 15:51:42 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
+2026-09-06 15:52:01 [INFO] core.score_engine: 评分结果: 设备=50744 缺陷=0 扣分=0.00 缺陷率=0.00% 缺陷率扣分=0.00 score_before=100.0 score_after=100.0
+2026-09-06 15:52:35 [INFO] core.topology_builder: 主配数据拆分完成：主网设备=1167 配网设备=50744 主网线段=223 配网线段=189 主网站=10 遥信遥测=5829 ZWMEA=442 ZWSIGNAL=1567
+2026-09-06 15:52:35 [INFO] core.topology_builder: 主网设备数量：1167
+2026-09-06 15:52:35 [INFO] core.topology_builder: 配网设备数量：50744
+2026-09-06 15:52:35 [INFO] core.topology_builder: 主网线路(ZLINEEND)数量：223
+2026-09-06 15:52:35 [INFO] core.topology_builder: 配网线路(PWFEEDERLINE)数量：189
+2026-09-06 15:52:35 [INFO] core.topology_builder: 主网站点(ZWSUBSTATION)数量：10
+2026-09-06 15:52:35 [INFO] core.topology_builder: 遥信遥测(PWREAL)记录数：5829
+2026-09-06 15:52:35 [INFO] core.topology_builder: 主网遥测(ZWMEA)：442 主网遥信(ZWSIGNAL)：1567
+2026-09-06 15:52:35 [INFO] core.topology_builder: [Builder] 正在添加 1167 个主网设备和 50744 个配网设备...
+2026-09-06 15:52:36 [INFO] core.topology_builder: 主网电源设备数=47
+2026-09-06 15:52:36 [INFO] core.topology_builder: 主网电源设备识别: 47 台
+2026-09-06 15:52:38 [DEBUG] core.topology_builder: 已处理 10000 个配网设备
+2026-09-06 15:52:41 [DEBUG] core.topology_builder: 已处理 20000 个配网设备
+2026-09-06 15:52:44 [DEBUG] core.topology_builder: 已处理 30000 个配网设备
+2026-09-06 15:52:46 [DEBUG] core.topology_builder: 已处理 40000 个配网设备
+2026-09-06 15:52:48 [DEBUG] core.topology_builder: 已处理 50000 个配网设备
+2026-09-06 15:52:48 [INFO] core.topology_builder: 配网电源设备数=17643
+2026-09-06 15:52:48 [INFO] core.topology_builder: 配网电源设备识别: 17643 台
+2026-09-06 15:52:56 [INFO] core.topology_builder: 主配电源注入：0 台配网设备经共享连接点接入主网电源
+2026-09-06 15:53:14 [INFO] core.topology_builder: [Builder] 配网真实端子数量:76354
+2026-09-06 15:53:14 [INFO] core.topology_builder: [Builder] 主网真实端子数量:1562
+2026-09-06 15:53:27 [INFO] core.topology_builder: [端子建边完成] 配网拓扑边数量：117276
+2026-09-06 15:53:27 [INFO] core.topology_builder: [端子建边完成] 主网拓扑边数量：2632
+2026-09-06 15:53:41 [INFO] core.measure_preprocess: [MeasurePreprocess] 遥信实测开关数量：6666
+2026-09-06 15:53:41 [INFO] core.measure_preprocess: [MeasurePreprocess] 默认合位开关数量：10942
+2026-09-06 15:53:41 [INFO] core.topology_builder: [遥信预处理统计] 总开关状态映射条目:17608 实际挂载到设备:16592
+2026-09-06 15:53:41 [INFO] core.topology_builder: 遥信实测开关:6666，赛题默认合位推演开关:10942
+2026-09-06 15:54:14 [INFO] core.topology_builder: 主配接口校验：通过=147 失败=42
+2026-09-06 15:54:14 [INFO] core.topology_builder: [主配接口校验] 4.1/4.2 命中缺陷: 42
+2026-09-06 15:54:14 [INFO] core.topology_builder: [电气逻辑校验] RULE-E01~E07 命中:4458
+2026-09-06 15:54:14 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
+2026-09-06 15:54:23 [INFO] core.topology_builder: 主网异常数量：338，断点数量：4
+2026-09-06 15:54:23 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
+2026-09-06 15:54:48 [INFO] core.score_engine: 评分结果: 设备=50744 缺陷=0 扣分=0.00 缺陷率=0.00% 缺陷率扣分=0.00 score_before=100.0 score_after=100.0
+2026-09-06 15:54:52 [INFO] core.topology_builder: 主配数据拆分完成：主网设备=1167 配网设备=50744 主网线段=223 配网线段=189 主网站=10 遥信遥测=5829 ZWMEA=442 ZWSIGNAL=1567
+2026-09-06 15:54:52 [INFO] core.topology_builder: 主网设备数量：1167
+2026-09-06 15:54:52 [INFO] core.topology_builder: 配网设备数量：50744
+2026-09-06 15:54:52 [INFO] core.topology_builder: 主网线路(ZLINEEND)数量：223
+2026-09-06 15:54:52 [INFO] core.topology_builder: 配网线路(PWFEEDERLINE)数量：189
+2026-09-06 15:54:52 [INFO] core.topology_builder: 主网站点(ZWSUBSTATION)数量：10
+2026-09-06 15:54:52 [INFO] core.topology_builder: 遥信遥测(PWREAL)记录数：5829
+2026-09-06 15:54:52 [INFO] core.topology_builder: 主网遥测(ZWMEA)：442 主网遥信(ZWSIGNAL)：1567
+2026-09-06 15:54:52 [INFO] core.topology_builder: [Builder] 正在添加 1167 个主网设备和 50744 个配网设备...
+2026-09-06 15:54:52 [INFO] core.topology_builder: 主网电源设备数=47
+2026-09-06 15:54:52 [INFO] core.topology_builder: 主网电源设备识别: 47 台
+2026-09-06 15:54:55 [DEBUG] core.topology_builder: 已处理 10000 个配网设备
+2026-09-06 15:54:58 [DEBUG] core.topology_builder: 已处理 20000 个配网设备
+2026-09-06 15:55:01 [DEBUG] core.topology_builder: 已处理 30000 个配网设备
+2026-09-06 15:55:04 [DEBUG] core.topology_builder: 已处理 40000 个配网设备
+2026-09-06 15:55:05 [DEBUG] core.topology_builder: 已处理 50000 个配网设备
+2026-09-06 15:55:06 [INFO] core.topology_builder: 配网电源设备数=17643
+2026-09-06 15:55:06 [INFO] core.topology_builder: 配网电源设备识别: 17643 台
+2026-09-06 15:55:12 [INFO] core.topology_builder: 主配电源注入：0 台配网设备经共享连接点接入主网电源
+2026-09-06 15:55:29 [INFO] core.topology_builder: [Builder] 配网真实端子数量:76354
+2026-09-06 15:55:29 [INFO] core.topology_builder: [Builder] 主网真实端子数量:1562
+2026-09-06 15:55:41 [INFO] core.topology_builder: [端子建边完成] 配网拓扑边数量：117276
+2026-09-06 15:55:41 [INFO] core.topology_builder: [端子建边完成] 主网拓扑边数量：2632
+2026-09-06 15:55:58 [INFO] core.measure_preprocess: [MeasurePreprocess] 遥信实测开关数量：6666
+2026-09-06 15:55:58 [INFO] core.measure_preprocess: [MeasurePreprocess] 默认合位开关数量：10942
+2026-09-06 15:55:58 [INFO] core.topology_builder: [遥信预处理统计] 总开关状态映射条目:17608 实际挂载到设备:16592
+2026-09-06 15:55:58 [INFO] core.topology_builder: 遥信实测开关:6666，赛题默认合位推演开关:10942
+2026-09-06 15:56:26 [INFO] core.topology_builder: 主配接口校验：通过=147 失败=42
+2026-09-06 15:56:26 [INFO] core.topology_builder: [主配接口校验] 4.1/4.2 命中缺陷: 42
+2026-09-06 15:56:26 [INFO] core.topology_builder: [电气逻辑校验] RULE-E01~E07 命中:4458
+2026-09-06 15:56:26 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
+2026-09-06 15:56:33 [INFO] core.topology_builder: 主网异常数量：338，断点数量：4
+2026-09-06 15:56:33 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
