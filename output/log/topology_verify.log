@@ -1164,3 +1164,68 @@
 2026-09-06 15:04:17 [DEBUG] core.feeder_topology_analysis: P1-P7 引擎产生 15 条断点候选
 2026-09-06 15:04:17 [INFO] core.feeder_topology_analysis: Sheet2 断点定位: feeder=TMP00000188 共 378 条 (P1-P7 优先级排序)
 2026-09-06 15:04:17 [INFO] core.feeder_topology_analysis: Sheet4 合环识别: feeder=TMP00000188 共 2 条
+2026-09-06 15:11:01 [INFO] core.topology_builder: 主配数据拆分完成：主网设备=1167 配网设备=50744 主网线段=223 配网线段=189 主网站=10 遥信遥测=5829 ZWMEA=442 ZWSIGNAL=1567
+2026-09-06 15:11:01 [INFO] core.topology_builder: 主网设备数量：1167
+2026-09-06 15:11:01 [INFO] core.topology_builder: 配网设备数量：50744
+2026-09-06 15:11:01 [INFO] core.topology_builder: 主网线路(ZLINEEND)数量：223
+2026-09-06 15:11:01 [INFO] core.topology_builder: 配网线路(PWFEEDERLINE)数量：189
+2026-09-06 15:11:01 [INFO] core.topology_builder: 主网站点(ZWSUBSTATION)数量：10
+2026-09-06 15:11:01 [INFO] core.topology_builder: 遥信遥测(PWREAL)记录数：5829
+2026-09-06 15:11:01 [INFO] core.topology_builder: 主网遥测(ZWMEA)：442 主网遥信(ZWSIGNAL)：1567
+2026-09-06 15:11:01 [INFO] core.topology_builder: [Builder] 正在添加 1167 个主网设备和 50744 个配网设备...
+2026-09-06 15:11:01 [INFO] core.topology_builder: 主网电源设备数=47
+2026-09-06 15:11:01 [INFO] core.topology_builder: 主网电源设备识别: 47 台
+2026-09-06 15:11:02 [DEBUG] core.topology_builder: 已处理 10000 个配网设备
+2026-09-06 15:11:03 [DEBUG] core.topology_builder: 已处理 20000 个配网设备
+2026-09-06 15:11:04 [DEBUG] core.topology_builder: 已处理 30000 个配网设备
+2026-09-06 15:11:05 [DEBUG] core.topology_builder: 已处理 40000 个配网设备
+2026-09-06 15:11:06 [DEBUG] core.topology_builder: 已处理 50000 个配网设备
+2026-09-06 15:11:06 [INFO] core.topology_builder: 配网电源设备数=17643
+2026-09-06 15:11:06 [INFO] core.topology_builder: 配网电源设备识别: 17643 台
+2026-09-06 15:11:09 [INFO] core.topology_builder: 主配电源注入：0 台配网设备经共享连接点接入主网电源
+2026-09-06 15:11:17 [INFO] core.topology_builder: [Builder] 配网真实端子数量:76354
+2026-09-06 15:11:17 [INFO] core.topology_builder: [Builder] 主网真实端子数量:1562
+2026-09-06 15:11:23 [INFO] core.topology_builder: [端子建边完成] 配网拓扑边数量：117276
+2026-09-06 15:11:23 [INFO] core.topology_builder: [端子建边完成] 主网拓扑边数量：2632
+2026-09-06 15:11:29 [INFO] core.measure_preprocess: [MeasurePreprocess] 遥信实测开关数量：6666
+2026-09-06 15:11:29 [INFO] core.measure_preprocess: [MeasurePreprocess] 默认合位开关数量：10942
+2026-09-06 15:11:29 [INFO] core.topology_builder: [遥信预处理统计] 总开关状态映射条目:17608 实际挂载到设备:16592
+2026-09-06 15:11:29 [INFO] core.topology_builder: 遥信实测开关:6666，赛题默认合位推演开关:10942
+2026-09-06 15:11:42 [INFO] core.topology_builder: 主配接口校验：通过=147 失败=42
+2026-09-06 15:11:42 [INFO] core.topology_builder: [主配接口校验] 4.1/4.2 命中缺陷: 42
+2026-09-06 15:11:42 [INFO] core.topology_builder: [电气逻辑校验] RULE-E01~E07 命中:4458
+2026-09-06 15:11:42 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
+2026-09-06 15:11:45 [INFO] core.topology_builder: 主网异常数量：338，断点数量：4
+2026-09-06 15:11:45 [INFO] core.topology_builder: 配网异常数量：726，断点数量：418
+2026-09-06 15:11:53 [INFO] core.score_engine: 评分结果: 设备=50744 缺陷=1756 扣分=25.00 缺陷率=3.46% 缺陷率扣分=4.92 score_before=70.1 score_after=100.0
+2026-09-06 15:11:53 [INFO] core.enhanced_report_generator: [增强报告] 开始为 LINE215 生成增强报告
+2026-09-06 15:11:53 [INFO] core.enhanced_report_generator: [增强报告] 评估数据源质量...
+2026-09-06 15:11:53 [INFO] core.physical_constraint_checker: [物理约束] 数据源可信度: 遥测=0.11, SVG=0.77, 数据库=0.90
+2026-09-06 15:11:53 [INFO] core.enhanced_report_generator: [增强报告] 执行物理约束校验...
+2026-09-06 15:11:53 [INFO] core.physical_constraint_checker: [物理约束] 数据源可信度: 遥测=0.11, SVG=0.77, 数据库=0.90
+2026-09-06 15:11:53 [INFO] core.physical_constraint_checker: [物理约束] 开始KCL校验, 共100个节点
+2026-09-06 15:11:53 [INFO] core.physical_constraint_checker: [物理约束] 开始支路约束校验, 共50个开关
+2026-09-06 15:11:53 [INFO] core.enhanced_report_generator: [增强报告] 处理 1756 个缺陷...
+2026-09-06 15:11:54 [INFO] core.enhanced_report_generator: [增强报告] 排序修复方案...
+2026-09-06 15:11:54 [INFO] core.repair_ranking_engine: [修复排序] 处理1756个修复候选, 最高优先级=0.500(TMP00044547 <-> TMP00046078)
+2026-09-06 15:11:54 [INFO] core.enhanced_report_generator: [增强报告] 生成完成: 缺陷1756个, 高风险0个, 确认1756个
+2026-09-06 15:11:55 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=TMP00000188 识别到 1 个联络开关
+2026-09-06 15:11:55 [DEBUG] core.feeder_topology_analysis: P1-P7 引擎产生 15 条断点候选
+2026-09-06 15:11:55 [INFO] core.feeder_topology_analysis: Sheet2 断点定位: feeder=TMP00000188 共 378 条 (P1-P7 优先级排序)
+2026-09-06 15:11:55 [INFO] core.feeder_topology_analysis: Sheet4 合环识别: feeder=TMP00000188 共 2 条
+2026-09-06 15:12:14 [INFO] core.score_engine: 评分结果: 设备=50744 缺陷=1837 扣分=25.00 缺陷率=3.62% 缺陷率扣分=5.24 score_before=69.8 score_after=100.0
+2026-09-06 15:12:14 [INFO] core.enhanced_report_generator: [增强报告] 开始为 LINE216 生成增强报告
+2026-09-06 15:12:14 [INFO] core.enhanced_report_generator: [增强报告] 评估数据源质量...
+2026-09-06 15:12:14 [INFO] core.physical_constraint_checker: [物理约束] 数据源可信度: 遥测=0.11, SVG=0.77, 数据库=0.90
+2026-09-06 15:12:14 [INFO] core.enhanced_report_generator: [增强报告] 执行物理约束校验...
+2026-09-06 15:12:14 [INFO] core.physical_constraint_checker: [物理约束] 数据源可信度: 遥测=0.11, SVG=0.77, 数据库=0.90
+2026-09-06 15:12:15 [INFO] core.physical_constraint_checker: [物理约束] 开始KCL校验, 共100个节点
+2026-09-06 15:12:15 [INFO] core.physical_constraint_checker: [物理约束] 开始支路约束校验, 共50个开关
+2026-09-06 15:12:15 [INFO] core.enhanced_report_generator: [增强报告] 处理 1837 个缺陷...
+2026-09-06 15:12:15 [INFO] core.enhanced_report_generator: [增强报告] 排序修复方案...
+2026-09-06 15:12:15 [INFO] core.repair_ranking_engine: [修复排序] 处理1837个修复候选, 最高优先级=0.500(TMP00313565 <-> TMP00046158)
+2026-09-06 15:12:15 [INFO] core.enhanced_report_generator: [增强报告] 生成完成: 缺陷1837个, 高风险0个, 确认1837个
+2026-09-06 15:12:16 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=TMP00000189 识别到 1 个联络开关
+2026-09-06 15:12:16 [DEBUG] core.feeder_topology_analysis: P1-P7 引擎产生 54 条断点候选
+2026-09-06 15:12:16 [INFO] core.feeder_topology_analysis: Sheet2 断点定位: feeder=TMP00000189 共 256 条 (P1-P7 优先级排序)
+2026-09-06 15:12:16 [INFO] core.feeder_topology_analysis: Sheet4 合环识别: feeder=TMP00000189 共 9 条
