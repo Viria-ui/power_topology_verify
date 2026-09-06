@@ -195,57 +195,27 @@ def test_module1_3_tie_switch(dist_topo, line_df):
     """模块1.3: 联络开关自动识别与可视化"""
     print_header("模块1.3: 联络开关自动识别与可视化梳理")
     
-    import networkx as nx
+    # 直接从拓扑校验结果获取联络开关
+    tie_loop_list = safe_get(dist_topo, 'tie_loop_list', [])
     
-    # 从line表获取所有馈线信息
     tie_switches = []
-    G = safe_get(dist_topo, 'graph')
-    
-    if line_df is not None and not line_df.empty:
-        # 构建馈线ID到设备的映射
-        feeder_devices = {}
-        for eid, dev in dist_topo.device_map.items():
-            fid = safe_get(dev, 'feeder_id')
-            if fid:
-                if fid not in feeder_devices:
-                    feeder_devices[fid] = []
-                feeder_devices[fid].append(eid)
-        
-        print(f"\n  馈线数量: {len(feeder_devices)}")
-        
-        # 识别联络开关：连接两条不同馈线的分位开关
-        for eid, dev in dist_topo.device_map.items():
-            if safe_get(dev, 'switch_status') == '0':  # 分位
-                points = dist_topo.get_device_all_points(eid) if hasattr(dist_topo, 'get_device_all_points') else []
-                if len(points) >= 2 and G:
-                    # 检查是否连接了不同的馈线
-                    connected_feeders = set()
-                    for p in points:
-                        if G.has_node(p):
-                            for neighbor in G.neighbors(p):
-                                neighbor_dev = dist_topo.device_map.get(neighbor)
-                                if neighbor_dev:
-                                    fid = safe_get(neighbor_dev, 'feeder_id')
-                                    if fid:
-                                        connected_feeders.add(fid)
-                    
-                    # 如果连接了多条馈线，可能是联络开关
-                    if len(connected_feeders) >= 2:
-                        tie_switches.append({
-                            'equip_id': eid,
-                            'equip_name': safe_get(dev, 'equip_name', 'N/A'),
-                            'status': '分位',
-                            'connected_feeders': list(connected_feeders),
-                            'feeder_count': len(connected_feeders)
-                        })
+    for item in tie_loop_list:
+        rt = safe_get(item, 'result_type', '')
+        if '联络' in str(rt):
+            d = item.model_dump() if hasattr(item, 'model_dump') else (item if isinstance(item, dict) else {})
+            tie_switches.append(d)
     
     print(f"\n  [结果] 识别到 {len(tie_switches)} 个联络开关")
     
     if tie_switches:
-        print("\n  联络开关列表:")
+        print("\n  联络开关列表（前10个）:")
         for ts in tie_switches[:10]:
-            print(f"    - {ts['equip_id']}: {ts['equip_name']}")
-            print(f"      连接的馈线: {ts['connected_feeders']}")
+            equip_id = ts.get('equip_id', 'N/A')
+            rule_desc = ts.get('rule_desc', 'N/A')
+            left_feeder = ts.get('left_feeder', 'N/A')
+            right_feeder = ts.get('right_feeder', 'N/A')
+            print(f"    - {equip_id}: {rule_desc}")
+            print(f"      左侧馈线: {left_feeder} | 右侧馈线: {right_feeder}")
     
     # 导出联络关系
     if tie_switches:
@@ -312,53 +282,29 @@ def test_module1_5_unplanned_loop(dist_topo):
     """模块1.5: 非计划性合环拓扑识别"""
     print_header("模块1.5: 非计划性合环拓扑识别")
     
-    import networkx as nx
+    # 直接从拓扑校验结果获取合环数据
+    tie_loop_list = safe_get(dist_topo, 'tie_loop_list', [])
     
     loops = []
-    G = safe_get(dist_topo, 'graph')
-    
-    if G:
-        # 找所有简单环（通过找所有连通分量中的环）
-        for component in nx.connected_components(G):
-            subgraph = G.subgraph(component)
-            # 检查是否有环（不是树）
-            if not nx.is_tree(subgraph):
-                # 找环中的开关
-                for cycle in nx.simple_cycles(subgraph):
-                    if len(cycle) >= 3:
-                        # 检查环中电源数量
-                        source_count = 0
-                        loop_devices = []
-                        for node in cycle:
-                            dev = dist_topo.device_map.get(node)
-                            if dev:
-                                is_source = safe_get(dev, 'is_source', False)
-                                if is_source:
-                                    source_count += 1
-                                loop_devices.append({
-                                    'equip_id': node,
-                                    'equip_name': safe_get(dev, 'equip_name', 'N/A'),
-                                    'is_source': is_source
-                                })
-                        
-                        # 非计划合环：环中只有1个电源（正常应该有2个）
-                        is_planned = source_count >= 2
-                        
-                        loops.append({
-                            'loop_devices': cycle,
-                            'source_count': source_count,
-                            'is_planned_loop': is_planned,
-                            'risk_level': '高' if not is_planned and source_count == 1 else '中',
-                            'devices': loop_devices
-                        })
+    for item in tie_loop_list:
+        rt = safe_get(item, 'result_type', '')
+        if '合环' in str(rt):
+            d = item.model_dump() if hasattr(item, 'model_dump') else (item if isinstance(item, dict) else {})
+            loops.append(d)
     
     print(f"\n  [结果] 检测到 {len(loops)} 个合环")
     
     for loop in loops[:3]:
-        print(f"    - 环长度: {len(loop['loop_devices'])} 设备")
-        print(f"      电源数: {loop['source_count']}")
-        print(f"      是否计划合环: {'是' if loop['is_planned_loop'] else '否'}")
-        print(f"      风险: {loop['risk_level']}")
+        equip_id = loop.get('equip_id', 'N/A')
+        source_count = loop.get('source_count', 0)
+        is_planned = loop.get('is_planned_loop', False)
+        risk_level = loop.get('risk_level', 'N/A')
+        rule_desc = loop.get('rule_desc', 'N/A')
+        print(f"    - 设备: {equip_id}")
+        print(f"      描述: {rule_desc}")
+        print(f"      电源数: {source_count}")
+        print(f"      是否计划合环: {'是' if is_planned else '否'}")
+        print(f"      风险: {risk_level}")
     
     return {"loop_count": len(loops), "loops": loops}
 
@@ -612,15 +558,15 @@ def test_svg_beautify():
     """SVG美化任务"""
     print_header("任务二5.1: SVG标准化美化排版")
     
+    from svg_io.svg_beautifier import beautify_svg_file
+    
     for line_name in ['LINE215', 'LINE216']:
         svg_path = find_svg_file(line_name)
         if svg_path:
             print(f"\n  美化 {line_name}.svg...")
             try:
-                beautifier = SvgBeautifier(svg_path)
-                beautifier.auto_layout()
                 output_path = os.path.join(OUTPUT_SVG, f'{line_name}_beautified.svg')
-                beautifier.save(output_path)
+                beautify_svg_file(svg_path, output_path, quality_report=True)
                 print(f"    输出: {output_path}")
             except Exception as e:
                 print(f"    美化失败: {e}")
@@ -807,7 +753,7 @@ def main():
         json.dump(summary, f, ensure_ascii=False, indent=2)
     
     print(f"\n  测试汇总已保存: {output_path}")
-    print("\n✅ 全部测试任务完成!")
+    print("\n= 全部测试任务完成!")
     
     return summary
 

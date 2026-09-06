@@ -1,0 +1,2 @@
+﻿trace_uuid,equip_id,point_id,line_id,rule_code,rule_desc,check_result,review_status,detail,dimension,risk_level
+0de95b34-62af-4929-b3cc-4e497ba26c05,DEV_TEST_001,PT_001,10kVLINE003,R001,设备拓扑度数为0，判定悬空设备,异常,待复核,该设备无任何线路连接，判定悬空,拓扑完整性,中

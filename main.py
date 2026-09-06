@@ -356,6 +356,29 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
                 "station_id": station,
             })
 
+    # ----------【模块三补录】将电气逻辑E01-E07结果合并入缺陷报告 ----------
+    # 从 builder.build_full_topology() 中产生的 dist_topo.electrical_defects 取数，
+    # 转为标准化缺陷格式后加入 defects_report，统一进入评分流程（fix: 解决电气逻辑维度cap=0问题）。
+    if hasattr(dist_topo, 'electrical_defects') and dist_topo.electrical_defects:
+        for ed in dist_topo.electrical_defects:
+            rule_code = ed.get("rule_code", "")
+            equip_id = ed.get("equip_id", "")
+            dev_name = ""
+            if equip_id in line_db_devices:
+                dev_name = getattr(line_db_devices[equip_id], "equip_name", "") or ""
+            elif equip_id in dist_topo.device_map:
+                dev_name = getattr(dist_topo.device_map[equip_id], "equip_name", "") or ""
+            defects_report.append({
+                "equip_id": equip_id,
+                "defect_type": rule_code,  # RULE-E01 ~ RULE-E07
+                "description": ed.get("detail", f"{rule_code} 电气逻辑异常"),
+                "suggestion": f"建议核查设备 {equip_id} 的遥信遥测数据是否与运行状态一致",
+                "sql_draft": f"-- 电气逻辑异常 {rule_code}，建议核查 {equip_id} 遥测数据",
+                "equip_name": dev_name,
+                "station_id": start_st_id,
+            })
+    # -----------------------------------------------------------------
+
     # 输出统计
     print(f"\n📊 图模一致性校验完成！累计发现缺陷: {len(defects_report)} 条")
     type_counts = {}
@@ -403,7 +426,9 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
     print("\n📈 质量评分与置信度计算...")
     tele_evaluator = TelemetryEvaluator()
     score_engine = ScoreAndConfidenceEngine(tele_evaluator)
-    repaired_defect_ids = list(range(len(defects_report)))
+    # 【修复模块五-P2】repaired_defect_ids 应为空列表：表示"当前未修复任何缺陷"，
+    # 使 score_after 真实反映"若修复后的评分"，而非将所有缺陷标记为已修复导致分虚高。
+    repaired_defect_ids: list = []
     score_summary = score_engine.evaluate_quality_score(
         defects_report, len(dist_topo.device_map),
         repaired_defect_ids=repaired_defect_ids
