@@ -1,5 +1,5 @@
 ﻿element_id,element_type,element_type_cn,x,y,object_id,object_name,psr_type,layer,voltage_level,css_class,stroke_color,is_junction,related_text_count
-AUTO_BackGround_Layer_bda99f1b,BackGround_Layer,BackGround_Layer,0.0,0.0,AUTO_BackGround_Layer_bda99f1b,,,BackGround_Layer,,,,False,0
+AUTO_BackGround_Layer_00ca64ad,BackGround_Layer,BackGround_Layer,0.0,0.0,AUTO_BackGround_Layer_00ca64ad,,,BackGround_Layer,,,,False,0
 TMP00046604,SurgeArrester_Layer,SurgeArrester_Layer,403.382,109.6099,TMP00046604,避雷器045,0116,SurgeArrester_Layer,10kV,,,False,0
 TMP00046603,SurgeArrester_Layer,SurgeArrester_Layer,418.0089,98.1253,TMP00046603,避雷器044,0116,SurgeArrester_Layer,10kV,,,False,0
 TMP00046602,SurgeArrester_Layer,SurgeArrester_Layer,431.376,71.7772,TMP00046602,避雷器043,0116,SurgeArrester_Layer,10kV,,,False,0

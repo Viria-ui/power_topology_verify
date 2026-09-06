@@ -3,6 +3,7 @@ import os
 import json
 import argparse
 import glob
+import pandas as pd
 
 # 1. 确保项目根目录在 sys.path 中
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -315,7 +316,10 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
 
     # 遥测评估与质量评分
     print("\n📈 开始进行遥信遥测校验、主配接口复核与质量评分...")
-    tele_evaluator = TelemetryEvaluator()
+    
+    # 从 table_data 获取遥测数据并构建 TelemetryEvaluator
+    yx_real_df = table_data.get('yx_real', pd.DataFrame())
+    tele_evaluator = TelemetryEvaluator.from_pwreal(yx_real_df)
     score_engine = ScoreAndConfidenceEngine(tele_evaluator)
 
     main_interface_ok, interface_conf, interface_msg = tele_evaluator.verify_main_substation_interface(
@@ -358,6 +362,84 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         }, f, ensure_ascii=False, indent=4)
 
     print(f"👉 质量评分报告: {score_output_path}")
+
+    # ========== 【增强报告生成】============
+    # 集成物理约束校验、II型模糊可信度、时序特征、修复排序
+    try:
+        from core.enhanced_report_generator import (
+            EnhancedReportGenerator,
+            format_enhanced_defect_table,
+            generate闭环演示流程,
+        )
+
+        print("\n📊 开始生成增强校验报告...")
+
+        # 构建开关状态映射
+        switch_status_map = {}
+        for eid, dev in dist_topo.device_map.items():
+            if hasattr(dev, 'switch_status'):
+                switch_status_map[eid] = dev.switch_status
+
+        # 生成增强报告
+        report_gen = EnhancedReportGenerator(
+            line_name=line_name,
+            defects=defects_report,
+            topology_graph=dist_topo.graph if hasattr(dist_topo, 'graph') else None,
+            device_map={eid: {"equip_type": dev.equip_type, "is_source": getattr(dev, 'is_source', False)}
+                       for eid, dev in dist_topo.device_map.items()},
+            telemetry_data=tele_evaluator.telemetry_data if tele_evaluator else {},
+            svg_device_map=svg_device_map,
+            switch_status_map=switch_status_map,
+        )
+
+        enhanced_report = report_gen.generate_full_report()
+
+        # 保存增强报告
+        enhanced_report_path = os.path.join(output_dir, "reports", f"{line_name}_增强校验报告.json")
+        os.makedirs(os.path.dirname(enhanced_report_path), exist_ok=True)
+        with open(enhanced_report_path, "w", encoding="utf-8") as f:
+            json.dump(enhanced_report, f, ensure_ascii=False, indent=2)
+
+        # 打印增强缺陷表格
+        from core.enhanced_report_generator import EnhancedDefectReport
+        enhanced_defects = [
+            EnhancedDefectReport(**{
+                "equip_id": d.get("equip_id", ""),
+                "defect_type": d.get("defect_type", ""),
+                "description": d.get("description", ""),
+                "comprehensive_risk": d.get("comprehensive_risk", 0.5),
+                "confidence_interval": d.get("confidence_interval", [0.5, 0.8]),
+                "confidence_status": d.get("confidence_status", "PENDING"),
+                "physical_basis": d.get("physical_basis", ""),
+                "suggestion": d.get("suggestion", ""),
+            })
+            for d in enhanced_report.get("enhanced_defects", [])[:30]
+        ]
+
+        print("\n📋 增强异常报告表格 (前30条):")
+        print(format_enhanced_defect_table(enhanced_defects))
+
+        # 打印数据源质量
+        dsq = enhanced_report.get("data_source_quality", {})
+        print(f"\n📡 数据源可信度:")
+        print(f"   • 遥测数据: {dsq.get('telemetry_quality', 0):.1%}")
+        print(f"   • SVG图模: {dsq.get('svg_quality', 0):.1%}")
+        print(f"   • 数据库: {dsq.get('database_quality', 0):.1%}")
+        print(f"   • 综合可信度: {dsq.get('overall_confidence', 0):.1%}")
+
+        # 打印物理约束校验结果
+        pcs = enhanced_report.get("physical_constraint_summary", {})
+        print(f"\n⚡ 物理约束校验:")
+        print(f"   • 总校验项: {pcs.get('total_checks', 0)}")
+        print(f"   • 通过: {pcs.get('passed', 0)} / 失败: {pcs.get('failed', 0)}")
+        print(f"   • 高风险: {pcs.get('high_risk_count', 0)} 项")
+
+        print(f"👉 增强校验报告: {enhanced_report_path}")
+
+    except ImportError as e:
+        print(f"[提示] 增强报告模块不可用: {e}")
+    except Exception as e:
+        print(f"[警告] 生成增强报告时出错: {e}")
 
     analysis = build_feeder_analysis(
         line_name=line_name,

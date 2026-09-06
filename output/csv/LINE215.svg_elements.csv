@@ -1,5 +1,5 @@
 ﻿element_id,element_type,element_type_cn,x,y,object_id,object_name,psr_type,layer,voltage_level,css_class,stroke_color,is_junction,related_text_count
-AUTO_BackGround_Layer_75dd2477,BackGround_Layer,BackGround_Layer,0.0,0.0,AUTO_BackGround_Layer_75dd2477,,,BackGround_Layer,,,,False,0
+AUTO_BackGround_Layer_a9f5a3f4,BackGround_Layer,BackGround_Layer,0.0,0.0,AUTO_BackGround_Layer_a9f5a3f4,,,BackGround_Layer,,,,False,0
 TMP00044758,ACLineSegment,交流线段,345.5487,497.3429,TMP00044758,00000败支2#~LINE215_线如切败支3#,dxd,ACLineSegment,10kV,,,False,1
 TMP00044757,ACLineSegment,交流线段,348.7247,495.027,TMP00044757,00000败支3照1#~LINE215_线如切败支3照2#,dxd,ACLineSegment,10kV,,,False,1
 TMP00044756,ACLineSegment,交流线段,413.8645,508.3373,TMP00044756,00000争2#~LINE215_线LINE365_争3#,dxd,ACLineSegment,10kV,,,False,1
