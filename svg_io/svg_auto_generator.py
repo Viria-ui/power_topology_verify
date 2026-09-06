@@ -372,12 +372,14 @@ class SvgAutoGenerator:
                     if key not in tie_set:
                         tie_set.add(key)
                         tie_list.append((mf, of, n, name))
+        # 【修复2】严格收紧：不允许生成虚拟联络开关 VIRTUAL_TIE_01
+        # 真实联络开关必须同时满足：
+        # 1. 设备类型为开关（断路器/负荷开关/隔离开关）
+        # 2. 设备名称不含豁免关键字
+        # 3. 两侧邻居属于不同馈线
+        # 只有在确实找到真实联络时才输出，否则返回空列表
         if not tie_list:
-            all_fids = list({str(self.dg.nodes[n].get("feeder_id") or "") for n in self.dg.nodes() if str(self.dg.nodes[n].get("feeder_id") or "")})
-            if target_resolved in all_fids and len(all_fids) >= 2:
-                others = [f for f in all_fids if f != target_resolved]
-                if others:
-                    tie_list.append((target_resolved, others[0], "VIRTUAL_TIE_01", "默认联络示意开关"))
+            return []
         return tie_list
 
     # ------------------------------------------------------------------

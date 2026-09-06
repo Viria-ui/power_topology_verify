@@ -401,10 +401,10 @@ class TopologyBuilder:
         from core.graph_model import AbnormalItem
         import uuid as _uuid
         trace_uuid = "MAIN_SUB_IFACE_" + _uuid.uuid4().hex[:8]
-        zw_st_ids = set(self.zw_substation_df['ST_ID'].astype(str)) if len(self.zw_substation_df) else set()
+        zw_st_ids = set(self.zw_substation_df["ST_ID"].astype(str)) if len(self.zw_substation_df) else set()
         zw_cn: set[str] = set()
         if self.zw_terminal_df is not None and not self.zw_terminal_df.empty:
-            zw_cn = set(self.zw_terminal_df['CONNECTIVITYNODE_ID'].dropna().astype(str))
+            zw_cn = set(self.zw_terminal_df["CONNECTIVITYNODE_ID"].dropna().astype(str))
         # 配网端子 → 所属设备 → 馈线 → 连接点集合
         pw_feeder_cn: dict[str, set[str]] = defaultdict(set)
         if self.pw_terminal_df is not None and not self.pw_terminal_df.empty:
@@ -431,7 +431,7 @@ class TopologyBuilder:
                 elif start_st not in zw_st_ids:
                     passed, code, detail = False, "R_MAIN_IFACE_42", f"4.2错拼：配网馈线{fid}起始站ID={start_st} 不存在于主网变电站表(共{len(zw_st_ids)}个)"
                 else:
-                    lineends = self.zw_line_end_df[self.zw_line_end_df['ST_ID'].astype(str) == start_st] if len(self.zw_line_end_df) else None
+                    lineends = self.zw_line_end_df[self.zw_line_end_df["ST_ID"].astype(str) == start_st] if len(self.zw_line_end_df) else None
                     if lineends is None or lineends.empty:
                         passed, code, detail = False, "R_MAIN_IFACE_41", f"4.1漏拼：主网站{start_st}无任何出线(ZWLINEEND)记录"
                     else:

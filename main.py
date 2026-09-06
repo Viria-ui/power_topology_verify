@@ -24,6 +24,18 @@ if __name__ == "__main__":
     main_topo, dist_topo = builder.build_full_topology()
     print("主网/配网拓扑构建完成，设备内部端点连通关系已补齐")
 
+    # 2.1 【修复1】调用电气逻辑校验（E01-E07 + 主配接口）
+    print("\n===== 电气逻辑校验（E01-E07）=====")
+    elec_results = builder.check_electrical_logic()
+    print(f"  电气逻辑缺陷数量: {len(elec_results)}")
+    elec_by_type: dict = {}
+    for r in elec_results:
+        code = r.get("rule_code", "未知")
+        elec_by_type[code] = elec_by_type.get(code, 0) + 1
+    for code, cnt in sorted(elec_by_type.items()):
+        print(f"    {code}: {cnt}条")
+    print(f"  主配接口异常数量: {len([a for a in dist_topo.abnormal_list if '接口' in a.dimension])}")
+
     # 3.输出验收所需拓扑统计信息
     main_stat = builder.get_topo_statistics(main_topo, "110kV主网拓扑")
     dist_stat = builder.get_topo_statistics(dist_topo, "10kV配网拓扑")

@@ -132,9 +132,10 @@ class ScoreAndConfidenceEngine:
             defect_copy["_idx"] = idx
             processed_defects.append(defect_copy)
 
-        # 使用固定基准容量，使评分对缺陷扣分更敏感
-        base_capacity = 10000.0
-        penalty_ratio = min(total_deduction / base_capacity, 1.0)
+        # 【修复4】修正评分公式：
+        # 1. 基准容量改为100（百分制），使扣分效果明显
+        # 2. 评分 = 100 - 维度扣分总和（已封顶）- 缺陷率惩罚
+        base_capacity = 100.0
 
         # 缺陷率惩罚：缺陷数量/设备总数 超过阈值时额外扣分
         defect_count = len(defects_report)
@@ -142,27 +143,29 @@ class ScoreAndConfidenceEngine:
         # 缺陷率超过 1% 开始惩罚，超过 5% 严重惩罚
         defect_rate_penalty = 0.0
         if defect_rate > 0.05:
-            defect_rate_penalty = min((defect_rate - 0.05) * 500, 30.0)  # 最多扣30分
+            defect_rate_penalty = min((defect_rate - 0.05) * 500, 40.0)  # 最多扣40分
         elif defect_rate > 0.01:
             defect_rate_penalty = (defect_rate - 0.01) * 200
 
-        score_before = round(max((1.0 - penalty_ratio) * 100.0 - defect_rate_penalty, 0.0), 1)
+        # 维度扣分总和（已按cap封顶）
+        total_deduction = sum(dim_deduction.values())
+        # 最终评分 = 100 - 维度扣分 - 缺陷率惩罚
+        score_before = round(max(base_capacity - total_deduction - defect_rate_penalty, 0.0), 1)
 
         repaired_sum = 0.0
         for d in processed_defects:
             if d.get("_idx") in repaired_defect_ids or d.get("equip_id") in repaired_defect_ids:
                 repaired_sum += d["score_deduction"]
-        after_total = round(max(total_deduction - repaired_sum, 0.0), 2)
-        after_ratio = min(after_total / base_capacity, 1.0)
+        after_deduction = total_deduction - repaired_sum
         # 修复后也需要重新计算缺陷率惩罚
         repaired_defect_count = len(repaired_defect_ids) if repaired_defect_ids else 0
         after_defect_rate = (defect_count - repaired_defect_count) / max(total_equip_count, 1)
         after_rate_penalty = 0.0
         if after_defect_rate > 0.05:
-            after_rate_penalty = min((after_defect_rate - 0.05) * 500, 30.0)
+            after_rate_penalty = min((after_defect_rate - 0.05) * 500, 40.0)
         elif after_defect_rate > 0.01:
             after_rate_penalty = (after_defect_rate - 0.01) * 200
-        score_after = round(max((1.0 - after_ratio) * 100.0 - after_rate_penalty, 0.0), 1)
+        score_after = round(max(base_capacity - after_deduction - after_rate_penalty, 0.0), 1)
         if not repaired_defect_ids:
             score_after = score_before
 
