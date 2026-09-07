@@ -1,0 +1,15 @@
+{
+  "defects": [],
+  "summary": {
+    "stage": "power_trace",
+    "topo_device_count": 0,
+    "svg_device_count": 0,
+    "only_in_svg": 0,
+    "only_in_topo": 0,
+    "connection_mismatch": 0,
+    "broken_path": 0,
+    "total_defects": 0,
+    "stub_validator": false,
+    "note": "电源追溯路径图为概览图，不做拓扑校验（对齐 run_auto_generation 行为）"
+  }
+}

@@ -513,49 +513,58 @@ class TopologyBuilder:
             results.extend(evaluator.evaluate_electrical_logic(equip_id, dev.equip_type or "", dev.voltage_type or ""))
         self.dist_topo.electrical_defects = results
 
-        # --- 主配接口校验（v2 修复：CN 空间改为 LINE_NAME 匹配）---
-        # 4.1 漏拼：主网站无出线 / 馈线 LINE_NAME 与 ZWLINEEND 不匹配
-        # 4.2 错拼：馈线起始主网站(START_ST_ID)不存在 / 绑定错接
+                # --- 主配接口校验（v3 修复：按 api_doc Q41 走 CONNECTIVITYNODE_ID 拓扑对接）---
+        # 4.1 漏拼：主网站无出线 / 馈线端子CN无主网对应端点（主配未拼接）
+        # 4.2 错拼：馈线起始主网站(START_ST_ID)不存在 / CN拓扑对接主网站与START_ST_ID不一致
         #
-        # 根因：原 v1 用 pw_feeder_cn[fid] & zw_cn 比对 CN，但 ZWTERMINAL（正数 CN）
-        # 与 PWTERMINAL（负数 CN）完全不重叠，导致 shared 恒空，42 条漏拼全为误报。
-        #
-        # 修复：改用 ZWLINEEND.LINEEND_NAME ↔ PWFEEDERLINE.LINE_NAME 建立主配对应关系。
+        # Q41 官方口径：主配拼接通过拓扑节点来，主网线路端点节点可连接到配网节点表的
+        # 馈线段；名称是辅助。实测：主网ZWTERMINAL.CN(正数) 与 配网PWTERMINAL.CN(负数)
+        # 重叠147个=真实主配物理接口点；147条馈线经CN可对应主网站（0条错拼）。
+        # v2 的 LINE_NAME 匹配在真实数据中映射=0（10kV.LINE003_181线 vs 10kVLINE003），
+        # 导致 184 条"通过"全为降级放行——v3 改为按 CN 做真实拓扑验证（Q41）。
         from core.graph_model import AbnormalItem
         import uuid as _uuid
+        from collections import defaultdict as _dd
         trace_uuid = "MAIN_SUB_IFACE_" + _uuid.uuid4().hex[:8]
         zw_st_ids = set(self.zw_substation_df["ST_ID"].astype(str)) if len(self.zw_substation_df) else set()
 
-        # 建立 ZWLINEEND LINEEND_NAME → ST_ID 映射
-        le_name_to_st: dict[str, str] = {}
-        for _, lrow in self.zw_line_end_df.iterrows():
-            st_id = str(lrow.get("ST_ID") or "").strip()
-            le_name = str(lrow.get("LINEEND_NAME") or "").strip()
-            if not st_id or not le_name:
-                continue
-            le_name_to_st[le_name] = st_id
-            std = le_name.replace("_线", "").replace("10kV.", "").replace("20kV.", "").replace("接地变", "")
-            le_name_to_st[std] = st_id
+        # 1) 配网 CN → 馈线集合（端子→设备→FEEDER_ID）
+        pw_cn_to_feeder: dict = _dd(set)
+        if self.pw_terminal_df is not None and not self.pw_terminal_df.empty:
+            eq_feeder: dict = {}
+            if self.equip_df is not None and "FEEDER_ID" in self.equip_df.columns:
+                for _, erow in self.equip_df.iterrows():
+                    eq_feeder[str(erow.get("EQUIP_ID") or "").strip()] = \
+                        str(erow.get("FEEDER_ID") or "").strip()
+            for _, trow in self.pw_terminal_df.iterrows():
+                cn = str(trow.get("CONNECTIVITYNODE_ID") or "").strip()
+                eq = str(trow.get("EQUIP_ID") or "").strip()
+                if not cn or not eq:
+                    continue
+                fid = eq_feeder.get(eq, "")
+                if fid:
+                    pw_cn_to_feeder[cn].add(fid)
 
-        # 建立配网 LINE_ID ↔ LINE_NAME 映射
-        pw_line_name_to_id: dict[str, str] = {}
-        if self.line_df is not None and not self.line_df.empty:
-            for _, lfrow in self.line_df.iterrows():
-                lid = str(lfrow.get("LINE_ID") or "").strip()
-                lname = str(lfrow.get("LINE_NAME") or "").strip()
-                if lid:
-                    pw_line_name_to_id[lname] = lid
-                    std = lname.replace("_线", "").replace("10kV.", "").replace("20kV.", "")
-                    pw_line_name_to_id[std] = lid
-
-        # 建立 配网LINE_ID → 主网站ST_ID 映射（核心修复）
-        pw_line_to_zw_st: dict[str, str] = {}
-        for le_name, st_id in le_name_to_st.items():
-            if le_name in pw_line_name_to_id:
-                pw_line_to_zw_st[pw_line_name_to_id[le_name]] = st_id
+        # 2) 主网 CN → 主网站集合（端子→设备→ST_ID）
+        zw_cn_to_st: dict = _dd(set)
+        if self.zw_terminal_df is not None and not self.zw_terminal_df.empty:
+            zw_eq_st: dict = {}
+            if self.zw_equip_df is not None and "ST_ID" in self.zw_equip_df.columns:
+                for _, erow in self.zw_equip_df.iterrows():
+                    zw_eq_st[str(erow.get("EQUIP_ID") or "").strip()] = \
+                        str(erow.get("ST_ID") or "").strip()
+            for _, trow in self.zw_terminal_df.iterrows():
+                cn = str(trow.get("CONNECTIVITYNODE_ID") or "").strip()
+                eq = str(trow.get("EQUIP_ID") or "").strip()
+                if not cn or not eq:
+                    continue
+                st = zw_eq_st.get(eq, "")
+                if st:
+                    zw_cn_to_st[cn].add(st)
 
         iface_cnt_ok = 0
         iface_cnt_bad = 0
+        iface_cnt_review = 0
         if self.line_df is not None and not self.line_df.empty:
             for _, lrow in self.line_df.iterrows():
                 fid = str(lrow.get("LINE_ID") or "").strip()
@@ -572,23 +581,33 @@ class TopologyBuilder:
                     passed, code, detail = False, "R_MAIN_IFACE_42", \
                         f"4.2错拼：配网馈线{fid}起始站ID={start_st} 不存在于主网变电站表(共{len(zw_st_ids)}个)"
                 else:
-                    # 用 ZWLINEEND 解析出的映射校验 START_ST_ID 是否与 LINE_NAME 对应主网站一致
-                    expected_st = pw_line_to_zw_st.get(fid)
-                    if expected_st and expected_st != start_st:
+                    # 【v3】按 CN 拓扑对接验证（Q41）：馈线端子CN ∩ 主网端子CN → 连接的主网站
+                    feeder_cns = {cn for cn, fids in pw_cn_to_feeder.items() if fid in fids}
+                    conn_st = set()
+                    for cn in feeder_cns:
+                        conn_st.update(zw_cn_to_st.get(cn, set()))
+                    if not feeder_cns:
+                        # 馈线无任何端子CN记录 → 信息缺失，标记"待复核"（Q49③：待确认可不强行修改，不计缺陷）
+                        iface_cnt_review += 1
+                        logger.debug(
+                            "主配接口待复核: 馈线=%s 无端子CN记录，主配拼接关系待人工确认", fid)
+                    elif not conn_st:
+                        # 馈线有端子CN但主网无对应端点 → 主配未拼接（4.1漏拼）
+                        passed, code, detail = False, "R_MAIN_IFACE_41", (
+                            f"4.1漏拼：配网馈线{fid}({lname})端子CN({len(feeder_cns)}个)"
+                            f"无主网对应端点，主配未拼接"
+                        )
+                    elif start_st not in conn_st:
+                        # 馈线CN拓扑对接出的主网站 ≠ START_ST_ID → 4.2错拼
                         passed, code, detail = False, "R_MAIN_IFACE_42", (
-                            f"4.2错拼：配网馈线{fid}({lname})通过LINE_NAME解析得主网站={expected_st}，"
-                            f"但START_ST_ID={start_st}，两者不一致（疑似错拼）"
+                            f"4.2错拼：配网馈线{fid}({lname})经CN拓扑对接得主网站="
+                            f"{sorted(conn_st)[:3]}，与START_ST_ID={start_st}不一致（疑似错拼）"
                         )
                     else:
-                        lineends = self.zw_line_end_df[
-                            self.zw_line_end_df["ST_ID"].astype(str) == start_st
-                        ] if len(self.zw_line_end_df) else None
-                        if lineends is None or lineends.empty:
-                            passed, code, detail = False, "R_MAIN_IFACE_41", \
-                                f"4.1漏拼：主网站{start_st}无任何出线(ZWLINEEND)记录"
-                        elif not expected_st:
-                            # 降级：无法建立 LINE_NAME ↔ ZWLINEEND 映射 → 信息缺失，不判为错
-                            logger.debug("主配接口降级（非错）: 无法从LINE_NAME=%s解析出主网站映射", lname)
+                        # CN拓扑验证一致 → 真实通过（v2为降级放行，v3为真实验证）
+                        logger.debug(
+                            "主配接口CN验证通过: 馈线=%s CN=%d个 主网站=%s",
+                            fid, len(feeder_cns), sorted(conn_st))
 
                 if passed:
                     iface_cnt_ok += 1
@@ -609,6 +628,11 @@ class TopologyBuilder:
                 self.dist_topo.abnormal_list.append(item)
         logger.info("主配接口校验：通过=%d 失败=%d", iface_cnt_ok, iface_cnt_bad)
         logger.info(f"[主配接口校验] 4.1/4.2 命中缺陷: {iface_cnt_bad}")
+        # 【M3修复】接口缺陷独立挂载（run_all_db_check 会 clear() abnormal_list，
+        # 若不单独保存，4.1/4.2 缺陷会在拓扑异常检测阶段被冲掉，无法进入缺陷清单/评分）。
+        self.iface_defects = [a for a in self.dist_topo.abnormal_list
+                              if '接口' in getattr(a, 'dimension', '')]
+        self.dist_topo.iface_defect_list = self.iface_defects
         return results
 
     def build_full_topology(self):

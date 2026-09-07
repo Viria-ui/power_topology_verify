@@ -27,17 +27,17 @@
       "threshold": 2.0
     },
     "island_components_pct": {
-      "value": 25.87,
+      "value": 25.45,
       "ok": true,
       "threshold": 50.0
     },
     "isolated_nodes_pct": {
-      "value": 11.15,
+      "value": 11.36,
       "ok": true,
       "threshold": 30.0
     },
     "dangling_connections_pct": {
-      "value": 6.64,
+      "value": 6.71,
       "ok": true,
       "threshold": 20.0
     },
@@ -56,15 +56,15 @@
     "viewBox": {
       "x": 0.0,
       "y": 0.0,
-      "w": 36220.0,
+      "w": 36760.0,
       "h": 3600.0
     },
     "canvas": {
-      "width": 36220.0,
+      "width": 36760.0,
       "height": 3600.0,
       "aspect_match": true,
-      "vb_ratio": 10.0611,
-      "wh_ratio": 10.0611
+      "vb_ratio": 10.2111,
+      "wh_ratio": 10.2111
     },
     "devices": {
       "total": 951,
@@ -72,7 +72,7 @@
       "outside": 0,
       "outside_pct": 0.0,
       "overlap_pairs": 0,
-      "avg_height_unit": 59.314
+      "avg_height_unit": 59.304
     },
     "texts": {
       "total": 788,
@@ -84,17 +84,17 @@
       "outside": 0,
       "fontscale_abnormal": 0,
       "fontscale_abnormal_pct": 0.0,
-      "avg_dev_h_for_ref": 59.314
+      "avg_dev_h_for_ref": 59.304
     },
     "topology": {
       "total_device_nodes": 951,
       "connections_total": 1446,
-      "connected_components": 137,
-      "largest_component_size": 705,
-      "largest_component_pct": 74.13,
-      "island_components_pct": 25.87,
-      "isolated_nodes_pct": 11.15,
-      "dangling_connections_pct": 6.64
+      "connected_components": 140,
+      "largest_component_size": 709,
+      "largest_component_pct": 74.55,
+      "island_components_pct": 25.45,
+      "isolated_nodes_pct": 11.36,
+      "dangling_connections_pct": 6.71
     }
   }
 }

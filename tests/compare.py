@@ -17,6 +17,7 @@ from core.telemetry_evaluator import TelemetryEvaluator
 from core.score_engine import ScoreAndConfidenceEngine
 from core.defect_excel_exporter import export_defects_xlsx
 from core.feeder_topology_analysis import build_feeder_analysis
+from core.topology_validator import run_specific_breakpoint_tests  # ★ 新增：赛题1.2专项断点测试
 from config.settings import DATASET_STANDARD_OUTPUT_XLSX
 
 
@@ -397,6 +398,25 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
 
         print("\n📊 开始生成增强校验报告...")
 
+        # 【M8修复】增强报告缺陷集与主报告口径对齐：
+        # 优先读取 main.py 生成的缺陷清单JSON（含合环/图模豁免后全量3491/3500），
+        # 避免与compare.py自带旧版图模比对(660条)口径冲突；文件不存在时回退自身defects_report。
+        _main_defects_path = os.path.join(PROJECT_ROOT, "output", f"{line_name}_缺陷清单报告.json")
+        if os.path.exists(_main_defects_path):
+            try:
+                with open(_main_defects_path, "r", encoding="utf-8") as _f:
+                    _main_defects = json.load(_f)
+                if isinstance(_main_defects, list) and len(_main_defects) > 0:
+                    defects_for_enhanced = _main_defects
+                    print(f"  [增强报告] 使用主报告缺陷集 {len(_main_defects)} 条（{_main_defects_path}）")
+                else:
+                    defects_for_enhanced = defects_report
+            except Exception as _e:
+                print(f"  [增强报告] 读取主报告缺陷集失败，回退自身缺陷集: {_e}")
+                defects_for_enhanced = defects_report
+        else:
+            defects_for_enhanced = defects_report
+
         # 构建开关状态映射
         switch_status_map = {}
         for eid, dev in dist_topo.device_map.items():
@@ -406,7 +426,7 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         # 生成增强报告
         report_gen = EnhancedReportGenerator(
             line_name=line_name,
-            defects=defects_report,
+            defects=defects_for_enhanced,
             topology_graph=dist_topo.graph if hasattr(dist_topo, 'graph') else None,
             device_map={eid: {"equip_type": dev.equip_type, "is_source": getattr(dev, 'is_source', False)}
                        for eid, dev in dist_topo.device_map.items()},
@@ -494,6 +514,17 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         f"合环 {len(analysis['loops'])} 条 / "
         f"评分 {len(analysis['scores'])} 条"
     )
+
+    # ★ 赛题 1.2 专项断点测试报告导出
+    # TMP00013138 → TMP00047197 / TMP00007913 → TMP00007907 两个具体断点查询
+    print("\n🔍 开始执行赛题 1.2 专项断点测试...")
+    specific_results = run_specific_breakpoint_tests(dist_topo)
+    for sr in specific_results:
+        print(f"  • {sr['task_id']}: {sr['summary']}")
+    specific_path = os.path.join(output_dir, f"{line_name}_赛题1.2专项断点报告.json")
+    with open(specific_path, "w", encoding="utf-8") as f:
+        json.dump(specific_results, f, ensure_ascii=False, indent=2)
+    print(f"👉 赛题1.2专项报告: {specific_path}")
 
     return {
         "line_name": line_name,

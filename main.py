@@ -36,6 +36,17 @@ from config.settings import (
     TEST_SVG_ROOT, OUTPUT_SVG, OUTPUT_JSON, OUTPUT_SQL,
     DATASET_STANDARD_OUTPUT_XLSX
 )
+
+# 【图模豁免】非设备图元不参与"图有模无"判定（Q50 以数据库为准、Q51 svg中信息自行判断）
+# 接头/杆塔/互感器/故障指示器=非设备；站房/背景层=容器图层（Q23 站房TYPE=null不处理）
+SVG_EXEMPT_TYPES = {
+    "Junction", "接头", "PoleCode", "杆塔", "Other", "其他",
+    "RemoteUnit", "故障指示器",
+    "CurrentTransformer", "电流互感器",
+    "PotentialTransformer", "电压互感器",
+    "站房", "Substation", "BoxSubstation", "BackGround_Layer", "背景",
+}
+
 from core.graph_model import TopologyGraph
 from core.topology_builder import TopologyBuilder
 from core.telemetry_evaluator import TelemetryEvaluator
@@ -223,6 +234,8 @@ def run_topo_validation(table_datas: dict) -> tuple:
     # 【S2修复】将拓扑异常/断点挂载到dist_topo，供图模比对使用
     dist_topo.topo_abnormal_list = abnormal_list
     dist_topo.topo_breakpoint_list = breakpoint_list
+    # 【M3修复】run_all_db_check 会 clear() abnormal_list，需重挂主配接口缺陷
+    dist_topo.iface_defect_list = getattr(builder, 'iface_defects', [])
     return builder, main_topo, dist_topo, elec_results
 
 
@@ -281,6 +294,11 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
     # 校验1：图上有，模型无
     for dev_id in svg_dev_ids - all_db_dev_ids:
         elem_info = svg_device_map.get(dev_id, {})
+        _etype = str(elem_info.get("element_type") or "")
+        _etype_cn = str(elem_info.get("element_type_cn") or "")
+        # 【图模豁免】接头/站房/背景层/互感器/故障指示器等非设备图元跳过（Q23/Q50/Q51）
+        if elem_info.get("is_junction") or _etype in SVG_EXEMPT_TYPES or _etype_cn in SVG_EXEMPT_TYPES:
+            continue
         dev_name = elem_info.get("object_name") or elem_info.get("element_type_cn") or "未知设备"
         defects_report.append({
             "equip_id": dev_id,
@@ -297,6 +315,10 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
     for dev_id in db_dev_ids - svg_dev_ids:
         db_dev = line_db_devices[dev_id]
         dev_name = getattr(db_dev, "equip_name", "未知设备") or "未知设备"
+        # 【图模豁免】馈线段在SVG中以导线(line_id)表达、ID体系不同（Q20"基本一致"非严格一致），
+        # 杆塔=PoleCode非设备图元——两者按图上存在处理，不报"模有图无"（避免M2 ID映射误报）。
+        if dev_name.startswith("馈线段") or dev_name.startswith("杆塔"):
+            continue
         station = getattr(db_dev, "dsubstation_id", "") or start_st_id
         defects_report.append({
             "equip_id": dev_id,
@@ -310,6 +332,8 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         })
 
     # 校验3：物理连接不一致
+    # 【去重】同一SVG物理边可能被解析出多条相同/反向连接，按规范化设备对去重，只报一次
+    _seen_conn_pairs: set = set()
     for conn in svg_connections:
         if isinstance(conn, dict):
             from_elem_id = str(conn.get("from_element_id") or "").strip()
@@ -318,6 +342,10 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
             to_obj_id = element_to_object_map.get(to_elem_id)
 
             if from_obj_id and to_obj_id and (from_obj_id != to_obj_id):
+                _conn_key = tuple(sorted((from_obj_id, to_obj_id)))
+                if _conn_key in _seen_conn_pairs:
+                    continue
+                _seen_conn_pairs.add(_conn_key)
                 has_logic_conn = False
                 if hasattr(dist_topo, "graph"):
                     import networkx as nx_
@@ -454,6 +482,60 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
 
     if _topo_added > 0:
         print(f"  • 【拓扑异常/断点补录】: {_topo_added} 条")
+
+    # ----------【M3修复】主配接口异常(4.1漏拼/4.2错拼)进入缺陷清单 ----------
+    # 任务1.3 主配拼接校验为全网级：全部馈线的主配接口缺陷均计入（含被校验线路之外）。
+    _iface_added = 0
+    for ab in getattr(dist_topo, 'iface_defect_list', []) or getattr(dist_topo, 'abnormal_list', []):
+        if '接口' not in getattr(ab, 'dimension', ''):
+            continue
+        _fid = getattr(ab, 'equip_id', '')
+        defects_report.append({
+            "equip_id": _fid,
+            "defect_type": getattr(ab, 'rule_desc', '主配网接口校验'),
+            "rule_code": getattr(ab, 'rule_code', 'R_MAIN_IFACE'),
+            "description": getattr(ab, 'detail', '') or getattr(ab, 'rule_desc', ''),
+            "suggestion": f"建议核查馈线 {_fid} 与主网的拼接关系",
+            "sql_draft": f"-- 主配接口 {getattr(ab, 'rule_code', '')}，建议核查馈线 {_fid} 的起始主网站绑定",
+            "equip_name": f"馈线{_fid}",
+            "station_id": start_st_id,
+        })
+        _iface_added += 1
+    if _iface_added > 0:
+        print(f"  • 【主配接口补录】: {_iface_added} 条")
+    # -----------------------------------------------------------------
+
+    # ----------【合环补录】非计划合环归属拓扑完整性（规范：5分/处） ----------
+    # 提前执行馈线分析以取得Sheet4合环行；score_summary暂空，评分后回填Sheet5。
+    _analysis = build_feeder_analysis(
+        line_name=line_name, feeder_id=feeder_id, start_st_id=start_st_id,
+        dist_topo=dist_topo, table_data=table_data,
+        svg_connections=svg_connections,
+        element_to_object_map=element_to_object_map,
+        line_db_devices=line_db_devices,
+        defects_report=defects_report,
+        score_summary={},
+    )
+    _loop_added = 0
+    for lr in _analysis.get("loops", []):
+        _sw_id = str(lr.get("疑似联络开关id") or "")
+        if not _sw_id:
+            continue
+        defects_report.append({
+            "equip_id": _sw_id,
+            "defect_type": "非计划合环",
+            "description": (f"馈线{line_name}存在非计划合环：疑似联络开关"
+                            f"{lr.get('疑似联络开关名称') or _sw_id}({_sw_id})为合位/未知状态运行"
+                            f"（Q5/Q24 所有合环均视为非计划合环）"),
+            "suggestion": "建议现场核查合环开关状态，按规范转为联络运行或停电操作",
+            "sql_draft": "-- 非计划合环待确认，需现场核查后操作（不自动修改）",
+            "equip_name": str(lr.get("疑似联络开关名称") or ""),
+            "station_id": start_st_id,
+            "dimension": "拓扑完整性",
+        })
+        _loop_added += 1
+    if _loop_added > 0:
+        print(f"  • 【合环补录】: {_loop_added} 条（归属拓扑完整性，5分/处）")
     # -----------------------------------------------------------------
 
     # 输出统计
@@ -503,9 +585,17 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
     print("\n📈 质量评分与置信度计算...")
     tele_evaluator = TelemetryEvaluator()
     score_engine = ScoreAndConfidenceEngine(tele_evaluator)
-    # 【修复模块五-P2】repaired_defect_ids 应为空列表：表示"当前未修复任何缺陷"，
-    # 使 score_after 真实反映"若修复后的评分"，而非将所有缺陷标记为已修复导致分虚高。
+    # 【评分口径】score_after = 当前未修复状态的评分（repaired=[] 不虚高）。
+    # 用户要求：不接受"把有缺陷硬做成满分"。模型质量评分只反映数据当前质量；
+    # 修复后的提升通过"确定性修复候选占比"单独说明，不并入评分。
+    # 注：修复候选多为 INSERT/UPDATE 建议，且 Q49③ 允许"待确认"标注，
+    # 若全部标记为已修复会导致 score_after=100 的虚假满分。
     repaired_defect_ids: list = []
+    deterministic_ratio = round(
+        sum(1 for c in repair_candidates
+            if c.get("sql_forward") and "待确认" not in str(c.get("sql_forward")))
+        / max(len(repair_candidates), 1), 3
+    )
     score_summary = score_engine.evaluate_quality_score(
         defects_report, len(dist_topo.device_map),
         repaired_defect_ids=repaired_defect_ids
@@ -525,21 +615,18 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
                 "score_after": score_summary["score_after"],
                 "total_deduction": score_summary["total_deduction"],
                 "defect_count": score_summary["defect_count"],
+                "deterministic_repair_ratio": deterministic_ratio,
+                "note": "score_after=当前未修复状态的评分；确定性修复候选占比见 deterministic_repair_ratio，不虚高。",
             },
             "defects_with_confidence": score_summary["processed_defects"],
         }, f, ensure_ascii=False, indent=4)
     print(f"👉 质量评分报告: {score_output_path}")
 
-    # 馈线分析
-    analysis = build_feeder_analysis(
-        line_name=line_name, feeder_id=feeder_id, start_st_id=start_st_id,
-        dist_topo=dist_topo, table_data=table_data,
-        svg_connections=svg_connections,
-        element_to_object_map=element_to_object_map,
-        line_db_devices=line_db_devices,
-        defects_report=defects_report,
-        score_summary=score_summary,
-    )
+    # 回填Sheet5评分（build_feeder_analysis提前执行时score_summary为空）
+    if _analysis.get("scores"):
+        for _sr in _analysis["scores"]:
+            _sr["修正前评分"] = score_summary.get("score_before", 0)
+            _sr["修正后评分"] = score_summary.get("score_after", 0)
 
     # Excel报告
     xlsx_output_path = os.path.join(output_dir, f"{line_name}_拓扑校验缺陷报告.xlsx")
@@ -547,7 +634,7 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         defects_report, xlsx_output_path, line_name,
         template_path=DATASET_STANDARD_OUTPUT_XLSX,
         default_station=start_st_id,
-        analysis=analysis,
+        analysis=_analysis,
     )
     print(f"👉 标准Excel报告: {xlsx_output_path}")
 

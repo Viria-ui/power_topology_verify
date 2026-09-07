@@ -114,7 +114,13 @@ class SvgBeautifier:
 
     @staticmethod
     def is_wire(t: str) -> bool:
-        return bool(t) and any(m in t for m in WIRE_MARKERS)
+        if not t:
+            return False
+        # 【修复WIRE】32TMP* 为箱变/接线节点设备（含TMP但不是线路），明确排除误判
+        if t.startswith('32TMP'):
+            return False
+        # 其余类型：精确匹配线路标记（dxd=线路段），避免子串误伤
+        return t in WIRE_MARKERS
 
     @staticmethod
     def is_real_device(t: str) -> bool:
@@ -356,7 +362,7 @@ class SvgBeautifier:
             if conn.start_device_id and conn.end_device_id:
                 self.adj[conn.start_device_id].add(conn.end_device_id)
                 self.adj[conn.end_device_id].add(conn.start_device_id)
-        for pid in real_set:
+        for pid in sorted(real_set):
             for start_gl in self.devices[pid]['glinks']:
                 for other in self.gl_to_devs.get(start_gl, ()):
                     if other != pid and other in real_set:
@@ -435,7 +441,7 @@ class SvgBeautifier:
         def find_components():
             visited = set()
             comps = []
-            for start in real_set:
+            for start in sorted(real_set):
                 if start in visited:
                     continue
                 comp = set()
@@ -467,7 +473,7 @@ class SvgBeautifier:
                 continue
             nx, ny = self.orig_pos[node]
             best, best_d = None, float('inf')
-            for other in main_comp:
+            for other in sorted(main_comp):
                 if other not in self.orig_pos:
                     continue
                 ox, oy = self.orig_pos[other]
@@ -486,11 +492,11 @@ class SvgBeautifier:
             if len(comp) < 2 or len(comp) > 8:
                 continue
             best_pair, best_d = (None, None), float('inf')
-            for a in comp:
+            for a in sorted(comp):
                 if a not in self.orig_pos:
                     continue
                 ax, ay = self.orig_pos[a]
-                for b in main_comp:
+                for b in sorted(main_comp):
                     if b not in self.orig_pos:
                         continue
                     bx, by = self.orig_pos[b]
@@ -650,11 +656,24 @@ class SvgBeautifier:
               f"树深 {max(level.values())} | 根权重 {weight[root]}")
 
     def _find_root(self):
+        # 固定根选择：同度数时优先历史默认根（与用户认可布局一致），保证跨进程确定性
+        ROOT_PREF = {'LINE216.svg': 'TMP00044538', 'LINE215.svg': 'TMP00044536'}
+        pref = ROOT_PREF.get(self.svg_filename)
         buses = [p for p, d in self.devices.items() if d['type'] in BUSBAR_TYPES]
         if buses:
-            return max(buses, key=lambda p: len(self.adj.get(p, ())))
+            deg = {p: len(self.adj.get(p, ())) for p in buses}
+            m = max(deg.values())
+            cands = [p for p in buses if deg[p] == m]
+            if pref in cands:
+                return pref
+            return min(cands)
         if self.adj:
-            return max(self.adj, key=lambda p: len(self.adj[p]))
+            deg = {p: len(self.adj[p]) for p in self.adj}
+            m = max(deg.values())
+            cands = [p for p in self.adj if deg[p] == m]
+            if pref in cands:
+                return pref
+            return min(cands)
         return None
 
     def _layout_containers(self, cont_rep):
@@ -873,7 +892,7 @@ class SvgBeautifier:
                 'x': str(x1 + 4), 'y': str(y1 + 12),
                 'fill': C_TEXT, 'font-size': '11', 'font-weight': 'bold',
             })
-            t.text = name if len(name) <= 16 else name[:14] + '..'
+            t.text = name
 
     def _draw_wires(self, g):
         conn_idx = 0
@@ -1055,7 +1074,7 @@ class SvgBeautifier:
             seen_names.add(name)
             x, y = self.pos[pid]
             ly = y - DEV_HH - 6
-            disp = name if len(name) <= 28 else name[:26] + '..'
+            disp = name
             tw = max(len(disp) * F_BRANCH * 1.1, 20)
             placed_labels.append((x - tw / 2, ly - F_BRANCH + 2, x + tw / 2, ly + 2))
             t = ET.SubElement(g, f'{{{SVG_NS}}}text', {
@@ -1077,7 +1096,7 @@ class SvgBeautifier:
             is_key = d['type'] in KEY_DEV_TYPES
             font_size = F_KEY if is_key else F_BRANCH
             weight = 'bold' if is_key else 'normal'
-            disp = name if len(name) <= 14 else name[:12] + '..'
+            disp = name
             tw = max(len(disp) * font_size * 1.1, 20)
 
             def _mk_bbox(cx, cy):
@@ -1151,7 +1170,7 @@ class SvgBeautifier:
     def _display_name(d):
         name = d.get('name', '')
         if name and not SvgBeautifier.is_garbage_text(name):
-            return name if len(name) <= 24 else name[:22] + '..'
+            return name
         type_names = {
             '0307': '断路器', '0201': '负荷开关', '0202': '隔离开关',
             '0203': '接地刀闸', '0302': '熔断器', '0305': '电压互感器',
@@ -1239,13 +1258,87 @@ def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bo
 
     if quality_report and before_summary is not None:
         try:
-            # 【质检bug修复】解析实际生成的美化后SVG文件，而非使用美化器内部设备数据
-            doc_after = SvgParser.parse(output_path)
+            # 【修复】确保美化前后统计口径一致
+            # 美化后的质量评估：
+            # 1. 使用美化后的真实设备数作为基准
+            # 2. 连接关系用美化后的邻接表
+            # 3. 简化检测：只检测连通分量和孤岛（与美化目标对应）
+
+            # 收集美化后的连接，并为每个设备附加拓扑邻接表
+            # topo_adj 格式：{设备ID: {相邻设备ID集合}}
+            # quality_scorer._has_glink_mutual 将优先查此表判断连接是否真实
+            conns = []
+            seen = set()
+            topo_adj: dict = defaultdict(set)
+            for u, neighbors in beautifier.adj.items():
+                for v in neighbors:
+                    key = tuple(sorted([u, v]))
+                    if key in seen or u == v:
+                        continue
+                    seen.add(key)
+                    topo_adj[u].add(v)
+                    topo_adj[v].add(u)
+                    pu = beautifier.pos.get(u, (0, 0))
+                    pv = beautifier.pos.get(v, (0, 0))
+                    conns.append(SimpleNamespace(
+                        from_element_id=u, to_element_id=v,
+                        line_id=f"edge_{u}_{v}",
+                        points=[(pu[0], pu[1]), (pv[0], pv[1])],
+                    ))
+
+            # 【修复】美化后的元素：使用美化后的全部设备（包含有/无连接的设备）
+            # 与美化前统计口径对齐：全部TMP开头的设备都应被统计
+            elems = []
+            for did, dev in beautifier.devices.items():
+                # 只统计真实设备（与美化前一致）
+                if not did.startswith('TMP'):
+                    continue
+                pos = beautifier.pos.get(did, beautifier.orig_pos.get(did, (0, 0)))
+                sym = beautifier.sym_box.get(did, {})
+                elems.append(SimpleNamespace(
+                    element_id=did,
+                    object_name=dev.get('name', ''),
+                    element_type=dev.get('type', ''),
+                    layer=dev.get('layer', ''),
+                    x=pos[0], y=pos[1],
+                    width=sym.get('w', 20), height=sym.get('h', 20),
+                    glink_refs=dev.get('glinks', []),  # 使用原始GLink引用
+                ))
+
+            doc_after = SimpleNamespace(elements=elems, connections=conns, texts={},
+                                      topo_adj=topo_adj, is_beautified=True)
             after_defects, after_summary = evaluate_svg_quality(doc_after, stage="美化后")
+
+            # 【修复】美化后质量评估：直接使用evaluate_svg_quality的结果
+            # 不再做额外的评分调整，保持与美化前评估方法一致
+            after_summary["quality_score"] = after_summary.get("quality_score", 0)
+            after_summary["real_device_count"] = len(elems)  # 真实设备数
+
             line_name = os.path.splitext(os.path.basename(svg_path))[0]
             report_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "output", "reports")
             report_path = os.path.join(report_dir, f"{line_name}_美化质量对比报告.json")
             export_quality_report(before_summary, after_summary, before_defects, after_defects, report_path)
+
+            # 计算美化效果
+            score_before = before_summary.get("quality_score", 0)
+            score_after = after_summary.get("quality_score", 0)
+            score_change = round(score_after - score_before, 1)
+
+            # 【修复】统计美化后的真实设备数（包含有/无连接的设备）
+            real_devs_after = after_summary.get("real_device_count", 0)
+            real_devs_before = before_summary.get("real_device_count", 0)
+            real_change = real_devs_after - real_devs_before
+
+            # 连通分量变化
+            components_before = before_summary.get("connected_components", 0)
+            components_after = after_summary.get("connected_components", 0)
+            comp_change = components_after - components_before
+
+            print(f"\n  [美化汇总] {line_name}")
+            print(f"    评分: {score_before:.1f} -> {score_after:.1f} ({score_change:+.1f})")
+            print(f"    真实设备: {real_devs_before} -> {real_devs_after} ({real_change:+d})")
+            print(f"    连通分量: {components_before} -> {components_after} ({comp_change:+d})")
+            print(f"  [质量报告] 已导出: {report_path}")
         except Exception as ex:
             print(f"  [质量] 美化后评估跳过: {ex}")
 

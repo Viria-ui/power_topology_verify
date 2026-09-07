@@ -146,8 +146,16 @@ class SvgInteractiveEditorV2:
         return True
 
     def add_station(self, station_id, station_name, upstream_query,
-                    downstream_query, internal_switch_ids):
-        print(f"\n[Editor] 新增站房 {station_id} ({station_name})")
+                    downstream_query, internal_switch_ids,
+                    internal_switch_type: str = "0201"):
+        """新增站房（默认内部为负荷开关 0201；可通过 internal_switch_type 指定类型）。
+
+        赛题 5.2 测试任务1要求：
+          - 新增站房编号 000300
+          - 站内3台负荷开关编号 00301 / 00302 / 00303
+          - 拓扑：开关00301 对接上游，开关00303 对接下游，开关00302 作备用间隔
+        """
+        print(f"\n[Editor] 新增站房 {station_id} ({station_name}) 内部开关类型={internal_switch_type}")
         up_id = self._find_id_by_name(upstream_query)
         down_id = self._find_id_by_name(downstream_query)
         if not up_id or not down_id:
@@ -165,14 +173,33 @@ class SvgInteractiveEditorV2:
             'psr_id': cid, 'members': []
         }
 
-        sym = self._find_symbol_by_type('0307')
+        # ★ 修复5.2：使用传入的开关类型（默认 0201 负荷开关）
+        sym = self._find_symbol_by_type(internal_switch_type)
+        # 设备类型 → 中文名称（用于标注）
+        _TYPE_CN = {
+            "0201": "负荷开关", "0307": "断路器",
+            "0202": "隔离开关", "0203": "接地刀闸",
+            "0302": "熔断器", "0309": "组合开关",
+        }
+        type_cn = _TYPE_CN.get(internal_switch_type, "开关")
+        # 设备类型 → 图层名
+        _TYPE_LAYER = {
+            "0201": "LoadBreakSwitch", "0307": "Breaker",
+            "0202": "Disconnector", "0203": "GroundDisconnector",
+            "0302": "Fuse", "0309": "CompositeSwitch",
+        }
+        layer_name = _TYPE_LAYER.get(internal_switch_type, "LoadBreakSwitch")
+
         sw_full_ids = []
         for sw_id in internal_switch_ids:
             full_id = f"SW_{sw_id}"
             self.b.devices[full_id] = {
-                'id': full_id, 'type': '0307', 'name': f'开关{sw_id}',
+                'id': full_id,
+                'type': internal_switch_type,   # ★ 使用传入类型
+                'name': f'{type_cn}{sw_id}',
                 'ssjg': cid, 'glinks': [], 'symbol': sym, 'vclass': 'lkv10',
-                'layer': 'Breaker', 'orig_x': 0.0, 'orig_y': 0.0,
+                'layer': layer_name,             # ★ 使用对应图层
+                'orig_x': 0.0, 'orig_y': 0.0,
             }
             self.b.containers[cid]['members'].append(full_id)
             sw_full_ids.append(full_id)
@@ -183,6 +210,7 @@ class SvgInteractiveEditorV2:
         self.b.adj[sw1].add(up_id)
         self.b.adj[sw3].add(down_id)
         self.b.adj[down_id].add(sw3)
+        # ★ 赛题5.2：开关00301<->00303 内部直连（旁路备用）
         self.b.adj[sw1].add(sw3)
         self.b.adj[sw3].add(sw1)
 
@@ -190,8 +218,24 @@ class SvgInteractiveEditorV2:
             'cid': cid, 'up_id': up_id, 'down_id': down_id,
             'switches': sw_full_ids,
         })
-        print(f"  [成功] 上游{up_id}->SW1, SW3->下游{down_id}, SW1<->SW3连通")
+        print(f"  [成功] 上游{up_id}->SW1, SW3->下游{down_id}, SW1<->SW3备用连通")
         return True
+
+    def add_load_switch_station(self, station_id, station_name,
+                                upstream_query, downstream_query,
+                                switch_short_ids: list):
+        """赛题 5.2 测试任务1专用：新增站房，内部为3台负荷开关(0201)。
+
+        等价于 add_station(..., internal_switch_type="0201")。
+        """
+        return self.add_station(
+            station_id=station_id,
+            station_name=station_name,
+            upstream_query=upstream_query,
+            downstream_query=downstream_query,
+            internal_switch_ids=switch_short_ids,
+            internal_switch_type="0201",   # ★ 负荷开关
+        )
 
     def delete_device(self, dev_query):
         print(f"\n[Editor] 删除设备: {dev_query}")

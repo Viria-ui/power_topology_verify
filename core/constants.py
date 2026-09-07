@@ -132,6 +132,16 @@ GARBAGE_PATTERNS = [
 # 关键一次设备图层（字号14, bold）
 KEY_DEVICE_LAYERS = {"PowerTransformer", "Breaker", "BusbarSection"}
 
+# ★ 新增：站房容器类型集合（用于 1.3 联络开关严格按容器排除）
+# 设备若归属这些类型的容器（ssjg 字段命中），则一律不参与联络识别
+STATION_CONTAINER_TYPES = {
+    "zf01", "zf06", "zf07", "zf08",
+    "Substation", "SwitchStation", "RingMainUnit", "BoxSubstation",
+    "DistributionRoom", "PadMountedSubstation",
+    "开关站", "环网柜", "箱变", "配电室", "配电房", "台区", "配电站",
+    "StationContainer",
+}
+
 # B.1 网格吸附
 GRID_SIZE = 10.0
 

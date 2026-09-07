@@ -365,18 +365,24 @@ class EnhancedReportGenerator:
             report.confidence_interval = (0.5, 0.8)
             report.confidence_status = "PENDING"
         
-        # 3. 物理约束校验
-        if PHYSICAL_MODULE_OK and self.physical_checker:
-            physical_result = self.physical_checker.check_branch_constraint(
-                equip_id, "NODE_A", "NODE_B"
-            )
-            report.physical_constraint_result = {
-                "check_type": physical_result.check_type,
-                "passed": physical_result.passed,
-                "risk_level": physical_result.risk_level,
-                "physical_basis": physical_result.physical_basis,
-                "suggestion": physical_result.suggestion,
-            }
+        # 3. 物理约束校验（【M4修复】原实现对每个缺陷传假节点"NODE_A/NODE_B"，
+        #    产生无意义的物理约束结果；仅当设备真实存在于拓扑图且端子>=2时执行校验）
+        if PHYSICAL_MODULE_OK and self.physical_checker and self.topology_graph is not None:
+            try:
+                pts = [n for n in self.topology_graph.neighbors(equip_id)]
+                if len(pts) >= 2:
+                    physical_result = self.physical_checker.check_branch_constraint(
+                        equip_id, pts[0], pts[1]
+                    )
+                    report.physical_constraint_result = {
+                        "check_type": physical_result.check_type,
+                        "passed": physical_result.passed,
+                        "risk_level": physical_result.risk_level,
+                        "physical_basis": physical_result.physical_basis,
+                        "suggestion": physical_result.suggestion,
+                    }
+            except Exception:
+                pass
         
         # 4. 时序特征
         if TEMPORAL_MODULE_OK:

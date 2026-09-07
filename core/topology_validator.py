@@ -29,7 +29,8 @@ from core.constants import (
     ERR, SUSPECT, EXEMPT, REVIEW,
     R_TIE_EXCLUDE_001, R_TIE_001, R_TIE_002, R_LOOP_001,
     R001, R002, R003,
-    SWITCH_STATUS_MAP
+    SWITCH_STATUS_MAP,
+    STATION_CONTAINER_TYPES,  # ★ 新增：站房容器类型（按容器严格判定联络）
 )
 
 
@@ -375,9 +376,8 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
             sql_draft=f"-- SVG图缺失: 请在SVG图层={dtype}_Layer 补画ID={tid} 并添加iec:PSR_Ref元数据",
         ))
 
-    # ---- 3. 物理连接不一致 ----
-    # 正确比较：TopologyGraph.graph 是设备节点 + 真实端子(TERMINAL_ID)混合图，
-    # 边只存在 TERMINAL-TERMINAL(CONNECT_NODE连接) 和 DEVICE-TERMINAL(挂点)。
+    # ---- 3. 物理连接不一致（增强：多策略退化）----
+    # 正确比较：TopologyGraph.graph 是设备节点 + 真实端子(TERMINAL_ID)混合图
     svg_pairs: set[tuple[str, str]] = set()
     for conn in doc.connections:
         s, e = conn.start_device_id, conn.end_device_id
@@ -385,6 +385,9 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
             svg_pairs.add(tuple(sorted([s, e])))
 
     G = topo.graph
+    # 端子→设备映射（用于策略3：折叠端子图为设备级图）
+    pt2dev = {pid: pt.belong_equip_id for pid, pt in topo.point_map.items()}
+
     for s, e in svg_pairs:
         if s not in G.nodes or e not in G.nodes:
             defects.append(_make_defect(
@@ -398,25 +401,67 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
         pts_s = list(topo._points_by_equip.get(s, [])) if hasattr(topo, "_points_by_equip") else []
         pts_e = list(topo._points_by_equip.get(e, [])) if hasattr(topo, "_points_by_equip") else []
         has_logic_conn = False
+        detection_strategy = "none"
         try:
-            cand_pairs = []
+            # 策略1：端子对全组合 + BFS 路径（首选）
             if pts_s and pts_e:
-                cand_pairs = [(a, b) for a in pts_s if G.has_node(a) for b in pts_e if G.has_node(b)]
+                cand_pairs = [(a, b) for a in pts_s if G.has_node(a)
+                              for b in pts_e if G.has_node(b)]
+                for a, b in cand_pairs:
+                    try:
+                        if nx.has_path(G, a, b):
+                            plen = len(nx.shortest_path(G, a, b))
+                            if plen <= 10:
+                                has_logic_conn = True
+                                detection_strategy = "terminal_bfs"
+                                break
+                    except nx.NetworkXNoPath:
+                        continue
             else:
-                cand_pairs = [(s, e)]
-            for a, b in cand_pairs:
-                if nx.has_path(G, a, b):
-                    plen = len(nx.shortest_path(G, a, b))
-                    if plen <= 10:  # 允许若干跳：设备A-端子A-端子N-...-端子N-设备B
-                        has_logic_conn = True
-                        break
+                cand_pairs = []
+
+            # ★ 策略2（退化1）：设备级直连路径
+            if not has_logic_conn and G.has_node(s) and G.has_node(e):
+                try:
+                    if nx.has_path(G, s, e):
+                        plen = len(nx.shortest_path(G, s, e))
+                        if plen <= 6:
+                            has_logic_conn = True
+                            detection_strategy = "device_direct"
+                except nx.NetworkXNoPath:
+                    pass
+
+            # ★ 策略3（退化2）：折叠端子为设备级图后 BFS
+            if not has_logic_conn:
+                device_sub = nx.Graph()
+                device_ids = set(topo.device_map.keys())
+                for u, v in G.edges():
+                    a_dev = pt2dev.get(u, u if u in device_ids else None)
+                    b_dev = pt2dev.get(v, v if v in device_ids else None)
+                    if a_dev and b_dev and a_dev != b_dev:
+                        if not device_sub.has_edge(a_dev, b_dev):
+                            device_sub.add_edge(a_dev, b_dev)
+                if device_sub.has_node(s) and device_sub.has_node(e):
+                    try:
+                        if nx.has_path(device_sub, s, e):
+                            plen = len(nx.shortest_path(device_sub, s, e))
+                            if plen <= 6:
+                                has_logic_conn = True
+                                detection_strategy = "device_collapsed_bfs"
+                    except nx.NetworkXNoPath:
+                        pass
         except Exception:
             has_logic_conn = False
+
         if not has_logic_conn:
             defects.append(_make_defect(
                 equip_id=f"{s} <-> {e}",
                 defect_type="物理连接不一致",
-                description=f"SVG存在物理连接{s}-{e}，但模型端子图不连通(候选端子对={len(cand_pairs) if pts_s else '无端子'})",
+                description=(
+                    f"SVG存在物理连接{s}-{e}，但模型端子图不连通"
+                    f"(候选端子对={len(pts_s)*len(pts_e) if pts_s and pts_e else '无端子'}, "
+                    f"策略={detection_strategy})"
+                ),
                 suggestion="建议在PWFEEDERLINE补线段记录，或PWTERMINAL补端子并对齐CONNECT_NODE_ID",
                 sql_draft=f"INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID,LINE_NAME,START_ST_ID,VOLTAGE_TYPE) VALUES ('LN_{s}_{e}','SVG物理连通补录','{s}','1010');",
             ))
@@ -444,6 +489,53 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
                 sql_draft=f"UPDATE EQUIP_JBS_PWEQUIPINFO SET VOLTAGE_TYPE='{svg_vol}' WHERE EQUIP_ID='{oid}';"
             ))
 
+    # ---- 5. ★ 修复2.4：物理断开、逻辑误连通反向校验 ----
+    # 遍历拓扑图中存在的设备-设备边，若 SVG 未绘制该连接且非内部 INT_ 边，
+    # 则判为后台错误生成的虚假拓扑连通。
+    topo_device_pairs: set[tuple[str, str]] = set()
+    device_ids = set(topo.device_map.keys())
+    if not pt2dev:
+        pt2dev = {pid: pt.belong_equip_id for pid, pt in topo.point_map.items()}
+    for u, v in topo.graph.edges():
+        a_dev = pt2dev.get(u, u if u in device_ids else None)
+        b_dev = pt2dev.get(v, v if v in device_ids else None)
+        if a_dev and b_dev and a_dev != b_dev and a_dev in device_ids and b_dev in device_ids:
+            topo_device_pairs.add(tuple(sorted([a_dev, b_dev])))
+
+    false_topo_edges = topo_device_pairs - svg_pairs
+    extra_false = 0
+    for a, b in false_topo_edges:
+        edge_data = topo.graph.get_edge_data(a, b) or {}
+        # edge_info 可能在 edge 字典里
+        edge_info = edge_data.get("edge_info") or edge_data.get("edge") or {}
+        line_id = (edge_info.get("line_id", "") if isinstance(edge_info, dict) else "") or ""
+        # 设备内部边（INT_ 前缀）属于正常内部通路，不计入虚假连通
+        if line_id.startswith("INT_"):
+            continue
+        # 两端均无 SVG 渲染则跳过，避免噪声
+        if a not in svg_device_ids and b not in svg_device_ids:
+            continue
+        extra_false += 1
+        defects.append(_make_defect(
+            equip_id=f"{a} <-> {b}",
+            defect_type="物理断开逻辑误连通",
+            description=(
+                f"数据库拓扑图存在 {a} ↔ {b} 的边（line_id={line_id or 'UNKNOWN'}），"
+                f"但 SVG 图纸中无对应物理连接，疑似后台错误生成关联链路形成虚假拓扑连通"
+            ),
+            suggestion=(
+                f"建议核实模型中 {a}↔{b} 是否真实物理连接；"
+                f"若图纸正确则在 PWFEEDERLINE/PWTERMINAL 中断开该虚假链路"
+            ),
+            sql_draft=(
+                f"DELETE FROM EQUIP_JBS_PWFEEDERLINE WHERE LINE_ID='{line_id}';"
+                if line_id else
+                f"-- 物理断开逻辑误连通：核对 PWFEEDERLINE 中 {a}↔{b} 边后人工删除"
+            ),
+        ))
+    if extra_false:
+        logger.info("物理断开逻辑误连通反向校验: 命中 %d 条", extra_false)
+
     summary = {
         "stage": stage,
         "feeder_id": feeder_id,
@@ -454,6 +546,7 @@ def validate_svg_vs_topology(doc: SvgDocument, topo: TopologyGraph,
             "模型有图无": len([d for d in defects if d["defect_type"] == "模型有图无"]),
             "物理连接不一致": len([d for d in defects if d["defect_type"] == "物理连接不一致"]),
             "逻辑连接不一致": len([d for d in defects if d["defect_type"] == "逻辑连接不一致"]),
+            "物理断开逻辑误连通": len([d for d in defects if d["defect_type"] == "物理断开逻辑误连通"]),
         },
         "total_defects": len(defects),
     }
@@ -808,9 +901,14 @@ class TopoDbValidator:
             self.source_point_ids.update(pts)
 
     def _is_tie_switch_candidate(self, dev, feeder_set: set):
-        """判断设备是否是联络开关候选，读取constants豁免规则"""
+        """判断设备是否是联络开关候选，读取constants豁免规则
+
+        ★ 修复1.3：除名称关键字外，严格按 ssjg 容器归属判定。
+        设备归属箱变/开关站/环网柜/配电室等容器内的开关，一律排除。
+        """
         equip_type = dev.equip_type or ""
         equip_name = dev.equip_name or ""
+        ssjg = (getattr(dev, "ssjg", "") or "").strip()
         # 类型豁免
         if equip_type in TERMINAL_EXEMPT_TYPES:
             return False
@@ -818,6 +916,9 @@ class TopoDbValidator:
         for ban_key in TIE_EXCLUDE_NAME_KEYS:
             if ban_key in equip_name:
                 return False
+        # ★ 新增：ssjg 容器豁免（按归属容器严格排除站内开关）
+        if ssjg and ssjg in STATION_CONTAINER_TYPES:
+            return False
         # 跨至少2个馈线
         if len(feeder_set) < 2:
             return False
@@ -956,12 +1057,22 @@ class TopoDbValidator:
                     self.topo.tie_loop_list.append(item)    
 
     def find_all_connected_components(self) -> list[set]:
-        """获取全部连通分量，只保留端子节点TERMINAL_ID"""
+        """获取全部连通分量，只保留端子节点TERMINAL_ID。
+
+        【L5优化】实例级缓存：检测阶段拓扑图构建完成后只读，多次调用
+        （孤岛/馈线连通/联络判定/断点定位共用）不重复遍历全图。
+        若外部在检测中途修改了 self.G（当前流程不存在），需调用
+        self._cc_cache = None 手动失效。
+        """
+        cached = getattr(self, "_cc_cache", None)
+        if cached is not None:
+            return cached
         comps = []
         for comp in nx.connected_components(self.G):
             term_comp = {n for n in comp if n in self.topo.point_map}
             if len(term_comp) > 0:
                 comps.append(term_comp)
+        self._cc_cache = comps
         return comps
 
     def _get_feeder_of_terminal(self, term_id: str) -> Optional[str]:
@@ -1121,9 +1232,14 @@ class TopoDbValidator:
             dev_name = dev.equip_name or ""
             dev_type = dev.equip_type or ""
             term_ids = self.topo.get_device_all_points(equip_id)
+            # ★ 修复1.3：按 ssjg 容器归属严格判定，站内开关不参与联络识别
+            ssjg = (getattr(dev, "ssjg", "") or "").strip()
 
             # R_TIE_EXCLUDE_001：末端对象直接排除联络识别
             if any(k in dev_name for k in TIE_EXCLUDE_NAME_KEYS):
+                continue
+            # ★ 新增：设备归属箱变/开关站/环网柜/配电室容器内 → 排除
+            if ssjg and ssjg in STATION_CONTAINER_TYPES:
                 continue
             # 只处理开关类设备，端子数量必须等于2
             if dev_type not in NON_TERMINAL_SWITCH_TYPES or len(term_ids) != 2:
@@ -1340,3 +1456,80 @@ def run_database_topo_check(topo: TopologyGraph, trace_id="DB_TOPO_001", measure
     validator = TopoDbValidator(topo, measure_proc=measure_proc)
     abn, brk, tie = validator.run_all_db_check(trace_uuid=trace_id)
     return abn, brk, tie
+
+
+# ----------------------------------------------------------------------
+# 赛题 1.2 专项测试任务：两点间断点定位
+# ----------------------------------------------------------------------
+SPECIFIC_BREAKPOINT_TASKS = [
+    {"task_id": "1.2-T1", "start": "TMP00013138", "end": "TMP00047197"},
+    {"task_id": "1.2-T2", "start": "TMP00007913", "end": "TMP00007907"},
+]
+
+
+def run_specific_breakpoint_tests(topo: TopologyGraph,
+                                   trace_uuid: str = "SPECIFIC_1.2") -> list[dict]:
+    """赛题 1.2 指定测试任务：两点间断点定位
+
+    测试任务1：拓扑找 TMP00013138 至 TMP00047197 中间的断点位置
+    测试任务2：拓扑找 TMP00007913 至 TMP00007907 中间的断点位置
+
+    返回：每个测试任务的详细结果列表（含起点/终点设备命中情况、断点候选 P1-P7、摘要）
+    """
+    results: list[dict] = []
+    for tc in SPECIFIC_BREAKPOINT_TASKS:
+        a, b = tc["start"], tc["end"]
+        a_in = a in topo.device_map
+        b_in = b in topo.device_map
+        record: dict = {
+            "task_id": tc["task_id"],
+            "trace_uuid": trace_uuid,
+            "start_equip": a,
+            "end_equip": b,
+            "found_start_in_topo": a_in,
+            "found_end_in_topo": b_in,
+            "breakpoints": [],
+            "summary": "",
+        }
+        if not a_in or not b_in:
+            missing = []
+            if not a_in:
+                missing.append(a)
+            if not b_in:
+                missing.append(b)
+            record["summary"] = (
+                f"设备 {','.join(missing)} 不在拓扑设备图中，无法进行断点定位"
+            )
+            results.append(record)
+            logger.warning(
+                "赛题 %s: 设备 %s 缺失，断点定位跳过",
+                tc["task_id"], ','.join(missing),
+            )
+            continue
+
+        try:
+            breakpoints = topo.find_breakpoint_between(a, b)
+        except Exception as ex:
+            logger.exception("赛题 %s: find_breakpoint_between 异常: %s", tc["task_id"], ex)
+            record["summary"] = f"调用 find_breakpoint_between 异常: {ex}"
+            results.append(record)
+            continue
+
+        record["breakpoints"] = breakpoints
+        if breakpoints:
+            top = breakpoints[0]
+            record["summary"] = (
+                f"{a} → {b}: 识别 {len(breakpoints)} 个断点候选，"
+                f"最高优先级={top.get('priority','N/A')} "
+                f"断点设备={top.get('equip_id','')} 类型={top.get('breakpoint_type','')}"
+            )
+        else:
+            record["summary"] = f"{a} → {b}: 未识别到任何断点，两点连通"
+
+        results.append(record)
+        logger.info(
+            "赛题 %s: %s → %s 共 %d 个断点 (P1=%s)",
+            tc["task_id"], a, b, len(breakpoints),
+            breakpoints[0].get("priority", "无") if breakpoints else "无",
+        )
+    return results

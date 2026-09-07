@@ -93,6 +93,11 @@ class TestTieSwitchAnalysis(unittest.TestCase):
         G.add_node("SW_A1", equip_id="SW_A1", equip_type="1705", feeder_id="FEEDER_A")
         G.add_node("SW_B1", equip_id="SW_B1", equip_type="1705", feeder_id="FEEDER_B")
         G.add_node("TIE_SW", equip_id="TIE_SW", equip_type="1705")  # 无 feeder_id
+        # 【Q18】两侧需连通变电站母线：图中必须有电源设备(is_source)，
+        # 否则按 api_doc Q18 判定"未连通母线"而不识别为联络。
+        G.add_node("POWER_SRC", equip_id="POWER_SRC", equip_type="1301",
+                   feeder_id="FEEDER_A", is_source=True)
+        G.add_edge("POWER_SRC", "SW_A1")
         G.add_edge("SW_A1", "TIE_SW")
         G.add_edge("TIE_SW", "SW_B1")
 

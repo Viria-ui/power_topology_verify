@@ -13,7 +13,7 @@
       "delta": {
         "devices": -1,
         "stations": 0,
-        "connections": -4
+        "connections": -6
       }
     }
   },
@@ -241,10 +241,10 @@
     "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\TMP00034205_power_trace.svg",
     "target": "TMP00034205",
     "feeder": "LINE074",
-    "main_path_len": 157,
+    "main_path_len": 755,
     "backup_paths": 2,
-    "nodes": 330,
-    "edges": 329,
+    "nodes": 291,
+    "edges": 290,
     "edge_error_pct": 0.0
   }
 }

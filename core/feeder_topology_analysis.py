@@ -22,7 +22,7 @@ import networkx as nx
 from core.graph_model import TopologyGraph
 from core.constants import (
     TERMINAL_EXEMPT_TYPES, NON_TERMINAL_SWITCH_TYPES, SWITCH_TYPES,
-    TIE_EXCLUDE_NAME_KEYS,
+    TIE_EXCLUDE_NAME_KEYS, STATION_CONTAINER_TYPES, SOURCE_TYPES,
 )
 from core.log_config import get_logger
 
@@ -158,7 +158,7 @@ def find_breakpoint_between(device_graph: nx.Graph, start_id: str, end_id: str) 
     except nx.NetworkXNoPath:
         return {"found": True, "reason": "两点不可达", "path": []}
     for node in path:
-        if _is_switch_node(device_graph, node) and str(device_graph.nodes[node].get("switch_status") or "") in {"open", "分位", "0"}:
+        if _is_switch_node(device_graph, node) and str(device_graph.nodes[node].get("switch_status") or "").upper() in {"OPEN", "分位", "0"}:
             return {"found": True, "reason": "分位开关断点", "breakpoint_id": node, "path": path}
     return {"found": False, "reason": "两点连通", "path": path}
 
@@ -304,13 +304,20 @@ def analyze_tie_switches(
     device_graph: nx.Graph,
     dist_topo: TopologyGraph,
     line_df,
+    table_data: dict | None = None,
 ) -> list[dict]:
     """
     Sheet3 联络开关自动识别：基于全库设备图遍历所有开关，
     判定其邻居是否跨越多条馈线（跨馈线 = 联络）。
 
-    关键修复：不再依赖 SVG 局部图（SVG 只有单条馈线设备，永远找不到联络开关）。
-    改用全库 build_device_graph() 构建的设备级无向图。
+    【v4 修复（api_doc Q23/Q18/Q38 口径）】
+      - Q23：联络开关不能出现在配电站房和箱变中（站内开关不纳入联络识别）
+      - Q18：两侧均需连通到变电站母线（所在连通分量含变电站/主变）
+      - Q38：无遥信记录默认合位；行内附加 _switch_status（0分位/1合位/None未知）
+      - 分位开关仍为合规联络（Sheet3 输出"是"，Sheet4 据此跳过）
+
+    关键修复（9月5日）：不再依赖 SVG 局部图（SVG 只有单条馈线设备，
+    永远找不到联络开关）。改用全库 build_device_graph() 的设备级无向图。
     """
     fid2name: dict = {}
     fid2station: dict = {}
@@ -319,6 +326,51 @@ def analyze_tie_switches(
             lid = str(row.get("LINE_ID") or "")
             fid2name[lid] = str(row.get("LINE_NAME") or lid)
             fid2station[lid] = str(row.get("START_ST_ID") or "")
+
+    # 遥信状态（Q38：无遥信默认合位，由调用方/Sheet4 处理）
+    tele = None
+    if table_data is not None:
+        try:
+            from core.telemetry_evaluator import TelemetryEvaluator
+            tele = TelemetryEvaluator.from_pwreal(table_data.get("yx_real"))
+        except Exception:
+            tele = None
+
+    def _switch_status(sw_id: str):
+        """返回 '0'分位 / '1'合位 / None未知（无遥信）"""
+        if tele is None:
+            return None
+        try:
+            st = tele._stable_status(sw_id)
+            if st is None:
+                return None
+            st_s = str(st).strip().upper()
+            if st_s in ("0", "分位", "OPEN"):
+                return "0"
+            if st_s in ("1", "合位", "CLOSE"):
+                return "1"
+        except Exception:
+            pass
+        return None
+
+    # 连通分量预计算（Q18：两侧连通变电站母线 = 所在连通分量含电源设备）
+    # is_source=True 的主网设备（变电站出线电源）即代表母线侧；兼容类型/名称匹配。
+    cc_of: dict = {}
+    cc_has_source: dict = {}
+    try:
+        for i, cc in enumerate(nx.connected_components(device_graph)):
+            has_src = any(
+                bool(device_graph.nodes[n].get("is_source"))
+                or str(device_graph.nodes[n].get("equip_type") or "") in SOURCE_TYPES
+                or "变电站" in str(device_graph.nodes[n].get("equip_name") or "")
+                or "主变" in str(device_graph.nodes[n].get("equip_name") or "")
+                for n in cc
+            )
+            cc_has_source[i] = has_src
+            for n in cc:
+                cc_of[n] = i
+    except Exception:
+        cc_of, cc_has_source = {}, {}
 
     target = str(feeder_id)
     tie_rows: list = []
@@ -343,6 +395,11 @@ def analyze_tie_switches(
             continue
         if any(k in dev_name for k in TIE_EXCLUDE_NAME_KEYS):
             continue
+        # 【Q23】站房/箱变内开关不纳入联络识别（任务书1.3：站内所有开关均不纳入）
+        if dev_type in STATION_CONTAINER_TYPES:
+            continue
+        if any(k in dev_name for k in ("站房", "配电室", "箱变", "配电房", "配电站", "台区")):
+            continue
 
         # 必须是开关类型
         if not _is_switch_node(device_graph, node):
@@ -359,6 +416,14 @@ def analyze_tie_switches(
         if not my_fids or not other_fids:
             continue
 
+        # 【Q18】两侧均需连通到变电站母线：开关所在连通分量必须含变电站/主变
+        cc_id = cc_of.get(node)
+        if cc_id is not None and not cc_has_source.get(cc_id, False):
+            continue
+
+        # 【Q38】开关状态（无遥信记录默认合位）
+        status = _switch_status(node)
+
         for other in other_fids:
             key = (target, other, node)
             if key in tie_set:
@@ -374,6 +439,13 @@ def analyze_tie_switches(
                 "联络线路id": other,
                 "联络线路名称": fid2name.get(other, other),
                 "联络线变电站名称": fid2station.get(other, ""),
+                # 内部字段（不进 Excel 模板列，仅供 Sheet4 判据使用）
+                "_switch_status": status,
+                "_switch_status_cn": (
+                    "分位" if status == "0"
+                    else "合位" if status == "1"
+                    else "未知(默认合位)"
+                ),
             })
 
     if not tie_rows:
@@ -389,7 +461,8 @@ def analyze_tie_switches(
             "联络线变电站名称": "",
         })
 
-    logger.info("Sheet3 联络开关: feeder=%s 识别到 %d 个联络开关", target, len(tie_rows))
+    _real_ties = [r for r in tie_rows if r.get("是否有联络") == "是"]
+    logger.info("Sheet3 联络开关: feeder=%s 识别到 %d 个联络开关", target, len(_real_ties))
     return tie_rows
 
 
@@ -576,8 +649,18 @@ def analyze_unplanned_loops(
     tie_rows: list,
     dist_topo: TopologyGraph,
     line_df,
+    table_data: dict | None = None,
 ) -> list[dict]:
-    """Sheet4 非计划性合环拓扑识别（所有合环均视为非计划）。"""
+    """
+    Sheet4 非计划性合环拓扑识别（api_doc Q5/Q24/Q38/Q16 口径）：
+      - Q5/Q24：所有合环均视为非计划合环
+      - Q38：无遥信记录默认合位（跨馈线开关无遥信 → 按合位 → 非计划合环）
+      - Q16：路径含分闸(分位)开关视为断开 → 分位联络/含分位开关的环不算合环
+    判定：
+      - 跨馈线联络开关（Sheet3 行）：_switch_status==分位 → 合规联络（跳过）；
+        合位 / 未知(默认合位) → 非计划合环
+      - 馈线内部环：环上存在明确分位开关 → 合规（跳过）；否则 → 非计划合环
+    """
     fid2name: dict = {}
     fid2station: dict = {}
     if line_df is not None:
@@ -585,6 +668,30 @@ def analyze_unplanned_loops(
             lid = str(row.get("LINE_ID") or "")
             fid2name[lid] = str(row.get("LINE_NAME") or lid)
             fid2station[lid] = str(row.get("START_ST_ID") or "")
+
+    tele = None
+    if table_data is not None:
+        try:
+            from core.telemetry_evaluator import TelemetryEvaluator
+            tele = TelemetryEvaluator.from_pwreal(table_data.get("yx_real"))
+        except Exception:
+            tele = None
+
+    def _switch_status(sw_id: str):
+        if tele is None:
+            return None
+        try:
+            st = tele._stable_status(sw_id)
+            if st is None:
+                return None
+            st_s = str(st).strip().upper()
+            if st_s in ("0", "分位", "OPEN"):
+                return "0"
+            if st_s in ("1", "合位", "CLOSE"):
+                return "1"
+        except Exception:
+            pass
+        return None
 
     rows: list = []
     seen: set = set()
@@ -598,10 +705,15 @@ def analyze_unplanned_loops(
         for cycle in cycles:
             if len(cycle) < 3:
                 continue
-            sw_id = next(
-                (n for n in cycle if _is_switch_node(device_graph, n)),
-                cycle[0]
-            )
+            sw_ids = [n for n in cycle if _is_switch_node(device_graph, n)]
+            if not sw_ids:
+                continue
+            # 【Q16】环上存在明确分位开关 → 电气断开，不算合环
+            statuses = [_switch_status(sw) for sw in sw_ids]
+            if any(st == "0" for st in statuses):
+                continue
+            sw_id = sw_ids[0]
+            status_cn = "合位" if "1" in statuses else "未知(默认合位)"
             key = ("internal", feeder_id, sw_id, tuple(sorted(cycle)))
             if key in seen:
                 continue
@@ -616,7 +728,7 @@ def analyze_unplanned_loops(
                 "疑似联络开关id": sw_id,
                 "疑似联络开关名称": _device_name(device_graph, sw_id),
                 "修正sql": (
-                    f"-- 馈线内部存在合环回路(节点数{len(cycle)})，"
+                    f"-- 馈线内部存在合环回路(节点数{len(cycle)}, 开关状态{status_cn})，"
                     f"建议核查开关 {sw_id} 分合状态并断开合环"
                 ),
             })
@@ -624,8 +736,12 @@ def analyze_unplanned_loops(
     for tie in tie_rows:
         if tie.get("是否有联络") != "是":
             continue
+        # 【Q16】分位联络开关 → 合规（电气断开），跳过
+        if tie.get("_switch_status") == "0":
+            continue
         other_id = tie.get("联络线路id", "")
         sw_id = tie.get("联络开关id", "")
+        status_cn = tie.get("_switch_status_cn", "未知(默认合位)")
         key = ("cross", feeder_id, other_id, sw_id)
         if key in seen:
             continue
@@ -641,9 +757,10 @@ def analyze_unplanned_loops(
             "疑似联络开关名称": tie.get("联络开关名称", ""),
             # 【S4修复】原SQL引用STATUS列（PWEQUIPINFO不存在）。
             # 开关分合状态在遥信表JBS_PWREAL.POINT字段（0=分位 1=合位）。
+            # 【Q49②】不使用DELETE；置POINT为分位以断开合环。
             "修正sql": (
                 f"UPDATE JBS_PWREAL SET POINT='0' WHERE TRAN_ID='{sw_id}'; "
-                f"-- 建议将该联络开关遥信置为分位以消除 {line_name} 与 {tie.get('联络线路名称')} 间的非计划合环"
+                f"-- 建议将该联络开关遥信置为分位以消除 {line_name} 与 {tie.get('联络线路名称')} 间的非计划合环(当前{status_cn})"
             ),
         })
 
@@ -664,70 +781,6 @@ def analyze_unplanned_loops(
     return rows
 
 
-# ------------------------------------------------------------------
-#  Sheet 5：模型修正质量评分
-# ------------------------------------------------------------------
-def build_score_rows(
-    *,
-    line_name: str,
-    feeder_id: str,
-    start_st_id: str,
-    score_summary: dict,
-) -> list[dict]:
-    """Sheet5 模型修正质量评分任务结果。"""
-    rows: list = []
-    rows.append({
-        "序号": 1,
-        "厂站名称": start_st_id or "未知厂站",
-        "厂站id": start_st_id,
-        "馈线名称": line_name,
-        "馈线id": feeder_id,
-        "修正前评分": score_summary.get("score_before"),
-        "修正后评分": score_summary.get("score_after"),
-    })
-
-    type_stats: dict = defaultdict(lambda: {"count": 0, "deduction": 0.0, "confidence": []})
-    for item in score_summary.get("processed_defects", []):
-        dtype = item.get("defect_type", "其它")
-        type_stats[dtype]["count"] += 1
-        type_stats[dtype]["deduction"] += float(item.get("score_deduction") or 0)
-        type_stats[dtype]["confidence"].append(float(item.get("confidence") or 0))
-
-    seq = 2
-    for dtype, stats in sorted(type_stats.items()):
-        avg_conf = (
-            sum(stats["confidence"]) / len(stats["confidence"])
-            if stats["confidence"] else 0
-        )
-        rows.append({
-            "序号": seq,
-            "厂站名称": f"{dtype}({stats['count']}处)",
-            "厂站id": f"累计扣分{stats['deduction']:.2f}",
-            "馈线名称": f"平均置信度{avg_conf:.2f}",
-            "馈线id": feeder_id,
-            "修正前评分": score_summary.get("score_before"),
-            "修正后评分": score_summary.get("score_after"),
-        })
-        seq += 1
-
-    rows.append({
-        "序号": seq,
-        "厂站名称": (
-            f"汇总: 缺陷{score_summary.get('defect_count', 0)}处 / "
-            f"总扣分{score_summary.get('total_deduction', 0)}"
-        ),
-        "厂站id": start_st_id,
-        "馈线名称": line_name,
-        "馈线id": feeder_id,
-        "修正前评分": score_summary.get("score_before"),
-        "修正后评分": score_summary.get("score_after"),
-    })
-    return rows
-
-
-# ------------------------------------------------------------------
-#  汇总入口（compare.py 调用）
-# ------------------------------------------------------------------
 def build_feeder_analysis(
     *,
     line_name: str,
@@ -760,6 +813,7 @@ def build_feeder_analysis(
         device_graph=device_graph,
         dist_topo=dist_topo,
         line_df=line_df,
+        table_data=table_data,
     )
 
     # Sheet2 断点（P1-P7 优先级分类）
@@ -782,6 +836,7 @@ def build_feeder_analysis(
         tie_rows=tie_rows,
         dist_topo=dist_topo,
         line_df=line_df,
+        table_data=table_data,
     )
 
     # Sheet5 评分
@@ -801,3 +856,25 @@ def build_feeder_analysis(
         "feeder_id": feeder_id,
         "start_st_id": start_st_id,
     }
+
+
+def build_score_rows(
+    *,
+    line_name: str,
+    feeder_id: str,
+    start_st_id: str,
+    score_summary: dict,
+) -> list[dict]:
+    """
+    Sheet5 模型修正质量评分行（标准输出模板 7 列）：
+      序号/厂站名称/厂站id/馈线名称/馈线id/修正前评分/修正后评分
+    """
+    return [{
+        "序号": 1,
+        "厂站名称": start_st_id or "",
+        "厂站id": start_st_id or "",
+        "馈线名称": line_name or "",
+        "馈线id": str(feeder_id or ""),
+        "修正前评分": score_summary.get("score_before", 0),
+        "修正后评分": score_summary.get("score_after", 0),
+    }]
