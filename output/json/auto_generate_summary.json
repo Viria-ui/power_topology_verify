@@ -1,5 +1,23 @@
 {
-  "B1_LINE215_单线图": {
+  "TaskA": {
+    "LINE215_add_station": {
+      "quality_pass": true,
+      "delta": {
+        "devices": 3,
+        "stations": 1,
+        "connections": 3
+      }
+    },
+    "LINE216_del_switch": {
+      "quality_pass": true,
+      "delta": {
+        "devices": -1,
+        "stations": 0,
+        "connections": -4
+      }
+    }
+  },
+  "B_LINE215_单线图": {
     "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\LINE215_single_line.svg",
     "feeder": "LINE215",
     "nodes": 1313,
@@ -10,7 +28,7 @@
     "cols": 424,
     "rows": 96
   },
-  "B2_LINE216_单线图": {
+  "B_LINE216_单线图": {
     "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\LINE216_single_line.svg",
     "feeder": "LINE216",
     "nodes": 1644,
@@ -21,7 +39,7 @@
     "cols": 22,
     "rows": 180
   },
-  "B3_10kVLINE111_联络关系图": {
+  "B_10kVLINE111_联络图": {
     "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\10kVLINE111_tie.svg",
     "feeder": "10kVLINE111",
     "nodes": 3,
@@ -30,7 +48,7 @@
     "edge_error_pct": 0.0,
     "cross_station_ties": 0
   },
-  "B4_SUB004_全站联络总图": {
+  "B_SUB004_全站联络图": {
     "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\SUB004_station_tie.svg",
     "substation": "SUB004",
     "feeders": [
@@ -219,14 +237,14 @@
     "edges": 1580,
     "edge_error_pct": 0.0
   },
-  "B5_LINE074_TMP00034205_电源追溯": {
+  "B_LINE074_电源追溯": {
     "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\TMP00034205_power_trace.svg",
     "target": "TMP00034205",
     "feeder": "LINE074",
-    "main_path_len": 656,
+    "main_path_len": 157,
     "backup_paths": 2,
-    "nodes": 289,
-    "edges": 288,
+    "nodes": 330,
+    "edges": 329,
     "edge_error_pct": 0.0
   }
 }

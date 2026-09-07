@@ -106,17 +106,26 @@ INSERT INTO EQUIP_JBS_PWROOM (ROOM_ID, ROOM_NAME, ROOM_TYPE, VOLTAGE_TYPE, REMAR
 VALUES ({_sql_quote('TMPROOM000300')}, {_sql_quote('站房000300')}, '开闭所', 'lkv10', 'LINE215测试任务新增');
 
 -- 2. 新增 3 台负荷开关 (站房内)
-INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE, VOLTAGE_TYPE, FEEDER_ID, DSUBSTATION_ID, PSR_TYPE, REMARK) VALUES
-  ({_sql_quote('TMP00301')}, {_sql_quote('开关00301')}, '负荷开关', 'lkv10', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')}, '0307', '站房000300-上游对接开关'),
-  ({_sql_quote('TMP00302')}, {_sql_quote('开关00302')}, '负荷开关', 'lkv10', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')}, '0307', '站房000300-备用间隔'),
-  ({_sql_quote('TMP00303')}, {_sql_quote('开关00303')}, '负荷开关', 'lkv10', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')}, '0307', '站房000300-下游对接开关');
+-- 【S4修复】原SQL引用PSR_TYPE/REMARK列（EQUIP_JBS_PWEQUIPINFO不存在）；VOLTAGE_TYPE='lkv10'改为真实码'1010'
+INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE, VOLTAGE_TYPE, FEEDER_ID, DSUBSTATION_ID) VALUES
+  ({_sql_quote('TMP00301')}, {_sql_quote('开关00301')}, '负荷开关', '1010', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')}),
+  ({_sql_quote('TMP00302')}, {_sql_quote('开关00302')}, '负荷开关', '1010', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')}),
+  ({_sql_quote('TMP00303')}, {_sql_quote('开关00303')}, '负荷开关', '1010', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')});
 
 -- 3. 新增馈线段：开关00104 → 00301；开关00301 → 00303；开关00303 → 00102；备用分支 00301→00302
-INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, LINE_NAME, START_ST_ID, END_ST_ID, VOLTAGE_TYPE, FEEDER_ID, LINE_TYPE, REMARK) VALUES
-  ({_sql_quote('LN_00104_00301')}, {_sql_quote('开关00104-开关00301')}, {_sql_quote('TMP00044018')}, {_sql_quote('TMP00301')}, 'lkv10', {_sql_quote('LINE215')}, 'Trunk', '站房000300上游引入'),
-  ({_sql_quote('LN_00301_00303')}, {_sql_quote('开关00301-开关00303')}, {_sql_quote('TMP00301')}, {_sql_quote('TMP00303')}, 'lkv10', {_sql_quote('LINE215')}, 'Trunk', '站房000300主干贯通'),
-  ({_sql_quote('LN_00303_00102')}, {_sql_quote('开关00303-开关00102')}, {_sql_quote('TMP00303')}, {_sql_quote('TMP00044016')}, 'lkv10', {_sql_quote('LINE215')}, 'Trunk', '站房000300下游引出'),
-  ({_sql_quote('LN_00301_00302')}, {_sql_quote('开关00301-开关00302_备用')}, {_sql_quote('TMP00301')}, {_sql_quote('TMP00302')}, 'lkv10', {_sql_quote('LINE215')}, 'Spare', '备用间隔引线(备用死端)');
+-- 【S4修复】PWFEEDERLINE真实列仅LINE_ID/LINE_NAME/START_ST_ID/VOLTAGE_TYPE；连接关系经PWTERMINAL.CONNECTIVITYNODE_ID表达
+INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, LINE_NAME, START_ST_ID, VOLTAGE_TYPE) VALUES
+  ({_sql_quote('LN_00104_00301')}, {_sql_quote('开关00104-开关00301')}, {_sql_quote('TMP00044018')}, '1010'),
+  ({_sql_quote('LN_00301_00303')}, {_sql_quote('开关00301-开关00303')}, {_sql_quote('TMP00301')}, '1010'),
+  ({_sql_quote('LN_00303_00102')}, {_sql_quote('开关00303-开关00102')}, {_sql_quote('TMP00303')}, '1010'),
+  ({_sql_quote('LN_00301_00302')}, {_sql_quote('开关00301-开关00302_备用')}, {_sql_quote('TMP00301')}, '1010');
+-- 连接关系（端子接入同一CONNECTIVITYNODE_ID即连通）
+INSERT INTO EQUIP_JBS_PWTERMINAL (ID, EQUIP_ID, CONNECTIVITYNODE_ID) VALUES
+  ({_sql_quote('TMPT001')}, {_sql_quote('TMP00301')}, 'CN_00301_UP'),
+  ({_sql_quote('TMPT002')}, {_sql_quote('TMP00301')}, 'CN_00301_DOWN'),
+  ({_sql_quote('TMPT003')}, {_sql_quote('TMP00302')}, 'CN_00301_DOWN'),
+  ({_sql_quote('TMPT004')}, {_sql_quote('TMP00303')}, 'CN_00301_DOWN'),
+  ({_sql_quote('TMPT005')}, {_sql_quote('TMP00303')}, 'CN_00303_DOWN');
 
 COMMIT;
 

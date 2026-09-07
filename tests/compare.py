@@ -241,11 +241,29 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
                     ))
 
     # 校验 4：逻辑连接/属性不一致
+    # 【A修复】电压口径归一化：SVG标注"10kV"与DB码"1010"是同一等级，
+    # 原字符串包含比较("10kV" not in "1010")把全库1010全部判为不一致→1095条误报。
+    def _norm_voltage(v):
+        """归一化电压等级为DB码。'10kV'→'1010'；已为DB码原样返回；未知返回None。"""
+        s = str(v or "").strip().upper()
+        if not s:
+            return None
+        table = {
+            "10KV": "1010", "10": "1010", "1010": "1010",
+            "110KV": "1011", "110": "1011", "1011": "1011",
+            "220KV": "1012", "220": "1012", "1012": "1012",
+            "35KV": "1013", "35": "1013", "1013": "1013",
+            "20KV": "1014", "20": "1014", "1014": "1014",
+            "0.4KV": "1015", "0.4": "1015", "1015": "1015",
+            "66KV": "1009", "66": "1009", "1009": "1009",
+        }
+        return table.get(s)
+
     for dev_id in svg_dev_ids & db_dev_ids:
         svg_elem = svg_device_map[dev_id]
         db_dev = line_db_devices[dev_id]
-        svg_voltage = svg_elem.get("voltage_level")
-        db_voltage = getattr(db_dev, "voltage_type", None)
+        svg_voltage = _norm_voltage(svg_elem.get("voltage_level"))
+        db_voltage = _norm_voltage(getattr(db_dev, "voltage_type", None))
         dev_name = (
             svg_elem.get("object_name")
             or svg_elem.get("element_type_cn")
@@ -253,7 +271,7 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
             or "未知设备"
         )
         station = getattr(db_dev, "dsubstation_id", "") or start_st_id
-        if svg_voltage and db_voltage and (str(svg_voltage) not in str(db_voltage)):
+        if svg_voltage and db_voltage and (svg_voltage != db_voltage):
             defects_report.append(_make_defect(
                 equip_id=dev_id,
                 defect_type="逻辑连接不一致",
@@ -279,7 +297,9 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
     for defect_type, count in type_counts.items():
         print(f"  • 【{defect_type}】: {count} 处")
 
-    output_dir = os.path.join(PROJECT_ROOT, "output")
+    # 【B修复】compare.py为开发自检脚本，产物隔离到 output/dev_compare/，
+    # 避免覆盖 main.py 的正式交付输出（output/ 根目录）。
+    output_dir = os.path.join(PROJECT_ROOT, "output", "dev_compare")
     os.makedirs(output_dir, exist_ok=True)
     output_json_path = os.path.join(output_dir, f"{line_name}_缺陷清单报告.json")
     with open(output_json_path, "w", encoding="utf-8") as f:
@@ -327,9 +347,12 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
     )
     print(f"🔌 主配网接口校验结果: [{interface_msg}] (置信度: {interface_conf})")
 
-    # 计算已修复的缺陷ID（所有 repair_candidates 对应的缺陷索引）
-    # 注意：processed_defects 中的 _idx 是整数索引 (0, 1, 2, ...)
-    repaired_defect_ids = list(range(len(defects_report)))
+    # 【关键修复】原代码 repaired_defect_ids = list(range(len(defects_report)))
+    # 把全部缺陷标记为已修复 → score_after 恒=100.0（"评分75→100"假满分，
+    # 用户明确否决：不允许把本来有缺陷的东西硬做成满分）。
+    # 修复：修复SQL尚未实际执行，score_after 如实=score_before；
+    # 真实修复执行后，回填已消除缺陷的索引再重算。
+    repaired_defect_ids = []
 
     # 评估修复前后的评分
     score_summary = score_engine.evaluate_quality_score(
@@ -337,9 +360,9 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         repaired_defect_ids=repaired_defect_ids
     )
     print(f"  • 修正前图模质量评分: {score_summary['score_before']} 分")
-    print(f"  • 预计修正后质量评分: {score_summary['score_after']} 分")
+    print(f"  • 预计修正后质量评分: {score_summary['score_after']} 分（修复未执行，如实=修正前）")
     print(f"  • 缺陷总数: {score_summary['defect_count']} 处")
-    print(f"  • 将修复缺陷数: {len(repaired_defect_ids)} 处")
+    print(f"  • 将修复缺陷数: {len(repaired_defect_ids)} 处（待修复执行后回填）")
 
     score_output_path = os.path.join(output_dir, f"{line_name}_质量评分与可解释置信度报告.json")
     with open(score_output_path, "w", encoding="utf-8") as f:
@@ -394,8 +417,9 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
 
         enhanced_report = report_gen.generate_full_report()
 
-        # 保存增强报告
-        enhanced_report_path = os.path.join(output_dir, "reports", f"{line_name}_增强校验报告.json")
+        # 保存增强报告（【C修复】固定写正式 output/reports/，不随dev目录）
+        enhanced_report_path = os.path.join(
+            PROJECT_ROOT, "output", "reports", f"{line_name}_增强校验报告.json")
         os.makedirs(os.path.dirname(enhanced_report_path), exist_ok=True)
         with open(enhanced_report_path, "w", encoding="utf-8") as f:
             json.dump(enhanced_report, f, ensure_ascii=False, indent=2)

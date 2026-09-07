@@ -866,25 +866,77 @@ class TopoDbValidator:
                         break
 
                 if has_tie_candidate:
-                    # 计划联络环：存在联络开关候选 → 标记为待复核
+                    # 计划联络环：存在联络开关候选 → 结合遥信状态分类
+                    # 【S3修复】规范（电气逻辑校验规则v1.0）："联络线(手拉手)根据开闭状态
+                    # (POINT=0/1)动态重构归属与转供电拓扑，不得直接记为错接"。
+                    # 原代码不查开关状态，220条环结构全报"疑似联络环(需复核)"→误报。
+                    # 现在按开关实际状态分类：
+                    #   分位 → 联络开关断开，正常运行方式，EXEMPT不扣分
+                    #   合位(实测) → 实际合环运行 → 非计划合环
+                    #   未知/默认推演 → 维持"疑似联络环(需复核)"
                     dev = dev_info_map[tie_equip_id]
-                    item = TieLoopItem(
-                        trace_uuid=trace_uuid,
-                        equip_id=tie_equip_id,
-                        point_id=",".join(one_cycle[:5]),
-                        line_id=None,
-                        result_type="疑似联络环(需复核)",
-                        rule_code=R_TIE_001,
-                        rule_desc="检测到计划联络环，需要复核开关实际遥信状态",
-                        detail=f"环路跨馈线:{list(feeder_set)}，环内存在联络开关候选：{tie_equip_id}[{dev.equip_name or ''}]",
-                        switch_status=None,
-                        risk_level="中",
-                        review_required=True,
-                        left_feeder=next(iter(feeder_set)) if len(feeder_set)>=1 else None,
-                        right_feeder=list(feeder_set)[1] if len(feeder_set)>=2 else None,
-                        is_planned_loop=True
-                    )
-                    self.topo.tie_loop_list.append(item)
+                    # 【M5修复】switch_state_map统一大写(CLOSE/OPEN)，判断前upper()标准化
+                    sw_status = str(self.topo.switch_state_map.get(tie_equip_id, "close")).upper()
+                    st_source = self.topo.switch_state_source.get(tie_equip_id, "default_rule")
+                    tie_name = dev.equip_name or ''
+                    if sw_status in {"OPEN", "分位", "0"}:
+                        item = TieLoopItem(
+                            trace_uuid=trace_uuid,
+                            equip_id=tie_equip_id,
+                            point_id=",".join(one_cycle[:5]),
+                            line_id=None,
+                            result_type="合规联络(分位)",
+                            rule_code=R_TIE_EXCLUDE_001,
+                            rule_desc="合规联络开关处于分位(断开)，正常运行方式，豁免",
+                            detail=f"环路跨馈线:{list(feeder_set)}，联络开关{tie_equip_id}[{tie_name}]分位断开，"
+                                   f"状态来源:{st_source}，不构成合环",
+                            switch_status=sw_status,
+                            risk_level="低",
+                            review_required=False,
+                            left_feeder=next(iter(feeder_set)) if len(feeder_set)>=1 else None,
+                            right_feeder=list(feeder_set)[1] if len(feeder_set)>=2 else None,
+                            is_planned_loop=False
+                        )
+                        self.topo.tie_loop_list.append(item)
+                    elif sw_status in {"CLOSE", "合位", "1"} and st_source != "default_rule":
+                        item = TieLoopItem(
+                            trace_uuid=trace_uuid,
+                            equip_id=tie_equip_id,
+                            point_id=",".join(one_cycle[:5]),
+                            line_id=None,
+                            result_type="非计划合环",
+                            rule_code=R_LOOP_001,
+                            rule_desc="非计划合环，联络开关合位实际运行构成环路",
+                            detail=f"环路跨馈线:{list(feeder_set)}，联络开关{tie_equip_id}[{tie_name}]实测合位，"
+                                   f"状态来源:{st_source}",
+                            switch_status=sw_status,
+                            risk_level="高",
+                            review_required=False,
+                            left_feeder=next(iter(feeder_set)) if len(feeder_set)>=1 else None,
+                            right_feeder=list(feeder_set)[1] if len(feeder_set)>=2 else None,
+                            is_planned_loop=False
+                        )
+                        self.topo.tie_loop_list.append(item)
+                    else:
+                        item = TieLoopItem(
+                            trace_uuid=trace_uuid,
+                            equip_id=tie_equip_id,
+                            point_id=",".join(one_cycle[:5]),
+                            line_id=None,
+                            result_type="疑似联络环(需复核)",
+                            rule_code=R_TIE_001,
+                            rule_desc="检测到计划联络环，开关状态未知/默认推演，需要复核实际遥信状态",
+                            detail=f"环路跨馈线:{list(feeder_set)}，环内存在联络开关候选：{tie_equip_id}[{tie_name}]，"
+                                   f"开关状态[{sw_status}]来源:{st_source}"
+                                   f"{'【提示】本结果由赛题默认规则推演，建议人工复核' if st_source == 'default_rule' else ''}",
+                            switch_status=sw_status,
+                            risk_level="中",
+                            review_required=(st_source == "default_rule"),
+                            left_feeder=next(iter(feeder_set)) if len(feeder_set)>=1 else None,
+                            right_feeder=list(feeder_set)[1] if len(feeder_set)>=2 else None,
+                            is_planned_loop=True
+                        )
+                        self.topo.tie_loop_list.append(item)
                 else:
                     # 无联络开关：非计划合环故障
                     item = TieLoopItem(
@@ -1151,16 +1203,17 @@ class TopoDbValidator:
                 continue
 
             # 两侧馈线不同，联络候选
-            sw_status = self.topo.switch_state_map.get(equip_id, "close")
+            # 【M5修复】switch_state_map统一大写(CLOSE/OPEN)，判断前upper()标准化
+            sw_status = str(self.topo.switch_state_map.get(equip_id, "close")).upper()
             st_source = self.topo.switch_state_source.get(equip_id, "default_rule")
 
-            if sw_status in {"合位", "close"}:
+            if sw_status in {"CLOSE", "合位", "1"}:
                  # 合位 → 进一步进入合环风险检查
                 self._check_loop_for_switch(equip_id, term_ids, trace_uuid)
                 tie_result = "联络"
                 rule = R_TIE_001
                 desc = f"合规联络开关，跨两条馈线，开关处于{sw_status}，状态来源:{st_source}"
-            elif sw_status in {"分位", "open"}:
+            elif sw_status in {"OPEN", "分位", "0"}:
                 tie_result = "联络"
                 rule = R_TIE_001
                 desc = f"合规联络开关，跨两条馈线，开关处于{sw_status}，状态来源:{st_source}"
@@ -1214,7 +1267,8 @@ class TopoDbValidator:
     def _check_loop_for_switch(self, equip_id: str, term_ids: list, trace_uuid: str):
         """R_LOOP_001：开关合位，检测是否产生多电源非计划合环"""
         visited_comp = set()
-        sw_status = self.topo.switch_state_map.get(equip_id, "close")
+        # 【M5修复】switch_state_map统一大写(CLOSE/OPEN)
+        sw_status = str(self.topo.switch_state_map.get(equip_id, "close")).upper()
         st_source = self.topo.switch_state_source.get(equip_id, "default_rule")
         for tid in term_ids:
             comp = None

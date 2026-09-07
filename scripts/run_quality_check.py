@@ -16,7 +16,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from config.settings import DATASET_STANDARD_OUTPUT_XLSX, TEST_SVG_ROOT, FEEDER_MAP
+from config.settings import DATASET_STANDARD_OUTPUT_XLSX, TEST_SVG_ROOT, FEEDER_MAP, resolve_feeder_id
 from data_io.data_reader import SqlTableLoader
 from core.topology_builder import TopologyBuilder
 from core.feeder_topology_analysis import build_device_graph, build_feeder_analysis
@@ -71,7 +71,8 @@ def load_svg_data(line_name: str):
 
 def run_check(line_name: str, dist_topo, table_data: dict, line_df):
     """对单条线路执行四类图模校验 + 全5表 Excel 导出。"""
-    feeder_id = FEEDER_MAP.get(line_name, line_name)
+    # 【L1修复】优先从线路表动态解析LINE_NAME→LINE_ID
+    feeder_id = resolve_feeder_id(line_name, line_df)
 
     logger.info("开始校验 %s (feeder_id=%s)", line_name, feeder_id)
 

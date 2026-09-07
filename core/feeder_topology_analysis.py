@@ -163,6 +163,8 @@ def find_breakpoint_between(device_graph: nx.Graph, start_id: str, end_id: str) 
     return {"found": False, "reason": "两点连通", "path": path}
 
 
+# 【M8标注】兼容入口：本文件存在两个 analyze_breakpoints 版本（166/397），
+# 397行为主用版本（后定义覆盖前者）。保留此处以防外部代码按旧签名引用。
 def analyze_breakpoints(
     *,
     feeder_id: str,
@@ -229,9 +231,12 @@ def analyze_breakpoints(
                 "对侧疑似断点设备id": far_id,
                 "对侧疑似断点设备名称": _device_name(device_graph, far_id),
                 "修正方案": f"建议在模型中补全 {a} 与 {b} 之间的拓扑连接",
+                # 【S4修复】原SQL引用END_ST_ID/FEEDER_ID列（不存在）。
+                # 补全模型连接通过PWTERMINAL.CONNECTIVITYNODE_ID实现。
                 "修正sql": (
-                    f"INSERT INTO EQUIP_JBS_PWFEEDERLINE (START_ST_ID, END_ST_ID, FEEDER_ID) "
-                    f"VALUES ('{a}', '{b}', '{feeder_id}');"
+                    f"UPDATE EQUIP_JBS_PWTERMINAL SET CONNECTIVITYNODE_ID="
+                    f"'CN_{a}_{b}' WHERE EQUIP_ID IN ('{a}', '{b}');"
+                    f" -- 建议为设备{a}与{b}的端子设置相同CONNECTIVITYNODE_ID以补全拓扑连接"
                 ),
             })
 
@@ -391,6 +396,7 @@ def analyze_tie_switches(
 # ------------------------------------------------------------------
 #  Sheet 2：拓扑连通性异常诊断与断点定位（P1-P7 优先级）
 # ------------------------------------------------------------------
+# 【M8标注】主用版本：断点分析实际实现。
 def analyze_breakpoints(
     *,
     feeder_id: str,
@@ -633,9 +639,11 @@ def analyze_unplanned_loops(
             "合环线变电站名称": tie.get("联络线变电站名称", ""),
             "疑似联络开关id": sw_id,
             "疑似联络开关名称": tie.get("联络开关名称", ""),
+            # 【S4修复】原SQL引用STATUS列（PWEQUIPINFO不存在）。
+            # 开关分合状态在遥信表JBS_PWREAL.POINT字段（0=分位 1=合位）。
             "修正sql": (
-                f"UPDATE EQUIP_JBS_PWEQUIPINFO SET STATUS='0' WHERE EQUIP_ID='{sw_id}'; "
-                f"-- 断开联络开关以消除 {line_name} 与 {tie.get('联络线路名称')} 间的非计划合环"
+                f"UPDATE JBS_PWREAL SET POINT='0' WHERE TRAN_ID='{sw_id}'; "
+                f"-- 建议将该联络开关遥信置为分位以消除 {line_name} 与 {tie.get('联络线路名称')} 间的非计划合环"
             ),
         })
 

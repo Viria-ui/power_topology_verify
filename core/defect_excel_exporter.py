@@ -435,30 +435,37 @@ def export_report_all_in_one(
 
     # ---- 5. 联络 + 合环 ----
     device_graph_for_analysis = dist_topo.graph
+    # 【S5修复】analyze_tie_switches/analyze_unplanned_loops 签名要求dist_topo必填，
+    # 原调用缺失 → 必抛TypeError；补传后真正执行联络/合环识别。
     tie_rows = analyze_tie_switches(
         feeder_id=resolved_fid, line_name=line_name, start_st_id=start_st_id,
-        device_graph=device_graph_for_analysis, line_df=line_df,
+        device_graph=device_graph_for_analysis, dist_topo=dist_topo, line_df=line_df,
     )
     loop_rows = analyze_unplanned_loops(
         feeder_id=resolved_fid, line_name=line_name, start_st_id=start_st_id,
-        device_graph=device_graph_for_analysis, tie_rows=tie_rows, line_df=line_df,
+        device_graph=device_graph_for_analysis, tie_rows=tie_rows,
+        dist_topo=dist_topo, line_df=line_df,
     )
 
     # ---- 6. 质量评分 ----
+    # 【S5修复】evaluate_quality_score 签名: (defects_report, total_equip_count,
+    # repaired_defect_ids=None)。原调用传入dist_topo/main_topo/svg_defects_raw等
+    # 不存在的关键字参数 → 必抛TypeError → except伪造90/90分。
     try:
         scorer = ScoreAndConfidenceEngine()
         _scored = scorer.evaluate_quality_score(
-            dist_topo=dist_topo, main_topo=main_topo,
-            svg_defects_raw=defects, feeder_id=resolved_fid,
-            dsubstation_id=start_st_id, line_name=line_name,
+            defects, len(dist_topo.device_map),
+            repaired_defect_ids=[],
         )
-        score_rows = _scored.get("score_rows", []) if isinstance(_scored, dict) else []
-    except Exception:
         score_rows = [{
             "序号": 1, "厂站名称": start_st_id or "未知", "厂站id": start_st_id or "",
             "馈线名称": line_name, "馈线id": resolved_fid,
-            "修正前评分": 90, "修正后评分": 90,
+            "修正前评分": _scored.get("score_before", 0),
+            "修正后评分": _scored.get("score_after", 0),
         }]
+    except Exception as _score_err:
+        logger.warning("CLI评分失败（不再伪造90/90）: %s", _score_err)
+        score_rows = []
 
     # ---- 7. 输出路径兜底 ----
     if output_path is None:

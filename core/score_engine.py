@@ -100,78 +100,64 @@ class ScoreAndConfidenceEngine:
         repaired_defect_ids: list | None = None,
     ) -> dict:
         """
-        计算图模质量评分（按维度封顶 + 缺陷率加权扣分 + 缺陷数量惩罚）。
-        - repaired_defect_ids: 已闭环修复的defect索引或id，从score_after中扣除其扣分
-        - 评分逻辑：
-          1. 使用固定基准容量（10000），使评分对缺陷扣分更敏感
-          2. 增加缺陷率惩罚：缺陷数量/设备总数 超过阈值时额外扣分
+        【S7修复】评分公式对齐规范（规范书v1.1 + 电气逻辑校验规则v1.0 第五章）：
+            Model_Score = 100 - Σ(W_i × C_i)
+          - W_i：维度权重 拓扑5 / 图模3 / 电气2 / 接口4
+          - C_i：该维度缺陷**处数**（不再按置信度打折，不再叠加缺陷率惩罚）
+          - 单维度扣分上限：拓扑30 / 图模25 / 电气20 / 接口25
+          - score_after = 移除已修复缺陷处数后的重算评分
         """
-        total_deduction = 0.0
-        dim_deduction = {k: 0.0 for k in self.DEDUCTION_WEIGHTS}
-        processed_defects = []
         repaired_defect_ids = set(repaired_defect_ids or [])
+        dim_count: dict[str, int] = {k: 0 for k in self.DEDUCTION_WEIGHTS}
+        processed_defects = []
 
         for idx, defect in enumerate(defects_report):
             conf, reason = self.calculate_defect_confidence(defect)
             dim = self._dimension_of(defect)
             weight = self.DEDUCTION_WEIGHTS.get(dim, 1.0)
-
-            per_defect_deduction = round(weight * conf, 2)
-            cap = self.DIMENSION_CAPS.get(dim, 9999)
-            if dim_deduction[dim] + per_defect_deduction > cap:
-                per_defect_deduction = round(max(cap - dim_deduction[dim], 0.0), 2)
-
-            dim_deduction[dim] = round(dim_deduction[dim] + per_defect_deduction, 2)
-            total_deduction += per_defect_deduction
+            dim_count[dim] = dim_count.get(dim, 0) + 1
 
             defect_copy = dict(defect)
             defect_copy["confidence"] = conf
             defect_copy["confidence_reason"] = reason
-            defect_copy["score_deduction"] = per_defect_deduction
+            defect_copy["score_deduction"] = round(weight, 2)  # 规范：每处扣W_i分
             defect_copy["dimension"] = dim
             defect_copy["_idx"] = idx
             processed_defects.append(defect_copy)
 
-        # 【修复4】修正评分公式：
-        # 1. 基准容量改为100（百分制），使扣分效果明显
-        # 2. 评分 = 100 - 维度扣分总和（已封顶）- 缺陷率惩罚
-        base_capacity = 100.0
+        def compute(count_map: dict[str, int]):
+            total = 0.0
+            dim_ded = {}
+            for dim, cnt in count_map.items():
+                w = self.DEDUCTION_WEIGHTS.get(dim, 1.0)
+                cap = self.DIMENSION_CAPS.get(dim, 9999)
+                ded = min(cnt * w, cap)
+                dim_ded[dim] = round(ded, 2)
+                total += ded
+            return round(total, 2), dim_ded
 
-        # 缺陷率惩罚：缺陷数量/设备总数 超过阈值时额外扣分
+        total_deduction, dim_deduction = compute(dim_count)
         defect_count = len(defects_report)
         defect_rate = defect_count / max(total_equip_count, 1)
-        # 缺陷率超过 1% 开始惩罚，超过 5% 严重惩罚
-        defect_rate_penalty = 0.0
-        if defect_rate > 0.05:
-            defect_rate_penalty = min((defect_rate - 0.05) * 500, 40.0)  # 最多扣40分
-        elif defect_rate > 0.01:
-            defect_rate_penalty = (defect_rate - 0.01) * 200
 
-        # 维度扣分总和（已按cap封顶）
-        total_deduction = sum(dim_deduction.values())
-        # 最终评分 = 100 - 维度扣分 - 缺陷率惩罚
-        score_before = round(max(base_capacity - total_deduction - defect_rate_penalty, 0.0), 1)
+        # score_before = 100 - Σ(W_i × C_i)（维度封顶）
+        score_before = round(max(100.0 - total_deduction, 0.0), 1)
 
-        repaired_sum = 0.0
-        for d in processed_defects:
-            if d.get("_idx") in repaired_defect_ids or d.get("equip_id") in repaired_defect_ids:
-                repaired_sum += d["score_deduction"]
-        after_deduction = total_deduction - repaired_sum
-        # 修复后也需要重新计算缺陷率惩罚
-        repaired_defect_count = len(repaired_defect_ids) if repaired_defect_ids else 0
-        after_defect_rate = (defect_count - repaired_defect_count) / max(total_equip_count, 1)
-        after_rate_penalty = 0.0
-        if after_defect_rate > 0.05:
-            after_rate_penalty = min((after_defect_rate - 0.05) * 500, 40.0)
-        elif after_defect_rate > 0.01:
-            after_rate_penalty = (after_defect_rate - 0.01) * 200
-        score_after = round(max(base_capacity - after_deduction - after_rate_penalty, 0.0), 1)
-        if not repaired_defect_ids:
+        # score_after：从维度计数中移除已修复缺陷处数后重算
+        if repaired_defect_ids:
+            after_count = dict(dim_count)
+            for d in processed_defects:
+                if d.get("_idx") in repaired_defect_ids or d.get("equip_id") in repaired_defect_ids:
+                    dim = d["dimension"]
+                    after_count[dim] = max(after_count[dim] - 1, 0)
+            after_deduction, _ = compute(after_count)
+            score_after = round(max(100.0 - after_deduction, 0.0), 1)
+        else:
             score_after = score_before
 
         logger.info(
-            "评分结果: 设备=%d 缺陷=%d 扣分=%.2f 缺陷率=%.2f%% 缺陷率扣分=%.2f score_before=%.1f score_after=%.1f",
-            total_equip_count, defect_count, total_deduction, defect_rate * 100, defect_rate_penalty,
+            "评分结果(规范公式): 设备=%d 缺陷=%d 维度扣分=%.2f score_before=%.1f score_after=%.1f",
+            total_equip_count, defect_count, total_deduction,
             score_before, score_after,
         )
 
@@ -180,8 +166,8 @@ class ScoreAndConfidenceEngine:
             "score_after": score_after,
             "total_deduction": round(total_deduction, 2),
             "dimension_deduction": {k: round(v, 2) for k, v in dim_deduction.items()},
-            "defect_count": len(defects_report),
-            "defect_rate": round(defect_rate * 100, 2),  # 缺陷率百分比
-            "defect_rate_penalty": round(defect_rate_penalty, 2),
+            "defect_count": defect_count,
+            "defect_rate": round(defect_rate * 100, 2),  # 缺陷率百分比（仅展示，不参与扣分）
+            "defect_rate_penalty": 0.0,  # 【S7修复】规范公式无缺陷率惩罚
             "processed_defects": processed_defects,
         }

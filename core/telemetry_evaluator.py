@@ -116,13 +116,32 @@ class TelemetryEvaluator:
         t = str(equip_type)
         return any(x in t for x in self.CAPACITOR_WHITELIST)
 
+    @staticmethod
+    def _rated_voltage_ph(voltage_type: str) -> float:
+        """由设备电压等级码求额定相电压（kV）。
+
+        【M3修复】规范E02/E05条件用 U > 0.8Un；Un为额定线电压。
+        遥测UA/UB/UC单位kV（进线/母线相运行有效值），因此把0.8Un换算为
+        相电压基准 0.8×Un/√3：
+          - 数据存相电压(10/√3=5.77kV)：5.77 > 4.62 → 判定有电压 ✓
+          - 数据存线电压(10kV)：10 > 4.62 → 判定有电压 ✓
+        两种存储口径都能得到一致的"有电压"结论。
+        """
+        vt = str(voltage_type or "")
+        for code, kv in (("2201", 220), ("1101", 110), ("1021", 10),
+                         ("1010", 10), ("351", 35), ("35", 35),
+                         ("10", 10), ("110", 110), ("220", 220)):
+            if code in vt:
+                return kv / 1.7320508
+        return 5.7735  # 默认10kV系统相电压
+
     def evaluate_switch_status(self, equip_id, svg_is_open):
         status = self._stable_status(equip_id)
         if status is None:
             return True, .5, "缺乏稳定遥信(10s防抖未通过)，按默认合位并标记待复核"
-        if status not in {"0", "1", "分位", "合位", "open", "close"}:
+        if str(status).upper() not in {"0", "1", "分位", "合位", "OPEN", "CLOSE"}:
             return True, .5, "遥信品质无效，待复核"
-        real_open = status in {"0", "分位", "open"}
+        real_open = str(status).upper() in {"0", "分位", "OPEN"}
         if real_open != bool(svg_is_open):
             return False, .95, f"遥信稳定状态({status})与图纸开关状态(分={svg_is_open})不一致"
         return True, .99, "遥信与图纸一致"
@@ -142,9 +161,19 @@ class TelemetryEvaluator:
             f"节点 KCL 三相电流残差 IA={residual_a:.2f}A IB={residual_b:.2f}A IC={residual_c:.2f}A"
         )
 
-    def evaluate_electrical_logic(self, equip_id, equip_type=""):
+    def evaluate_electrical_logic(self, equip_id, equip_type="", voltage_type=""):
         """
-        执行 E01--E07；
+        执行 E01--E07（阈值对齐《电气逻辑校验规则.v1.0.docx》诊断矩阵）：
+
+          E01 分位 I>1.0A                → ERR
+          E02 合位 I<0.05A 且 U>0.8Un     → SUSPECT（失流）
+          E03 合位 I=0 且 U=0 且 P=0 且Q=0 → SUSPECT（停电，需电源追溯）
+          E04 (Imax-Imin)/Iavg > 20%      → SUSPECT（三相不平衡）
+          E05 合位 I>0.5A 且 U>0.8Un 且
+              |P-√3UI·PF|/(√3UI·PF)>15%  → ERR（功率失配）
+          E06 分位 |P|>0.1kW 或 |Q|>0.1kvar → ERR（分位有功率）
+          E07 合位 I<0.05A 且 |P|>5.0kW   → SUSPECT（小电流大功率）
+
         - 遥信状态经 10 秒防抖（FA_TRIP 保护动作不防抖）
         - 电容器类投切 30 秒过渡屏蔽窗内豁免 E01/E02/E06/E07
         - 新能源（光伏/储能/分布式电源）E05/E07 豁免
@@ -157,6 +186,7 @@ class TelemetryEvaluator:
         p, q, s = self._number(row, "AP"), self._number(row, "RP"), self._number(row, "SP")
         current = max(abs(ia), abs(ib), abs(ic))
         u = [self._number(row, x) for x in ("UA", "UB", "UC")]
+        u_max = max(u, default=0.0)
         out = []
 
         def add(code, detail):
@@ -172,41 +202,54 @@ class TelemetryEvaluator:
         is_new_energy = self._is_new_energy(equip_type)
         is_cap = self._is_capacitor_type(equip_type)
 
-        status_open = status in {"0", "分位", "open"}
-        status_close = status in {"1", "合位", "close"}
+        status_open = str(status).upper() in {"0", "分位", "OPEN"}
+        status_close = str(status).upper() in {"1", "合位", "CLOSE"}
+
+        # 【M3修复】0.8Un 的相电压基准（见_rated_voltage_ph说明）
+        u_th = 0.8 * self._rated_voltage_ph(voltage_type)
 
         if not cap_transition:
-            if status_open and current > 1:
+            if status_open and current > 1.0:
                 add("RULE-E01", f"开关分位仍有电流 {current:.2f}A(IA={ia:.2f} IB={ib:.2f} IC={ic:.2f})")
-            if status_close and current < 0.1 and any(v > 1 for v in u):
+            if status_close and current < 0.05 and u_max > u_th:
                 add("RULE-E02", f"开关合位失流：电流={current:.3f}A，三相电压={u}")
-        if status_close and max(u, default=0) < 1:
-            add("RULE-E03", f"开关合位但三相均失压：U={u}")
+
+        # E03 停电：合位 + 电流≈0 + 电压≈0 + 有功≈0 + 无功≈0
+        if status_close and current < 0.05 and u_max < u_th and abs(p) < 0.1 and abs(q) < 0.1:
+            add("RULE-E03", f"开关合位但三相均失压：I={current:.3f}A U={u} P={p:.2f} Q={q:.2f}")
 
         avg = (ia + ib + ic) / 3 if (ia or ib or ic) else 0
         if abs(avg) > 0.1:
-            unbalance = max(abs(x - avg) for x in (ia, ib, ic)) / abs(avg)
-            if unbalance > 0.3:
+            # 【M3修复】规范为 (Imax-Imin)/Iavg > 20%
+            unbalance = max(u for u in (ia, ib, ic)) - min(u for u in (ia, ib, ic))
+            unbalance = unbalance / abs(avg)
+            if unbalance > 0.2:
                 add("RULE-E04",
-                    f"三相电流不平衡{unbalance:.1%} > 30%：IA={ia:.2f} IB={ib:.2f} IC={ic:.2f} 均值={avg:.2f}")
+                    f"三相电流不平衡{unbalance:.1%} > 20%：IA={ia:.2f} IB={ib:.2f} IC={ic:.2f} 均值={avg:.2f}")
 
-        if not is_new_energy:
+        if not is_new_energy and status_close:
             u_avg = sum(u) / 3 if any(u) else 0
             i_avg = (ia + ib + ic) / 3
-            expected_p = u_avg * i_avg * 1.732 * 0.9 if (u_avg and i_avg) else 0
-            if expected_p > 1 and abs(p) > 1:
+            # 【M3修复】PF取遥测COS_PHI/PF字段；√3UI·PF按规范公式
+            pf = self._number(row, "COS_PHI")
+            if pf == 0:
+                pf = self._number(row, "PF")
+            if pf == 0:
+                pf = 0.9  # 无PF遥测时的工程近似（与原实现一致）
+            expected_p = u_avg * i_avg * 1.7320508 * pf if (u_avg and i_avg) else 0
+            if expected_p > 0.5 and i_avg > 0.5 and u_avg > u_th:
                 mismatch = abs(abs(p) - expected_p) / max(abs(expected_p), 1e-6)
-                if mismatch > 0.5:
+                if mismatch > 0.15:
                     add("RULE-E05",
                         f"有功功率与电压电流不匹配：AP={p:.2f} 推算≈{expected_p:.2f}"
-                        f" (U_avg={u_avg:.2f} I_avg={i_avg:.2f}) 偏差{mismatch:.1%}")
+                        f" (U_avg={u_avg:.2f} I_avg={i_avg:.2f} PF={pf:.2f}) 偏差{mismatch:.1%}")
 
         if not cap_transition:
-            if status_open and abs(p) > 1:
-                add("RULE-E06", f"开关分位仍有有功功率 AP={p:.2f} RP={q:.2f} SP={s:.2f}")
+            if status_open and (abs(p) > 0.1 or abs(q) > 0.1):
+                add("RULE-E06", f"开关分位仍有功率 AP={p:.2f} RP={q:.2f} SP={s:.2f}")
 
         if not (cap_transition or is_cap or is_new_energy):
-            if current < 1 and abs(p) > 10:
+            if status_close and current < 0.05 and abs(p) > 5.0:
                 add("RULE-E07",
                     f"小电流大功率疑似异常：I_max={current:.3f}A AP={p:.2f}"
                     f" (电容器/新能源已由白名单豁免)")

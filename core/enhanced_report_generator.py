@@ -273,16 +273,29 @@ class EnhancedReportGenerator:
             logger.warning("物理约束校验模块不可用")
             return summary
         
-        # 获取需要校验的节点和开关
-        nodes = list(self.device_map.keys())[:100]  # 限制数量
+        # 【M6修复】原实现依赖device_map里的connected_equips/from_node/to_node键
+        # （调用方未提供这些键）→ 校验0次。改为直接从拓扑图提取开关两端端子，
+        # 真实执行支路约束校验。
         switches = [
             eid for eid, dev in self.device_map.items()
             if str(dev.get("equip_type", "")) in {"1705", "1706", "1707"}
         ][:50]
         
-        # 执行校验
-        self.physical_checker.run_batch_check(nodes, switches)
-        results = self.physical_checker.results
+        self.physical_checker.run_batch_check([], [])
+        results = []
+        if self.topology_graph is not None:
+            for sw_id in switches:
+                try:
+                    pts = [n for n in self.topology_graph.neighbors(sw_id)]
+                    if len(pts) >= 2:
+                        result = self.physical_checker.check_branch_constraint(
+                            sw_id, pts[0], pts[1]
+                        )
+                        results.append(result)
+                except Exception:
+                    continue
+        else:
+            results = list(self.physical_checker.results)
         
         summary.total_checks = len(results)
         summary.passed = sum(1 for r in results if r.passed)
@@ -447,12 +460,17 @@ class EnhancedReportGenerator:
         if not REPAIR_MODULE_OK or not self.repair_ranker:
             return {}
         
-        # 构建修复候选
+        # 构建修复候选（【M6修复】同一设备多条缺陷只保留一条候选，避免重复输出）
         candidates = []
+        seen_equip = set()
         for defect in self.defects:
+            eid = defect.get("equip_id", "")
+            if eid in seen_equip:
+                continue
+            seen_equip.add(eid)
             cand = {
-                "repair_id": f"FIX_{defect.get('equip_id', '')[:8]}",
-                "target_equip": defect.get("equip_id", ""),
+                "repair_id": f"FIX_{eid[:8]}",
+                "target_equip": eid,
                 "action": "UPDATE_DEVICE",
                 "sql_forward": defect.get("sql_draft", ""),
                 "sql_rollback": "",

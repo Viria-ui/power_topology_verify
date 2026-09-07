@@ -1,45 +1,45 @@
 {
   "SVG_FILE": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\LINE215_add_station_000300.svg",
-  "PASS": false,
+  "PASS": true,
   "PASS_THRESHOLDS": {
-    "device_overlap_pairs": 5,
-    "text_overlap_pct": 5.0,
-    "device_outside_pct": 1.0,
-    "island_components_pct": 85.0,
-    "isolated_nodes_pct": 60.0,
-    "dangling_connections_pct": 10.0,
+    "device_overlap_pairs": 10,
+    "text_overlap_pct": 8.0,
+    "device_outside_pct": 2.0,
+    "island_components_pct": 50.0,
+    "isolated_nodes_pct": 30.0,
+    "dangling_connections_pct": 20.0,
     "fontscale_abnormal_pct": 5.0
   },
   "CHECKS": {
     "device_overlap_pairs": {
-      "value": 2,
+      "value": 0,
       "ok": true,
-      "threshold": 5
+      "threshold": 10
     },
     "text_overlap_pct": {
       "value": 0.0,
       "ok": true,
-      "threshold": 5.0
+      "threshold": 8.0
     },
     "device_outside_pct": {
       "value": 0.0,
       "ok": true,
-      "threshold": 1.0
+      "threshold": 2.0
     },
     "island_components_pct": {
-      "value": 99.89,
-      "ok": false,
-      "threshold": 85.0
+      "value": 25.87,
+      "ok": true,
+      "threshold": 50.0
     },
     "isolated_nodes_pct": {
-      "value": 100.0,
-      "ok": false,
-      "threshold": 60.0
+      "value": 11.15,
+      "ok": true,
+      "threshold": 30.0
     },
     "dangling_connections_pct": {
-      "value": 100.0,
-      "ok": false,
-      "threshold": 10.0
+      "value": 6.64,
+      "ok": true,
+      "threshold": 20.0
     },
     "fontscale_abnormal_pct": {
       "value": 0.0,
@@ -56,23 +56,23 @@
     "viewBox": {
       "x": 0.0,
       "y": 0.0,
-      "w": 36360.0,
+      "w": 36220.0,
       "h": 3600.0
     },
     "canvas": {
-      "width": 36360.0,
+      "width": 36220.0,
       "height": 3600.0,
       "aspect_match": true,
-      "vb_ratio": 10.1,
-      "wh_ratio": 10.1
+      "vb_ratio": 10.0611,
+      "wh_ratio": 10.0611
     },
     "devices": {
-      "total": 1744,
+      "total": 951,
       "stations": 0,
       "outside": 0,
       "outside_pct": 0.0,
-      "overlap_pairs": 2,
-      "avg_height_unit": 46.051
+      "overlap_pairs": 0,
+      "avg_height_unit": 59.314
     },
     "texts": {
       "total": 788,
@@ -84,17 +84,17 @@
       "outside": 0,
       "fontscale_abnormal": 0,
       "fontscale_abnormal_pct": 0.0,
-      "avg_dev_h_for_ref": 46.051
+      "avg_dev_h_for_ref": 59.314
     },
     "topology": {
       "total_device_nodes": 951,
       "connections_total": 1446,
-      "connected_components": 951,
-      "largest_component_size": 1,
-      "largest_component_pct": 0.11,
-      "island_components_pct": 99.89,
-      "isolated_nodes_pct": 100.0,
-      "dangling_connections_pct": 100.0
+      "connected_components": 137,
+      "largest_component_size": 705,
+      "largest_component_pct": 74.13,
+      "island_components_pct": 25.87,
+      "isolated_nodes_pct": 11.15,
+      "dangling_connections_pct": 6.64
     }
   }
 }

@@ -1,45 +1,45 @@
 {
   "SVG_FILE": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\LINE216_del_switch_00024.svg",
-  "PASS": false,
+  "PASS": true,
   "PASS_THRESHOLDS": {
-    "device_overlap_pairs": 5,
-    "text_overlap_pct": 5.0,
-    "device_outside_pct": 1.0,
-    "island_components_pct": 85.0,
-    "isolated_nodes_pct": 60.0,
-    "dangling_connections_pct": 10.0,
+    "device_overlap_pairs": 10,
+    "text_overlap_pct": 8.0,
+    "device_outside_pct": 2.0,
+    "island_components_pct": 50.0,
+    "isolated_nodes_pct": 30.0,
+    "dangling_connections_pct": 20.0,
     "fontscale_abnormal_pct": 5.0
   },
   "CHECKS": {
     "device_overlap_pairs": {
-      "value": 48,
-      "ok": false,
-      "threshold": 5
+      "value": 0,
+      "ok": true,
+      "threshold": 10
     },
     "text_overlap_pct": {
       "value": 0.0,
       "ok": true,
-      "threshold": 5.0
+      "threshold": 8.0
     },
     "device_outside_pct": {
       "value": 0.0,
       "ok": true,
-      "threshold": 1.0
+      "threshold": 2.0
     },
     "island_components_pct": {
-      "value": 99.86,
-      "ok": false,
-      "threshold": 85.0
+      "value": 10.68,
+      "ok": true,
+      "threshold": 50.0
     },
     "isolated_nodes_pct": {
-      "value": 100.0,
-      "ok": false,
-      "threshold": 60.0
+      "value": 4.18,
+      "ok": true,
+      "threshold": 30.0
     },
     "dangling_connections_pct": {
-      "value": 100.0,
-      "ok": false,
-      "threshold": 10.0
+      "value": 1.95,
+      "ok": true,
+      "threshold": 20.0
     },
     "fontscale_abnormal_pct": {
       "value": 0.0,
@@ -56,23 +56,23 @@
     "viewBox": {
       "x": 0.0,
       "y": 0.0,
-      "w": 23840.0,
-      "h": 2480.0
+      "w": 21320.0,
+      "h": 2330.0
     },
     "canvas": {
-      "width": 23840.0,
-      "height": 2480.0,
+      "width": 21320.0,
+      "height": 2330.0,
       "aspect_match": true,
-      "vb_ratio": 9.6129,
-      "wh_ratio": 9.6129
+      "vb_ratio": 9.1502,
+      "wh_ratio": 9.1502
     },
     "devices": {
-      "total": 1350,
+      "total": 693,
       "stations": 0,
       "outside": 0,
       "outside_pct": 0.0,
-      "overlap_pairs": 48,
-      "avg_height_unit": 27.968
+      "overlap_pairs": 0,
+      "avg_height_unit": 33.514
     },
     "texts": {
       "total": 650,
@@ -84,17 +84,17 @@
       "outside": 0,
       "fontscale_abnormal": 0,
       "fontscale_abnormal_pct": 0.0,
-      "avg_dev_h_for_ref": 27.968
+      "avg_dev_h_for_ref": 33.514
     },
     "topology": {
       "total_device_nodes": 693,
       "connections_total": 1695,
-      "connected_components": 693,
-      "largest_component_size": 1,
-      "largest_component_pct": 0.14,
-      "island_components_pct": 99.86,
-      "isolated_nodes_pct": 100.0,
-      "dangling_connections_pct": 100.0
+      "connected_components": 32,
+      "largest_component_size": 619,
+      "largest_component_pct": 89.32,
+      "island_components_pct": 10.68,
+      "isolated_nodes_pct": 4.18,
+      "dangling_connections_pct": 1.95
     }
   }
 }

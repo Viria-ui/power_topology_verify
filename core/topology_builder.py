@@ -101,8 +101,11 @@ class TopologyBuilder:
                     "PowerTransformer", "变电")
         if any(k in name.upper() for k in keywords):
             return True
-        # 3. 主网站房类型码（1701/1702）也判电源
-        if t in ("1701", "1702"):
+        # 3. 主网站房类型码（1701）判电源
+        # 【S1修复】1702 是"馈线段XX"（数据实测17643台），不是电源！
+        # 原代码把1702也判为电源，导致整条馈线的馈线段全部被当作电源，
+        # is_source 从真实电源数膨胀到17643（34.8%），孤岛/悬空/合环判定全部失真。
+        if t in ("1701",):
             return True
         return False
 
@@ -230,9 +233,12 @@ class TopologyBuilder:
                 lid = pw_line_name_to_id[le_name]
                 pw_line_to_zw_st[lid] = st_id
 
-        # Step 4: 遍历配网设备，根据 FEEDER_ID 找对应主网站，标记电源
+        # Step 4: 主网设备本身标记为电源（不再向整条配网馈线注入is_source）
+        # 【S1修复】原v2逻辑把"配网馈线对应主网站"下的整条馈线所有设备都标is_source，
+        # 配合1702误判导致is_source=17643。真正的电源接入点由S2（重叠CN跨边）
+        # 在 build_graph_from_terminal 中把主网边界设备并入dist_topo实现，
+        # 配网馈线通过物理连接边自然连到电源，无需整条馈线注入。
         injected = 0
-        # 缓存主网站 → 主网设备列表
         main_equip_ids_by_st: dict[str, set[str]] = {}
         for _, row in self.main_equip.iterrows():
             eid = str(row.get("EQUIP_ID") or "").strip()
@@ -240,27 +246,14 @@ class TopologyBuilder:
             if eid and st_id:
                 main_equip_ids_by_st.setdefault(st_id, set()).add(eid)
 
-        for _, row in self.dist_equip.iterrows():
-            fid = str(row.get("FEEDER_ID") or "").strip()
-            eid = str(row.get("EQUIP_ID") or "").strip()
-            if not fid or not eid:
-                continue
-            st_id = pw_line_to_zw_st.get(fid)
-            if not st_id:
-                continue
-            dev = self.dist_topo.device_map.get(eid)
-            if dev is not None and not dev.is_source:
-                dev.is_source = True
-                injected += 1
-
-        # 主网设备本身标记为电源
         for st_id, equip_ids in main_equip_ids_by_st.items():
             for eid in equip_ids:
                 dev = self.main_topo.device_map.get(eid)
                 if dev is not None:
                     dev.is_source = True
+                    injected += 1
 
-        logger.info("主配电源注入（v2-ZWLINEEND映射）: %d 台配网设备接入主网电源", injected)
+        logger.info("主配电源注入（S1修复版）: %d 台主网设备标记为电源（不再整条馈线注入）", injected)
         logger.info("  ZWLINEEND 解析出馈线→主网站映射数: %d", len(pw_line_to_zw_st))
 
     def build_real_terminal_points(self):
@@ -403,6 +396,74 @@ class TopologyBuilder:
                 )
                 self.main_topo.add_edge(e)
 
+        # -----S2修复：主配物理连接（147个重叠CN跨边）-----
+        # 根因：ZWTERMINAL的CN（正数1090...）与PWTERMINAL的CN（负数）空间本不重叠，
+        # 但实测仍有147个CN重叠——这些正是主配接口的真实物理连接点
+        # （主网出线开关 如"10kV.LINE003_181开关" ↔ 配网馈线首端设备）。
+        # 原代码对主/配各自独立建边，主配之间0跨接边，配网永远连不到主网电源，
+        # 电源追溯断裂、孤岛判定失真。
+        # 修复：把重叠CN的主网端子并入dist_topo（设备标is_source=True作为电源边界），
+        # 并在配网端子↔主网端子之间建跨边，使配网通过物理边连到电源。
+        cross_edge_count = 0
+        main_dev_injected = 0
+        try:
+            if self.zw_terminal_df is not None and not self.zw_terminal_df.empty:
+                zw_cn_to_terms = cn_to_terms_zw
+                zw_term_to_equip = term_to_equip_zw
+                for cn, zw_terms in zw_cn_to_terms.items():
+                    if cn not in cn_to_terms:
+                        continue  # 仅处理与配网重叠的CN
+                    # 1) 主网端子并入dist_topo
+                    for zt in zw_terms:
+                        if zt in self.dist_topo.point_map:
+                            continue
+                        zdev_id = zw_term_to_equip.get(zt, "")
+                        if not zdev_id:
+                            continue
+                        self.dist_topo.add_point(ConnectPoint(
+                            point_id=zt,
+                            belong_equip_id=zdev_id,
+                            feeder_id="",
+                        ))
+                        # 2) 主网边界设备并入dist_topo（is_source=True=电源）
+                        if zdev_id not in self.dist_topo.device_map:
+                            zdev = self.main_topo.device_map.get(zdev_id)
+                            if zdev is not None:
+                                self.dist_topo.add_device(Device(
+                                    equip_id=zdev_id,
+                                    equip_name=zdev.equip_name or "",
+                                    equip_type=zdev.equip_type or "",
+                                    voltage_type=zdev.voltage_type or "",
+                                    dsubstation_id=zdev.dsubstation_id or "",
+                                    is_source=True,
+                                ))
+                                main_dev_injected += 1
+                        self.dist_topo.link_device_point(zdev_id, zt)
+                    # 3) 配网端子↔主网端子跨边
+                    pw_terms = cn_to_terms[cn]
+                    cross_terms = [t for t in zw_terms if t in self.dist_topo.point_map]
+                    all_terms = pw_terms + cross_terms
+                    if len(all_terms) >= 2:
+                        for i in range(len(all_terms) - 1):
+                            t1, t2 = all_terms[i], all_terms[i + 1]
+                            # 同设备两端子跳过（设备内部通路负责）
+                            e1 = term_to_equip.get(t1, "")
+                            e2 = term_to_equip.get(t2, "")
+                            if e1 and e2 and e1 == e2:
+                                continue
+                            e = TopoEdge(
+                                line_id=f"CROSS_{cn}_{t1}_{t2}",
+                                start_point=t1,
+                                end_point=t2,
+                                line_name=f"主配接口连接节点{cn}",
+                            )
+                            self.dist_topo.add_edge(e)
+                            cross_edge_count += 1
+                logger.info("[S2修复] 主配物理连接跨边建立: %d 条, 主网边界设备并入: %d 台",
+                            cross_edge_count, main_dev_injected)
+        except Exception as _s2e:
+            logger.warning("[S2修复] 主配跨边建立异常（不影响主流程）: %s", _s2e)
+
         logger.info(f"[端子建边完成] 配网拓扑边数量：{self.dist_topo.graph.number_of_edges()}")
         logger.info(f"[端子建边完成] 主网拓扑边数量：{self.main_topo.graph.number_of_edges()}")
 
@@ -449,7 +510,7 @@ class TopologyBuilder:
         self.telemetry_evaluator = evaluator
         results = []
         for equip_id, dev in self.dist_topo.device_map.items():
-            results.extend(evaluator.evaluate_electrical_logic(equip_id, dev.equip_type or ""))
+            results.extend(evaluator.evaluate_electrical_logic(equip_id, dev.equip_type or "", dev.voltage_type or ""))
         self.dist_topo.electrical_defects = results
 
         # --- 主配接口校验（v2 修复：CN 空间改为 LINE_NAME 匹配）---

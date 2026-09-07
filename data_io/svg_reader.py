@@ -301,12 +301,22 @@ class SvgText:
 
 class SvgDocument:
     """SVG 文档中间模型"""
-    def __init__(self, svg_path: str):
+    def __init__(self, svg_path: str, feeder_id: str = None, line_df=None):
         self.svg_path = svg_path
         self.svg_filename = os.path.basename(svg_path)
-        self.feeder_id_map = {"LINE215": "TMP00000188", "LINE216": "TMP00000189"}
         base_name = os.path.splitext(self.svg_filename)[0].split("_")[0]
-        self.feeder_id = self.feeder_id_map.get(base_name, base_name)
+        # 【L2修复】签名与调用方对齐：优先显式feeder_id，其次line_df动态解析，
+        # 最后回退文件名推断（不再依赖硬编码2线映射）。
+        if feeder_id:
+            self.feeder_id = feeder_id
+        elif line_df is not None:
+            try:
+                from config.settings import resolve_feeder_id
+                self.feeder_id = resolve_feeder_id(base_name, line_df)
+            except Exception:
+                self.feeder_id = base_name
+        else:
+            self.feeder_id = base_name
         self.elements: List[SvgElement] = []
         self.connections: List[SvgConnection] = []
         self.texts: List[SvgText] = []
@@ -624,6 +634,18 @@ class SvgDocument:
                 if d_end < 5.0: conn.end_device_id = dev_id
 
     def _infer_voltage_from_psr_type(self, psr_type: str, elem: SvgElement):
+        """【S6修复】从SVG文件名推断电压等级，替代无条件硬编码"10kV"。
+
+        SVG设备节点本身不含电压属性（实测数据无PSR电压信息），但文件名携带
+        电压等级（如 10kVLINE003.svg / 35kVLINExxx.svg）。按文件名映射电压，
+        避免全库VOLTAGE_TYPE=1010时"逻辑连接不一致"系统性误报。
+        """
+        fname = str(getattr(self, "svg_filename", "") or "")
+        for kv in ("220kV", "110kV", "66kV", "35kV", "20kV", "10kV"):
+            if kv.lower() in fname.lower():
+                elem.voltage_level = kv
+                return
+        # 兜底：赛题配网数据全部为10kV
         elem.voltage_level = "10kV"
 
     def _infer_voltage_from_stroke(self, stroke: str) -> str:

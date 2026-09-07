@@ -1,27 +1,28 @@
 {
   "comparison": {
     "score_before": 0.0,
-    "score_after": 0.0,
-    "score_change": 0.0,
+    "score_after": 93.2,
+    "score_change": 93.2,
     "defects_before": 944,
-    "defects_after": 3158,
-    "defects_reduced": -2214,
+    "defects_after": 64,
+    "defects_reduced": 880,
     "elements_before": 1431,
-    "elements_after": 1431,
-    "elements_lost": 0,
+    "elements_after": 946,
+    "elements_lost": 485,
     "real_devices_before": 1430,
-    "real_devices_after": 1430,
-    "real_devices_lost": 0,
+    "real_devices_after": 789,
+    "real_devices_lost": 641,
     "defect_rate_before": 65.97,
-    "defect_rate_after": 220.68,
+    "defect_rate_after": 6.77,
     "defect_rate_penalty_before": 40.0,
-    "defect_rate_penalty_after": 40.0,
+    "defect_rate_penalty_after": 3.54,
     "components_before": 84,
     "components_after": 6,
     "type_changes": {
-      "设备重叠": -2301,
+      "孤岛设备": 25,
       "标注错位": 62,
-      "孤岛设备": 25
+      "飞线-悬空端点": -64,
+      "设备重叠": 857
     }
   },
   "before": {
@@ -53,25 +54,25 @@
   },
   "after": {
     "stage": "美化后",
-    "total_elements": 1431,
-    "real_device_count": 1430,
-    "fake_device_count": 1,
-    "total_connections": 1382,
-    "total_defects": 3158,
-    "defect_rate_percent": 220.68,
-    "defect_rate_penalty": 40.0,
-    "quality_score": 0.0,
+    "total_elements": 946,
+    "real_device_count": 789,
+    "fake_device_count": 157,
+    "total_connections": 1446,
+    "total_defects": 64,
+    "defect_rate_percent": 6.77,
+    "defect_rate_penalty": 3.54,
+    "quality_score": 93.2,
     "defects_by_type": {
-      "设备重叠": 3158
+      "飞线-悬空端点": 64
     },
     "defects_by_severity": {
-      "medium": 3158
+      "medium": 64
     },
     "connected_components": 6,
     "max_component_size": 768,
-    "dangling_count": 0,
+    "dangling_count": 64,
     "fake_connect_count": 0,
-    "overlap_count": 3158,
+    "overlap_count": 0,
     "text_missing_count": 0
   },
   "before_defects_sample": [
@@ -218,144 +219,144 @@
   ],
   "after_defects_sample": [
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000768",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3照1#~LINE215_线如切败支3照2#] bbox重叠率=74.38% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000768] 端点缺失: start='TMP00044584' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000769",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支1#-LINE215_线如切败支2#] bbox重叠率=96.06% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000769] 端点缺失: start='TMP00044589' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000770",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3#-LINE215_线如切败支4#] bbox重叠率=81.30% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000770] 端点缺失: start='TMP00044590' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000771",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3#-LINE215_线如切败支3照1#数线] bbox重叠率=88.42% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000771] 端点缺失: start='TMP00044586' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000772",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000切败支5#] bbox重叠率=77.50% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000772] 端点缺失: start='TMP00044592' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000773",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000切败支11#] bbox重叠率=59.66% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000773] 端点缺失: start='TMP00044593' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000774",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3照3#-LINE215_线如切败支3照5#] bbox重叠率=50.25% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000774] 端点缺失: start='TMP00044588' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000775",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支12#~LINE215_线如切败支13#] bbox重叠率=57.09% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000775] 端点缺失: start='TMP00044587' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000776",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支5#-LINE215_线如切败支6#] bbox重叠率=74.52% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000776] 端点缺失: start='TMP00044600' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000777",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支6#-LINE215_线如切败支7#] bbox重叠率=71.55% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000777] 端点缺失: start='TMP00044585' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000778",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支7#-LINE215_线如切败支8#] bbox重叠率=68.58% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000778] 端点缺失: start='TMP00044591' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000779",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支8#-LINE215_线如切败支9#] bbox重叠率=65.61% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000779] 端点缺失: start='TMP00044545' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000780",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支9#-LINE215_线如切败支10#] bbox重叠率=62.64% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000780] 端点缺失: start='TMP00044544' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000781",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支11#-LINE215_线如切败支12#] bbox重叠率=57.09% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000781] 端点缺失: start='TMP00044559' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000782",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3照2#~LINE215_线如切败支3照3#] bbox重叠率=59.26% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000782] 端点缺失: start='TMP00044558' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000783",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [0] bbox重叠率=53.71% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000783] 端点缺失: start='TMP00044541' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000784",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [32TMP00132954] bbox重叠率=51.91% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000784] 端点缺失: start='TMP00044551' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000785",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [站房000079] bbox重叠率=59.85% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000785] 端点缺失: start='TMP00044522' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044757",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000786",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支3照1#~LINE215_线如切败支3照2#] 与 [00000败支1#-LINE215_线如切败支2#] bbox重叠率=71.06% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000786] 端点缺失: start='TMP00044534' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     },
     {
-      "equip_id": "TMP00044757",
-      "defect_type": "设备重叠",
+      "equip_id": "BUS_000787",
+      "defect_type": "飞线-悬空端点",
       "severity": "medium",
-      "description": "设备[00000败支3照1#~LINE215_线如切败支3照2#] 与 [00000败支3#-LINE215_线如切败支4#] bbox重叠率=78.13% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
+      "description": "连接线[BUS_000787] 端点缺失: start='TMP00044557' end=''",
+      "suggestion": "补全连接线端点指向的设备ID，或删除无效飞线"
     }
   ],
   "algorithm_note": "缺陷分类与评分算法与任务一 core.topology_validator.validate_svg_only 完全一致"

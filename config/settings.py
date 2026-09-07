@@ -49,10 +49,32 @@ DIST_VOLTAGE = "10"     # 配网电压标识
 
 # 硬编码馈线映射（LINE名称 → 数据库 LINE_ID）。
 # 优先通过 SQL 表的 LINE_NAME 解析；此字典仅作为 fallback。
+# 【L1修复】实际解析统一走 resolve_feeder_id（先查线路表LINE_NAME→LINE_ID，
+# 查不到才回退本字典），避免新增线路时映射遗漏。
 FEEDER_MAP: dict[str, str] = {
     "LINE215": "TMP00000188",
     "LINE216": "TMP00000189",
 }
+
+
+def resolve_feeder_id(line_name: str, line_df=None) -> str:
+    """优先从线路表(PWFEEDERLINE)动态解析 LINE_NAME → LINE_ID。
+
+    参数:
+        line_name: 线路名称（如 LINE215）
+        line_df: 线路表DataFrame（含 LINE_ID/LINE_NAME 列）；可为None
+    返回:
+        LINE_ID；解析失败时回退 FEEDER_MAP，再回退 line_name 本身
+    """
+    if line_df is not None:
+        try:
+            if "LINE_NAME" in line_df.columns and "LINE_ID" in line_df.columns:
+                hit = line_df[line_df["LINE_NAME"].astype(str).str.strip() == str(line_name)]
+                if len(hit) > 0:
+                    return str(hit.iloc[0]["LINE_ID"]).strip()
+        except Exception:
+            pass
+    return FEEDER_MAP.get(str(line_name), str(line_name))
 
 # 设备内部连通规则配置
 DEVICE_INTERNAL_RULE = {

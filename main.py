@@ -346,7 +346,14 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
                         "rule_code": "R004",
                         "description": f"SVG图纸存在设备 {from_obj_id} 与 {to_obj_id} 的物理连接，但数据库拓扑网中缺失该连线",
                         "suggestion": "建议在数据库线路表中增补对应物理连接记录",
-                        "sql_draft": f"INSERT INTO EQUIP_JBS_PWFEEDERLINE (START_EQUIP, END_EQUIP) VALUES ('{from_obj_id}', '{to_obj_id}');",
+                        # 【S4修复】原SQL引用START_EQUIP/END_EQUIP列（不存在）。
+                        # PWFEEDERLINE真实列仅LINE_ID/LINE_NAME/START_ST_ID/VOLTAGE_TYPE，
+                        # 拓扑连接关系通过PWTERMINAL.CONNECTIVITYNODE_ID表达。
+                        "sql_draft": (
+                            f"UPDATE EQUIP_JBS_PWTERMINAL SET CONNECTIVITYNODE_ID="
+                            f"'CN_{from_obj_id}_{to_obj_id}' WHERE EQUIP_ID IN ('{from_obj_id}', '{to_obj_id}');"
+                            f" -- 建议为两设备端子设置相同CONNECTIVITYNODE_ID以补全物理连接"
+                        ),
                         "equip_name": "物理连接",
                         "station_id": start_st_id,
                     })

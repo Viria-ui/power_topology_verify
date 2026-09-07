@@ -378,6 +378,12 @@ class Type2FuzzyConfidenceEngine:
             result.primary_confidence = ConfidenceInterval(
                 tele_conf * 0.6, min(1.0, tele_conf * 0.85)
             )
+        else:
+            # 【M6修复】未匹配任何数据源强化分支的缺陷，保守估计：
+            # 原实现保留默认[0.7,0.9]直接标CONFIRMED，未经任何数据验证即"确认"自相矛盾。
+            # 改[0.3,0.6]：下限0.3<0.5→determine_status判LIKELY（疑似待复核），
+            # 宽度0.3<0.4不触发PENDING。
+            result.primary_confidence = ConfidenceInterval(0.3, 0.6)
         
         # 确定状态
         result.status = result.determine_status()
