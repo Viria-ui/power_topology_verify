@@ -320,16 +320,7 @@ power_topology_verify/
 │   ├── sync_dataset.py             # 数据集同步脚本
 │   ├── _load_sql_topology.py      # SQL拓扑加载脚本
 │   ├── _check_syntax.bat          # 语法检查批处理
-│   │
-│   ├── data_extraction/            # 数据提取脚本
-│   │   ├── extract_docx.py        # 从docx提取文本
-│   │   ├── extract_docx2.py       # docx提取变体
-│   │   ├── extract_from_file.py   # 从文件提取数据
-│   │   ├── run_extract.py         # 提取运行脚本
-│   │   ├── extract.bat            # Windows批处理
-│   │   ├── extract.ps1            # PowerShell脚本
-│   │   └── run_extract.ps1        # 运行PowerShell脚本
-│   │
+│
 │   ├── svg_pipeline/               # SVG处理流水线
 │   │   ├── run_beautify.py       # SVG美化流水线入口
 │   │   └── run_svg_pipeline.py   # SVG全流程处理脚本
