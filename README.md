@@ -781,21 +781,30 @@ power_topology_verify/
 └── venv/                        # Python虚拟环境
 ```
 
-### 4.2 核心代码详细说明
+> 📚 **详细API文档**：完整的类结构与方法说明请参阅 [docs/api_doc.md](docs/api_doc.md)
 
-#### 4.2.1 `core/graph_model.py` - 图数据结构定义
+### 4.2 核心接口说明
 
-**功能**：定义拓扑图的基本数据结构，包括设备、端子、边、异常等
+| 模块 | 主要类/函数 | 功能说明 |
+|------|-------------|----------|
+| `core/graph_model.py` | `TopologyGraph`, `Device`, `ConnectPoint` | 图数据结构定义 |
+| `core/topology_builder.py` | `TopologyBuilder.build_full_topology()` | 从SQL构建完整拓扑图 |
+| `core/topology_validator.py` | `detect_hanging_terminal()`, `detect_tie_and_suspect_tie()` | 拓扑校验规则 |
+| `core/telemetry_evaluator.py` | `TelemetryEvaluator.evaluate_electrical_logic()` | E01-E07电气逻辑校验 |
+| `core/score_engine.py` | `ScoreAndConfidenceEngine.evaluate_quality_score()` | 四维质量评分 |
+| `core/repair_generator.py` | `TopologyRepairGenerator.generate_repair_candidates()` | SQL修复方案生成 |
+| `svg_io/svg_beautifier.py` | `SvgBeautifier.beautify()` | SVG标准化美化 |
+| `svg_io/svg_auto_generator.py` | `SvgAutoGenerator.generate_*()` | 自动生成SVG图 |
 
-**核心类详细说明**：
+> ⚠️ **高压电气与数据安全须知**
+>
+> 本系统生成的 SQL 修复脚本在对生产数据库执行更新（UPDATE/DELETE）前，**必须在测试环境完成逆向回滚脚本（Rollback SQL）的验证**。
+>
+> 涉及高压开关状态推演与合环操作建议时，**必须经由线下人工调度员核查**，严禁直接联动自动化执行机构。
 
-```python
-class Device:
-    """设备实体类"""
-    def __init__(self, equip_id: str, equip_name: str, equip_type: str = None):
-        self.equip_id = equip_id          # 设备唯一标识，如 "TMP00012345"
-        self.equip_name = equip_name      # 设备名称，如 "10kVXX线路开关001"
-        self.equip_type = equip_type      # 设备类型编码，如 "1705"(断路器)
+---
+
+## 5. 数据格式说明
         self.voltage_type = None          # 电压等级，如 "10kV"
         self.feeder_id = None            # 所属馈线ID，如 "FEEDER-A"
         self.is_source = False            # 是否电源设备
