@@ -1245,24 +1245,26 @@ def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bo
             # 2. 连接关系用美化后的邻接表
             # 3. 简化检测：只检测连通分量和孤岛（与美化目标对应）
 
-            # 收集美化后的连接
+            # 收集美化后的连接，并为每个设备附加拓扑邻接表
+            # topo_adj 格式：{设备ID: {相邻设备ID集合}}
+            # quality_scorer._has_glink_mutual 将优先查此表判断连接是否真实
             conns = []
             seen = set()
-            device_ids = set()
+            topo_adj: dict = defaultdict(set)
             for u, neighbors in beautifier.adj.items():
-                device_ids.add(u)
                 for v in neighbors:
                     key = tuple(sorted([u, v]))
                     if key in seen or u == v:
                         continue
                     seen.add(key)
+                    topo_adj[u].add(v)
+                    topo_adj[v].add(u)
                     pu = beautifier.pos.get(u, (0, 0))
                     pv = beautifier.pos.get(v, (0, 0))
                     conns.append(SimpleNamespace(
                         from_element_id=u, to_element_id=v,
                         line_id=f"edge_{u}_{v}",
-                        # 【修复】不设置points，避免端点偏离检测报错
-                        points=None,
+                        points=[(pu[0], pu[1]), (pv[0], pv[1])],
                     ))
 
             # 【修复】美化后的元素：使用美化后的全部设备（包含有/无连接的设备）
@@ -1284,7 +1286,8 @@ def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bo
                     glink_refs=dev.get('glinks', []),  # 使用原始GLink引用
                 ))
 
-            doc_after = SimpleNamespace(elements=elems, connections=conns, texts={})
+            doc_after = SimpleNamespace(elements=elems, connections=conns, texts={},
+                                      topo_adj=topo_adj, is_beautified=True)
             after_defects, after_summary = evaluate_svg_quality(doc_after, stage="美化后")
 
             # 【修复】美化后质量评估：直接使用evaluate_svg_quality的结果

@@ -14,6 +14,9 @@ class Device(BaseModel):
     dsubstation_id: Optional[str] = None
     is_source: bool = False
     switch_status: Optional[str] = None
+    # ★ 新增：归属站房容器 ID（开关站/箱变/环网柜/配电室等）
+    # 由数据侧通过 FEEDER/EQUIP 关联注入；联络开关识别按此字段严格排除容器内设备
+    ssjg: Optional[str] = None
 
 
 class ConnectPoint(BaseModel):

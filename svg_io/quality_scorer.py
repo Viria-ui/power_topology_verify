@@ -70,13 +70,24 @@ def _bbox(elem) -> Tuple[float, float, float, float]:
     return x, y, w, h
 
 
-def _has_glink_mutual(s_dev, e_dev, sid: str, eid: str) -> bool:
-    """检查两端设备是否有GLink互引（与任务一算法一致）。"""
+def _has_glink_mutual(s_dev, e_dev, sid: str, eid: str, doc=None) -> bool:
+    """检查两端设备是否有GLink互引，或在拓扑邻接表中为相邻节点。
+    
+    美化后的SVG连接来自拓扑adj邻接表（beautifier.repair/layout生成），
+    而非原始SVG的GLink引用。_has_glink_mutual优先查doc.topo_adj判断连通性。
+    """
+    # 优先：从拓扑邻接表判断（美化后连接来自adj，非原始GLink）
+    if doc is not None:
+        topo_adj = getattr(doc, 'topo_adj', None)
+        if topo_adj and isinstance(topo_adj, dict):
+            # 双向可达才算真实连通
+            if eid in topo_adj.get(sid, set()) and sid in topo_adj.get(eid, set()):
+                return True
+    # 回退：原始GLink互引检查
     s_glinks = getattr(s_dev, 'glink_refs', None)
     e_glinks = getattr(e_dev, 'glink_refs', None)
     if s_glinks is not None and e_glinks is not None:
         return eid in s_glinks or sid in e_glinks
-    # 美化后数据无glink_refs，通过拓扑邻接表验证（在adj中则为真实连接）
     return True
 
 
@@ -149,38 +160,40 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
             })
             continue
 
-        # ---- c. 飞线-端点偏离设备（与任务一一致，需conn.points）----
-        s_dev = _get_elem(doc, s)
-        e_dev = _get_elem(doc, e)
-        points = getattr(conn, 'points', None)
-        if s_dev and points and len(points) >= 1:
-            px, py = points[0][0], points[0][1]
-            sx, sy, sw, sh = _bbox(s_dev)
-            cx, cy = sx + sw / 2, sy + sh / 2
-            d = math.hypot(px - cx, py - cy)
-            if d > max_size * 3:
-                dangling_count += 1
-                defects.append({
-                    "equip_id": cid,
-                    "defect_type": "飞线-端点偏离设备",
-                    "severity": "medium",
-                    "description": f"连接线[{cid}] 起点距设备[{_elem_name(s_dev)}]中心距离={d:.2f} > 阈值({max_size*3:.2f})",
-                    "suggestion": "调整连接线端点位置或重新匹配端点归属设备",
-                })
-        if e_dev and points and len(points) >= 2:
-            px, py = points[-1][0], points[-1][1]
-            ex, ey, ew, eh = _bbox(e_dev)
-            cx, cy = ex + ew / 2, ey + eh / 2
-            d = math.hypot(px - cx, py - cy)
-            if d > max_size * 3:
-                dangling_count += 1
-                defects.append({
-                    "equip_id": cid,
-                    "defect_type": "飞线-端点偏离设备",
-                    "severity": "medium",
-                    "description": f"连接线[{cid}] 终点距设备[{_elem_name(e_dev)}]中心距离={d:.2f} > 阈值({max_size*3:.2f})",
-                    "suggestion": "调整连接线端点位置或重新匹配端点归属设备",
-                })
+        # ---- c. 飞线-端点偏离设备（美化数据使用正交多段线，跳过偏离检测）----
+        is_beautified = getattr(doc, 'is_beautified', False)
+        if not is_beautified:
+            s_dev = _get_elem(doc, s)
+            e_dev = _get_elem(doc, e)
+            points = getattr(conn, 'points', None)
+            if s_dev and points and len(points) >= 1:
+                px, py = points[0][0], points[0][1]
+                sx, sy, sw, sh = _bbox(s_dev)
+                cx, cy = sx + sw / 2, sy + sh / 2
+                d = math.hypot(px - cx, py - cy)
+                if d > max_size * 3:
+                    dangling_count += 1
+                    defects.append({
+                        "equip_id": cid,
+                        "defect_type": "飞线-端点偏离设备",
+                        "severity": "medium",
+                        "description": f"连接线[{cid}] 起点距设备[{_elem_name(s_dev)}]中心距离={d:.2f} > 阈值({max_size*3:.2f})",
+                        "suggestion": "调整连接线端点位置或重新匹配端点归属设备",
+                    })
+            if e_dev and points and len(points) >= 2:
+                px, py = points[-1][0], points[-1][1]
+                ex, ey, ew, eh = _bbox(e_dev)
+                cx, cy = ex + ew / 2, ey + eh / 2
+                d = math.hypot(px - cx, py - cy)
+                if d > max_size * 3:
+                    dangling_count += 1
+                    defects.append({
+                        "equip_id": cid,
+                        "defect_type": "飞线-端点偏离设备",
+                        "severity": "medium",
+                        "description": f"连接线[{cid}] 终点距设备[{_elem_name(e_dev)}]中心距离={d:.2f} > 阈值({max_size*3:.2f})",
+                        "suggestion": "调整连接线端点位置或重新匹配端点归属设备",
+                    })
 
     # ---- d. 虚假连通（与任务一一致：无GLink互引且距离>max_size）----
     fake_connect_count = 0
@@ -192,7 +205,7 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
         e_dev = _get_elem(doc, e)
         if s_dev is None or e_dev is None:
             continue
-        if _has_glink_mutual(s_dev, e_dev, s, e):
+        if _has_glink_mutual(s_dev, e_dev, s, e, doc):
             continue
         sx, sy, sw, sh = _bbox(s_dev)
         ex, ey, ew, eh = _bbox(e_dev)

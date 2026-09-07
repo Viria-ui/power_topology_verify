@@ -4,8 +4,8 @@
     "score_after": 30.0,
     "score_change": -14.8,
     "defects_before": 450,
-    "defects_after": 7742,
-    "defects_reduced": -7292,
+    "defects_after": 7731,
+    "defects_reduced": -7281,
     "real_devices_before": 1644,
     "real_devices_after": 1644,
     "real_devices_change": 0,
@@ -19,9 +19,9 @@
     "components_change": -213,
     "type_changes": {
       "孤岛设备": 148,
-      "虚假连通": -1626,
-      "标注错位": 30,
-      "设备重叠": -5844
+      "设备重叠": -5834,
+      "虚假连通": -1625,
+      "标注错位": 30
     }
   },
   "before": {
@@ -57,23 +57,23 @@
     "real_device_count": 1644,
     "fake_device_count": 0,
     "total_connections": 1682,
-    "total_defects": 7742,
+    "total_defects": 7731,
     "defect_rate_percent": 100.0,
     "defect_rate_penalty": 20.0,
     "quality_score": 30.0,
     "defects_by_type": {
-      "虚假连通": 1626,
-      "设备重叠": 6116
+      "虚假连通": 1625,
+      "设备重叠": 6106
     },
     "defects_by_severity": {
-      "high": 1626,
-      "medium": 6116
+      "high": 1625,
+      "medium": 6106
     },
     "connected_components": 1,
     "max_component_size": 678,
     "dangling_count": 0,
-    "fake_connect_count": 1626,
-    "overlap_count": 6116,
+    "fake_connect_count": 1625,
+    "overlap_count": 6106,
     "text_missing_count": 0
   },
   "before_defects_sample": [
@@ -223,84 +223,63 @@
       "equip_id": "edge_TMP00046158_TMP00313565",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00046158_TMP00313565] 两端设备[00000]-[故障指示器007] 无互引GLink，几何距离=150.00 > 阈值(20.00)，疑似乱凑对",
-      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
-    },
-    {
-      "equip_id": "edge_TMP00046158_TMP00046604",
-      "defect_type": "虚假连通",
-      "severity": "high",
-      "description": "连接线[edge_TMP00046158_TMP00046604] 两端设备[00000]-[避雷器045] 无互引GLink，几何距离=205.18 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00046158_TMP00313565] 两端设备[00000]-[故障指示器007] 无互引GLink，几何距离=161.55 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
       "equip_id": "edge_TMP00046158_TMP00046159",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00046158_TMP00046159] 两端设备[00000]-[TMP00131370] 无互引GLink，几何距离=317.65 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00046158_TMP00046159] 两端设备[00000]-[TMP00131370] 无互引GLink，几何距离=150.00 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
+    },
+    {
+      "equip_id": "edge_TMP00046158_TMP00046604",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046158_TMP00046604] 两端设备[00000]-[避雷器045] 无互引GLink，几何距离=250.00 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
       "equip_id": "edge_TMP00313565_TMP00043924",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00313565_TMP00043924] 两端设备[故障指示器007]-[开关00036] 无互引GLink，几何距离=1408.01 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00313565_TMP00043924] 两端设备[故障指示器007]-[开关00036] 无互引GLink，几何距离=445.98 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
       "equip_id": "edge_TMP00313539_TMP00048670",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00313539_TMP00048670] 两端设备[TMP00318364次母线]-[开关03300] 无互引GLink，几何距离=150.00 > 阈值(20.00)，疑似乱凑对",
-      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
-    },
-    {
-      "equip_id": "edge_TMP00048670_TMP00313541",
-      "defect_type": "虚假连通",
-      "severity": "high",
-      "description": "连接线[edge_TMP00048670_TMP00313541] 两端设备[开关03300]-[32TMP00132954] 无互引GLink，几何距离=205.18 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00313539_TMP00048670] 两端设备[TMP00318364次母线]-[开关03300] 无互引GLink，几何距离=161.55 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
       "equip_id": "edge_TMP00048670_TMP00045087",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00048670_TMP00045087] 两端设备[开关03300]-[TMP00314522LINE216_争1#] 无互引GLink，几何距离=579.74 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00048670_TMP00045087] 两端设备[开关03300]-[TMP00314522LINE216_争1#] 无互引GLink，几何距离=266.27 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
+    },
+    {
+      "equip_id": "edge_TMP00048670_TMP00313541",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00048670_TMP00313541] 两端设备[开关03300]-[32TMP00132954] 无互引GLink，几何距离=250.00 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
       "equip_id": "edge_TMP00048670_TMP00046159",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00048670_TMP00046159] 两端设备[开关03300]-[TMP00131370] 无互引GLink，几何距离=140.00 > 阈值(20.00)，疑似乱凑对",
-      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
-    },
-    {
-      "equip_id": "edge_TMP00044381_TMP00043924",
-      "defect_type": "虚假连通",
-      "severity": "high",
-      "description": "连接线[edge_TMP00044381_TMP00043924] 两端设备[刀闸0145]-[开关00036] 无互引GLink，几何距离=7621.48 > 阈值(20.00)，疑似乱凑对",
-      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
-    },
-    {
-      "equip_id": "edge_TMP00044381_TMP00046157",
-      "defect_type": "虚假连通",
-      "severity": "high",
-      "description": "连接线[edge_TMP00044381_TMP00046157] 两端设备[刀闸0145]-[00000终端头510346] 无互引GLink，几何距离=7901.42 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00048670_TMP00046159] 两端设备[开关03300]-[TMP00131370] 无互引GLink，几何距离=80.00 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
       "equip_id": "edge_TMP00044381_TMP00043895",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00044381_TMP00043895] 两端设备[刀闸0145]-[开关00007] 无互引GLink，几何距离=2364.76 > 阈值(20.00)，疑似乱凑对",
-      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
-    },
-    {
-      "equip_id": "edge_TMP00044381_TMP00045085",
-      "defect_type": "虚假连通",
-      "severity": "high",
-      "description": "连接线[edge_TMP00044381_TMP00045085] 两端设备[刀闸0145]-[00000终端头510346-站外-电缆终端头510347] 无互引GLink，几何距离=7761.45 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00044381_TMP00043895] 两端设备[刀闸0145]-[开关00007] 无互引GLink，几何距离=1090.37 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
@@ -311,38 +290,59 @@
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
+      "equip_id": "edge_TMP00044381_TMP00045085",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00044381_TMP00045085] 两端设备[刀闸0145]-[00000终端头510346-站外-电缆终端头510347] 无互引GLink，几何距离=250.00 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
+    },
+    {
+      "equip_id": "edge_TMP00044381_TMP00043924",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00044381_TMP00043924] 两端设备[刀闸0145]-[开关00036] 无互引GLink，几何距离=161.55 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
+    },
+    {
+      "equip_id": "edge_TMP00044381_TMP00046157",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00044381_TMP00046157] 两端设备[刀闸0145]-[00000终端头510346] 无互引GLink，几何距离=371.62 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
+    },
+    {
       "equip_id": "edge_TMP00046157_TMP00046156",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00046157_TMP00046156] 两端设备[00000终端头510346]-[00000终端头510347] 无互引GLink，几何距离=1467.69 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00046157_TMP00046156] 两端设备[00000终端头510346]-[00000终端头510347] 无互引GLink，几何距离=502.89 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
       "equip_id": "edge_TMP00313553_TMP00046027",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00313553_TMP00046027] 两端设备[0]-[用户1637] 无互引GLink，几何距离=205.18 > 阈值(20.00)，疑似乱凑对",
-      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
-    },
-    {
-      "equip_id": "edge_TMP00046027_TMP00313561",
-      "defect_type": "虚假连通",
-      "severity": "high",
-      "description": "连接线[edge_TMP00046027_TMP00313561] 两端设备[用户1637]-[0] 无互引GLink，几何距离=317.65 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00313553_TMP00046027] 两端设备[0]-[用户1637] 无互引GLink，几何距离=250.00 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
       "equip_id": "edge_TMP00046027_TMP00046497",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00046027_TMP00046497] 两端设备[用户1637]-[配变2274] 无互引GLink，几何距离=370.00 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00046027_TMP00046497] 两端设备[用户1637]-[配变2274] 无互引GLink，几何距离=374.83 > 阈值(20.00)，疑似乱凑对",
+      "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
+    },
+    {
+      "equip_id": "edge_TMP00046027_TMP00313561",
+      "defect_type": "虚假连通",
+      "severity": "high",
+      "description": "连接线[edge_TMP00046027_TMP00313561] 两端设备[用户1637]-[0] 无互引GLink，几何距离=371.62 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
       "equip_id": "edge_TMP00046027_TMP00045085",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00046027_TMP00045085] 两端设备[用户1637]-[00000终端头510346-站外-电缆终端头510347] 无互引GLink，几何距离=1467.69 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00046027_TMP00045085] 两端设备[用户1637]-[00000终端头510346-站外-电缆终端头510347] 无互引GLink，几何距离=502.89 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     },
     {
@@ -356,7 +356,7 @@
       "equip_id": "edge_TMP00044450_TMP00046602",
       "defect_type": "虚假连通",
       "severity": "high",
-      "description": "连接线[edge_TMP00044450_TMP00046602] 两端设备[刀闸0148]-[避雷器043] 无互引GLink，几何距离=2544.43 > 阈值(20.00)，疑似乱凑对",
+      "description": "连接线[edge_TMP00044450_TMP00046602] 两端设备[刀闸0148]-[避雷器043] 无互引GLink，几何距离=161.55 > 阈值(20.00)，疑似乱凑对",
       "suggestion": "核对两端设备是否真的物理相连，不对应则删除该连接并补画正确连接"
     }
   ],
