@@ -263,14 +263,129 @@
 ```
 power_topology_verify/
 │
-├── main.py                        # 【主入口】统一命令行入口，支持--all/--topo/--compare/--svg
-├── run_beautify.py               # SVG美化流水线入口
-├── requirements.txt              # Python依赖包列表
-├── README.md                    # 项目说明文档
-├── api_doc.md                   # API文档
-├── svg_render_config.json       # SVG渲染配置
+├── main.py                          # 【主入口】统一命令行入口，支持--all/--topo/--compare/--svg
+├── requirements.txt                # Python依赖包列表
+├── README.md                       # 项目说明文档（本文档）
+├── .gitignore                      # Git忽略配置
 │
-├── core/                          # 【核心业务逻辑】所有核心模块
+├── core/                            # 【核心业务逻辑】所有核心模块
+│   ├── __init__.py                # 模块初始化
+│   ├── constants.py                # 业务常量定义
+│   ├── log_config.py               # 日志配置
+│   ├── graph_model.py              # 【图数据结构定义】Device/ConnectPoint/TopoEdge/TopologyGraph
+│   ├── topology_builder.py         # 【拓扑构建器】从SQL数据构建完整拓扑图
+│   ├── topology_validator.py       # 【拓扑校验器】图模一致性校验规则R001-R003
+│   ├── telemetry_evaluator.py      # 【电气逻辑校验】E01-E07规则校验
+│   ├── score_engine.py             # 【评分引擎】四维质量评分体系
+│   ├── repair_generator.py         # 【修复方案生成】SQL修复脚本与回滚
+│   ├── measure_preprocess.py       # 【遥信预处理】去噪、防抖、状态推演
+│   ├── feeder_topology_analysis.py # 【馈线分析】联络开关/合环/断点分析
+│   ├── defect_excel_exporter.py   # 【Excel报告导出】标准化缺陷报告
+│   ├── topology_repairer.py        # 【拓扑修复器】SVG拓扑缺陷整治
+│   ├── physical_constraint_checker.py  # [v2.0] 物理约束校验(KCL)
+│   ├── type2_fuzzy_confidence.py   # [v2.0] II型模糊可信度
+│   ├── temporal_feature_extractor.py  # [v2.0] 时序特征提取
+│   ├── repair_ranking_engine.py    # [v2.0] 修复排序引擎
+│   └── enhanced_report_generator.py    # [v2.0] 增强报告生成
+│
+├── data_io/                         # 【数据输入输出】
+│   ├── __init__.py
+│   ├── data_reader.py              # SQL数据读取SqlTableLoader
+│   ├── svg_reader.py               # SVG解析SvgParser/SvgDocument
+│   ├── data_writer.py              # 数据导出CSV/JSON/Excel
+│   └── svg_writer.py               # SVG写入SvgDocumentWriter
+│
+├── svg_io/                          # 【SVG处理】
+│   ├── __init__.py
+│   ├── svg_beautifier.py           # SVG美化SvgBeautifier
+│   ├── svg_editor.py               # SVG编辑SvgInteractiveEditorV2
+│   ├── svg_auto_generator.py       # SVG自动生成(单线图/联络图/电源追溯图)
+│   ├── quality_checker.py          # SVG质量检查
+│   ├── quality_scorer.py           # SVG美观度评分
+│   └── task_deliverables.py       # 任务交付物
+│
+├── config/                          # 【配置】
+│   ├── __init__.py
+│   ├── settings.py                 # 全局配置(INPUT/OUTPUT目录等)
+│   ├── constants.py                # 业务常量
+│   └── rule_config.json            # 规则配置JSON
+│
+├── scripts/                         # 【脚本工具】按功能分类
+│   ├── run_all_tests.py           # 【综合测试】执行所有测试任务
+│   ├── run_quality_check.py       # 质量检查运行脚本
+│   ├── run_auto_generation.py     # 自动生成运行脚本
+│   ├── quick_test.py               # 快速测试脚本
+│   ├── check_tie_loop.py          # 联络合环检查脚本
+│   ├── build_mapping_v1.py         # 映射构建脚本
+│   ├── sync_dataset.py             # 数据集同步脚本
+│   ├── _load_sql_topology.py      # SQL拓扑加载脚本
+│   ├── _check_syntax.bat          # 语法检查批处理
+│   │
+│   ├── data_extraction/            # 数据提取脚本
+│   │   ├── extract_docx.py        # 从docx提取文本
+│   │   ├── extract_docx2.py       # docx提取变体
+│   │   ├── extract_from_file.py   # 从文件提取数据
+│   │   ├── run_extract.py         # 提取运行脚本
+│   │   ├── extract.bat            # Windows批处理
+│   │   ├── extract.ps1            # PowerShell脚本
+│   │   └── run_extract.ps1        # 运行PowerShell脚本
+│   │
+│   ├── svg_pipeline/               # SVG处理流水线
+│   │   ├── run_beautify.py       # SVG美化流水线入口
+│   │   └── run_svg_pipeline.py   # SVG全流程处理脚本
+│   │
+│   ├── validation/                 # 验证脚本
+│   │   ├── verify_mapping.py      # 验证LINE_ID映射关系
+│   │   ├── verify_output.py       # 验证美化输出SVG
+│   │   └── verify_svg_pipeline.py # SVG闭环验证
+│   │
+│   └── visualization/              # 可视化脚本
+│       └── visual_app.py          # Streamlit可视化Web应用
+│
+├── tests/                           # 【测试】
+│   ├── __init__.py
+│   ├── test_graph_model.py         # 图模型单元测试
+│   ├── test_feeder_topology_analysis.py  # 馈线分析测试
+│   ├── test_defect_excel_exporter.py     # Excel导出测试
+│   └── compare.py                 # 主比对脚本（入口文件）
+│
+├── docs/                           # 【文档】
+│   ├── api_doc.md                 # API文档
+│   ├── sample_abnormal.json        # 异常样例JSON
+│   └── sample_abnormal.csv        # 异常样例CSV
+│
+├── input/                          # 【输入数据】
+│   └── sql_gbk/                   # SQL数据文件(GBK编码)
+│       ├── EQUIP_JBS_PWEQUIPINFO.sql   # 配网设备表
+│       ├── EQUIP_JBS_PWFEEDERLINE.sql  # 线路表
+│       ├── EQUIP_JBS_PWROOM.sql        # 站房表
+│       ├── EQUIP_JBS_PWTERMINAL.sql   # 端子表
+│       ├── EQUIP_JBS_PWREAL.sql        # 实时数据
+│       ├── EQUIP_JBS_ZWEQUIPINFO.sql  # 主网设备
+│       ├── EQUIP_JBS_ZWSUBSTATION.sql # 主网站点
+│       └── ... (其他主网相关表)
+│
+├── output/                         # 【输出结果】
+│   ├── csv/                       # CSV格式输出
+│   ├── json/                      # JSON格式输出
+│   ├── svg/                       # SVG图形输出
+│   ├── reports/                   # 报告输出
+│   ├── sql/                       # SQL脚本输出
+│   ├── log/                       # 日志文件
+│   └── *.xlsx, *.json, *.sql      # 线路级报告
+│
+├── 数据集更新版20260729/           # 【比赛数据集V1】
+│   ├── 配网 svg/                  # 配电网SVG图(200+个)
+│   └── sql形式数据集/              # SQL格式数据
+│
+├── 数据集更新版20260821/           # 【比赛数据集V2(增量补丁)】
+│   ├── 拓扑校验问题标准输出.xlsx
+│   └── 数据库更新脚本20260821.txt
+│
+├── 参考文件/                       # 【参考文档】比赛官方参考文档
+│
+└── venv/                          # Python虚拟环境
+```
 │   ├── __init__.py              # 模块初始化
 │   ├── constants.py             # 业务常量定义
 │   │   ├── SWITCH_TYPES         # 开关类型编码集合 {1705,1706,1707,1708,1709}
