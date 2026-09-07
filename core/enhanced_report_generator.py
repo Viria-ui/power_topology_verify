@@ -78,6 +78,14 @@ except ImportError:
     TEMPORAL_MODULE_OK = False
     logger.warning("TemporalFeatureExtractor 模块不可用")
 
+try:
+    from core.hybrid_intelligence import HybridIntelligenceChecker
+    from core.hybrid_intelligence.hybrid_checker import run_hybrid_intelligence_check
+    HYBRID_MODULE_OK = True
+except ImportError as ex:
+    HYBRID_MODULE_OK = False
+    logger.warning("混合智能校验模块不可用: %s", ex)
+
 
 @dataclass
 class EnhancedDefectReport:
@@ -147,6 +155,54 @@ class DataSourceSummary:
 
 
 @dataclass
+class HybridIntelligenceSummary:
+    """混合智能校验汇总"""
+    enabled: bool = False
+    total_devices: int = 0
+    duration_seconds: float = 0.0
+    features_extracted: int = 0
+    telemetry_coverage: int = 0
+    gnn_enabled: bool = False
+    temporal_enabled: bool = False
+    gnn_anomaly_count: int = 0
+    temporal_anomaly_count: int = 0
+    rule_hit_count: int = 0
+    rule_deterministic_count: int = 0
+    fused_anomaly_count: int = 0
+    high_risk_count: int = 0
+    medium_risk_count: int = 0
+    confirmed_count: int = 0
+    need_review_count: int = 0
+    suspected_tie_switches: List[dict] = field(default_factory=list)
+    electrical_anomalies: List[dict] = field(default_factory=list)
+    graph_model_anomalies: List[dict] = field(default_factory=list)
+    fusion_results: List[dict] = field(default_factory=list)
+
+    def to_dict(self) -> dict:
+        return {
+            "enabled": self.enabled,
+            "total_devices": self.total_devices,
+            "duration_seconds": round(self.duration_seconds, 2),
+            "features_extracted": self.features_extracted,
+            "telemetry_coverage": self.telemetry_coverage,
+            "gnn_enabled": self.gnn_enabled,
+            "temporal_enabled": self.temporal_enabled,
+            "gnn_anomaly_count": self.gnn_anomaly_count,
+            "temporal_anomaly_count": self.temporal_anomaly_count,
+            "rule_hit_count": self.rule_hit_count,
+            "rule_deterministic_count": self.rule_deterministic_count,
+            "fused_anomaly_count": self.fused_anomaly_count,
+            "high_risk_count": self.high_risk_count,
+            "medium_risk_count": self.medium_risk_count,
+            "confirmed_count": self.confirmed_count,
+            "need_review_count": self.need_review_count,
+            "suspected_tie_switches": self.suspected_tie_switches,
+            "electrical_anomalies": self.electrical_anomalies,
+            "graph_model_anomalies": self.graph_model_anomalies,
+        }
+
+
+@dataclass
 class PhysicalConstraintSummary:
     """物理约束校验汇总"""
     total_checks: int = 0
@@ -208,6 +264,7 @@ class EnhancedReportGenerator:
         self.enhanced_defects: List[EnhancedDefectReport] = []
         self.data_source_summary = DataSourceSummary()
         self.physical_summary = PhysicalConstraintSummary()
+        self.hybrid_summary = HybridIntelligenceSummary()
         self.repair_report = {}
         
     def initialize_engines(self):
@@ -272,16 +329,13 @@ class EnhancedReportGenerator:
         if not PHYSICAL_MODULE_OK or not self.physical_checker:
             logger.warning("物理约束校验模块不可用")
             return summary
-        
-        # 获取需要校验的节点和开关
-        nodes = list(self.device_map.keys())[:100]  # 限制数量
-        switches = [
-            eid for eid, dev in self.device_map.items()
-            if str(dev.get("equip_type", "")) in {"1705", "1706", "1707"}
-        ][:50]
-        
-        # 执行校验
-        self.physical_checker.run_batch_check(nodes, switches)
+
+        # 执行校验（传入 topology_graph 使 KCL/支路校验能正确推导节点-设备关系）
+        self.physical_checker.run_batch_check(
+            nodes_to_check=None,
+            switches_to_check=None,
+            topology_graph=self.topology_graph,
+        )
         results = self.physical_checker.results
         
         summary.total_checks = len(results)
@@ -311,7 +365,87 @@ class EnhancedReportGenerator:
         
         self.physical_summary = summary
         return summary
-    
+
+    def run_hybrid_intelligence_check(
+        self,
+        enable_gnn: bool = True,
+        enable_temporal: bool = True,
+        gat_epochs: int = 30,
+    ) -> HybridIntelligenceSummary:
+        """
+        运行混合智能校验（拓扑图算法 + GNN + 时空模型 + 规则引擎）
+
+        参数:
+            enable_gnn: 是否启用 GNN 图注意力检测（默认 True）
+            enable_temporal: 是否启用时空模型检测（默认 True）
+            gat_epochs: GNN 训练轮数（默认 30）
+
+        返回: HybridIntelligenceSummary
+        """
+        summary = HybridIntelligenceSummary()
+        summary.enabled = True
+
+        if not HYBRID_MODULE_OK:
+            logger.warning("混合智能校验模块不可用，跳过")
+            return summary
+
+        try:
+            from core.hybrid_intelligence import run_hybrid_intelligence_check as _run_hybrid
+
+            logger.info(
+                "[EnhancedReport] 运行混合智能校验: GNN=%s, 时空=%s, epochs=%d",
+                enable_gnn, enable_temporal, gat_epochs,
+            )
+
+            report = _run_hybrid(
+                line_name=self.line_name,
+                topo=self.topology_graph,
+                telemetry_data=self.telemetry_data,
+                svg_document=None,         # 由调用方注入
+                switch_status_map=self.switch_status_map,
+                enable_gnn=enable_gnn,
+                enable_temporal=enable_temporal,
+                gat_epochs=gat_epochs,
+            )
+
+            # 同步到 HybridIntelligenceSummary
+            summary.total_devices = report.total_devices
+            summary.duration_seconds = report.duration_seconds
+            summary.features_extracted = report.features_extracted
+            summary.telemetry_coverage = report.telemetry_coverage
+            summary.gnn_enabled = report.gnn_enabled
+            summary.temporal_enabled = report.temporal_enabled
+            summary.gnn_anomaly_count = report.gnn_anomaly_count
+            summary.temporal_anomaly_count = report.temporal_anomaly_count
+            summary.rule_hit_count = report.rule_hit_count
+            summary.rule_deterministic_count = report.rule_deterministic_count
+            summary.fused_anomaly_count = report.fused_anomaly_count
+            summary.high_risk_count = report.high_risk_count
+            summary.medium_risk_count = report.medium_risk_count
+            summary.confirmed_count = report.confirmed_count
+            summary.need_review_count = report.need_review_count
+            summary.suspected_tie_switches = report.suspected_tie_switches
+            summary.electrical_anomalies = report.electrical_anomalies
+            summary.graph_model_anomalies = report.graph_model_anomalies
+            summary.fusion_results = report.fusion_results
+
+            logger.info(
+                "[EnhancedReport] 混合智能校验完成: 融合异常=%d, 高风险=%d, "
+                "确认=%d, 待复核=%d, 疑似联络开关=%d",
+                summary.fused_anomaly_count,
+                summary.high_risk_count,
+                summary.confirmed_count,
+                summary.need_review_count,
+                len(summary.suspected_tie_switches),
+            )
+
+        except Exception as ex:
+            logger.exception("[EnhancedReport] 混合智能校验异常: %s", ex)
+            summary.enabled = False
+
+        self.hybrid_summary = summary
+        return summary
+
     def process_defects(self) -> List[EnhancedDefectReport]:
         """处理缺陷列表，生成增强报告"""
         enhanced = []
@@ -501,6 +635,7 @@ class EnhancedReportGenerator:
             },
             "data_source_quality": data_quality.to_dict(),
             "physical_constraint_summary": physical_check.to_dict(),
+            "hybrid_intelligence_summary": self.hybrid_summary.to_dict(),
             "enhanced_defects": [e.to_dict() for e in enhanced_defects],
             "repair_ranking": repair_report,
             "summary": {

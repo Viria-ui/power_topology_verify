@@ -610,41 +610,89 @@ class PhysicalConstraintChecker:
         self,
         nodes_to_check: List[str] = None,
         switches_to_check: List[str] = None,
+        topology_graph = None,
     ) -> List[PhysicalConstraintResult]:
         """
         批量执行物理约束校验
-        
+
         参数:
-            nodes_to_check: 需要校验KCL的节点列表
+            nodes_to_check: 需要校验KCL的节点列表（CONNECT_NODE_ID 或设备ID）
             switches_to_check: 需要校验的开关列表
-        
+            topology_graph: TopologyGraph 实例（从中提取节点邻接关系）
         返回:
             List[PhysicalConstraintResult]: 所有校验结果
         """
         self.results = []
-        
+
         # 先评估数据质量
         self.evaluate_data_quality()
-        
+
+        # ★ Bug3 修复：优先使用传入的节点列表；若未传，则从 topology_graph 推导
+        if nodes_to_check is not None:
+            nodes = list(nodes_to_check)[:200]   # 有传入就用传入的（上限200）
+        elif topology_graph is not None:
+            # 从 TopologyGraph 的 point_map 中提取全部连接节点作为 KCL 校验对象
+            from collections import defaultdict
+            node_to_equips: dict = defaultdict(list)
+            for pid, pt in topology_graph.point_map.items():
+                node_to_equips[pid].append(pt.belong_equip_id)
+            # 只保留关联≥2个设备的节点（有电气意义）
+            nodes = [nid for nid, eids in node_to_equips.items() if len(eids) >= 2]
+            logger.info(f"[物理约束] 从 topology_graph 推导出 %d 个KCL候选节点", len(nodes))
+        else:
+            # 兜底：取 device_map 前200个（仅作为展示，不推荐）
+            nodes = list(self.device_map.keys())[:200]
+
         # KCL节点校验
-        if nodes_to_check:
-            logger.info(f"[物理约束] 开始KCL校验, 共{len(nodes_to_check)}个节点")
-            for node in nodes_to_check:
-                # 获取节点关联的设备 (需要上层传入拓扑信息)
-                connected = self.device_map.get(node, {}).get("connected_equips", [])
-                if connected:
-                    self.check_kcl_node_balance(node, connected)
-        
+        if nodes:
+            logger.info(f"[物理约束] 开始KCL校验, 共{len(nodes)}个节点")
+            for node in nodes:
+                # ★ Bug1 修复：device_map 存的是 Device 对象，不是 dict
+                #    从 topology_graph.point_map 反推节点→设备列表（最可靠）
+                if topology_graph is not None and hasattr(topology_graph, "point_map"):
+                    connected_equips: List[str] = []
+                    for pid, pt in topology_graph.point_map.items():
+                        if pid == node:
+                            connected_equips.append(pt.belong_equip_id)
+                else:
+                    # 兜底：从 self.device_map 中 Device 对象提取
+                    dev = self.device_map.get(node)
+                    if dev is not None and hasattr(dev, "connected_equips"):
+                        connected_equips = getattr(dev, "connected_equips", []) or []
+                    else:
+                        connected_equips = []
+                if connected_equips:
+                    self.check_kcl_node_balance(node, connected_equips)
+
+        # ★ Bug2 修复：switches_to_check 参数优先；否则从 device_map 中枚举开关设备
+        if switches_to_check is not None:
+            switches = list(switches_to_check)[:100]
+        else:
+            switches = [
+                eid for eid, dev in self.device_map.items()
+                if str(getattr(dev, "equip_type", "") or "") in {"1705", "1706", "1707", "0307", "0201", "0202"}
+            ][:100]
+
         # 开关约束校验
-        if switches_to_check:
-            logger.info(f"[物理约束] 开始支路约束校验, 共{len(switches_to_check)}个开关")
-            for switch_id in switches_to_check:
-                # 获取开关两端节点 (需要上层传入拓扑信息)
-                from_node = self.device_map.get(switch_id, {}).get("from_node", "")
-                to_node = self.device_map.get(switch_id, {}).get("to_node", "")
+        if switches:
+            logger.info(f"[物理约束] 开始支路约束校验, 共{len(switches)}个开关")
+            for switch_id in switches:
+                # ★ Bug2 修复：从 topology_graph 推断开关两端节点
+                if topology_graph is not None and hasattr(topology_graph, "_points_by_equip"):
+                    pts = topology_graph._points_by_equip.get(switch_id, [])
+                    if len(pts) >= 2:
+                        from_node = pts[0]
+                        to_node = pts[-1]
+                    else:
+                        from_node, to_node = "", ""
+                else:
+                    # 兜底：从 Device 对象的属性
+                    dev = self.device_map.get(switch_id)
+                    from_node = str(getattr(dev, "from_node", "") or "")
+                    to_node   = str(getattr(dev, "to_node", "") or "")
                 if from_node and to_node:
                     self.check_branch_constraint(switch_id, from_node, to_node)
-        
+
         return self.results
     
     def get_high_risk_anomalies(self) -> List[PhysicalConstraintResult]:
