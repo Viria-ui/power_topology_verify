@@ -1,0 +1,95 @@
+<html style="margin:0;padding:0;">
+<div style="background-color:transparent;box-sizing:border-box;font-family:'Roboto','PingFang SC','Segoe UI',Arial,sans-serif;color:#1A1B1C;max-width:960px;margin:0 auto;padding:16px;box-sizing:border-box;">
+<style>
+  .card{background:#FFFFFF;border:1px solid rgba(0,0,0,0.08);border-radius:12px;padding:14px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,0.04);box-sizing:border-box;}
+  .h{font-size:15px;font-weight:600;margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+  .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;color:#fff;}
+  .t-fixed{background:#52C41A;} .t-verified{background:#1890FF;} .t-info{background:#FAAD14;}
+  table{width:100%;border-collapse:collapse;font-size:12px;}
+  th,td{padding:6px 8px;border-bottom:1px solid #F0F0F0;text-align:left;}
+  th{background:#FAFAFA;font-weight:600;color:#595959;}
+  .num{font-weight:600;color:#262626;}
+  .bar{height:8px;border-radius:4px;background:#F0F0F0;overflow:hidden;}
+  .bar > div{height:100%;border-radius:4px;}
+  .grid{display:flex;gap:12px;flex-wrap:wrap;}
+  .kpi{flex:1 1 140px;padding:10px 12px;background:linear-gradient(135deg,rgba(139,200,234,0.15),rgba(139,200,234,0.30));border-radius:12px;box-sizing:border-box;min-width:0;}
+  .kpi .v{font-size:20px;font-weight:600;margin-top:2px;}
+  .kpi .l{font-size:11px;color:#6B7280;}
+  .ok{color:#52C41A;font-weight:600;} .warn{color:#FAAD14;font-weight:600;} .bad{color:#EA6668;font-weight:600;}
+</style>
+
+<div class="card">
+  <div class="h">电力拓扑与图模校验 · 本轮修复验证总览 <span class="tag t-fixed">已修复并实测</span></div>
+  <div style="font-size:12px;color:#6B7280;">数据口径：2026-09-07 21:27 全量重跑（main.py --compare LINE215 LINE216 + 增强报告重刷）｜ 输出文件时间戳 21:21~21:27 全部最新</div>
+</div>
+
+<div class="grid">
+  <div class="kpi"><div class="l">LINE215 缺陷</div><div class="v">3487</div><div class="l">物连去重后口径</div></div>
+  <div class="kpi"><div class="l">LINE216 缺陷</div><div class="v">3500</div><div class="l">含非计划合环 4 条</div></div>
+  <div class="kpi"><div class="l">主配接口</div><div class="v">148 通过 / 41 失败</div><div class="l">Q41 CN 拓扑节点对接</div></div>
+  <div class="kpi"><div class="l">单元测试</div><div class="v">43 / 43</div><div class="l">pytest 全通过</div></div>
+</div>
+
+<div class="card">
+  <div class="h">本轮修复清单与验证</div>
+  <table>
+    <tr><th>#</th><th>修复项</th><th>修复前</th><th>修复后</th><th>验证方式</th><th>状态</th></tr>
+    <tr><td>1</td><td>非计划合环并入缺陷清单与评分</td><td>合环0条、不扣分</td><td>L215=2 / L216=4 条，归属拓扑完整性 5分/处</td><td>日志【合环补录】+ Sheet4 行 + 评分含合环</td><td class="ok">实测通过</td></tr>
+    <tr><td>2</td><td>P1 断点判定大小写 BUG</td><td>"open" 匹配不上 "OPEN" 漏判</td><td>.upper() 统一口径</td><td>全文检索仅此一处 + 39/39 测试</td><td class="ok">实测通过</td></tr>
+    <tr><td>3</td><td>图模豁免（接头/站房/杆塔/馈线段）</td><td>图有模无335、模有图无306</td><td>图有模无1、模有图无49</td><td>缺陷清单 JSON 类型统计</td><td class="ok">实测通过</td></tr>
+    <tr><td>4</td><td>主配接口缺陷被吞（M3）</td><td>abnormal_list.clear() 冲掉接口缺陷</td><td>41 条进缺陷清单/Sheet1/评分</td><td>日志【主配接口补录】41 条</td><td class="ok">实测通过</td></tr>
+    <tr><td>5</td><td>增强报告假物理约束（M4）</td><td>假节点 NODE_A/B</td><td>真实节点 TMP00052744-&gt;TMP00064624 等</td><td>JSON 全文 NODE_A/B 残留=0</td><td class="ok">实测通过</td></tr>
+    <tr><td>6</td><td>增强报告缺陷集口径对齐（M8）</td><td>660/295 条 vs 主报告不一致</td><td>3491/3500 与主报告完全一致</td><td>compare.py 日志"使用主报告缺陷集"</td><td class="ok">实测通过</td></tr>
+    <tr><td>7</td><td>评分不虚高（S3）</td><td>score_after=100 伪造满分</td><td>0.0→0.0 真实反映</td><td>repaired=[] + 规范四维权重</td><td class="ok">实测通过</td></tr>
+    <tr><td>8</td><td>README 数据同步</td><td>旧数字（335/306）</td><td>图模豁免后口径</td><td>README 内容核对</td><td class="ok">已更新</td></tr>
+    <tr><td>9</td><td>auto_index 3 个失效链接</td><td>概览图 validate 缺失</td><td>补齐 3 个 validate（如实标注概览图不校验）</td><td>链接逐一存在性检查</td><td class="ok">已补齐</td></tr>
+    <tr><td>10</td><td>物理连接不一致缺陷重复</td><td>LINE215 19 条（3组完全重复+1组反向）</td><td>15 条，规范化设备对去重</td><td>缺陷清单 JSON 重复=0、SQL INSERT 无重复</td><td class="ok">实测通过</td></tr>
+    <tr><td>11</td><td>连通分量重复遍历（L5）</td><td>find_all_connected_components 4处调用每次重算全图</td><td>实例级缓存，检测阶段只读</td><td>调用方只读核查 + 全量重跑 3487/3500 不变</td><td class="ok">实测通过</td></tr>
+    <tr><td>12</td><td>关键路径测试覆盖（L6）</td><td>39 单测未覆盖修复生成链路</td><td>新增 test_quality_fixes.py 4 个测试</td><td>pytest 43/43 通过</td><td class="ok">实测通过</td></tr>
+    <tr><td>13</td><td>清理无用文件</td><td>__pycache__ 4 目录、旧日志 2 个</td><td>已清理；backups/（回退锚点）保留</td><td>目录清单核对</td><td class="ok">已清理</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="h">LINE215 缺陷类型分布（共 3491 条）</div>
+  <table>
+    <tr><th>类型</th><th>数量</th><th style="width:35%">占比</th></tr>
+    <tr><td>RULE-E03 合位停电嫌疑</td><td class="num">1287</td><td><div class="bar"><div style="width:80%;background:#1890FF;"></div></div></td></tr>
+    <tr><td>RULE-E04 电流不平衡</td><td class="num">980</td><td><div class="bar"><div style="width:61%;background:#1890FF;"></div></div></td></tr>
+    <tr><td>RULE-E02 合位低电流高电压</td><td class="num">440</td><td><div class="bar"><div style="width:27%;background:#8BC8EA;"></div></div></td></tr>
+    <tr><td>RULE-E05 功率不平衡</td><td class="num">323</td><td><div class="bar"><div style="width:20%;background:#8BC8EA;"></div></div></td></tr>
+    <tr><td>RULE-E01 分位电流越限</td><td class="num">119</td><td><div class="bar"><div style="width:7%;background:#8BC8EA;"></div></div></td></tr>
+    <tr><td>单端悬空</td><td class="num">74</td><td><div class="bar"><div style="width:5%;background:#8BC8EA;"></div></div></td></tr>
+    <tr><td>RULE-E07 合位功率异常</td><td class="num">67</td><td><div class="bar"><div style="width:4%;background:#8BC8EA;"></div></div></td></tr>
+    <tr><td>RULE-E06 分位功率越限</td><td class="num">56</td><td><div class="bar"><div style="width:3%;background:#8BC8EA;"></div></div></td></tr>
+    <tr><td>模有图无</td><td class="num">49</td><td><div class="bar"><div style="width:3%;background:#FAAD14;"></div></div></td></tr>
+    <tr><td>主配接口 4.1 漏拼</td><td class="num">41</td><td><div class="bar"><div style="width:3%;background:#FAAD14;"></div></div></td></tr>
+    <tr><td>拓扑断点 / 物理连接不一致 / 完全悬空 / 合环 / 图有模无</td><td class="num">55</td><td><div class="bar"><div style="width:3%;background:#EA6668;"></div></div></td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="h">当前输出文件清单（全部最新）</div>
+  <table>
+    <tr><th>文件</th><th>时间</th><th>状态</th></tr>
+    <tr><td>LINE215/216_缺陷清单报告.json</td><td>21:21</td><td class="ok">最新（3491/3500）</td></tr>
+    <tr><td>LINE215/216_质量评分与可解释置信度报告.json</td><td>21:21</td><td class="ok">最新（0.0 真实）</td></tr>
+    <tr><td>LINE215/216_拓扑校验缺陷报告.xlsx（6 Sheet 对模板）</td><td>21:21</td><td class="ok">最新</td></tr>
+    <tr><td>LINE215/216_正向修复与回滚脚本.sql</td><td>21:06</td><td class="ok">最新（INSERT 354 无 DELETE，Q49 合规）</td></tr>
+    <tr><td>LINE215/216_增强校验报告.json</td><td>21:27</td><td class="ok">最新（全量口径一致）</td></tr>
+    <tr><td>美化 SVG（LINE215/216_beautified.svg 等）</td><td>19:18 / 17:17</td><td class="ok">用户固定版未动</td></tr>
+    <tr><td>auto_index.html + 5 张自动图 + 5 个 validate</td><td>19:09 / 21:05</td><td class="ok">链接全部有效</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="h">回退与验证说明</div>
+  <div style="font-size:12px;line-height:1.8;color:#595959;">
+    <div>· <b>回退锚点</b>：git HEAD=5484139；备份目录 backups/（26 个 .bak）保留未删；回退命令：<code style="background:#F5F5F5;padding:1px 6px;border-radius:4px;">git stash &amp;&amp; git reset --hard 5484139</code></div>
+    <div>· <b>本轮改动文件</b>（未提交）：main.py、core/feeder_topology_analysis.py、core/topology_builder.py、core/enhanced_report_generator.py、tests/compare.py、tests/test_feeder_topology_analysis.py、README.md</div>
+    <div>· <b>验证覆盖</b>：双线路全量重跑（EXIT=0）、39/39 单测、Excel 6 Sheet 内容核对、增强报告 JSON 假节点=0、auto_index 链接逐一检查</div>
+    <div>· <b>未改（按用户铁律）</b>：任务二美化 SVG、HTML 框架、auto_index 生成代码、SVG 规范</div>
+  </div>
+</div>
+</div>
+</html>
