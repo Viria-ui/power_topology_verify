@@ -427,7 +427,7 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
         report_gen = EnhancedReportGenerator(
             line_name=line_name,
             defects=defects_for_enhanced,
-            topology_graph=dist_topo.graph if hasattr(dist_topo, 'graph') else None,
+            topology_graph=dist_topo if hasattr(dist_topo, 'point_map') else (dist_topo.graph if hasattr(dist_topo, 'graph') else None),
             device_map={eid: {"equip_type": dev.equip_type, "is_source": getattr(dev, 'is_source', False)}
                        for eid, dev in dist_topo.device_map.items()},
             telemetry_data=tele_evaluator.telemetry_data if tele_evaluator else {},

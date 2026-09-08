@@ -353,7 +353,21 @@ class PhysicalConstraintChecker:
         """
         switch_status = self.switch_status_map.get(str(switch_id), "UNKNOWN")
         row = self._get_latest_telemetry(switch_id)
-        
+
+        # 无遥测数据：无法判定支路约束，不算失败（避免"合位但P/U=0"被误报为虚接）
+        if not row:
+            return PhysicalConstraintResult(
+                check_type="BRANCH",
+                equip_id=switch_id,
+                node_id=f"{from_node}->{to_node}",
+                passed=True,
+                confidence=0.4,
+                physical_basis=f"开关{switch_id}无遥测数据，无法判定支路约束",
+                detail="遥测数据缺失",
+                risk_level="中",
+                suggestion="补充遥测采集后复核",
+            )
+
         # 获取功率数据
         active_power = self._number(row.get('AP', 0))
         reactive_power = self._number(row.get('RP', 0))
@@ -630,31 +644,41 @@ class PhysicalConstraintChecker:
         """
         self.results = []
 
+        def _dev_attr(dev, key, default=""):
+            # 兼容 Device 对象与 dict 两种 device_map 值类型
+            if hasattr(dev, key):
+                return getattr(dev, key, default)
+            if isinstance(dev, dict):
+                return dev.get(key, default)
+            return default
+
         # 先评估数据质量
         self.evaluate_data_quality()
 
         # ★ Bug3 修复：优先使用传入的节点列表；若未传，则从 topology_graph 推导
         if nodes_to_check is not None:
             nodes = list(nodes_to_check)[:200]   # 有传入就用传入的（上限200）
-        elif topology_graph is not None and hasattr(topology_graph, "point_map"):
-            # 从 TopologyGraph 的 point_map 中提取全部连接节点作为 KCL 校验对象
-            from collections import defaultdict
-            node_to_equips: dict = defaultdict(list)
-            for pid, pt in topology_graph.point_map.items():
-                node_to_equips[pid].append(pt.belong_equip_id)
-            # 只保留关联≥2个设备的节点（有电气意义）
-            nodes = [nid for nid, eids in node_to_equips.items() if len(eids) >= 2]
-            logger.info(f"[物理约束] 从 topology_graph 推导出 %d 个KCL候选节点", len(nodes))
-        elif topology_graph is not None and hasattr(topology_graph, "neighbors"):
-            # 兜底：NetworkX Graph，从度数>=2的节点中筛选
-            try:
-                nodes = [
-                    n for n in topology_graph.nodes()
-                    if topology_graph.degree(n) >= 2
-                ][:200]
-                logger.info(f"[物理约束] 从 NetworkX Graph 推导出 %d 个KCL候选节点", len(nodes))
-            except Exception:
-                nodes = list(self.device_map.keys())[:200]
+        elif topology_graph is not None:
+            # 兼容两种图对象：
+            # 1) TopologyGraph（有 point_map）：从 point_map 反推 连接点→设备 映射
+            # 2) networkx.Graph（无 point_map）：按节点度>=2 推导候选节点
+            if hasattr(topology_graph, "point_map"):
+                from collections import defaultdict
+                node_to_equips: dict = defaultdict(list)
+                for pid, pt in topology_graph.point_map.items():
+                    node_to_equips[pid].append(pt.belong_equip_id)
+                # 只保留关联≥2个设备的节点（有电气意义）
+                nodes = [nid for nid, eids in node_to_equips.items() if len(eids) >= 2]
+                logger.info(f"[物理约束] 从 topology_graph 推导出 %d 个KCL候选节点", len(nodes))
+            else:
+                try:
+                    if hasattr(topology_graph, "degree"):
+                        nodes = [n for n, d in topology_graph.degree() if d >= 2]
+                    else:
+                        nodes = list(getattr(topology_graph, "nodes", []))[:200]
+                    logger.info(f"[物理约束] 从 networkx 图推导出 %d 个KCL候选节点", len(nodes))
+                except Exception:
+                    nodes = []
         else:
             # 兜底：取 device_map 前200个（仅作为展示，不推荐）
             nodes = list(self.device_map.keys())[:200]
@@ -679,8 +703,9 @@ class PhysicalConstraintChecker:
                 else:
                     # 兜底：从 self.device_map 中 Device 对象提取
                     dev = self.device_map.get(node)
-                    if dev is not None and hasattr(dev, "connected_equips"):
-                        connected_equips = getattr(dev, "connected_equips", []) or []
+                    _ce = _dev_attr(dev, "connected_equips", None)
+                    if _ce:
+                        connected_equips = list(_ce)
                     else:
                         connected_equips = []
                 if connected_equips:
@@ -692,7 +717,7 @@ class PhysicalConstraintChecker:
         else:
             switches = [
                 eid for eid, dev in self.device_map.items()
-                if str(getattr(dev, "equip_type", "") or "") in {"1705", "1706", "1707", "0307", "0201", "0202"}
+                if str(_dev_attr(dev, "equip_type", "") or "") in {"1705", "1706", "1707", "0307", "0201", "0202"}
             ][:100]
 
         # 开关约束校验
@@ -719,10 +744,21 @@ class PhysicalConstraintChecker:
                 else:
                     # 兜底：从 Device 对象的属性
                     dev = self.device_map.get(switch_id)
-                    from_node = str(getattr(dev, "from_node", "") or "")
-                    to_node   = str(getattr(dev, "to_node", "") or "")
+                    from_node = str(_dev_attr(dev, "from_node", "") or "")
+                    to_node   = str(_dev_attr(dev, "to_node", "") or "")
+                    # 兼容 networkx / TopologyGraph：属性缺失时从邻接图取开关两端
+                    if (not from_node or not to_node) and topology_graph is not None:
+                        try:
+                            _g = getattr(topology_graph, "graph", topology_graph)
+                            _pts = [n for n in _g.neighbors(switch_id)]
+                            if len(_pts) >= 2:
+                                from_node, to_node = _pts[0], _pts[-1]
+                        except Exception:
+                            pass
                 if from_node and to_node:
-                    self.check_branch_constraint(switch_id, from_node, to_node)
+                    self.results.append(
+                        self.check_branch_constraint(switch_id, from_node, to_node)
+                    )
 
         return self.results
     
