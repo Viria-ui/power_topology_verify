@@ -973,7 +973,7 @@ class SvgBeautifier:
                 continue
             xs = [self.pos[p][0] for p in conn]
             y = self.pos[pid][1]
-            x1, x2 = min(xs) - 20, max(xs) + 20
+            x1, x2 = min(xs), max(xs)  # 不延伸到设备两端，防止出头
             key = (self.snap(x1), self.snap(y))
             if key in drawn:
                 continue
