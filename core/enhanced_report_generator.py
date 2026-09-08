@@ -325,46 +325,23 @@ class EnhancedReportGenerator:
     def run_physical_constraint_check(self) -> PhysicalConstraintSummary:
         """运行物理约束校验"""
         summary = PhysicalConstraintSummary()
-        
+
         if not PHYSICAL_MODULE_OK or not self.physical_checker:
             logger.warning("物理约束校验模块不可用")
             return summary
-<<<<<<< HEAD
-        
-        # 【M6修复】原实现依赖device_map里的connected_equips/from_node/to_node键
-        # （调用方未提供这些键）→ 校验0次。改为直接从拓扑图提取开关两端端子，
-        # 真实执行支路约束校验。
-        switches = [
-            eid for eid, dev in self.device_map.items()
-            if str(dev.get("equip_type", "")) in {"1705", "1706", "1707"}
-        ][:50]
-        
-        self.physical_checker.run_batch_check([], [])
-        results = []
-        if self.topology_graph is not None:
-            for sw_id in switches:
-                try:
-                    pts = [n for n in self.topology_graph.neighbors(sw_id)]
-                    if len(pts) >= 2:
-                        result = self.physical_checker.check_branch_constraint(
-                            sw_id, pts[0], pts[1]
-                        )
-                        results.append(result)
-                except Exception:
-                    continue
-        else:
-            results = list(self.physical_checker.results)
-=======
 
         # 执行校验（传入 topology_graph 使 KCL/支路校验能正确推导节点-设备关系）
-        self.physical_checker.run_batch_check(
-            nodes_to_check=None,
-            switches_to_check=None,
-            topology_graph=self.topology_graph,
-        )
-        results = self.physical_checker.results
->>>>>>> origin/main
-        
+        try:
+            self.physical_checker.run_batch_check(
+                nodes_to_check=None,
+                switches_to_check=None,
+                topology_graph=self.topology_graph,
+            )
+            results = self.physical_checker.results
+        except Exception as e:
+            logger.error(f"[物理约束] 校验异常: {e}")
+            results = []
+
         summary.total_checks = len(results)
         summary.passed = sum(1 for r in results if r.passed)
         summary.failed = sum(1 for r in results if not r.passed)

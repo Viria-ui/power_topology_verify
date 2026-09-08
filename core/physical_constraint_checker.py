@@ -280,7 +280,7 @@ class PhysicalConstraintChecker:
                 ic_values.append(ic)
         
         if valid_count == 0:
-            return PhysicalConstraintResult(
+            result = PhysicalConstraintResult(
                 check_type="KCL",
                 equip_id=",".join(connected_equips[:3]) + "...",
                 node_id=node_id,
@@ -290,6 +290,8 @@ class PhysicalConstraintChecker:
                 detail=f"节点{node_id}关联{len(connected_equips)}个设备，均无有效遥测",
                 suggestion="建议补充该区域的电流互感器配置",
             )
+            self.results.append(result)
+            return result
         
         # 计算三相电流残差
         residual_a = sum(ia_values)
@@ -529,7 +531,7 @@ class PhysicalConstraintChecker:
         uc = self._number(row.get('UC', 0))
         
         if ua == 0 and ub == 0 and uc == 0:
-            return PhysicalConstraintResult(
+            result = PhysicalConstraintResult(
                 check_type="VOLTAGE_IMBALANCE",
                 equip_id=busbar_id,
                 passed=True,
@@ -538,10 +540,12 @@ class PhysicalConstraintChecker:
                 detail="三相电压均为零",
                 risk_level="中",
             )
-        
+            self.results.append(result)
+            return result
+
         un = (ua + ub + uc) / 3
         if un < 1.0:
-            return PhysicalConstraintResult(
+            result = PhysicalConstraintResult(
                 check_type="VOLTAGE_IMBALANCE",
                 equip_id=busbar_id,
                 passed=True,
@@ -550,6 +554,8 @@ class PhysicalConstraintChecker:
                 detail=f"三相电压: UA={ua:.2f}V, UB={ub:.2f}V, UC={uc:.2f}V",
                 risk_level="中",
             )
+            self.results.append(result)
+            return result
         
         imbalance = max(abs(ua - un), abs(ub - un), abs(uc - un)) / un
         passed = imbalance <= self.VOLTAGE_IMBALANCE_THRESHOLD
@@ -630,7 +636,7 @@ class PhysicalConstraintChecker:
         # ★ Bug3 修复：优先使用传入的节点列表；若未传，则从 topology_graph 推导
         if nodes_to_check is not None:
             nodes = list(nodes_to_check)[:200]   # 有传入就用传入的（上限200）
-        elif topology_graph is not None:
+        elif topology_graph is not None and hasattr(topology_graph, "point_map"):
             # 从 TopologyGraph 的 point_map 中提取全部连接节点作为 KCL 校验对象
             from collections import defaultdict
             node_to_equips: dict = defaultdict(list)
@@ -639,6 +645,16 @@ class PhysicalConstraintChecker:
             # 只保留关联≥2个设备的节点（有电气意义）
             nodes = [nid for nid, eids in node_to_equips.items() if len(eids) >= 2]
             logger.info(f"[物理约束] 从 topology_graph 推导出 %d 个KCL候选节点", len(nodes))
+        elif topology_graph is not None and hasattr(topology_graph, "neighbors"):
+            # 兜底：NetworkX Graph，从度数>=2的节点中筛选
+            try:
+                nodes = [
+                    n for n in topology_graph.nodes()
+                    if topology_graph.degree(n) >= 2
+                ][:200]
+                logger.info(f"[物理约束] 从 NetworkX Graph 推导出 %d 个KCL候选节点", len(nodes))
+            except Exception:
+                nodes = list(self.device_map.keys())[:200]
         else:
             # 兜底：取 device_map 前200个（仅作为展示，不推荐）
             nodes = list(self.device_map.keys())[:200]
@@ -649,11 +665,17 @@ class PhysicalConstraintChecker:
             for node in nodes:
                 # ★ Bug1 修复：device_map 存的是 Device 对象，不是 dict
                 #    从 topology_graph.point_map 反推节点→设备列表（最可靠）
+                connected_equips: List[str] = []
                 if topology_graph is not None and hasattr(topology_graph, "point_map"):
-                    connected_equips: List[str] = []
                     for pid, pt in topology_graph.point_map.items():
                         if pid == node:
                             connected_equips.append(pt.belong_equip_id)
+                elif topology_graph is not None and hasattr(topology_graph, "neighbors"):
+                    # NetworkX Graph 兜底
+                    try:
+                        connected_equips = list(topology_graph.neighbors(node))
+                    except Exception:
+                        connected_equips = []
                 else:
                     # 兜底：从 self.device_map 中 Device 对象提取
                     dev = self.device_map.get(node)
@@ -678,13 +700,22 @@ class PhysicalConstraintChecker:
             logger.info(f"[物理约束] 开始支路约束校验, 共{len(switches)}个开关")
             for switch_id in switches:
                 # ★ Bug2 修复：从 topology_graph 推断开关两端节点
+                from_node, to_node = "", ""
                 if topology_graph is not None and hasattr(topology_graph, "_points_by_equip"):
                     pts = topology_graph._points_by_equip.get(switch_id, [])
                     if len(pts) >= 2:
                         from_node = pts[0]
                         to_node = pts[-1]
-                    else:
-                        from_node, to_node = "", ""
+                elif topology_graph is not None and hasattr(topology_graph, "neighbors"):
+                    # NetworkX Graph 兜底
+                    try:
+                        neighbors = list(topology_graph.neighbors(switch_id))
+                        if len(neighbors) >= 2:
+                            from_node, to_node = neighbors[0], neighbors[1]
+                        elif len(neighbors) == 1:
+                            from_node = to_node = neighbors[0]
+                    except Exception:
+                        pass
                 else:
                     # 兜底：从 Device 对象的属性
                     dev = self.device_map.get(switch_id)
