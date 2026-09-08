@@ -613,7 +613,7 @@ class SvgBeautifier:
             rep = min(ms, key=lambda m: level.get(m, 99999))
             cont_rep[cid] = rep
 
-        DEV_SPAN = 140
+        DEV_SPAN = 180
         TRUNK_Y0 = MARGIN + 30
         LAYER_H = 150
         GROUP_GAP = 60
@@ -1180,7 +1180,7 @@ class SvgBeautifier:
         for (cx1, cy1, cx2, cy2) in self.cont_box.values():
             dev_bboxes.append((cx1, cy1, cx2, cy1 + 20))
 
-        def _bbox_overlap(a, b, pad=2):
+        def _bbox_overlap(a, b, pad=6):
             return not (a[2] + pad < b[0] or b[2] + pad < a[0] or
                         a[3] + pad < b[1] or b[3] + pad < a[1])
 
@@ -1212,8 +1212,7 @@ class SvgBeautifier:
                 continue
             if not self.is_real_device(d['type']):
                 continue  # 非真实设备（dxd线/未知type）不标注
-            if d['type'] in JUNCTION_TYPES:
-                continue  # 拓扑节点（Junction）弱化，不标注文字
+            # Junction 节点也标注文字（用户要求每个元件都有文字）
             if d.get('label_in_box'):
                 continue  # 无符号设备文字已画在框内
             name = self._display_name(d)
