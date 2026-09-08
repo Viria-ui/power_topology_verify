@@ -24,6 +24,7 @@ from data_io.svg_writer import write_svg
 WIRE_MARKERS = ('TMP', 'dxd')
 BUSBAR_TYPES = {'0311'}
 CONTAINER_TYPES = {'zf01', 'zf06', 'zf07', 'zf08'}
+JUNCTION_TYPES = {'0313', '0314', '32TMP00132954'}  # 拓扑节点：不画大色框不显示设备名
 SWITCH_TYPES = {'0307', '0201', '0202', '0203', '0302', '0305', '0306', '0309'}
 TRANSFORMER_TYPES = {'0110', '0111'}
 KEY_DEV_TYPES = SWITCH_TYPES | TRANSFORMER_TYPES | BUSBAR_TYPES
@@ -49,11 +50,49 @@ C_SPARE = '#BFBFBF'
 C_CONTAINER = '#595959'
 C_TEXT = '#262626'
 C_BUSBAR = '#00A854'
-W_TRUNK = 3.0
-W_BRANCH = 1.5
-W_TIE = 4.5
+
+# ═══════════════════════════════════════════════════════════
+#  设备类别色块（浅色实色，画在容器灰底之上不叠加；同类相近、跨类区分）
+#  色系派生自 SVG 制图规范 v1 附表 B.2：橙=开关族 / 蓝=变压器族 /
+#  黄绿=互感器 / 灰绿=负荷末端 / 浅灰=节点与备用
+# ═══════════════════════════════════════════════════════════
+DEV_CATEGORY_FILL = {
+    # 开关族（橙系）
+    '0307': '#FFB985',   '0201': '#FFC9A0', '0202': '#FFDFA8',
+    '0203': '#FFEBA8',   '0302': '#FFD5A8', '0309': '#FFD0A8',
+    '0113': '#FFD0A8',   '0115': '#FFC9A0',
+    # 变压器族（蓝系）
+    '0110': '#A8C8FF',   '0111': '#A8E0F5',
+    # 互感器（黄绿）
+    '0305': '#D0E8B8',   '0306': '#D0E8B8',
+    # 母线（绿）
+    '0311': '#A8E8C8',
+    # 负荷/用户（灰绿）
+    '370000': '#C8E8C8',
+    # 附属设备（避雷器/故障指示器，紫）
+    '0116': '#D8C8F0',   '0811003': '#D8C8F0',
+    # 节点（浅灰）
+    '0313': '#E0E0E0',   '0314': '#E0E0E0',
+}
+DEV_CATEGORY_FALLBACK = '#E8E8E8'
+# 容器透明灰底：fill 用 #808080 + fill-opacity（兼容 SVG 解析），很低透明度保证穿过箱柜的线路可见
+CONTAINER_BG_FILL = '#808080'
+CONTAINER_BG_OPACITY = '0.06'
+# 名称优先分类（数据源 type 与名称脱节严重，名称更可靠；长关键词在前）
+DEV_CATEGORY_BY_NAME = [
+    (('负荷开关', '隔离开关', '断路器', '分段器', '重合器'), '#FFB985'),
+    (('开关', '刀闸', '熔断'), '#FFC9A0'),
+    (('主变', '箱变', '配变', '变压器'), '#A8C8FF'),
+    (('母线',), '#A8E8C8'),
+    (('用户', '负荷'), '#C8E8C8'),
+    (('避雷器', '故障指示器', '互感器', '电容器'), '#D8C8F0'),
+    (('终端头', '缆头', '电缆', '站外'), '#E0E0E0'),
+]
+W_TRUNK = 3.0  # 主线：粗实线
+W_BRANCH = 1.5  # 分支线路/柜内短线
+W_TIE = 4.5  # 联络线：加粗高亮
 W_CONTAINER = 2.0
-W_BUSBAR = 4.0
+W_BUSBAR = 3.0  # 母线：粗实线
 F_TITLE = 21.3
 F_KEY = 14.0
 F_BRANCH = 12.0
@@ -129,6 +168,8 @@ class SvgBeautifier:
         if t in CONTAINER_TYPES:
             return False
         if t in ('-1', '0'):
+            return False
+        if 'BackGround' in t:
             return False
         return True
 
@@ -330,8 +371,9 @@ class SvgBeautifier:
             '0305': 'PotentialTransformer', '0306': 'CurrentTransformer',
             '0110': 'PowerTransformer', '0111': 'PowerTransformer',
             '0115': 'PoleCode', '0313': 'Junction', '0314': 'Junction',
-            '0307': 'Breaker', '0309': 'CompositeSwitch',
-            '370000': 'EnergyConsumer',
+            '0307': 'Breaker', '0309': 'SurgeArrester',
+            '370000': 'EnergyConsumer', '32TMP00132954': 'Junction',
+            '0116': 'SurgeArrester', '0113': 'Other',
         }
         sym_by_kw = {}
         if self.doc and self.doc.root is not None:
@@ -703,7 +745,7 @@ class SvgBeautifier:
             x1 = cx - CONT_W // 2
             x2 = cx + CONT_W // 2
             y1 = min(ys) - CONT_TOP
-            y2 = max(ys) + CONT_PAD + UNIT_V // 2
+            y2 = max(ys) + CONT_PAD + UNIT_V // 2 + 34  # 底部留空隙（大框向下延伸28px）
             self.cont_box[cid] = (self.snap(x1), self.snap(y1), self.snap(x2), self.snap(y2))
 
         # ---- 容器碰撞避让：按x从左到右，右侧容器若与左侧容器y重叠且x重叠，则整体右移 ----
@@ -880,13 +922,14 @@ class SvgBeautifier:
             ET.SubElement(g, f'{{{SVG_NS}}}rect', {
                 'x': str(x1), 'y': str(y1),
                 'width': str(x2 - x1), 'height': str(y2 - y1),
-                'fill': 'none', 'stroke': C_CONTAINER,
+                'fill': CONTAINER_BG_FILL, 'fill-opacity': CONTAINER_BG_OPACITY,
+                'stroke': C_CONTAINER,
                 'stroke-width': str(W_CONTAINER), 'rx': '3',
             })
             ET.SubElement(g, f'{{{SVG_NS}}}rect', {
                 'x': str(x1), 'y': str(y1),
                 'width': str(x2 - x1), 'height': '16',
-                'fill': '#f0f0f0', 'stroke': 'none', 'rx': '3',
+                'fill': '#f0f0f0', 'fill-opacity': '0.6', 'stroke': 'none', 'rx': '3',
             })
             t = ET.SubElement(g, f'{{{SVG_NS}}}text', {
                 'x': str(x1 + 4), 'y': str(y1 + 12),
@@ -896,6 +939,7 @@ class SvgBeautifier:
 
     def _draw_wires(self, g):
         conn_idx = 0
+        self._wire_segs = []  # 收集所有线段，末尾合并去重
         # 生成树边（主干+分支）
         for child, par in self.tree_parent.items():
             if par is None or child not in self.pos or par not in self.pos:
@@ -910,11 +954,14 @@ class SvgBeautifier:
             conn_idx += 1
             conn_id = f'WIRE_{conn_idx:06d}'
             if is_trunk:
-                points = [(x1, y1), (x1 + r1, y1), (x2 + l2, y2), (x2, y2)]
-                self._polyline(g, points, C_10KV, w, conn_id=conn_id, from_id=par, to_id=child)
+                if abs(x1 - x2) < GRID:
+                    points = [(x1, y1), (x2, y2)]  # 正对：直接垂直线，免往返
+                else:
+                    points = [(x1, y1), (x1 + r1, y1), (x2 + l2, y2), (x2, y2)]
+                self._wire_segs.append((points, C_10KV, w, conn_id, par, child))
             else:
                 points = [(x1, y1), (x1, y2), (x2 + l2, y2), (x2, y2)]
-                self._polyline(g, points, C_10KV, w, conn_id=conn_id, from_id=par, to_id=child)
+                self._wire_segs.append((points, C_10KV, w, conn_id, par, child))
 
         # 母线：加粗横线
         drawn = set()
@@ -967,14 +1014,16 @@ class SvgBeautifier:
                 edge_w = W_TIE
             _, r1, _, _ = self._dev_sym_edges(u)
             l2, _, _, _ = self._dev_sym_edges(v)
-            if abs(y1 - y2) < GRID * 2:
+            if abs(x1 - x2) < GRID and abs(y1 - y2) < GRID * 2:
+                points = [(x1, y1), (x2, y2)]
+            elif abs(y1 - y2) < GRID * 2:
                 points = [(x1, y1), (x1 + r1, y1), (x2 + l2, y2), (x2, y2)]
             elif abs(x1 - x2) < GRID * 2:
                 points = [(x1, y1), (x1, y2), (x2 + l2, y2), (x2, y2)]
             else:
                 mid_y = (y1 + y2) / 2
                 points = [(x1, y1), (x1 + r1, y1), (x1 + r1, mid_y), (x2 + l2, mid_y), (x2 + l2, y2), (x2, y2)]
-            self._polyline(g, points, edge_color, edge_w, conn_id=conn_id, from_id=u, to_id=v)
+            self._wire_segs.append((points, edge_color, edge_w, conn_id, u, v))
 
         # ★ 补充：原始 SVG 连接中未被 adj 图捕获的边（防止连线数量下降）
         for elem in self.doc.connections:
@@ -994,14 +1043,50 @@ class SvgBeautifier:
             conn_id = f'CONN_{conn_idx:06d}'
             _, r1, _, _ = self._dev_sym_edges(s_id)
             l2, _, _, _ = self._dev_sym_edges(e_id)
-            if abs(y1 - y2) < GRID * 2:
+            if abs(x1 - x2) < GRID and abs(y1 - y2) < GRID * 2:
+                points = [(x1, y1), (x2, y2)]
+            elif abs(y1 - y2) < GRID * 2:
                 points = [(x1, y1), (x1 + r1, y1), (x2 + l2, y2), (x2, y2)]
             elif abs(x1 - x2) < GRID * 2:
                 points = [(x1, y1), (x1, y2), (x2 + l2, y2), (x2, y2)]
             else:
                 mid_y = (y1 + y2) / 2
                 points = [(x1, y1), (x1 + r1, y1), (x1 + r1, mid_y), (x2 + l2, mid_y), (x2 + l2, y2), (x2, y2)]
-            self._polyline(g, points, C_10KV, W_BRANCH, conn_id=conn_id, from_id=s_id, to_id=e_id)
+            self._wire_segs.append((points, C_10KV, W_BRANCH, conn_id, s_id, e_id))
+
+        # ★ 线段合并去重：同几何同色只画一次，宽度取最大值，from/to 全保留
+        merged = {}
+        order = []
+        for pts, color, width, cid, fid, tid in self._wire_segs:
+            key = (tuple((round(x), round(y)) for x, y in pts), color)
+            if key in merged:
+                m = merged[key]
+                if width > m['width']:
+                    m['width'] = width
+                if fid:
+                    m['froms'].add(fid)
+                if tid:
+                    m['tos'].add(tid)
+            else:
+                merged[key] = {'width': width, 'froms': {fid} if fid else set(),
+                               'tos': {tid} if tid else set(), 'cid': cid}
+                order.append(key)
+        for key in order:
+            pts, color = key
+            m = merged[key]
+            cg = ET.SubElement(g, f'{{{SVG_NS}}}g', {'id': m['cid']})
+            pts_str = ' '.join(f'{x},{y}' for x, y in pts)
+            ET.SubElement(cg, f'{{{SVG_NS}}}polyline', {
+                'points': pts_str, 'fill': 'none', 'stroke': color,
+                'stroke-width': str(m['width']),
+                'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+            })
+            if m['froms'] or m['tos']:
+                md = ET.SubElement(cg, f'{{{SVG_NS}}}metadata')
+                for fid in m['froms']:
+                    ET.SubElement(md, f'{{{IEC_NS}}}Terminal', {'ObjectID': fid, 'side': 'from'})
+                for tid in m['tos']:
+                    ET.SubElement(md, f'{{{IEC_NS}}}Terminal', {'ObjectID': tid, 'side': 'to'})
 
     def _draw_devices(self, g):
         # 设备符号：白色背景与符号放在同一个 <g> 内，避免被解析器当作独立设备图元
@@ -1009,6 +1094,8 @@ class SvgBeautifier:
             d = self.devices.get(pid)
             if not d:
                 continue
+            if not self.is_real_device(d['type']):
+                continue  # 非真实设备（dxd线/未知type/背景）不绘制、不输出metadata
             dg = ET.SubElement(g, f'{{{SVG_NS}}}g', {
                 'transform': f'translate({x},{y})',
             })
@@ -1017,15 +1104,43 @@ class SvgBeautifier:
             if d['type'] in BUSBAR_TYPES:
                 # 母线视觉由 BUS_ 母线连线承担，仅输出 metadata 节点（图模一致）
                 continue
+            if d['type'] in JUNCTION_TYPES:
+                # 拓扑节点（Junction）：小色框 + 小符号（用户要求有外框）
+                ET.SubElement(dg, f'{{{SVG_NS}}}rect', {
+                    'x': '-9', 'y': '-7', 'width': '18', 'height': '14',
+                    'fill': '#E0E0E0', 'fill-opacity': '0.6',
+                    'stroke': '#999999', 'stroke-width': '0.5',
+                })
+                sym = d.get('symbol', '')
+                if sym:
+                    ET.SubElement(dg, f'{{{SVG_NS}}}use', {
+                        'href': sym, 'x': '-7', 'y': '-5', 'width': '14', 'height': '10',
+                    })
+                continue
             # 非母线设备：透明背景，符号独立渲染
             # 保留原始SVG背景色，禁止强制覆盖为纯白
             left, right, top, bottom = self._dev_sym_edges(pid)
-            pad = 1.5
+            # 类别色：名称优先，type 兜底
+            dev_fill = DEV_CATEGORY_FALLBACK
+            disp_name = self._display_name(d)
+            if disp_name:
+                for kws, col in DEV_CATEGORY_BY_NAME:
+                    if any(k in disp_name for k in kws):
+                        dev_fill = col
+                        break
+            if dev_fill == DEV_CATEGORY_FALLBACK:
+                dev_fill = DEV_CATEGORY_FILL.get(d['type'], DEV_CATEGORY_FALLBACK)
+            # 大框：符号 + 上下文字区域（标注可能避让到上方或下方；左右允许文字一半在外）
+            pad_x = 10.0
+            pad_top = 16.0
+            pad_bottom = 20.0
             ET.SubElement(dg, f'{{{SVG_NS}}}rect', {
-                'x': f'{left - pad:.1f}', 'y': f'{top - pad:.1f}',
-                'width': f'{right - left + 2 * pad:.1f}',
-                'height': f'{bottom - top + 2 * pad:.1f}',
-                'fill': 'none', 'stroke': 'none',  # 不强制白底，尊重原始SVG
+                'x': f'{left - pad_x:.1f}', 'y': f'{top - pad_top:.1f}',
+                'width': f'{right - left + 2 * pad_x:.1f}',
+                'height': f'{bottom - top + pad_top + pad_bottom:.1f}',
+                'fill': dev_fill, 'fill-opacity': '0.6',
+                'stroke': dev_fill, 'stroke-opacity': '0.9', 'stroke-width': '1',  # 半透明+细边 类别色实色（不与容器灰底叠加）
+                'rx': '2',
             })
             if d.get('symbol'):
                 sym = d['symbol'].lstrip('#')
@@ -1038,11 +1153,18 @@ class SvgBeautifier:
                     f'{{{XLINK_NS}}}href': d['symbol'], 'transform': tr,
                 })
             else:
-                ET.SubElement(dg, f'{{{SVG_NS}}}rect', {
-                    'x': str(-DEV_HW), 'y': str(-DEV_HH),
-                    'width': str(DEV_HW * 2), 'height': str(DEV_HH * 2),
-                    'fill': 'none', 'stroke': C_SPARE, 'stroke-width': '1', 'rx': '2',
+                # 无符号设备：通用占位符号（圆点）+ 框内文字（避免只有空色框）
+                ET.SubElement(dg, f'{{{SVG_NS}}}circle', {
+                    'cx': '0', 'cy': '0', 'r': '3.5', 'fill': C_TEXT, 'stroke': 'none',
                 })
+                disp = self._display_name(d)
+                if disp:
+                    t = ET.SubElement(dg, f'{{{SVG_NS}}}text', {
+                        'x': '0', 'y': '26', 'text-anchor': 'middle',
+                        'font-size': str(F_BRANCH), 'fill': C_TEXT,
+                    })
+                    t.text = disp
+                d['label_in_box'] = True
 
     def _draw_labels(self, g):
         seen_names = set()
@@ -1080,7 +1202,6 @@ class SvgBeautifier:
             t = ET.SubElement(g, f'{{{SVG_NS}}}text', {
                 'x': str(x), 'y': str(ly),
                 'text-anchor': 'middle', 'font-size': str(F_BRANCH), 'fill': C_TEXT,
-                'stroke': '#ffffff', 'stroke-width': '3.5', 'paint-order': 'stroke',
             })
             t.text = disp
 
@@ -1089,10 +1210,18 @@ class SvgBeautifier:
             d = self.devices.get(pid)
             if not d or d['type'] in BUSBAR_TYPES:
                 continue
+            if not self.is_real_device(d['type']):
+                continue  # 非真实设备（dxd线/未知type）不标注
+            if d['type'] in JUNCTION_TYPES:
+                continue  # 拓扑节点（Junction）弱化，不标注文字
+            if d.get('label_in_box'):
+                continue  # 无符号设备文字已画在框内
             name = self._display_name(d)
-            if name in seen_names:
+            if not name:
                 continue
             seen_names.add(name)
+            if d.get('label_in_box'):
+                continue  # 无符号设备文字已画在框内
             is_key = d['type'] in KEY_DEV_TYPES
             font_size = F_KEY if is_key else F_BRANCH
             weight = 'bold' if is_key else 'normal'
@@ -1154,7 +1283,7 @@ class SvgBeautifier:
             t = ET.SubElement(lg, f'{{{SVG_NS}}}text', {
                 'x': str(lx), 'y': str(ly), 'text-anchor': 'middle',
                 'font-size': str(font_size), 'fill': C_TEXT, 'font-weight': weight,
-                'stroke': '#ffffff', 'stroke-width': '3.5', 'paint-order': 'stroke',
+                
             })
             t.text = disp
 
@@ -1177,6 +1306,8 @@ class SvgBeautifier:
             '0306': '电流互感器', '0110': '变压器', '0111': '配变',
             '0115': '杆塔', '0313': '电缆终端', '0314': '电缆终端',
             '370000': '用户', '0309': '避雷器',
+            '0311': '母线', '0116': '避雷器', '0811003': '故障指示器',
+            '0113': '其他',
         }
         tname = type_names.get(d.get('type', ''), '设备')
         pid = d.get('id', '')
