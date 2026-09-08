@@ -76,15 +76,43 @@ PAD = 60.0
 # 主生成器
 # ----------------------------------------------------------------
 class SvgAutoGenerator:
-    def __init__(self):
-        self.loader = SqlTableLoader()
-        self.table_data = self.loader.load_all_topo_tables()
+    # 类级缓存：避免同一次 main.py 运行中多次重复构建全网拓扑
+    _cache: dict = {}
+
+    def __init__(self, table_data: dict = None):
+        if table_data is not None:
+            # 外部传入已加载数据，直接复用（推荐）
+            self.table_data = table_data
+        elif "shared" in SvgAutoGenerator._cache:
+            # 类级缓存：复用一个 loader 实例
+            cached = SvgAutoGenerator._cache["shared"]
+            self.table_data = cached["table_data"]
+            self.main_topo = cached["main_topo"]
+            self.dist_topo = cached["dist_topo"]
+            self.dg = cached["dg"]
+            return
+        else:
+            # 首次加载：走正常路径并缓存
+            self.table_data = self._load_data()
+
         self.builder = TopologyBuilder(self.table_data)
         self.main_topo, self.dist_topo = self.builder.build_full_topology()
         self.dg = self._project_to_device_graph(self.dist_topo,
                                                 self.table_data.get("equip"),
                                                 self.table_data.get("line"),
                                                 self.table_data.get("terminal"))
+        # 缓存
+        SvgAutoGenerator._cache["shared"] = {
+            "table_data": self.table_data,
+            "main_topo": self.main_topo,
+            "dist_topo": self.dist_topo,
+            "dg": self.dg,
+        }
+
+    @staticmethod
+    def _load_data():
+        loader = SqlTableLoader()
+        return loader.load_all_topo_tables()
 
     # ------------------------------------------------------------------
     # 基础：把 TopologyGraph (含设备+端点) 折叠为设备级图。

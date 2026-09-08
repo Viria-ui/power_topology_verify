@@ -400,6 +400,16 @@ class HybridIntelligenceSummary:
 
             "graph_model_anomalies": self.graph_model_anomalies,
 
+            "fusion_results": self.fusion_results,
+
+            "scope": getattr(self, "scope", "full_network"),
+
+            "feeder_id": getattr(self, "feeder_id", ""),
+
+            "subgraph_target_devices": getattr(self, "subgraph_target_devices", 0),
+
+            "subgraph_boundary_devices": getattr(self, "subgraph_boundary_devices", 0),
+
         }
 
 
@@ -905,7 +915,7 @@ class EnhancedReportGenerator:
 
                 line_name=self.line_name,
 
-                topo=getattr(self.topology_graph, 'graph', self.topology_graph),
+                topo=self.topology_graph,  # \u4f20 TopologyGraph\uff0c\u4e0d\u8981\u9884\u5148\u62c6\u6210 .graph
 
                 telemetry_data=self.telemetry_data,
 
@@ -998,6 +1008,186 @@ class EnhancedReportGenerator:
         return summary
 
 
+
+    # ==================================================================
+    # 【方案C：双层报告】子图混合智能校验（单馈线子图）
+    # ==================================================================
+    def run_subgraph_hybrid_check(
+        self,
+        feeder_id: str,
+        include_cross_feeder_neighbors: bool = True,
+        enable_gnn: bool = True,
+        enable_temporal: bool = True,
+        gat_epochs: int = 30,
+    ) -> HybridIntelligenceSummary:
+        """
+        对单条馈线子图运行混合智能校验（GNN + 时空 + 规则）。
+
+        与 run_hybrid_intelligence_check() 的差异：
+            - 仅取 feeder_id 一致的设备节点 + 与该馈线有跨边连接的"边界节点"
+            - 重新构建一个轻量 TopologyGraph，避免 5 万节点 GAT 注意力矩阵爆内存
+            - 报告顶层追加 scope='feeder_subgraph'，便于 PPT 上和全网报告对比
+        """
+        summary = HybridIntelligenceSummary()
+        summary.enabled = True
+
+        if not HYBRID_MODULE_OK:
+            logger.warning("[增强报告] 混合智能模块不可用，跳过子图校验")
+            return summary
+
+        if self.topology_graph is None:
+            logger.warning("[增强报告] topology_graph 未注入，跳过子图校验")
+            return summary
+
+        try:
+            from core.graph_model import TopologyGraph
+            from core.hybrid_intelligence import run_hybrid_intelligence_check as _run_hybrid
+
+            logger.info(
+                "[增强报告] 子图混合智能校验开始: feeder=%s, GNN=%s, 时空=%s",
+                feeder_id, enable_gnn, enable_temporal,
+            )
+
+            all_devs = self.topology_graph.device_map
+            target_ids = [
+                eid for eid, dev in all_devs.items()
+                if str(dev.feeder_id or "").strip() == str(feeder_id).strip()
+            ]
+            target_set = set(target_ids)
+            logger.info("[增强报告] 馈线 %s 节点数: %d", feeder_id, len(target_ids))
+
+            if not target_ids:
+                logger.warning("[增强报告] 馈线 %s 未匹配到任何设备，跳过", feeder_id)
+                return summary
+
+            boundary_ids = []
+            if include_cross_feeder_neighbors:
+                G = self.topology_graph.graph
+                for tid in target_ids:
+                    for nb in G.neighbors(tid):
+                        if nb in all_devs and nb not in target_set:
+                            boundary_ids.append(nb)
+                boundary_ids = list(dict.fromkeys(boundary_ids))
+                logger.info(
+                    "[增强报告] 加入跨馈线边界节点: %d (合计子图规模=%d)",
+                    len(boundary_ids), len(target_ids) + len(boundary_ids),
+                )
+
+            kept_ids = set(target_ids) | set(boundary_ids)
+
+            sub = TopologyGraph()
+            for eid in kept_ids:
+                sub.add_device(all_devs[eid])
+
+            for pt_id, pt in self.topology_graph.point_map.items():
+                if getattr(pt, "belong_equip_id", None) in kept_ids:
+                    sub.add_point(pt)
+                    sub.link_device_point(getattr(pt, "belong_equip_id", ""), pt_id)
+
+            G_src = self.topology_graph.graph
+            for u, v, edata in G_src.edges(data=True):
+                if u in kept_ids and v in kept_ids:
+                    if sub.graph.has_edge(u, v):
+                        continue
+                    sub.graph.add_edge(u, v, **edata)
+
+            sub_switch_status = {}
+            if self.switch_status_map:
+                sub_switch_status = {
+                    eid: self.switch_status_map[eid]
+                    for eid in kept_ids
+                    if eid in self.switch_status_map
+                }
+            sub_telemetry = {
+                eid: rows
+                for eid, rows in (self.telemetry_data or {}).items()
+                if eid in kept_ids
+            }
+
+            report = _run_hybrid(
+                line_name=f"{self.line_name}__subgraph_{feeder_id}",
+                topo=sub,
+                telemetry_data=sub_telemetry,
+                svg_document=None,
+                switch_status_map=sub_switch_status,
+                enable_gnn=enable_gnn,
+                enable_temporal=enable_temporal,
+                gat_epochs=gat_epochs,
+            )
+
+            summary.total_devices = report.total_devices
+            summary.duration_seconds = report.duration_seconds
+            summary.features_extracted = report.features_extracted
+            summary.telemetry_coverage = report.telemetry_coverage
+            summary.gnn_enabled = report.gnn_enabled
+            summary.temporal_enabled = report.temporal_enabled
+            summary.gnn_anomaly_count = report.gnn_anomaly_count
+            summary.temporal_anomaly_count = report.temporal_anomaly_count
+            summary.rule_hit_count = report.rule_hit_count
+            summary.rule_deterministic_count = report.rule_deterministic_count
+            summary.fused_anomaly_count = report.fused_anomaly_count
+            summary.high_risk_count = report.high_risk_count
+            summary.medium_risk_count = report.medium_risk_count
+            summary.confirmed_count = report.confirmed_count
+            summary.need_review_count = report.need_review_count
+            summary.suspected_tie_switches = report.suspected_tie_switches
+            summary.electrical_anomalies = report.electrical_anomalies
+            summary.graph_model_anomalies = report.graph_model_anomalies
+            summary.fusion_results = report.fusion_results
+
+            summary.scope = "feeder_subgraph"
+            summary.feeder_id = feeder_id
+            summary.subgraph_target_devices = len(target_ids)
+            summary.subgraph_boundary_devices = len(boundary_ids)
+
+            logger.info(
+                "[增强报告] 子图校验完成: feeder=%s, 子图设备=%d (核心=%d + 边界=%d), GNN 异常=%d, 融合异常=%d",
+                feeder_id, len(kept_ids), len(target_ids), len(boundary_ids),
+                summary.gnn_anomaly_count, summary.fused_anomaly_count,
+            )
+
+        except Exception as ex:
+            logger.exception("[增强报告] 子图混合智能校验异常: %s", ex)
+            summary.enabled = False
+
+        self.subgraph_hybrid_summary = summary
+        return summary
+
+    def save_subgraph_report(
+        self,
+        feeder_id: str,
+        output_dir: str = None,
+    ) -> str:
+        """报告子图混合校验结果到独立 JSON\uff08与全网报告并行存在\uff09。"""
+        if output_dir is None:
+            output_dir = os.path.join(
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                "output", "reports",
+            )
+        os.makedirs(output_dir, exist_ok=True)
+
+        s = getattr(self, "subgraph_hybrid_summary", None)
+        if s is None:
+            raise RuntimeError("请先调用 run_subgraph_hybrid_check()")
+
+        safe_fid = str(feeder_id).replace("/", "_").replace("\\", "_")
+        out_path = os.path.join(
+            output_dir,
+            f"{self.line_name}_{safe_fid}_subgraph_hybrid_report.json",
+        )
+
+        payload = {
+            "scope": "feeder_subgraph",
+            "feeder_id": feeder_id,
+            "parent_line": self.line_name,
+            "subgraph_target_devices": getattr(s, "subgraph_target_devices", 0),
+            "subgraph_boundary_devices": getattr(s, "subgraph_boundary_devices", 0),
+            "hybrid_summary": s.to_dict(),
+        }
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+        logger.info("[增强报告] 子图报告已写出: %s", out_path)
+        return out_path
 
     def process_defects(self) -> List[EnhancedDefectReport]:
 
@@ -1280,7 +1470,13 @@ class EnhancedReportGenerator:
 
             return {}
 
-        
+        # 空缺陷列表保护：避免 process_repair_candidates 返回空后再访问 [0]
+        if not self.defects:
+            return {
+                "summary": "无待排序缺陷（--line 模式下混合智能校验阶段 defects 尚未注入，留空）",
+                "ranked_candidates": [],
+                "total_candidates": 0,
+            }
 
         # 构建修复候选（【M6修复】同一设备多条缺陷只保留一条候选，避免重复输出）
 

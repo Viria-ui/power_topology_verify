@@ -19,6 +19,6 @@
   - 三路矛盾   → 降级为"需人工复核"
 """
 
-from .hybrid_checker import HybridIntelligenceChecker
+from .hybrid_checker import HybridIntelligenceChecker, run_hybrid_intelligence_check
 
-__all__ = ["HybridIntelligenceChecker"]
+__all__ = ["HybridIntelligenceChecker", "run_hybrid_intelligence_check"]

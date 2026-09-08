@@ -40,6 +40,8 @@ import time
 from typing import Dict, List, Optional
 from dataclasses import dataclass
 
+import numpy as np
+
 from .feature_engineering import FeatureEngineering, DeviceFeatures
 from .gat_layer import GATAnomalyDetector, GNNAnomalyResult, run_gat_anomaly_detection
 from .spatio_temporal import SpatioTemporalDetector, TemporalAnomalyResult
@@ -268,9 +270,9 @@ class HybridIntelligenceChecker:
         features = self._feature_eng.run_all()
         feat_mat, equip_ids = self._feature_eng.get_feature_matrix()
 
-        # 构建邻接矩阵
+        # 构建邻接表（稀疏，避免 50000+ 节点时全稠密矩阵爆内存）
         from .gat_layer import build_adjacency_matrix
-        adj, _, _ = build_adjacency_matrix(self.topo, equip_ids)
+        adj_neighbors, _, _ = build_adjacency_matrix(self.topo, equip_ids)
 
         # 构建属性字典
         equip_types = {
@@ -299,7 +301,7 @@ class HybridIntelligenceChecker:
 
         self._gat_detector.fit(
             features=feat_mat,
-            adj_matrix=adj,
+            neighbors=adj_neighbors,
             equip_types=e_types_arr,
             feeder_ids=f_ids_arr,
             is_sources=is_src_arr,
@@ -312,7 +314,7 @@ class HybridIntelligenceChecker:
         self._gnn_results = self._gat_detector.predict(
             equip_ids=equip_ids,
             features=feat_mat,
-            adj_matrix=adj,
+            neighbors=adj_neighbors,
             equip_types=e_types_arr,
             feeder_ids=f_ids_arr,
             is_sources=is_src_arr,

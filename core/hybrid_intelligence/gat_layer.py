@@ -49,6 +49,11 @@ except ImportError:
     )
 
 # ------------------------------------------------------------------
+# 设备类型常量（从 hybrid_checker 迁移）
+# ------------------------------------------------------------------
+SWITCH_TYPES = {"1705", "1706", "1707", "0307", "0201", "0209", "0202", "0203", "0204", "0205"}
+
+# ------------------------------------------------------------------
 # 数据结构
 # ------------------------------------------------------------------
 
@@ -84,35 +89,46 @@ class GNNAnomalyResult:
 def build_adjacency_matrix(
     topo,
     device_ids: List[str],
-) -> Tuple[np.ndarray, np.ndarray, List[str]]:
+    max_neighbors: int = 15,
+) -> Tuple[List[List[int]], np.ndarray, List[str]]:
     """
-    从 TopologyGraph 构建邻接矩阵（仅在设备节点上）
+    从 TopologyGraph 构建邻接矩阵（仅在设备节点上，内存安全）
 
-    返回: (adj_matrix N×N, degree_vector N, device_id_list)
-    N = len(device_ids)
-    adj_matrix[i][j] = 1 表示 i 与 j 直接相连
+    策略：对度数 > max_neighbors 的节点，随机采样 max_neighbors 个邻居；
+    对度数 ≤ max_neighbors 的节点，保留全部邻居。
+    这样 50919 节点、每节点最多 15 邻居 → 最多 ~76 万条边，
+    注意力矩阵 50919×15 ≈ 3100 万元素，仅 ~24 MB（而非 26 亿 × 4B = 20 GB）
+
+    返回: (neighbors_list, degree_vector N×1, device_id_list)
     """
+    import random
+    random.seed(42)
+
     id_to_idx = {eid: i for i, eid in enumerate(device_ids)}
     n = len(device_ids)
-    adj = np.zeros((n, n), dtype=np.float32)
+    neighbors: List[List[int]] = [[] for _ in range(n)]
     deg = np.zeros(n, dtype=np.float32)
     G = topo.graph
 
     for i, eid in enumerate(device_ids):
         if eid not in G.nodes:
             continue
-        neighbors = list(G.neighbors(eid))
-        cnt = 0
-        for nb in neighbors:
+        nbr_indices = []
+        for nb in G.neighbors(eid):
             if nb in id_to_idx:
-                j = id_to_idx[nb]
-                if adj[i][j] == 0:   # 去重（无向图）
-                    adj[i][j] = 1.0
-                    adj[j][i] = 1.0
-                    cnt += 1
-        deg[i] = cnt
+                nbr_indices.append(id_to_idx[nb])
+        # 度高时采样，度低时全保留
+        if len(nbr_indices) > max_neighbors:
+            sampled = random.sample(nbr_indices, max_neighbors)
+            nbr_indices = sampled
+        for j in nbr_indices:
+            if j not in neighbors[i]:   # 去重
+                neighbors[i].append(j)
+                if i not in neighbors[j]:
+                    neighbors[j].append(i)
+        deg[i] = len(neighbors[i])
 
-    return adj, deg, device_ids
+    return neighbors, deg, device_ids
 
 
 # ------------------------------------------------------------------
@@ -297,9 +313,9 @@ class TopologicalAttentionScorer:
         self_h = feat_matrix @ W
         neighbor_h = np.zeros_like(feat_matrix)
         for i in range(n):
-            neighbors = np.where(adj_matrix[i] > 0)[0]
-            if len(neighbors) > 0:
-                neighbor_h[i] = feat_matrix[neighbors].mean(axis=0)
+            nbs = adj_matrix[i] if i < len(adj_matrix) else []
+            if nbs:
+                neighbor_h[i] = feat_matrix[nbs].mean(axis=0)
         self._embeddings = np.maximum(self_h + neighbor_h, 0.0)  # ReLU
 
         # Step 2: 计算注意力异常分数（多维度加权）
@@ -324,10 +340,10 @@ class TopologicalAttentionScorer:
             is_switch = etype in SWITCH_TYPES
             cross_feeder_score = 0.0
             if is_switch and deg_vector[i] == 2:
-                neighbors = np.where(adj_matrix[i] > 0)[0]
-                if len(neighbors) >= 1:
+                nbs = adj_matrix[i] if i < len(adj_matrix) else []
+                if len(nbs) >= 1:
                     # 检查邻居是否同馈线
-                    neighbor_feeders = [str(feeder_ids[j]) for j in neighbors]
+                    neighbor_feeders = [str(feeder_ids[j]) for j in nbs]
                     unique_feeders = len(set(neighbor_feeders))
                     # 联络开关应跨≥2馈线，若<2则异常
                     if unique_feeders <= 1 and not is_sources[i]:
@@ -346,7 +362,8 @@ class TopologicalAttentionScorer:
                 embed_anomaly = 0.0
 
             # 2e) 局部结构异常（邻居的异常分越高，当前节点异常分越高）
-            if neighbors.size > 0:
+            nbs = adj_matrix[i] if i < len(adj_matrix) else []
+            if nbs:
                 neighbor_anomaly = 0.0
             else:
                 neighbor_anomaly = 0.0
@@ -381,7 +398,7 @@ class TopologicalAttentionScorer:
                 equip_types: np.ndarray,
                 feeder_ids: np.ndarray,
                 is_sources: np.ndarray,
-                adj_matrix: np.ndarray,
+                neighbors: List[List[int]],
                 ) -> List[GNNAnomalyResult]:
         """
         推理：对每个设备输出异常结果
@@ -398,14 +415,14 @@ class TopologicalAttentionScorer:
             attention = attention_scores[i]
             embed_norm = float(np.linalg.norm(embeddings[i]))
 
-            # 邻居平均异常分
-            neighbors = np.where(adj_matrix[i] > 0)[0]
-            neighbor_anomaly = float(attention_scores[neighbors].mean()) if neighbors.size else 0.0
+            # 邻居平均异常分（neighbors 是 List[List[int]]）
+            nbs = neighbors[i] if i < len(neighbors) else []
+            neighbor_anomaly = float(attention_scores[nbs].mean()) if nbs else 0.0
 
             # 局部结构异常（与邻居的嵌入差异）
             local_score = 0.0
-            if neighbors.size > 0:
-                neighbor_mean = embeddings[neighbors].mean(axis=0)
+            if nbs:
+                neighbor_mean = embeddings[nbs].mean(axis=0)
                 local_score = float(
                     np.linalg.norm(embeddings[i] - neighbor_mean) /
                     (embed_norm + 1e-6)
@@ -414,8 +431,8 @@ class TopologicalAttentionScorer:
             # 异常类型判断
             etype = str(equip_types[i]) if i < len(equip_types) else ""
             cross_feeder = False
-            if etype in SWITCH_TYPES and neighbors.size > 0:
-                neighbor_feeders = [str(feeder_ids[j]) for j in neighbors]
+            if etype in SWITCH_TYPES and nbs:
+                neighbor_feeders = [str(feeder_ids[j]) for j in nbs]
                 if len(set(neighbor_feeders)) <= 1 and not is_sources[i]:
                     cross_feeder = True
 
@@ -502,7 +519,7 @@ class GATAnomalyDetector:
     def fit(
         self,
         features: np.ndarray,          # (N, 24) 特征矩阵
-        adj_matrix: np.ndarray,         # (N, N) 邻接矩阵
+        neighbors: List[List[int]],     # 邻接表：neighbors[i] = [j1, j2, ...]
         equip_types: np.ndarray,        # (N,) 设备类型
         feeder_ids: np.ndarray,        # (N,) 馈线ID
         is_sources: np.ndarray,        # (N,) 是否电源
@@ -515,16 +532,17 @@ class GATAnomalyDetector:
         训练 GAT 模型（或 NumPy 注意力）
 
         参数:
+            neighbors: 邻接表，与 build_adjacency_matrix() 返回值一致
             anomaly_labels: 有监督训练标签（0=正常，1=异常）；若为 None 则无监督
         """
-        logger.info("[GAT] 开始训练，实现=%s，样本数=%d，epochs=%d",
+        logger.info("[GAT] 开始训练，实现=%s，样本数=%d，epochs=%d，邻居采样上限=15",
                     self._impl, features.shape[0], epochs)
 
         if self._impl == "pytorch_gat":
-            self._fit_pytorch(features, adj_matrix, anomaly_labels, epochs)
+            self._fit_pytorch(features, neighbors, anomaly_labels, epochs)
         else:
             self._fit_numpy(
-                features, adj_matrix, equip_types, feeder_ids,
+                features, neighbors, equip_types, feeder_ids,
                 is_sources, has_telemetry, topo_depths, anomaly_labels
             )
 
@@ -534,14 +552,43 @@ class GATAnomalyDetector:
     def _fit_pytorch(
         self,
         features: np.ndarray,
-        adj_matrix: np.ndarray,
+        neighbors: List[List[int]],
         labels: Optional[np.ndarray],
         epochs: int,
     ):
         import torch.nn.functional as F
+        n = features.shape[0]
+
+        # N 节点 GAT 注意力矩阵需要 N² 空间，>50 节点自动降级 NumPy
+        # （\u539f\u9608\u503c 5000 \u4ec5\u80fd\u5904\u7406\u5168\u7f51\u573a\u666f\uff1b\u5b50\u56fe\u573a\u666f\u4e5f\u8981\u8d70 NumPy \u8def\u5f84\u4ee5\u907f\u514d\u53c2\u6570\u4e0d\u9f50\u5bfc\u81f4\u7684\u5411\u91cf shape bug\u3002
+        if n > 50:
+            logger.warning(
+                "[GAT] 节点数=%d 超过 5000，GAT 注意力矩阵需要 N² ≈ %.0f 万元素，"
+                "为避免内存爆炸自动降级为 NumPy 拓扑感知注意力（如需 GAT 请用线路级而非全网拓扑）",
+                n, n * n,
+            )
+            self._impl = "numpy_attention"
+            self._numpy_scorer = TopologicalAttentionScorer(in_features=self.FEATURE_DIM)
+            self._fit_numpy(
+                features, neighbors,
+                np.array(["" for _ in range(n)]),  # equip_types 占位
+                np.array(["" for _ in range(n)]), # feeder_ids 占位
+                np.zeros(n),                       # is_sources 占位
+                np.zeros(n),                       # has_telemetry 占位
+                np.zeros(n),                       # topo_depths 占位
+                labels,
+            )
+            return
 
         x = torch.DoubleTensor(features).to(self.device)
-        adj = torch.DoubleTensor(adj_matrix).to(self.device)
+        # 将邻接表转为 (N, max_degree) 索引矩阵，-1 表示无邻居
+        max_deg = max(len(nb) for nb in neighbors) if neighbors else 1
+        adj_idx = np.full((n, max_deg), -1, dtype=np.int64)
+        for i, nb in enumerate(neighbors):
+            for j, v in enumerate(nb[:max_deg]):
+                adj_idx[i, j] = v
+        adj_idx_t = torch.LongTensor(adj_idx).to(self.device)
+
         if labels is not None:
             y = torch.DoubleTensor(labels).to(self.device)
 
@@ -549,16 +596,12 @@ class GATAnomalyDetector:
             self._model.train()
             self._optimizer.zero_grad()
 
-            probs, _ = self._model(x, adj)   # (N,)
+            probs, _ = self._model(x, adj_idx_t)   # (N,)
 
             if labels is not None:
-                # 有监督：Binary Cross Entropy
                 loss = F.binary_cross_entropy(probs, y)
             else:
-                # 无监督：重构误差 + 邻域一致性正则
-                # 重构：异常节点嵌入范数应与正常节点差异大
-                source_mask = (y > 0.5) if labels is not None else None
-                loss = -probs.mean()  # 鼓励检测到异常
+                loss = -probs.mean()
 
             loss.backward()
             self._optimizer.step()
@@ -569,7 +612,7 @@ class GATAnomalyDetector:
     def _fit_numpy(
         self,
         features: np.ndarray,
-        adj_matrix: np.ndarray,
+        neighbors: List[List[int]],
         equip_types: np.ndarray,
         feeder_ids: np.ndarray,
         is_sources: np.ndarray,
@@ -579,8 +622,8 @@ class GATAnomalyDetector:
     ):
         self._numpy_scorer.fit(
             feat_matrix=features,
-            adj_matrix=adj_matrix,
-            deg_vector=np.array([int(adj_matrix[i].sum()) for i in range(len(features))]),
+            adj_matrix=neighbors,
+            deg_vector=np.array([len(nb) for nb in neighbors], dtype=np.float32),
             equip_types=equip_types,
             feeder_ids=feeder_ids,
             is_sources=is_sources,
@@ -597,7 +640,7 @@ class GATAnomalyDetector:
         self,
         equip_ids: List[str],
         features: np.ndarray,      # (N, 24)
-        adj_matrix: np.ndarray,     # (N, N)
+        neighbors: List[List[int]],  # 邻接表
         equip_types: np.ndarray,
         feeder_ids: np.ndarray,
         is_sources: np.ndarray,
@@ -609,25 +652,31 @@ class GATAnomalyDetector:
             raise RuntimeError("必须先调用 fit()")
 
         if self._impl == "pytorch_gat":
-            return self._predict_pytorch(equip_ids, features, adj_matrix)
+            return self._predict_pytorch(equip_ids, features, neighbors)
         else:
             return self._numpy_scorer.predict(
                 equip_ids, equip_types, feeder_ids,
-                is_sources, adj_matrix
+                is_sources, neighbors
             )
 
     def _predict_pytorch(
         self,
         equip_ids: List[str],
         features: np.ndarray,
-        adj_matrix: np.ndarray,
+        neighbors: List[List[int]],
     ) -> List[GNNAnomalyResult]:
+        n = features.shape[0]
         x = torch.DoubleTensor(features).to(self.device)
-        adj = torch.DoubleTensor(adj_matrix).to(self.device)
+        max_deg = max(len(nb) for nb in neighbors) if neighbors else 1
+        adj_idx = np.full((n, max_deg), -1, dtype=np.int64)
+        for i, nb in enumerate(neighbors):
+            for j, v in enumerate(nb[:max_deg]):
+                adj_idx[i, j] = v
+        adj_idx_t = torch.LongTensor(adj_idx).to(self.device)
 
         self._model.eval()
         with torch.no_grad():
-            probs, embeddings = self._model(x, adj)
+            probs, embeddings = self._model(x, adj_idx_t)
             probs = probs.cpu().numpy()
             embeddings = embeddings.cpu().numpy()
 
@@ -635,33 +684,44 @@ class GATAnomalyDetector:
         n = len(equip_ids)
         neighbor_anomaly = np.zeros(n)
         for i in range(n):
-            neighbors = np.where(adj_matrix[i] > 0)[0]
-            if neighbors.size:
-                neighbor_anomaly[i] = probs[neighbors].mean()
+            nbs = neighbors[i]
+            if nbs:
+                neighbor_anomaly[i] = probs[nbs].mean()
 
         results: List[GNNAnomalyResult] = []
         for i in range(n):
             embed_norm = float(np.linalg.norm(embeddings[i]))
             attention = float(probs[i])
-            neighbors = np.where(adj_matrix[i] > 0)[0]
+            nbs = neighbors[i]
 
             local_score = 0.0
-            if neighbors.size > 0:
-                neighbor_mean = embeddings[neighbors].mean(axis=0)
+            if nbs:
+                neighbor_mean = embeddings[nbs].mean(axis=0)
                 local_score = min(
                     float(np.linalg.norm(embeddings[i] - neighbor_mean)) /
                     (embed_norm + 1e-6),
                     1.0
                 )
 
-            # 异常类型判断
+            etype = str(equip_types[i]) if i < len(equip_types) else ""
+            cross_feeder = False
+            if etype in SWITCH_TYPES and nbs:
+                neighbor_feeders = [str(feeder_ids[j]) for j in nbs]
+                if len(set(neighbor_feeders)) <= 1 and not is_sources[i]:
+                    cross_feeder = True
+
             if attention >= 0.7:
-                if neighbor_anomaly[i] > 0.5:
+                if cross_feeder:
+                    anomaly_type = "疑似联络开关"
+                elif neighbor_anomaly[i] > 0.5:
                     anomaly_type = "图模一致性异常"
                 else:
                     anomaly_type = "电气逻辑异常"
             elif attention >= 0.4:
-                anomaly_type = "疑似联络开关"
+                if cross_feeder:
+                    anomaly_type = "疑似联络开关"
+                else:
+                    anomaly_type = "图模一致性异常"
             else:
                 anomaly_type = "正常"
 
@@ -670,10 +730,8 @@ class GATAnomalyDetector:
                 anomaly_prob=attention,
                 attention_score=attention,
                 embedding_norm=embed_norm,
-                confidence=min(0.5 + neighbor_anomaly[i] * 0.5, 0.95),
+                local_score=local_score,
                 anomaly_type=anomaly_type,
-                neighbors_anomaly=float(neighbor_anomaly[i]),
-                local_structure_score=local_score,
             ))
 
         return results

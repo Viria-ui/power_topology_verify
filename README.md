@@ -1,6 +1,6 @@
 # 配电网图模拓扑智能识别与校验系统
 
-> 基于图模一致性比对的主配网拓扑校验系统，支持电气逻辑校验、物理约束校核、II型模糊可信度评估和智能修复排序。
+> 基于图模一致性比对的主配网拓扑校验系统，支持电气逻辑校验、物理约束校核、II型模糊可信度评估、智能修复排序，以及 GNN+时空融合的混合智能校验（双层报告：全网 + 单馈线子图，2026-09 新增）。
 
 ---
 
@@ -241,6 +241,9 @@
 | **模块五** | 模型修正质量自评分 | 四维评分体系量化质量 | Model_Score=100-Σ(Wi×Ci) | 规范公式，结果见output/质量评分报告 |
 | **SVG美化** | SVG标准化美化排版 | 布局优化、断点修复、连通分量减少 | 力导向布局 | LINE215/LINE216美化完成（详见output/svg/） |
 | **SVG生成** | 自动生成SVG接线图 | 单线图、联络图、电源追溯图 | 拓扑遍历渲染 | 5种输出（单线图/联络图/电源追溯图/美化图/auto_index） |
+| **混合智能校验**（2026-09 新增） | GNN 图注意力 + 时空序列 + 规则引擎融合 | 全网 / 单馈线子图双层异常检测 | GAT（NumPy 兜底）+ 拓扑感知注意力 + 融合层 | `EnhancedReportGenerator` + `core/hybrid_intelligence/*`，由 `--line --hybrid` 触发；产物见 `output/reports/LINE111_增强校验报告.json` 与 `*_subgraph_hybrid_report.json` |
+
+> **双层报告说明**：混合智能校验对全网 50919 节点跑一次（GNN + 时空 + 规则）得到"全局可疑点"，再对指定馈线子图（含跨馈线边界节点）跑一次得到"这条线的 GNN 异常"。两份报告独立 JSON、互不依赖，便于答辩时单独呈现"线路级"结论。GAT 实现使用邻接表 + 邻居采样（≤15）+ NumPy 拓扑感知注意力，5 万节点不 OOM，PyTorch 可选（装上不会更快反而更占内存）。
 
 ### 3.3 数据规模
 
@@ -1685,17 +1688,20 @@ python -c "import pandas, networkx, openpyxl; print('OK')"
 ### 6.3 运行命令
 
 ```bash
-# 运行全部功能（拓扑校验 + SVG处理）
-python main.py --all
+# ===== 单线路完整流程（推荐用法，2026-09 新增）=====
+python main.py --line LINE111                       # 解析→图模比对→美化→出图
+python main.py --line LINE111 --hybrid              # 再加混合智能校验（全网+子图双报告）
+python main.py --line LINE111 --hybrid --repair     # 再算"修复后评分"（不写库）
+python main.py --line LINE111 --hybrid --repair --no-beautify  # 跳过美化
 
-# 仅拓扑校验
-python main.py --topo
+# 只解析 SVG（不跑校验）
+python main.py --parse-only LINE111
 
-# 仅SVG编辑与自动出图
-python main.py --svg
-
-# 图模比对（指定线路）
-python main.py --compare LINE215 LINE216
+# 历史用法（未改动）
+python main.py --all                                # 全功能（建议配合 --line 指定线路）
+python main.py --topo                               # 仅拓扑校验
+python main.py --svg                                # 仅 SVG 编辑与自动出图
+python main.py --compare LINE215 LINE216            # 多线路图模比对
 
 # 运行综合测试脚本（执行所有测试任务）
 python scripts/run_all_tests.py
@@ -1703,9 +1709,38 @@ python scripts/run_all_tests.py
 # 快速测试
 python scripts/quick_test.py
 
-# SVG美化
+# SVG美化（独立入口）
 python run_beautify.py
 ```
+
+> **2026-09 新增参数速查**
+>
+> | 参数 | 用途 |
+> |---|---|
+> | `--line NAME` | 单条线路全流程（SVG解析→增强报告→图模比对→美化→出图） |
+> | `--parse-only NAME` | 只解析 SVG、生成两份 JSON，不跑校验 |
+> | `--hybrid` | 在 `--line` 流程里启用混合智能校验（GNN + 时空 + 规则） |
+> | `--repair` | 把"物理/逻辑层"确定性修复候选视为已采纳，重算 `score_after`（不写库） |
+> | `--no-beautify` | 跳过 SVG 美化（仅 `--line` 模式生效） |
+> | `--no-svg` | 跳过全部 SVG 相关步骤 |
+>
+> **典型产物（`--line LINE111 --hybrid --repair`）**
+>
+> | 文件 | 说明 |
+> |---|---|
+> | `output/json/LINE111.svg_elements.json` | SVG 元素解析（自动生成） |
+> | `output/reports/LINE111_增强校验报告.json` | **全网**混合智能校验报告 |
+> | `output/reports/LINE111_TMP00000033_subgraph_hybrid_report.json` | **单馈线子图**混合智能校验报告 |
+> | `output/LINE111_缺陷清单报告.json` | 图模缺陷清单 |
+> | `output/LINE111_最小修改候选与SQL草案.json` | 修复候选 + 拓扑变更摘要 |
+> | `output/LINE111_正向修复与回滚脚本.sql` | 可执行的 SQL 草案（含回滚） |
+> | `output/LINE111_质量评分与可解释置信度报告.json` | `score_before→score_after` |
+> | `output/LINE111_拓扑校验缺陷报告.xlsx` | 标准 Excel 缺陷报告 |
+> | `output/svg/10kVLINE111_beautified.svg` | 美化后的 SVG |
+> | `output/svg/LINE111_single_line.svg` | 自动生成的单线图 |
+>
+> 数据库不会被改动，所有 SQL 仅作为草案，需人工审核后再执行。
+> 详细设计决策与 FAQ 见根目录 [`UPDATE_REPORT.md`](./UPDATE_REPORT.md)。
 
 ### 6.4 查看输出
 

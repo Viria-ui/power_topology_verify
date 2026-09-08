@@ -58,6 +58,14 @@ from data_io.data_reader import SqlTableLoader
 from data_io.data_writer import gen_sample_data
 from data_io.svg_reader import SvgParser
 
+# 【混合智能校验】增强报告生成器（含 GNN + 时空融合 + 物理约束）
+try:
+    from core.enhanced_report_generator import EnhancedReportGenerator
+    ENHANCED_OK = True
+except ImportError as _e:
+    ENHANCED_OK = False
+    print(f"[WARNING] 增强报告模块导入失败: {_e}")
+
 # 【auto_index修复】导入原本的自动出图+auto_index生成脚本（代码不改，仅调用）
 try:
     from scripts.run_auto_generation import main as run_auto_generation_main
@@ -136,7 +144,14 @@ def load_svg_data(line_name: str) -> tuple[dict, dict, list]:
 
 
 def resolve_feeder_id(line_name: str, line_df) -> str:
-    """将线路名称解析为数据库FEEDER_ID"""
+    """将线路名称解析为数据库 FEEDER_ID（LINE_ID）
+
+    策略（按优先级）：
+      1. 精确匹配 LINE_NAME（小写相等）
+      2. 去掉所有电压等级前缀（10kV/35kV/110kV/kV）+ "LINE" 前缀，
+         与 LINE_NAME 末尾的数字串做等值匹配（LINE111 ↔ 10kVLINE111）
+      3. 都失败则返回原名
+    """
     if line_df is None or len(line_df) == 0:
         return line_name
     kw = line_name.strip()
@@ -144,15 +159,28 @@ def resolve_feeder_id(line_name: str, line_df) -> str:
     matches = line_df[line_df["LINE_NAME"].astype(str).str.lower() == kw_low]
     if len(matches) > 0:
         return str(matches.iloc[0]["LINE_ID"])
-    # 前缀剥离
-    for prefix in ("10kvline", "35kvline", "110kvline", "kvline", "line"):
-        if kw_low.startswith(prefix):
-            suffix = kw_low[len(prefix):]
-            if suffix and len(suffix) >= 2:
-                mask = line_df["LINE_NAME"].astype(str).str.extract(r"(\d{2,4})", expand=False).fillna("")
-                end_chars = suffix[-3:] if len(suffix) >= 3 else suffix[-2:]
-                if mask.str.endswith(end_chars).any():
-                    return str(line_df[mask.str.endswith(end_chars)].iloc[0]["LINE_ID"])
+    # 前缀剥离 + 数字串等值匹配
+    import re
+    digit_match = re.search(r"(\d{2,4})$", kw_low)
+    if digit_match:
+        digits = digit_match.group(1)
+        candidates = line_df[
+            line_df["LINE_NAME"].astype(str).str.lower().str.endswith(digits)
+        ]
+        # 只保留"末尾就是这段数字、且前缀包含 line/kv"的，更精确
+        candidates = candidates[
+            candidates["LINE_NAME"].astype(str)
+            .str.lower()
+            .str.contains(r"(line|kv)", regex=True, na=False)
+        ]
+        if len(candidates) >= 1:
+            # 唯一时直接返回；多个时取数字部分总长度最小者（最像 LINE111 而不是 LINE1110）
+            if len(candidates) == 1:
+                return str(candidates.iloc[0]["LINE_ID"])
+            cand_names = candidates["LINE_NAME"].astype(str).str.lower().tolist()
+            best = min(cand_names, key=lambda n: (len(n), n))
+            return str(candidates[candidates["LINE_NAME"].astype(str).str.lower() == best].iloc[0]["LINE_ID"])
+    # 退化：原样返回
     return kw
 
 
@@ -269,8 +297,20 @@ def run_svg_parsing(table_datas: dict) -> dict:
     return results
 
 
-def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -> dict:
-    """功能3：图模比对（SVG与数据库一致性校验）"""
+def run_compare_for_line(
+    line_name: str, dist_topo, line_df, table_data: dict,
+    use_repair: bool = False,
+) -> dict:
+    """功能3：图模比对（SVG与数据库一致性校验）
+
+    参数:
+        line_name:     线路名（LINE215、10kVLINE111 等）
+        dist_topo:     已构建的配网拓扑
+        line_df:       线路表 DataFrame
+        table_data:    数据库表字典
+        use_repair:    True 时将确定性修复候选视为已采纳，重新算 score_after
+                       （仅做参考，不写入数据库；SQL 仍需人工执行）
+    """
     feeder_id = resolve_feeder_id(line_name, line_df)
     start_st_id = resolve_start_st_id(feeder_id, line_df)
 
@@ -590,7 +630,24 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
     # 修复后的提升通过"确定性修复候选占比"单独说明，不并入评分。
     # 注：修复候选多为 INSERT/UPDATE 建议，且 Q49③ 允许"待确认"标注，
     # 若全部标记为已修复会导致 score_after=100 的虚假满分。
-    repaired_defect_ids: list = []
+    if use_repair:
+        # 【--repair 模式】仅采纳"可逆、有明确 SQL 且非 REVIEW 类"的修复候选，
+        # 让 score_after 反映"按 SQL 脚本执行后"的理论评分，便于 PPT 上做
+        # "修复前 vs 修复后"对比；不修改数据库、SQL 仍由人工执行。
+        # 排除：图上有模型无（INSERT 新设备，可能违反唯一约束）、模型有图上无（属
+        # 图纸侧补全，不影响评分维度）、电压逻辑（属于规则引擎判定，不并入自动评分）
+        # 等需要人工复核/不可逆操作的候选。
+        REVIEW_ACTIONS = {"ADD_DEVICE", "ADD_SVG_ELEMENT", "REVIEW"}
+        repaired_defect_ids: list = [
+            i for i, c in enumerate(repair_candidates)
+            if c.get("action") not in REVIEW_ACTIONS
+            and c.get("sql_forward")
+            and "待确认" not in str(c.get("sql_forward"))
+            and not str(c.get("sql_forward", "")).startswith("--")
+        ]
+        print(f"  • --repair 已采纳 {len(repaired_defect_ids)}/{len(repair_candidates)} 条物理/逻辑层确定性修复候选")
+    else:
+        repaired_defect_ids = []
     deterministic_ratio = round(
         sum(1 for c in repair_candidates
             if c.get("sql_forward") and "待确认" not in str(c.get("sql_forward")))
@@ -616,6 +673,8 @@ def run_compare_for_line(line_name: str, dist_topo, line_df, table_data: dict) -
                 "total_deduction": score_summary["total_deduction"],
                 "defect_count": score_summary["defect_count"],
                 "deterministic_repair_ratio": deterministic_ratio,
+                "repaired_candidate_count": len(repaired_defect_ids),
+                "use_repair_mode": bool(use_repair),
                 "note": "score_after=当前未修复状态的评分；确定性修复候选占比见 deterministic_repair_ratio，不虚高。",
             },
             "defects_with_confidence": score_summary["processed_defects"],
@@ -792,22 +851,20 @@ def main():
   python main.py --all --no-svg           # 全部功能但跳过SVG编辑
         """
     )
-    parser.add_argument("--all", action="store_true", help="运行全部功能")
+    parser.add_argument("--all", action="store_true", help="运行全部功能（需配合 --line 指定线路）")
+    parser.add_argument("--line", metavar="NAME", help="指定线路名称，如 LINE215、10kVLINE111")
     parser.add_argument("--topo", action="store_true", help="仅运行拓扑校验")
     parser.add_argument("--compare", nargs="+", metavar="LINE", help="图模比对（可指定线路名）")
     parser.add_argument("--svg", action="store_true", help="仅SVG编辑与自动出图")
     parser.add_argument("--no-svg", action="store_true", help="跳过SVG相关功能")
     parser.add_argument("--parse-svg", action="store_true", help="仅SVG解析")
+    parser.add_argument("--parse-only", metavar="NAME", help="仅解析指定线路的SVG并生成JSON（不跑校验）")
+    parser.add_argument("--repair", action="store_true", help="将修复候选视为已采纳，重新计算修正后评分")
+    parser.add_argument("--hybrid", action="store_true", help="启用混合智能校验（GNN+时空融合），输出增强报告")
+    parser.add_argument("--no-beautify", action="store_true", help="跳过 SVG 美化（仅 --line 模式生效）")
     args = parser.parse_args()
 
-    # 默认行为：运行全部功能
-    run_all = args.all or (not args.topo and not args.compare and not args.svg and not args.parse_svg)
-
-    print("=" * 70)
-    print("配电网图模拓扑智能识别与校验系统")
-    print("=" * 70)
-
-    # 加载数据
+    # 加载数据（必须在所有条件分支之前，避免 Python 将 table_datas 视为局部变量）
     print("\n📂 加载SQL数据...")
     sql_loader = SqlTableLoader()
     table_datas = sql_loader.load_all_topo_tables()
@@ -818,7 +875,176 @@ def main():
 
     results = {}
 
-    # 功能1: 拓扑校验
+    # 默认行为：运行全部功能
+    run_all = args.all or (not args.topo and not args.compare and not args.svg and not args.parse_svg and not args.parse_only)
+
+    # 【新增】--line 模式：对单条线路执行完整流程（SVG解析→图模比对→报告）
+    if args.line:
+        target_line = args.line.strip()
+        sep = "=" * 60
+        print(f"\n{sep}\n🎯 单线路完整流程: {target_line}\n{sep}")
+
+        # Step 1: 先确保 dist_topo 可用（table_datas 在外层 main() 已定义，直接用）
+        if "dist_topo" not in globals():
+            builder, main_topo, dist_topo, elec_results = run_topo_validation(table_datas)
+        else:
+            try:
+                _ = dist_topo
+            except NameError:
+                builder, main_topo, dist_topo, elec_results = run_topo_validation(table_datas)
+
+        # Step 2: 检查是否已有 JSON，没有则先解析
+        json_elem_path = os.path.join(PROJECT_ROOT, "output", "json", f"{target_line}.svg_elements.json")
+        if not os.path.exists(json_elem_path):
+            print(f"\n📝 未发现 {target_line} 的JSON，正在解析SVG...")
+            svg_path = os.path.join(TEST_SVG_ROOT, f"{target_line}.svg")
+            if not os.path.exists(svg_path):
+                for prefix in ("", "10kV", "10kVLINE"):
+                    _p = os.path.join(TEST_SVG_ROOT, f"{prefix}{target_line}.svg")
+                    if os.path.exists(_p):
+                        svg_path = _p
+                        break
+            if os.path.exists(svg_path):
+                doc = SvgParser.parse(svg_path)
+                if doc:
+                    doc.export_elements_json(f"{target_line}.svg_elements.json")
+                    doc.export_connections_json(f"{target_line}.svg_connections.json")
+                    print(f"  ✅ JSON 已生成: output/json/{target_line}.svg_elements.json")
+                else:
+                    print(f"  ❌ SVG 解析失败: {svg_path}")
+            else:
+                print(f"  ❌ SVG 文件未找到: {svg_path}")
+        else:
+            print(f"  ✅ 使用已有JSON: output/json/{target_line}.svg_elements.json")
+
+        # Step 3: 增强报告（混合智能校验 - GNN + 时空 + 物理约束）
+        if args.hybrid and ENHANCED_OK:
+            print(f"\n🧠 混合智能增强校验: {target_line}")
+            try:
+                generator = EnhancedReportGenerator(
+                    line_name=target_line,
+                    defects=[],
+                    topology_graph=dist_topo,
+                    device_map=getattr(dist_topo, "device_map", {}),
+                    telemetry_data=None,
+                )
+                # 运行全网混合智能校验
+                generator.run_hybrid_intelligence_check(
+                    enable_gnn=True, enable_temporal=True, gat_epochs=30
+                )
+                enhanced_path = os.path.join(PROJECT_ROOT, "output", "reports",
+                                            f"{target_line}_增强校验报告.json")
+                os.makedirs(os.path.dirname(enhanced_path), exist_ok=True)
+                generator.save_report(os.path.dirname(enhanced_path))
+                print(f"  ✅ 增强报告: {enhanced_path}")
+            except Exception as _e:
+                print(f"  ⚠️ 混合智能校验失败: {_e}")
+                import traceback
+                traceback.print_exc()
+
+            # 子图混合校验（方案C：双层报告）
+            # 与全网报告独立，不受全网 save_report 报错影响
+            try:
+                _fid = resolve_feeder_id(target_line, table_datas.get("line"))
+                print(f"\n🔍 子图混合校验: feeder={_fid}")
+                generator.run_subgraph_hybrid_check(
+                    feeder_id=_fid,
+                    include_cross_feeder_neighbors=True,
+                    enable_gnn=True,
+                    enable_temporal=True,
+                    gat_epochs=30,
+                )
+                sub_path = generator.save_subgraph_report(feeder_id=_fid)
+                print(f"  ✅ 子图报告: {sub_path}")
+            except Exception as _se:
+                print(f"  ⚠️ 子图校验失败: {_se}")
+                import traceback as _tb_sub
+                _tb_sub.print_exc()
+
+        # Step 4: 图模比对 + 报告
+        try:
+            r = run_compare_for_line(
+                target_line, dist_topo, table_datas["line"], table_datas,
+                use_repair=args.repair,
+            )
+            print(f"\n✅ {target_line} 图模比对完成！")
+            print(
+                f"   缺陷数: {r['defect_count']} | "
+                f"评分: {r['score_before']}→{r['score_after']}"
+                + ("（含 --repair）" if args.repair else "")
+            )
+        except FileNotFoundError:
+            print(f"  ❌ {target_line} 的JSON不存在，跳过图模比对")
+        except Exception as _e:
+            print(f"  ❌ 图模比对出错: {_e}")
+
+        # Step 5: SVG 美化
+        if not args.no_svg and not args.no_beautify and SVG_MODULES_OK:
+            print(f"\n🎨 SVG美化: {target_line}")
+            for cand_name in [target_line, f"10kV{target_line}", f"10kVLINE{target_line}"]:
+                cand_path = os.path.join(TEST_SVG_ROOT, f"{cand_name}.svg")
+                if os.path.exists(cand_path):
+                    try:
+                        _out = os.path.join(PROJECT_ROOT, "output", "svg", f"{cand_name}_beautified.svg")
+                        os.makedirs(os.path.dirname(_out), exist_ok=True)
+                        beautify_svg_file(cand_path, _out)
+                        print(f"  ✅ 美化完成: {cand_name}.svg → {os.path.basename(_out)}")
+                    except Exception as _be:
+                        print(f"  ⚠️ 美化失败 {cand_name}: {_be}")
+                    break
+            else:
+                print(f"  ⚠️ 未找到 {target_line} 的SVG源文件，跳过美化")
+
+        # Step 6: 自动出图（生成单线图）
+        if not args.no_svg and SVG_MODULES_OK:
+            print(f"\n📊 自动出图: {target_line}")
+            try:
+                g = SvgAutoGenerator(table_data=table_datas)
+                out_path = os.path.join(PROJECT_ROOT, "output", "svg", f"{target_line}_single_line.svg")
+                os.makedirs(os.path.dirname(out_path), exist_ok=True)
+                p = g.generate_feeder_single_line_diagram(
+                    feeder_name=target_line,
+                    out_path=out_path
+                )
+                print(f"  ✅ 单线图: {os.path.basename(out_path)} (nodes={p.get('nodes')} edges={p.get('edges')})")
+            except Exception as _ae:
+                print(f"  ⚠️ 自动出图失败: {_ae}")
+
+        print(f"\n{sep}\n✅ {target_line} 完整流程全部结束\n{sep}")
+        return
+
+    # 【新增】--parse-only 模式：仅解析指定线路SVG，不跑校验
+    if args.parse_only:
+        target_line = args.parse_only.strip()
+        sep = "=" * 60
+        print(f"\n{sep}\n📝 仅解析SVG: {target_line}\n{sep}")
+        svg_path = os.path.join(TEST_SVG_ROOT, f"{target_line}.svg")
+        if not os.path.exists(svg_path):
+            for prefix in ("", "10kV", "10kVLINE"):
+                _p = os.path.join(TEST_SVG_ROOT, f"{prefix}{target_line}.svg")
+                if os.path.exists(_p):
+                    svg_path = _p
+                    break
+        if not os.path.exists(svg_path):
+            print(f"  ❌ SVG 文件未找到: {svg_path}")
+            return
+        doc = SvgParser.parse(svg_path)
+        if doc:
+            doc.export_elements_json(f"{target_line}.svg_elements.json")
+            doc.export_connections_json(f"{target_line}.svg_connections.json")
+            print(f"  ✅ JSON 已生成:")
+            print(f"     output/json/{target_line}.svg_elements.json")
+            print(f"     output/json/{target_line}.svg_connections.json")
+        else:
+            print(f"  ❌ 解析失败")
+        return
+
+    print("=" * 70)
+    print("配电网图模拓扑智能识别与校验系统")
+    print("=" * 70)
+
+    # 加载数据
+    print("\n📂 加载SQL数据...")
     if run_all or args.topo:
         builder, main_topo, dist_topo, elec_results = run_topo_validation(table_datas)
         results["topo"] = {

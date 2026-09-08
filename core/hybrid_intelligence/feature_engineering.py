@@ -268,7 +268,8 @@ class FeatureEngineering:
         try:
             pagerank = nx.pagerank(subG, max_iter=100)
         except Exception:
-            pagerank = {n: 1.0 / n for n in subG.nodes()}
+            # 节点 ID 是字符串，需要按节点数做兜底，避免 TypeError
+            pagerank = {n: 1.0 / max(len(subG.nodes), 1) for n in subG.nodes()}
 
         # 聚类系数
         clustering = nx.clustering(subG)
