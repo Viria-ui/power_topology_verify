@@ -48,6 +48,28 @@ import os
 
 from typing import Dict, List, Tuple, Optional
 
+
+def _json_safe_default(obj):
+    """让 json.dump 支持 numpy / numpy scalar / 非原生 Python 类型"""
+    # numpy 数组、标量统一成 Python 原生
+    try:
+        import numpy as np
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        if isinstance(obj, (np.integer,)):
+            return int(obj)
+        if isinstance(obj, (np.floating,)):
+            f = float(obj)
+            # NaN / Inf 在 json 中不合法，统一成 None
+            import math
+            if math.isnan(f) or math.isinf(f):
+                return None
+            return f
+    except Exception:
+        pass
+    # 其他不可序列化对象 → None（避免整篇报告被砸）
+    return None
+
 from dataclasses import dataclass, field
 
 from datetime import datetime
@@ -1185,7 +1207,7 @@ class EnhancedReportGenerator:
             "hybrid_summary": s.to_dict(),
         }
         with open(out_path, "w", encoding="utf-8") as f:
-            json.dump(payload, f, ensure_ascii=False, indent=2)
+            json.dump(payload, f, ensure_ascii=False, indent=2, default=_json_safe_default)
         logger.info("[增强报告] 子图报告已写出: %s", out_path)
         return out_path
 
@@ -1670,7 +1692,7 @@ class EnhancedReportGenerator:
 
         with open(json_path, "w", encoding="utf-8") as f:
 
-            json.dump(report, f, ensure_ascii=False, indent=2)
+            json.dump(report, f, ensure_ascii=False, indent=2, default=_json_safe_default)
 
         
 

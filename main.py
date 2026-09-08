@@ -631,23 +631,38 @@ def run_compare_for_line(
     # 注：修复候选多为 INSERT/UPDATE 建议，且 Q49③ 允许"待确认"标注，
     # 若全部标记为已修复会导致 score_after=100 的虚假满分。
     if use_repair:
-        # 【--repair 模式】仅采纳"可逆、有明确 SQL 且非 REVIEW 类"的修复候选，
+        # 【--repair 模式】仅采纳"可逆、有明确 SQL 且非人工复核/不可逆"的修复候选，
         # 让 score_after 反映"按 SQL 脚本执行后"的理论评分，便于 PPT 上做
         # "修复前 vs 修复后"对比；不修改数据库、SQL 仍由人工执行。
-        # 排除：图上有模型无（INSERT 新设备，可能违反唯一约束）、模型有图上无（属
-        # 图纸侧补全，不影响评分维度）、电压逻辑（属于规则引擎判定，不并入自动评分）
-        # 等需要人工复核/不可逆操作的候选。
+        # 排除：
+        #   - REVIEW           = 需人工判定（电气规则、联络开关等）
+        #   - ADD_DEVICE       = INSERT 新设备（可能违反唯一约束 + 触发 Q49③）
+        #   - ADD_SVG_ELEMENT  = 图纸侧补全，不影响评分维度
+        # 仅采纳：ADD_CONNECTION（数据库侧补一条物理边，可由 SQL 脚本回滚）
+        # 注：传给 ScoreEngine 的是 target_equip（修复实际指向的设备），由
+        # evaluate_quality_score 内部与 defects_report 的 equip_id 对齐扣分。
         REVIEW_ACTIONS = {"ADD_DEVICE", "ADD_SVG_ELEMENT", "REVIEW"}
-        repaired_defect_ids: list = [
-            i for i, c in enumerate(repair_candidates)
-            if c.get("action") not in REVIEW_ACTIONS
-            and c.get("sql_forward")
-            and "待确认" not in str(c.get("sql_forward"))
-            and not str(c.get("sql_forward", "")).startswith("--")
-        ]
-        print(f"  • --repair 已采纳 {len(repaired_defect_ids)}/{len(repair_candidates)} 条物理/逻辑层确定性修复候选")
+        repaired_equip_ids = []
+        for c in repair_candidates:
+            if c.get("action") in REVIEW_ACTIONS:
+                continue
+            sql_fwd = str(c.get("sql_forward", ""))
+            sql_rb  = str(c.get("sql_rollback", ""))
+            if not sql_fwd or "待确认" in sql_fwd or sql_fwd.startswith("--"):
+                continue
+            # 排除回滚脚本为"-- 无"的（即没有可逆操作的）
+            if sql_rb.startswith("-- 无"):
+                continue
+            tid = str(c.get("target_equip") or "")
+            if tid and tid not in repaired_equip_ids:
+                repaired_equip_ids.append(tid)
+        print(
+            f"  • --repair 已采纳 {len(repaired_equip_ids)}/{len({c.get('action') for c in repair_candidates if c.get('target_equip')})} "
+            f"台目标设备的确定性修复候选（action∈ADD_CONNECTION），覆盖 "
+            f"{len(repaired_equip_ids)}/{len(repair_candidates)} 条候选，其余因需人工复核/不可逆未采纳"
+        )
     else:
-        repaired_defect_ids = []
+        repaired_equip_ids = []
     deterministic_ratio = round(
         sum(1 for c in repair_candidates
             if c.get("sql_forward") and "待确认" not in str(c.get("sql_forward")))
@@ -655,7 +670,7 @@ def run_compare_for_line(
     )
     score_summary = score_engine.evaluate_quality_score(
         defects_report, len(dist_topo.device_map),
-        repaired_defect_ids=repaired_defect_ids
+        repaired_defect_ids=repaired_equip_ids
     )
     print(f"  • 修正前评分: {score_summary['score_before']} 分")
     print(f"  • 预计修正后评分: {score_summary['score_after']} 分")
@@ -673,7 +688,7 @@ def run_compare_for_line(
                 "total_deduction": score_summary["total_deduction"],
                 "defect_count": score_summary["defect_count"],
                 "deterministic_repair_ratio": deterministic_ratio,
-                "repaired_candidate_count": len(repaired_defect_ids),
+                "repaired_candidate_count": len(repaired_equip_ids),
                 "use_repair_mode": bool(use_repair),
                 "note": "score_after=当前未修复状态的评分；确定性修复候选占比见 deterministic_repair_ratio，不虚高。",
             },
