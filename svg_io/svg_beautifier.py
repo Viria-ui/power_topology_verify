@@ -1061,21 +1061,13 @@ class SvgBeautifier:
                 continue
             xs = [self.pos[p][0] for p in conn]
             y = self.pos[pid][1]
-            x1, x2 = min(xs), max(xs)  # 不延伸到设备两端，防止出头
+            x1, x2 = min(xs) - 20, max(xs) + 20
             key = (self.snap(x1), self.snap(y))
             if key in drawn:
                 continue
             drawn.add(key)
             conn_idx += 1
             self._polyline(g, [(x1, y), (x2, y)], C_BUSBAR, W_BUSBAR, conn_id=f'BUS_{conn_idx:06d}', from_id=pid)
-            # ★ 画垂直线：从母线到每个连接设备，防止断连
-            for cp in conn:
-                cx, cy = self.pos[cp]
-                if abs(cy - y) < 5:
-                    continue  # 设备和母线同y，不用画垂直线
-                conn_idx += 1
-                self._polyline(g, [(cx, y), (cx, cy)], C_BUSBAR, W_BUSBAR,
-                               conn_id=f'BUSV_{conn_idx:06d}', from_id=pid, to_id=cp)
 
         # ★ 环路补边：非树边（补回生成树算法丢弃的连接）
         # 颜色语义：仅“跨站房/跨馈线”才用联络橙 C_TIE；同容器/无容器/母线参与均属
