@@ -1,7 +1,7 @@
 {
   "report_info": {
     "line_name": "LINE216",
-    "generated_at": "2026-09-08T12:01:20.999385",
+    "generated_at": "2026-09-08T12:07:21.870189",
     "version": "2.0"
   },
   "data_source_quality": {
@@ -12,8 +12,8 @@
   },
   "physical_constraint_summary": {
     "total_checks": 99,
-    "passed": 9,
-    "failed": 90,
+    "passed": 74,
+    "failed": 25,
     "high_risk_count": 0,
     "medium_risk_count": 90,
     "kcl_failures": [],
@@ -43,22 +43,6 @@
         "risk_level": "中"
       },
       {
-        "equip_id": "TMP00003764",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052747->TMP00064627",
-        "physical_basis": "开关TMP00003764处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003765",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052748->TMP00064628",
-        "physical_basis": "开关TMP00003765处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
         "equip_id": "TMP00003768",
         "check_type": "BRANCH",
         "node_id": "TMP00052751->TMP00064631",
@@ -71,14 +55,6 @@
         "check_type": "BRANCH",
         "node_id": "TMP00052759->TMP00064639",
         "physical_basis": "开关TMP00003776处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003777",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052760->TMP00064640",
-        "physical_basis": "开关TMP00003777处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
         "suggestion": "建议现场核查开关端子连接情况",
         "risk_level": "中"
       },
@@ -115,202 +91,10 @@
         "risk_level": "中"
       },
       {
-        "equip_id": "TMP00003783",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052766->TMP00064646",
-        "physical_basis": "开关TMP00003783处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
         "equip_id": "TMP00003784",
         "check_type": "BRANCH",
         "node_id": "TMP00052767->TMP00064647",
         "physical_basis": "开关TMP00003784处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003785",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052768->TMP00064648",
-        "physical_basis": "开关TMP00003785处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003786",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052769->TMP00064649",
-        "physical_basis": "开关TMP00003786处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003787",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052770->TMP00064650",
-        "physical_basis": "开关TMP00003787处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003788",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052771->TMP00064651",
-        "physical_basis": "开关TMP00003788处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003789",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052772->TMP00064652",
-        "physical_basis": "开关TMP00003789处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003790",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052773->TMP00064653",
-        "physical_basis": "开关TMP00003790处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003791",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052774->TMP00064654",
-        "physical_basis": "开关TMP00003791处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003792",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052775->TMP00064655",
-        "physical_basis": "开关TMP00003792处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003793",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052776->TMP00064656",
-        "physical_basis": "开关TMP00003793处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003794",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052777->TMP00064657",
-        "physical_basis": "开关TMP00003794处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003795",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052778->TMP00064658",
-        "physical_basis": "开关TMP00003795处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003796",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052779->TMP00064659",
-        "physical_basis": "开关TMP00003796处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003797",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052780->TMP00064660",
-        "physical_basis": "开关TMP00003797处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003798",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052781->TMP00064661",
-        "physical_basis": "开关TMP00003798处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003799",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052782->TMP00064662",
-        "physical_basis": "开关TMP00003799处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003800",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052783->TMP00064663",
-        "physical_basis": "开关TMP00003800处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003801",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052784->TMP00064664",
-        "physical_basis": "开关TMP00003801处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003802",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052785->TMP00064665",
-        "physical_basis": "开关TMP00003802处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003803",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052786->TMP00064666",
-        "physical_basis": "开关TMP00003803处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003804",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052787->TMP00064667",
-        "physical_basis": "开关TMP00003804处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003805",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052788->TMP00064668",
-        "physical_basis": "开关TMP00003805处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003806",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052789->TMP00064669",
-        "physical_basis": "开关TMP00003806处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003807",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052790->TMP00064670",
-        "physical_basis": "开关TMP00003807处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
         "suggestion": "建议现场核查开关端子连接情况",
         "risk_level": "中"
       },
@@ -343,78 +127,6 @@
         "check_type": "BRANCH",
         "node_id": "TMP00052795->TMP00064675",
         "physical_basis": "开关TMP00003812处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003813",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052796->TMP00064676",
-        "physical_basis": "开关TMP00003813处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003814",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052797->TMP00064677",
-        "physical_basis": "开关TMP00003814处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003815",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052798->TMP00064678",
-        "physical_basis": "开关TMP00003815处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003816",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052799->TMP00064679",
-        "physical_basis": "开关TMP00003816处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003817",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052800->TMP00064680",
-        "physical_basis": "开关TMP00003817处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003818",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052801->TMP00064681",
-        "physical_basis": "开关TMP00003818处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003819",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052802->TMP00064682",
-        "physical_basis": "开关TMP00003819处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003820",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052803->TMP00064683",
-        "physical_basis": "开关TMP00003820处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003821",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052804->TMP00064684",
-        "physical_basis": "开关TMP00003821处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
         "suggestion": "建议现场核查开关端子连接情况",
         "risk_level": "中"
       },
@@ -467,146 +179,10 @@
         "risk_level": "中"
       },
       {
-        "equip_id": "TMP00003840",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052823->TMP00064703",
-        "physical_basis": "开关TMP00003840处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
         "equip_id": "TMP00003841",
         "check_type": "BRANCH",
         "node_id": "TMP00052824->TMP00064704",
         "physical_basis": "开关TMP00003841处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003843",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052826->TMP00064705",
-        "physical_basis": "开关TMP00003843处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003844",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052827->TMP00064706",
-        "physical_basis": "开关TMP00003844处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003845",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052828->TMP00064707",
-        "physical_basis": "开关TMP00003845处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003846",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052829->TMP00064708",
-        "physical_basis": "开关TMP00003846处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003847",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052830->TMP00064709",
-        "physical_basis": "开关TMP00003847处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003848",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052831->TMP00064710",
-        "physical_basis": "开关TMP00003848处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003849",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052832->TMP00064711",
-        "physical_basis": "开关TMP00003849处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003850",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052833->TMP00064712",
-        "physical_basis": "开关TMP00003850处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003851",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052834->TMP00064713",
-        "physical_basis": "开关TMP00003851处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003852",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052835->TMP00064714",
-        "physical_basis": "开关TMP00003852处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003853",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052836->TMP00064715",
-        "physical_basis": "开关TMP00003853处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003854",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052837->TMP00064716",
-        "physical_basis": "开关TMP00003854处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003855",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052838->TMP00064717",
-        "physical_basis": "开关TMP00003855处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003856",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052839->TMP00064718",
-        "physical_basis": "开关TMP00003856处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003857",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052840->TMP00064719",
-        "physical_basis": "开关TMP00003857处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003858",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052841->TMP00064720",
-        "physical_basis": "开关TMP00003858处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
         "suggestion": "建议现场核查开关端子连接情况",
         "risk_level": "中"
       },
@@ -639,102 +215,6 @@
         "check_type": "BRANCH",
         "node_id": "TMP00052846->TMP00064725",
         "physical_basis": "开关TMP00003863处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003865",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052848->TMP00064727",
-        "physical_basis": "开关TMP00003865处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003866",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052849->TMP00064728",
-        "physical_basis": "开关TMP00003866处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003867",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052850->TMP00064729",
-        "physical_basis": "开关TMP00003867处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003868",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052851->TMP00064730",
-        "physical_basis": "开关TMP00003868处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003869",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052852->TMP00064731",
-        "physical_basis": "开关TMP00003869处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003870",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052853->TMP00064732",
-        "physical_basis": "开关TMP00003870处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003871",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052854->TMP00064733",
-        "physical_basis": "开关TMP00003871处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003872",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052855->TMP00064734",
-        "physical_basis": "开关TMP00003872处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003873",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052856->TMP00064735",
-        "physical_basis": "开关TMP00003873处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003874",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052857->TMP00064736",
-        "physical_basis": "开关TMP00003874处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003875",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052858->TMP00064737",
-        "physical_basis": "开关TMP00003875处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况",
-        "risk_level": "中"
-      },
-      {
-        "equip_id": "TMP00003876",
-        "check_type": "BRANCH",
-        "node_id": "TMP00052859->TMP00064738",
-        "physical_basis": "开关TMP00003876处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
         "suggestion": "建议现场核查开关端子连接情况",
         "risk_level": "中"
       }
@@ -88861,8 +88341,8 @@
         "check_type": "BRANCH",
         "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043886状态未知(None), 无法判定",
-        "suggestion": "检查遥信采集和数据同步"
+        "physical_basis": "开关TMP00043886无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043886",
@@ -88934,10 +88414,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043540处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043540无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043540",
@@ -89009,10 +88489,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043527处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043527无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043527",
@@ -89084,10 +88564,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043532处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043532无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043532",
@@ -89159,10 +88639,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043538处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043538无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043538",
@@ -89234,10 +88714,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043539处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043539无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043539",
@@ -89309,10 +88789,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043534处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043534无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043534",
@@ -89384,10 +88864,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043537处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043537无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043537",
@@ -89530,8 +89010,8 @@
         "check_type": "BRANCH",
         "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00046420状态未知(None), 无法判定",
-        "suggestion": "检查遥信采集和数据同步"
+        "physical_basis": "开关TMP00046420无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00046420",
@@ -89605,8 +89085,8 @@
         "check_type": "BRANCH",
         "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043887状态未知(None), 无法判定",
-        "suggestion": "检查遥信采集和数据同步"
+        "physical_basis": "开关TMP00043887无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043887",
@@ -89680,8 +89160,8 @@
         "check_type": "BRANCH",
         "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00046561状态未知(None), 无法判定",
-        "suggestion": "检查遥信采集和数据同步"
+        "physical_basis": "开关TMP00046561无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00046561",
@@ -89753,10 +89233,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043535处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043535无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043535",
@@ -89899,8 +89379,8 @@
         "check_type": "BRANCH",
         "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00046562状态未知(None), 无法判定",
-        "suggestion": "检查遥信采集和数据同步"
+        "physical_basis": "开关TMP00046562无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00046562",
@@ -90041,10 +89521,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043533处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043533无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043533",
@@ -90116,10 +89596,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043536处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043536无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043536",
@@ -90193,8 +89673,8 @@
         "check_type": "BRANCH",
         "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043885状态未知(None), 无法判定",
-        "suggestion": "检查遥信采集和数据同步"
+        "physical_basis": "开关TMP00043885无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043885",
@@ -90337,8 +89817,8 @@
         "check_type": "BRANCH",
         "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043888状态未知(None), 无法判定",
-        "suggestion": "检查遥信采集和数据同步"
+        "physical_basis": "开关TMP00043888无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043888",
@@ -90410,10 +89890,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043526处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043526无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043526",
@@ -90485,10 +89965,10 @@
       "confidence_status": "CONFIRMED",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043525处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043525无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043525",
@@ -258443,10 +257923,10 @@
       "confidence_status": "LIKELY",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043532处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043532无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043532",
@@ -258518,10 +257998,10 @@
       "confidence_status": "LIKELY",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043534处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043534无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043534",
@@ -258593,10 +258073,10 @@
       "confidence_status": "LIKELY",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043535处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043535无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043535",
@@ -258668,10 +258148,10 @@
       "confidence_status": "LIKELY",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043540处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043540无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043540",
@@ -261572,10 +261052,10 @@
       "confidence_status": "LIKELY",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00043893处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00043893无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00043893",
@@ -261647,10 +261127,10 @@
       "confidence_status": "LIKELY",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00044305处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00044305无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00044305",
@@ -261722,10 +261202,10 @@
       "confidence_status": "LIKELY",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00044306处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00044306无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00044306",
@@ -261797,10 +261277,10 @@
       "confidence_status": "LIKELY",
       "physical_constraint_result": {
         "check_type": "BRANCH",
-        "passed": false,
+        "passed": true,
         "risk_level": "中",
-        "physical_basis": "开关TMP00044363处于合位但功率和电压均接近零, 可能存在虚接或端子未正确连接.",
-        "suggestion": "建议现场核查开关端子连接情况"
+        "physical_basis": "开关TMP00044363无遥测数据，无法判定支路约束",
+        "suggestion": "补充遥测采集后复核"
       },
       "temporal_features": {
         "equip_id": "TMP00044363",

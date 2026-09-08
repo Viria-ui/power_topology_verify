@@ -351,7 +351,21 @@ class PhysicalConstraintChecker:
         """
         switch_status = self.switch_status_map.get(str(switch_id), "UNKNOWN")
         row = self._get_latest_telemetry(switch_id)
-        
+
+        # 无遥测数据：无法判定支路约束，不算失败（避免"合位但P/U=0"被误报为虚接）
+        if not row:
+            return PhysicalConstraintResult(
+                check_type="BRANCH",
+                equip_id=switch_id,
+                node_id=f"{from_node}->{to_node}",
+                passed=True,
+                confidence=0.4,
+                physical_basis=f"开关{switch_id}无遥测数据，无法判定支路约束",
+                detail="遥测数据缺失",
+                risk_level="中",
+                suggestion="补充遥测采集后复核",
+            )
+
         # 获取功率数据
         active_power = self._number(row.get('AP', 0))
         reactive_power = self._number(row.get('RP', 0))
