@@ -206,10 +206,21 @@ def _render_svg_edge(svg_path: Path, width: int = 1400) -> bytes | None:
     if not browser:
         return None
     try:
-        import tempfile, subprocess
-        # 写一个 html wrapper（用 file URL 直接打开 SVG，绕开中文路径转义）
+        import tempfile, subprocess, re
+        # 读取 SVG 并规范化命名空间：去掉 ns0: 前缀，补回默认 xmlns。
+        # 问题：美化后的 SVG 由 ElementTree 生成，命名空间序列化为 ns0: 前缀，
+        # Edge 浏览器无法识别 <ns0:svg> 等标签，导致渲染为空白。
+        # 修复：在嵌入 HTML 之前用正则规范化，不改动原始 .svg 文件。
         svg_text = svg_path.read_text(encoding="utf-8", errors="replace")
-        # 抽取 SVG 尺寸
+        svg_text = re.sub(r'\s+xmlns:ns\d+="[^"]*"', '', svg_text)
+        svg_text = re.sub(r'<(\s*/?)ns0:(\w+)', r'<\1\2', svg_text)
+        svg_text = re.sub(r'<ns0:(\w+)(\s)', r'<\1\2', svg_text)
+        svg_text = re.sub(r'\bns0:', '', svg_text)
+        svg_text = re.sub(
+            r'(<svg\s[^>]*)(>)',
+            r'\1 xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"\2',
+            svg_text, count=1
+        )
         html = (
             "<!doctype html><html><head><meta charset='utf-8'>"
             "<style>html,body{margin:0;padding:0;background:#fafafa;}"
