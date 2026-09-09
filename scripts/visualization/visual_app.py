@@ -266,9 +266,6 @@ def base_interaction_tab() -> None:
         )
         st.markdown(f"**文件路径：** `output/svg/{selected.name}`")
         st.markdown(f"**文件大小：** `{round(selected.stat().st_size / 1024, 1)} KB`")
-        auto_index = SVG_DIR / "auto_index.html"
-        if auto_index.exists():
-            st.markdown("**图集页面：** `output/svg/auto_index.html`")
         st.markdown("</div>", unsafe_allow_html=True)
 
         uploaded = st.file_uploader("上传本地 PNG/JPG/SVG", type=["png", "jpg", "jpeg", "svg"], key="base_upload")
@@ -343,7 +340,7 @@ def showcase_tab() -> None:
         ("设备统计", str(item["device_count"]), "来自校验摘要"),
         ("文件大小", f"{item['size_kb']} KB", "output/svg"),
         ("关联缺陷", str(item["reported_defects"]), "来自校验摘要"),
-        ("图集页面", "auto_index", "output/svg"),
+        ("展示方式", "GUI / Streamlit", "双入口均可查看"),
     ])
 
     left, right = st.columns([0.28, 0.72], gap="large")
@@ -354,10 +351,6 @@ def showcase_tab() -> None:
         st.markdown(f"**路径：** `output/svg/{svg_path.name}`")
         st.markdown(f"**处理流程：** {item['logic']}")
         st.markdown("</div>", unsafe_allow_html=True)
-
-        auto_index = SVG_DIR / "auto_index.html"
-        if auto_index.exists():
-            st.link_button("打开图集页面", auto_index.as_uri(), use_container_width=True)
 
     with right:
         st.markdown(f'<div class="section-title">{html_lib.escape(item["title"])}</div>', unsafe_allow_html=True)

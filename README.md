@@ -1651,21 +1651,20 @@ class TelemetryEvaluator:
 ### 6.1 环境要求
 
 ```bash
-# Python 3.8+
-python --version  # Python 3.8+
+# Python 3.10+（项目使用了 match-case 等新语法）
+python --version  # Python 3.10+
 
-# 必需依赖
-pip install pandas>=1.3.0
-pip install networkx>=2.6.0
-pip install openpyxl>=3.0.0
-pip install pydantic>=1.8.0
-pip install lxml>=4.6.0
-pip install scipy>=1.7.0
+# 安装全部依赖（推荐）
+pip install -r requirements.txt
 
-# 可选依赖
-pip install xlrd>=2.0.0
-pip install matplotlib>=3.4.0
+# 或手动安装
+pip install pydantic>=2.0 networkx>=3.0 lxml>=4.9 openpyxl>=3.1 jinja2>=3.0 torch>=2.0 torch_geometric>=2.4
 ```
+
+> **torch 安装说明**：默认装 CPU 版（约 700MB）。如果对方机器有 NVIDIA GPU，可改为安装 GPU 版以加速 GAT 训练：
+> ```bash
+> pip install torch --index-url https://download.pytorch.org/whl/cu118
+> ```
 
 ### 6.2 安装步骤
 
@@ -1681,8 +1680,8 @@ python -m venv venv
 # 3. 安装依赖
 pip install -r requirements.txt
 
-# 4. 验证安装
-python -c "import pandas, networkx, openpyxl; print('OK')"
+# 4. 验证安装（全部应该输出 OK）
+py -c "import pydantic, networkx, lxml, openpyxl, jinja2, torch, torch_geometric; print('OK')"
 ```
 
 ### 6.3 运行命令

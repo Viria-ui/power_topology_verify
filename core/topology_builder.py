@@ -500,7 +500,13 @@ class TopologyBuilder:
     def check_electrical_logic(self):
         """对有 PWREAL 的配网设备执行 RULE-E01--E07，并保留结构化结果供评分/Sheet3 导出。
         同时执行 4.1/4.2 主配接口校验并挂载到 abnormal_list。
+
+        【幂等保护】如果已跑过（self.electrical_defects / self.iface_defects 已存在），
+        直接返回缓存，避免 main.py 与 build_full_topology() 重复调用导致日志刷屏。
         """
+        if getattr(self, '_electrical_logic_done', False):
+            logger.debug("[幂等] check_electrical_logic 已执行过，跳过重复运行")
+            return getattr(self, 'electrical_defects', [])
         from core.telemetry_evaluator import TelemetryEvaluator
         evaluator = TelemetryEvaluator.from_pwreal(
             self.yx_real_df,
@@ -633,6 +639,7 @@ class TopologyBuilder:
         self.iface_defects = [a for a in self.dist_topo.abnormal_list
                               if '接口' in getattr(a, 'dimension', '')]
         self.dist_topo.iface_defect_list = self.iface_defects
+        self._electrical_logic_done = True  # 幂等保护标志
         return results
 
     def build_full_topology(self):

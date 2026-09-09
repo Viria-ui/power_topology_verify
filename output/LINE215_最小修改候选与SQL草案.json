@@ -20,196 +20,6 @@
         {
             "repair_id": "FIX_0002",
             "defect_type": "模型有图上无",
-            "target_equip": "TMP00043963",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043963的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043963]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[开关00039](ID:TMP00043963)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0003",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044465",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044465的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044465]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0085](ID:TMP00044465)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0004",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044464",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044464的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044464]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0084](ID:TMP00044464)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0005",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043883",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043883的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043883]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[配变2078](ID:TMP00043883)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0006",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043967",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043967的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043967]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[开关00043](ID:TMP00043967)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0007",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00046371",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00046371的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00046371]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[配变2148](ID:TMP00046371)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0008",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043531",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043531的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043531]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0004](ID:TMP00043531)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0009",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00045920",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00045920的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00045920]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[CT016](ID:TMP00045920)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0010",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044489",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044489的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044489]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0017](ID:TMP00044489)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0011",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00045921",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00045921的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00045921]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[CT017](ID:TMP00045921)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0012",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044468",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044468的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044468]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0088](ID:TMP00044468)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0013",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044493",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044493的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044493]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0021](ID:TMP00044493)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0014",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043529",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043529的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043529]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0002](ID:TMP00043529)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0015",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044492",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044492的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044492]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0020](ID:TMP00044492)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0016",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044483",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044483的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044483]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0011](ID:TMP00044483)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0017",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044606",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044606的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044606]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[PT006](ID:TMP00044606)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0018",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044487",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044487的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044487]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0015](ID:TMP00044487)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0019",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044240",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044240的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044240]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[开关00055](ID:TMP00044240)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0020",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044461",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044461的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044461]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0081](ID:TMP00044461)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0021",
-            "defect_type": "模型有图上无",
             "target_equip": "TMP00044486",
             "action": "ADD_SVG_ELEMENT",
             "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044486的图层图元以及iec:PSR_Ref元数据标注。",
@@ -218,177 +28,17 @@
             "description": "数据库拓扑模型存在设备[地刀0014](ID:TMP00044486)，但SVG图纸未绘制该图元"
         },
         {
-            "repair_id": "FIX_0022",
+            "repair_id": "FIX_0003",
             "defect_type": "模型有图上无",
-            "target_equip": "TMP00045923",
+            "target_equip": "TMP00043963",
             "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00045923的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043963的图层图元以及iec:PSR_Ref元数据标注。",
             "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00045923]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[CT019](ID:TMP00045923)，但SVG图纸未绘制该图元"
+            "impact_summary": "SVG侧补画图元[TMP00043963]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[开关00039](ID:TMP00043963)，但SVG图纸未绘制该图元"
         },
         {
-            "repair_id": "FIX_0023",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043530",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043530的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043530]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0003](ID:TMP00043530)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0024",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044485",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044485的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044485]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0013](ID:TMP00044485)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0025",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044237",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044237的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044237]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[开关00052](ID:TMP00044237)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0026",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043965",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043965的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043965]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[开关00041](ID:TMP00043965)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0027",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044236",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044236的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044236]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[开关00051](ID:TMP00044236)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0028",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044239",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044239的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044239]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[开关00054](ID:TMP00044239)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0029",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044491",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044491的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044491]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0019](ID:TMP00044491)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0030",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044495",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044495的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044495]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0023](ID:TMP00044495)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0031",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043528",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043528的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043528]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0001](ID:TMP00043528)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0032",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043964",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043964的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043964]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[开关00040](ID:TMP00043964)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0033",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044469",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044469的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044469]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0089](ID:TMP00044469)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0034",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00045922",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00045922的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00045922]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[CT018](ID:TMP00045922)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0035",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044598",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044598的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044598]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[母线XX](ID:TMP00044598)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0036",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044466",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044466的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044466]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0086](ID:TMP00044466)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0037",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043884",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043884的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043884]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[配变2079](ID:TMP00043884)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0038",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044463",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044463的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044463]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0083](ID:TMP00044463)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0039",
+            "repair_id": "FIX_0004",
             "defect_type": "模型有图上无",
             "target_equip": "TMP00044467",
             "action": "ADD_SVG_ELEMENT",
@@ -398,27 +48,67 @@
             "description": "数据库拓扑模型存在设备[刀闸0087](ID:TMP00044467)，但SVG图纸未绘制该图元"
         },
         {
-            "repair_id": "FIX_0040",
+            "repair_id": "FIX_0005",
             "defect_type": "模型有图上无",
-            "target_equip": "TMP00044470",
+            "target_equip": "TMP00044606",
             "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044470的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044606的图层图元以及iec:PSR_Ref元数据标注。",
             "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044470]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[刀闸0090](ID:TMP00044470)，但SVG图纸未绘制该图元"
+            "impact_summary": "SVG侧补画图元[TMP00044606]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[PT006](ID:TMP00044606)，但SVG图纸未绘制该图元"
         },
         {
-            "repair_id": "FIX_0041",
+            "repair_id": "FIX_0006",
             "defect_type": "模型有图上无",
-            "target_equip": "TMP00044238",
+            "target_equip": "TMP00043964",
             "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044238的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043964的图层图元以及iec:PSR_Ref元数据标注。",
             "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044238]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[开关00053](ID:TMP00044238)，但SVG图纸未绘制该图元"
+            "impact_summary": "SVG侧补画图元[TMP00043964]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[开关00040](ID:TMP00043964)，但SVG图纸未绘制该图元"
         },
         {
-            "repair_id": "FIX_0042",
+            "repair_id": "FIX_0007",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00043528",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043528的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00043528]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0001](ID:TMP00043528)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0008",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044240",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044240的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044240]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[开关00055](ID:TMP00044240)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0009",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044464",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044464的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044464]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0084](ID:TMP00044464)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0010",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00043884",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043884的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00043884]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[配变2079](ID:TMP00043884)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0011",
             "defect_type": "模型有图上无",
             "target_equip": "TMP00044462",
             "action": "ADD_SVG_ELEMENT",
@@ -428,7 +118,187 @@
             "description": "数据库拓扑模型存在设备[刀闸0082](ID:TMP00044462)，但SVG图纸未绘制该图元"
         },
         {
-            "repair_id": "FIX_0043",
+            "repair_id": "FIX_0012",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044491",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044491的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044491]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0019](ID:TMP00044491)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0013",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00043883",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043883的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00043883]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[配变2078](ID:TMP00043883)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0014",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00043882",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043882的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00043882]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[配变2077](ID:TMP00043882)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0015",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00046371",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00046371的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00046371]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[配变2148](ID:TMP00046371)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0016",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00043530",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043530的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00043530]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0003](ID:TMP00043530)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0017",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044487",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044487的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044487]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0015](ID:TMP00044487)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0018",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044598",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044598的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044598]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[母线XX](ID:TMP00044598)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0019",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044490",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044490的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044490]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0018](ID:TMP00044490)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0020",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044492",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044492的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044492]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0020](ID:TMP00044492)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0021",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00045920",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00045920的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00045920]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[CT016](ID:TMP00045920)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0022",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00043531",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043531的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00043531]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0004](ID:TMP00043531)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0023",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044470",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044470的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044470]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0090](ID:TMP00044470)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0024",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044238",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044238的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044238]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[开关00053](ID:TMP00044238)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0025",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00045921",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00045921的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00045921]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[CT017](ID:TMP00045921)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0026",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044463",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044463的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044463]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0083](ID:TMP00044463)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0027",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044488",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044488的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044488]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0016](ID:TMP00044488)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0028",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044461",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044461的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044461]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0081](ID:TMP00044461)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0029",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044468",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044468的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044468]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0088](ID:TMP00044468)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0030",
             "defect_type": "模型有图上无",
             "target_equip": "TMP00044497",
             "action": "ADD_SVG_ELEMENT",
@@ -436,6 +306,136 @@
             "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
             "impact_summary": "SVG侧补画图元[TMP00044497]，不改动数据库数据",
             "description": "数据库拓扑模型存在设备[地刀0025](ID:TMP00044497)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0031",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044469",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044469的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044469]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0089](ID:TMP00044469)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0032",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044237",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044237的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044237]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[开关00052](ID:TMP00044237)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0033",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044496",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044496的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044496]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0024](ID:TMP00044496)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0034",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044484",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044484的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044484]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0012](ID:TMP00044484)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0035",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044489",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044489的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044489]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0017](ID:TMP00044489)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0036",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044236",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044236的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044236]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[开关00051](ID:TMP00044236)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0037",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044485",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044485的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044485]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0013](ID:TMP00044485)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0038",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044239",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044239的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044239]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[开关00054](ID:TMP00044239)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0039",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00045922",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00045922的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00045922]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[CT018](ID:TMP00045922)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0040",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044483",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044483的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044483]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0011](ID:TMP00044483)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0041",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00043965",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043965的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00043965]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[开关00041](ID:TMP00043965)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0042",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044495",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044495的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044495]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0023](ID:TMP00044495)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0043",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00043529",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043529的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00043529]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0002](ID:TMP00043529)，但SVG图纸未绘制该图元"
         },
         {
             "repair_id": "FIX_0044",
@@ -450,62 +450,62 @@
         {
             "repair_id": "FIX_0045",
             "defect_type": "模型有图上无",
+            "target_equip": "TMP00044493",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044493的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044493]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[地刀0021](ID:TMP00044493)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0046",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044465",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044465的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044465]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0085](ID:TMP00044465)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0047",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00045923",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00045923的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00045923]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[CT019](ID:TMP00045923)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0048",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00044466",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044466的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00044466]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[刀闸0086](ID:TMP00044466)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0049",
+            "defect_type": "模型有图上无",
+            "target_equip": "TMP00043967",
+            "action": "ADD_SVG_ELEMENT",
+            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043967的图层图元以及iec:PSR_Ref元数据标注。",
+            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
+            "impact_summary": "SVG侧补画图元[TMP00043967]，不改动数据库数据",
+            "description": "数据库拓扑模型存在设备[开关00043](ID:TMP00043967)，但SVG图纸未绘制该图元"
+        },
+        {
+            "repair_id": "FIX_0050",
+            "defect_type": "模型有图上无",
             "target_equip": "TMP00044494",
             "action": "ADD_SVG_ELEMENT",
             "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044494的图层图元以及iec:PSR_Ref元数据标注。",
             "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
             "impact_summary": "SVG侧补画图元[TMP00044494]，不改动数据库数据",
             "description": "数据库拓扑模型存在设备[地刀0022](ID:TMP00044494)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0046",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044484",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044484的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044484]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0012](ID:TMP00044484)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0047",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044496",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044496的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044496]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0024](ID:TMP00044496)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0048",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044488",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044488的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044488]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0016](ID:TMP00044488)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0049",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00044490",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00044490的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00044490]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[地刀0018](ID:TMP00044490)，但SVG图纸未绘制该图元"
-        },
-        {
-            "repair_id": "FIX_0050",
-            "defect_type": "模型有图上无",
-            "target_equip": "TMP00043882",
-            "action": "ADD_SVG_ELEMENT",
-            "sql_forward": "-- Q49禁止操作型SQL删除：该缺陷不在数据库层面产生数据写操作。\n-- 请在 SVG 中补画ID=TMP00043882的图层图元以及iec:PSR_Ref元数据标注。",
-            "sql_rollback": "-- 回滚动作：删除SVG中补画的图元与标注。",
-            "impact_summary": "SVG侧补画图元[TMP00043882]，不改动数据库数据",
-            "description": "数据库拓扑模型存在设备[配变2077](ID:TMP00043882)，但SVG图纸未绘制该图元"
         },
         {
             "repair_id": "FIX_0051",
@@ -34220,11 +34220,11 @@
         {
             "repair_id": "FIX_3422",
             "defect_type": "拓扑断点",
-            "target_equip": "TMP00045162",
+            "target_equip": "TMP00045133",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045162）",
+            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045133）",
             "description": "本连通分量包含1508个端子，共890台设备，未连通到任何电源设备"
         },
         {
@@ -34240,31 +34240,31 @@
         {
             "repair_id": "FIX_3424",
             "defect_type": "拓扑断点",
-            "target_equip": "TMP00044201",
+            "target_equip": "TMP00044198",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：拓扑断点（设备=TMP00044201）",
+            "impact_summary": "待人工复核：拓扑断点（设备=TMP00044198）",
             "description": "本连通分量包含44个端子，共28台设备，未连通到任何电源设备"
         },
         {
             "repair_id": "FIX_3425",
             "defect_type": "拓扑断点",
-            "target_equip": "TMP00043746",
+            "target_equip": "TMP00046030",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：拓扑断点（设备=TMP00043746）",
+            "impact_summary": "待人工复核：拓扑断点（设备=TMP00046030）",
             "description": "本连通分量包含16个端子，共11台设备，未连通到任何电源设备"
         },
         {
             "repair_id": "FIX_3426",
             "defect_type": "拓扑断点",
-            "target_equip": "TMP00044462",
+            "target_equip": "TMP00044489",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：拓扑断点（设备=TMP00044462）",
+            "impact_summary": "待人工复核：拓扑断点（设备=TMP00044489）",
             "description": "本连通分量包含34个端子，共20台设备，未连通到任何电源设备"
         },
         {
@@ -34380,21 +34380,21 @@
         {
             "repair_id": "FIX_3438",
             "defect_type": "拓扑断点",
-            "target_equip": "TMP00045094",
+            "target_equip": "TMP00045096",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045094）",
+            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045096）",
             "description": "本连通分量包含14个端子，共7台设备，未连通到任何电源设备"
         },
         {
             "repair_id": "FIX_3439",
             "defect_type": "拓扑断点",
-            "target_equip": "TMP00045101",
+            "target_equip": "TMP00045100",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045101）",
+            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045100）",
             "description": "本连通分量包含10个端子，共5台设备，未连通到任何电源设备"
         },
         {
@@ -34410,31 +34410,31 @@
         {
             "repair_id": "FIX_3441",
             "defect_type": "拓扑断点",
-            "target_equip": "TMP00045106",
+            "target_equip": "TMP00045112",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045106）",
+            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045112）",
             "description": "本连通分量包含14个端子，共7台设备，未连通到任何电源设备"
         },
         {
             "repair_id": "FIX_3442",
             "defect_type": "拓扑断点",
-            "target_equip": "TMP00045113",
+            "target_equip": "TMP00045116",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045113）",
+            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045116）",
             "description": "本连通分量包含8个端子，共4台设备，未连通到任何电源设备"
         },
         {
             "repair_id": "FIX_3443",
             "defect_type": "拓扑断点",
-            "target_equip": "TMP00045118",
+            "target_equip": "TMP00045117",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045118）",
+            "impact_summary": "待人工复核：拓扑断点（设备=TMP00045117）",
             "description": "本连通分量包含4个端子，共2台设备，未连通到任何电源设备"
         },
         {
@@ -34870,12 +34870,12 @@
         {
             "repair_id": "FIX_3487",
             "defect_type": "非计划合环",
-            "target_equip": "TMP00044398",
+            "target_equip": "TMP00044399",
             "action": "REVIEW",
             "sql_forward": "-- 该缺陷需人工复核，无自动修复SQL。",
             "sql_rollback": "-- 无",
-            "impact_summary": "待人工复核：非计划合环（设备=TMP00044398）",
-            "description": "馈线LINE215存在非计划合环：疑似联络开关刀闸0021(TMP00044398)为合位/未知状态运行（Q5/Q24 所有合环均视为非计划合环）"
+            "impact_summary": "待人工复核：非计划合环（设备=TMP00044399）",
+            "description": "馈线LINE215存在非计划合环：疑似联络开关刀闸0022(TMP00044399)为合位/未知状态运行（Q5/Q24 所有合环均视为非计划合环）"
         }
     ]
 }

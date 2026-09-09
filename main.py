@@ -32,6 +32,13 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.append(PROJECT_ROOT)
 
+# Windows GBK 控制台兜底（避免 emoji/特殊字符报错）
+try:
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+except Exception:
+    pass
+
 from config.settings import (
     TEST_SVG_ROOT, OUTPUT_SVG, OUTPUT_JSON, OUTPUT_SQL,
     DATASET_STANDARD_OUTPUT_XLSX
@@ -877,6 +884,16 @@ def main():
     parser.add_argument("--repair", action="store_true", help="将修复候选视为已采纳，重新计算修正后评分")
     parser.add_argument("--hybrid", action="store_true", help="启用混合智能校验（GNN+时空融合），输出增强报告")
     parser.add_argument("--no-beautify", action="store_true", help="跳过 SVG 美化（仅 --line 模式生效）")
+
+    # 兼容 GUI 一键运行：--all 后面紧跟的线路名，自动改写为 --line 参数
+    # 因为 argparse 解析失败时会直接 sys.exit(2)，必须在 parse_args 之前修正 argv
+    # 例：python main.py --all 10kVLINE013  →  等价于 --all --line 10kVLINE013
+    if "--all" in sys.argv and "--line" not in sys.argv:
+        for i, tok in enumerate(sys.argv):
+            if tok == "--all" and i + 1 < len(sys.argv) and not sys.argv[i + 1].startswith("-"):
+                sys.argv.insert(i + 1, "--line")
+                break
+
     args = parser.parse_args()
 
     # 加载数据（必须在所有条件分支之前，避免 Python 将 table_datas 视为局部变量）
@@ -1136,11 +1153,11 @@ def main():
 
     # 【auto_index修复】调用原本的自动出图+auto_index生成脚本（代码不改，仅调用）
     if run_all and not args.no_svg and AUTO_GENERATION_OK:
-        print("\n📑 生成自动出图图集 + auto_index.html...")
+        print("\n📑 生成自动出图 SVG...")
         try:
-            auto_results = run_auto_generation_main()
-            results["auto_index"] = "completed"
-            print("  ✅ auto_index.html 生成完成")
+            auto_results = run_auto_generation_main(skip_index=True)
+            results["auto_index"] = "skipped"
+            print("  ✅ 自动出图 SVG 生成完成")
         except Exception as _e:
             print(f"  ⚠️ auto_index生成失败: {_e}")
             results["auto_index"] = "failed"

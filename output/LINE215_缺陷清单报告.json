@@ -10,196 +10,6 @@
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00043963",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[开关00039](ID:TMP00043963)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043963 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "开关00039",
-        "station_id": "TMP00000214"
-    },
-    {
-        "equip_id": "TMP00044465",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0085](ID:TMP00044465)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044465 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0085",
-        "station_id": "TMP00000214"
-    },
-    {
-        "equip_id": "TMP00044464",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0084](ID:TMP00044464)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044464 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0084",
-        "station_id": "TMP00000214"
-    },
-    {
-        "equip_id": "TMP00043883",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[配变2078](ID:TMP00043883)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043883 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "配变2078",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00043967",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[开关00043](ID:TMP00043967)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043967 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "开关00043",
-        "station_id": "TMP00000214"
-    },
-    {
-        "equip_id": "TMP00046371",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[配变2148](ID:TMP00046371)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00046371 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "配变2148",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00043531",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0004](ID:TMP00043531)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043531 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0004",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00045920",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[CT016](ID:TMP00045920)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00045920 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "CT016",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044489",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0017](ID:TMP00044489)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044489 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0017",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00045921",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[CT017](ID:TMP00045921)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00045921 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "CT017",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044468",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0088](ID:TMP00044468)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044468 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0088",
-        "station_id": "TMP00000213"
-    },
-    {
-        "equip_id": "TMP00044493",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0021](ID:TMP00044493)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044493 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0021",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00043529",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0002](ID:TMP00043529)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043529 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0002",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044492",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0020](ID:TMP00044492)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044492 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0020",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044483",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0011](ID:TMP00044483)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044483 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0011",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044606",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[PT006](ID:TMP00044606)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044606 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "PT006",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044487",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0015](ID:TMP00044487)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044487 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0015",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044240",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[开关00055](ID:TMP00044240)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044240 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "开关00055",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044461",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0081](ID:TMP00044461)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044461 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0081",
-        "station_id": "TMP00000214"
-    },
-    {
         "equip_id": "TMP00044486",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
@@ -210,103 +20,33 @@
         "station_id": "null"
     },
     {
-        "equip_id": "TMP00045923",
+        "equip_id": "TMP00043963",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[CT019](ID:TMP00045923)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00045923 图元",
+        "description": "数据库拓扑模型存在设备[开关00039](ID:TMP00043963)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043963 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "CT019",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00043530",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0003](ID:TMP00043530)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043530 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0003",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044485",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0013](ID:TMP00044485)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044485 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0013",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044237",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[开关00052](ID:TMP00044237)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044237 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "开关00052",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00043965",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[开关00041](ID:TMP00043965)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043965 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "开关00041",
+        "equip_name": "开关00039",
         "station_id": "TMP00000214"
     },
     {
-        "equip_id": "TMP00044236",
+        "equip_id": "TMP00044467",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[开关00051](ID:TMP00044236)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044236 图元",
+        "description": "数据库拓扑模型存在设备[刀闸0087](ID:TMP00044467)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044467 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "开关00051",
-        "station_id": "null"
+        "equip_name": "刀闸0087",
+        "station_id": "TMP00000213"
     },
     {
-        "equip_id": "TMP00044239",
+        "equip_id": "TMP00044606",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[开关00054](ID:TMP00044239)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044239 图元",
+        "description": "数据库拓扑模型存在设备[PT006](ID:TMP00044606)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044606 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "开关00054",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044491",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0019](ID:TMP00044491)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044491 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0019",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044495",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0023](ID:TMP00044495)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044495 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0023",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00043528",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0001](ID:TMP00043528)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043528 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0001",
+        "equip_name": "PT006",
         "station_id": "null"
     },
     {
@@ -320,23 +60,113 @@
         "station_id": "TMP00000214"
     },
     {
-        "equip_id": "TMP00044469",
+        "equip_id": "TMP00043528",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0089](ID:TMP00044469)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044469 图元",
+        "description": "数据库拓扑模型存在设备[刀闸0001](ID:TMP00043528)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043528 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0089",
-        "station_id": "TMP00000213"
+        "equip_name": "刀闸0001",
+        "station_id": "null"
     },
     {
-        "equip_id": "TMP00045922",
+        "equip_id": "TMP00044240",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[CT018](ID:TMP00045922)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00045922 图元",
+        "description": "数据库拓扑模型存在设备[开关00055](ID:TMP00044240)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044240 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "CT018",
+        "equip_name": "开关00055",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044464",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0084](ID:TMP00044464)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044464 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0084",
+        "station_id": "TMP00000214"
+    },
+    {
+        "equip_id": "TMP00043884",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[配变2079](ID:TMP00043884)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043884 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "配变2079",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044462",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0082](ID:TMP00044462)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044462 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0082",
+        "station_id": "TMP00000214"
+    },
+    {
+        "equip_id": "TMP00044491",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[地刀0019](ID:TMP00044491)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044491 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "地刀0019",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00043883",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[配变2078](ID:TMP00043883)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043883 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "配变2078",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00043882",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[配变2077](ID:TMP00043882)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043882 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "配变2077",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00046371",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[配变2148](ID:TMP00046371)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00046371 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "配变2148",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00043530",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0003](ID:TMP00043530)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043530 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0003",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044487",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[地刀0015](ID:TMP00044487)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044487 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "地刀0015",
         "station_id": "null"
     },
     {
@@ -350,44 +180,44 @@
         "station_id": "TMP00000214"
     },
     {
-        "equip_id": "TMP00044466",
+        "equip_id": "TMP00044490",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0086](ID:TMP00044466)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044466 图元",
+        "description": "数据库拓扑模型存在设备[地刀0018](ID:TMP00044490)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044490 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0086",
-        "station_id": "TMP00000213"
-    },
-    {
-        "equip_id": "TMP00043884",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[配变2079](ID:TMP00043884)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043884 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "配变2079",
+        "equip_name": "地刀0018",
         "station_id": "null"
     },
     {
-        "equip_id": "TMP00044463",
+        "equip_id": "TMP00044492",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0083](ID:TMP00044463)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044463 图元",
+        "description": "数据库拓扑模型存在设备[地刀0020](ID:TMP00044492)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044492 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0083",
-        "station_id": "TMP00000214"
+        "equip_name": "地刀0020",
+        "station_id": "null"
     },
     {
-        "equip_id": "TMP00044467",
+        "equip_id": "TMP00045920",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0087](ID:TMP00044467)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044467 图元",
+        "description": "数据库拓扑模型存在设备[CT016](ID:TMP00045920)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00045920 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0087",
-        "station_id": "TMP00000213"
+        "equip_name": "CT016",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00043531",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0004](ID:TMP00043531)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043531 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0004",
+        "station_id": "null"
     },
     {
         "equip_id": "TMP00044470",
@@ -410,14 +240,54 @@
         "station_id": "null"
     },
     {
-        "equip_id": "TMP00044462",
+        "equip_id": "TMP00045921",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[刀闸0082](ID:TMP00044462)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044462 图元",
+        "description": "数据库拓扑模型存在设备[CT017](ID:TMP00045921)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00045921 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "刀闸0082",
+        "equip_name": "CT017",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044463",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0083](ID:TMP00044463)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044463 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0083",
         "station_id": "TMP00000214"
+    },
+    {
+        "equip_id": "TMP00044488",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[地刀0016](ID:TMP00044488)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044488 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "地刀0016",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044461",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0081](ID:TMP00044461)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044461 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0081",
+        "station_id": "TMP00000214"
+    },
+    {
+        "equip_id": "TMP00044468",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0088](ID:TMP00044468)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044468 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0088",
+        "station_id": "TMP00000213"
     },
     {
         "equip_id": "TMP00044497",
@@ -430,33 +300,23 @@
         "station_id": "null"
     },
     {
-        "equip_id": "TMP00043966",
+        "equip_id": "TMP00044469",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[开关00042](ID:TMP00043966)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043966 图元",
+        "description": "数据库拓扑模型存在设备[刀闸0089](ID:TMP00044469)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044469 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "开关00042",
-        "station_id": "TMP00000214"
+        "equip_name": "刀闸0089",
+        "station_id": "TMP00000213"
     },
     {
-        "equip_id": "TMP00044494",
+        "equip_id": "TMP00044237",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0022](ID:TMP00044494)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044494 图元",
+        "description": "数据库拓扑模型存在设备[开关00052](ID:TMP00044237)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044237 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0022",
-        "station_id": "null"
-    },
-    {
-        "equip_id": "TMP00044484",
-        "defect_type": "模型有图上无",
-        "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0012](ID:TMP00044484)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044484 图元",
-        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0012",
+        "equip_name": "开关00052",
         "station_id": "null"
     },
     {
@@ -470,33 +330,173 @@
         "station_id": "null"
     },
     {
-        "equip_id": "TMP00044488",
+        "equip_id": "TMP00044484",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0016](ID:TMP00044488)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044488 图元",
+        "description": "数据库拓扑模型存在设备[地刀0012](ID:TMP00044484)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044484 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0016",
+        "equip_name": "地刀0012",
         "station_id": "null"
     },
     {
-        "equip_id": "TMP00044490",
+        "equip_id": "TMP00044489",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[地刀0018](ID:TMP00044490)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044490 图元",
+        "description": "数据库拓扑模型存在设备[地刀0017](ID:TMP00044489)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044489 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "地刀0018",
+        "equip_name": "地刀0017",
         "station_id": "null"
     },
     {
-        "equip_id": "TMP00043882",
+        "equip_id": "TMP00044236",
         "defect_type": "模型有图上无",
         "rule_code": "R003",
-        "description": "数据库拓扑模型存在设备[配变2077](ID:TMP00043882)，但SVG图纸未绘制该图元",
-        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043882 图元",
+        "description": "数据库拓扑模型存在设备[开关00051](ID:TMP00044236)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044236 图元",
         "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
-        "equip_name": "配变2077",
+        "equip_name": "开关00051",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044485",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[地刀0013](ID:TMP00044485)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044485 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "地刀0013",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044239",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[开关00054](ID:TMP00044239)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044239 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "开关00054",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00045922",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[CT018](ID:TMP00045922)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00045922 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "CT018",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044483",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[地刀0011](ID:TMP00044483)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044483 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "地刀0011",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00043965",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[开关00041](ID:TMP00043965)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043965 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "开关00041",
+        "station_id": "TMP00000214"
+    },
+    {
+        "equip_id": "TMP00044495",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[地刀0023](ID:TMP00044495)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044495 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "地刀0023",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00043529",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0002](ID:TMP00043529)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043529 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0002",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00043966",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[开关00042](ID:TMP00043966)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043966 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "开关00042",
+        "station_id": "TMP00000214"
+    },
+    {
+        "equip_id": "TMP00044493",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[地刀0021](ID:TMP00044493)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044493 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "地刀0021",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044465",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0085](ID:TMP00044465)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044465 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0085",
+        "station_id": "TMP00000214"
+    },
+    {
+        "equip_id": "TMP00045923",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[CT019](ID:TMP00045923)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00045923 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "CT019",
+        "station_id": "null"
+    },
+    {
+        "equip_id": "TMP00044466",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[刀闸0086](ID:TMP00044466)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044466 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "刀闸0086",
+        "station_id": "TMP00000213"
+    },
+    {
+        "equip_id": "TMP00043967",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[开关00043](ID:TMP00043967)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00043967 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "开关00043",
+        "station_id": "TMP00000214"
+    },
+    {
+        "equip_id": "TMP00044494",
+        "defect_type": "模型有图上无",
+        "rule_code": "R003",
+        "description": "数据库拓扑模型存在设备[地刀0022](ID:TMP00044494)，但SVG图纸未绘制该图元",
+        "suggestion": "建议重新补全SVG图纸绘图，增加设备 TMP00044494 图元",
+        "sql_draft": "-- 图纸层面补全，无需调整数据库数据",
+        "equip_name": "地刀0022",
         "station_id": "null"
     },
     {
@@ -30938,12 +30938,12 @@
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00045162",
+        "equip_id": "TMP00045133",
         "defect_type": "拓扑断点",
         "rule_code": "R002",
         "description": "本连通分量包含1508个端子，共890台设备，未连通到任何电源设备",
-        "suggestion": "建议核查设备 TMP00045162 与主网的连接断点",
-        "sql_draft": "-- 拓扑断点，建议核查 TMP00045162 的连接关系",
+        "suggestion": "建议核查设备 TMP00045133 与主网的连接断点",
+        "sql_draft": "-- 拓扑断点，建议核查 TMP00045133 的连接关系",
         "equip_name": "馈线段XX",
         "station_id": "TMP00000198"
     },
@@ -30958,33 +30958,33 @@
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00044201",
+        "equip_id": "TMP00044198",
         "defect_type": "拓扑断点",
         "rule_code": "R002",
         "description": "本连通分量包含44个端子，共28台设备，未连通到任何电源设备",
-        "suggestion": "建议核查设备 TMP00044201 与主网的连接断点",
-        "sql_draft": "-- 拓扑断点，建议核查 TMP00044201 的连接关系",
-        "equip_name": "开关00234",
+        "suggestion": "建议核查设备 TMP00044198 与主网的连接断点",
+        "sql_draft": "-- 拓扑断点，建议核查 TMP00044198 的连接关系",
+        "equip_name": "开关00231",
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00043746",
+        "equip_id": "TMP00046030",
         "defect_type": "拓扑断点",
         "rule_code": "R002",
         "description": "本连通分量包含16个端子，共11台设备，未连通到任何电源设备",
-        "suggestion": "建议核查设备 TMP00043746 与主网的连接断点",
-        "sql_draft": "-- 拓扑断点，建议核查 TMP00043746 的连接关系",
-        "equip_name": "馈线段XX",
+        "suggestion": "建议核查设备 TMP00046030 与主网的连接断点",
+        "sql_draft": "-- 拓扑断点，建议核查 TMP00046030 的连接关系",
+        "equip_name": "开关00263",
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00044462",
+        "equip_id": "TMP00044489",
         "defect_type": "拓扑断点",
         "rule_code": "R002",
         "description": "本连通分量包含34个端子，共20台设备，未连通到任何电源设备",
-        "suggestion": "建议核查设备 TMP00044462 与主网的连接断点",
-        "sql_draft": "-- 拓扑断点，建议核查 TMP00044462 的连接关系",
-        "equip_name": "刀闸0082",
+        "suggestion": "建议核查设备 TMP00044489 与主网的连接断点",
+        "sql_draft": "-- 拓扑断点，建议核查 TMP00044489 的连接关系",
+        "equip_name": "地刀0017",
         "station_id": "TMP00000198"
     },
     {
@@ -31098,22 +31098,22 @@
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00045094",
+        "equip_id": "TMP00045096",
         "defect_type": "拓扑断点",
         "rule_code": "R002",
         "description": "本连通分量包含14个端子，共7台设备，未连通到任何电源设备",
-        "suggestion": "建议核查设备 TMP00045094 与主网的连接断点",
-        "sql_draft": "-- 拓扑断点，建议核查 TMP00045094 的连接关系",
+        "suggestion": "建议核查设备 TMP00045096 与主网的连接断点",
+        "sql_draft": "-- 拓扑断点，建议核查 TMP00045096 的连接关系",
         "equip_name": "馈线段XX",
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00045101",
+        "equip_id": "TMP00045100",
         "defect_type": "拓扑断点",
         "rule_code": "R002",
         "description": "本连通分量包含10个端子，共5台设备，未连通到任何电源设备",
-        "suggestion": "建议核查设备 TMP00045101 与主网的连接断点",
-        "sql_draft": "-- 拓扑断点，建议核查 TMP00045101 的连接关系",
+        "suggestion": "建议核查设备 TMP00045100 与主网的连接断点",
+        "sql_draft": "-- 拓扑断点，建议核查 TMP00045100 的连接关系",
         "equip_name": "馈线段XX",
         "station_id": "TMP00000198"
     },
@@ -31128,32 +31128,32 @@
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00045106",
+        "equip_id": "TMP00045112",
         "defect_type": "拓扑断点",
         "rule_code": "R002",
         "description": "本连通分量包含14个端子，共7台设备，未连通到任何电源设备",
-        "suggestion": "建议核查设备 TMP00045106 与主网的连接断点",
-        "sql_draft": "-- 拓扑断点，建议核查 TMP00045106 的连接关系",
+        "suggestion": "建议核查设备 TMP00045112 与主网的连接断点",
+        "sql_draft": "-- 拓扑断点，建议核查 TMP00045112 的连接关系",
         "equip_name": "馈线段XX",
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00045113",
+        "equip_id": "TMP00045116",
         "defect_type": "拓扑断点",
         "rule_code": "R002",
         "description": "本连通分量包含8个端子，共4台设备，未连通到任何电源设备",
-        "suggestion": "建议核查设备 TMP00045113 与主网的连接断点",
-        "sql_draft": "-- 拓扑断点，建议核查 TMP00045113 的连接关系",
+        "suggestion": "建议核查设备 TMP00045116 与主网的连接断点",
+        "sql_draft": "-- 拓扑断点，建议核查 TMP00045116 的连接关系",
         "equip_name": "馈线段XX",
         "station_id": "TMP00000198"
     },
     {
-        "equip_id": "TMP00045118",
+        "equip_id": "TMP00045117",
         "defect_type": "拓扑断点",
         "rule_code": "R002",
         "description": "本连通分量包含4个端子，共2台设备，未连通到任何电源设备",
-        "suggestion": "建议核查设备 TMP00045118 与主网的连接断点",
-        "sql_draft": "-- 拓扑断点，建议核查 TMP00045118 的连接关系",
+        "suggestion": "建议核查设备 TMP00045117 与主网的连接断点",
+        "sql_draft": "-- 拓扑断点，建议核查 TMP00045117 的连接关系",
         "equip_name": "馈线段XX",
         "station_id": "TMP00000198"
     },
@@ -31588,12 +31588,12 @@
         "dimension": "拓扑完整性"
     },
     {
-        "equip_id": "TMP00044398",
+        "equip_id": "TMP00044399",
         "defect_type": "非计划合环",
-        "description": "馈线LINE215存在非计划合环：疑似联络开关刀闸0021(TMP00044398)为合位/未知状态运行（Q5/Q24 所有合环均视为非计划合环）",
+        "description": "馈线LINE215存在非计划合环：疑似联络开关刀闸0022(TMP00044399)为合位/未知状态运行（Q5/Q24 所有合环均视为非计划合环）",
         "suggestion": "建议现场核查合环开关状态，按规范转为联络运行或停电操作",
         "sql_draft": "-- 非计划合环待确认，需现场核查后操作（不自动修改）",
-        "equip_name": "刀闸0021",
+        "equip_name": "刀闸0022",
         "station_id": "TMP00000198",
         "dimension": "拓扑完整性"
     }

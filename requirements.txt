@@ -1,6 +1,32 @@
-pydantic>=2.7.0
-networkx>=3.3
-pandas>=2.2
-lxml>=5.0
-openpyxl>=3.1.0
-streamlit>=1.36.0
+# Power Topology Verify - Python 依赖清单
+# 本文件列出运行本项目所需的全部 Python 包
+# 安装命令: pip install -r requirements.txt
+#
+# 重要提示:
+#   1. torch 默认安装为 CPU 版(约 700MB)。如果对方机器有 NVIDIA GPU,
+#      可改为安装 GPU 版以加速 GAT 训练:
+#        pip install torch --index-url https://download.pytorch.org/whl/cu118
+#   2. Python 版本要求 >= 3.10 (项目使用了 match-case 等新语法)
+#   3. 全部依赖纯 Python wheel,无原生编译需求
+
+# 核心数据建模
+pydantic>=2.0,<3.0
+
+# 图论基础
+networkx>=3.0
+
+# XML/SVG 解析
+lxml>=4.9
+
+# Excel 报告生成
+openpyxl>=3.1
+
+# HTML/报告模板渲染
+jinja2>=3.0
+
+# 深度学习 (混合智能校验-GAT)
+# CPU 版约 700MB,推荐。如果对方机器没有 GPU,直接装这个即可
+torch>=2.0
+
+# PyTorch Geometric (GNN 库,被 hybrid_checker 使用)
+torch_geometric>=2.4

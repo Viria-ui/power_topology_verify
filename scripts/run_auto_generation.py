@@ -1,9 +1,10 @@
 r"""
-run_auto_generation.py - P2 统一驱动脚本：自动出图 4类5张 + Validator校验 + auto_index.html
+run_auto_generation.py - P2 统一驱动脚本：自动出图 4类5张 SVG + Validator校验
 
 执行：
-    cd c:\Users\1\Desktop\power_topology_verify
-    python scripts/run_auto_generation.py
+    cd 项目根目录
+    python scripts/run_auto_generation.py           # 生成 SVG，不生成 auto_index.html
+    python scripts/run_auto_generation.py --index    # 额外生成 auto_index.html 图集（默认关闭）
 """
 from __future__ import annotations
 
@@ -193,7 +194,8 @@ function showTab(id, btn) {{
     return AUTO_INDEX_PATH
 
 
-def main():
+def main(skip_index: bool = True):
+    """生成 5 类 SVG 图纸（可选生成 auto_index.html 图集，默认跳过）。"""
     t0 = time.time()
     print("=" * 64)
     print("  P2 自动出图交付开始")
@@ -366,14 +368,20 @@ def main():
         })
         results.append(r)
 
-    # 5. 渲染 auto_index.html
-    print("\n[5/6] 渲染 auto_index.html ...")
-    idx_path = _render_auto_index(results)
-    print(f"  -> {idx_path}")
+    # 5. 渲染 auto_index.html（可选跳过）
+    if skip_index:
+        print("\n[5/6] 跳过 auto_index.html 生成（已关闭图集功能）")
+        idx_path = None
+    else:
+        print("\n[5/6] 渲染 auto_index.html ...")
+        idx_path = _render_auto_index(results)
+        print(f"  -> {idx_path}")
 
     # 6. 最终汇总
     print("\n[6/6] 最终文件检查 ...")
-    all_paths = [r["svg"] for r in results] + [idx_path]
+    all_paths = [r["svg"] for r in results]
+    if idx_path:
+        all_paths.append(idx_path)
     ok_cnt = 0
     for p in all_paths:
         existed = os.path.exists(p)
@@ -389,7 +397,8 @@ def main():
     print(f"  5 个 SVG 路径：")
     for r in results:
         print(f"    - {r['svg']}")
-    print(f"  auto_index.html: {idx_path}")
+    if idx_path:
+        print(f"  auto_index.html: {idx_path}")
     print("=" * 64)
     return results
 

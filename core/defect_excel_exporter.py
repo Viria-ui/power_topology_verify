@@ -354,7 +354,10 @@ def export_report_all_in_one(
         analyze_tie_switches, analyze_unplanned_loops, analyze_breakpoints,
     )
     from core.score_engine import ScoreAndConfidenceEngine
-    from tests.compare import resolve_feeder_id, resolve_start_st_id
+    # 【依赖收敛】原从 tests.compare 导入的 resolve_feeder_id / resolve_start_st_id
+    # 是开发脚本里的临时复制品，已并入 main.py 的同名实现（生产正式版本）。
+    # 删除 tests.compare 后统一从 main 引入，避免 core → tests 的反向依赖。
+    from main import resolve_feeder_id, resolve_start_st_id
     from data_io.svg_reader import SvgParser, SvgDocument
 
     # ---- 1. 路径参数兜底 ----
