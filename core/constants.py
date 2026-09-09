@@ -184,6 +184,9 @@ R002 = "R002"
 R003 = "R003"
 
 # -------- 模型质量评分权重与单项扣分上限 --------
+# 【Q44修复】对齐任务书初赛评分5维度：任务完成度/运行效率/问题完整性/修复合理性/图形美观性
+# 现 SCORE_WEIGHTS 聚焦"数据质量问题"，新增 RUN_EFFICIENCY_WEIGHT / BEAUTY_QUALITY_WEIGHT
+# 用于综合得分展示（不影响数据缺陷扣分），由 main.py 汇总到最终评分。
 SCORE_WEIGHTS = {
     "拓扑完整性": 5,
     "图模一致性": 3,
@@ -195,6 +198,20 @@ SCORE_CAPS = {
     "图模一致性": 25,
     "电气逻辑": 20,
     "接口规范性": 25,
+}
+# 【Q44】运行效率阈值（按馈线数计）：<10秒满分，每多10秒扣5分，封顶10分
+RUN_EFFICIENCY_THRESHOLDS = {
+    "perfect_seconds": 10,    # ≤10秒 满分
+    "per_extra_10s": 5,       # 每多10秒扣5分
+    "cap_deduction": 10,      # 扣分上限10分
+}
+# 【Q44】图形美观性：基于 svg_beautifier 输出评分（100=原始，>100=美化后质量）
+# 美化后应满足 viewBox 规范/正交布线/无重叠/元数据保留
+BEAUTY_QUALITY_WEIGHTS = {
+    "viewbox_ok": 25,         # viewBox 完整且不超界
+    "no_overlap": 25,         # 设备 bbox 无大面积重叠
+    "orthogonal_routing": 25, # 正交布线
+    "metadata_preserved": 25, # 元数据 PSR_Ref/GLink_Ref 完整保留
 }
 
 # -------- 遥信状态文本映射，POINT字段码值 --------

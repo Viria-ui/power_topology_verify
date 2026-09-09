@@ -675,13 +675,46 @@ def run_compare_for_line(
             if c.get("sql_forward") and "待确认" not in str(c.get("sql_forward")))
         / max(len(repair_candidates), 1), 3
     )
+    # 【Q44修复】使用综合评分（数据质量+运行效率+图形美观性，5维度对齐任务书）
+    import time as _time
+    _t_start = _time.monotonic() if '_topo_t0' not in globals() else _topo_t0
     score_summary = score_engine.evaluate_quality_score(
         defects_report, len(dist_topo.device_map),
         repaired_defect_ids=repaired_equip_ids
     )
+    _elapsed = _time.monotonic() - _t_start
+    # 尝试加载 SVG 美化质量报告（若存在）
+    _beauty_report = {}
+    _beauty_path = os.path.join(output_dir, "reports", f"{line_name}_美化质量对比报告.json")
+    if not os.path.isfile(_beauty_path):
+        _beauty_path = os.path.join(output_dir, "json", f"{line_name}_beautify_quality.json")
+    if os.path.isfile(_beauty_path):
+        try:
+            with open(_beauty_path, "r", encoding="utf-8") as _bf:
+                _beauty_report = json.load(_bf)
+        except Exception:
+            _beauty_report = {}
+    comprehensive_summary = score_engine.evaluate_comprehensive_score(
+        defects_report, len(dist_topo.device_map),
+        elapsed_seconds=_elapsed,
+        svg_quality_report=_beauty_report or None,
+        repaired_defect_ids=repaired_equip_ids,
+    )
+    # 把综合分合并到主 dict，向后兼容
+    score_summary.update({
+        "run_efficiency": comprehensive_summary["run_efficiency"],
+        "beauty_quality": comprehensive_summary["beauty_quality"],
+        "comprehensive_score": comprehensive_summary["comprehensive_score"],
+        "comprehensive_grade": comprehensive_summary["comprehensive_grade"],
+    })
     print(f"  • 修正前评分: {score_summary['score_before']} 分")
     print(f"  • 预计修正后评分: {score_summary['score_after']} 分")
     print(f"  • 缺陷总数: {score_summary['defect_count']} 处")
+    print(f"  • 【Q44】运行效率分: {score_summary['run_efficiency']['score']} 分"
+          f"（耗时{score_summary['run_efficiency']['elapsed_seconds']}s）")
+    print(f"  • 【Q44】图形美观性分: {score_summary['beauty_quality']['score']} 分")
+    print(f"  • 【Q44】综合评分: {score_summary['comprehensive_score']} 分"
+          f"（{score_summary['comprehensive_grade']}）")
 
     score_output_path = os.path.join(output_dir, f"{line_name}_质量评分与可解释置信度报告.json")
     with open(score_output_path, "w", encoding="utf-8") as f:

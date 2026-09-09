@@ -8,7 +8,10 @@ try:
 except (ImportError, NameError):
     TelemetryEvaluator = None  # type: ignore
     _TELE_OK = False
-from core.constants import SCORE_WEIGHTS, SCORE_CAPS
+from core.constants import (
+    SCORE_WEIGHTS, SCORE_CAPS,
+    RUN_EFFICIENCY_THRESHOLDS, BEAUTY_QUALITY_WEIGHTS,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -171,3 +174,99 @@ class ScoreAndConfidenceEngine:
             "defect_rate_penalty": 0.0,  # 【S7修复】规范公式无缺陷率惩罚
             "processed_defects": processed_defects,
         }
+
+    # ──────────────────────────────────────────────────────────────────
+    # 【Q44修复】运行效率 + 图形美观性评分（对齐任务书初赛5维度）
+    #   - 数据质量分：score_before / score_after（已有）
+    #   - 运行效率分：基于端到端执行时长（满分100，>10秒开始扣分）
+    #   - 图形美观性分：基于美化后 SVG 4 子项评分（满分100）
+    # ──────────────────────────────────────────────────────────────────
+    @staticmethod
+    def calc_run_efficiency(elapsed_seconds: float) -> dict:
+        """【Q44】运行效率评分：≤10s 满分100，每多10s扣5分，封顶扣10分。"""
+        th = RUN_EFFICIENCY_THRESHOLDS
+        if elapsed_seconds <= th["perfect_seconds"]:
+            deduction = 0.0
+        else:
+            extra_10s = (elapsed_seconds - th["perfect_seconds"]) / 10.0
+            deduction = min(extra_10s * th["per_extra_10s"], th["cap_deduction"])
+        score = round(max(100.0 - deduction, 0.0), 1)
+        return {
+            "elapsed_seconds": round(elapsed_seconds, 2),
+            "score": score,
+            "deduction": round(deduction, 2),
+            "grade": "优" if score >= 95 else "良" if score >= 85 else "中" if score >= 70 else "差",
+        }
+
+    @staticmethod
+    def calc_beauty_quality(svg_quality_report: dict | None) -> dict:
+        """【Q44】图形美观性评分：4 子项各25分，满分100。"""
+        weights = BEAUTY_QUALITY_WEIGHTS
+        sub = {
+            "viewbox_ok": 0.0,
+            "no_overlap": 0.0,
+            "orthogonal_routing": 0.0,
+            "metadata_preserved": 0.0,
+        }
+        if svg_quality_report:
+            # 子项1：viewBox 完整且不超界
+            vb = svg_quality_report.get("viewbox_ok") or svg_quality_report.get("viewbox")
+            if vb is not False and vb != [0, 0, 0, 0]:
+                sub["viewbox_ok"] = weights["viewbox_ok"]
+            # 子项2：无大面积重叠
+            if not svg_quality_report.get("overlap_found", False):
+                sub["no_overlap"] = weights["no_overlap"]
+            # 子项3：正交布线（routing_score > 0.8 即合格）
+            routing = svg_quality_report.get("routing_score", 1.0)
+            if routing >= 0.8:
+                sub["orthogonal_routing"] = weights["orthogonal_routing"]
+            elif routing >= 0.5:
+                sub["orthogonal_routing"] = weights["orthogonal_routing"] * routing
+            # 子项4：元数据保留
+            meta = svg_quality_report.get("metadata_preserved", True)
+            if meta:
+                sub["metadata_preserved"] = weights["metadata_preserved"]
+        else:
+            # 无 SVG 时按 75% 兜底（不阻断流程）
+            sub = {k: v * 0.75 for k, v in sub.items()}
+
+        total = sum(sub.values())
+        return {
+            "sub_scores": {k: round(v, 2) for k, v in sub.items()},
+            "score": round(total, 1),
+            "grade": "优" if total >= 90 else "良" if total >= 75 else "中" if total >= 60 else "差",
+        }
+
+    def evaluate_comprehensive_score(
+        self,
+        defects_report: list[dict],
+        total_equip_count: int,
+        elapsed_seconds: float = 0.0,
+        svg_quality_report: dict | None = None,
+        repaired_defect_ids: list | None = None,
+    ) -> dict:
+        """【Q44】综合评分：数据质量40% + 运行效率30% + 图形美观性30%。
+        （任务书初赛5维度：完成度/效率/完整性/修复合理性/美观性 — 前4者折算到数据质量）
+        """
+        base = self.evaluate_quality_score(
+            defects_report, total_equip_count, repaired_defect_ids=repaired_defect_ids
+        )
+        eff = self.calc_run_efficiency(elapsed_seconds)
+        beauty = self.calc_beauty_quality(svg_quality_report)
+        comprehensive = round(
+            base["score_after"] * 0.40
+            + eff["score"] * 0.30
+            + beauty["score"] * 0.30,
+            1,
+        )
+        result = dict(base)
+        result["run_efficiency"] = eff
+        result["beauty_quality"] = beauty
+        result["comprehensive_score"] = comprehensive
+        result["comprehensive_grade"] = (
+            "优" if comprehensive >= 90
+            else "良" if comprehensive >= 75
+            else "中" if comprehensive >= 60
+            else "差"
+        )
+        return result

@@ -529,17 +529,23 @@ def analyze_breakpoints(
         brk_list = dist_topo.find_breakpoint_between(a, b)
         for brk in brk_list:
             brk_count += 1
-            _append({
+            brk_equip = brk.get("equip_id", a)
+            brk_type = brk.get("breakpoint_type", "") or "[P2]图形物理连通、拓扑逻辑断开"
+            # 【Q43①】分位开关本体填本侧，对侧留空（不填两端设备）
+            is_open_switch = "[P1]" in brk_type or brk_type.endswith("分位开关")
+            row = {
                 "起点设备id": a,
                 "终点设备id": b,
-                "断点类型": brk.get("breakpoint_type", "") or "[P2]图形物理连通、拓扑逻辑断开",
-                "本侧疑似断点设备id": brk.get("equip_id", a),
-                "本侧疑似断点设备名称": _device_name(device_graph, brk.get("equip_id", a)),
-                "对侧疑似断点设备id": b,
-                "对侧疑似断点设备名称": _device_name(device_graph, b),
+                "断点类型": brk_type,
+                "本侧疑似断点设备id": brk_equip,
+                "本侧疑似断点设备名称": _device_name(device_graph, brk_equip),
+                # Q43①：分位开关本身填本侧，对侧留空
+                "对侧疑似断点设备id": "" if is_open_switch else b,
+                "对侧疑似断点设备名称": "" if is_open_switch else _device_name(device_graph, b),
                 "修正方案": "请根据断点类型[P1-P7]人工核查并修复",
                 "修正sql": "-- 待人工确认断点后执行修复 SQL",
-            })
+            }
+            _append(row)
     if brk_count:
         logger.debug("P1-P7 引擎产生 %d 条断点候选", brk_count)
 

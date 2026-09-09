@@ -49,7 +49,7 @@ class MeasurePreprocessor:
         df = self.df_pwreal.copy()
         if df.empty:
             return df
-        # 去重
+        # 去重：Q8 口径，按 TRAN_ID+DATA_DATE 联合去重，保留**最后一条**（时间最新）
         df = df.drop_duplicates(subset=["TRAN_ID", "DATA_DATE"], keep="last")
         return df
 

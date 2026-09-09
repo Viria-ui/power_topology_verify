@@ -1018,6 +1018,27 @@ class TopoDbValidator:
                             is_planned_loop=False
                         )
                         self.topo.tie_loop_list.append(item)
+                    # ★【Q24+Q38修复】无遥信默认合位 → 等同合位，全部视为非计划合环
+                    elif st_source == "default_rule" and sw_status not in {"OPEN", "分位", "0"}:
+                        item = TieLoopItem(
+                            trace_uuid=trace_uuid,
+                            equip_id=tie_equip_id,
+                            point_id=",".join(one_cycle[:5]),
+                            line_id=None,
+                            result_type="非计划合环",
+                            rule_code=R_LOOP_001,
+                            rule_desc="无遥信默认合位，视为非计划合环（Q24+Q38口径）",
+                            detail=f"环路跨馈线:{list(feeder_set)}，环内存在联络开关候选：{tie_equip_id}[{tie_name}]，"
+                                   f"开关状态[{sw_status}]来源:{st_source}（Q38: 无遥信默认合位）"
+                                   f"，按Q24口径该合环全部视为非计划合环",
+                            switch_status="CLOSE",
+                            risk_level="高",
+                            review_required=False,
+                            left_feeder=next(iter(feeder_set)) if len(feeder_set)>=1 else None,
+                            right_feeder=list(feeder_set)[1] if len(feeder_set)>=2 else None,
+                            is_planned_loop=False
+                        )
+                        self.topo.tie_loop_list.append(item)
                     else:
                         item = TieLoopItem(
                             trace_uuid=trace_uuid,
@@ -1026,13 +1047,12 @@ class TopoDbValidator:
                             line_id=None,
                             result_type="疑似联络环(需复核)",
                             rule_code=R_TIE_001,
-                            rule_desc="检测到计划联络环，开关状态未知/默认推演，需要复核实际遥信状态",
+                            rule_desc="检测到计划联络环，开关状态未知/遥信品质无效，需要复核实际遥信状态",
                             detail=f"环路跨馈线:{list(feeder_set)}，环内存在联络开关候选：{tie_equip_id}[{tie_name}]，"
-                                   f"开关状态[{sw_status}]来源:{st_source}"
-                                   f"{'【提示】本结果由赛题默认规则推演，建议人工复核' if st_source == 'default_rule' else ''}",
+                                   f"开关状态[{sw_status}]来源:{st_source}，遥信品质无效或状态未知，建议人工复核",
                             switch_status=sw_status,
                             risk_level="中",
-                            review_required=(st_source == "default_rule"),
+                            review_required=True,
                             left_feeder=next(iter(feeder_set)) if len(feeder_set)>=1 else None,
                             right_feeder=list(feeder_set)[1] if len(feeder_set)>=2 else None,
                             is_planned_loop=True
