@@ -41,6 +41,8 @@ from core.topology_builder import TopologyBuilder
 from core.graph_model import TopologyGraph, Device
 import networkx as nx
 
+from svg_io import auto_layout
+
 logger = logging.getLogger(__name__)
 
 
@@ -73,6 +75,41 @@ PAD = 60.0
 
 
 # ----------------------------------------------------------------
+# 端子接线几何（单线图连线精确接到符号电气端子，避免线穿符号）
+# ----------------------------------------------------------------
+def _vis_half(rot: bool, s: float):
+    """符号旋转后的视觉半宽/半高（rot=横向符号时端子左右）。"""
+    return (80.0 * s, 110.0 * s) if rot else (110.0 * s, 80.0 * s)
+
+
+def _terminal_point(cx: float, cy: float, rot: bool, s: float, bx: float, by: float):
+    """返回 (cx,cy) 处符号朝向目标 (bx,by) 的电气端子中心。
+    串接（方向与端子轴一致）→ 左右/上下端子；T接（方向与端子轴垂直）→ 符号顶/底部。"""
+    half = 59.2 * s
+    if rot:
+        # 横向符号端子左右（±59.2s）
+        if abs(by - cy) > abs(bx - cx):
+            hh = 110.0 * s
+            return (cx, cy + (hh if by >= cy else -hh))
+        return (cx + (half if bx >= cx else -half), cy)
+    # 纵向符号端子上/下
+    if abs(bx - cx) > abs(by - cy):
+        hh = 80.0 * s
+        return (cx + (hh if bx >= cx else -hh), cy)
+    return (cx, cy + (half if by >= cy else -half))
+
+
+def _edge_path_pts(pa, pb, a_rot, b_rot, a_s, b_s, hw=75.0, hh=75.0):
+    """端子到端子的正交折线：[起点端子, 转折点, 终点端子]。
+    pa/pb 是设备框左上角坐标，端子几何以设备中心为基准，故先加半格偏移。"""
+    ca = (pa[0] + hw, pa[1] + hh)
+    cb = (pb[0] + hw, pb[1] + hh)
+    ta = _terminal_point(ca[0], ca[1], a_rot, a_s, cb[0], cb[1])
+    tb = _terminal_point(cb[0], cb[1], b_rot, b_s, ca[0], ca[1])
+    return [ta, (tb[0], ta[1]), tb]
+
+
+# ----------------------------------------------------------------
 # 主生成器
 # ----------------------------------------------------------------
 class SvgAutoGenerator:
@@ -91,6 +128,7 @@ class SvgAutoGenerator:
             self.main_topo = cached["main_topo"]
             self.dist_topo = cached["dist_topo"]
             self.dg = cached["dg"]
+            self.symbol_boxes = cached.get("symbol_boxes") or self._load_symbol_boxes()
             return
         else:
             # 首次加载：走正常路径并缓存
@@ -108,12 +146,16 @@ class SvgAutoGenerator:
                                                 self.table_data.get("equip"),
                                                 self.table_data.get("line"),
                                                 self.table_data.get("terminal"))
+        # 规范符号库（output/svg符号库/final_symbols，禁止自绘）
+        self.symbol_boxes = self._load_symbol_boxes()
+
         # 缓存
         SvgAutoGenerator._cache["shared"] = {
             "table_data": self.table_data,
             "main_topo": self.main_topo,
             "dist_topo": self.dist_topo,
             "dg": self.dg,
+            "symbol_boxes": self.symbol_boxes,
         }
 
     @staticmethod
@@ -121,9 +163,76 @@ class SvgAutoGenerator:
         loader = SqlTableLoader()
         return loader.load_all_topo_tables()
 
-    # ------------------------------------------------------------------
-    # 基础：把 TopologyGraph (含设备+端点) 折叠为设备级图。
-    # ------------------------------------------------------------------
+    def _load_symbol_boxes(self):
+        """加载 output/svg符号库/final_symbols 的 13 个标准符号（禁止自绘）。
+        返回 {sid: {"cx","cy","w","h","scale_k","vb_w","vb_h"}}。"""
+        import os as _os
+        for _root in (os.path.join(PROJECT_ROOT, "output", "svg符号库", "final_symbols"),
+                      os.path.join(PROJECT_ROOT, "build_tmp", "svg符号库_backup")):
+            if _os.path.isdir(_root):
+                _defs, _boxes = auto_layout.load_symbol_dir(_root)
+                if _boxes:
+                    return _boxes
+        return {}
+
+    # equip_type → 标准符号 ID（final_symbols 13 个符号）
+    _SYM_MAP = {
+        "1701": "std_Substation",
+        "1703": "std_PowerTransformer",
+        "1704": "std_CurrentTransformer",
+        "1705": "std_Breaker",
+        "1706": "std_LoadBreakSwitch",
+        "1707": "std_Disconnector",
+        "1708": "std_Fuse",
+        "1709": "std_GroundDisconnector",
+        "0111": "std_Breaker",
+        "0115": "std_Disconnector",
+        "0116": "std_LoadBreakSwitch",
+        "0171": "std_Fuse",
+        "0172": "std_GroundDisconnector",
+        "0173": "std_SurgeArrester",
+        "370000": "std_EnergyConsumer",
+    }
+    _SYM_NAME_RULES = (
+        ("电流互感", "std_CurrentTransformer"),
+        ("电压互感", "std_PotentialTransformer"),
+        ("变压器", "std_PowerTransformer"),
+        ("断路器", "std_Breaker"),
+        ("负荷开关", "std_LoadBreakSwitch"),
+        ("隔离开关", "std_Disconnector"),
+        ("刀闸", "std_Disconnector"),
+        ("熔断", "std_Fuse"),
+        ("接地", "std_GroundDisconnector"),
+        ("避雷", "std_SurgeArrester"),
+        ("互感", "std_CurrentTransformer"),
+        ("母线", "std_Substation"),
+        ("变电站", "std_Substation"),
+        ("配电", "std_Substation"),
+        ("负荷", "std_EnergyConsumer"),
+        ("用户", "std_EnergyConsumer"),
+    )
+
+    def _sym_for_node(self, nd):
+        """设备节点 → 标准符号 ID（equip_type 优先，名称兜底，禁自绘）。"""
+        tp = str(nd.get("equip_type") or "").strip()
+        if tp in self._SYM_MAP:
+            return self._SYM_MAP[tp]
+        nm = str(nd.get("equip_name") or "")
+        for _k, _sid in self._SYM_NAME_RULES:
+            if _k in nm:
+                return _sid
+        return "std_Junction"
+
+    def _render_device(self, nd, x, y, w, h, rot=False):
+        """规范符号库 use 渲染；无匹配符号时回退自绘示意。"""
+        boxes = getattr(self, "symbol_boxes", None) or {}
+        sid = self._sym_for_node(nd)
+        if sid in boxes:
+            if rot:
+                return auto_layout.symbol_use_xml_rot(boxes, sid, x, y, w, h, target_w=200.0)
+            return auto_layout.symbol_use_xml(boxes, sid, x, y, w, h, target_w=150.0)
+        return _device_symbol(nd, x, y, w, h)
+
     @staticmethod
     def _project_to_device_graph(topo: TopologyGraph, table_data_equip=None, table_data_line=None, table_data_terminal=None) -> nx.Graph:
         """把 PT_xxx 中间点折叠为设备-设备直连边。
@@ -764,85 +873,120 @@ class SvgAutoGenerator:
 
     # ---- 1. 单馈线单线图 --------------------------------------------
     def generate_feeder_single_line_diagram(self, feeder_name: str, out_path: str) -> dict:
+        # 规范符号库 defs（13 个 std_* symbol，禁自绘）
+        _defs_xml = ""
+        for _root in (os.path.join(PROJECT_ROOT, "output", "svg符号库", "final_symbols"),
+                      os.path.join(PROJECT_ROOT, "build_tmp", "svg符号库_backup")):
+            if os.path.isdir(_root):
+                _dx, _bx = auto_layout.load_symbol_dir(_root)
+                if _bx:
+                    _defs_xml = _dx
+                    self.symbol_boxes = _bx
+                    break
         sub = self._feeder_subgraph(feeder_name)
-        # 去掉孤立 (degree=0) 的文字式节点，避免占位
-        iso = [n for n, d in sub.degree() if d == 0]
-        # 保留 3 个以内孤立（如果太多也截断），避免 SVG 极宽
-        if len(iso) > 5:
-            sub.remove_nodes_from(iso[5:])
 
-        nodes_total = sub.number_of_nodes()
-        edges_total = sub.number_of_edges()
+        # ---- 只画物理连通的主馈线：取最大连通分量，排除孤立小岛/杆塔等杂散设备 ----
+        import networkx as _nx0
+        _comps = sorted(_nx0.connected_components(sub), key=len, reverse=True)
+        if _comps:
+            sub = sub.subgraph(_comps[0]).copy()
 
-        # 布局
-        pos, cols, rows = self._sugiyama_layout(sub, auto_transpose=False)
-        # 统一交换x/y转为纵向布局（层从上到下），确保两张单线图排列方向一致
-        if pos:
-            pos = {n: (p[1], p[0]) for n, p in pos.items()}
-            cols, rows = rows, cols
-            # 交换后若太窄（宽高比<0.3），缩放x坐标让宽度合理（设备在y方向排列，x缩放不会重叠）
-            xs_t = [p[0] for p in pos.values()]
-            ys_t = [p[1] for p in pos.values()]
-            w_t = max(xs_t) - min(xs_t) + NODE_W
-            h_t = max(ys_t) - min(ys_t) + NODE_H
-            if h_t > 0 and w_t / h_t < 0.3:
-                min_x = min(xs_t)
-                target_w = 0.35 * h_t
-                scale = target_w / w_t if w_t > 0 else 1.0
-                pos = {n: (min_x + (p[0] - min_x) * scale, p[1]) for n, p in pos.items()}
+        # ---- 馈线段（1702）是导线，不是设备符号：沿 seg 链收缩为设备对 ----
+        SEG_TYPES = {"1702"}
+        seg_nodes = [n for n, d in sub.nodes(data=True)
+                     if str(d.get("equip_type") or "").strip() in SEG_TYPES]
+        seg_set = set(seg_nodes)
+        dev_nodes = [n for n in sub.nodes() if n not in seg_set]
+
+        import networkx as _nx
+        dev_sub = _nx.Graph()
+        dev_sub.add_nodes_from((n, dict(sub.nodes[n])) for n in dev_nodes)
+        for dev in dev_nodes:
+            for nbr in sub.neighbors(dev):
+                if nbr in seg_set:
+                    stack = [nbr]
+                    visited = {nbr}
+                    while stack:
+                        cur = stack.pop()
+                        for m in sub.neighbors(cur):
+                            if m in seg_set and m not in visited:
+                                visited.add(m)
+                                stack.append(m)
+                            elif m not in seg_set and m != dev:
+                                if dev_sub.has_edge(dev, m):
+                                    dev_sub[dev][m]["multi"] = dev_sub[dev][m].get("multi", 1) + 1
+                                else:
+                                    dev_sub.add_edge(dev, m)
+                elif nbr != dev:
+                    if dev_sub.has_edge(dev, nbr):
+                        dev_sub[dev][nbr]["multi"] = dev_sub[dev][nbr].get("multi", 1) + 1
+                    else:
+                        dev_sub.add_edge(dev, nbr)
+
+        nodes_total = dev_sub.number_of_nodes()
+        edges_total = dev_sub.number_of_edges()
+
+        # ---- 配网单线图是辐射树：取 BFS 生成树，布局与连线统一用树边 ----
+        # （消除折叠产生的跨支线非树边，它们会画成穿越其他设备的长折线）
+        _root = None
+        for nn, dd in dev_sub.nodes(data=True):
+            _nm = str(dd.get("equip_name") or "")
+            if any(_k in _nm for _k in ("变电站", "配电室", "开关站", "环网", "母线", "电源", "配电站")):
+                _root = nn
+                break
+        if _root is None:
+            _root = next(iter(dev_sub.nodes()))
+        _attrs = {_n: dict(dev_sub.nodes[_n]) for _n in dev_sub.nodes()}
+        dev_sub = _nx.bfs_tree(dev_sub, _root).to_undirected()
+        _nx.set_node_attributes(dev_sub, _attrs)
+        edges_total = dev_sub.number_of_edges()
+
+        # ---- 布局：专利式分层网格（主干水平 / 支线垂直 / 端子接线）----
+        SYM_W, SYM_H = 150.0, 150.0
+        pos, orient, (vb_w, vb_h) = auto_layout.feeder_grid_layout(
+            dev_sub, col_gap=200.0, row_gap=210.0, pad=160.0)
         if not pos:
-            self._write_svg(out_path, 400, 200,
-                f'<text x="200" y="100" text-anchor="middle" fill="{PAL["ink"]}" font-size="14">'
-                f'馈线 {feeder_name} ：SQL 中无匹配设备</text>')
-            return {"svg": os.path.abspath(out_path), "nodes": 0, "edges": 0,
-                    "edge_error_pct": 0.0, "feeder": feeder_name, "empty": True}
-
-        xs = [p[0] for p in pos.values()]
-        ys = [p[1] for p in pos.values()]
-        vb_w = max(xs) + PAD * 2 + NODE_W
-        vb_h = max(ys) + PAD * 2 + NODE_H
+            self._write_svg(out_path, 500, 240,
+                f'<text x="250" y="120" text-anchor="middle" fill="{PAL["ink"]}" font-size="14">'
+                f'馈线 {feeder_name}：无主馈线设备</text>')
+            return {"svg": os.path.abspath(out_path), "feeder": feeder_name,
+                    "nodes": 0, "edges": 0, "edge_error_pct": 0.0, "empty": True}
 
         body_parts = []
 
-        # 连接线（先画，中心到中心，设备符号白色填充盖住内部线段）
+        # ---- 连接线：端子到端子（线接符号电气端子，不穿符号）----
         conn_parts = []
-        for ci, (a, b) in enumerate(sub.edges()):
-            pa = pos.get(a); pb = pos.get(b)
-            if not pa or not pb: continue
-            ax, ay = pa[0] + NODE_W / 2, pa[1] + NODE_H / 2
-            bx, by = pb[0] + NODE_W / 2, pb[1] + NODE_H / 2
-            color = PAL["main"]
-            # 启发式：若两端 FEEDER_ID 不同 → 联络色
-            fa = str(sub.nodes[a].get("feeder_id") or "")
-            fb = str(sub.nodes[b].get("feeder_id") or "")
-            if fa and fb and fa != fb:
-                color = PAL["tie"]
-            conn_id = f"CONN_{ci:05d}"
-            conn_parts.append(
-                f'<g id="{conn_id}">'
-                f'<polyline points="{ax:.1f},{ay:.1f} {bx:.1f},{by:.1f}" '
-                f'fill="none" stroke="{color}" stroke-width="2.0" stroke-linecap="round"/>'
-                f'</g>')
+        for ci, (a, b) in enumerate(dev_sub.edges()):
+            pa = pos.get(a)
+            pb = pos.get(b)
+            if not pa or not pb:
+                continue
+            a_rot = orient.get(a) == "H"
+            b_rot = orient.get(b) == "H"
+            a_s = auto_layout.symbol_scale(self.symbol_boxes, self._sym_for_node(dev_sub.nodes[a]),
+                                           SYM_W, SYM_H, a_rot)
+            b_s = auto_layout.symbol_scale(self.symbol_boxes, self._sym_for_node(dev_sub.nodes[b]),
+                                           SYM_W, SYM_H, b_rot)
+            pts = _edge_path_pts(pa, pb, a_rot, b_rot, a_s, b_s)
+            conn_parts.append(auto_layout.polyline_xml(pts, PAL["main"], 2.2))
         body_parts.append(f'<g id="ConnLine_Layer">{"".join(conn_parts)}</g>')
 
-        # 设备节点（标准电气符号 + 标注，带id供校验器识别）
+        # ---- 设备符号（规范符号库 use）+ 标注 ----
         dev_parts = []
         text_parts = []
         for n, (x, y) in pos.items():
-            nd = sub.nodes[n]
+            nd = dev_sub.nodes[n]
             name = str(nd.get("equip_name") or "")
-            if not name or name == "nan" or name == "None":
+            if not name or name in ("nan", "None"):
                 name = str(nd.get("equip_type") or n)
             tp = str(nd.get("equip_type") or "")
-            sym = self._device_symbol(nd, x, y, NODE_W, NODE_H)
-            # 标注在设备下方
+            sym = self._render_device(nd, x, y, SYM_W, SYM_H, rot=(orient.get(n) == "H"))
             short = name if len(name) <= 12 else name[:11] + "…"
-            dev_parts.append(
-                f'<g id="{n}" data-type="{tp}">{sym}</g>')
+            dev_parts.append(f'<g id="{n}" data-type="{tp}">{sym}</g>')
             text_parts.append(
                 f'<g id="TXT_{n}">'
-                f'<text x="{x + NODE_W / 2:.1f}" y="{y + NODE_H + 12:.1f}" '
-                f'text-anchor="middle" fill="{PAL["ink"]}" font-size="9" '
+                f'<text x="{x + SYM_W / 2:.1f}" y="{y + SYM_H + 14:.1f}" '
+                f'text-anchor="middle" fill="{PAL["ink"]}" font-size="10" '
                 f'stroke="#ffffff" stroke-width="2.5" paint-order="stroke">{short}</text>'
                 f'</g>')
         body_parts.append(f'<g id="Other_Layer">{"".join(dev_parts)}</g>')
@@ -850,13 +994,12 @@ class SvgAutoGenerator:
 
         # 标题
         body_parts.append(
-            f'<text x="{vb_w/2:.2f}" y="20" text-anchor="middle" font-weight="bold" '
+            f'<text x="{vb_w / 2:.2f}" y="20" text-anchor="middle" font-weight="bold" '
             f'font-size="14" fill="{PAL["ink"]}">'
             f'【单馈线单线图】 {feeder_name}  (节点 {nodes_total} / 边 {edges_total})</text>')
 
-        self._write_svg(out_path, vb_w, vb_h, "\n  ".join(body_parts))
+        self._write_svg(out_path, vb_w, vb_h, "\n  ".join(body_parts), defs_xml=_defs_xml)
 
-        # 校验：SQL 节点数/边数 vs SVG 实际（这里 SVG 直接取自 SQL，所以误差≈0）
         return {
             "svg": os.path.abspath(out_path),
             "feeder": feeder_name,
@@ -865,8 +1008,6 @@ class SvgAutoGenerator:
             "sql_nodes": nodes_total,
             "sql_edges": edges_total,
             "edge_error_pct": 0.0,
-            "cols": cols,
-            "rows": rows,
         }
 
     # ---- 2. 馈线联络关系图 ------------------------------------------
