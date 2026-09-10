@@ -429,11 +429,15 @@ class SvgDocument:
         elem.raw_element = copy.deepcopy(shape_elem)
         return elem
 
-    def _parse_device_element(self, g_elem: ET.Element, layer_name: str, parent_matrix: Matrix, parent_metadata: Optional[ET.Element] = None):
+    def _parse_device_element(self, g_elem: ET.Element, layer_name: str, parent_matrix: Matrix,
+                              parent_metadata: Optional[ET.Element] = None,
+                              ancestor_id: Optional[str] = None):
         g_transform = g_elem.get("transform", "")
         combined_matrix = parent_matrix.multiply(_parse_transform_to_matrix(g_transform))
         local_metadata = g_elem.find(f"{{{SVG_NS}}}metadata")
         current_metadata = local_metadata if local_metadata is not None else parent_metadata
+        # 向上取最近一个有 id 的祖先 g，供嵌套 g 内的 use/形状兜底（符号 use 常见 <g id><g><use/></g></g> 结构）
+        gid = g_elem.get("id") or ancestor_id
 
         # 【M3修复】如果<g>有metadata（设备容器），只解析一个形状元素（优先use），避免rect+use重复ID
         shape_children = [c for c in g_elem if _local_tag(c.tag) in ("use", "rect", "polygon", "polyline", "path", "circle", "line")]
@@ -448,7 +452,7 @@ class SvgDocument:
         for child in g_elem:
             tag = _local_tag(child.tag)
             if tag == "g":
-                self._parse_device_element(child, layer_name, combined_matrix, current_metadata)
+                self._parse_device_element(child, layer_name, combined_matrix, current_metadata, gid)
             elif tag in ("use", "rect", "polygon", "polyline", "path", "circle", "line"):
                 # M3修复：跳过不在shape_children中的元素（即跳过背景rect）
                 if local_metadata is not None and len(shape_children) == 1 and child is not shape_children[0]:
@@ -458,7 +462,7 @@ class SvgDocument:
                 elem.element_type = DEVICE_TYPE_MAP.get(layer_name, layer_name)
                 elem.shape_tag = tag
                 elem.shape_attrs = dict(child.attrib)
-                elem.element_id = child.get("id") or g_elem.get("id") or f"AUTO_{layer_name}_{uuid.uuid4().hex[:8]}"
+                elem.element_id = child.get("id") or gid or f"AUTO_{layer_name}_{uuid.uuid4().hex[:8]}"
                 self._apply_shape_to_element(child, elem, layer_name, combined_matrix)
                 if current_metadata is not None: self._parse_metadata(current_metadata, elem)
                 elem.raw_element = copy.deepcopy(child)

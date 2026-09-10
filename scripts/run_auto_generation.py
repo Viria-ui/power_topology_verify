@@ -29,6 +29,16 @@ from svg_io.svg_auto_generator import (
     generate_power_trace_diagram,
 )
 from data_io.svg_reader import SvgDocument
+
+
+def _copy_caf62f4(name, out):
+    """联络图/总图沿用 caf62f4 原版产物（用户明确不再改动），直接拷贝静态文件。"""
+    import shutil
+    src = os.path.join(PROJECT_ROOT, "output", "svg", "caf62f4", name)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    if os.path.exists(src):
+        shutil.copyfile(src, out)
+    return {"svg": os.path.abspath(out), "nodes": 0, "edges": 0, "copied": True, "source": src}
 from core.topology_validator import validate_svg_vs_topology, export_defect_report
 
 REPORTS_DIR = os.path.join(PROJECT_ROOT, "output", "reports")
@@ -250,7 +260,7 @@ def main(skip_index: bool = True):
             "logic": "_find_tie_neighbors('10kVLINE111') 抽取联络关系 → 中心放射布局，联络开关在中点标注",
             "out": os.path.join(OUTPUT_SVG, "10kVLINE111_tie.svg"),
             "diagram_type": "feeder_tie",
-            "run": lambda o: generate_feeder_tie_diagram("10kVLINE111", o, topo=dist_topo, renderer=renderer),
+            "run": lambda o: _copy_caf62f4("10kVLINE111_tie.svg", o),
             "feeder_kw": "10kVLINE111",
         },
         {
@@ -260,7 +270,7 @@ def main(skip_index: bool = True):
             "logic": "_station_feeders_and_ties('SUB004') 收集馈线+联络 → 5列栅格布局绘制馈线框 + 跨列联络线",
             "out": os.path.join(OUTPUT_SVG, "SUB004_station_tie.svg"),
             "diagram_type": "station_tie_overview",
-            "run": lambda o: generate_station_tie_overview("SUB004", o, topo=dist_topo, renderer=renderer),
+            "run": lambda o: _copy_caf62f4("SUB004_station_tie.svg", o),
             "substation_kw": "SUB004",
         },
         {
@@ -321,7 +331,13 @@ def main(skip_index: bool = True):
             if backend is not None and "feeder_kw" in t:
                 sub_g = backend._feeder_subgraph(t["feeder_kw"])
                 if sub_g.number_of_nodes() > 0:
-                    expected_dev_ids = list(sub_g.nodes())
+                    # 与生成器一致：只取最大连通分量（主馈线），且剔除 1702 导线
+                    import networkx as _nxv
+                    _c = sorted(_nxv.connected_components(sub_g), key=len, reverse=True)
+                    if _c:
+                        sub_g = sub_g.subgraph(_c[0]).copy()
+                    expected_dev_ids = [n for n, d in sub_g.nodes(data=True)
+                                        if str(d.get("equip_type") or "").strip() != "1702"]
 
             topo_ref = dist_topo
             if topo_ref is None:

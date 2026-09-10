@@ -4,8 +4,13 @@
     "score_after": 30.0,
     "score_change": -14.8,
     "defects_before": 450,
+<<<<<<< HEAD
     "defects_after": 6097,
     "defects_reduced": -5647,
+=======
+    "defects_after": 6068,
+    "defects_reduced": -5618,
+>>>>>>> d7a7746 (提交美化专项工作区基线：更新美化器与质量报告、清理冗余文件)
     "real_devices_before": 1644,
     "real_devices_after": 1644,
     "real_devices_change": 0,
@@ -15,12 +20,16 @@
     "defect_rate_penalty_before": 5.21,
     "defect_rate_penalty_after": 20.0,
     "components_before": 214,
-    "components_after": 2,
-    "components_change": -212,
+    "components_after": 1,
+    "components_change": -213,
     "type_changes": {
       "标注错位": 30,
       "孤岛设备": 148,
+<<<<<<< HEAD
       "设备重叠": -5825
+=======
+      "设备重叠": -5796
+>>>>>>> d7a7746 (提交美化专项工作区基线：更新美化器与质量报告、清理冗余文件)
     }
   },
   "before": {
@@ -56,21 +65,36 @@
     "real_device_count": 1644,
     "fake_device_count": 0,
     "total_connections": 1725,
+<<<<<<< HEAD
     "total_defects": 6097,
+=======
+    "total_defects": 6068,
+>>>>>>> d7a7746 (提交美化专项工作区基线：更新美化器与质量报告、清理冗余文件)
     "defect_rate_percent": 100.0,
     "defect_rate_penalty": 20.0,
     "quality_score": 30.0,
     "defects_by_type": {
+<<<<<<< HEAD
       "设备重叠": 6097
     },
     "defects_by_severity": {
       "medium": 6097
+=======
+      "设备重叠": 6068
     },
-    "connected_components": 2,
-    "max_component_size": 707,
+    "defects_by_severity": {
+      "medium": 6068
+>>>>>>> d7a7746 (提交美化专项工作区基线：更新美化器与质量报告、清理冗余文件)
+    },
+    "connected_components": 1,
+    "max_component_size": 716,
     "dangling_count": 0,
     "fake_connect_count": 0,
+<<<<<<< HEAD
     "overlap_count": 6097,
+=======
+    "overlap_count": 6068,
+>>>>>>> d7a7746 (提交美化专项工作区基线：更新美化器与质量报告、清理冗余文件)
     "text_missing_count": 0
   },
   "before_defects_sample": [

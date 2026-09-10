@@ -4,8 +4,8 @@
     "score_after": 30.0,
     "score_change": -2.0,
     "defects_before": 944,
-    "defects_after": 2253,
-    "defects_reduced": -1309,
+    "defects_after": 2250,
+    "defects_reduced": -1306,
     "real_devices_before": 1430,
     "real_devices_after": 1430,
     "real_devices_change": 0,
@@ -20,7 +20,11 @@
     "type_changes": {
       "标注错位": 62,
       "孤岛设备": 25,
+<<<<<<< HEAD
       "设备重叠": -1396
+=======
+      "设备重叠": -1393
+>>>>>>> d7a7746 (提交美化专项工作区基线：更新美化器与质量报告、清理冗余文件)
     }
   },
   "before": {
@@ -56,21 +60,21 @@
     "real_device_count": 1430,
     "fake_device_count": 0,
     "total_connections": 1576,
-    "total_defects": 2253,
+    "total_defects": 2250,
     "defect_rate_percent": 100.0,
     "defect_rate_penalty": 20.0,
     "quality_score": 30.0,
     "defects_by_type": {
-      "设备重叠": 2253
+      "设备重叠": 2250
     },
     "defects_by_severity": {
-      "medium": 2253
+      "medium": 2250
     },
     "connected_components": 6,
     "max_component_size": 908,
     "dangling_count": 0,
     "fake_connect_count": 0,
-    "overlap_count": 2253,
+    "overlap_count": 2250,
     "text_missing_count": 0
   },
   "before_defects_sample": [
