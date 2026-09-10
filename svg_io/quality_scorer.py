@@ -109,6 +109,10 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
         max_size = max(max_size, w, h)
     if max_size <= 0:
         max_size = 1.0
+    # 【P2修复】使用绝对尺寸阈值，避免美化后 SVG 缩放导致 max_size 过小
+    # 电力设备最小宽度约 15 单位（SVG标准设备宽度），此值作为重叠/飞线的绝对下界
+    MIN_DEVICE_SIZE = 15.0
+    effective_size = max(max_size, MIN_DEVICE_SIZE)
 
     # ---- a. 孤岛检测（与任务一一致）----
     conn_dev_ids = set()
@@ -171,7 +175,7 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
                 sx, sy, sw, sh = _bbox(s_dev)
                 cx, cy = sx + sw / 2, sy + sh / 2
                 d = math.hypot(px - cx, py - cy)
-                if d > max_size * 3:
+                if d > effective_size * 3:   # 【P2修复】使用绝对尺寸阈值
                     dangling_count += 1
                     defects.append({
                         "equip_id": cid,
@@ -185,7 +189,7 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
                 ex, ey, ew, eh = _bbox(e_dev)
                 cx, cy = ex + ew / 2, ey + eh / 2
                 d = math.hypot(px - cx, py - cy)
-                if d > max_size * 3:
+                if d > effective_size * 3:   # 【P2修复】使用绝对尺寸阈值
                     dangling_count += 1
                     defects.append({
                         "equip_id": cid,
@@ -195,7 +199,7 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
                         "suggestion": "调整连接线端点位置或重新匹配端点归属设备",
                     })
 
-    # ---- d. 虚假连通（与任务一一致：无GLink互引且距离>max_size）----
+    # ---- d. 虚假连通（与任务一一致：无GLink互引且距离>effective_size）----
     fake_connect_count = 0
     for conn in doc.connections:
         s, e, cid = _conn_ids(conn)
@@ -210,7 +214,7 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
         sx, sy, sw, sh = _bbox(s_dev)
         ex, ey, ew, eh = _bbox(e_dev)
         dist = math.hypot(sx + sw / 2 - ex - ew / 2, sy + sh / 2 - ey - eh / 2)
-        if dist > max_size * 1:
+        if dist > effective_size * 1:   # 【P2修复】使用绝对尺寸阈值
             fake_connect_count += 1
             defects.append({
                 "equip_id": cid,
@@ -221,6 +225,8 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
             })
 
     # ---- e. 设备重叠（与任务一一致：重叠率>50%）----
+    # 【P2修复】使用 effective_size 作为最小设备尺寸，避免美化后 SVG 缩放导致误报
+    # 电力设备最小宽度约 15 单位，只有两设备中心距 < effective_size 才算可能重叠
     overlap_count = 0
     n = len(real_elems)
     for i in range(n):
@@ -228,6 +234,13 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
             a, b = real_elems[i], real_elems[j]
             ax, ay, aw, ah = _bbox(a)
             bx, by, bw, bh = _bbox(b)
+            # 计算中心距，过远的两设备不可能重叠
+            acx, acy = ax + aw / 2, ay + ah / 2
+            bcx, bcy = bx + bw / 2, by + bh / 2
+            center_dist = math.hypot(acx - bcx, acy - bcy)
+            min_dim = min(aw, ah, bw, bh)
+            if center_dist > min_dim * 1.5 + effective_size:
+                continue  # 中心距过远，不可能重叠，跳过
             ox1, oy1 = max(ax, bx), max(ay, by)
             ox2, oy2 = min(ax + aw, bx + bw), min(ay + ah, by + bh)
             if ox2 <= ox1 or oy2 <= oy1:

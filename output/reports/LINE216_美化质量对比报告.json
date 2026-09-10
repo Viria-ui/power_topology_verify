@@ -4,8 +4,8 @@
     "score_after": 30.0,
     "score_change": -14.8,
     "defects_before": 450,
-    "defects_after": 6073,
-    "defects_reduced": -5623,
+    "defects_after": 6097,
+    "defects_reduced": -5647,
     "real_devices_before": 1644,
     "real_devices_after": 1644,
     "real_devices_change": 0,
@@ -18,9 +18,9 @@
     "components_after": 2,
     "components_change": -212,
     "type_changes": {
-      "设备重叠": -5801,
+      "标注错位": 30,
       "孤岛设备": 148,
-      "标注错位": 30
+      "设备重叠": -5825
     }
   },
   "before": {
@@ -56,21 +56,21 @@
     "real_device_count": 1644,
     "fake_device_count": 0,
     "total_connections": 1725,
-    "total_defects": 6073,
+    "total_defects": 6097,
     "defect_rate_percent": 100.0,
     "defect_rate_penalty": 20.0,
     "quality_score": 30.0,
     "defects_by_type": {
-      "设备重叠": 6073
+      "设备重叠": 6097
     },
     "defects_by_severity": {
-      "medium": 6073
+      "medium": 6097
     },
     "connected_components": 2,
     "max_component_size": 707,
     "dangling_count": 0,
     "fake_connect_count": 0,
-    "overlap_count": 6073,
+    "overlap_count": 6097,
     "text_missing_count": 0
   },
   "before_defects_sample": [

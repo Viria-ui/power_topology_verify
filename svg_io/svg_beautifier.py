@@ -13,10 +13,14 @@ import copy
 import math
 import xml.etree.ElementTree as ET
 from collections import defaultdict, deque
+import collections
 from typing import List, Tuple, Dict, Optional, Set
 
 from data_io.svg_reader import SvgDocument, SvgElement, SvgConnection, SvgText, SVG_NS, XLINK_NS, IEC_NS
 from data_io.svg_writer import write_svg
+import logging
+
+logger = logging.getLogger(__name__)
 
 # ═══════════════════════════════════════════════════════════
 #  规范常量（与参考文件 v2 对齐，自包含不依赖 core.constants）
@@ -694,6 +698,31 @@ class SvgBeautifier:
         self._layout_containers(cont_rep)
         self._normalize()
 
+        # 【P2修复】layout 阶段主动检测宽高比，超 3:1 触发蛇形折返
+        # render 阶段不再触发，避免重复改坐标
+        _snake_ok = False
+        _snake_err = None
+        try:
+            if self.pos:
+                xs = [p[0] for p in self.pos.values()]
+                ys = [p[1] for p in self.pos.values()]
+                for (a, b, c, d) in self.cont_box.values():
+                    xs += [a, c]
+                    ys += [b, d]
+                layout_W = max(xs) - min(xs) if xs else 0
+                layout_H = max(ys) - min(ys) if ys else 0
+                if layout_H > 0 and (layout_W / layout_H) > 3.0:
+                    target_W = int(layout_H * 3.0)
+                    self._layout_snake_fold(target_W, layout_H)
+                    self._normalize()
+                    _snake_ok = True
+                    print(f"  [折返] 宽高比 {layout_W/layout_H:.1f}:1 超阈值 → 蛇形折返已生效")
+        except Exception as _e:
+            _snake_err = _e
+            logger.warning("layout 阶段蛇形折返失败: %s", _e)
+        if not _snake_ok and _snake_err:
+            print(f"  [折返] 失败: {_snake_err}")
+
         print(f"  [布局] 放置 {len(self.pos)} | 容器框 {len(self.cont_box)} | "
               f"树深 {max(level.values())} | 根权重 {weight[root]}")
 
@@ -855,6 +884,65 @@ class SvgBeautifier:
         self.cont_box = {c: (self.snap(a + ox), self.snap(b + oy),
                             self.snap(c2 + ox), self.snap(d + oy))
                          for c, (a, b, c2, d) in self.cont_box.items()}
+
+    def _layout_snake_fold(self, max_width: int, target_height: int):
+        """【P2修复】蛇形折返布局：宽高比超 3:1 时触发
+        算法：按树层级分 Y → 同列内蛇形 Z 字扫描 → 强制宽度不超过 max_width
+        使用 self.adj 邻接表、self.tree_parent 树结构
+        """
+        if not self.pos:
+            return
+
+        # 取根节点：从 self.tree_parent 中找（None 父节点）
+        root = None
+        for n, p in self.tree_parent.items():
+            if p is None:
+                root = n
+                break
+        if root is None:
+            root = next(iter(self.tree_parent.keys()))
+
+        # 计算每节点的层级（BFS，已在 layout 中计算过，这里复用）
+        levels: dict = {root: 0}
+        queue = collections.deque([root])
+        while queue:
+            node = queue.popleft()
+            for nb in self.adj.get(node, ()):
+                if nb not in levels:
+                    levels[nb] = levels[node] + 1
+                    queue.append(nb)
+        # 未访问节点（不在树中）：按图序追加
+        next_level = (max(levels.values()) + 1) if levels else 0
+        for n in (set(self.pos.keys()) | set(self.adj.keys())):
+            if n not in levels:
+                levels[n] = next_level
+                next_level += 1
+
+        # 按层级分组
+        level_groups: dict = {}
+        for n, lv in levels.items():
+            level_groups.setdefault(lv, []).append(n)
+
+        n_levels = max(len(level_groups), 1)
+        level_h = max(target_height // n_levels, 80)
+        # 【P2修复】DEV_SPAN 使用模块全局常量，避免被布局函数局部变量遮蔽
+        DEV_SPAN_LOCAL = 180
+        max_per_row = max(int(max_width // DEV_SPAN_LOCAL), 1)
+        # 蛇形 Z 字布局
+        for lv in sorted(level_groups.keys()):
+            nodes = level_groups[lv]
+            if not nodes:
+                continue
+            if lv % 2 == 1:
+                nodes = list(reversed(nodes))
+            for i, node in enumerate(nodes):
+                if node not in self.pos:
+                    continue
+                col = i % max_per_row
+                row = i // max_per_row
+                x = MARGIN + col * DEV_SPAN_LOCAL
+                y = MARGIN + 30 + lv * level_h + row * 60
+                self.pos[node] = (self.snap(x), self.snap(y))
 
     # ═══════════════════════════════════════════════════════════
     #  渲染（正交布线 + 母线 + 标注白底避让）

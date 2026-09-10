@@ -1385,7 +1385,11 @@ class RunPage(tk.Frame):
         mode = self._selected_mode.get()
         line = self._selected_line.get()
         parts = mode.split()
-        # 若 parts 里已经有 line 或 parse-only，把 line 放最后
+        # 【Fix】仅 --line / --all / --compare / --parse-only 模式需要线路名参数，
+        # --topo / --svg / --parse-svg 不接受线路名参数，追加会报错
+        NO_LINE_MODES = {"--topo", "--svg", "--parse-svg"}
+        if parts and parts[0] in NO_LINE_MODES:
+            return "python main.py", parts
         return "python main.py", parts + [line]
 
     def _do_run(self):

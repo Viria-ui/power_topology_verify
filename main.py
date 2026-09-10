@@ -215,20 +215,28 @@ def filter_feeder_devices(dist_topo, feeder_id: str) -> dict:
 # 功能模块
 # ============================================================================
 
-def run_topo_validation(table_datas: dict) -> tuple:
-    """功能1：拓扑校验（主网/配网构建 + 电气逻辑校验）"""
+def run_topo_validation(table_datas: dict, feeder_id: str = "") -> tuple:
+    """功能1：拓扑校验（主网/配网构建 + 电气逻辑校验）
+
+    Args:
+        feeder_id: 指定馈线 ID 时，电气逻辑校验只评估该馈线设备；
+                   为空字符串时全网评估（向后兼容 --topo 模式）。
+    """
     print("\n" + "=" * 70)
     print("【功能1】拓扑校验：主网/配网拓扑构建 + 电气逻辑校验")
     print("=" * 70)
 
     builder = TopologyBuilder(table_datas)
+    # 【P3修复】指定 feeder 时按馈线过滤电气缺陷，避免全网3500+缺陷污染单线评分
+    builder._feeder_filter = feeder_id or None
     main_topo, dist_topo = builder.build_full_topology()
     print("✅ 主网/配网拓扑构建完成，设备内部端点连通关系已补齐")
 
     # 1.1 电气逻辑校验（E01-E07 + 主配接口）
     print("\n--- 电气逻辑校验（E01-E07）---")
     elec_results = builder.check_electrical_logic()
-    print(f"  电气逻辑缺陷数量: {len(elec_results)}")
+    scope = f"馈线={feeder_id}" if feeder_id else "全网"
+    print(f"  电气逻辑缺陷数量: {len(elec_results)} ({scope})")
     elec_by_type: dict = {}
     for r in elec_results:
         code = r.get("rule_code", "未知")
@@ -469,10 +477,17 @@ def run_compare_for_line(
     # ----------【模块三补录】将电气逻辑E01-E07结果合并入缺陷报告 ----------
     # 从 builder.build_full_topology() 中产生的 dist_topo.electrical_defects 取数，
     # 转为标准化缺陷格式后加入 defects_report，统一进入评分流程（fix: 解决电气逻辑维度cap=0问题）。
+    # 【P2修复】按 feeder_id 过滤：electrical_defects 是全网结果，避免混入其他馈线缺陷。
     if hasattr(dist_topo, 'electrical_defects') and dist_topo.electrical_defects:
         for ed in dist_topo.electrical_defects:
             rule_code = ed.get("rule_code", "")
             equip_id = ed.get("equip_id", "")
+            # P2：电气缺陷按设备归属馈线过滤
+            if equip_id and equip_id not in line_db_devices and equip_id not in all_db_dev_ids:
+                continue  # 非本馈线设备，跳过
+            # 如果 equip_id 不在 line_db_devices 但在 all_db_dev_ids（属于其他馈线），跳过
+            if equip_id in all_db_dev_ids and equip_id not in line_db_devices:
+                continue
             dev_name = ""
             if equip_id in line_db_devices:
                 dev_name = getattr(line_db_devices[equip_id], "equip_name", "") or ""
@@ -730,7 +745,16 @@ def run_compare_for_line(
                 "deterministic_repair_ratio": deterministic_ratio,
                 "repaired_candidate_count": len(repaired_equip_ids),
                 "use_repair_mode": bool(use_repair),
-                "note": "score_after=当前未修复状态的评分；确定性修复候选占比见 deterministic_repair_ratio，不虚高。",
+                # 【Q44-Fix】补全综合评分三维度（原来漏掉了，导致报告文件缺少运行效率和图形美观性）
+                "run_efficiency": score_summary.get("run_efficiency", {
+                    "elapsed_seconds": 0.0, "score": 0.0, "deduction": 0.0, "grade": "差"
+                }),
+                "beauty_quality": score_summary.get("beauty_quality", {
+                    "sub_scores": {}, "score": 0.0, "grade": "差"
+                }),
+                "comprehensive_score": score_summary.get("comprehensive_score", 0.0),
+                "comprehensive_grade": score_summary.get("comprehensive_grade", "差"),
+                "note": "score_after=当前未修复状态的评分；确定性修复候选占比见 deterministic_repair_ratio，不虚高。综合评分=数据质量40%+运行效率30%+图形美观性30%。",
             },
             "defects_with_confidence": score_summary["processed_defects"],
         }, f, ensure_ascii=False, indent=4)
@@ -949,14 +973,55 @@ def main():
         sep = "=" * 60
         print(f"\n{sep}\n🎯 单线路完整流程: {target_line}\n{sep}")
 
+        # Step 1: 【P3修复】按 feeder_id 过滤电气缺陷，避免全网 3500+ 缺陷污染单线评分
+        target_feeder_id = resolve_feeder_id(target_line, table_datas.get("line"))
+        print(f"  📌 解析目标馈线: {target_line} → FEEDER_ID={target_feeder_id}")
+
         # Step 1: 先确保 dist_topo 可用（table_datas 在外层 main() 已定义，直接用）
-        if "dist_topo" not in globals():
-            builder, main_topo, dist_topo, elec_results = run_topo_validation(table_datas)
+        # 【P3修复】--line 模式也用单例缓存，避免后续 export/自动出图重复构建
+        _topo_cache_local = globals().get('_topo_cache')
+        if _topo_cache_local is None:
+            _topo_cache_local = {}
+            globals()['_topo_cache'] = _topo_cache_local
+
+        if _topo_cache_local.get('dist_topo') is not None:
+            builder = _topo_cache_local['builder']
+            main_topo = _topo_cache_local['main_topo']
+            dist_topo = _topo_cache_local['dist_topo']
+            elec_results = _topo_cache_local['elec_results']
+            # 重新设置 feeder 过滤并重跑电气逻辑
+            builder._feeder_filter = target_feeder_id or None
+            if not getattr(builder, '_electrical_logic_done', False):
+                elec_results = builder.check_electrical_logic()
+                dist_topo.electrical_defects = builder.dist_topo.electrical_defects
+        elif "dist_topo" not in globals():
+            builder, main_topo, dist_topo, elec_results = run_topo_validation(
+                table_datas, feeder_id=target_feeder_id
+            )
+            _topo_cache_local['builder'] = builder
+            _topo_cache_local['main_topo'] = main_topo
+            _topo_cache_local['dist_topo'] = dist_topo
+            _topo_cache_local['elec_results'] = elec_results
         else:
             try:
                 _ = dist_topo
+                # 【P3修复】复用拓扑时，重新设置 feeder 过滤并跑电气逻辑
+                builder._feeder_filter = target_feeder_id or None
+                if not getattr(builder, '_electrical_logic_done', False):
+                    elec_results = builder.check_electrical_logic()
+                    dist_topo.electrical_defects = builder.dist_topo.electrical_defects
+                _topo_cache_local['builder'] = builder
+                _topo_cache_local['main_topo'] = main_topo
+                _topo_cache_local['dist_topo'] = dist_topo
+                _topo_cache_local['elec_results'] = elec_results
             except NameError:
-                builder, main_topo, dist_topo, elec_results = run_topo_validation(table_datas)
+                builder, main_topo, dist_topo, elec_results = run_topo_validation(
+                    table_datas, feeder_id=target_feeder_id
+                )
+                _topo_cache_local['builder'] = builder
+                _topo_cache_local['main_topo'] = main_topo
+                _topo_cache_local['dist_topo'] = dist_topo
+                _topo_cache_local['elec_results'] = elec_results
 
         # Step 2: 检查是否已有 JSON，没有则先解析
         json_elem_path = os.path.join(PROJECT_ROOT, "output", "json", f"{target_line}.svg_elements.json")
@@ -1064,7 +1129,12 @@ def main():
         if not args.no_svg and SVG_MODULES_OK:
             print(f"\n📊 自动出图: {target_line}")
             try:
-                g = SvgAutoGenerator(table_data=table_datas)
+                # 【P3修复】复用 --line 阶段的 builder/dist_topo，避免重复构建
+                g = SvgAutoGenerator(
+                    table_data=table_datas,
+                    cached_builder=_topo_cache_local.get('builder'),
+                    cached_dist_topo=_topo_cache_local.get('dist_topo'),
+                )
                 out_path = os.path.join(PROJECT_ROOT, "output", "svg", f"{target_line}_single_line.svg")
                 os.makedirs(os.path.dirname(out_path), exist_ok=True)
                 p = g.generate_feeder_single_line_diagram(
@@ -1110,8 +1180,17 @@ def main():
 
     # 加载数据
     print("\n📂 加载SQL数据...")
+    # 【P4修复】拓扑构建单例缓存：避免 --all 模式下功能1 + 功能3 重复构建全网拓扑（实测2次重复）
+    _topo_cache = globals().get('_topo_cache')
+    if _topo_cache is None:
+        _topo_cache = {}
+        globals()['_topo_cache'] = _topo_cache
     if run_all or args.topo:
         builder, main_topo, dist_topo, elec_results = run_topo_validation(table_datas)
+        _topo_cache['builder'] = builder
+        _topo_cache['main_topo'] = main_topo
+        _topo_cache['dist_topo'] = dist_topo
+        _topo_cache['elec_results'] = elec_results
         results["topo"] = {
             "elec_defects": len(elec_results),
             "main_devices": len(main_topo.device_map),
@@ -1125,12 +1204,19 @@ def main():
 
     # 功能3: 图模比对
     if run_all or args.compare is not None:
-        # 【M8修复】--compare模式下若未跑拓扑校验，dist_topo未定义，自动先跑
-        try:
-            dist_topo
-        except NameError:
+        # 【M8修复 + P4修复】--compare模式下若未跑拓扑校验，复用缓存或自动跑一次
+        if not _topo_cache:
             print("\n⚠️ --compare模式需先运行拓扑校验，自动执行功能1...")
             builder, main_topo, dist_topo, elec_results = run_topo_validation(table_datas)
+            _topo_cache['builder'] = builder
+            _topo_cache['main_topo'] = main_topo
+            _topo_cache['dist_topo'] = dist_topo
+            _topo_cache['elec_results'] = elec_results
+        else:
+            builder = _topo_cache['builder']
+            main_topo = _topo_cache['main_topo']
+            dist_topo = _topo_cache['dist_topo']
+            elec_results = _topo_cache['elec_results']
         if args.compare:
             line_names = args.compare
         else:

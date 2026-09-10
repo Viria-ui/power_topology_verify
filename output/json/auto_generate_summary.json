@@ -1,7 +1,7 @@
 {
   "TaskA": {
     "LINE215_add_station": {
-      "quality_pass": true,
+      "quality_pass": false,
       "delta": {
         "devices": 3,
         "stations": 1,
@@ -18,7 +18,7 @@
     }
   },
   "B_LINE215_单线图": {
-    "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\LINE215_single_line.svg",
+    "svg": "D:\\挑战杯\\tiaozhanbeigit\\power_topology_verify\\output\\svg\\LINE215_single_line.svg",
     "feeder": "LINE215",
     "nodes": 1313,
     "edges": 1299,
@@ -29,7 +29,7 @@
     "rows": 96
   },
   "B_LINE216_单线图": {
-    "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\LINE216_single_line.svg",
+    "svg": "D:\\挑战杯\\tiaozhanbeigit\\power_topology_verify\\output\\svg\\LINE216_single_line.svg",
     "feeder": "LINE216",
     "nodes": 1644,
     "edges": 1646,
@@ -40,7 +40,7 @@
     "rows": 180
   },
   "B_10kVLINE111_联络图": {
-    "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\10kVLINE111_tie.svg",
+    "svg": "D:\\挑战杯\\tiaozhanbeigit\\power_topology_verify\\output\\svg\\10kVLINE111_tie.svg",
     "feeder": "10kVLINE111",
     "nodes": 3,
     "edges": 42,
@@ -49,7 +49,7 @@
     "cross_station_ties": 0
   },
   "B_SUB004_全站联络图": {
-    "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\SUB004_station_tie.svg",
+    "svg": "D:\\挑战杯\\tiaozhanbeigit\\power_topology_verify\\output\\svg\\SUB004_station_tie.svg",
     "substation": "SUB004",
     "feeders": [
       "TMP00000001",
@@ -238,13 +238,13 @@
     "edge_error_pct": 0.0
   },
   "B_LINE074_电源追溯": {
-    "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\TMP00034205_power_trace.svg",
+    "svg": "D:\\挑战杯\\tiaozhanbeigit\\power_topology_verify\\output\\svg\\TMP00034205_power_trace.svg",
     "target": "TMP00034205",
     "feeder": "LINE074",
-    "main_path_len": 755,
+    "main_path_len": 53,
     "backup_paths": 2,
-    "nodes": 291,
-    "edges": 290,
+    "nodes": 208,
+    "edges": 207,
     "edge_error_pct": 0.0
   }
 }

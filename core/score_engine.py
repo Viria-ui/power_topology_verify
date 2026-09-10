@@ -214,7 +214,12 @@ class ScoreAndConfidenceEngine:
             if vb is not False and vb != [0, 0, 0, 0]:
                 sub["viewbox_ok"] = weights["viewbox_ok"]
             # 子项2：无大面积重叠
-            if not svg_quality_report.get("overlap_found", False):
+            # 【Q44-Fix】支持两种报告格式：
+            #   - quality_scorer.evaluate_svg_quality() 输出 overlap_found 布尔
+            #   - 美化质量对比报告 输出 overlap_count 数值（>0 = 有重叠）
+            overlap_count = svg_quality_report.get("overlap_count", 0)
+            has_overlap = overlap_count > 0 or svg_quality_report.get("overlap_found", False)
+            if not has_overlap:
                 sub["no_overlap"] = weights["no_overlap"]
             # 子项3：正交布线（routing_score > 0.8 即合格）
             routing = svg_quality_report.get("routing_score", 1.0)

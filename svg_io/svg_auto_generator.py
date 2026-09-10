@@ -79,7 +79,8 @@ class SvgAutoGenerator:
     # 类级缓存：避免同一次 main.py 运行中多次重复构建全网拓扑
     _cache: dict = {}
 
-    def __init__(self, table_data: dict = None):
+    def __init__(self, table_data: dict = None,
+                 cached_builder=None, cached_dist_topo=None):
         if table_data is not None:
             # 外部传入已加载数据，直接复用（推荐）
             self.table_data = table_data
@@ -95,8 +96,14 @@ class SvgAutoGenerator:
             # 首次加载：走正常路径并缓存
             self.table_data = self._load_data()
 
-        self.builder = TopologyBuilder(self.table_data)
-        self.main_topo, self.dist_topo = self.builder.build_full_topology()
+        # 【P3修复】如传入 cached_builder/dist_topo 直接复用，不再重复 build_full_topology
+        if cached_builder is not None and cached_dist_topo is not None:
+            self.builder = cached_builder
+            self.main_topo = cached_builder.main_topo
+            self.dist_topo = cached_dist_topo
+        else:
+            self.builder = TopologyBuilder(self.table_data)
+            self.main_topo, self.dist_topo = self.builder.build_full_topology()
         self.dg = self._project_to_device_graph(self.dist_topo,
                                                 self.table_data.get("equip"),
                                                 self.table_data.get("line"),

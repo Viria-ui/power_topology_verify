@@ -1,6 +1,6 @@
 {
-  "SVG_FILE": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\LINE215_add_station_000300.svg",
-  "PASS": true,
+  "SVG_FILE": "D:\\挑战杯\\tiaozhanbeigit\\power_topology_verify\\output\\svg\\LINE215_add_station_000300.svg",
+  "PASS": false,
   "PASS_THRESHOLDS": {
     "device_overlap_pairs": 10,
     "text_overlap_pct": 8.0,
@@ -12,7 +12,7 @@
   },
   "CHECKS": {
     "device_overlap_pairs": {
-      "value": 0,
+      "value": 2,
       "ok": true,
       "threshold": 10
     },
@@ -27,17 +27,17 @@
       "threshold": 2.0
     },
     "island_components_pct": {
-      "value": 25.45,
-      "ok": true,
+      "value": 53.94,
+      "ok": false,
       "threshold": 50.0
     },
     "isolated_nodes_pct": {
-      "value": 11.36,
+      "value": 28.6,
       "ok": true,
       "threshold": 30.0
     },
     "dangling_connections_pct": {
-      "value": 6.71,
+      "value": 16.71,
       "ok": true,
       "threshold": 20.0
     },
@@ -56,27 +56,27 @@
     "viewBox": {
       "x": 0.0,
       "y": 0.0,
-      "w": 36760.0,
-      "h": 3600.0
+      "w": 31580.0,
+      "h": 13230.0
     },
     "canvas": {
-      "width": 36760.0,
-      "height": 3600.0,
+      "width": 31580.0,
+      "height": 13230.0,
       "aspect_match": true,
-      "vb_ratio": 10.2111,
-      "wh_ratio": 10.2111
+      "vb_ratio": 2.387,
+      "wh_ratio": 2.387
     },
     "devices": {
-      "total": 951,
+      "total": 1346,
       "stations": 0,
       "outside": 0,
       "outside_pct": 0.0,
-      "overlap_pairs": 0,
-      "avg_height_unit": 59.304
+      "overlap_pairs": 2,
+      "avg_height_unit": 74.337
     },
     "texts": {
-      "total": 788,
-      "visible": 788,
+      "total": 946,
+      "visible": 946,
       "hidden": 0,
       "hidden_pct": 0.0,
       "overlap_victims": 0,
@@ -84,17 +84,17 @@
       "outside": 0,
       "fontscale_abnormal": 0,
       "fontscale_abnormal_pct": 0.0,
-      "avg_dev_h_for_ref": 59.304
+      "avg_dev_h_for_ref": 74.337
     },
     "topology": {
-      "total_device_nodes": 951,
-      "connections_total": 1446,
-      "connected_components": 140,
-      "largest_component_size": 709,
-      "largest_component_pct": 74.55,
-      "island_components_pct": 25.45,
-      "isolated_nodes_pct": 11.36,
-      "dangling_connections_pct": 6.71
+      "total_device_nodes": 1346,
+      "connections_total": 1903,
+      "connected_components": 433,
+      "largest_component_size": 620,
+      "largest_component_pct": 46.06,
+      "island_components_pct": 53.94,
+      "isolated_nodes_pct": 28.6,
+      "dangling_connections_pct": 16.71
     }
   }
 }

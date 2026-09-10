@@ -325,6 +325,9 @@ def export_report_all_in_one(
     *,
     template_path: str | os.PathLike | None = None,
     run_beautify: bool = True,
+    # 【P3修复】允许传入已构建好的 builder / dist_topo，避免重复 build_full_topology
+    cached_builder=None,
+    cached_dist_topo=None,
 ) -> Path:
     """
     标准 Sheet3(及 Sheet1~Sheet5) 一键独立导出闭环：
@@ -373,10 +376,21 @@ def export_report_all_in_one(
     svg_path = _Path(svg_path)
 
     # ---- 2. 加载 SQL + 构建拓扑 ----
-    loader = SqlTableLoader()
-    table_data = loader.load_all_topo_tables()
-    line_df = table_data.get("line")
-    equip_df = table_data.get("equip")
+    # 【P3修复】复用上游构建的 builder/dist_topo，避免重复构建全网拓扑（实测可省 1 分钟）
+    if cached_builder is not None and cached_dist_topo is not None:
+        builder = cached_builder
+        main_topo, dist_topo = builder.main_topo, cached_dist_topo
+        # 需要 line_df/equip_df；从 builder 取
+        line_df = builder.line_df if hasattr(builder, 'line_df') else table_data.get("line")
+        equip_df = builder.equip_df if hasattr(builder, 'equip_df') else table_data.get("equip")
+    else:
+        loader = SqlTableLoader()
+        table_data = loader.load_all_topo_tables()
+        line_df = table_data.get("line")
+        equip_df = table_data.get("equip")
+
+        builder = TopologyBuilder(table_data)
+        main_topo, dist_topo = builder.build_full_topology()
 
     # 馈线解析（支持 LINE074 → TMPxxxx）
     if feeder_id:
@@ -386,8 +400,6 @@ def export_report_all_in_one(
         resolved_fid = resolve_feeder_id(base_name, line_df)
     start_st_id = resolve_start_st_id(resolved_fid, line_df)
 
-    builder = TopologyBuilder(table_data)
-    main_topo, dist_topo = builder.build_full_topology()
     line_name = resolved_fid
     if line_df is not None and len(line_df) > 0:
         _m = line_df[line_df["LINE_ID"].astype(str) == str(resolved_fid)]

@@ -5,6 +5,7 @@ import os
 import logging
 import pandas as pd
 from collections import defaultdict
+from typing import Optional
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -26,6 +27,8 @@ class TopologyBuilder:
         self.equip_df = table_data.get("equip", pd.DataFrame()).copy()
         self.zw_equip_df = table_data.get("zw_equip", pd.DataFrame()).copy()
         self.line_df = table_data.get("line", pd.DataFrame()).copy()
+        # 【P3修复】可选 feeder 过滤：传具体 feeder_id 时，check_electrical_logic 只评估该馈线设备
+        self._feeder_filter: Optional[str] = None
 
         self.pw_terminal_df = table_data.get("pw_terminal")
         self.zw_terminal_df = table_data.get("zw_terminal")
@@ -204,14 +207,30 @@ class TopologyBuilder:
         # Step 1: 解析 ZWLINEEND.LINEEND_NAME → 主网站 ST_ID
         # 存储 原始名 和 标准化名（去 "10kV.", "_线" 等）
         le_name_to_st_id: dict[str, str] = {}
+
+        def _norm_line_name(name: str) -> str:
+            """【P1修复】标准化线路名称用于精确匹配：
+            "10kV.LINE003_181线" → "LINE003"
+            "10kVLINE003"        → "LINE003"
+            "203LINE001_线"      → "LINE001"
+            """
+            s = name.strip()
+            # 去除电压前缀：10kV. / 10kV / 35kV. / 35kV 等
+            s = re.sub(r'^(10kV|20kV|35kV|110kV|66kV)\.?', '', s, flags=re.IGNORECASE)
+            # 去除末尾后缀：_181线 / _线 / 等（数字+线）
+            s = re.sub(r'_\d+线$', '', s)
+            s = re.sub(r'_线$', '', s)
+            return s.upper()
+
         for _, lrow in self.zw_line_end_df.iterrows():
             st_id = str(lrow.get("ST_ID") or "").strip()
             le_name = str(lrow.get("LINEEND_NAME") or "").strip()
             if not st_id or not le_name:
                 continue
             le_name_to_st_id[le_name] = st_id
-            std = le_name.replace("_线", "").replace("10kV.", "").replace("20kV.", "").replace("接地变", "")
-            le_name_to_st_id[std] = st_id
+            std = _norm_line_name(le_name)
+            if std:
+                le_name_to_st_id[std] = st_id
 
         # Step 2: 建立配网 LINE_ID ↔ LINE_NAME 映射
         pw_line_id_to_name: dict[str, str] = {}
@@ -223,15 +242,19 @@ class TopologyBuilder:
                 if lid:
                     pw_line_id_to_name[lid] = lname
                     pw_line_name_to_id[lname] = lid
-                    std = lname.replace("_线", "").replace("10kV.", "").replace("20kV.", "")
-                    pw_line_name_to_id[std] = lid
+                    std = _norm_line_name(lname)
+                    if std:
+                        pw_line_name_to_id[std] = lid
 
-        # Step 3: 通过 LINE_NAME 匹配，建立 馈线LINE_ID → 主网站ST_ID 映射
+        # Step 3: 【P1修复】通过标准化 LINE_NAME 匹配，建立 馈线LINE_ID → 主网站ST_ID 映射
+        # 原问题："10kV.LINE003_181线" 与 "10kVLINE003" 无法精确匹配导致映射数=0
+        # 解决：双方标准化后都变成 "LINE003" → 精确匹配
         pw_line_to_zw_st: dict[str, str] = {}
         for le_name, st_id in le_name_to_st_id.items():
             if le_name in pw_line_name_to_id:
                 lid = pw_line_name_to_id[le_name]
-                pw_line_to_zw_st[lid] = st_id
+                if lid not in pw_line_to_zw_st:  # 避免重复覆盖
+                    pw_line_to_zw_st[lid] = st_id
 
         # Step 4: 主网设备本身标记为电源（不再向整条配网馈线注入is_source）
         # 【S1修复】原v2逻辑把"配网馈线对应主网站"下的整条馈线所有设备都标is_source，
@@ -516,6 +539,11 @@ class TopologyBuilder:
         self.telemetry_evaluator = evaluator
         results = []
         for equip_id, dev in self.dist_topo.device_map.items():
+            # 【P3修复】电气缺陷按设备归属馈线过滤，避免全网3500+缺陷混入单条馈线导致评分=0
+            # dist_topo.device_map 中每个 device.feeder_id 已正确归属（PWEQUIPINFO.FEEDER_ID）
+            # 对 1 条馈线，传入 feeder_id=None 表示全网（保持向后兼容）；传入具体 feeder_id 则过滤
+            if self._feeder_filter and getattr(dev, 'feeder_id', '') != self._feeder_filter:
+                continue
             results.extend(evaluator.evaluate_electrical_logic(equip_id, dev.equip_type or "", dev.voltage_type or ""))
         self.dist_topo.electrical_defects = results
 
