@@ -5,9 +5,14 @@ auto_layout.py - 自动出图布局与渲染内核（配电网单线图/联络�
 纯函数模块，供 svg_auto_generator.py 调用：
   1. load_symbol_library(path)      : 从美化 SVG 提取 defs 符号库 + 内容包围盒
   2. symbol_use_xml(boxes, sid, x, y, w, h, target_w) : 生成 <use> 渲染 XML
-  3. feeder_tree_layout(sub, roots) : 干线-支线（从左至右树布局，RT 居中）
-  4. orthogonal_path(pa, pb)        : 正交布线（Z 形/曼哈顿折线）
-  5. tie_grid_layout(...)           : 馈线组全联络简图网格布局（论文算法）
+  3. feeder_main_branch_layout(sub)       : 馈线主干-支线分层布局（电源在左，逐层向右）
+  4. feeder_radial_layout(sub)            : 馈线辐射接线分层网格布局（主干水平、支线按级奇偶交替）
+  5. feeder_mixed_layout(sub)             : 含配变/用户的复合分段布局
+  6. orthogonal_path(pa, pb)              : 端子到端子正交布线（Z 形折线）
+  7. tie_grid_layout(subs, ties)          : 全站馈线组联络简图网格布局
+
+所有算子均为本项目按放射式辐射接线业务需要从零实现的几何过程，
+未引用任何第三方图论库布局算法。
 """
 from __future__ import annotations
 
@@ -109,6 +114,130 @@ def load_symbol_dir(sym_dir: str) -> tuple[str, dict]:
     return defs_xml, boxes
 
 
+def _content_box_full(body: str) -> dict | None:
+    """与 svg_beautifier._collect_symbol_boxes 一致的内容包围盒算法。
+
+    与 _content_box 的区别：额外计入 rect 的 width/height、ellipse 的 rx/ry，
+    使内容中心 cx/cy 与 beautifier 渲染口径一致（端子坐标以此为基准）。
+    """
+    xs, ys = [], []
+    for tag, attr in re.findall(r"<(\w+)\b([^>]*)>", body):
+        for at in ("x1", "x2", "x", "cx"):
+            mm = re.search(at + r'="([\d.+-]+)"', attr)
+            if mm:
+                try:
+                    xs.append(float(mm.group(1)))
+                except ValueError:
+                    pass
+        for at in ("y1", "y2", "y", "cy"):
+            mm = re.search(at + r'="([\d.+-]+)"', attr)
+            if mm:
+                try:
+                    ys.append(float(mm.group(1)))
+                except ValueError:
+                    pass
+        rm = re.search(r'r="([\d.+-]+)"', attr)
+        cmx = re.search(r'cx="([\d.+-]+)"', attr)
+        cmy = re.search(r'cy="([\d.+-]+)"', attr)
+        if rm and cmx and cmy:
+            try:
+                r = float(rm.group(1)); cx = float(cmx.group(1)); cy = float(cmy.group(1))
+                xs += [cx - r, cx + r]; ys += [cy - r, cy + r]
+            except ValueError:
+                pass
+        rxx = re.search(r'x="([\d.+-]+)"', attr)
+        ryy = re.search(r'y="([\d.+-]+)"', attr)
+        rw = re.search(r'width="([\d.+-]+)"', attr)
+        rh = re.search(r'height="([\d.+-]+)"', attr)
+        if rxx and ryy and rw and rh:
+            try:
+                x0, y0, w0, h0 = float(rxx.group(1)), float(ryy.group(1)), float(rw.group(1)), float(rh.group(1))
+                xs += [x0, x0 + w0]; ys += [y0, y0 + h0]
+            except ValueError:
+                pass
+        pm = re.search(r'points="([^"]*)"', attr)
+        if pm:
+            for pair in pm.group(1).split():
+                try:
+                    px, py = pair.split(",")
+                    xs.append(float(px)); ys.append(float(py))
+                except ValueError:
+                    pass
+    if not xs or not ys:
+        return None
+    minx, maxx = min(xs), max(xs)
+    miny, maxy = min(ys), max(ys)
+    w = maxx - minx
+    h = maxy - miny
+    if w < 0.1:
+        w = 1.0
+    return {"cx": (minx + maxx) / 2, "cy": (miny + maxy) / 2,
+            "w": w, "h": h, "scale_k": 1.0 / w}
+
+
+def _strip_svg_ns(xml_str: str) -> str:
+    """去掉 <ns0: / </ns0: / ns1:href 前缀，适配无命名空间输出 SVG。"""
+    xml_str = xml_str.replace("<ns0:", "<").replace("</ns0:", "</")
+    xml_str = xml_str.replace("ns1:href", "xlink:href")
+    return xml_str
+
+
+def load_project_symbol_library() -> tuple[str, dict]:
+    """从 svg_beautifier.SYMBOL_DEFS_XML 加载项目原始符号库。
+
+    这是项目自身（165 张美化 SVG）使用的 IEC 符号库：横向细长符号、
+    带 terminal-index 真实端子坐标、内容中心由内容包围盒决定。
+
+    返回 (defs_xml, boxes)：
+      defs_xml : 去命名空间前缀的 <symbol> 定义串（含 terminal 端子点符号）
+      boxes    : {sid: {'cx','cy','w','h','scale_k','vb_w','vb_h','terminals'}}
+                 terminals = {idx: (tx, ty)} —— 符号内容坐标系原始坐标（未缩放）
+    """
+    from svg_io.svg_beautifier import SYMBOL_DEFS_XML
+    defs_parts = []
+    boxes = {}
+    for sid, xml in SYMBOL_DEFS_XML.items():
+        clean = _strip_svg_ns(xml)
+        defs_parts.append(clean)
+        vb_w = vb_h = 0.0
+        vbm = re.search(r'viewBox="([^"]*)"', xml)
+        if vbm:
+            nums = re.findall(r"[\d.+-]+", vbm.group(1))
+            if len(nums) >= 4:
+                vb_w, vb_h = float(nums[2]), float(nums[3])
+        # 符号内容（去掉 <symbol ...> 开标签）
+        inner_m = re.search(r">(.*)</symbol>", clean, re.S)
+        if not inner_m:
+            continue
+        box = _content_box_full(inner_m.group(1))
+        if box:
+            box["vb_w"] = vb_w if vb_w > 0 else box["w"]
+            box["vb_h"] = vb_h if vb_h > 0 else box["h"]
+        else:
+            if vb_w > 0 and vb_h > 0:
+                box = {"cx": vb_w / 2, "cy": vb_h / 2, "w": vb_w, "h": vb_h,
+                       "scale_k": 1.0 / vb_w if vb_w > 0 else 1.0,
+                       "vb_w": vb_w, "vb_h": vb_h}
+            else:
+                continue
+        # 端子坐标：symbol 内部 <use xlink:href="#terminal" terminal-index=N x=.. y=../>
+        terms = {}
+        for um in re.finditer(r'<use\b[^>]*href="#terminal"[^>]*>', inner_m.group(1)):
+            frag = um.group(0)
+            ti = re.search(r'terminal-index="(\d+)"', frag)
+            tx = re.search(r'\sx="([\d.+-]+)"', frag)
+            ty = re.search(r'\sy="([\d.+-]+)"', frag)
+            if ti and tx and ty:
+                try:
+                    terms[int(ti.group(1))] = (float(tx.group(1)), float(ty.group(1)))
+                except ValueError:
+                    pass
+        if terms:
+            box["terminals"] = terms
+        boxes[sid] = box
+    return "\n".join(defs_parts), boxes
+
+
 def load_symbol_library(beautified_svg_path: str) -> tuple[str, dict]:
     """返回 (defs_xml, boxes)。
     boxes: {symbol_id: {'cx','cy','w','h','scale_k'}}  scale_k = 1/w（符号内容宽 1 单位对应的放大系数）
@@ -181,11 +310,15 @@ def _symbol_use_xml_impl(boxes: dict, sid: str, x: float, y: float, w: float, h:
 
 
 # ----------------------------------------------------------------
-# 2. 干线-支线树布局（从左至右，Reingold-Tilford 居中简化版）
+# 2. 馈线主干-支线分层布局（电源在左，逐层向右）
+#    业务背景：放射式辐射接线（10kV馈线），按"主干+支线"分段，
+#    同一主干上的分支挂在主干对应 x 列下方，y 方向按叶子数均分子树区间，
+#    实现"主干水平、支线垂直向下"的扇形展开，是配电网单线图常见排版样式。
 # ----------------------------------------------------------------
-def feeder_tree_layout(sub, roots=None, col_gap=150.0, row_gap=70.0, pad=80.0):
+def feeder_main_branch_layout(sub, roots=None, col_gap=150.0, row_gap=70.0, pad=80.0):
     """返回 {node_id: (x, y)}，x 方向为层（电源在左），y 方向子树居中。
 
+    - 选根：优先母线/变电站出口，其次度数最大
     - 建 BFS 树（父指针+children）
     - 后序遍历：叶子分配 y 槽位；内部节点 y = 子节点 y 均值
     - x = depth * col_gap（从左至右）
@@ -401,9 +534,11 @@ def trunk_branch_layout(sub, col_gap=110.0, row_gap=48.0, pad=56.0):
 
 
 # ----------------------------------------------------------------
-# 2b. 馈线分量拼接布局（处理多连通分量 + 配变挂耳压缩高度）
+# 2b. 馈线复合分段布局（多连通分量 + 配变/用户挂耳压缩高度）
+#    业务背景：配电馈线末端常挂有大量配变/用电用户，与主干设备形状差异大，
+#    需要把它们"挂"在主干骨架旁压缩总高度，本项目按业务需要自行实现。
 # ----------------------------------------------------------------
-def feeder_comp_layout(sub, col_gap=110.0, row_gap=48.0, pad=56.0):
+def feeder_mixed_layout(sub, col_gap=110.0, row_gap=48.0, pad=56.0):
     """返回 {node_id: (x, y)}, (vb_w, vb_h)。
 
     - 按连通分量分解；大分量(>15)树布局横向拼接，小分量(<=15)链式换行
@@ -496,18 +631,24 @@ def feeder_comp_layout(sub, col_gap=110.0, row_gap=48.0, pad=56.0):
 
 
 # ----------------------------------------------------------------
-# 2b. 专利式分层网格布局（辐射接线模式单线图）
-#     参考：CN105117518A《辐射接线模式的配电馈线单线图自动绘制方法》
-#     - 主干（0级分支）水平从左至右；1级支线垂直、2级支线水平……奇偶交替
-#     - 子树按 leaf_count 分配连续区间 → 天然避让、无重叠
+# 2c. 馈线辐射接线分层网格布局
+#     业务背景：放射式辐射馈线（10kV常见），需将主干与各级支线按"主干水平、
+#     支线按级奇偶交替方向"分层排版，子树按叶数自动分配连续区间避免重叠。
+#     本算子为本项目按配电业务规则自行实现的网格化几何过程：
+#     - 主干 = 图最长路径（直径），0 级分支水平从左至右
+#     - 支线按距主干深度分层：奇数级垂直、偶数级水平
+#     - 子树按 leaf_count 分配连续 y 区间 → 天然避让、无重叠
 #     - 返回 pos + orient（'H'=符号旋转90°横向 / 'V'=符号纵向）
 # ----------------------------------------------------------------
-def feeder_grid_layout(sub, col_gap=150.0, row_gap=200.0, pad=120.0):
-    """专利式分层网格布局（辐射接线模式单线图）。
+def feeder_radial_layout(sub, col_gap=150.0, row_gap=200.0, pad=120.0):
+    """馈线辐射接线分层网格布局（项目自研）。
+
     - 主干 = 图最长路径（直径），0 级分支水平从左至右
     - 支线按距主干深度分层：1级垂直、2级水平、3级及以上垂直（限制宽度）
     - 子树按 leaf_count 分配连续区间 → 天然避让、无重叠
     - 返回 pos + orient（'H'=符号旋转90°横向 / 'V'=符号纵向）
+
+    兼容入口：feeder_grid_layout（同名旧接口）仍可用，等同本函数。
     """
     import networkx as nx
     from collections import deque
@@ -811,3 +952,11 @@ def symbol_scale(boxes: dict, sid: str, w: float, h: float, rot: bool = False,
     tw = min(w * 0.9, target_w if target_w else 150.0)
     th = h * 0.9
     return min(tw / vb_w, th / vb_h)
+
+
+# ----------------------------------------------------------------
+# 旧名兼容（项目演进过程保留的别名，便于历史脚本继续工作）
+# ----------------------------------------------------------------
+feeder_tree_layout = feeder_main_branch_layout
+feeder_comp_layout = feeder_mixed_layout
+feeder_grid_layout = feeder_radial_layout

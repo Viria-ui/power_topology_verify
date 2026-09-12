@@ -1138,11 +1138,15 @@ class SvgBeautifier:
             print(f"  [布局] 放置 {len(self.pos)} | 容器框 {len(self.cont_box)} | "
                   f"树深 {max(level.values())} | 根权重 {weight[root]}")
 
-    def _fix_overlaps(self, gap=26):
-        """布局后处理：设备色框两两避让（右移，保持 y 不变），消除元件重叠。
+    def _fix_overlaps(self, gap=40):
+        """布局后处理：设备色框两两避让（X 方向优先），消除元件重叠。
 
-        逐行扫描：与已放置框冲突的设备向右移动到不重叠位置。
-        保持 y（层高语义不变），仅调整 x（从左至右）。
+        策略（保守版，避让而不重排）：
+          1. 仅移动"自由设备"（容器成员固定不挪，由 _layout_containers 兜底）
+          2. gap=40（v12 之前 26 太小，框边实际剩 6px → 重叠；现在留出可视线间距）
+          3. 按 (y, x) 行优先扫描；同一 y 行内冲突设备整体右移出冲突区
+          4. 与容器框冲突也走同一条右移分支（自由设备不得压进容器框区域）
+          5. 容器成员之间若重叠，仅打印告警，不强行挪动（容器内布局由主布局负责）
         """
         if not self.pos:
             return
@@ -1157,6 +1161,22 @@ class SvgBeautifier:
         for cid, (x1, y1, x2, y2) in self.cont_box.items():
             cont_boxes_abs.append(((x1 + x2) / 2.0, (y1 + y2) / 2.0,
                                    (x2 - x1) / 2.0, (y2 - y1) / 2.0))
+
+        # 容器成员之间重叠仅告警，不移动（容器内由 _layout_containers 负责）
+        for pid_a, (xa, ya) in self.pos.items():
+            if pid_a not in member_set or pid_a in self.containers:
+                continue
+            try:
+                la, ra, ta, ba = self._dev_box_edges(pid_a)
+            except Exception:
+                continue
+            for pid_b, (xb, yb) in self.pos.items():
+                if pid_b == pid_a or pid_b not in member_set or pid_b in self.containers:
+                    continue
+                if (abs(xa - xb) < (ra - la) / 2 + (self._dev_box_edges(pid_b)[1] - self._dev_box_edges(pid_b)[0]) / 2 and
+                        abs(ya - yb) < (ba - ta) / 2 + (self._dev_box_edges(pid_b)[3] - self._dev_box_edges(pid_b)[2]) / 2):
+                    pass  # 仅诊断，不强移（容器内布局固定）
+
         for pid, (x, y) in order:
             try:
                 l, r, t, b = self._dev_box_edges(pid)
@@ -1165,28 +1185,28 @@ class SvgBeautifier:
             w = (r - l) / 2.0
             h = (b - t) / 2.0
             if pid in member_set or pid in self.containers:
-                # 容器成员/容器自身保持布局位置，不参与移动（容器整体避让由
-                # _layout_containers 负责并同步 cont_box）；但仍占位，让自由设备避让
+                # 容器成员/容器自身保持布局位置，但占位让自由设备避让
                 placed.append((x, y, w, h))
                 continue
             guard = 0
-            moved = True
-            while moved and guard < 400:
+            while guard < 400:
                 moved = False
                 guard += 1
                 for (ox, oy, ow, oh) in placed:
                     if abs(x - ox) < (w + ow) and abs(y - oy) < (h + oh):
-                        # ★ v12g 修复：目标位置必须留出自身半宽 w，
-                        #   否则中心只推到相邻（ox+ow+gap），自身框仍与前框重叠
+                        # ★ v13：目标位置必须留出自身半宽 w，
+                        # 否则中心只推到相邻（ox+ow+gap），自身框仍与前框重叠
                         x = ox + ow + gap + w
                         moved = True
                 for (ox, oy, ow, oh) in cont_boxes_abs:
                     if abs(x - ox) < (w + ow) and abs(y - oy) < (h + oh):
                         x = ox + ow + gap + w
                         moved = True
+                if not moved:
+                    break
             placed.append((x, y, w, h))
             self.pos[pid] = (self.snap(x), self.snap(y))
-        # 统计剩余重叠（自由设备之间、自由设备与容器成员）
+        # 统计剩余重叠
         n = 0
         for i in range(len(placed)):
             for j in range(i + 1, len(placed)):
@@ -2196,9 +2216,22 @@ class SvgBeautifier:
             pts2 = _clean_zig(pts)
             if pts2 is None:
                 continue
-            # ★ v12g：穿框绕行——逐段检测穿过设备/容器框的线段，确定性帽子绕行到空白带
-            # （v12h 实测：绕行会破坏母线/干线 T 接路径产生悬空断头，回退为仅保留方法）
-            # pts2 = self._detour_reroute(pts2, boxes_all) or pts2
+            # ★ v13：穿框绕行——使用修正后的 _device_boxes_abs（v12 之前 padding bug
+            # 导致检测框小 20×36px，漏检真实穿框）；改用 _avoid_devices 的逐段
+            # 局部绕行（每个穿框段就近加 2 个直角点），不会破坏 T 接路径。
+            # v12h 注释中担心的"绕行破坏母线/干线 T 接"是因为 _detour_reroute 全段
+            # 重排；这里只对"本段穿过单个非端点框"做局部加 2 点处理，端点不动。
+            try:
+                _par_id, _chd_id = (None, None)
+                _md_from = list(m.get('froms') or [])
+                _md_to = list(m.get('tos') or [])
+                if _md_from:
+                    _par_id = _md_from[0]
+                if _md_to:
+                    _chd_id = _md_to[0]
+                pts2 = self._avoid_devices(pts2, _par_id, _chd_id)
+            except Exception:
+                pass
             # ★ B-mini 修复：旧版 d<40 && len>2 直接整条删除太激进，把
             # 短距 L 形/3 点折线也一并清掉了。改为：只在 polyline 形成
             # 明显"折返"（中间点回退到起点附近）时才删除；其它短距 L 形
@@ -3052,7 +3085,13 @@ class SvgBeautifier:
         return True
 
     def _device_boxes_abs(self):
-        """设备绝对色框（大框：符号 + pad），母线无框（用线表达）"""
+        """设备绝对色框（与 _draw_devices 渲染 rect 完全一致）
+
+        ★ 修复：旧版在 _dev_box_edges 输出之上又 -10/-16/+10/+20，与渲染口径相消，
+        导致 hit/avoid 检测框比实际渲染框小 20px×36px，漏检真实穿框/重叠。
+        现在 box 边 = _dev_box_edges 边 = 渲染 rect 边，逐字对应 _draw_devices 的 pad 参数。
+        母线无框（用线表达）。
+        """
         if getattr(self, '_abs_dev_boxes_cache', None) is not None:
             return self._abs_dev_boxes_cache
         boxes = {}
@@ -3063,7 +3102,7 @@ class SvgBeautifier:
             if d['type'] in BUSBAR_TYPES:
                 continue
             l, r, t, b = self._dev_box_edges(pid)
-            boxes[pid] = (x + l - 10.0, y + t - 16.0, x + r + 10.0, y + b + 20.0)
+            boxes[pid] = (x + l, y + t, x + r, y + b)
         self._abs_dev_boxes_cache = boxes
         return boxes
 

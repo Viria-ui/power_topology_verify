@@ -3,6 +3,7 @@
      viewBox="0 0 3868.00 445.00"
      width="3868.00" height="445.00"
      font-family="Microsoft YaHei, SimHei, Arial, sans-serif">
+  <style>symbol{overflow:visible}</style>
   <defs>
     <!-- 箭头 marker -->
     <marker id="arr-main" viewBox="0 0 10 10" refX="9" refY="5"
@@ -16,35 +17,35 @@
     
   </defs>
   <rect x="0" y="0" width="3868.00" height="445.00" fill="#FFFFFF"/>
-  <line x1="110.00" y1="217.50" x2="266.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
-  <line x1="266.00" y1="245.00" x2="422.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
-  <line x1="422.00" y1="190.00" x2="422.00" y2="135.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
-  <line x1="734.00" y1="162.50" x2="578.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1202.00" y1="162.50" x2="1046.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2294.00" y1="162.50" x2="2450.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="3230.00" y1="162.50" x2="3386.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="110.00" y1="107.50" x2="266.00" y2="80.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="890.00" y1="162.50" x2="734.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1358.00" y1="162.50" x2="1202.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="266.00" y1="135.00" x2="266.00" y2="80.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1046.00" y1="162.50" x2="890.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="422.00" y1="135.00" x2="578.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2918.00" y1="162.50" x2="3074.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1358.00" y1="162.50" x2="1514.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1982.00" y1="162.50" x2="2138.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1982.00" y1="162.50" x2="1826.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1826.00" y1="162.50" x2="1670.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2918.00" y1="162.50" x2="2762.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2294.00" y1="162.50" x2="2138.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="110.00" y1="162.50" x2="266.00" y2="190.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="422.00" y1="135.00" x2="266.00" y2="190.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1514.00" y1="162.50" x2="1670.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="110.00" y1="162.50" x2="266.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2450.00" y1="162.50" x2="2606.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="3386.00" y1="162.50" x2="3542.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2762.00" y1="162.50" x2="2606.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="3542.00" y1="162.50" x2="3698.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="3230.00" y1="162.50" x2="3074.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="316.00" y1="227.37" x2="372.00" y2="207.63" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="422.00" y1="170.00" x2="422.00" y2="155.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="160.00" y1="226.31" x2="216.00" y2="236.19" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="472.00" y1="143.81" x2="528.00" y2="153.69" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2244.00" y1="162.50" x2="2188.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2868.00" y1="162.50" x2="2812.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1564.00" y1="162.50" x2="1620.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2968.00" y1="162.50" x2="3024.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="160.00" y1="153.69" x2="216.00" y2="143.81" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1308.00" y1="162.50" x2="1252.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="160.00" y1="98.69" x2="216.00" y2="88.81" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1408.00" y1="162.50" x2="1464.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2344.00" y1="162.50" x2="2400.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1152.00" y1="162.50" x2="1096.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="996.00" y1="162.50" x2="940.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="3436.00" y1="162.50" x2="3492.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="3180.00" y1="162.50" x2="3124.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2500.00" y1="162.50" x2="2556.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="3280.00" y1="162.50" x2="3336.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="3592.00" y1="162.50" x2="3648.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="372.00" y1="152.63" x2="316.00" y2="172.37" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1776.00" y1="162.50" x2="1720.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="160.00" y1="171.31" x2="216.00" y2="181.19" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2712.00" y1="162.50" x2="2656.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2032.00" y1="162.50" x2="2088.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="684.00" y1="162.50" x2="628.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1932.00" y1="162.50" x2="1876.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="266.00" y1="115.00" x2="266.00" y2="100.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="840.00" y1="162.50" x2="784.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
   <g data-id="TMP00004767"><rect x="60.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="#E6F4FF" stroke="#262626" stroke-width="2.8"/><text x="110.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00008</text></g>
   <g data-id="TMP00004768"><rect x="60.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="#E6F4FF" stroke="#262626" stroke-width="2.8"/><text x="110.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00009</text></g>
   <g data-id="TMP00004770"><rect x="60.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="#E6F4FF" stroke="#262626" stroke-width="2.8"/><text x="110.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00011</text></g>

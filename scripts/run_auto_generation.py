@@ -32,7 +32,8 @@ from data_io.svg_reader import SvgDocument
 
 
 def _copy_caf62f4(name, out):
-    """联络图/总图沿用 caf62f4 原版产物（用户明确不再改动），直接拷贝静态文件。"""
+    """[已停用] 曾直接拷贝 caf62f4 静态产物；现联络图/总图已改回 caf62f4 版本代码实时生成。
+    保留函数仅为兼容历史引用，不再被任务列表调用。"""
     import shutil
     src = os.path.join(PROJECT_ROOT, "output", "svg", "caf62f4", name)
     os.makedirs(os.path.dirname(out), exist_ok=True)
@@ -50,13 +51,25 @@ AUTO_INDEX_PATH = os.path.join(OUTPUT_SVG, "auto_index.html")
 
 
 def _svg_meta(svg_path: str) -> tuple[int, int]:
-    """解析 SVG 获取设备数和连接数（若 parse 失败则兜底 0）。"""
+    """解析 SVG 获取设备数和连接数（若 parse 失败则兜底 0）。
+
+    注意：SvgDocument.parse() 的连接解析仅识别 <g> 包装的 polyline，
+    而生成器输出为 ConnLine_Layer 下裸 polyline，直接读会得到 0 条连接。
+    因此在 SvgDocument 结果不可用时，回退为正则统计 ConnLine_Layer 内的 polyline 数量。
+    """
     try:
         doc = SvgDocument(svg_path)
         ok = doc.parse()
-        if not ok:
-            return 0, 0
-        return len(doc.elements), len(doc.connections)
+        devs = len(doc.elements) if ok else 0
+        if ok and doc.connections:
+            return devs, len(doc.connections)
+        import re as _re
+        src = open(svg_path, encoding="utf-8").read()
+        conns = 0
+        m = _re.search(r'<g id="ConnLine_Layer">(.*?)</g>', src, _re.S)
+        if m:
+            conns = len(_re.findall(r"<polyline\b", m.group(1)))
+        return devs, conns
     except Exception:
         return 0, 0
 
@@ -260,7 +273,7 @@ def main(skip_index: bool = True):
             "logic": "_find_tie_neighbors('10kVLINE111') 抽取联络关系 → 中心放射布局，联络开关在中点标注",
             "out": os.path.join(OUTPUT_SVG, "10kVLINE111_tie.svg"),
             "diagram_type": "feeder_tie",
-            "run": lambda o: _copy_caf62f4("10kVLINE111_tie.svg", o),
+            "run": lambda o: generate_feeder_tie_diagram("10kVLINE111", o, topo=dist_topo, renderer=renderer),
             "feeder_kw": "10kVLINE111",
         },
         {
@@ -270,7 +283,7 @@ def main(skip_index: bool = True):
             "logic": "_station_feeders_and_ties('SUB004') 收集馈线+联络 → 5列栅格布局绘制馈线框 + 跨列联络线",
             "out": os.path.join(OUTPUT_SVG, "SUB004_station_tie.svg"),
             "diagram_type": "station_tie_overview",
-            "run": lambda o: _copy_caf62f4("SUB004_station_tie.svg", o),
+            "run": lambda o: generate_station_tie_overview("SUB004", o, topo=dist_topo, renderer=renderer),
             "substation_kw": "SUB004",
         },
         {

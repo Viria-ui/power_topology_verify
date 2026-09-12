@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      viewBox="0 0 640.00 1580.00"
      width="640.00" height="1580.00"
      font-family="Microsoft YaHei, SimHei, Arial, sans-serif">
+  <style>symbol{overflow:visible}</style>
   <defs>
     <!-- 箭头 marker -->
     <marker id="arr-main" viewBox="0 0 10 10" refX="9" refY="5"

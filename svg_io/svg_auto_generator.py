@@ -82,30 +82,59 @@ def _vis_half(rot: bool, s: float):
     return (80.0 * s, 110.0 * s) if rot else (110.0 * s, 80.0 * s)
 
 
-def _terminal_point(cx: float, cy: float, rot: bool, s: float, bx: float, by: float):
-    """返回 (cx,cy) 处符号朝向目标 (bx,by) 的电气端子中心。
-    串接（方向与端子轴一致）→ 左右/上下端子；T接（方向与端子轴垂直）→ 符号顶/底部。"""
-    half = 59.2 * s
-    if rot:
-        # 横向符号端子左右（±59.2s）
-        if abs(by - cy) > abs(bx - cx):
-            hh = 110.0 * s
-            return (cx, cy + (hh if by >= cy else -hh))
-        return (cx + (half if bx >= cx else -half), cy)
-    # 纵向符号端子上/下
-    if abs(bx - cx) > abs(by - cy):
-        hh = 80.0 * s
-        return (cx + (hh if bx >= cx else -hh), cy)
-    return (cx, cy + (half if by >= cy else -half))
+def _terminal_point(sid: str, boxes: dict, cx: float, cy: float, rot: bool, s: float,
+                    bx: float, by: float):
+    """返回 (cx,cy) 处符号 sid 朝向目标 (bx,by) 的电气端子中心。
+
+    ★ 基于项目符号库真实端子坐标（terminal-index），不再硬编码 59.2/80/110。
+    渲染口径与 symbol_use_xml_impl 一致：
+      use transform = scale(s) translate(-box.cx,-box.cy)，外框 translate(cx,cy) [rotate(90)]
+    端子世界坐标 = 设备中心 + s*旋转(端子局部坐标 - 内容盒中心)。
+    无端子信息时退化为内容盒边中点（自绘符号走此分支）。
+    """
+    box = boxes.get(sid) if boxes else None
+    terms = box.get("terminals") if box else None
+    horiz_main = abs(bx - cx) >= abs(by - cy)
+    if box:
+        bcx, bcy = box.get("cx", 0.0), box.get("cy", 0.0)
+        if rot:
+            hw, hh = s * box.get("vb_h", box.get("h", 1.0)) / 2, s * box.get("vb_w", box.get("w", 1.0)) / 2
+        else:
+            hw, hh = s * box.get("vb_w", box.get("w", 1.0)) / 2, s * box.get("vb_h", box.get("h", 1.0)) / 2
+    else:
+        bcx = bcy = 0.0
+        hw = hh = 75.0
+
+    def _w(tx, ty):
+        if rot:
+            return (cx - s * (ty - bcy), cy + s * (tx - bcx))
+        return (cx + s * (tx - bcx), cy + s * (ty - bcy))
+
+    if terms:
+        # 水平端子（y≈内容盒中心）与垂直端子（x≈内容盒中心）
+        horiz_pts = [_w(tx, ty) for (tx, ty) in terms.values() if abs(ty - bcy) <= 2.0]
+        vert_pts = [_w(tx, ty) for (tx, ty) in terms.values() if abs(tx - bcx) <= 2.0]
+        if horiz_main and horiz_pts:
+            return min(horiz_pts, key=lambda p: (p[0] - bx) ** 2 + (p[1] - by) ** 2)
+        if not horiz_main and vert_pts:
+            return min(vert_pts, key=lambda p: (p[0] - bx) ** 2 + (p[1] - by) ** 2)
+        all_pts = horiz_pts + vert_pts
+        if all_pts:
+            return min(all_pts, key=lambda p: (p[0] - bx) ** 2 + (p[1] - by) ** 2)
+    # 无端子：内容盒边中点
+    if horiz_main:
+        return (cx + (hw if bx >= cx else -hw), cy)
+    return (cx, cy + (hh if by >= cy else -hh))
 
 
-def _edge_path_pts(pa, pb, a_rot, b_rot, a_s, b_s, hw=75.0, hh=75.0):
+def _edge_path_pts(sid_a, sid_b, boxes, pa, pb, a_rot, b_rot, a_s, b_s,
+                    hw=75.0, hh=75.0):
     """端子到端子的正交折线：[起点端子, 转折点, 终点端子]。
     pa/pb 是设备框左上角坐标，端子几何以设备中心为基准，故先加半格偏移。"""
     ca = (pa[0] + hw, pa[1] + hh)
     cb = (pb[0] + hw, pb[1] + hh)
-    ta = _terminal_point(ca[0], ca[1], a_rot, a_s, cb[0], cb[1])
-    tb = _terminal_point(cb[0], cb[1], b_rot, b_s, ca[0], ca[1])
+    ta = _terminal_point(sid_a, boxes, ca[0], ca[1], a_rot, a_s, cb[0], cb[1])
+    tb = _terminal_point(sid_b, boxes, cb[0], cb[1], b_rot, b_s, ca[0], ca[1])
     return [ta, (tb[0], ta[1]), tb]
 
 
@@ -129,6 +158,7 @@ class SvgAutoGenerator:
             self.dist_topo = cached["dist_topo"]
             self.dg = cached["dg"]
             self.symbol_boxes = cached.get("symbol_boxes") or self._load_symbol_boxes()
+            self.symbol_defs_xml = cached.get("symbol_defs_xml") or getattr(self, "symbol_defs_xml", "")
             return
         else:
             # 首次加载：走正常路径并缓存
@@ -146,7 +176,8 @@ class SvgAutoGenerator:
                                                 self.table_data.get("equip"),
                                                 self.table_data.get("line"),
                                                 self.table_data.get("terminal"))
-        # 规范符号库（output/svg符号库/final_symbols，禁止自绘）
+        # 项目原始符号库（svg_beautifier.SYMBOL_DEFS_XML，禁止自绘）
+        self.symbol_defs_xml = ""
         self.symbol_boxes = self._load_symbol_boxes()
 
         # 缓存
@@ -156,6 +187,7 @@ class SvgAutoGenerator:
             "dist_topo": self.dist_topo,
             "dg": self.dg,
             "symbol_boxes": self.symbol_boxes,
+            "symbol_defs_xml": getattr(self, "symbol_defs_xml", ""),
         }
 
     @staticmethod
@@ -164,56 +196,63 @@ class SvgAutoGenerator:
         return loader.load_all_topo_tables()
 
     def _load_symbol_boxes(self):
-        """加载 output/svg符号库/final_symbols 的 13 个标准符号（禁止自绘）。
-        返回 {sid: {"cx","cy","w","h","scale_k","vb_w","vb_h"}}。"""
-        import os as _os
-        for _root in (os.path.join(PROJECT_ROOT, "output", "svg符号库", "final_symbols"),
-                      os.path.join(PROJECT_ROOT, "build_tmp", "svg符号库_backup")):
-            if _os.path.isdir(_root):
-                _defs, _boxes = auto_layout.load_symbol_dir(_root)
-                if _boxes:
-                    return _boxes
+        """加载项目原始符号库（svg_beautifier.SYMBOL_DEFS_XML，165 张美化 SVG 用库）。
+        返回 {sid: {"cx","cy","w","h","scale_k","vb_w","vb_h","terminals"}}。
+        同时把去前缀 defs 存到 self.symbol_defs_xml 供 _write_svg 注入。"""
+        _defs, _boxes = auto_layout.load_project_symbol_library()
+        if _boxes:
+            self.symbol_defs_xml = _defs
+            return _boxes
         return {}
 
-    # equip_type → 标准符号 ID（final_symbols 13 个符号）
+    # equip_type → 项目符号库 ID（svg_beautifier.SYMBOL_DEFS_XML，165 张美化 SVG 同款 IEC 符号）
     _SYM_MAP = {
-        "1701": "std_Substation",
-        "1703": "std_PowerTransformer",
-        "1704": "std_CurrentTransformer",
-        "1705": "std_Breaker",
-        "1706": "std_LoadBreakSwitch",
-        "1707": "std_Disconnector",
-        "1708": "std_Fuse",
-        "1709": "std_GroundDisconnector",
-        "0111": "std_Breaker",
-        "0115": "std_Disconnector",
-        "0116": "std_LoadBreakSwitch",
-        "0171": "std_Fuse",
-        "0172": "std_GroundDisconnector",
-        "0173": "std_SurgeArrester",
-        "370000": "std_EnergyConsumer",
+        "1701": "",                       # 变电站 → 自绘容器（项目库无变电站符号）
+        "1703": "PowerTransformer_TMP_a70da64e-4139-4238-99ff-f38ae7eea01c",   # 配变
+        "1704": "CurrentTransformer_9119054a-1e83-4003-a946-a83406c03d83",     # 电流互感器
+        "1705": "Breaker_TMP_62d95710-813b-4a92-8dce-35f89dc1c3cd",            # 断路器
+        "1706": "LoadBreakSwitch_357151fb-61fc-46d3-9281-9ff6d1969176",        # 负荷开关
+        "1707": "Disconnector_TMP_54fefde2-8d21-4470-8807-663dab8577b8",       # 隔离开关
+        "1708": "Disconnector_TMP_54fefde2-8d21-4470-8807-663dab8577b8",       # 刀闸
+        "1709": "GroundDisconnector_TMP_0c37fbe3-1b09-41fd-8a4d-38e20bd945d5", # 接地刀闸
+        "1710": "",                       # 母线 → 自绘 busbar（项目库母线为画线）
+        "1713": "PotentialTransformer_a6f46c6a-ace4-43ea-9973-b5f94576d3c9",   # 电压互感器
+        "1714": "PoleCode_da3c5ac4-fbe8-4e62-bfb3-5eab3768a97a",               # 杆塔
+        "1719": "EnergyConsumer_3dba839c-4394-4b87-9ef4-dae464753604",         # 用户
+        "1720": "Breaker_TMP_62d95710-813b-4a92-8dce-35f89dc1c3cd",            # 开关(大数量，同断路器)
+        "1313": "CurrentTransformer_9119054a-1e83-4003-a946-a83406c03d83",     # CT
+        "1328": "SurgeArrester_f4d15417-154b-4802-9a0d-eaa46f6f049d",          # 避雷器
+        "0111": "Breaker_TMP_62d95710-813b-4a92-8dce-35f89dc1c3cd",
+        "0115": "PoleCode_da3c5ac4-fbe8-4e62-bfb3-5eab3768a97a",
+        "0116": "SurgeArrester_f4d15417-154b-4802-9a0d-eaa46f6f049d",
+        "0171": "Fuse_6f477905-e141-4423-8160-7b6e8537ec92",
+        "0172": "GroundDisconnector_TMP_0c37fbe3-1b09-41fd-8a4d-38e20bd945d5",
+        "0173": "SurgeArrester_f4d15417-154b-4802-9a0d-eaa46f6f049d",
+        "370000": "EnergyConsumer_3dba839c-4394-4b87-9ef4-dae464753604",
     }
     _SYM_NAME_RULES = (
-        ("电流互感", "std_CurrentTransformer"),
-        ("电压互感", "std_PotentialTransformer"),
-        ("变压器", "std_PowerTransformer"),
-        ("断路器", "std_Breaker"),
-        ("负荷开关", "std_LoadBreakSwitch"),
-        ("隔离开关", "std_Disconnector"),
-        ("刀闸", "std_Disconnector"),
-        ("熔断", "std_Fuse"),
-        ("接地", "std_GroundDisconnector"),
-        ("避雷", "std_SurgeArrester"),
-        ("互感", "std_CurrentTransformer"),
-        ("母线", "std_Substation"),
-        ("变电站", "std_Substation"),
-        ("配电", "std_Substation"),
-        ("负荷", "std_EnergyConsumer"),
-        ("用户", "std_EnergyConsumer"),
+        ("电流互感", "CurrentTransformer_9119054a-1e83-4003-a946-a83406c03d83"),
+        ("电压互感", "PotentialTransformer_a6f46c6a-ace4-43ea-9973-b5f94576d3c9"),
+        ("变压器", "PowerTransformer_TMP_a70da64e-4139-4238-99ff-f38ae7eea01c"),
+        ("断路器", "Breaker_TMP_62d95710-813b-4a92-8dce-35f89dc1c3cd"),
+        ("负荷开关", "LoadBreakSwitch_357151fb-61fc-46d3-9281-9ff6d1969176"),
+        ("隔离开关", "Disconnector_TMP_54fefde2-8d21-4470-8807-663dab8577b8"),
+        ("刀闸", "Disconnector_TMP_54fefde2-8d21-4470-8807-663dab8577b8"),
+        ("熔断", "Fuse_6f477905-e141-4423-8160-7b6e8537ec92"),
+        ("接地", "GroundDisconnector_TMP_0c37fbe3-1b09-41fd-8a4d-38e20bd945d5"),
+        ("避雷", "SurgeArrester_f4d15417-154b-4802-9a0d-eaa46f6f049d"),
+        ("互感", "CurrentTransformer_9119054a-1e83-4003-a946-a83406c03d83"),
+        ("母线", ""),
+        ("变电站", ""),
+        ("配电", ""),
+        ("负荷", "EnergyConsumer_3dba839c-4394-4b87-9ef4-dae464753604"),
+        ("用户", "EnergyConsumer_3dba839c-4394-4b87-9ef4-dae464753604"),
+        ("杆塔", "PoleCode_da3c5ac4-fbe8-4e62-bfb3-5eab3768a97a"),
     )
 
     def _sym_for_node(self, nd):
-        """设备节点 → 标准符号 ID（equip_type 优先，名称兜底，禁自绘）。"""
+        """设备节点 → 项目符号库 ID（equip_type 优先，名称兜底）。
+        返回 "" 表示该设备走自绘（母线/变电站容器）。"""
         tp = str(nd.get("equip_type") or "").strip()
         if tp in self._SYM_MAP:
             return self._SYM_MAP[tp]
@@ -221,17 +260,17 @@ class SvgAutoGenerator:
         for _k, _sid in self._SYM_NAME_RULES:
             if _k in nm:
                 return _sid
-        return "std_Junction"
+        return "Junction_03ae4dd6-c087-42d2-82de-7a7c43b048e8"
 
     def _render_device(self, nd, x, y, w, h, rot=False):
-        """规范符号库 use 渲染；无匹配符号时回退自绘示意。"""
+        """项目符号库 use 渲染；母线/变电站等无符号设备回退自绘。"""
         boxes = getattr(self, "symbol_boxes", None) or {}
         sid = self._sym_for_node(nd)
-        if sid in boxes:
+        if sid and sid in boxes:
             if rot:
                 return auto_layout.symbol_use_xml_rot(boxes, sid, x, y, w, h, target_w=200.0)
             return auto_layout.symbol_use_xml(boxes, sid, x, y, w, h, target_w=150.0)
-        return _device_symbol(nd, x, y, w, h)
+        return SvgAutoGenerator._device_symbol(nd, x, y, w, h)
 
     @staticmethod
     def _project_to_device_graph(topo: TopologyGraph, table_data_equip=None, table_data_line=None, table_data_terminal=None) -> nx.Graph:
@@ -848,6 +887,7 @@ class SvgAutoGenerator:
      viewBox="0 0 {vb_w:.2f} {vb_h:.2f}"
      width="{vb_w:.2f}" height="{vb_h:.2f}"
      font-family="Microsoft YaHei, SimHei, Arial, sans-serif">
+  <style>symbol{{overflow:visible}}</style>
   <defs>
     <!-- 箭头 marker -->
     <marker id="arr-main" viewBox="0 0 10 10" refX="9" refY="5"
@@ -873,16 +913,12 @@ class SvgAutoGenerator:
 
     # ---- 1. 单馈线单线图 --------------------------------------------
     def generate_feeder_single_line_diagram(self, feeder_name: str, out_path: str) -> dict:
-        # 规范符号库 defs（13 个 std_* symbol，禁自绘）
-        _defs_xml = ""
-        for _root in (os.path.join(PROJECT_ROOT, "output", "svg符号库", "final_symbols"),
-                      os.path.join(PROJECT_ROOT, "build_tmp", "svg符号库_backup")):
-            if os.path.isdir(_root):
-                _dx, _bx = auto_layout.load_symbol_dir(_root)
-                if _bx:
-                    _defs_xml = _dx
-                    self.symbol_boxes = _bx
-                    break
+        # 项目原始符号库 defs（svg_beautifier.SYMBOL_DEFS_XML，20 个 IEC 符号 + terminal）
+        if not getattr(self, "symbol_defs_xml", "") or not getattr(self, "symbol_boxes", None):
+            _dx, _bx = auto_layout.load_project_symbol_library()
+            self.symbol_defs_xml = _dx
+            self.symbol_boxes = _bx
+        _defs_xml = self.symbol_defs_xml
         sub = self._feeder_subgraph(feeder_name)
 
         # ---- 只画物理连通的主馈线：取最大连通分量，排除孤立小岛/杆塔等杂散设备 ----
@@ -961,13 +997,15 @@ class SvgAutoGenerator:
             pb = pos.get(b)
             if not pa or not pb:
                 continue
-            a_rot = orient.get(a) == "H"
-            b_rot = orient.get(b) == "H"
-            a_s = auto_layout.symbol_scale(self.symbol_boxes, self._sym_for_node(dev_sub.nodes[a]),
+            a_rot = orient.get(a) == "V"
+            b_rot = orient.get(b) == "V"
+            a_sid = self._sym_for_node(dev_sub.nodes[a])
+            b_sid = self._sym_for_node(dev_sub.nodes[b])
+            a_s = auto_layout.symbol_scale(self.symbol_boxes, a_sid,
                                            SYM_W, SYM_H, a_rot)
-            b_s = auto_layout.symbol_scale(self.symbol_boxes, self._sym_for_node(dev_sub.nodes[b]),
+            b_s = auto_layout.symbol_scale(self.symbol_boxes, b_sid,
                                            SYM_W, SYM_H, b_rot)
-            pts = _edge_path_pts(pa, pb, a_rot, b_rot, a_s, b_s)
+            pts = _edge_path_pts(a_sid, b_sid, self.symbol_boxes, pa, pb, a_rot, b_rot, a_s, b_s)
             conn_parts.append(auto_layout.polyline_xml(pts, PAL["main"], 2.2))
         body_parts.append(f'<g id="ConnLine_Layer">{"".join(conn_parts)}</g>')
 
@@ -980,7 +1018,7 @@ class SvgAutoGenerator:
             if not name or name in ("nan", "None"):
                 name = str(nd.get("equip_type") or n)
             tp = str(nd.get("equip_type") or "")
-            sym = self._render_device(nd, x, y, SYM_W, SYM_H, rot=(orient.get(n) == "H"))
+            sym = self._render_device(nd, x, y, SYM_W, SYM_H, rot=(orient.get(n) == "V"))
             short = name if len(name) <= 12 else name[:11] + "…"
             dev_parts.append(f'<g id="{n}" data-type="{tp}">{sym}</g>')
             text_parts.append(
@@ -1258,13 +1296,13 @@ class SvgAutoGenerator:
         body = []
 
         # 备用路径 (先画：在底部)
+        # ★ v13：改用框边交点（_edge_points 已实现但未调用），避免线穿过设备符号内部
         for a, b in edges_backup:
             pa = pos.get(a); pb = pos.get(b)
             if not pa or not pb: continue
-            ax, ay = pa[0] + NODE_W / 2, pa[1] + NODE_H / 2
-            bx, by = pb[0] + NODE_W / 2, pb[1] + NODE_H / 2
+            x1, y1, x2, y2 = self._edge_points(pa, pb, NODE_W, NODE_H)
             body.append(
-                f'<line x1="{ax:.2f}" y1="{ay:.2f}" x2="{bx:.2f}" y2="{by:.2f}" '
+                f'<line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" '
                 f'stroke="{PAL["trace_backup"]}" stroke-width="3.5" '
                 f'stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>')
 
@@ -1272,10 +1310,9 @@ class SvgAutoGenerator:
         for a, b in edges_main:
             pa = pos.get(a); pb = pos.get(b)
             if not pa or not pb: continue
-            ax, ay = pa[0] + NODE_W / 2, pa[1] + NODE_H / 2
-            bx, by = pb[0] + NODE_W / 2, pb[1] + NODE_H / 2
+            x1, y1, x2, y2 = self._edge_points(pa, pb, NODE_W, NODE_H)
             body.append(
-                f'<line x1="{ax:.2f}" y1="{ay:.2f}" x2="{bx:.2f}" y2="{by:.2f}" '
+                f'<line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" '
                 f'stroke="{PAL["trace"]}" stroke-width="4.5" '
                 f'marker-end="url(#arr-main)"/>')
 
