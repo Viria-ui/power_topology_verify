@@ -574,3 +574,6 @@
 2026-09-13 12:40:51 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=FEEDER_A 识别到 1 个联络开关
 2026-09-13 12:40:51 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=FEEDER_X 识别到 0 个联络开关
 2026-09-13 12:40:51 [INFO] core.score_engine: 评分结果(规范公式): 设备=1000 缺陷=19 维度扣分=58.00 score_before=42.0 score_after=42.0
+2026-09-13 14:23:32 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=FEEDER_A 识别到 1 个联络开关
+2026-09-13 14:23:32 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=FEEDER_X 识别到 0 个联络开关
+2026-09-13 14:23:32 [INFO] core.score_engine: 评分结果(规范公式): 设备=1000 缺陷=19 维度扣分=58.00 score_before=42.0 score_after=42.0
