@@ -17,7 +17,7 @@
       "threshold": 10
     },
     "text_overlap_pct": {
-      "value": 0.0,
+      "value": 0.31,
       "ok": true,
       "threshold": 8.0
     },
@@ -37,7 +37,7 @@
       "threshold": 30.0
     },
     "dangling_connections_pct": {
-      "value": 0.35,
+      "value": 0.18,
       "ok": true,
       "threshold": 20.0
     },
@@ -56,15 +56,15 @@
     "viewBox": {
       "x": 0.0,
       "y": 0.0,
-      "w": 15640.0,
-      "h": 3670.0
+      "w": 9540.0,
+      "h": 6910.0
     },
     "canvas": {
-      "width": 15640.0,
-      "height": 3670.0,
+      "width": 9540.0,
+      "height": 6910.0,
       "aspect_match": true,
-      "vb_ratio": 4.2616,
-      "wh_ratio": 4.2616
+      "vb_ratio": 1.3806,
+      "wh_ratio": 1.3806
     },
     "devices": {
       "total": 651,
@@ -79,8 +79,8 @@
       "visible": 651,
       "hidden": 0,
       "hidden_pct": 0.0,
-      "overlap_victims": 0,
-      "overlap_pct": 0.0,
+      "overlap_victims": 2,
+      "overlap_pct": 0.31,
       "outside": 0,
       "fontscale_abnormal": 0,
       "fontscale_abnormal_pct": 0.0,
@@ -88,13 +88,13 @@
     },
     "topology": {
       "total_device_nodes": 672,
-      "connections_total": 1696,
+      "connections_total": 1710,
       "connected_components": 4,
       "largest_component_size": 639,
       "largest_component_pct": 95.09,
       "island_components_pct": 4.91,
       "isolated_nodes_pct": 0.0,
-      "dangling_connections_pct": 0.35
+      "dangling_connections_pct": 0.18
     }
   }
 }

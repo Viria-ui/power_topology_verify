@@ -17,7 +17,7 @@
       "threshold": 10
     },
     "text_overlap_pct": {
-      "value": 0.0,
+      "value": 1.27,
       "ok": true,
       "threshold": 8.0
     },
@@ -56,15 +56,15 @@
     "viewBox": {
       "x": 0.0,
       "y": 0.0,
-      "w": 14960.0,
-      "h": 6580.0
+      "w": 14620.0,
+      "h": 6310.0
     },
     "canvas": {
-      "width": 14960.0,
-      "height": 6580.0,
+      "width": 14620.0,
+      "height": 6310.0,
       "aspect_match": true,
-      "vb_ratio": 2.2736,
-      "wh_ratio": 2.2736
+      "vb_ratio": 2.317,
+      "wh_ratio": 2.317
     },
     "devices": {
       "total": 947,
@@ -79,8 +79,8 @@
       "visible": 947,
       "hidden": 0,
       "hidden_pct": 0.0,
-      "overlap_victims": 0,
-      "overlap_pct": 0.0,
+      "overlap_victims": 12,
+      "overlap_pct": 1.27,
       "outside": 0,
       "fontscale_abnormal": 0,
       "fontscale_abnormal_pct": 0.0,
@@ -88,7 +88,7 @@
     },
     "topology": {
       "total_device_nodes": 1013,
-      "connections_total": 1705,
+      "connections_total": 1697,
       "connected_components": 7,
       "largest_component_size": 900,
       "largest_component_pct": 88.85,

@@ -18,8 +18,8 @@
     "components_after": 3,
     "components_change": -249,
     "type_changes": {
-      "标注错位": 27,
       "设备重叠": 278,
+      "标注错位": 27,
       "孤岛设备": 114
     }
   },
