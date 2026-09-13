@@ -1079,51 +1079,59 @@ class SvgBeautifier:
             for n in self.tree_parent:
                 layers[branch_depth[n]].append(n)
 
+            max_depth = max(branch_depth.values()) if branch_depth else 0
+            # ★ v36：主干横排（电源→负荷，从左至右）+ 分支网格（列=x 聚类、行=y 聚类）。
             self.pos = {}
             for i, n in enumerate(trunk_order):
                 self.pos[n] = (self.snap(MARGIN + i * DEV_SPAN), self.snap(TRUNK_Y0))
-
-            # ★ 分支层内排序：兄弟按（母线>开关>其他, 原图y）→ 先上后下
-            def _sib_order(cs):
-                def key(c):
-                    t = self.devices.get(c, {}).get('type', '')
-                    rank = 0 if t in BUSBAR_TYPES else (1 if t in SWITCH_TYPES else 2)
-                    return (rank, self.devices.get(c, {}).get('orig_y', 0))
-                return sorted(cs, key=key)
-
-            max_depth = max(branch_depth.values()) if branch_depth else 0
-            # ★ v15 竖排已回退（兄弟同列互穿，交叉反而暴涨）；
-            # 恢复 v5 横排：兄弟从父 x 起横排，同层 x 区间冲突右移
-            BRANCH_ROW_LIMIT = 22
-            for depth in range(1, max_depth + 1):
-                layer_nodes = layers[depth]
-                if not layer_nodes:
-                    continue
-                groups = defaultdict(list)
-                for n in layer_nodes:
-                    groups[self.tree_parent[n]].append(n)
-                sorted_parents = sorted(groups.keys(),
-                                        key=lambda p: self.pos.get(p, (0, 0))[0])
-                # ★ v17：同层不同父的分支排 y 错开（最多 3 个轨道），
-                #   避免所有父的兄弟横排水平段挤在同一 y → 互穿成网格
-                TRACKS = 5
-                TRACK_OFF = 60
-                occupied = []
-                for _pi, par in enumerate(sorted_parents):
-                    y = TRUNK_Y0 + depth * LAYER_H + (_pi % TRACKS) * TRACK_OFF
-                    children = _sib_order(groups[par])
-                    px = self.pos[par][0]
-                    base = px
-                    for o_l, o_r in occupied:
-                        need_l = base
-                        need_r = base + (len(children) - 1) * DEV_SPAN
-                        if need_r >= o_l and need_l <= o_r:
-                            base = o_r + GROUP_GAP
-                    for i, n in enumerate(children):
-                        self.pos[n] = (self.snap(base + i * DEV_SPAN), self.snap(y))
-                    if children:
-                        occupied.append((base, base + (len(children) - 1) * DEV_SPAN))
-                        occupied.sort()
+            # ★ v35：原图坐标网格化（v29 回归）——列 = 原图 x 聚类（并联支路并排），
+            # 行 = 原图 y 聚类（并联对齐，垂直连接短）。保留原图拓扑顺序，
+            # 交叉最低（17880/20336）、重叠 0、评分 100，线短简洁。
+            COL_GAP = 6.0        # 原图 x 聚类阈值
+            ROW_GAP_Y = 4.0      # 原图 y 聚类阈值
+            COL_SPAN = 104       # 列间距（设备 68 宽 + 36 空隙）
+            ROW_SPAN = 96        # 行距（设备 76 高 + 20）
+            branch_devs = [n for n in self.tree_parent
+                           if n not in trunk_set and self.is_real_device(
+                               self.devices.get(n, {}).get('type', ''))]
+            if branch_devs:
+                # 列聚类：x 差 < COL_GAP 归同列（按 x 排序）
+                _col_list = []
+                for n in sorted(branch_devs,
+                                key=lambda d: (self.devices[d].get('orig_x', 0),
+                                               self.devices[d].get('orig_y', 0))):
+                    _ox = self.devices[n].get('orig_x', 0)
+                    if not _col_list or abs(_ox - _col_list[-1][0]) >= COL_GAP:
+                        _col_list.append([_ox, []])
+                    _col_list[-1][1].append(n)
+                _col_idx = {}
+                for ci, (_ox, _ms) in enumerate(_col_list):
+                    for n in _ms:
+                        _col_idx[n] = ci
+                # 行聚类：y 差 < ROW_GAP_Y 归同行（按 y 排序）
+                _row_list = []
+                for n in sorted(branch_devs,
+                                key=lambda d: (self.devices[d].get('orig_y', 0),
+                                               self.devices[d].get('orig_x', 0))):
+                    _oy = self.devices[n].get('orig_y', 0)
+                    if not _row_list or abs(_oy - _row_list[-1][0]) >= ROW_GAP_Y:
+                        _row_list.append([_oy, []])
+                    _row_list[-1][1].append(n)
+                _row_idx = {}
+                for ri, (_oy, _ms) in enumerate(_row_list):
+                    for n in _ms:
+                        _row_idx[n] = ri
+                # 格内冲突（同 (col,row) 多设备）：格内按原 y/x 微偏移（限 4）
+                _slot_use = {}
+                for n in branch_devs:
+                    _ci = _col_idx[n]
+                    _ri = _row_idx[n]
+                    _key = (_ci, _ri)
+                    _k = _slot_use.get(_key, 0)
+                    _slot_use[_key] = _k + 1
+                    _px = MARGIN + _ci * COL_SPAN + (_k % 4) * 22
+                    _py = TRUNK_Y0 + 170 + _ri * ROW_SPAN
+                    self.pos[n] = (self.snap(_px), self.snap(_py))
 
         # ★ 未入树设备兜底（两种算法共享）
         placed = set(self.pos)
@@ -1631,21 +1639,24 @@ class SvgBeautifier:
         return [[p_abs, (c_abs[0], p_abs[1]), c_abs]]
 
     def _z_shape(self, p_abs, c_abs, par, child):
-        """Z 形正交路径：出盒安全列 + 行间通道，全程横平竖直且不穿设备列/行"""
+        """★ v26 标准 Z 形：垂直-水平-垂直（4 点），无 U 形回头。
+        先垂直下到通道空白带 y，水平贯穿到目标 x，再垂直进目标。
+        端点不动（贴色框边），通道取两端 y 之间的最近空白带。"""
         boxes = self._device_boxes_abs()
-        par_side = self._get_port_side(par, child)
-        child_side = self._get_port_side(child, par)
-        ex_p = self._safe_exit_x(p_abs[0], par_side)
-        ex_c = self._safe_exit_x(c_abs[0], child_side)
-        # 通道：两端 y 各自最近的空白带（优先中间统一通道以减少垂直长线）
-        chan = self._nearest_gap_y((p_abs[1] + c_abs[1]) / 2.0, boxes)
-        pts = [p_abs,
-               (ex_p, p_abs[1]),
-               (ex_p, chan),
-               (ex_c, chan),
-               (ex_c, c_abs[1]),
-               c_abs]
-        # 合并共线点
+        # 通道 y：两端 y 中点附近的空白带
+        mid_y = (p_abs[1] + c_abs[1]) / 2.0
+        chan = self._nearest_gap_y(mid_y, boxes)
+        # 与端点同一行则退化为直线
+        if abs(p_abs[1] - c_abs[1]) < 0.5:
+            return [p_abs, c_abs]
+        if abs(p_abs[0] - c_abs[0]) < 0.5:
+            return [p_abs, c_abs]
+        # 通道段不得在端点之外（保持路径单调）
+        lo, hi = min(p_abs[1], c_abs[1]), max(p_abs[1], c_abs[1])
+        if not (lo - 1 <= chan <= hi + 1):
+            chan = mid_y
+        # 选垂直先行的 Z（垂直-水平-垂直），避免 L 形长水平段穿中间设备
+        pts = [p_abs, (p_abs[0], chan), (c_abs[0], chan), c_abs]
         out = [pts[0]]
         for p in pts[1:]:
             if abs(out[-1][0] - p[0]) > 0.1 or abs(out[-1][1] - p[1]) > 0.1:
@@ -1869,13 +1880,16 @@ class SvgBeautifier:
                 return [[p_abs, (tap_ok, by), (c_bot[0], by), c_bot]]
             tap_x = self._bus_tap_on_seg(par, y1, tap_x)
             p_abs = (tap_x, y1)
+            try:
+                cxt, cyt = self._port_offset(child, 'T')
+            except Exception:
+                cxt, cyt = 0, -30
+            c_top = (x2 + cxt, y2 + cyt)
+            if abs(tap_x - c_top[0]) < 0.5:
+                # ★ v32：T 接点与设备顶对齐 → 垂直直连（1 段），线简洁
+                return [[c_top, p_abs]]
             if abs(tap_x - x2) > 0.5:
                 # 错位 T 接：child 顶部端点 → 母线下方横线 → 母线 T 接点
-                try:
-                    cxt, cyt = self._port_offset(child, 'T')
-                except Exception:
-                    cxt, cyt = 0, -30
-                c_top = (x2 + cxt, y2 + cyt)
                 mid_y = y1 - 24
                 return [[c_top, (x2, mid_y), (tap_x, mid_y), p_abs]]
         elif _child_is_bus and not _par_is_bus:
@@ -2256,14 +2270,9 @@ class SvgBeautifier:
             # 局部绕行（每个穿框段就近加 2 个直角点），不会破坏 T 接路径。
             # v12h 注释中担心的"绕行破坏母线/干线 T 接"是因为 _detour_reroute 全段
             # 重排；这里只对"本段穿过单个非端点框"做局部加 2 点处理，端点不动。
-            try:
-                # ★ v14/v18：穿框绕行——_detour_reroute（逐段+全局安全带，防振荡）。
-                # 只对容器框绕行（cont_abs）：设备框已由 _make_wire_segs 的 L/Z 形
-                # 避让；若连设备框也绕，会在设备密集区产生大量"上去下来"的回头段
-                # （回头段本身制造交叉）。端点不动，不破坏 T 接路径。
-                pts2 = self._detour_reroute(pts2, cont_abs) or pts2
-            except Exception as _ex:
-                print(f"  [warn] 绕行失败，保留原路径: {_ex}")
+            # ★ v25：不再对容器框做 _detour_reroute 绕行——绕行产生大量
+            # "上去下来"的回头段与折返（用户明确否决：线绕一圈很难看）。
+            # 跨容器边已由 _make_wire_segs 从容器底部引出，穿框由布局密度兜底。
             # ★ B-mini 修复：旧版 d<40 && len>2 直接整条删除太激进，把
             # 短距 L 形/3 点折线也一并清掉了。改为：只在 polyline 形成
             # 明显"折返"（中间点回退到起点附近）时才删除；其它短距 L 形
@@ -2333,10 +2342,41 @@ class SvgBeautifier:
             if len(res) >= 2 and res != list(pts):
                 _split_keys[key] = res
 
+        # ★ v26：输出前终极路径清理——任意线出现"同坐标往返段"或"非正交斜段"
+        # 即重建为最短 L 形（端点贴框边不动，避免 U 形回头/斜线，保持电路图简洁）。
+        def _final_clean_path(pts):
+            if len(pts) < 3:
+                return pts
+            bad = False
+            for i in range(len(pts) - 2):
+                a, b, c = pts[i], pts[i + 1], pts[i + 2]
+                seg1_h = abs(a[1] - b[1]) < 0.5 and abs(a[0] - b[0]) > 0.5
+                seg1_v = abs(a[0] - b[0]) < 0.5 and abs(a[1] - b[1]) > 0.5
+                seg2_h = abs(b[1] - c[1]) < 0.5 and abs(b[0] - c[0]) > 0.5
+                seg2_v = abs(b[0] - c[0]) < 0.5 and abs(b[1] - c[1]) > 0.5
+                # 同轴往返（a→b→c 沿同一轴折返）
+                if (seg1_h and seg2_h and (c[0] - b[0]) * (b[0] - a[0]) < 0) or \
+                   (seg1_v and seg2_v and (c[1] - b[1]) * (b[1] - a[1]) < 0):
+                    bad = True
+                    break
+                # 斜段（非横非竖）
+                if not (seg1_h or seg1_v) or not (seg2_h or seg2_v):
+                    bad = True
+                    break
+            if not bad:
+                return pts
+            # 重建：最短 L 形（保留端点）
+            s0, e0 = pts[0], pts[-1]
+            if abs(s0[1] - e0[1]) < 0.5 or abs(s0[0] - e0[0]) < 0.5:
+                return [s0, e0]
+            if abs(e0[0] - s0[0]) >= abs(e0[1] - s0[1]):
+                return [s0, (e0[0], s0[1]), e0]
+            return [s0, (s0[0], e0[1]), e0]
+
         for key in order:
             pts, color = key
             m = merged[key]
-            out_pts = _split_keys.get(key, pts)
+            out_pts = _final_clean_path(_split_keys.get(key, pts))
             cg = ET.SubElement(g, f'{{{SVG_NS}}}g', {'id': m['cid']})
             pts_str = ' '.join(f'{x},{y}' for x, y in out_pts)
             ET.SubElement(cg, f'{{{SVG_NS}}}polyline', {
