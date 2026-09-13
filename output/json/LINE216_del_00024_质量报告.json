@@ -37,7 +37,7 @@
       "threshold": 30.0
     },
     "dangling_connections_pct": {
-      "value": 3.5,
+      "value": 3.55,
       "ok": true,
       "threshold": 20.0
     },
@@ -94,7 +94,7 @@
       "largest_component_pct": 73.7,
       "island_components_pct": 26.3,
       "isolated_nodes_pct": 15.89,
-      "dangling_connections_pct": 3.5
+      "dangling_connections_pct": 3.55
     }
   }
 }

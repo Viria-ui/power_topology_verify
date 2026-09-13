@@ -565,3 +565,9 @@
 2026-09-10 23:37:21 [INFO] core.topology_builder: 开始执行拓扑异常检测：悬空、孤岛、断点
 2026-09-10 23:37:24 [INFO] core.topology_builder: 主网异常数量：0，断点数量：0
 2026-09-10 23:37:24 [INFO] core.topology_builder: 配网异常数量：9565，断点数量：561
+2026-09-13 11:33:58 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=FEEDER_A 识别到 1 个联络开关
+2026-09-13 11:33:58 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=FEEDER_X 识别到 0 个联络开关
+2026-09-13 11:33:58 [INFO] core.score_engine: 评分结果(规范公式): 设备=1000 缺陷=19 维度扣分=58.00 score_before=42.0 score_after=42.0
+2026-09-13 11:34:00 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=FEEDER_A 识别到 1 个联络开关
+2026-09-13 11:34:00 [INFO] core.feeder_topology_analysis: Sheet3 联络开关: feeder=FEEDER_X 识别到 0 个联络开关
+2026-09-13 11:34:00 [INFO] core.score_engine: 评分结果(规范公式): 设备=1000 缺陷=19 维度扣分=58.00 score_before=42.0 score_after=42.0

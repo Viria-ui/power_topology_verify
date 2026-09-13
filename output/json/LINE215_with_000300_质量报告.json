@@ -27,17 +27,17 @@
       "threshold": 2.0
     },
     "island_components_pct": {
-      "value": 50.96,
+      "value": 50.89,
       "ok": false,
       "threshold": 50.0
     },
     "isolated_nodes_pct": {
-      "value": 24.7,
+      "value": 24.85,
       "ok": true,
       "threshold": 30.0
     },
     "dangling_connections_pct": {
-      "value": 8.67,
+      "value": 8.85,
       "ok": true,
       "threshold": 20.0
     },
@@ -90,11 +90,11 @@
       "total_device_nodes": 1348,
       "connections_total": 1695,
       "connected_components": 387,
-      "largest_component_size": 661,
-      "largest_component_pct": 49.04,
-      "island_components_pct": 50.96,
-      "isolated_nodes_pct": 24.7,
-      "dangling_connections_pct": 8.67
+      "largest_component_size": 662,
+      "largest_component_pct": 49.11,
+      "island_components_pct": 50.89,
+      "isolated_nodes_pct": 24.85,
+      "dangling_connections_pct": 8.85
     }
   }
 }
