@@ -95,14 +95,26 @@ def _build_topo_graph(doc: SvgDocument) -> dict:
     dev_ids_in_graph: set[str] = set()
 
     for e in doc.elements:
-        if e.element_id and e.layer_name and e.layer_name != 'Substation':
+        # 排除 SvgReader 自动生成的装饰性假设备（无 PSR_Ref metadata、id 以 AUTO_ 开头），
+        # 否则容器框/标签装饰会被当成孤岛设备，导致连通分量虚高
+        if e.element_id and not e.element_id.startswith('AUTO_') and e.layer_name and e.layer_name != 'Substation':
             graph.setdefault(e.element_id, set())
             dev_ids_in_graph.add(e.element_id)
+
+    # 用设备 GLink_Ref 补边：美化后 SVG 的设备 GLink 指向拓扑邻接设备，
+    # 即使部分 WIRE_ 线段因视觉清理被删，拓扑连通性依然完整可恢复
+    for e in doc.elements:
+        if not e.element_id or e.element_id.startswith('AUTO_'):
+            continue
+        for gl in getattr(e, 'glink_refs', []) or []:
+            if gl in dev_ids_in_graph and gl != e.element_id:
+                graph[e.element_id].add(gl)
+                graph[gl].add(e.element_id)
 
     # 预建设备坐标索引：element_id → (cx, cy, max_hw)
     dev_center: dict[str, tuple[float, float, float]] = {}
     for e in doc.elements:
-        if e.element_id and e.element_id in dev_ids_in_graph:
+        if e.element_id and not e.element_id.startswith('AUTO_') and e.element_id in dev_ids_in_graph:
             cx = e.x + e.width / 2.0
             cy = e.y + e.height / 2.0
             max_hw = max(e.width, e.height, 1.0)
@@ -212,7 +224,8 @@ def check_svg_quality(svg_path: str, report_out: Optional[str] = None) -> tuple[
     valid_devs = [e for e in doc.elements
                   if e.width and e.height and e.width > 0 and e.height > 0
                   and not (abs(e.x) < 1.0 and abs(e.y) < 1.0)
-                  and e.layer_name != 'Substation']
+                  and e.layer_name != 'Substation'
+                  and not e.element_id.startswith('AUTO_')]
     stations = [e for e in doc.elements if e.layer_name == 'Substation']
 
     dev_outside = 0

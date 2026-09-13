@@ -449,6 +449,7 @@ class SvgDocument:
             else:
                 shape_children = shape_children[:1]  # 只保留第一个形状元素
 
+        _shape_parsed = False
         for child in g_elem:
             tag = _local_tag(child.tag)
             if tag == "g":
@@ -467,9 +468,30 @@ class SvgDocument:
                 if current_metadata is not None: self._parse_metadata(current_metadata, elem)
                 elem.raw_element = copy.deepcopy(child)
                 self.elements.append(elem)
+                _shape_parsed = True
             elif tag == "text":
                 txt = self._parse_text_element_direct(child, combined_matrix, current_metadata)
                 if txt: self.texts.append(txt)
+        # ★ 纯 metadata 节点（美化后母线占位：<g><metadata/><no shape/></g>）：
+        #   没有形状子元素时循环不会生成任何设备 → 母线从拓扑中丢失，
+        #   导致重解析时母线端连线全部 dangling、连通分量破裂。此处兜底生成设备元素。
+        #   注意：文字标注 g（<g><metadata/><text/></g>）不是设备，跳过兜底。
+        if (not _shape_parsed and local_metadata is not None
+                and not any(_local_tag(c.tag) == "text" for c in g_elem)):
+            elem = SvgElement()
+            elem.layer_name = layer_name
+            elem.element_type = DEVICE_TYPE_MAP.get(layer_name, layer_name)
+            elem.shape_tag = 'metadata-only'
+            elem.shape_attrs = {}
+            elem.element_id = gid or f"AUTO_{layer_name}_{uuid.uuid4().hex[:8]}"
+            elem.x, elem.y = combined_matrix.apply(0.0, 0.0)
+            elem.width, elem.height = 0.0, 0.0
+            elem.rotation = combined_matrix.get_rotation()
+            elem._transform_scale = combined_matrix.get_scale()
+            elem.rebuild_transform()
+            self._parse_metadata(local_metadata, elem)
+            elem.raw_element = copy.deepcopy(g_elem)
+            self.elements.append(elem)
 
     def _parse_text_element_direct(self, text_elem: ET.Element, parent_matrix: Matrix, metadata_elem: Optional[ET.Element] = None) -> Optional[SvgText]:
         """直接解析 text 标签，而不假设它被包裹在 g 中。"""
@@ -627,15 +649,26 @@ class SvgDocument:
                 txt.object_name = child.get("ObjectName", "")
 
     def _resolve_connection_links(self):
-        device_map = {e.element_id: e for e in self.elements if e.element_id}
+        # 排除 SvgReader 自动生成的装饰性假设备（无 PSR_Ref metadata、id 以 AUTO_ 开头），
+        # 否则容器框/标签装饰会被坐标反查误命中为连接端点
+        device_map = {e.element_id: e for e in self.elements
+                      if e.element_id and not e.element_id.startswith('AUTO_')}
         for conn in self.connections:
             if not conn.points: continue
             start_p, end_p = conn.points[0], conn.points[-1]
-            for dev_id, dev in device_map.items():
-                d_start = ((dev.x + dev.width/2 - start_p[0])**2 + (dev.y + dev.height/2 - start_p[1])**2)**0.5
-                if d_start < 5.0: conn.start_device_id = dev_id
-                d_end = ((dev.x + dev.width/2 - end_p[0])**2 + (dev.y + dev.height/2 - end_p[1])**2)**0.5
-                if d_end < 5.0: conn.end_device_id = dev_id
+            # 优先保留 Terminal/PSR 已解析的 ID；仅在缺失时才用坐标反查（避免覆盖真实 ID）
+            if not conn.start_device_id:
+                for dev_id, dev in device_map.items():
+                    d = ((dev.x + dev.width/2 - start_p[0])**2 + (dev.y + dev.height/2 - start_p[1])**2)**0.5
+                    if d < 5.0:
+                        conn.start_device_id = dev_id
+                        break
+            if not conn.end_device_id:
+                for dev_id, dev in device_map.items():
+                    d = ((dev.x + dev.width/2 - end_p[0])**2 + (dev.y + dev.height/2 - end_p[1])**2)**0.5
+                    if d < 5.0:
+                        conn.end_device_id = dev_id
+                        break
 
     def _infer_voltage_from_psr_type(self, psr_type: str, elem: SvgElement):
         """【S6修复】从SVG文件名推断电压等级，替代无条件硬编码"10kV"。

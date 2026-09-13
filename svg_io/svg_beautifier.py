@@ -970,7 +970,18 @@ class SvgBeautifier:
             print("  [布局] 无有效根节点")
             return
 
+        # ★ layout 可重复调用（editor.save(relayout=True) 会二次布局）：
+        #   必须重置全部布局状态，否则 tree_children 累积旧孩子导致 calc_weight
+        #   递归爆炸（死循环），pos/cont_box 残留脏数据。
         self.tree_parent = {root: None}
+        self.tree_children = defaultdict(list)
+        self.pos = {}
+        self.cont_box = {}
+        self.non_tree_edges = []
+        self._bus_segs = {}
+        self._bus_segs_built = False
+        if hasattr(self, '_cont_rep_map'):
+            self._cont_rep_map = {}
         level = {root: 0}
         q = deque([root])
         while q:
@@ -1161,21 +1172,6 @@ class SvgBeautifier:
         for cid, (x1, y1, x2, y2) in self.cont_box.items():
             cont_boxes_abs.append(((x1 + x2) / 2.0, (y1 + y2) / 2.0,
                                    (x2 - x1) / 2.0, (y2 - y1) / 2.0))
-
-        # 容器成员之间重叠仅告警，不移动（容器内由 _layout_containers 负责）
-        for pid_a, (xa, ya) in self.pos.items():
-            if pid_a not in member_set or pid_a in self.containers:
-                continue
-            try:
-                la, ra, ta, ba = self._dev_box_edges(pid_a)
-            except Exception:
-                continue
-            for pid_b, (xb, yb) in self.pos.items():
-                if pid_b == pid_a or pid_b not in member_set or pid_b in self.containers:
-                    continue
-                if (abs(xa - xb) < (ra - la) / 2 + (self._dev_box_edges(pid_b)[1] - self._dev_box_edges(pid_b)[0]) / 2 and
-                        abs(ya - yb) < (ba - ta) / 2 + (self._dev_box_edges(pid_b)[3] - self._dev_box_edges(pid_b)[2]) / 2):
-                    pass  # 仅诊断，不强移（容器内布局固定）
 
         for pid, (x, y) in order:
             try:
@@ -1574,27 +1570,6 @@ class SvgBeautifier:
 
         ET.ElementTree(svg).write(out_path, encoding='utf-8', xml_declaration=True)
         print(f"  [渲染] {out_path}  {W} x {H}")
-
-    def _draw_title(self, svg, W):
-        tg = ET.SubElement(svg, f'{{{SVG_NS}}}g', {'id': 'TitleBar'})
-        ET.SubElement(tg, f'{{{SVG_NS}}}rect', {
-            'x': '0', 'y': '0', 'width': str(W), 'height': str(TITLE_H),
-            'fill': '#1a3a6b',
-        })
-        line_name = self.svg_filename.replace('.svg', '')
-        t1 = ET.SubElement(tg, f'{{{SVG_NS}}}text', {
-            'x': '16', 'y': '34', 'fill': '#fff',
-            'font-size': str(F_TITLE), 'font-weight': 'bold',
-        })
-        t1.text = f'配电网单线图 — {line_name}（标准化美化）'
-        ndev = len(self.pos)
-        ncont = len(self.cont_box)
-        ntie = len(self.non_tree_edges)
-        t2 = ET.SubElement(tg, f'{{{SVG_NS}}}text', {
-            'x': f'{W - 16}', 'y': '34', 'fill': '#aaccff',
-            'font-size': str(F_BRANCH), 'text-anchor': 'end',
-        })
-        t2.text = f'设备 {ndev} | 柜箱 {ncont} | 联络 {ntie} | 10kV | 权重树算法'
 
     def _draw_containers(self, g):
         for cid, (x1, y1, x2, y2) in self.cont_box.items():
@@ -2031,6 +2006,11 @@ class SvgBeautifier:
             conn_sorted = sorted(conn, key=lambda p: self.pos[p][0])
             y = self.pos[pid][1]
             a_id, b_id = conn_sorted[0], conn_sorted[-1]
+            # 母线 T 接段 Terminal 的 to 端必须指向真实设备（接线点不在最终图中，
+            # 否则重解析时母线连线端点找不到设备 → dangling 误报）
+            _real_conn = [p for p in conn_sorted
+                          if is_real(self.devices.get(p))]
+            _term_id = _real_conn[-1] if _real_conn else b_id
             a_left, a_right, _, _ = self._dev_box_edges(a_id)
             b_left, b_right, _, _ = self._dev_box_edges(b_id)
             x_start = self.pos[a_id][0] + a_left
@@ -2052,7 +2032,7 @@ class SvgBeautifier:
                     continue
                 conn_idx += 1
                 seg_id = f'BUS_{conn_idx:06d}'
-                self._wire_segs.append(([(sx1, y), (sx2, y)], C_BUSBAR, W_BUSBAR, seg_id, pid, b_id))
+                self._wire_segs.append(([(sx1, y), (sx2, y)], C_BUSBAR, W_BUSBAR, seg_id, pid, _term_id))
 
         # ★ 环路补边：非树边（补回生成树算法丢弃的连接）
         # 颜色语义：仅"跨站房/跨馈线"才用联络橙 C_TIE；同容器/无容器/母线参与均属
@@ -2230,15 +2210,18 @@ class SvgBeautifier:
                 if _md_to:
                     _chd_id = _md_to[0]
                 pts2 = self._avoid_devices(pts2, _par_id, _chd_id)
-            except Exception:
-                pass
+            except Exception as _ex:
+                print(f"  [warn] _avoid_devices 绕行失败，保留原路径: {_ex}")
             # ★ B-mini 修复：旧版 d<40 && len>2 直接整条删除太激进，把
             # 短距 L 形/3 点折线也一并清掉了。改为：只在 polyline 形成
             # 明显"折返"（中间点回退到起点附近）时才删除；其它短距 L 形
             # 保留（其端点已贴设备框/母线，下方 ok_s/ok_e 判定会兜底）。
             d = math.hypot(pts2[0][0] - pts2[-1][0], pts2[0][1] - pts2[-1][1])
-            if d < 20 and len(pts2) > 4:
-                # 折返型线头：起点/终点距离近且路径长 → 整条放弃
+            # 折返型线头：仅当首尾几乎重合且路径明显绕远时才整条放弃。
+            # 原 d<20 && len>4 会把母线附近短距 T 接线（真实连接）误删 → 设备变孤岛
+            _plen = sum(math.hypot(pts2[i][0]-pts2[i-1][0], pts2[i][1]-pts2[i-1][1])
+                        for i in range(1, len(pts2)))
+            if d < 8 and len(pts2) > 4 and _plen > 4 * d:
                 continue
             # 断头：端点不贴任何设备框/母线 → 删除（用户要求不留）
             s, e = pts2[0], pts2[-1]
@@ -2280,7 +2263,8 @@ class SvgBeautifier:
     #  Segment-based Parallel Routing (网格化平行线偏移)
     # ─────────────────────────────────────────────────────────────────────────
     def _post_process_parallel_offset(self, g):
-        """★ v3 - Segment-based Parallel Routing（按用户算法升级版）
+        """[弃用] 已不再调用（并行支路偏移由 _layout 兄弟等距处理）。保留方法定义仅为兼容旧引用。
+        ★ v3 - Segment-based Parallel Routing（按用户算法升级版）
 
         核心算法：
           1. 把每条 polyline 拆成 H/V 单段（axis-aligned segments）
@@ -3021,6 +3005,11 @@ class SvgBeautifier:
             conn_sorted = sorted(conn, key=lambda p: self.pos[p][0])
             y = self.pos[pid][1]
             a_id, b_id = conn_sorted[0], conn_sorted[-1]
+            # 母线 T 接段 Terminal 的 to 端必须指向真实设备（接线点不在最终图中，
+            # 否则重解析时母线连线端点找不到设备 → dangling 误报）
+            _real_conn = [p for p in conn_sorted
+                          if is_real(self.devices.get(p))]
+            _term_id = _real_conn[-1] if _real_conn else b_id
             a_left, a_right, _, _ = self._dev_box_edges(a_id)
             b_left, b_right, _, _ = self._dev_box_edges(b_id)
             xs = self.pos[a_id][0] + a_left
@@ -3365,8 +3354,19 @@ class SvgBeautifier:
             'ObjectName': d.get('name', ''),
             'PSRType': d.get('type', ''),
         })
-        for gl in d.get('glinks', []):
-            ET.SubElement(md, f'{{{IEC_NS}}}GLink_Ref', {'ObjectID': gl})
+        # GLink_Ref 写入美化后拓扑邻接设备（而非原始导线点引用），
+        # 使保存后的 SVG 自带完整拓扑关系：重解析时可按 GLink 恢复连通性，
+        # 不依赖 WIRE_ 线段是否全部画出（断头/折返删除只影响视觉不影响拓扑）
+        _written = set()
+        for nid in sorted(self.adj.get(pid, ())):
+            if nid == pid or nid in _written:
+                continue
+            if nid not in self.pos:
+                continue
+            if not SvgBeautifier.is_real_device(self.devices.get(nid, {}).get('type', '')):
+                continue
+            _written.add(nid)
+            ET.SubElement(md, f'{{{IEC_NS}}}GLink_Ref', {'ObjectID': nid})
 
 
 def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bool = True) -> str:
@@ -3407,41 +3407,111 @@ def beautify_svg_file(svg_path: str, output_path: str = None, quality_report: bo
             # 收集美化后的连接，并为每个设备附加拓扑邻接表
             # topo_adj 格式：{设备ID: {相邻设备ID集合}}
             # quality_scorer._has_glink_mutual 将优先查此表判断连接是否真实
+            # 【修复①"】美化后的连接：用 _wire_segs 真实折线端点（而非设备中心直线）
+            #   - 排除 BUS_ 母线段（母线横线端点合法远离设备中心，不参与端点检测）
+            #   - 同 (u,v) 多路径择优：选端点贴两端设备框最近的路径
+            #   - 端点方向校准：pts[0] 贴 from 设备、pts[-1] 贴 to 设备（双向取优）
+            def _pt_box_dist(px, py, cx, cy, l, r, t, b):
+                dx = max(l - (px - cx), 0.0, (px - cx) - r)
+                dy = max(t - (py - cy), 0.0, (py - cy) - b)
+                return math.hypot(dx, dy)
+
+            wire_groups = {}
+            for _seg, _color, _w, _seg_id, _u, _v in (beautifier._wire_segs or []):
+                if _seg_id.startswith('BUS_'):
+                    continue  # 母线横线段不参与端点检测
+                if not _seg or len(_seg) < 2:
+                    continue
+                if _u not in beautifier.pos or _v not in beautifier.pos:
+                    continue
+                _key = tuple(sorted([_u, _v]))
+                wire_groups.setdefault(_key, []).append((_seg, _u, _v))
+
             conns = []
-            seen = set()
             topo_adj: dict = defaultdict(set)
+            for (u, v), cands in wire_groups.items():
+                if u == v:
+                    continue
+                best = None
+                best_score = None
+                for pts, f, t in cands:
+                    p0, p1 = pts[0], pts[-1]
+                    try:
+                        fl, fr, ft, fb = beautifier._dev_box_edges(f)
+                        fx, fy = beautifier.pos[f]
+                        d0_f = _pt_box_dist(p0[0], p0[1], fx, fy, fl, fr, ft, fb)
+                        d1_f = _pt_box_dist(p1[0], p1[1], fx, fy, fl, fr, ft, fb)
+                    except Exception:
+                        d0_f = d1_f = 1e9
+                    try:
+                        tl, tr, tt, tb = beautifier._dev_box_edges(t)
+                        tx, ty = beautifier.pos[t]
+                        d0_t = _pt_box_dist(p0[0], p0[1], tx, ty, tl, tr, tt, tb)
+                        d1_t = _pt_box_dist(p1[0], p1[1], tx, ty, tl, tr, tt, tb)
+                    except Exception:
+                        d0_t = d1_t = 1e9
+                    # 方向 f->t：p0 贴 f + p1 贴 t；方向 t->f：p0 贴 t + p1 贴 f
+                    score_ft = d0_f + d1_t
+                    score_tf = d0_t + d1_f
+                    if best_score is None or min(score_ft, score_tf) < best_score:
+                        best_score = min(score_ft, score_tf)
+                        best = (pts, f, t, score_ft <= score_tf)
+                if best is None:
+                    continue
+                pts, f, t, ft_dir = best
+                fr_id, to_id = (f, t) if ft_dir else (t, f)
+                topo_adj[fr_id].add(to_id)
+                topo_adj[to_id].add(fr_id)
+                conns.append(SimpleNamespace(
+                    from_element_id=fr_id, to_element_id=to_id,
+                    line_id=f"wire_{fr_id}_{to_id}",
+                    points=pts,
+                ))
+
+            # 连通性拓扑补全：adj 中被画线过滤掉的短边/补边以"中心直线占位"加入 conns，
+            # 使连通分量/孤岛统计基于完整拓扑（与 repair 结果一致）；占位边端点=设备中心，
+            # 端点偏离检测恒通过（无害），真实端点检测只针对 _wire_segs 渲染线。
+            wire_keys = set(wire_groups.keys())
             for u, neighbors in beautifier.adj.items():
+                if u not in beautifier.pos:
+                    continue
                 for v in neighbors:
-                    key = tuple(sorted([u, v]))
-                    if key in seen or u == v:
+                    if v not in beautifier.pos or u == v:
                         continue
-                    seen.add(key)
                     topo_adj[u].add(v)
                     topo_adj[v].add(u)
-                    pu = beautifier.pos.get(u, (0, 0))
-                    pv = beautifier.pos.get(v, (0, 0))
+                    if tuple(sorted([u, v])) in wire_keys:
+                        continue
+                    pu = beautifier.pos[u]
+                    pv = beautifier.pos[v]
                     conns.append(SimpleNamespace(
                         from_element_id=u, to_element_id=v,
                         line_id=f"edge_{u}_{v}",
                         points=[(pu[0], pu[1]), (pv[0], pv[1])],
                     ))
 
-            # 【修复】美化后的元素：使用美化后的全部设备（包含有/无连接的设备）
-            # 与美化前统计口径对齐：全部TMP开头的设备都应被统计
+            # 【修复①①'】美化后的元素：
+            #   - 只统计布局（渲染）中真实存在的设备（pos 中有位置）
+            #   - 宽高用 _dev_box_edges 渲染色框尺寸（评分重叠阈值与视觉一致）
             elems = []
             for did, dev in beautifier.devices.items():
-                # 只统计真实设备（与美化前一致）
                 if not did.startswith('TMP'):
                     continue
-                pos = beautifier.pos.get(did, beautifier.orig_pos.get(did, (0, 0)))
-                sym = beautifier.sym_box.get(did, {})
+                if did not in beautifier.pos:
+                    continue  # 未入布局的设备不参与评分（避免原始密集坐标误报）
+                pos = beautifier.pos[did]
+                try:
+                    el, er, et, eb = beautifier._dev_box_edges(did)
+                    ew, eh = er - el, eb - et
+                except Exception:
+                    ew, eh = 56.0, 58.0
                 elems.append(SimpleNamespace(
                     element_id=did,
                     object_name=dev.get('name', ''),
                     element_type=dev.get('type', ''),
                     layer=dev.get('layer', ''),
                     x=pos[0], y=pos[1],
-                    width=sym.get('w', 20), height=sym.get('h', 20),
+                    width=ew, height=eh,
                     glink_refs=dev.get('glinks', []),  # 使用原始GLink引用
                 ))
 

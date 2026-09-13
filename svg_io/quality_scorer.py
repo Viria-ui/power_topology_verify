@@ -101,7 +101,9 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
     elems = _elem_list(doc)
     # 【修复】real_elems 用于重叠检测等需要真实设备图元的场景
     # 不再用它来计算设备总数（避免美化后过滤导致统计口径不一致）
-    real_elems = [e for e in elems if getattr(e, 'element_id', '').startswith('TMP')]
+    real_elems = [e for e in elems
+                  if getattr(e, 'element_id', '').startswith('TMP')
+                  and not getattr(e, 'element_id', '').startswith('AUTO_')]
 
     max_size = 0.0
     for e in real_elems:
@@ -164,40 +166,47 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
             })
             continue
 
-        # ---- c. 飞线-端点偏离设备（美化数据使用正交多段线，跳过偏离检测）----
+        # ---- c. 飞线-端点偏离设备（美化后也检测：用 _wire_segs 真实折线端点）----
         is_beautified = getattr(doc, 'is_beautified', False)
-        if not is_beautified:
-            s_dev = _get_elem(doc, s)
-            e_dev = _get_elem(doc, e)
-            points = getattr(conn, 'points', None)
-            if s_dev and points and len(points) >= 1:
-                px, py = points[0][0], points[0][1]
-                sx, sy, sw, sh = _bbox(s_dev)
-                cx, cy = sx + sw / 2, sy + sh / 2
-                d = math.hypot(px - cx, py - cy)
-                if d > effective_size * 3:   # 【P2修复】使用绝对尺寸阈值
-                    dangling_count += 1
-                    defects.append({
-                        "equip_id": cid,
-                        "defect_type": "飞线-端点偏离设备",
-                        "severity": "medium",
-                        "description": f"连接线[{cid}] 起点距设备[{_elem_name(s_dev)}]中心距离={d:.2f} > 阈值({max_size*3:.2f})",
-                        "suggestion": "调整连接线端点位置或重新匹配端点归属设备",
-                    })
-            if e_dev and points and len(points) >= 2:
-                px, py = points[-1][0], points[-1][1]
-                ex, ey, ew, eh = _bbox(e_dev)
-                cx, cy = ex + ew / 2, ey + eh / 2
-                d = math.hypot(px - cx, py - cy)
-                if d > effective_size * 3:   # 【P2修复】使用绝对尺寸阈值
-                    dangling_count += 1
-                    defects.append({
-                        "equip_id": cid,
-                        "defect_type": "飞线-端点偏离设备",
-                        "severity": "medium",
-                        "description": f"连接线[{cid}] 终点距设备[{_elem_name(e_dev)}]中心距离={d:.2f} > 阈值({max_size*3:.2f})",
-                        "suggestion": "调整连接线端点位置或重新匹配端点归属设备",
-                    })
+
+        def _is_bus_elem(el):
+            """母线设备：母线横线端点合法远离中心，跳过偏离检测。"""
+            _t = str(getattr(el, 'element_type', '') or '')
+            _n = str(getattr(el, 'object_name', '') or '')
+            _l = str(getattr(el, 'layer', '') or '')
+            return ('0311' in _t or '母线' in _n or 'Busbar' in _l)
+
+        s_dev = _get_elem(doc, s)
+        e_dev = _get_elem(doc, e)
+        points = getattr(conn, 'points', None)
+        if s_dev and points and len(points) >= 1 and not _is_bus_elem(s_dev):
+            px, py = points[0][0], points[0][1]
+            sx, sy, sw, sh = _bbox(s_dev)
+            cx, cy = sx + sw / 2, sy + sh / 2
+            d = math.hypot(px - cx, py - cy)
+            if d > effective_size * 3:   # 【P2修复】使用绝对尺寸阈值
+                dangling_count += 1
+                defects.append({
+                    "equip_id": cid,
+                    "defect_type": "飞线-端点偏离设备",
+                    "severity": "medium",
+                    "description": f"连接线[{cid}] 起点距设备[{_elem_name(s_dev)}]中心距离={d:.2f} > 阈值({effective_size*3:.2f})",
+                    "suggestion": "调整连接线端点位置或重新匹配端点归属设备",
+                })
+        if e_dev and points and len(points) >= 2 and not _is_bus_elem(e_dev):
+            px, py = points[-1][0], points[-1][1]
+            ex, ey, ew, eh = _bbox(e_dev)
+            cx, cy = ex + ew / 2, ey + eh / 2
+            d = math.hypot(px - cx, py - cy)
+            if d > effective_size * 3:   # 【P2修复】使用绝对尺寸阈值
+                dangling_count += 1
+                defects.append({
+                    "equip_id": cid,
+                    "defect_type": "飞线-端点偏离设备",
+                    "severity": "medium",
+                    "description": f"连接线[{cid}] 终点距设备[{_elem_name(e_dev)}]中心距离={d:.2f} > 阈值({effective_size*3:.2f})",
+                    "suggestion": "调整连接线端点位置或重新匹配端点归属设备",
+                })
 
     # ---- d. 虚假连通（与任务一一致：无GLink互引且距离>effective_size）----
     fake_connect_count = 0
@@ -228,12 +237,18 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
     # 【P2修复】使用 effective_size 作为最小设备尺寸，避免美化后 SVG 缩放导致误报
     # 电力设备最小宽度约 15 单位，只有两设备中心距 < effective_size 才算可能重叠
     overlap_count = 0
-    n = len(real_elems)
+    # 【修复⑦】O(n²) → 按 x 排序 + 滑动窗口剪枝（水平距离超阈值即不可能重叠，break）
+    order = sorted(real_elems, key=lambda e: _bbox(e)[0])
+    n = len(order)
     for i in range(n):
+        a = order[i]
+        ax, ay, aw, ah = _bbox(a)
         for j in range(i + 1, n):
-            a, b = real_elems[i], real_elems[j]
-            ax, ay, aw, ah = _bbox(a)
+            b = order[j]
             bx, by, bw, bh = _bbox(b)
+            # 水平已完全分离且超出最小判定距离 → 后续更远，剪枝
+            if bx - (ax + aw) > effective_size + 1:
+                break
             # 计算中心距，过远的两设备不可能重叠
             acx, acy = ax + aw / 2, ay + ah / 2
             bcx, bcy = bx + bw / 2, by + bh / 2

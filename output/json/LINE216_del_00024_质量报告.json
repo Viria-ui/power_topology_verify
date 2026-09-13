@@ -27,17 +27,17 @@
       "threshold": 2.0
     },
     "island_components_pct": {
-      "value": 26.3,
+      "value": 4.91,
       "ok": true,
       "threshold": 50.0
     },
     "isolated_nodes_pct": {
-      "value": 15.89,
+      "value": 0.0,
       "ok": true,
       "threshold": 30.0
     },
     "dangling_connections_pct": {
-      "value": 3.55,
+      "value": 0.35,
       "ok": true,
       "threshold": 20.0
     },
@@ -57,26 +57,26 @@
       "x": 0.0,
       "y": 0.0,
       "w": 15640.0,
-      "h": 3600.0
+      "h": 3670.0
     },
     "canvas": {
       "width": 15640.0,
-      "height": 3600.0,
+      "height": 3670.0,
       "aspect_match": true,
-      "vb_ratio": 4.3444,
-      "wh_ratio": 4.3444
+      "vb_ratio": 4.2616,
+      "wh_ratio": 4.2616
     },
     "devices": {
-      "total": 768,
+      "total": 651,
       "stations": 0,
       "outside": 0,
       "outside_pct": 0.0,
       "overlap_pairs": 0,
-      "avg_height_unit": 50.701
+      "avg_height_unit": 17.818
     },
     "texts": {
-      "total": 648,
-      "visible": 648,
+      "total": 651,
+      "visible": 651,
       "hidden": 0,
       "hidden_pct": 0.0,
       "overlap_victims": 0,
@@ -84,17 +84,17 @@
       "outside": 0,
       "fontscale_abnormal": 0,
       "fontscale_abnormal_pct": 0.0,
-      "avg_dev_h_for_ref": 50.701
+      "avg_dev_h_for_ref": 17.818
     },
     "topology": {
-      "total_device_nodes": 768,
-      "connections_total": 1688,
-      "connected_components": 137,
-      "largest_component_size": 566,
-      "largest_component_pct": 73.7,
-      "island_components_pct": 26.3,
-      "isolated_nodes_pct": 15.89,
-      "dangling_connections_pct": 3.55
+      "total_device_nodes": 672,
+      "connections_total": 1696,
+      "connected_components": 4,
+      "largest_component_size": 639,
+      "largest_component_pct": 95.09,
+      "island_components_pct": 4.91,
+      "isolated_nodes_pct": 0.0,
+      "dangling_connections_pct": 0.35
     }
   }
 }

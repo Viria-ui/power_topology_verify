@@ -1,26 +1,26 @@
 {
   "comparison": {
-    "score_before": 32.0,
-    "score_after": 30.0,
-    "score_change": -2.0,
-    "defects_before": 944,
-    "defects_after": 2250,
-    "defects_reduced": -1306,
+    "score_before": 31.3,
+    "score_after": 100.0,
+    "score_change": 68.7,
+    "defects_before": 964,
+    "defects_after": 0,
+    "defects_reduced": 964,
     "real_devices_before": 1430,
-    "real_devices_after": 1430,
-    "real_devices_change": 0,
-    "defect_rate_before": 66.01,
-    "defect_rate_after": 100.0,
-    "defect_rate_change": 33.99,
-    "defect_rate_penalty_before": 18.01,
-    "defect_rate_penalty_after": 20.0,
-    "components_before": 84,
-    "components_after": 6,
-    "components_change": -78,
+    "real_devices_after": 1080,
+    "real_devices_change": -350,
+    "defect_rate_before": 67.41,
+    "defect_rate_after": 0.0,
+    "defect_rate_change": -67.41,
+    "defect_rate_penalty_before": 18.7,
+    "defect_rate_penalty_after": 0.0,
+    "components_before": 105,
+    "components_after": 5,
+    "components_change": -100,
     "type_changes": {
-      "孤岛设备": 25,
       "标注错位": 62,
-      "设备重叠": -1393
+      "孤岛设备": 45,
+      "设备重叠": 857
     }
   },
   "before": {
@@ -29,22 +29,22 @@
     "real_device_count": 1430,
     "fake_device_count": 1,
     "total_connections": 962,
-    "total_defects": 944,
-    "defect_rate_percent": 66.01,
-    "defect_rate_penalty": 18.01,
-    "quality_score": 32.0,
+    "total_defects": 964,
+    "defect_rate_percent": 67.41,
+    "defect_rate_penalty": 18.7,
+    "quality_score": 31.3,
     "defects_by_type": {
-      "孤岛设备": 25,
+      "孤岛设备": 45,
       "设备重叠": 857,
       "标注错位": 62
     },
     "defects_by_severity": {
-      "high": 25,
+      "high": 45,
       "medium": 857,
       "low": 62
     },
-    "connected_components": 84,
-    "max_component_size": 9,
+    "connected_components": 105,
+    "max_component_size": 10,
     "dangling_count": 0,
     "fake_connect_count": 0,
     "overlap_count": 857,
@@ -52,310 +52,165 @@
   },
   "after": {
     "stage": "美化后",
-    "total_elements": 1430,
-    "real_device_count": 1430,
+    "total_elements": 1080,
+    "real_device_count": 1080,
     "fake_device_count": 0,
-    "total_connections": 1576,
-    "total_defects": 2250,
-    "defect_rate_percent": 100.0,
-    "defect_rate_penalty": 20.0,
-    "quality_score": 30.0,
-    "defects_by_type": {
-      "设备重叠": 2250
-    },
-    "defects_by_severity": {
-      "medium": 2250
-    },
-    "connected_components": 6,
-    "max_component_size": 908,
+    "total_connections": 1740,
+    "total_defects": 0,
+    "defect_rate_percent": 0.0,
+    "defect_rate_penalty": 0.0,
+    "quality_score": 100.0,
+    "defects_by_type": {},
+    "defects_by_severity": {},
+    "connected_components": 5,
+    "max_component_size": 1030,
     "dangling_count": 0,
     "fake_connect_count": 0,
-    "overlap_count": 2250,
+    "overlap_count": 0,
     "text_missing_count": 0
   },
   "before_defects_sample": [
     {
-      "equip_id": "TMP00044441",
+      "equip_id": "TMP00044679",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[刀闸0064](ID:TMP00044441)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000跑争9#](ID:TMP00044679)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00044442",
+      "equip_id": "TMP00044633",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[刀闸0065](ID:TMP00044442)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000败支54#~LINE215_线况诉败支55#](ID:TMP00044633)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00131784",
+      "equip_id": "TMP00044625",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[故障指示器004](ID:TMP00131784)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000败支62#~LINE215_线况诉败支63#](ID:TMP00044625)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00046207",
+      "equip_id": "TMP00044643",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[00000示1#环网箱102](ID:TMP00046207)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000败支44#~LINE215_线况诉败支45#](ID:TMP00044643)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00043929",
+      "equip_id": "TMP00044750",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00005](ID:TMP00043929)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000分1#~LINE215_线海半分2#](ID:TMP00044750)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00046095",
+      "equip_id": "TMP00045285",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1569](ID:TMP00046095)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000分10#-LINE215_线海半分14#](ID:TMP00045285)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00043941",
+      "equip_id": "TMP00044697",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[开关00017](ID:TMP00043941)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[TMP00131693电缆终端头710299](ID:TMP00044697)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00046081",
+      "equip_id": "TMP00044740",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1583](ID:TMP00046081)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[TMP00131370#环网箱102－LINE215_线LINE365_3#环网箱101](ID:TMP00044740)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00044590",
+      "equip_id": "TMP00311798",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[TMP00131371#环网箱母线](ID:TMP00044590)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[Other](ID:TMP00311798)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00044592",
+      "equip_id": "TMP00044729",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[TMP00131372#环网箱103母线](ID:TMP00044592)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[TMP00131371#环网箱102－LINE215_线LINE365_5#环网箱101](ID:TMP00044729)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00046050",
+      "equip_id": "TMP00045270",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1614](ID:TMP00046050)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000二支2照2#-LINE215_线海半二支2照3#](ID:TMP00045270)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00044408",
+      "equip_id": "TMP00044747",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[刀闸0031](ID:TMP00044408)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000二支5照4#~LINE215_线海半二支5照5#](ID:TMP00044747)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00046082",
+      "equip_id": "TMP00044684",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1582](ID:TMP00046082)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000争4#-LINE215_线LINE365_争5#](ID:TMP00044684)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00046088",
+      "equip_id": "TMP00044631",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1576](ID:TMP00046088)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000败支56#~LINE215_线况诉败支57#](ID:TMP00044631)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00046093",
+      "equip_id": "TMP00044622",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1571](ID:TMP00046093)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000败支66#~LINE215_线况诉败支67#](ID:TMP00044622)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00044443",
+      "equip_id": "TMP00311636",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[刀闸0066](ID:TMP00044443)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[Junction](ID:TMP00311636)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00046051",
+      "equip_id": "TMP00311661",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[用户1613](ID:TMP00046051)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[Other](ID:TMP00311661)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00044579",
+      "equip_id": "TMP00045213",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[00000母线](ID:TMP00044579)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000终端头197688-站外-电缆终端头197689](ID:TMP00045213)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00046216",
+      "equip_id": "TMP00311427",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[TMP00131370#](ID:TMP00046216)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[Junction](ID:TMP00311427)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     },
     {
-      "equip_id": "TMP00044392",
+      "equip_id": "TMP00045202",
       "defect_type": "孤岛设备",
       "severity": "high",
-      "description": "设备[刀闸0015](ID:TMP00044392)为孤立节点，未与其他设备形成有效连通分量",
+      "description": "设备[00000示1#环网箱102(1)－LINE215_线LINE231_示分5#](ID:TMP00045202)为孤立节点，未与其他设备形成有效连通分量",
       "suggestion": "核查该设备连接关系，补画连接线或删除孤立图元"
     }
   ],
-  "after_defects_sample": [
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3照1#~LINE215_线如切败支3照2#] bbox重叠率=74.38% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支1#-LINE215_线如切败支2#] bbox重叠率=96.06% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3#-LINE215_线如切败支4#] bbox重叠率=81.30% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3#-LINE215_线如切败支3照1#数线] bbox重叠率=88.42% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000切败支5#] bbox重叠率=77.50% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000切败支11#] bbox重叠率=59.66% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3照3#-LINE215_线如切败支3照5#] bbox重叠率=50.25% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支12#~LINE215_线如切败支13#] bbox重叠率=57.09% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支5#-LINE215_线如切败支6#] bbox重叠率=74.52% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支6#-LINE215_线如切败支7#] bbox重叠率=71.55% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支7#-LINE215_线如切败支8#] bbox重叠率=68.58% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支8#-LINE215_线如切败支9#] bbox重叠率=65.61% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支9#-LINE215_线如切败支10#] bbox重叠率=62.64% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支11#-LINE215_线如切败支12#] bbox重叠率=57.09% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [00000败支3照2#~LINE215_线如切败支3照3#] bbox重叠率=59.26% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [0] bbox重叠率=53.71% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044758",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支2#~LINE215_线如切败支3#] 与 [站房000079] bbox重叠率=59.85% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044757",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支3照1#~LINE215_线如切败支3照2#] 与 [00000败支1#-LINE215_线如切败支2#] bbox重叠率=71.06% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044757",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支3照1#~LINE215_线如切败支3照2#] 与 [00000败支3#-LINE215_线如切败支4#] bbox重叠率=78.13% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00044757",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[00000败支3照1#~LINE215_线如切败支3照2#] 与 [00000败支3#-LINE215_线如切败支3照1#数线] bbox重叠率=84.12% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    }
-  ],
+  "after_defects_sample": [],
   "algorithm_note": "缺陷分类与评分算法与任务一 core.topology_validator.validate_svg_only 完全一致"
 }

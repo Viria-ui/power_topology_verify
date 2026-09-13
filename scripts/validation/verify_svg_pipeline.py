@@ -2,7 +2,8 @@
 import os
 import sys
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+# 本文件位于 scripts/validation/ 下，上溯两级到项目根
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
@@ -13,13 +14,26 @@ OUTPUT_DIR = os.path.join(PROJECT_ROOT, "output", "svg")
 INTERMEDIATE_DIR = os.path.join(PROJECT_ROOT, "output", "intermediate")
 
 
+def get_connected_devices(doc, device_id):
+    """基于连接端点（start/end_device_id）返回设备直接邻居列表。"""
+    out = set()
+    for c in doc.connections:
+        a = getattr(c, 'start_device_id', '') or ''
+        b = getattr(c, 'end_device_id', '') or ''
+        if a == device_id and b:
+            out.add(b)
+        if b == device_id and a:
+            out.add(a)
+    return sorted(out)
+
+
 def verify_topology():
     """验证问题1: 拓扑连接关系是否正确"""
     print("\n" + "=" * 70)
     print("【问题1】拓扑连接关系验证")
     print("=" * 70)
 
-    svg_path = os.path.join(OUTPUT_DIR, "LINE215_with_000300.svg")
+    svg_path = os.path.join(OUTPUT_DIR, "LINE215_add_station_000300.svg")
     doc = SvgDocument(svg_path)
     if not doc.parse():
         print("  SVG解析失败")
@@ -30,7 +44,7 @@ def verify_topology():
     for sid in switch_ids:
         dev = doc.get_device_by_id(sid)
         if dev:
-            connected = doc.get_connected_devices(sid)
+            connected = get_connected_devices(doc, sid)
             print(f"  设备 {sid} ({dev.element_name}):")
             print(f"    连接数: {len(connected)}")
             print(f"    连接到: {connected}")
@@ -42,10 +56,10 @@ def verify_topology():
     dev_4016 = doc.get_device_by_id("TMP00044016")
 
     if dev_4018:
-        connected_4018 = doc.get_connected_devices("TMP00044018")
+        connected_4018 = get_connected_devices(doc, "TMP00044018")
         print(f"\n  上游开关 TMP00044018 (00104) 连接到: {connected_4018}")
     if dev_4016:
-        connected_4016 = doc.get_connected_devices("TMP00044016")
+        connected_4016 = get_connected_devices(doc, "TMP00044016")
         print(f"  下游开关 TMP00044016 (00102) 连接到: {connected_4016}")
 
     dev_301 = doc.get_device_by_id("TMP00301")
@@ -54,21 +68,21 @@ def verify_topology():
 
     issues = []
     if dev_301:
-        conn_301 = doc.get_connected_devices("TMP00301")
+        conn_301 = get_connected_devices(doc, "SW_00301")
         if "TMP00044018" not in conn_301:
             issues.append("00301 没有连接到 00104 (上游缺失)")
     if dev_303:
-        conn_303 = doc.get_connected_devices("TMP00303")
+        conn_303 = get_connected_devices(doc, "SW_00303")
         if "TMP00044016" not in conn_303:
             issues.append("00303 没有连接到 00102 (下游缺失)")
     if dev_302:
-        conn_302 = doc.get_connected_devices("TMP00302")
+        conn_302 = get_connected_devices(doc, "SW_00302")
         if len(conn_302) == 0:
             issues.append("00302 完全悬空 (没有任何连接)")
         elif len(conn_302) > 1:
             issues.append("00302 连接数=%d, 备用间隔应仅连1个设备(死端)" % len(conn_302))
     if dev_301 and dev_303:
-        conn_301 = doc.get_connected_devices("TMP00301")
+        conn_301 = get_connected_devices(doc, "SW_00301")
         if "TMP00303" not in conn_301:
             issues.append("00301 没有连接到 00303 (主通路缺失)")
 
@@ -94,8 +108,8 @@ def verify_intermediate_representation():
     output_svgs = [
         "LINE215_beautified",
         "LINE216_beautified",
-        "LINE215_with_000300",
-        "LINE216_del_switch",
+        "LINE215_add_station_000300",
+        "LINE216_del_switch_00024",
     ]
 
     for base_name in output_svgs:
@@ -170,8 +184,8 @@ def verify_closed_loop():
     output_files = [
         ("LINE215_beautified.svg", None),
         ("LINE216_beautified.svg", None),
-        ("LINE215_with_000300.svg", "add_station"),
-        ("LINE216_del_switch.svg", "del_switch"),
+        ("LINE215_add_station_000300.svg", "add_station"),
+        ("LINE216_del_switch_00024.svg", "del_switch"),
     ]
 
     for fname, task in output_files:
@@ -186,7 +200,8 @@ def verify_closed_loop():
             print(f"    可解析的连接: {connected_count}/{len(doc.connections)}")
 
             if task == "add_station":
-                for sid in ["TMP00301", "TMP00302", "TMP00303"]:
+                # editor.add_station 生成的开关 id 为 SW_ 前缀（svg_editor.py: SW_{switch_id}）
+                for sid in ["SW_00301", "SW_00302", "SW_00303"]:
                     dev = doc.get_device_by_id(sid)
                     if dev:
                         print(f"    新设备 {sid} ({dev.element_name}) 可被读取")
@@ -197,9 +212,9 @@ def verify_closed_loop():
                 dev_302 = doc.get_device_by_id("TMP00302")
                 dev_303 = doc.get_device_by_id("TMP00303")
                 if dev_301 and dev_302 and dev_303:
-                    print(f"    00301 连接: {doc.get_connected_devices('TMP00301')}")
-                    print(f"    00302 连接: {doc.get_connected_devices('TMP00302')}")
-                    print(f"    00303 连接: {doc.get_connected_devices('TMP00303')}")
+                    print(f"    00301 连接: {get_connected_devices(doc, 'TMP00301')}")
+                    print(f"    00302 连接: {get_connected_devices(doc, 'TMP00302')}")
+                    print(f"    00303 连接: {get_connected_devices(doc, 'TMP00303')}")
 
             elif task == "del_switch":
                 dev = doc.get_device_by_id("TMP00043912")

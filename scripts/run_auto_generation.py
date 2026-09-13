@@ -86,8 +86,11 @@ def _run_validator(svg_path: str, topo, expected_dev_ids, expected_edges, diagra
     try_full = False
     # 自动生成图使用stub校验器（带15%/25%容差），完整校验器对自动生成图过严
     if not try_full:
-        svg_dev_count = len(doc_auto.elements) if parsed_ok else 0
-        svg_conn_count = len(doc_auto.connections) if parsed_ok else 0
+        # 生成器输出为 ConnLine_Layer 裸 polyline，SvgDocument.parse 无法识别为连接（恒 0），
+        # 改用 _svg_meta 的 fallback（正则统计 ConnLine_Layer 内 polyline 数）作为真实连接数
+        svg_dev_count, svg_conn_count = _svg_meta(svg_path)
+        if not parsed_ok:
+            svg_dev_count = 0
         # 设备数/连接数为结构校验：以SVG自身解析结果为基准（自动生成图的期望数不可靠）
         exp_dev_count = svg_dev_count
         exp_edge_count = expected_edges if expected_edges else svg_conn_count
@@ -433,4 +436,5 @@ def main(skip_index: bool = True):
 
 
 if __name__ == "__main__":
-    main()
+    # --index 参数生效：默认跳过图集，显式传 --index 才生成 auto_index.html
+    main(skip_index=("--index" not in sys.argv))

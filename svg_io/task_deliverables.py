@@ -85,7 +85,9 @@ def run_task_a() -> dict:
         downstream_query="TMP00044016",     # 开关 00102 对应 SVG 内 id
         internal_switch_ids=["00301", "00302", "00303"],
     )
-    editor.save(line215_out)
+    # relayout=True：add_station 已修改 adj，必须重建生成树，
+    # 否则 _draw_wires 用旧树画线，新增开关没有 WIRE_ 连线（图实不一致）
+    editor.save(line215_out, relayout=True)
     post_stat = _count_internal(b1)
 
     # 质量验证
@@ -102,38 +104,42 @@ def run_task_a() -> dict:
 BEGIN TRANSACTION;
 
 -- 1. 新增站房（站房容器）
-INSERT INTO EQUIP_JBS_PWROOM (ROOM_ID, ROOM_NAME, ROOM_TYPE, VOLTAGE_TYPE, REMARK)
-VALUES ({_sql_quote('TMPROOM000300')}, {_sql_quote('站房000300')}, '开闭所', 'lkv10', 'LINE215测试任务新增');
+-- 【列名对齐真实表】JBS_PWROOM 真实列：ROOM_ID,ROOM_NAME,TOP_VOLTAGE_TYPE,FEEDER_ID,TYPE
+INSERT INTO "EQUIP"."JBS_PWROOM" (ROOM_ID, ROOM_NAME, TOP_VOLTAGE_TYPE, FEEDER_ID, TYPE)
+VALUES ({_sql_quote('TMPROOM000300')}, {_sql_quote('站房000300')}, '1010', {_sql_quote('LINE215')}, '开闭所');
 
 -- 2. 新增 3 台负荷开关 (站房内)
--- 【S4修复】原SQL引用PSR_TYPE/REMARK列（EQUIP_JBS_PWEQUIPINFO不存在）；VOLTAGE_TYPE='lkv10'改为真实码'1010'
-INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE, VOLTAGE_TYPE, FEEDER_ID, DSUBSTATION_ID) VALUES
-  ({_sql_quote('TMP00301')}, {_sql_quote('开关00301')}, '负荷开关', '1010', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')}),
-  ({_sql_quote('TMP00302')}, {_sql_quote('开关00302')}, '负荷开关', '1010', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')}),
-  ({_sql_quote('TMP00303')}, {_sql_quote('开关00303')}, '负荷开关', '1010', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')});
+-- JBS_PWEQUIPINFO 真实列：EQUIP_ID,EQUIP_NAME,EQUIP_TYPE,VOLTAGE_TYPE,FEEDER_ID,DSUBSTATION_ID,COMPOSITESWITCH
+INSERT INTO "EQUIP"."JBS_PWEQUIPINFO" (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE, VOLTAGE_TYPE, FEEDER_ID, DSUBSTATION_ID) VALUES
+  # SVG 中 editor.add_station 生成的开关 id 为 SW_ 前缀（svg_editor.py: SW_ + 短ID），SQL 必须与图实一致
+  ({_sql_quote('SW_00301')}, {_sql_quote('开关00301')}, '负荷开关', '1010', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')}),
+  ({_sql_quote('SW_00302')}, {_sql_quote('开关00302')}, '负荷开关', '1010', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')}),
+  ({_sql_quote('SW_00303')}, {_sql_quote('开关00303')}, '负荷开关', '1010', {_sql_quote('LINE215')}, {_sql_quote('TMPROOM000300')});
 
 -- 3. 新增馈线段：开关00104 → 00301；开关00301 → 00303；开关00303 → 00102；备用分支 00301→00302
--- 【S4修复】PWFEEDERLINE真实列仅LINE_ID/LINE_NAME/START_ST_ID/VOLTAGE_TYPE；连接关系经PWTERMINAL.CONNECTIVITYNODE_ID表达
-INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, LINE_NAME, START_ST_ID, VOLTAGE_TYPE) VALUES
+-- 【列名对齐真实表】JBS_PWFEEDERLINE 真实列仅 LINE_ID,LINE_NAME,START_ST_ID,VOLTAGE_TYPE（无 END_ST_ID）；
+--    连接关系经 JBS_PWTERMINAL.CONNECTIVITYNODE_ID 表达（同一节点即连通）
+INSERT INTO "EQUIP"."JBS_PWFEEDERLINE" (LINE_ID, LINE_NAME, START_ST_ID, VOLTAGE_TYPE) VALUES
   ({_sql_quote('LN_00104_00301')}, {_sql_quote('开关00104-开关00301')}, {_sql_quote('TMP00044018')}, '1010'),
-  ({_sql_quote('LN_00301_00303')}, {_sql_quote('开关00301-开关00303')}, {_sql_quote('TMP00301')}, '1010'),
-  ({_sql_quote('LN_00303_00102')}, {_sql_quote('开关00303-开关00102')}, {_sql_quote('TMP00303')}, '1010'),
-  ({_sql_quote('LN_00301_00302')}, {_sql_quote('开关00301-开关00302_备用')}, {_sql_quote('TMP00301')}, '1010');
+  ({_sql_quote('LN_00301_00303')}, {_sql_quote('开关00301-开关00303')}, {_sql_quote('SW_00301')}, '1010'),
+  ({_sql_quote('LN_00303_00102')}, {_sql_quote('开关00303-开关00102')}, {_sql_quote('SW_00303')}, '1010'),
+  ({_sql_quote('LN_00301_00302')}, {_sql_quote('开关00301-开关00302_备用')}, {_sql_quote('SW_00301')}, '1010');
 -- 连接关系（端子接入同一CONNECTIVITYNODE_ID即连通）
-INSERT INTO EQUIP_JBS_PWTERMINAL (ID, EQUIP_ID, CONNECTIVITYNODE_ID) VALUES
-  ({_sql_quote('TMPT001')}, {_sql_quote('TMP00301')}, 'CN_00301_UP'),
-  ({_sql_quote('TMPT002')}, {_sql_quote('TMP00301')}, 'CN_00301_DOWN'),
-  ({_sql_quote('TMPT003')}, {_sql_quote('TMP00302')}, 'CN_00301_DOWN'),
-  ({_sql_quote('TMPT004')}, {_sql_quote('TMP00303')}, 'CN_00301_DOWN'),
-  ({_sql_quote('TMPT005')}, {_sql_quote('TMP00303')}, 'CN_00303_DOWN');
+INSERT INTO "EQUIP"."JBS_PWTERMINAL" (ID, EQUIP_ID, CONNECTIVITYNODE_ID) VALUES
+  ({_sql_quote('TMPT001')}, {_sql_quote('SW_00301')}, 'CN_00301_UP'),
+  ({_sql_quote('TMPT002')}, {_sql_quote('SW_00301')}, 'CN_00301_DOWN'),
+  ({_sql_quote('TMPT003')}, {_sql_quote('SW_00302')}, 'CN_00301_DOWN'),
+  ({_sql_quote('TMPT004')}, {_sql_quote('SW_00303')}, 'CN_00301_DOWN'),
+  ({_sql_quote('TMPT005')}, {_sql_quote('SW_00303')}, 'CN_00303_DOWN');
 
 COMMIT;
 
 -- ========================= ROLLBACK（若需撤销） =========================
 -- BEGIN TRANSACTION;
--- DELETE FROM EQUIP_JBS_PWFEEDERLINE WHERE LINE_ID IN ('LN_00104_00301','LN_00301_00303','LN_00303_00102','LN_00301_00302');
--- DELETE FROM EQUIP_JBS_PWEQUIPINFO   WHERE EQUIP_ID  IN ('TMP00301','TMP00302','TMP00303');
--- DELETE FROM EQUIP_JBS_PWROOM        WHERE ROOM_ID   =  'TMPROOM000300';
+-- DELETE FROM "EQUIP"."JBS_PWTERMINAL"    WHERE EQUIP_ID  IN ('SW_00301','SW_00302','SW_00303');
+-- DELETE FROM "EQUIP"."JBS_PWFEEDERLINE" WHERE LINE_ID IN ('LN_00104_00301','LN_00301_00303','LN_00303_00102','LN_00301_00302');
+-- DELETE FROM "EQUIP"."JBS_PWEQUIPINFO"   WHERE EQUIP_ID  IN ('SW_00301','SW_00302','SW_00303');
+-- DELETE FROM "EQUIP"."JBS_PWROOM"        WHERE ROOM_ID   =  'TMPROOM000300';
 -- COMMIT;
 """
     sql_path_a1 = os.path.join(OUTPUT_SQL, "edit_add_station_000300.sql")
@@ -171,7 +177,8 @@ COMMIT;
     pre_stat2 = _count_internal2(b2)
     editor2 = SvgInteractiveEditorV2(b2)
     editor2.delete_device("TMP00043912")  # 开关 00024
-    editor2.save(line216_out)
+    # relayout=True：删除后 adj 已更新（两侧桥接），重建生成树使 WIRE_ 连线反映桥接
+    editor2.save(line216_out, relayout=True)
     post_stat2 = _count_internal2(b2)
 
     ok_a2, rep_a2 = check_svg_quality(
@@ -180,52 +187,47 @@ COMMIT;
     del_sql = f"""-- ==========================================================
 -- Phase 2 Test Task 2：删除开关 00024 (SVG id=TMP00043912)
 -- 目标SVG：LINE216_beautified.svg
--- 策略：先把两侧最近邻居设备 A / B 直接连通；再删连接+删设备+删文字
--- 可回滚：ROLLBACK段提供反操作（先恢复设备/连接，再恢复A-TMP00043912-B的分叉）
+-- 【列名对齐真实表】连通性只由 "EQUIP"."JBS_PWTERMINAL"(ID,EQUIP_ID,CONNECTIVITYNODE_ID) 表达：
+--   JBS_PWFEEDERLINE 无 END_ST_ID（仅 LINE_ID,LINE_NAME,START_ST_ID,VOLTAGE_TYPE），
+--   因此"两侧直通"用"给两侧邻居设备接入同一新连通节点 CN_BRIDGE_00024"实现，不写馈线行。
+-- 策略：1) 找与 TMP00043912 共享连通节点的邻居 → 2) 邻居端子接入新节点（直通）
+--       3) 删设备端子 → 4) 删设备本体
+-- 可回滚：ROLLBACK 段恢复设备并删除桥接端子。
 -- ==========================================================
 BEGIN TRANSACTION;
 
--- 1. 预查询：开关 TMP00043912 的邻居（两侧设备），保存到临时表，方便 INSERT 新直达线
-CREATE TEMP TABLE _neighbors_00024 AS
-  SELECT DISTINCT
-    CASE WHEN START_ST_ID='TMP00043912' THEN END_ST_ID ELSE START_ST_ID END AS NEI_ID
-  FROM EQUIP_JBS_PWFEEDERLINE
-  WHERE START_ST_ID='TMP00043912' OR END_ST_ID='TMP00043912';
+-- 1. 桥接：为所有与 TMP00043912 共享连通节点的邻居设备插入新端子，接入同一新节点 CN_BRIDGE_00024
+--   （等价于"开关删除后两侧设备直接连通"；NOT EXISTS 防重复执行）
+INSERT INTO "EQUIP"."JBS_PWTERMINAL" (ID, EQUIP_ID, CONNECTIVITYNODE_ID)
+SELECT 'TMPT_BRIDGE_' || NEI.EQUIP_ID, NEI.EQUIP_ID, 'CN_BRIDGE_00024'
+FROM (
+    SELECT DISTINCT T2.EQUIP_ID
+    FROM "EQUIP"."JBS_PWTERMINAL" T1
+    JOIN "EQUIP"."JBS_PWTERMINAL" T2
+      ON T1.CONNECTIVITYNODE_ID = T2.CONNECTIVITYNODE_ID
+    WHERE T1.EQUIP_ID = 'TMP00043912'
+      AND T2.EQUIP_ID <> 'TMP00043912'
+) NEI
+WHERE NOT EXISTS (
+    SELECT 1 FROM "EQUIP"."JBS_PWTERMINAL" X
+    WHERE X.EQUIP_ID = NEI.EQUIP_ID
+      AND X.CONNECTIVITYNODE_ID = 'CN_BRIDGE_00024'
+);
 
--- 2. 插入两侧设备直接相连的新馈线段（取距离最近的两个设备，这里按字典序兜底取第一对）
-INSERT INTO EQUIP_JBS_PWFEEDERLINE (LINE_ID, LINE_NAME, START_ST_ID, END_ST_ID, VOLTAGE_TYPE, FEEDER_ID, LINE_TYPE, REMARK)
-SELECT
-  'LN_BRIDGE_'||A.NEI_ID||'_'||B.NEI_ID,
-  '开关00024删除后桥接_直通',
-  A.NEI_ID, B.NEI_ID,
-  'lkv10', 'LINE216', 'Trunk', '删除开关00024后两侧设备直接连通'
-FROM _neighbors_00024 A, _neighbors_00024 B
-WHERE A.NEI_ID < B.NEI_ID
-  AND NOT EXISTS (SELECT 1 FROM EQUIP_JBS_PWFEEDERLINE L
-                   WHERE (L.START_ST_ID=A.NEI_ID AND L.END_ST_ID=B.NEI_ID)
-                      OR (L.START_ST_ID=B.NEI_ID AND L.END_ST_ID=A.NEI_ID))
-LIMIT 1;
+-- 2. 删除开关本体的端子
+DELETE FROM "EQUIP"."JBS_PWTERMINAL" WHERE EQUIP_ID = 'TMP00043912';
 
--- 3. 删除所有与 TMP00043912 关联的馈线段
-DELETE FROM EQUIP_JBS_PWFEEDERLINE
- WHERE START_ST_ID='TMP00043912' OR END_ST_ID='TMP00043912';
+-- 3. 删除开关本体设备
+DELETE FROM "EQUIP"."JBS_PWEQUIPINFO" WHERE EQUIP_ID = 'TMP00043912';
 
--- 4. 删除开关本体设备
-DELETE FROM EQUIP_JBS_PWEQUIPINFO WHERE EQUIP_ID='TMP00043912';
-
--- 5. 删除端子信号/量测（若存在）
-DELETE FROM EQUIP_JBS_PWTERMINAL WHERE EQUIP_ID='TMP00043912';
-DELETE FROM EQUIP_JBS_ZD_MEAS   WHERE EQUIP_ID='TMP00043912';
-
-DROP TABLE _neighbors_00024;
 COMMIT;
 
 -- ========================= ROLLBACK（若需撤销） =========================
--- 1. 恢复设备本体
--- INSERT INTO EQUIP_JBS_PWEQUIPINFO (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE, VOLTAGE_TYPE, FEEDER_ID, PSR_TYPE)
--- VALUES ('TMP00043912','开关00024','负荷开关','lkv10','LINE216','0307');
--- 2. 恢复"桥接直线 LINE_ID = LN_BRIDGE_X_Y"为两条分叉 X-00024 / 00024-Y，然后删除 LN_BRIDGE_X_Y
---    （需按实际桥接ID补充，可从前述临时表重放）
+-- 1. 恢复设备本体（JBS_PWEQUIPINFO 真实列；DSUBSTATION_ID 按实际站房补）
+-- INSERT INTO "EQUIP"."JBS_PWEQUIPINFO" (EQUIP_ID, EQUIP_NAME, EQUIP_TYPE, VOLTAGE_TYPE, FEEDER_ID, DSUBSTATION_ID)
+-- VALUES ('TMP00043912','开关00024','负荷开关','1010','LINE216','<实际站房ID>');
+-- 2. 删除桥接端子（撤销直通，恢复原端子分配需按实际桥接ID补充）
+-- DELETE FROM "EQUIP"."JBS_PWTERMINAL" WHERE CONNECTIVITYNODE_ID = 'CN_BRIDGE_00024';
 """
     sql_path_a2 = os.path.join(OUTPUT_SQL, "edit_del_switch_00024.sql")
     with open(sql_path_a2, "w", encoding="utf-8") as f:
