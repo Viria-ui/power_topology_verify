@@ -24,45 +24,34 @@ class TopologyRepairer:
 
     def repair(self):
         """执行全量修复流水线。"""
-        with open("debug_repair.txt", "w") as f:
-            f.write(f"Starting repair for {self.doc.svg_filename}\n")
         
         # 1. 归一化旋转角度
         self._normalize_rotation()
-        with open("debug_repair.txt", "a") as f: f.write("Normalized rotation\n")
         
         # 2. 建立站房归属关系
         self._identify_station_affiliation()
-        with open("debug_repair.txt", "a") as f: f.write("Identified station affiliation\n")
         
         # 3. 修复飞线端点
         self._repair_dangling_connections()
-        with open("debug_repair.txt", "a") as f: f.write("Repaired dangling connections\n")
         
         # 4. 强力缝合孤立节点
         self._stitch_isolated_nodes()
-        with open("debug_repair.txt", "a") as f: f.write("Stitched isolated nodes\n")
         
         # 5. 同步 glink_refs
         self._sync_glink_refs()
-        with open("debug_repair.txt", "a") as f: f.write("Synced glink_refs\n")
         
         # 6. 识别电源点与主干/支线标记
         self._identify_topology_hierarchy()
-        with open("debug_repair.txt", "a") as f: f.write("Identified topology hierarchy\n")
         
         # 7. IR 级别连接线正交化
         self._orthogonalize_connections()
-        with open("debug_repair.txt", "a") as f: f.write("Orthogonalized connections\n")
         
         # 8. 清理无效图元与孤立线路
         self._cleanup_invalid_elements()
         self._cleanup_orphan_lines()
-        with open("debug_repair.txt", "a") as f: f.write("Cleaned up elements\n")
         
         # 9. 拓扑质量分析
         self._analyze_topology_quality()
-        with open("debug_repair.txt", "a") as f: f.write("Analyzed quality\n")
         
         return self.doc
 
