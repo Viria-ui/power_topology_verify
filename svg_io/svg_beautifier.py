@@ -1030,7 +1030,7 @@ class SvgBeautifier:
             # ★ v5 电力语义布局（题目 5.1.1：电源起点/从左至右/先上后下/疏密均匀）
             DEV_SPAN = 140          # 主干/层内水平间距（符号48宽+空隙）
             TRUNK_Y0 = MARGIN + 30  # 主干行（电源→负荷，从左至右）
-            LAYER_H = 240           # 分支层高（先上后下）
+            LAYER_H = 320           # 分支层高（先上后下）★ v21 加大容纳 5 轨道
             GROUP_GAP = 60
             BRANCH_ROW_LIMIT = 22   # 单层设备数上限，超出拆多行（疏密均匀）
 
@@ -1092,8 +1092,9 @@ class SvgBeautifier:
                 return sorted(cs, key=key)
 
             max_depth = max(branch_depth.values()) if branch_depth else 0
-            # 梳状放置：孩子尽量垂直对齐父节点（x 贴近父），兄弟从父 x 横排；
-            # 同层内 x 冲突检测 → 向右找空位（保持"从左至右、先上后下"）
+            # ★ v15 竖排已回退（兄弟同列互穿，交叉反而暴涨）；
+            # 恢复 v5 横排：兄弟从父 x 起横排，同层 x 区间冲突右移
+            BRANCH_ROW_LIMIT = 22
             for depth in range(1, max_depth + 1):
                 layer_nodes = layers[depth]
                 if not layer_nodes:
@@ -1103,13 +1104,15 @@ class SvgBeautifier:
                     groups[self.tree_parent[n]].append(n)
                 sorted_parents = sorted(groups.keys(),
                                         key=lambda p: self.pos.get(p, (0, 0))[0])
-                y = TRUNK_Y0 + depth * LAYER_H
-                # 本层已占用的 x 区间（兄弟排开后占用）
+                # ★ v17：同层不同父的分支排 y 错开（最多 3 个轨道），
+                #   避免所有父的兄弟横排水平段挤在同一 y → 互穿成网格
+                TRACKS = 5
+                TRACK_OFF = 60
                 occupied = []
-                for par in sorted_parents:
+                for _pi, par in enumerate(sorted_parents):
+                    y = TRUNK_Y0 + depth * LAYER_H + (_pi % TRACKS) * TRACK_OFF
                     children = _sib_order(groups[par])
                     px = self.pos[par][0]
-                    # 尝试从 px 起排；若与已占用区间重叠，整体右移到空位
                     base = px
                     for o_l, o_r in occupied:
                         need_l = base
@@ -1675,11 +1678,13 @@ class SvgBeautifier:
         bx1, by1, bx2, by2 = box
         if abs(y1 - y2) < 0.5:
             xa, xb = min(x1, x2), max(x1, x2)
-            for cand in (by1 - tol - 14, by2 + tol + 14,
-                         by1 - tol - 28, by2 + tol + 28,
-                         by1 - tol - 42, by2 + tol + 42,
-                         by1 - tol - 56, by2 + tol + 56,
-                         by1 - tol - 70, by2 + tol + 70):
+            for cand in (by1 - tol - 18, by2 + tol + 18,
+                         by1 - tol - 30, by2 + tol + 30,
+                         by1 - tol - 46, by2 + tol + 46,
+                         by1 - tol - 64, by2 + tol + 64,
+                         by1 - tol - 84, by2 + tol + 84,
+                         by1 - tol - 106, by2 + tol + 106):
+                # ★ v22：候选带全局校验（候选 y 上无其他框，绕行段不穿框），步进加远
                 ok = True
                 for b in boxes:
                     if b is box:
@@ -1696,7 +1701,9 @@ class SvgBeautifier:
             for cand in (bx1 - tol - 14, bx2 + tol + 14,
                          bx1 - tol - 28, bx2 + tol + 28,
                          bx1 - tol - 42, bx2 + tol + 42,
-                         bx1 - tol - 56, bx2 + tol + 56):
+                         bx1 - tol - 56, bx2 + tol + 56,
+                         bx1 - tol - 74, bx2 + tol + 74):
+                # ★ v22：候选带全局校验
                 ok = True
                 for b in boxes:
                     if b is box:
@@ -1709,27 +1716,58 @@ class SvgBeautifier:
                     return [(x1, y1), (cand, y1), (cand, y2), (x2, y2)]
             return None
 
-    def _detour_reroute(self, pts, boxes, max_detour=2):
-        """整条线逐段穿框检测 + 帽子绕行。每段最多绕一次，整线最多 max_detour 次；
-        绕行路径不穿其他框（候选带已校验），绕行段仍穿框则保留原段。"""
+    def _detour_reroute(self, pts, boxes, max_detour=6):
+        """★ v19 队列式穿框绕行：逐段检测，绕行产生的新段也插回队列复查，
+        直到不再穿框或超过 max_detour。visited 记录 (段起点, 框) 防止振荡。
+        候选带全局校验（候选 y/x 上无其他框），绕行水平段不穿框；
+        绕行垂直短段复查，若仍穿框则继续绕（visited 限次）。"""
         new_pts = [pts[0]]
         n_detour = 0
-        for seg in zip(pts, pts[1:]):
+        visited = set()
+        segs_q = list(zip(pts, pts[1:]))
+        while segs_q and n_detour < max_detour:
+            seg = segs_q.pop(0)
+            p1, p2 = seg
             hit = None
             for b in boxes:
                 if self._seg_hits_box(seg, b):
                     hit = b
                     break
-            if hit is None or n_detour >= max_detour:
-                new_pts.append(seg[1])
+            if hit is None:
+                new_pts.append(p2)
                 continue
+            vk = (round(p1[0] / 4), round(p1[1] / 4), id(hit) if hasattr(hit, '__hash__') else hash(tuple(hit)))
+            if vk in visited:
+                # 该段绕不动（候选带失败或已绕）→ 保留原段
+                new_pts.append(p2)
+                continue
+            visited.add(vk)
             route = self._detour_once(seg, hit, boxes)
             if route is None:
-                new_pts.append(seg[1])
-                continue
-            # 绕行路径自身不能再穿框（候选带已校验；垂直短段在端点列，贴自身框边可容忍）
+                # ★ v23：候选带全失败（容器密集区常见）→ 兜底沿框底/框右 20px 外走。
+                # 不穿本框；穿其他框由队列复查 + visited 兜底。
+                bx1, by1, bx2, by2 = hit
+                if abs(p1[1] - p2[1]) < 0.5:
+                    _cand = by2 + 1.0 + 20.0
+                    route = [(p1[0], p1[1]), (p1[0], _cand), (p2[0], _cand), (p2[0], p2[1])]
+                else:
+                    _cand = bx2 + 1.0 + 20.0
+                    route = [(p1[0], p1[1]), (_cand, p1[1]), (_cand, p2[1]), (p2[0], p2[1])]
+                # 若兜底段自己也穿本框（极端异常），退回原段
+                if self._seg_hits_box((route[1], route[2]), hit):
+                    new_pts.append(p2)
+                    continue
             n_detour += 1
-            new_pts.extend(route[1:])
+            # route = [(x1,y1), (x1,cand), (x2,cand), (x2,y2)]
+            # ★ v20：队列顺序必须为 [出段, 水平段, 回程]（逆序 insert），
+            #   水平绕行的回程 (x2,cand)->(x2,y2) 必须保留，否则线终点悬空被误删。
+            #   出段/水平段端点由各自入队处理时追加，不在 new_pts 预置（防重复点）。
+            segs_q.insert(0, (route[2], route[3]))   # 回程（最后处理）
+            segs_q.insert(0, (route[1], route[2]))   # 水平段（中间处理）
+            segs_q.insert(0, (route[0], route[1]))   # 出段（最先处理）
+        # 剩余队列直接追加终点
+        for seg in segs_q:
+            new_pts.append(seg[1])
         # 合并共线点 + 去重复点
         res = []
         for p in new_pts:
@@ -2183,9 +2221,26 @@ class SvgBeautifier:
             on = (abs(px - x1) <= tol or abs(px - x2) <= tol or abs(py - y1) <= tol or abs(py - y2) <= tol)
             return on and (x1 - tol <= px <= x2 + tol and y1 - tol <= py <= y2 + tol)
 
+        # ★ v16：干线水平段收集（母线 BUS_ + 主干树边），供 T 接截断与端点判定使用
+        TRUNK_W_MIN = 2.0
+        trunk_hsegs = []  # (x1, x2, y, froms_set, tos_set)
+        for key, m in merged.items():
+            if m['width'] < TRUNK_W_MIN:
+                continue
+            pts = key[0]
+            for i in range(len(pts) - 1):
+                p1, p2 = pts[i], pts[i + 1]
+                if abs(p1[1] - p2[1]) < 0.5 and abs(p1[0] - p2[0]) > 0.5:
+                    trunk_hsegs.append((min(p1[0], p2[0]), max(p1[0], p2[0]), p1[1],
+                                        set(m.get('froms') or []), set(m.get('tos') or [])))
+
         def _on_bus(px, py):
             for bx1, by, bx2, _ in bus_lines:
                 if abs(py - by) <= 3 and bx1 - 3 <= px <= bx2 + 3:
+                    return True
+            # ★ v16：T 接截断后的细线端点落在干线上（主干树边水平段），同样合法
+            for (tx1, tx2, ty, _tf, _tt) in trunk_hsegs:
+                if abs(py - ty) <= 3 and tx1 - 3 <= px <= tx2 + 3:
                     return True
             return False
 
@@ -2202,16 +2257,13 @@ class SvgBeautifier:
             # v12h 注释中担心的"绕行破坏母线/干线 T 接"是因为 _detour_reroute 全段
             # 重排；这里只对"本段穿过单个非端点框"做局部加 2 点处理，端点不动。
             try:
-                _par_id, _chd_id = (None, None)
-                _md_from = list(m.get('froms') or [])
-                _md_to = list(m.get('tos') or [])
-                if _md_from:
-                    _par_id = _md_from[0]
-                if _md_to:
-                    _chd_id = _md_to[0]
-                pts2 = self._avoid_devices(pts2, _par_id, _chd_id)
+                # ★ v14/v18：穿框绕行——_detour_reroute（逐段+全局安全带，防振荡）。
+                # 只对容器框绕行（cont_abs）：设备框已由 _make_wire_segs 的 L/Z 形
+                # 避让；若连设备框也绕，会在设备密集区产生大量"上去下来"的回头段
+                # （回头段本身制造交叉）。端点不动，不破坏 T 接路径。
+                pts2 = self._detour_reroute(pts2, cont_abs) or pts2
             except Exception as _ex:
-                print(f"  [warn] _avoid_devices 绕行失败，保留原路径: {_ex}")
+                print(f"  [warn] 绕行失败，保留原路径: {_ex}")
             # ★ B-mini 修复：旧版 d<40 && len>2 直接整条删除太激进，把
             # 短距 L 形/3 点折线也一并清掉了。改为：只在 polyline 形成
             # 明显"折返"（中间点回退到起点附近）时才删除；其它短距 L 形
@@ -2236,11 +2288,57 @@ class SvgBeautifier:
             new_order.append(nkey)
         order = new_order
 
+        # ★ v16：T 接截断——细线（分支）垂直段穿过干线 → 在交点处拆开（止于干线）
+        _split_keys = {}  # key -> 拆分后的 pts 列表（原 key 仍输出，拆分点同时打在两条线上）
         for key in order:
             pts, color = key
             m = merged[key]
+            if m['width'] >= TRUNK_W_MIN or len(pts) < 3:
+                continue
+            my_from = set(m.get('froms') or [])
+            my_to = set(m.get('tos') or [])
+            new_pts = [pts[0]]
+            for i in range(len(pts) - 1):
+                p1, p2 = pts[i], pts[i + 1]
+                if abs(p1[0] - p2[0]) < 0.5 and abs(p1[1] - p2[1]) > 0.5:
+                    # 垂直段：检查是否穿过干线水平段（且干线不属于本线端点设备）
+                    vx = p1[0]
+                    vy1, vy2 = min(p1[1], p2[1]), max(p1[1], p2[1])
+                    cuts = []
+                    for (tx1, tx2, ty, tfrom, tto) in trunk_hsegs:
+                        if tx1 + 0.5 < vx < tx2 - 0.5 and vy1 + 0.5 < ty < vy2 - 0.5:
+                            if tfrom & (my_from | my_to) or tto & (my_from | my_to):
+                                continue
+                            cuts.append(ty)
+                    if cuts:
+                        # 在第一个交叉点处拆开（垂直段止于干线）
+                        cut_y = min(cuts)
+                        new_pts.append((vx, cut_y))
+                        # 干线以下部分：垂直段继续到终点（本段不再穿该干线）
+                        if cut_y + 0.5 < vy2:
+                            new_pts.append((vx, vy2))
+                        continue
+                new_pts.append(p2)
+            # 共线/去重
+            res = []
+            for p in new_pts:
+                if res and abs(res[-1][0] - p[0]) < 0.5 and abs(res[-1][1] - p[1]) < 0.5:
+                    continue
+                if len(res) >= 2:
+                    v1 = (res[-1][0] - res[-2][0], res[-1][1] - res[-2][1])
+                    v2 = (p[0] - res[-1][0], p[1] - res[-1][1])
+                    if abs(v1[0] * v2[1] - v1[1] * v2[0]) < 1e-6 and                        v1[0] * v2[0] + v1[1] * v2[1] > 0:
+                        res.pop()
+                res.append(p)
+            if len(res) >= 2 and res != list(pts):
+                _split_keys[key] = res
+
+        for key in order:
+            pts, color = key
+            m = merged[key]
+            out_pts = _split_keys.get(key, pts)
             cg = ET.SubElement(g, f'{{{SVG_NS}}}g', {'id': m['cid']})
-            pts_str = ' '.join(f'{x},{y}' for x, y in pts)
+            pts_str = ' '.join(f'{x},{y}' for x, y in out_pts)
             ET.SubElement(cg, f'{{{SVG_NS}}}polyline', {
                 'points': pts_str, 'fill': 'none', 'stroke': color,
                 'stroke-width': str(m['width']),

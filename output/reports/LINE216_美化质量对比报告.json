@@ -1,76 +1,76 @@
 {
   "comparison": {
     "score_before": 45.4,
-    "score_after": 95.5,
-    "score_change": 50.1,
-    "defects_before": 416,
-    "defects_after": 3,
-    "defects_reduced": 413,
-    "real_devices_before": 1644,
-    "real_devices_after": 726,
-    "real_devices_change": -918,
-    "defect_rate_before": 25.3,
-    "defect_rate_after": 0.41,
-    "defect_rate_change": -24.89,
-    "defect_rate_penalty_before": 4.59,
+    "score_after": 98.5,
+    "score_change": 53.1,
+    "defects_before": 419,
+    "defects_after": 1,
+    "defects_reduced": 418,
+    "real_devices_before": 1648,
+    "real_devices_after": 729,
+    "real_devices_change": -919,
+    "defect_rate_before": 25.42,
+    "defect_rate_after": 0.14,
+    "defect_rate_change": -25.28,
+    "defect_rate_penalty_before": 4.63,
     "defect_rate_penalty_after": 0.0,
     "components_before": 252,
     "components_after": 3,
     "components_change": -249,
     "type_changes": {
-      "标注错位": 30,
-      "孤岛设备": 114,
-      "设备重叠": 269
+      "标注错位": 27,
+      "设备重叠": 277,
+      "孤岛设备": 114
     }
   },
   "before": {
     "stage": "美化前",
-    "total_elements": 1645,
-    "real_device_count": 1644,
+    "total_elements": 1649,
+    "real_device_count": 1648,
     "fake_device_count": 1,
     "total_connections": 660,
-    "total_defects": 416,
-    "defect_rate_percent": 25.3,
-    "defect_rate_penalty": 4.59,
+    "total_defects": 419,
+    "defect_rate_percent": 25.42,
+    "defect_rate_penalty": 4.63,
     "quality_score": 45.4,
     "defects_by_type": {
       "孤岛设备": 114,
-      "设备重叠": 272,
-      "标注错位": 30
+      "设备重叠": 278,
+      "标注错位": 27
     },
     "defects_by_severity": {
       "high": 114,
-      "medium": 272,
-      "low": 30
+      "medium": 278,
+      "low": 27
     },
     "connected_components": 252,
     "max_component_size": 9,
     "dangling_count": 0,
     "fake_connect_count": 0,
-    "overlap_count": 272,
-    "text_missing_count": 30
+    "overlap_count": 278,
+    "text_missing_count": 27
   },
   "after": {
     "stage": "美化后",
-    "total_elements": 726,
-    "real_device_count": 726,
+    "total_elements": 729,
+    "real_device_count": 729,
     "fake_device_count": 0,
-    "total_connections": 1789,
-    "total_defects": 3,
-    "defect_rate_percent": 0.41,
+    "total_connections": 1791,
+    "total_defects": 1,
+    "defect_rate_percent": 0.14,
     "defect_rate_penalty": 0.0,
-    "quality_score": 95.5,
+    "quality_score": 98.5,
     "defects_by_type": {
-      "设备重叠": 3
+      "设备重叠": 1
     },
     "defects_by_severity": {
-      "medium": 3
+      "medium": 1
     },
     "connected_components": 3,
-    "max_component_size": 702,
+    "max_component_size": 705,
     "dangling_count": 0,
     "fake_connect_count": 0,
-    "overlap_count": 3,
+    "overlap_count": 1,
     "text_missing_count": 0
   },
   "before_defects_sample": [
@@ -216,20 +216,6 @@
     }
   ],
   "after_defects_sample": [
-    {
-      "equip_id": "TMP00046603",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[避雷器044] 与 [站房000069] bbox重叠率=70.59% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
-    {
-      "equip_id": "TMP00000224",
-      "defect_type": "设备重叠",
-      "severity": "medium",
-      "description": "设备[站房000025] 与 [配变2144] bbox重叠率=85.29% > 50%",
-      "suggestion": "移动其中一台设备，保持设备图元无大面积重叠"
-    },
     {
       "equip_id": "TMP00313539",
       "defect_type": "设备重叠",
