@@ -1,0 +1,39 @@
+{
+  "schema_version": "1",
+  "source_path": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\_clip_b215_tl.html",
+  "source_filename": "_clip_b215_tl.html",
+  "source_hash": "7b728b2722be",
+  "source_size_bytes": 1348513,
+  "kind": "html",
+  "rendered_at_utc": "2026-09-14T15:08:26+00:00",
+  "output_dir": "C:\\Users\\1\\Desktop\\power_topology_verify\\.preview\\7b728b2722be",
+  "page_count": 1,
+  "rendered_page_count": 1,
+  "collage_count": 0,
+  "extracted_text_chars": 1337522,
+  "text_relpath": "text.md",
+  "thumbnail_relpath": "thumb.jpg",
+  "pages": [
+    {
+      "page": 1,
+      "relpath": "pages\\p001.png",
+      "size_bytes": 115030,
+      "width": 1280,
+      "height": 823
+    }
+  ],
+  "collages": [],
+  "warnings": [],
+  "options": {
+    "max_pages": 12,
+    "collage": true,
+    "page_range": null,
+    "thumbnail": true,
+    "text_only": false,
+    "jpeg_quality": 85,
+    "out_max_dim": 2048
+  },
+  "summary": {
+    "bytes": 1348513
+  }
+}
