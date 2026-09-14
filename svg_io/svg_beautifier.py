@@ -99,6 +99,13 @@ GARBAGE_PATTERNS = [
     r'[炽始速常]',
     r'行县', r'个行', r'行者劳',
     r'明\d*#', r'争\d', r'败诉', r'况诉',
+    # ---- OCR 拼接乱码（2026-09 实测样本）----
+    r'LINE\d+_\w*线',       # "LINE370_线" / "配电LINE370_线"
+    r'SUB\d+_',              # "SUB020_开关"
+    r'[饭发退能分书工明]',     # OCR 乱码常见字
+    r'00000#',                # "00000#-能半分38#"
+    r'站外-电缆终端头',        # 终端头拼接乱码
+    r'\d{3,}-\D+-\d{3,}',   # 数字-文字-数字 拼接（586690-站外-586691）
 ]
 
 C_BG = '#FFFFFF'
@@ -2934,9 +2941,15 @@ class SvgBeautifier:
             if d['type'] not in BUSBAR_TYPES or pid not in self.pos:
                 continue
             name = self._display_name(d)
-            # 清理 TMPxxxx# 前缀（看起来像乱码）
+            # 清理母线名：去 TMP编号# 前缀、00000 前缀；明显OCR乱码简化
             import re as _re
             name = _re.sub(r'^TMP\d+#', '', name)
+            name = _re.sub(r'^0+', '', name)
+            if (SvgBeautifier.is_garbage_text(name)
+                    or _re.search(r'LINE\d+_线', name)
+                    or _re.search(r'SUB\d+_', name)
+                    or '饭' in name or len(name) < 2 or len(name) > 20):
+                name = '母线'
             if name in seen_names:
                 continue
             seen_names.add(name)
@@ -3591,9 +3604,15 @@ class SvgBeautifier:
         }
         pid = d.get('id', '')
         real = (d.get('name') or '').strip()
-        # 真实设备名：非空、不是纯 TMP/纯数字/纯符号 时优先显示
-        if real and not real.startswith('TMP') and not re.fullmatch(r'[\d\-#~_\.]+', real):
-            return real
+        # 真实设备名：非空、非纯 TMP/纯数字/纯符号、且通过乱码检测 时优先显示
+        # （乱码名（OCR 拼接）丢弃 → 用"类型名_ID尾号"统一兜底，保证文字标识规范统一）
+        if (real and not real.startswith('TMP')
+                and not re.fullmatch(r'[\d\-#~_\.]+', real)
+                and not SvgBeautifier.is_garbage_text(real)):
+            # 统一化：去掉 00000 类前缀（00000终端头XXX → 终端头XXX）
+            real = re.sub(r'^0{2,}', '', real).strip()
+            if real:
+                return real
         tname = type_names.get(d.get('type', ''), '设备')
         return f"{tname}_{pid[-4:]}" if pid else tname
 

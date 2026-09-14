@@ -56,15 +56,15 @@
     "viewBox": {
       "x": 0.0,
       "y": 0.0,
-      "w": 12880.0,
-      "h": 15820.0
+      "w": 12250.0,
+      "h": 15620.0
     },
     "canvas": {
-      "width": 12880.0,
-      "height": 15820.0,
+      "width": 12250.0,
+      "height": 15620.0,
       "aspect_match": true,
-      "vb_ratio": 0.8142,
-      "wh_ratio": 0.8142
+      "vb_ratio": 0.7843,
+      "wh_ratio": 0.7843
     },
     "devices": {
       "total": 687,
@@ -88,7 +88,7 @@
     },
     "topology": {
       "total_device_nodes": 708,
-      "connections_total": 1684,
+      "connections_total": 1689,
       "connected_components": 8,
       "largest_component_size": 656,
       "largest_component_pct": 92.66,
