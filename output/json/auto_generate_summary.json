@@ -219,10 +219,10 @@
     "svg": "C:\\Users\\1\\Desktop\\power_topology_verify\\output\\svg\\TMP00034205_power_trace.svg",
     "target": "TMP00034205",
     "feeder": "LINE074",
-    "main_path_len": 880,
+    "main_path_len": 94,
     "backup_paths": 2,
-    "nodes": 320,
-    "edges": 319,
+    "nodes": 253,
+    "edges": 252,
     "edge_error_pct": 0.0
   }
 }

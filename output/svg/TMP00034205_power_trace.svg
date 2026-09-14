@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 3868.00 445.00"
-     width="3868.00" height="445.00"
+     viewBox="0 0 12448.00 500.00"
+     width="12448.00" height="500.00"
      font-family="Microsoft YaHei, SimHei, Arial, sans-serif">
   <style>symbol{overflow:visible}</style>
   <defs>
@@ -16,66 +16,512 @@
     </marker>
     
   </defs>
-  <rect x="0" y="0" width="3868.00" height="445.00" fill="#FFFFFF"/>
-  <line x1="422.00" y1="170.00" x2="422.00" y2="155.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
-  <line x1="316.00" y1="227.37" x2="372.00" y2="207.63" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
-  <line x1="160.00" y1="226.31" x2="216.00" y2="236.19" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
-  <line x1="996.00" y1="162.50" x2="940.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1408.00" y1="162.50" x2="1464.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="372.00" y1="152.63" x2="316.00" y2="172.37" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="3280.00" y1="162.50" x2="3336.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2032.00" y1="162.50" x2="2088.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2868.00" y1="162.50" x2="2812.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="160.00" y1="153.69" x2="216.00" y2="143.81" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="3436.00" y1="162.50" x2="3492.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="160.00" y1="171.31" x2="216.00" y2="181.19" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="266.00" y1="115.00" x2="266.00" y2="100.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="3180.00" y1="162.50" x2="3124.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1776.00" y1="162.50" x2="1720.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1152.00" y1="162.50" x2="1096.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2244.00" y1="162.50" x2="2188.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="3592.00" y1="162.50" x2="3648.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2712.00" y1="162.50" x2="2656.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2968.00" y1="162.50" x2="3024.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2344.00" y1="162.50" x2="2400.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="840.00" y1="162.50" x2="784.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="472.00" y1="143.81" x2="528.00" y2="153.69" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1932.00" y1="162.50" x2="1876.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="2500.00" y1="162.50" x2="2556.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1308.00" y1="162.50" x2="1252.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="1564.00" y1="162.50" x2="1620.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="684.00" y1="162.50" x2="628.00" y2="162.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <line x1="160.00" y1="98.69" x2="216.00" y2="88.81" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
-  <g data-id="TMP00004767"><rect x="60.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="#E6F4FF" stroke="#262626" stroke-width="2.8"/><text x="110.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00008</text></g>
-  <g data-id="TMP00004768"><rect x="60.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="#E6F4FF" stroke="#262626" stroke-width="2.8"/><text x="110.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00009</text></g>
-  <g data-id="TMP00004770"><rect x="60.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="#E6F4FF" stroke="#262626" stroke-width="2.8"/><text x="110.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00011</text></g>
-  <g data-id="TMP00040254"><rect x="216.00" y="60.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="266.00" y="83.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0006</text></g>
-  <g data-id="TMP00004769"><rect x="216.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="266.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00010</text></g>
-  <g data-id="TMP00004774"><rect x="216.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="266.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00015</text></g>
-  <g data-id="TMP00004771"><rect x="216.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="266.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00012</text></g>
-  <g data-id="TMP00004773"><rect x="372.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="422.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00014</text></g>
-  <g data-id="TMP00004772"><rect x="372.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="422.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00013</text></g>
-  <g data-id="TMP00008968"><rect x="528.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="578.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00161</text></g>
-  <g data-id="TMP00008967"><rect x="684.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="734.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00160</text></g>
-  <g data-id="TMP00008966"><rect x="840.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="890.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00159</text></g>
-  <g data-id="TMP00008965"><rect x="996.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1046.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00158</text></g>
-  <g data-id="TMP00008964"><rect x="1152.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1202.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00157</text></g>
-  <g data-id="TMP00008952"><rect x="1308.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1358.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00152</text></g>
-  <g data-id="TMP00008953"><rect x="1464.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1514.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00153</text></g>
-  <g data-id="TMP00042370"><rect x="1620.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1670.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0027</text></g>
-  <g data-id="TMP00013383"><rect x="1776.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1826.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00211</text></g>
-  <g data-id="TMP00013382"><rect x="1932.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1982.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00210</text></g>
-  <g data-id="TMP00042369"><rect x="2088.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2138.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0026</text></g>
-  <g data-id="TMP00011916"><rect x="2244.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2294.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00187</text></g>
-  <g data-id="TMP00041482"><rect x="2400.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2450.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0012</text></g>
-  <g data-id="TMP00041483"><rect x="2556.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2606.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0013</text></g>
-  <g data-id="TMP00011918"><rect x="2712.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2762.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00189</text></g>
-  <g data-id="TMP00005800"><rect x="2868.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2918.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00072</text></g>
-  <g data-id="TMP00012797"><rect x="3024.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3074.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00206</text></g>
-  <g data-id="TMP00005797"><rect x="3180.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3230.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00069</text></g>
-  <g data-id="TMP00005798"><rect x="3336.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3386.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00070</text></g>
-  <g data-id="TMP00005799"><rect x="3492.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3542.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00071</text></g>
-  <g data-id="TMP00034205"><rect x="3643.00" y="139.50" width="110.0" height="46.0" rx="3" ry="3" fill="#FFF1F0" stroke="#262626" stroke-width="2.8"/><text x="3698.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">配变0486</text></g>
-  <g transform="translate(20, 400.0)"><line x1="0" y1="0" x2="40" y2="0" stroke="#1890FF" stroke-width="4.5"/><text x="48" y="4" font-size="9" fill="#262626">主供路径</text><line x1="150" y1="0" x2="190" y2="0" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5"/><text x="198" y="4" font-size="9" fill="#262626">备供路径</text><rect x="310" y="-8" width="32" height="16" fill="#E6F4FF" stroke="#262626"/><text x="348" y="4" font-size="9" fill="#262626">电源点</text><rect x="430" y="-8" width="34" height="16" fill="#FFF1F0" stroke="#262626"/><text x="470" y="4" font-size="9" fill="#262626">目标设备</text></g>
-  <text x="1934.00" y="22" text-anchor="middle" font-weight="bold" font-size="13" fill="#262626">【电源追溯路径图】 目标设备 TMP00034205  (馈线 TMP00000006) 主供 52 节点 / 备供 2 条</text>
+  <rect x="0" y="0" width="12448.00" height="500.00" fill="#FFFFFF"/>
+  <line x1="7704.00" y1="162.50" x2="7648.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2088.00" y1="245.00" x2="2032.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="12228.00" y1="198.81" x2="12172.00" y2="208.69" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4896.00" y1="217.50" x2="4840.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3648.00" y1="263.69" x2="3592.00" y2="253.81" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6088.00" y1="272.50" x2="6144.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="784.00" y1="245.00" x2="840.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6400.00" y1="217.50" x2="6456.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="12016.00" y1="217.50" x2="12072.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4840.00" y1="162.50" x2="4896.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8796.00" y1="281.31" x2="8740.00" y2="291.19" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7236.00" y1="272.50" x2="7180.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3960.00" y1="272.50" x2="3904.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="840.00" y1="190.00" x2="784.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="12072.00" y1="162.50" x2="12016.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7860.00" y1="272.50" x2="7804.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9052.00" y1="263.69" x2="9108.00" y2="253.81" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7336.00" y1="217.50" x2="7392.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5988.00" y1="272.50" x2="5932.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3124.00" y1="245.00" x2="3180.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4584.00" y1="162.50" x2="4528.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2812.00" y1="190.00" x2="2868.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8896.00" y1="162.50" x2="8952.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1096.00" y1="190.00" x2="1152.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8896.00" y1="272.50" x2="8952.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11080.00" y1="217.50" x2="11136.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1308.00" y1="190.00" x2="1252.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6768.00" y1="272.50" x2="6712.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10612.00" y1="217.50" x2="10668.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6868.00" y1="217.50" x2="6924.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7804.00" y1="162.50" x2="7860.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2344.00" y1="245.00" x2="2400.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3124.00" y1="190.00" x2="3180.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6300.00" y1="272.50" x2="6244.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7024.00" y1="162.50" x2="7080.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1564.00" y1="190.00" x2="1620.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9576.00" y1="217.50" x2="9520.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5364.00" y1="272.50" x2="5308.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1776.00" y1="190.00" x2="1720.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4996.00" y1="217.50" x2="5052.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3748.00" y1="162.50" x2="3804.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="316.00" y1="190.00" x2="372.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5620.00" y1="217.50" x2="5676.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1252.00" y1="245.00" x2="1308.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10980.00" y1="162.50" x2="10924.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6612.00" y1="272.50" x2="6556.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4684.00" y1="272.50" x2="4740.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="216.00" y1="190.00" x2="160.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9208.00" y1="236.19" x2="9264.00" y2="226.31" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8272.00" y1="162.50" x2="8328.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1464.00" y1="245.00" x2="1408.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5620.00" y1="272.50" x2="5676.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="684.00" y1="245.00" x2="628.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11236.00" y1="162.50" x2="11292.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5932.00" y1="162.50" x2="5988.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2556.00" y1="245.00" x2="2500.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6924.00" y1="162.50" x2="6868.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="372.00" y1="245.00" x2="316.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11760.00" y1="162.50" x2="11704.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3024.00" y1="190.00" x2="2968.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8484.00" y1="143.81" x2="8428.00" y2="153.69" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6456.00" y1="162.50" x2="6400.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8584.00" y1="300.00" x2="8640.00" y2="300.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11860.00" y1="217.50" x2="11916.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1876.00" y1="245.00" x2="1932.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10456.00" y1="217.50" x2="10512.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1408.00" y1="190.00" x2="1464.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2344.00" y1="190.00" x2="2400.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9988.00" y1="217.50" x2="10044.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6144.00" y1="162.50" x2="6088.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="996.00" y1="245.00" x2="940.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="528.00" y1="190.00" x2="472.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3436.00" y1="245.00" x2="3492.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5464.00" y1="217.50" x2="5520.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5152.00" y1="217.50" x2="5208.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8016.00" y1="217.50" x2="7960.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11548.00" y1="162.50" x2="11604.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9052.00" y1="171.31" x2="9108.00" y2="181.19" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11916.00" y1="162.50" x2="11860.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5208.00" y1="162.50" x2="5152.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1720.00" y1="245.00" x2="1776.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4060.00" y1="162.50" x2="4116.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6868.00" y1="272.50" x2="6924.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5520.00" y1="272.50" x2="5464.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7548.00" y1="162.50" x2="7492.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5152.00" y1="272.50" x2="5208.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8484.00" y1="291.19" x2="8428.00" y2="281.31" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4428.00" y1="162.50" x2="4372.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9420.00" y1="162.50" x2="9364.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10668.00" y1="162.50" x2="10612.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3592.00" y1="198.81" x2="3648.00" y2="208.69" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4584.00" y1="272.50" x2="4528.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10456.00" y1="162.50" x2="10512.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9676.00" y1="162.50" x2="9732.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2556.00" y1="190.00" x2="2500.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7704.00" y1="217.50" x2="7648.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2656.00" y1="190.00" x2="2712.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11392.00" y1="162.50" x2="11448.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3024.00" y1="245.00" x2="2968.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4116.00" y1="272.50" x2="4060.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6768.00" y1="162.50" x2="6712.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10824.00" y1="217.50" x2="10768.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8740.00" y1="143.81" x2="8796.00" y2="153.69" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2188.00" y1="245.00" x2="2244.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6612.00" y1="162.50" x2="6556.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4216.00" y1="272.50" x2="4272.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10924.00" y1="217.50" x2="10980.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4528.00" y1="217.50" x2="4584.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10144.00" y1="217.50" x2="10200.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5464.00" y1="162.50" x2="5520.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10356.00" y1="217.50" x2="10300.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4060.00" y1="217.50" x2="4116.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8172.00" y1="217.50" x2="8116.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8272.00" y1="217.50" x2="8328.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8272.00" y1="272.50" x2="8328.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3904.00" y1="217.50" x2="3960.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4684.00" y1="217.50" x2="4740.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5676.00" y1="162.50" x2="5620.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5776.00" y1="272.50" x2="5832.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10356.00" y1="162.50" x2="10300.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1152.00" y1="245.00" x2="1096.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9676.00" y1="217.50" x2="9732.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2188.00" y1="190.00" x2="2244.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5364.00" y1="217.50" x2="5308.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6244.00" y1="217.50" x2="6300.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3748.00" y1="272.50" x2="3804.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7492.00" y1="217.50" x2="7548.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7548.00" y1="272.50" x2="7492.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1620.00" y1="245.00" x2="1564.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9832.00" y1="217.50" x2="9888.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2656.00" y1="245.00" x2="2712.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10768.00" y1="162.50" x2="10824.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11548.00" y1="217.50" x2="11604.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="160.00" y1="245.00" x2="216.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11080.00" y1="162.50" x2="11136.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7080.00" y1="272.50" x2="7024.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10044.00" y1="162.50" x2="9988.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8172.00" y1="162.50" x2="8116.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5052.00" y1="162.50" x2="4996.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4740.00" y1="162.50" x2="4684.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="1932.00" y1="190.00" x2="1876.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3336.00" y1="190.00" x2="3280.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2032.00" y1="190.00" x2="2088.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6712.00" y1="217.50" x2="6768.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9576.00" y1="162.50" x2="9520.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11448.00" y1="217.50" x2="11392.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="2812.00" y1="245.00" x2="2868.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3436.00" y1="190.00" x2="3492.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8016.00" y1="162.50" x2="7960.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7180.00" y1="217.50" x2="7236.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="684.00" y1="190.00" x2="628.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9208.00" y1="181.19" x2="9264.00" y2="171.31" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4840.00" y1="272.50" x2="4896.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="472.00" y1="245.00" x2="528.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4216.00" y1="217.50" x2="4272.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6556.00" y1="217.50" x2="6612.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5364.00" y1="162.50" x2="5308.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5832.00" y1="217.50" x2="5776.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8016.00" y1="272.50" x2="7960.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11292.00" y1="217.50" x2="11236.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5932.00" y1="217.50" x2="5988.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7236.00" y1="162.50" x2="7180.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5052.00" y1="272.50" x2="4996.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3804.00" y1="217.50" x2="3748.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6456.00" y1="272.50" x2="6400.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6144.00" y1="217.50" x2="6088.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7336.00" y1="272.50" x2="7392.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8116.00" y1="272.50" x2="8172.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7080.00" y1="217.50" x2="7024.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4372.00" y1="272.50" x2="4428.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3336.00" y1="245.00" x2="3280.00" y2="245.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7336.00" y1="162.50" x2="7392.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="10200.00" y1="162.50" x2="10144.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4372.00" y1="217.50" x2="4428.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9888.00" y1="162.50" x2="9832.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7648.00" y1="272.50" x2="7704.00" y2="272.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="7860.00" y1="217.50" x2="7804.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3904.00" y1="162.50" x2="3960.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="6244.00" y1="162.50" x2="6300.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="9364.00" y1="217.50" x2="9420.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="11704.00" y1="217.50" x2="11760.00" y2="217.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="4272.00" y1="162.50" x2="4216.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3592.00" y1="181.19" x2="3648.00" y2="171.31" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="8584.00" y1="135.00" x2="8640.00" y2="135.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="996.00" y1="190.00" x2="940.00" y2="190.00" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="5832.00" y1="162.50" x2="5776.00" y2="162.50" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="12172.00" y1="171.31" x2="12228.00" y2="181.19" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5" marker-end="url(#arr-backup)"/>
+  <line x1="3592.00" y1="126.19" x2="3648.00" y2="116.31" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="4216.00" y1="107.50" x2="4272.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="216.00" y1="135.00" x2="160.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2968.00" y1="135.00" x2="3024.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8740.00" y1="88.81" x2="8796.00" y2="98.69" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8172.00" y1="107.50" x2="8116.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="7492.00" y1="107.50" x2="7548.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="840.00" y1="135.00" x2="784.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8584.00" y1="190.00" x2="8640.00" y2="190.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="3280.00" y1="135.00" x2="3336.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="7080.00" y1="107.50" x2="7024.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2032.00" y1="135.00" x2="2088.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="5620.00" y1="107.50" x2="5676.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="9120.18" y1="155.00" x2="9039.82" y2="197.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="6868.00" y1="107.50" x2="6924.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="6556.00" y1="107.50" x2="6612.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="5988.00" y1="107.50" x2="5932.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="5364.00" y1="107.50" x2="5308.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="4372.00" y1="107.50" x2="4428.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8952.00" y1="217.50" x2="8896.00" y2="217.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="5776.00" y1="107.50" x2="5832.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="7960.00" y1="107.50" x2="8016.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2812.00" y1="135.00" x2="2868.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="4740.00" y1="107.50" x2="4684.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="4896.00" y1="107.50" x2="4840.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8428.00" y1="98.69" x2="8484.00" y2="88.81" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="5464.00" y1="107.50" x2="5520.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1096.00" y1="135.00" x2="1152.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8328.00" y1="107.50" x2="8272.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="3492.00" y1="135.00" x2="3436.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="528.00" y1="135.00" x2="472.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8484.00" y1="198.81" x2="8428.00" y2="208.69" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1308.00" y1="135.00" x2="1252.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="6400.00" y1="107.50" x2="6456.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="7336.00" y1="107.50" x2="7392.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2344.00" y1="135.00" x2="2400.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="7648.00" y1="107.50" x2="7704.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="4060.00" y1="107.50" x2="4116.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="3124.00" y1="135.00" x2="3180.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="372.00" y1="135.00" x2="316.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="6712.00" y1="107.50" x2="6768.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="7180.00" y1="107.50" x2="7236.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="3904.00" y1="107.50" x2="3960.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2188.00" y1="135.00" x2="2244.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="3748.00" y1="107.50" x2="3804.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1408.00" y1="135.00" x2="1464.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="684.00" y1="135.00" x2="628.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8796.00" y1="208.69" x2="8740.00" y2="198.81" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="6244.00" y1="107.50" x2="6300.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="940.00" y1="135.00" x2="996.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="5052.00" y1="107.50" x2="4996.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2712.00" y1="135.00" x2="2656.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="2556.00" y1="135.00" x2="2500.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="5152.00" y1="107.50" x2="5208.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8584.00" y1="245.00" x2="8640.00" y2="245.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8428.00" y1="226.31" x2="8484.00" y2="236.19" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8896.00" y1="107.50" x2="8952.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="6144.00" y1="107.50" x2="6088.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="7804.00" y1="107.50" x2="7860.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1720.00" y1="135.00" x2="1776.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1932.00" y1="135.00" x2="1876.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="4584.00" y1="107.50" x2="4528.00" y2="107.50" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="1564.00" y1="135.00" x2="1620.00" y2="135.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="9108.00" y1="126.19" x2="9052.00" y2="116.31" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <line x1="8584.00" y1="80.00" x2="8640.00" y2="80.00" stroke="#1890FF" stroke-width="4.5" marker-end="url(#arr-main)"/>
+  <g data-id="TMP00017551"><rect x="60.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="#E6F4FF" stroke="#262626" stroke-width="2.8"/><text x="110.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">馈线段XX</text></g>
+  <g data-id="TMP00013000"><rect x="60.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="#E6F4FF" stroke="#262626" stroke-width="2.8"/><text x="110.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00010</text></g>
+  <g data-id="TMP00022175"><rect x="60.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="#E6F4FF" stroke="#262626" stroke-width="2.8"/><text x="110.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">馈线段XX</text></g>
+  <g data-id="TMP00013087"><rect x="216.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="266.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00214</text></g>
+  <g data-id="TMP00012999"><rect x="216.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="266.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00009</text></g>
+  <g data-id="TMP00042808"><rect x="216.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="266.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0013</text></g>
+  <g data-id="TMP00013084"><rect x="372.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="422.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00211</text></g>
+  <g data-id="TMP00042087"><rect x="372.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="422.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0007</text></g>
+  <g data-id="TMP00014315"><rect x="372.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="422.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00027</text></g>
+  <g data-id="TMP00013083"><rect x="528.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="578.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00210</text></g>
+  <g data-id="TMP00042083"><rect x="528.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="578.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0013</text></g>
+  <g data-id="TMP00039911"><rect x="528.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="578.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0001</text></g>
+  <g data-id="TMP00013081"><rect x="684.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="734.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00208</text></g>
+  <g data-id="TMP00012994"><rect x="684.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="734.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00032</text></g>
+  <g data-id="TMP00006503"><rect x="684.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="734.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00002</text></g>
+  <g data-id="TMP00013072"><rect x="840.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="890.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00199</text></g>
+  <g data-id="TMP00012993"><rect x="840.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="890.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00031</text></g>
+  <g data-id="TMP00039883"><rect x="840.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="890.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0013</text></g>
+  <g data-id="TMP00013074"><rect x="996.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1046.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00201</text></g>
+  <g data-id="TMP00012992"><rect x="996.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1046.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00030</text></g>
+  <g data-id="TMP00039882"><rect x="996.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1046.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0012</text></g>
+  <g data-id="TMP00041672"><rect x="1152.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1202.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0022</text></g>
+  <g data-id="TMP00042085"><rect x="1152.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1202.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0015</text></g>
+  <g data-id="TMP00006509"><rect x="1152.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1202.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00007</text></g>
+  <g data-id="TMP00012189"><rect x="1308.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1358.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00043</text></g>
+  <g data-id="TMP00013573"><rect x="1308.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1358.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00044</text></g>
+  <g data-id="TMP00039881"><rect x="1308.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1358.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0011</text></g>
+  <g data-id="TMP00012190"><rect x="1464.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1514.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00044</text></g>
+  <g data-id="TMP00042494"><rect x="1464.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1514.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0025</text></g>
+  <g data-id="TMP00039874"><rect x="1464.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1514.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0004</text></g>
+  <g data-id="TMP00041675"><rect x="1620.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1670.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0025</text></g>
+  <g data-id="TMP00042495"><rect x="1620.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1670.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0026</text></g>
+  <g data-id="TMP00006502"><rect x="1620.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1670.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00001</text></g>
+  <g data-id="TMP00041810"><rect x="1776.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1826.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0003</text></g>
+  <g data-id="TMP00013575"><rect x="1776.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1826.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00046</text></g>
+  <g data-id="TMP00039873"><rect x="1776.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1826.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0003</text></g>
+  <g data-id="TMP00012348"><rect x="1932.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1982.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00038</text></g>
+  <g data-id="TMP00005350"><rect x="1932.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1982.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00163</text></g>
+  <g data-id="TMP00042018"><rect x="1932.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="1982.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0034</text></g>
+  <g data-id="TMP00012349"><rect x="2088.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2138.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00039</text></g>
+  <g data-id="TMP00015533"><rect x="2088.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2138.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00226</text></g>
+  <g data-id="TMP00012867"><rect x="2088.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2138.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00057</text></g>
+  <g data-id="TMP00012350"><rect x="2244.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2294.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00040</text></g>
+  <g data-id="TMP00015547"><rect x="2244.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2294.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00240</text></g>
+  <g data-id="TMP00042016"><rect x="2244.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2294.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0032</text></g>
+  <g data-id="TMP00041813"><rect x="2400.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2450.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0006</text></g>
+  <g data-id="TMP00042360"><rect x="2400.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2450.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0023</text></g>
+  <g data-id="TMP00042468"><rect x="2400.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2450.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0038</text></g>
+  <g data-id="TMP00009672"><rect x="2556.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2606.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00029</text></g>
+  <g data-id="TMP00005351"><rect x="2556.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2606.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00164</text></g>
+  <g data-id="TMP00013504"><rect x="2556.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2606.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00073</text></g>
+  <g data-id="TMP00009671"><rect x="2712.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2762.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00028</text></g>
+  <g data-id="TMP00015536"><rect x="2712.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2762.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00229</text></g>
+  <g data-id="TMP00043344"><rect x="2712.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2762.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0047</text></g>
+  <g data-id="TMP00010148"><rect x="2868.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2918.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00032</text></g>
+  <g data-id="TMP00015541"><rect x="2868.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2918.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00234</text></g>
+  <g data-id="TMP00043345"><rect x="2868.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="2918.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0048</text></g>
+  <g data-id="TMP00010149"><rect x="3024.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3074.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00033</text></g>
+  <g data-id="TMP00005339"><rect x="3024.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3074.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00152</text></g>
+  <g data-id="TMP00015630"><rect x="3024.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3074.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00081</text></g>
+  <g data-id="TMP00010150"><rect x="3180.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3230.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00034</text></g>
+  <g data-id="TMP00042355"><rect x="3180.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3230.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0032</text></g>
+  <g data-id="TMP00043337"><rect x="3180.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3230.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0030</text></g>
+  <g data-id="TMP00010151"><rect x="3336.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3386.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00035</text></g>
+  <g data-id="TMP00013366"><rect x="3336.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3386.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00294</text></g>
+  <g data-id="TMP00015281"><rect x="3336.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3386.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00046</text></g>
+  <g data-id="TMP00010134"><rect x="3492.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3542.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00047</text></g>
+  <g data-id="TMP00013367"><rect x="3492.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3542.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00295</text></g>
+  <g data-id="TMP00043222"><rect x="3492.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3542.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0025</text></g>
+  <g data-id="TMP00010135"><rect x="3648.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3698.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00048</text></g>
+  <g data-id="TMP00013368"><rect x="3648.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3698.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00296</text></g>
+  <g data-id="TMP00042359"><rect x="3648.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3698.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0036</text></g>
+  <g data-id="TMP00015298"><rect x="3648.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3698.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00047</text></g>
+  <g data-id="TMP00010136"><rect x="3804.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3854.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00049</text></g>
+  <g data-id="TMP00013369"><rect x="3804.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3854.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00297</text></g>
+  <g data-id="TMP00008991"><rect x="3804.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3854.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00125</text></g>
+  <g data-id="TMP00043239"><rect x="3804.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="3854.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0026</text></g>
+  <g data-id="TMP00010137"><rect x="3960.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4010.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00050</text></g>
+  <g data-id="TMP00013370"><rect x="3960.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4010.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00298</text></g>
+  <g data-id="TMP00008992"><rect x="3960.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4010.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00126</text></g>
+  <g data-id="TMP00039941"><rect x="3960.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4010.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0012</text></g>
+  <g data-id="TMP00010142"><rect x="4116.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4166.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00055</text></g>
+  <g data-id="TMP00042357"><rect x="4116.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4166.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0034</text></g>
+  <g data-id="TMP00011386"><rect x="4116.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4166.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00227</text></g>
+  <g data-id="TMP00006732"><rect x="4116.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4166.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00024</text></g>
+  <g data-id="TMP00010145"><rect x="4272.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4322.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00058</text></g>
+  <g data-id="TMP00008987"><rect x="4272.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4322.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00060</text></g>
+  <g data-id="TMP00011387"><rect x="4272.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4322.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00228</text></g>
+  <g data-id="TMP00039942"><rect x="4272.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4322.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0013</text></g>
+  <g data-id="TMP00040574"><rect x="4428.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4478.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0010</text></g>
+  <g data-id="TMP00008986"><rect x="4428.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4478.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00059</text></g>
+  <g data-id="TMP00011388"><rect x="4428.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4478.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00229</text></g>
+  <g data-id="TMP00039943"><rect x="4428.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4478.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0014</text></g>
+  <g data-id="TMP00010144"><rect x="4584.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4634.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00057</text></g>
+  <g data-id="TMP00008985"><rect x="4584.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4634.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00058</text></g>
+  <g data-id="TMP00011389"><rect x="4584.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4634.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00230</text></g>
+  <g data-id="TMP00006733"><rect x="4584.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4634.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00025</text></g>
+  <g data-id="TMP00010143"><rect x="4740.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4790.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00056</text></g>
+  <g data-id="TMP00008984"><rect x="4740.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4790.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00057</text></g>
+  <g data-id="TMP00040713"><rect x="4740.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4790.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0025</text></g>
+  <g data-id="TMP00039944"><rect x="4740.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4790.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0015</text></g>
+  <g data-id="TMP00010141"><rect x="4896.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4946.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00054</text></g>
+  <g data-id="TMP00043396"><rect x="4896.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4946.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0025</text></g>
+  <g data-id="TMP00010435"><rect x="4896.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4946.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00222</text></g>
+  <g data-id="TMP00040922"><rect x="4896.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="4946.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0018</text></g>
+  <g data-id="TMP00010140"><rect x="5052.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5102.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00053</text></g>
+  <g data-id="TMP00015710"><rect x="5052.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5102.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00121</text></g>
+  <g data-id="TMP00010436"><rect x="5052.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5102.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00223</text></g>
+  <g data-id="TMP00014532"><rect x="5052.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5102.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00093</text></g>
+  <g data-id="TMP00042224"><rect x="5208.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5258.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0025</text></g>
+  <g data-id="TMP00015709"><rect x="5208.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5258.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00120</text></g>
+  <g data-id="TMP00040716"><rect x="5208.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5258.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0028</text></g>
+  <g data-id="TMP00039849"><rect x="5208.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5258.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0006</text></g>
+  <g data-id="TMP00013203"><rect x="5364.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5414.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00122</text></g>
+  <g data-id="TMP00015708"><rect x="5364.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5414.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00119</text></g>
+  <g data-id="TMP00015727"><rect x="5364.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5414.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00290</text></g>
+  <g data-id="TMP00039845"><rect x="5364.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5414.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0002</text></g>
+  <g data-id="TMP00013204"><rect x="5520.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5570.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00123</text></g>
+  <g data-id="TMP00043399"><rect x="5520.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5570.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0028</text></g>
+  <g data-id="TMP00043416"><rect x="5520.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5570.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0074</text></g>
+  <g data-id="TMP00006492"><rect x="5520.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5570.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00006</text></g>
+  <g data-id="TMP00013205"><rect x="5676.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5726.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00124</text></g>
+  <g data-id="TMP00043394"><rect x="5676.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5726.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0023</text></g>
+  <g data-id="TMP00043417"><rect x="5676.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5726.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0075</text></g>
+  <g data-id="TMP00039844"><rect x="5676.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5726.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0001</text></g>
+  <g data-id="TMP00042228"><rect x="5832.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5882.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0029</text></g>
+  <g data-id="TMP00015704"><rect x="5832.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5882.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00115</text></g>
+  <g data-id="TMP00015731"><rect x="5832.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5882.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00294</text></g>
+  <g data-id="TMP00042349"><rect x="5832.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="5882.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0050</text></g>
+  <g data-id="TMP00041797"><rect x="5988.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6038.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0014</text></g>
+  <g data-id="TMP00040523"><rect x="5988.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6038.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0003</text></g>
+  <g data-id="TMP00043462"><rect x="5988.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6038.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0080</text></g>
+  <g data-id="TMP00013361"><rect x="5988.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6038.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00056</text></g>
+  <g data-id="TMP00012323"><rect x="6144.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6194.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00105</text></g>
+  <g data-id="TMP00009999"><rect x="6144.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6194.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00074</text></g>
+  <g data-id="TMP00015821"><rect x="6144.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6194.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00298</text></g>
+  <g data-id="TMP00042348"><rect x="6144.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6194.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0049</text></g>
+  <g data-id="TMP00012324"><rect x="6300.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6350.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00106</text></g>
+  <g data-id="TMP00010007"><rect x="6300.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6350.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00082</text></g>
+  <g data-id="TMP00015822"><rect x="6300.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6350.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00299</text></g>
+  <g data-id="TMP00013441"><rect x="6300.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6350.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00060</text></g>
+  <g data-id="TMP00012325"><rect x="6456.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6506.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00107</text></g>
+  <g data-id="TMP00010006"><rect x="6456.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6506.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00081</text></g>
+  <g data-id="TMP00015823"><rect x="6456.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6506.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00300</text></g>
+  <g data-id="TMP00013440"><rect x="6456.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6506.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00059</text></g>
+  <g data-id="TMP00012326"><rect x="6612.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6662.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00108</text></g>
+  <g data-id="TMP00010005"><rect x="6612.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6662.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00080</text></g>
+  <g data-id="TMP00015828"><rect x="6612.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6662.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00305</text></g>
+  <g data-id="TMP00009296"><rect x="6612.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6662.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00039</text></g>
+  <g data-id="TMP00041800"><rect x="6768.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6818.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0017</text></g>
+  <g data-id="TMP00010004"><rect x="6768.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6818.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00079</text></g>
+  <g data-id="TMP00015834"><rect x="6768.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6818.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00311</text></g>
+  <g data-id="TMP00004481"><rect x="6768.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6818.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00004</text></g>
+  <g data-id="TMP00042000"><rect x="6924.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6974.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0023</text></g>
+  <g data-id="TMP00010003"><rect x="6924.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6974.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00078</text></g>
+  <g data-id="TMP00043465"><rect x="6924.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6974.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0083</text></g>
+  <g data-id="TMP00040334"><rect x="6924.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="6974.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0029</text></g>
+  <g data-id="TMP00012798"><rect x="7080.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7130.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00112</text></g>
+  <g data-id="TMP00040527"><rect x="7080.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7130.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0007</text></g>
+  <g data-id="TMP00015836"><rect x="7080.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7130.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00313</text></g>
+  <g data-id="TMP00009295"><rect x="7080.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7130.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00021</text></g>
+  <g data-id="TMP00012799"><rect x="7236.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7286.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00113</text></g>
+  <g data-id="TMP00008380"><rect x="7236.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7286.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00054</text></g>
+  <g data-id="TMP00043471"><rect x="7236.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7286.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0089</text></g>
+  <g data-id="TMP00009294"><rect x="7236.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7286.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00020</text></g>
+  <g data-id="TMP00012800"><rect x="7392.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7442.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00114</text></g>
+  <g data-id="TMP00008383"><rect x="7392.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7442.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00057</text></g>
+  <g data-id="TMP00043474"><rect x="7392.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7442.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0092</text></g>
+  <g data-id="TMP00039785"><rect x="7392.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7442.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0004</text></g>
+  <g data-id="TMP00012801"><rect x="7548.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7598.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00115</text></g>
+  <g data-id="TMP00008381"><rect x="7548.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7598.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00055</text></g>
+  <g data-id="TMP00043476"><rect x="7548.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7598.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0094</text></g>
+  <g data-id="TMP00004697"><rect x="7548.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7598.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00006</text></g>
+  <g data-id="TMP00012802"><rect x="7704.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7754.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00116</text></g>
+  <g data-id="TMP00008379"><rect x="7704.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7754.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00053</text></g>
+  <g data-id="TMP00015827"><rect x="7704.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7754.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00304</text></g>
+  <g data-id="TMP00039784"><rect x="7704.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7754.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0003</text></g>
+  <g data-id="TMP00012803"><rect x="7860.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7910.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00117</text></g>
+  <g data-id="TMP00008388"><rect x="7860.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7910.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00062</text></g>
+  <g data-id="TMP00005535"><rect x="7860.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7910.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00068</text></g>
+  <g data-id="TMP00039783"><rect x="7860.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="7910.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0002</text></g>
+  <g data-id="TMP00041998"><rect x="8016.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8066.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0021</text></g>
+  <g data-id="TMP00008386"><rect x="8016.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8066.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00060</text></g>
+  <g data-id="TMP00005534"><rect x="8016.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8066.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00067</text></g>
+  <g data-id="TMP00004696"><rect x="8016.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8066.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00005</text></g>
+  <g data-id="TMP00040208"><rect x="8172.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8222.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0005</text></g>
+  <g data-id="TMP00008384"><rect x="8172.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8222.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00058</text></g>
+  <g data-id="TMP00005533"><rect x="8172.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8222.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00066</text></g>
+  <g data-id="TMP00039782"><rect x="8172.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8222.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0001</text></g>
+  <g data-id="TMP00008630"><rect x="8328.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8378.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00141</text></g>
+  <g data-id="TMP00040129"><rect x="8328.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8378.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0013</text></g>
+  <g data-id="TMP00005798"><rect x="8328.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8378.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00070</text></g>
+  <g data-id="TMP00039787"><rect x="8328.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8378.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0006</text></g>
+  <g data-id="TMP00008631"><rect x="8484.00" y="60.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8534.00" y="83.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00142</text></g>
+  <g data-id="TMP00008373"><rect x="8484.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8534.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00047</text></g>
+  <g data-id="TMP00005797"><rect x="8484.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8534.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00069</text></g>
+  <g data-id="TMP00005799"><rect x="8484.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8534.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00071</text></g>
+  <g data-id="TMP00004699"><rect x="8484.00" y="280.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8534.00" y="303.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00008</text></g>
+  <g data-id="TMP00008632"><rect x="8640.00" y="60.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8690.00" y="83.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00143</text></g>
+  <g data-id="TMP00008374"><rect x="8640.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8690.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00048</text></g>
+  <g data-id="TMP00012797"><rect x="8640.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8690.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00206</text></g>
+  <g data-id="TMP00034205"><rect x="8635.00" y="222.00" width="110.0" height="46.0" rx="3" ry="3" fill="#FFF1F0" stroke="#262626" stroke-width="2.8"/><text x="8690.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">配变0486</text></g>
+  <g data-id="TMP00040369"><rect x="8640.00" y="280.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8690.00" y="303.20" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0012</text></g>
+  <g data-id="TMP00008633"><rect x="8796.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8846.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00144</text></g>
+  <g data-id="TMP00008375"><rect x="8796.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8846.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00049</text></g>
+  <g data-id="TMP00005803"><rect x="8796.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8846.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00075</text></g>
+  <g data-id="TMP00009489"><rect x="8796.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="8846.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00023</text></g>
+  <g data-id="TMP00008642"><rect x="8952.00" y="87.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9002.00" y="110.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00145</text></g>
+  <g data-id="TMP00008376"><rect x="8952.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9002.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00050</text></g>
+  <g data-id="TMP00005802"><rect x="8952.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9002.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00074</text></g>
+  <g data-id="TMP00009490"><rect x="8952.00" y="252.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9002.00" y="275.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00024</text></g>
+  <g data-id="TMP00005801"><rect x="9108.00" y="115.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9158.00" y="138.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00073</text></g>
+  <g data-id="TMP00015203"><rect x="9108.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9158.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00151</text></g>
+  <g data-id="TMP00009494"><rect x="9108.00" y="225.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9158.00" y="248.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00028</text></g>
+  <g data-id="TMP00043171"><rect x="9264.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9314.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0046</text></g>
+  <g data-id="TMP00009495"><rect x="9264.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9314.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00029</text></g>
+  <g data-id="TMP00041502"><rect x="9420.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9470.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0017</text></g>
+  <g data-id="TMP00042378"><rect x="9420.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9470.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0031</text></g>
+  <g data-id="TMP00011944"><rect x="9576.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9626.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00096</text></g>
+  <g data-id="TMP00013386"><rect x="9576.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9626.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00065</text></g>
+  <g data-id="TMP00041513"><rect x="9732.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9782.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0027</text></g>
+  <g data-id="TMP00013387"><rect x="9732.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9782.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00066</text></g>
+  <g data-id="TMP00011956"><rect x="9888.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9938.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00107</text></g>
+  <g data-id="TMP00013388"><rect x="9888.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="9938.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00067</text></g>
+  <g data-id="TMP00011955"><rect x="10044.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10094.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00106</text></g>
+  <g data-id="TMP00013390"><rect x="10044.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10094.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00069</text></g>
+  <g data-id="TMP00011954"><rect x="10200.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10250.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00105</text></g>
+  <g data-id="TMP00013392"><rect x="10200.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10250.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00071</text></g>
+  <g data-id="TMP00011953"><rect x="10356.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10406.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00104</text></g>
+  <g data-id="TMP00013389"><rect x="10356.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10406.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00068</text></g>
+  <g data-id="TMP00011959"><rect x="10512.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10562.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00110</text></g>
+  <g data-id="TMP00042377"><rect x="10512.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10562.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0030</text></g>
+  <g data-id="TMP00011958"><rect x="10668.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10718.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00109</text></g>
+  <g data-id="TMP00042978"><rect x="10668.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10718.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0037</text></g>
+  <g data-id="TMP00041515"><rect x="10824.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10874.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0029</text></g>
+  <g data-id="TMP00014731"><rect x="10824.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="10874.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00080</text></g>
+  <g data-id="TMP00011964"><rect x="10980.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11030.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00115</text></g>
+  <g data-id="TMP00014732"><rect x="10980.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11030.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00081</text></g>
+  <g data-id="TMP00011966"><rect x="11136.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11186.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00117</text></g>
+  <g data-id="TMP00042981"><rect x="11136.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11186.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0040</text></g>
+  <g data-id="TMP00011967"><rect x="11292.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11342.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00118</text></g>
+  <g data-id="TMP00041521"><rect x="11292.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11342.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0024</text></g>
+  <g data-id="TMP00011980"><rect x="11448.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11498.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00131</text></g>
+  <g data-id="TMP00011985"><rect x="11448.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11498.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00059</text></g>
+  <g data-id="TMP00011982"><rect x="11604.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11654.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00133</text></g>
+  <g data-id="TMP00011986"><rect x="11604.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11654.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00060</text></g>
+  <g data-id="TMP00011981"><rect x="11760.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11810.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00132</text></g>
+  <g data-id="TMP00011987"><rect x="11760.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11810.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00061</text></g>
+  <g data-id="TMP00011979"><rect x="11916.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11966.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00130</text></g>
+  <g data-id="TMP00011988"><rect x="11916.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="11966.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00062</text></g>
+  <g data-id="TMP00011969"><rect x="12072.00" y="142.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="12122.00" y="165.70" text-anchor="middle" font-size="5.2" fill="#262626">开关00120</text></g>
+  <g data-id="TMP00041517"><rect x="12072.00" y="197.50" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="12122.00" y="220.70" text-anchor="middle" font-size="5.2" fill="#262626">刀闸0020</text></g>
+  <g data-id="TMP00011972"><rect x="12228.00" y="170.00" width="100.0" height="40.0" rx="3" ry="3" fill="white" stroke="#262626" stroke-width="1.8"/><text x="12278.00" y="193.20" text-anchor="middle" font-size="5.2" fill="#262626">开关00123</text></g>
+  <g transform="translate(20, 455.0)"><line x1="0" y1="0" x2="40" y2="0" stroke="#1890FF" stroke-width="4.5"/><text x="48" y="4" font-size="9" fill="#262626">主供路径</text><line x1="150" y1="0" x2="190" y2="0" stroke="#FA8C16" stroke-width="3.5" stroke-dasharray="8 5"/><text x="198" y="4" font-size="9" fill="#262626">备供路径</text><rect x="310" y="-8" width="32" height="16" fill="#E6F4FF" stroke="#262626"/><text x="348" y="4" font-size="9" fill="#262626">电源点</text><rect x="430" y="-8" width="34" height="16" fill="#FFF1F0" stroke="#262626"/><text x="470" y="4" font-size="9" fill="#262626">目标设备</text></g>
+  <text x="6224.00" y="22" text-anchor="middle" font-weight="bold" font-size="13" fill="#262626">【电源追溯路径图】 目标设备 TMP00034205  (馈线 LINE074) 主供 94 节点 / 备供 2 条</text>
 </svg>

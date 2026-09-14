@@ -117,8 +117,14 @@ def evaluate_svg_quality(doc, stage: str = "unknown") -> Tuple[List[dict], dict]
     effective_size = max(max_size, MIN_DEVICE_SIZE)
 
     # ---- a. 孤岛检测（与任务一一致）----
+    # 【修复】所有真实设备先建为节点，没连线的设备才算孤岛；
+    # 旧逻辑只把有连接的设备加节点，导致无连线的孤立设备漏检、评分虚高。
     conn_dev_ids = set()
     g = nx.Graph()
+    for e in real_elems:
+        _eid = getattr(e, 'element_id', '')
+        if _eid:
+            g.add_node(_eid)
     for conn in doc.connections:
         s, e, _ = _conn_ids(conn)
         if s:

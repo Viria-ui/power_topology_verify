@@ -17,7 +17,7 @@
       "threshold": 10
     },
     "text_overlap_pct": {
-      "value": 1.27,
+      "value": 0.38,
       "ok": true,
       "threshold": 8.0
     },
@@ -27,12 +27,12 @@
       "threshold": 2.0
     },
     "island_components_pct": {
-      "value": 11.15,
+      "value": 14.82,
       "ok": true,
       "threshold": 50.0
     },
     "isolated_nodes_pct": {
-      "value": 0.1,
+      "value": 0.09,
       "ok": true,
       "threshold": 30.0
     },
@@ -56,44 +56,44 @@
     "viewBox": {
       "x": 0.0,
       "y": 0.0,
-      "w": 14620.0,
-      "h": 6310.0
+      "w": 17950.0,
+      "h": 16080.0
     },
     "canvas": {
-      "width": 14620.0,
-      "height": 6310.0,
+      "width": 17950.0,
+      "height": 16080.0,
       "aspect_match": true,
-      "vb_ratio": 2.317,
-      "wh_ratio": 2.317
+      "vb_ratio": 1.1163,
+      "wh_ratio": 1.1163
     },
     "devices": {
-      "total": 947,
+      "total": 1047,
       "stations": 0,
       "outside": 0,
       "outside_pct": 0.0,
       "overlap_pairs": 0,
-      "avg_height_unit": 17.443
+      "avg_height_unit": 15.945
     },
     "texts": {
-      "total": 947,
-      "visible": 947,
+      "total": 1047,
+      "visible": 1047,
       "hidden": 0,
       "hidden_pct": 0.0,
-      "overlap_victims": 12,
-      "overlap_pct": 1.27,
+      "overlap_victims": 4,
+      "overlap_pct": 0.38,
       "outside": 0,
       "fontscale_abnormal": 0,
       "fontscale_abnormal_pct": 0.0,
-      "avg_dev_h_for_ref": 17.443
+      "avg_dev_h_for_ref": 15.945
     },
     "topology": {
-      "total_device_nodes": 1013,
-      "connections_total": 1697,
-      "connected_components": 7,
-      "largest_component_size": 900,
-      "largest_component_pct": 88.85,
-      "island_components_pct": 11.15,
-      "isolated_nodes_pct": 0.1,
+      "total_device_nodes": 1113,
+      "connections_total": 1618,
+      "connected_components": 9,
+      "largest_component_size": 948,
+      "largest_component_pct": 85.18,
+      "island_components_pct": 14.82,
+      "isolated_nodes_pct": 0.09,
       "dangling_connections_pct": 0.0
     }
   }

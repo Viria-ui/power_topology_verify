@@ -58,7 +58,7 @@ SYMBOL_LIBRARY = {
     '0201': 'LoadBreakSwitch_357151fb-61fc-46d3-9281-9ff6d1969176',   # 负荷开关 QL（250次，LoadBreakSwitch 前缀最高）
     '0202': 'Disconnector_TMP_54fefde2-8d21-4470-8807-663dab8577b8',  # 隔离开关 QS（42次，Disconnector 前缀最高）
     '0203': 'GroundDisconnector_TMP_0c37fbe3-1b09-41fd-8a4d-38e20bd945d5',  # 接地刀闸 QES（29次）
-    '0302': 'Fuse_6f477905-e141-4423-8160-7b6e8537ec92',              # 熔断器 FU（196次）
+    '0302': 'PowerTransformer_TMP_a70da64e-4139-4238-99ff-f38ae7eea01c',  # 配变/柱上变（实际名称多为"配变xxxx"，非熔断器）
     # --- 保护与测量类 ---
     '0309': 'SurgeArrester_f4d15417-154b-4802-9a0d-eaa46f6f049d',   # 避雷器 F（42次，SurgeArrester 前缀最高）
     '0116': 'SurgeArrester_f4d15417-154b-4802-9a0d-eaa46f6f049d',   # 避雷器 F（同0309）
@@ -68,7 +68,7 @@ SYMBOL_LIBRARY = {
     '0110': 'PowerTransformer_TMP_a70da64e-4139-4238-99ff-f38ae7eea01c',  # 主变压器 T（84次，PowerTransformer 前缀最高）
     '0111': 'PowerTransformer_TMP_a70da64e-4139-4238-99ff-f38ae7eea01c',  # 配电变压器 T（同0110，共用）
     # --- 其他 ---
-    '0115': 'PoleCode_da3c5ac4-fbe8-4e62-bfb3-5eab3768a97a',          # 杆塔
+    '0115': 'Disconnector_TMP_54fefde2-8d21-4470-8807-663dab8577b8',  # 刀闸/隔离开关（实际名称多为"刀闸00xx"，非杆塔）
     '0313': 'CurrentTransformer_9119054a-1e83-4003-a946-a83406c03d83',  # 实际是电流互感器 CT
     '0314': 'PotentialTransformer_a6f46c6a-ace4-43ea-9973-b5f94576d3c9',  # 实际是电压互感器 PT
     '32TMP00132954': 'Junction_03ae4dd6-c087-42d2-82de-7a7c43b048e8',    # 真正的接线点
@@ -118,10 +118,10 @@ C_BUSBAR = '#00A854'
 DEV_CATEGORY_FILL = {
     # 开关族（橙系）
     '0307': '#FFB985',   '0201': '#FFC9A0', '0202': '#FFDFA8',
-    '0203': '#FFEBA8',   '0302': '#FFD5A8', '0309': '#FFD0A8',
+    '0203': '#FFEBA8',   '0309': '#FFD0A8',
     '0113': '#FFD0A8',   '0115': '#FFC9A0',
     # 变压器族（蓝系）
-    '0110': '#A8C8FF',   '0111': '#A8E0F5',
+    '0110': '#A8C8FF',   '0111': '#A8E0F5', '0302': '#A8C8FF',
     # 互感器（黄绿）
     '0305': '#D0E8B8',   '0306': '#D0E8B8',
     # 母线（绿）
@@ -156,13 +156,13 @@ W_CONTAINER = 2.0
 W_BUSBAR = 3.0  # 母线：粗实线
 F_TITLE = 21.3
 F_KEY = 14.0
-F_BRANCH = 12.0
+F_BRANCH = 22.0
 GRID = 10
 MARGIN = 40
 TITLE_H = 52
 CONT_PAD = 24
 UNIT_V = 14
-SYM_SCALE = 3.5
+SYM_SCALE = 7.0
 DEV_HW = 15
 DEV_HH = 10
 
@@ -211,6 +211,7 @@ class SvgBeautifier:
         self.sym_box: Dict[str, Dict] = {}
         self.orig_pos: Dict[str, Tuple[float, float]] = {}
         self.repair_stats: Dict = {}
+        self.tie_names: set = set()   # 联络开关设备名集合（来自 tie_switches.csv detail[名称]）
 
     # ═══════════════════════════════════════════════════════════
     #  辅助工具函数
@@ -232,7 +233,7 @@ class SvgBeautifier:
             return False
         if t in CONTAINER_TYPES:
             return False
-        if t in ('-1', '0'):
+        if t == '-1':  # t=='0' 的 Other 接线点带 GLink，保留为真实设备
             return False
         if 'BackGround' in t:
             return False
@@ -268,8 +269,33 @@ class SvgBeautifier:
     #  核心处理流程
     # ═══════════════════════════════════════════════════════════
 
+    def _load_tie_ids(self):
+        """加载联络开关台账：tie_switches.csv 的 equip_id 属 SQL 库编号体系，与配网 SVG
+        设备 TMP 号不是一套；detail 字段含 "[开关00024]" 形式的设备名，按名称匹配高亮。"""
+        import csv
+        cand = [
+            os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                         'output', 'csv', 'tie_switches.csv'),
+            os.path.join(os.getcwd(), 'output', 'csv', 'tie_switches.csv'),
+        ]
+        for path in cand:
+            if os.path.exists(path):
+                try:
+                    with open(path, encoding='utf-8-sig') as f:
+                        for row in csv.DictReader(f):
+                            for cell in (row.get('detail') or '', row.get('rule_desc') or ''):
+                                for m in re.findall(r'\[([^\[\]]{2,30})\]', cell):
+                                    nm = m.strip()
+                                    if nm and not nm.startswith('TMP'):
+                                        self.tie_names.add(nm)
+                except Exception as e:
+                    print(f'  [联络] 加载 {path} 失败: {e}')
+                print(f'  [联络] 已载入联络开关名 {len(self.tie_names)} 个')
+                break
+
     def beautify(self) -> str:
         print(f"\n[Beautifier v2] 正在处理: {self.svg_filename}")
+        self._load_tie_ids()
         self._prepare_internal_data()
         self.repair()
         self.layout()
@@ -321,6 +347,15 @@ class SvgBeautifier:
         self._build_adj()
         self._find_containers()
         self._assign_fallback_symbols()
+
+        # 去掉孤岛：所有无任何连线的设备（不管type）
+        orphan_ids = [pid for pid, d in self.devices.items()
+                      if not [n for n in self.adj.get(pid, []) if n != pid]]
+        for pid in orphan_ids:
+            self.devices.pop(pid, None)
+            self.adj.pop(pid, None)
+        if orphan_ids:
+            print(f"  [去孤岛] 移除 {len(orphan_ids)} 个无连线设备")
 
         nd = sum(1 for d in self.devices.values() if self.is_real_device(d['type']))
         print(f"  [解析] 设备 {len(self.devices)} | 真实设备 {nd} | "
@@ -529,10 +564,41 @@ class SvgBeautifier:
                 self.sym_box[sid]['terminals'] = term_map
 
     def _assign_fallback_symbols(self):
-        # 符号归一化：按美化符号库精确映射（类型码 -> 唯一符号 id），
-        # 同类型设备统一使用同一符号，不再按关键词子串匹配 defs 首个命中
+        # 符号归一化：名称优先（数据集 PSRType 与实际设备经常错配，如 0201/0202 里
+        # 混入电缆终端头），type 码兜底。同类型设备统一使用同一符号。
+        DISC   = 'Disconnector_TMP_54fefde2-8d21-4470-8807-663dab8577b8'
+        GND    = 'GroundDisconnector_TMP_0c37fbe3-1b09-41fd-8a4d-38e20bd945d5'
+        FUSE   = 'Fuse_6f477905-e141-4423-8160-7b6e8537ec92'
+        TXFMR  = 'PowerTransformer_TMP_a70da64e-4139-4238-99ff-f38ae7eea01c'
+        LBS    = 'LoadBreakSwitch_357151fb-61fc-46d3-9281-9ff6d1969176'
+        BREAKER= 'Breaker_TMP_62d95710-813b-4a92-8dce-35f89dc1c3cd'
+        ARR    = 'SurgeArrester_f4d15417-154b-4802-9a0d-eaa46f6f049d'
+        JUNC   = 'Junction_03ae4dd6-c087-42d2-82de-7a7c43b048e8'
         for pid, d in self.devices.items():
-            sid = SYMBOL_LIBRARY.get(d['type'])
+            name = d.get('name') or ''
+            t = d.get('type') or ''
+            if t == '0307':
+                sid = BREAKER            # 柱上断路器 QF（名称多为"开关00xx"，不被名称覆盖）
+            elif '避雷器' in name:
+                sid = ARR
+            elif '接地刀闸' in name or ('接地' in name and '刀闸' in name):
+                sid = GND
+            elif '刀闸' in name:
+                sid = DISC
+            elif '终端头' in name or '电缆终端' in name:
+                sid = JUNC
+            elif '配变' in name or '箱变' in name or '变压器' in name:
+                sid = TXFMR
+            elif '熔断' in name or '跌落' in name:
+                sid = FUSE
+            elif '负荷开关' in name:
+                sid = LBS
+            elif '断路器' in name:
+                sid = BREAKER
+            elif '开关' in name:
+                sid = LBS
+            else:
+                sid = SYMBOL_LIBRARY.get(t)
             if sid:
                 d['symbol'] = '#' + sid
 
@@ -652,8 +718,8 @@ class SvgBeautifier:
         main_comp = set(comps_before[0]) if comps_before else set()
 
         repaired = 0
-        DANGLE_THRESHOLD = 150.0
-        STITCH_THRESHOLD = 250.0
+        DANGLE_THRESHOLD = 0.0  # 题目5.1：仅依托SVG自身连接关系，禁止凭距离硬连孤岛造假
+        STITCH_THRESHOLD = 0.0  # 同上，不新增图上不存在的连接
 
         for comp in comps_before[1:]:
             if len(comp) != 1:
@@ -1080,68 +1146,125 @@ class SvgBeautifier:
                 layers[branch_depth[n]].append(n)
 
             max_depth = max(branch_depth.values()) if branch_depth else 0
-            # ★ v36：主干横排（电源→负荷，从左至右）+ 分支网格（列=x 聚类、行=y 聚类）。
-            self.pos = {}
-            for i, n in enumerate(trunk_order):
-                self.pos[n] = (self.snap(MARGIN + i * DEV_SPAN), self.snap(TRUNK_Y0))
-            # ★ v35：原图坐标网格化（v29 回归）——列 = 原图 x 聚类（并联支路并排），
-            # 行 = 原图 y 聚类（并联对齐，垂直连接短）。保留原图拓扑顺序，
-            # 交叉最低（17880/20336）、重叠 0、评分 100，线短简洁。
-            COL_GAP = 6.0        # 原图 x 聚类阈值
-            ROW_GAP_Y = 4.0      # 原图 y 聚类阈值
-            COL_SPAN = 104       # 列间距（设备 68 宽 + 36 空隙）
-            ROW_SPAN = 96        # 行距（设备 76 高 + 20）
-            branch_devs = [n for n in self.tree_parent
-                           if n not in trunk_set and self.is_real_device(
-                               self.devices.get(n, {}).get('type', ''))]
-            if branch_devs:
-                # 列聚类：x 差 < COL_GAP 归同列（按 x 排序）
-                _col_list = []
-                for n in sorted(branch_devs,
-                                key=lambda d: (self.devices[d].get('orig_x', 0),
-                                               self.devices[d].get('orig_y', 0))):
-                    _ox = self.devices[n].get('orig_x', 0)
-                    if not _col_list or abs(_ox - _col_list[-1][0]) >= COL_GAP:
-                        _col_list.append([_ox, []])
-                    _col_list[-1][1].append(n)
-                _col_idx = {}
-                for ci, (_ox, _ms) in enumerate(_col_list):
-                    for n in _ms:
-                        _col_idx[n] = ci
-                # 行聚类：y 差 < ROW_GAP_Y 归同行（按 y 排序）
-                _row_list = []
-                for n in sorted(branch_devs,
-                                key=lambda d: (self.devices[d].get('orig_y', 0),
-                                               self.devices[d].get('orig_x', 0))):
-                    _oy = self.devices[n].get('orig_y', 0)
-                    if not _row_list or abs(_oy - _row_list[-1][0]) >= ROW_GAP_Y:
-                        _row_list.append([_oy, []])
-                    _row_list[-1][1].append(n)
-                _row_idx = {}
-                for ri, (_oy, _ms) in enumerate(_row_list):
-                    for n in _ms:
-                        _row_idx[n] = ri
-                # 格内冲突（同 (col,row) 多设备）：格内按原 y/x 微偏移（限 4）
-                _slot_use = {}
-                for n in branch_devs:
-                    _ci = _col_idx[n]
-                    _ri = _row_idx[n]
-                    _key = (_ci, _ri)
-                    _k = _slot_use.get(_key, 0)
-                    _slot_use[_key] = _k + 1
-                    _px = MARGIN + _ci * COL_SPAN + (_k % 4) * 22
-                    _py = TRUNK_Y0 + 170 + _ri * ROW_SPAN
-                    self.pos[n] = (self.snap(_px), self.snap(_py))
+            # ★ 复用 5.3 feeder_radial_layout 算法（主干=直径、depth方向交替、leaf_count区间、占用避让）
+            # 建无向邻接
+            adj = {n:set() for n in self.tree_parent}
+            for child, par in self.tree_parent.items():
+                if par is not None and par in adj:
+                    adj[child].add(par); adj[par].add(child)
+            nodes_all = list(adj.keys())
+            # BFS 最远
+            def _bfs(s):
+                seen={s:0}; dq=deque([s]); far=s; fd=0
+                while dq:
+                    cur=dq.popleft()
+                    for m in adj.get(cur,()):
+                        if m not in seen:
+                            seen[m]=seen[cur]+1; dq.append(m)
+                            if seen[m]>fd: far,fd=m,seen[m]
+                return far,fd
+            a,_ = _bfs(nodes_all[0])
+            b,_ = _bfs(a)
+            # 主干 = a->b 路径
+            def _path(s,t):
+                prev={s:None}; dq=deque([s])
+                while dq:
+                    cur=dq.popleft()
+                    if cur==t: break
+                    for m in adj.get(cur,()):
+                        if m not in prev:
+                            prev[m]=cur; dq.append(m)
+                path=[]; x=t
+                while x is not None:
+                    path.append(x); x=prev.get(x)
+                return list(reversed(path))
+            trunk_seq = _path(a,b)
+            # root 并入主干端（电源在最左）
+            if root not in trunk_seq:
+                # 找主干中离 root 最近的点
+                def _dist(s):
+                    seen={s:0}; dq=deque([s])
+                    while dq:
+                        cur=dq.popleft()
+                        for m in adj.get(cur,()):
+                            if m not in seen: seen[m]=seen[cur]+1; dq.append(m)
+                    return seen
+                dr = _dist(root)
+                e = min(trunk_seq, key=lambda t: dr.get(t,9999))
+                seg = _path(root,e)
+                trunk_seq = seg[:-1] + trunk_seq
+            trunk_set = set(trunk_seq)
+            # 多源 BFS depth（距主干）
+            depth={n:0 for n in trunk_seq}; par={}
+            dq=deque(trunk_seq)
+            while dq:
+                cur=dq.popleft()
+                for m in adj.get(cur,()):
+                    if m not in depth:
+                        depth[m]=depth[cur]+1; par[m]=cur; dq.append(m)
+            kids={n:[m for m in adj.get(n,()) if par.get(m)==n] for n in adj}
+            # leaf_count
+            leaf_count={}
+            for n in sorted(adj.keys(), key=lambda m:-depth.get(m,0)):
+                ks=kids[n]
+                leaf_count[n]=sum(leaf_count[k] for k in ks) if ks else 1
+            COL_GAP=150.0; ROW_GAP=200.0; PAD=120.0
+            self.pos={}
+            used={}
+            for i,n in enumerate(trunk_seq):
+                self.pos[n]=(self.snap(PAD+i*COL_GAP), self.snap(PAD))
+            trunk_x={n:self.pos[n][0] for n in trunk_seq}
+            def _occ(n,x,y,d):
+                dx,dy=(COL_GAP,0.0) if d%2==0 else (0.0,ROW_GAP)
+                key=(round(x,1),round(y,1))
+                while key in used and used[key]!=n:
+                    x+=dx; y+=dy; key=(round(x,1),round(y,1))
+                self.pos[n]=(self.snap(x),self.snap(y))
+                used[key]=n
+            def _place(n,x,y,d):
+                ch=kids.get(n,[])
+                if not ch:
+                    if d%2==1: _occ(n,x,y+ROW_GAP,d)
+                    else: _occ(n,x+COL_GAP,y,d)
+                    return
+                if d%2==1:
+                    _occ(n,x,y+ROW_GAP,d)
+                    yy=y+ROW_GAP*2
+                    for c in ch:
+                        hh=max(leaf_count[c]*ROW_GAP*0.5,ROW_GAP)
+                        _place(c,x,yy,d+1)
+                        yy+=hh
+                else:
+                    _occ(n,x+COL_GAP,y,d)
+                    xx=x+COL_GAP*2
+                    for c in ch:
+                        ww=max(leaf_count[c]*COL_GAP*0.5,COL_GAP)
+                        _place(c,xx,y,d+1)
+                        xx+=ww
+            for n in trunk_seq:
+                yy=PAD
+                for c in kids.get(n,[]):
+                    hh=max(leaf_count[c]*ROW_GAP*0.5,ROW_GAP)
+                    _place(c,trunk_x[n],yy,1)
+                    yy+=hh
+            # 未入树的排到底部
+            for n in self.tree_parent:
+                if n not in self.pos:
+                    self.pos[n]=(self.snap(PAD), self.snap(PAD+5000))
 
         # ★ 未入树设备兜底（两种算法共享）
         placed = set(self.pos)
         leftover = [p for p, d in self.devices.items()
                     if self.is_real_device(d['type']) and p not in placed]
         if leftover:
-            bx = max((p[0] for p in self.pos.values()), default=0) + (80 if not use_sugiyama else 80)
-            by = (MARGIN + 30) + (max_depth + 1) * 220 if not use_sugiyama else MARGIN + (len(self.layers)) * 220
+            # leftover 排到主体下方，每行15个
+            by = max((p[1] for p in self.pos.values()), default=0) + 500
+            bx = MARGIN
+            PER_ROW = 15
             for i, pid in enumerate(leftover):
-                self.pos[pid] = (self.snap(bx + i * 80), self.snap(by))
+                col = i % PER_ROW
+                row = i // PER_ROW
+                self.pos[pid] = (self.snap(bx + col * 220), self.snap(by + row * 220))
 
         # ★ 布局后处理：先容器单元化（成员竖排/容器框/碰撞/顶部/非柜箱避让），
         #   再对自由设备做设备-设备避让（容器成员保持竖排不参与移动）
@@ -1160,7 +1283,7 @@ class SvgBeautifier:
             print(f"  [布局] 放置 {len(self.pos)} | 容器框 {len(self.cont_box)} | "
                   f"树深 {max(level.values())} | 根权重 {weight[root]}")
 
-    def _fix_overlaps(self, gap=40):
+    def _fix_overlaps(self, gap=80):
         """布局后处理：设备色框两两避让（X 方向优先），消除元件重叠。
 
         策略（保守版，避让而不重排）：
@@ -1192,8 +1315,23 @@ class SvgBeautifier:
             w = (r - l) / 2.0
             h = (b - t) / 2.0
             if pid in member_set or pid in self.containers:
-                # 容器成员/容器自身保持布局位置，但占位让自由设备避让
+                # 容器成员：和已放重叠时往下挪
+                guard2 = 0
+                while guard2 < 200:
+                    moved2 = False
+                    guard2 += 1
+                    for (ox, oy, ow, oh) in placed:
+                        if abs(x - ox) < (w + ow) and abs(y - oy) < (h + oh):
+                            y = oy + oh + gap + h
+                            moved2 = True
+                    for (ox, oy, ow, oh) in cont_boxes_abs:
+                        if abs(x - ox) < (w + ow) and abs(y - oy) < (h + oh):
+                            y = oy + oh + gap + h
+                            moved2 = True
+                    if not moved2:
+                        break
                 placed.append((x, y, w, h))
+                self.pos[pid] = (self.snap(x), self.snap(y))
                 continue
             guard = 0
             while guard < 400:
@@ -1221,7 +1359,6 @@ class SvgBeautifier:
                 if abs(a[0] - b2[0]) < (a[2] + b2[2]) and abs(a[1] - b2[1]) < (a[3] + b2[3]):
                     n += 1
         print(f"  [布局避让] 剩余重叠 {n} 对")
-
     def _assign_ports(self):
         """★ 色框端点预分配
 
@@ -2037,7 +2174,10 @@ class SvgBeautifier:
             _is_bus = (self.devices[par]['type'] in BUSBAR_TYPES
                        or self.devices[child]['type'] in BUSBAR_TYPES)
             is_trunk = _is_bus or _depth.get(child, 9) <= 2
-            w = W_TRUNK if is_trunk else W_BRANCH
+            is_tie = (self.devices.get(par, {}).get('name', '') in self.tie_names
+                      or self.devices.get(child, {}).get('name', '') in self.tie_names)
+            wire_color = C_TIE if is_tie else C_10KV
+            w = W_TIE if is_tie else (W_TRUNK if is_trunk else W_BRANCH)
             conn_idx += 1
             conn_id = f'WIRE_{conn_idx:06d}'
 
@@ -2045,7 +2185,7 @@ class SvgBeautifier:
             segs = self._make_wire_segs(par, child, x1, y1, x2, y2)
             for seg_idx, seg in enumerate(segs):
                 seg_id = f"{conn_id}_{seg_idx:02d}"
-                self._wire_segs.append((seg, C_10KV, w, seg_id, par, child))
+                self._wire_segs.append((seg, wire_color, w, seg_id, par, child))
 
         # 母线：一条完整连续横线（覆盖所有连接设备 x 范围），T 接点落在母线上
         drawn = set()
@@ -2700,6 +2840,9 @@ class SvgBeautifier:
                 continue
             if not self.is_real_device(d['type']):
                 continue  # 非真实设备（dxd线/未知type/背景）不绘制、不输出metadata
+            # 孤岛去除：type=0 且无任何连线的垃圾元素不画
+            if d['type'] == '0' and not self.adj.get(pid):
+                continue
             dg = ET.SubElement(g, f'{{{SVG_NS}}}g', {
                 'transform': f'translate({x},{y})',
             })
@@ -2721,28 +2864,25 @@ class SvgBeautifier:
                         break
             if dev_fill == DEV_CATEGORY_FALLBACK:
                 dev_fill = DEV_CATEGORY_FILL.get(d['type'], DEV_CATEGORY_FALLBACK)
-            # 强制最小框尺寸：所有设备（含接线点）至少 48x40（用户要求"所有框都要大框"）
-            DEV_MIN_W, DEV_MIN_H = 48.0, 40.0
-            cur_w = right - left
-            cur_h = bottom - top
-            if cur_w < DEV_MIN_W:
-                grow = (DEV_MIN_W - cur_w) / 2.0
-                left -= grow
-                right += grow
-            if cur_h < DEV_MIN_H:
-                grow = (DEV_MIN_H - cur_h) / 2.0
-                top -= grow
-                bottom += grow
-            # 大框：符号 + 上下文字区域（标注可能避让到上方或下方；左右允许文字一半在外）
-            pad_x = 10.0
-            pad_top = 16.0
-            pad_bottom = 20.0
+            # 色框：固定最小尺寸36x28 + padding，与之前推送版本一致
+            DEV_MIN_W, DEV_MIN_H = 36.0, 28.0
+            cw = right - left
+            ch = bottom - top
+            if cw < DEV_MIN_W:
+                grow = (DEV_MIN_W - cw) / 2.0
+                left -= grow; right += grow
+            if ch < DEV_MIN_H:
+                grow = (DEV_MIN_H - ch) / 2.0
+                top -= grow; bottom += grow
+            pad_x = 6.0
+            pad_top = 10.0
+            pad_bottom = 12.0
             ET.SubElement(dg, f'{{{SVG_NS}}}rect', {
                 'x': f'{left - pad_x:.1f}', 'y': f'{top - pad_top:.1f}',
                 'width': f'{right - left + 2 * pad_x:.1f}',
                 'height': f'{bottom - top + pad_top + pad_bottom:.1f}',
-                'fill': dev_fill, 'fill-opacity': '0.6',
-                'stroke': dev_fill, 'stroke-opacity': '0.9', 'stroke-width': '1',  # 半透明+细边 类别色实色（不与容器灰底叠加）
+                'fill': dev_fill, 'fill-opacity': '0.7',
+                'stroke': dev_fill, 'stroke-width': '1.0',
                 'rx': '2',
             })
             if d.get('symbol'):
@@ -2794,6 +2934,9 @@ class SvgBeautifier:
             if d['type'] not in BUSBAR_TYPES or pid not in self.pos:
                 continue
             name = self._display_name(d)
+            # 清理 TMPxxxx# 前缀（看起来像乱码）
+            import re as _re
+            name = _re.sub(r'^TMP\d+#', '', name)
             if name in seen_names:
                 continue
             seen_names.add(name)
@@ -3018,10 +3161,10 @@ class SvgBeautifier:
         #   端口落点与渲染框边相差 14px，导致"线头悬在框外"。
         #   现在 box 边 = 渲染 rect 边，端口与色框精确对齐。
         l, r, t, b = self._dev_sym_edges(pid)
-        DEV_MIN_W, DEV_MIN_H = 48.0, 40.0
-        pad_x = 10.0
-        pad_top = 16.0
-        pad_bottom = 20.0
+        DEV_MIN_W, DEV_MIN_H = 36.0, 28.0
+        pad_x = 6.0
+        pad_top = 10.0
+        pad_bottom = 12.0
 
         cur_w = r - l
         cur_h = b - t
@@ -3434,19 +3577,24 @@ class SvgBeautifier:
     @staticmethod
     @staticmethod
     def _display_name(d):
-        """标准化文本标识：统一使用 type 中文名（符合规范要求，不显示原始设备 name）"""
+        """标注文本：优先显示原图真实设备名（刀闸0066/配变2291等），type 中文名兜底。
+        规范要求"设备名称标注完整规范"，不再只用泛化类型名+ID尾号。"""
         type_names = {
             '0307': '断路器', '0201': '负荷开关', '0202': '隔离开关',
-            '0203': '接地刀闸', '0302': '熔断器', '0305': '电压互感器',
+            '0203': '接地刀闸', '0302': '配变', '0305': '电压互感器',
             '0306': '电流互感器', '0110': '主变压器', '0111': '配电变压器',
-            '0115': '杆塔', '0313': '电流互感器', '0314': '电压互感器',
+            '0115': '刀闸', '0313': '电流互感器', '0314': '电压互感器',
             '370000': '电力用户', '0309': '避雷器',
             '0311': '母线', '0116': '避雷器', '0811003': '故障指示器',
             '0113': '其他',
             '32TMP00132954': '接线点',
         }
-        tname = type_names.get(d.get('type', ''), '设备')
         pid = d.get('id', '')
+        real = (d.get('name') or '').strip()
+        # 真实设备名：非空、不是纯 TMP/纯数字/纯符号 时优先显示
+        if real and not real.startswith('TMP') and not re.fullmatch(r'[\d\-#~_\.]+', real):
+            return real
+        tname = type_names.get(d.get('type', ''), '设备')
         return f"{tname}_{pid[-4:]}" if pid else tname
 
     @staticmethod
